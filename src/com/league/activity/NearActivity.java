@@ -3,6 +3,7 @@ package com.league.activity;
 import com.mine.league.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -86,7 +87,8 @@ public class NearActivity extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.near_searchinfo:
-			Toast.makeText(this, "near_searchinfo", 1).show();
+			Intent intent=new Intent(this,SechJobInfo.class);
+			startActivity(intent);
 			break;
 		case R.id.near_featurecom:
 			Toast.makeText(this, "near_featurecom", 1).show();
