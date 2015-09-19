@@ -171,7 +171,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/near_others"
+            android:id="@+id/near_searchpeople"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -192,7 +192,7 @@
                     android:background="#ffffff"
                     android:focusable="false"
                     android:scaleType="centerInside"
-                    android:src="@drawable/other" />
+                    android:src="@drawable/searchpeople" />
 
                 <TextView
                     android:id="@+id/tv_interact2"
@@ -201,21 +201,47 @@
                     android:layout_below="@id/ib_hongbao2"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
-                    android:text="其他"
+                    android:text="寻人启事"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
             </RelativeLayout>
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/near_tranparent"
+            android:id="@+id/near_others"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="3dp"
-            android:visibility="invisible"  >
+            android:onClick="onClick">
 
-            
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/ib_hongbao3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="#ffffff"
+                    android:focusable="false"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/other" />
+
+                <TextView
+                    android:id="@+id/tv_interact3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ib_hongbao3"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:text="其他"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 

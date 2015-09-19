@@ -97,6 +97,8 @@ public class NearActivity extends Activity implements OnClickListener{
 		case R.id.near_sfcar:
 			Toast.makeText(this, "near_sfcar", 1).show();
 			break;
+		case R.id.near_searchpeople:
+			break;
 		case R.id.near_others:
 			Toast.makeText(this, "near_others", 1).show();
 			break;
