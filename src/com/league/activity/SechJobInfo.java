@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 /**  
@@ -21,6 +22,7 @@ public class SechJobInfo extends Activity implements OnClickListener{
 	private TextView near_title;
 	private ImageView near_t_rig;
 	
+	private ListView infoseach;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -33,6 +35,7 @@ public class SechJobInfo extends Activity implements OnClickListener{
 		near_title=(TextView) findViewById(R.id.near_centertitle);
 		near_t_rig=(ImageView) findViewById(R.id.near_ti_right);
 		near_right=(ImageButton) findViewById(R.id.near_right);
+		infoseach=(ListView) findViewById(R.id.infosearch_list);
 		near_title.setText("求职信息");
 		near_back.setOnClickListener(this);
 		near_right.setOnClickListener(this);
