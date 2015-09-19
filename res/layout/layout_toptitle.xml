@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="49.0dip"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48.0dip"
+        android:background="@color/bar_color" >
+
+        <ImageButton
+            android:id="@+id/imgbtn_back"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/transparent"
+            android:src="@drawable/icon_back"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/oh_title"
+            style="@style/txt_titleStyle"
+            android:layout_centerInParent="true"
+            android:text="@string/app_name" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/icon_dingwei"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="10dp"
+            android:text="正在定位中"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/black2" />
+
+</LinearLayout>
