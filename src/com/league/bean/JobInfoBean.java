@@ -7,7 +7,7 @@ package com.league.bean;
 public class JobInfoBean {
 
 	String thumb;
-	String nuserNickname;
+	String userNickname;
 	int fullorpart_timejob;
 	String profession;
 	String lasttime;
@@ -22,11 +22,12 @@ public class JobInfoBean {
 	public void setThumb(String thumb) {
 		this.thumb = thumb;
 	}
-	public String getNuserNickname() {
-		return nuserNickname;
+	
+	public String getUserNickname() {
+		return userNickname;
 	}
-	public void setNuserNickname(String nuserNickname) {
-		this.nuserNickname = nuserNickname;
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
 	}
 	public int getFullorpart_timejob() {
 		return fullorpart_timejob;

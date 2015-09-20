@@ -1,5 +1,10 @@
 package com.league.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.league.adapter.JobInfoAdapter;
+import com.league.bean.JobInfoBean;
 import com.mine.league.R;
 
 import android.app.Activity;
@@ -23,12 +28,15 @@ public class SechJobInfo extends Activity implements OnClickListener{
 	private ImageView near_t_rig;
 	
 	private ListView infoseach;
+	private List<JobInfoBean> listdata=new ArrayList<JobInfoBean>();
+	private JobInfoAdapter adapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_searchinfo);
 		init();
+		initData();
 	}
 	private void init(){
 		near_back=(ImageButton) findViewById(R.id.near_back);
@@ -39,6 +47,25 @@ public class SechJobInfo extends Activity implements OnClickListener{
 		near_title.setText("求职信息");
 		near_back.setOnClickListener(this);
 		near_right.setOnClickListener(this);
+	}
+	public void initData(){
+		//从服务器拉取数据
+		for(int i=0;i<10;i++){
+			JobInfoBean jib=new JobInfoBean();
+			jib.setUserNickname("nickname "+i);
+			jib.setFullorpart_timejob(i%2);
+			jib.setProfession("profession "+i);
+			jib.setLasttime("lasttime "+i);
+			jib.setInfoContent("infocontent "+i);
+			jib.setEduction("edution "+i);
+			jib.setWorktime("worktime "+i);
+			jib.setCurrent_status("status "+i);
+			jib.setLeave_message("leave message "+i);
+			listdata.add(jib);
+			
+		}
+		adapter=new JobInfoAdapter(getApplicationContext(), listdata);
+		infoseach.setAdapter(adapter);
 	}
 	@Override
 	public void onClick(View v) {
