@@ -3,18 +3,28 @@ package com.league.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.league.adapter.FeatureComAdapter;
 import com.league.adapter.JobInfoAdapter;
+import com.league.adapter.MakingFriendAdapter;
+import com.league.adapter.SearchPeoAdapter;
+import com.league.bean.FeatureComInfo;
 import com.league.bean.JobInfoBean;
+import com.league.bean.MakingFriendInfo;
+import com.league.bean.SearchPeopleInfo;
 import com.mine.league.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**  
  *   
@@ -29,7 +39,13 @@ public class SechJobInfo extends Activity implements OnClickListener{
 	private int Flag;
 	private ListView infoseach;
 	private List<JobInfoBean> listdata=new ArrayList<JobInfoBean>();
+	private List<FeatureComInfo> listFeaCData=new ArrayList<FeatureComInfo>();
+	private List<MakingFriendInfo> listMaFrData=new ArrayList<MakingFriendInfo>();
+	private List<SearchPeopleInfo> listSearchPeoData=new ArrayList<SearchPeopleInfo>();
 	private JobInfoAdapter adapter;
+	private FeatureComAdapter feaComAdapter;
+	private MakingFriendAdapter makFriAdapter;
+	private SearchPeoAdapter searchPeoAdapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -99,14 +115,62 @@ public class SechJobInfo extends Activity implements OnClickListener{
 			}
 			adapter=new JobInfoAdapter(getApplicationContext(), listdata);
 			infoseach.setAdapter(adapter);
+			infoseach.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					// TODO Auto-generated method stub
+					Intent intent=new Intent(getApplicationContext(),NearItemActivity.class);
+					startActivity(intent);
+				}
+			});
 			break;
 		case 2:
+			//从服务器拉取数据
+			for(int i=0;i<10;i++){
+				FeatureComInfo fci=new FeatureComInfo();
+				fci.setUserNickname("userNickname"+i);
+				fci.setFea_location("fea_location"+i);
+				fci.setType("type"+i);
+				fci.setLasttime("lasttime"+i);
+				fci.setComnumber(""+i);
+				fci.setInfoContent("infoContent"+i);
+				fci.setSecContent("secContent"+i);
+				listFeaCData.add(fci);
+			}
+			feaComAdapter = new FeatureComAdapter(getApplicationContext(), listFeaCData);
+			infoseach.setAdapter(feaComAdapter);
 			break;
 		case 3:
+			//从服务器拉取数据
+			for(int i=0;i<10;i++){
+				MakingFriendInfo mfi=new MakingFriendInfo();
+				mfi.setUserNickName("userNickName"+i);
+				mfi.setSex(i%2==0?"男":"女");
+				mfi.setInteresting("interesting"+i);
+				mfi.setLeaveMessage("leaveMessage"+i);
+				listMaFrData.add(mfi);
+			}
+			makFriAdapter =new MakingFriendAdapter(getApplicationContext(), listMaFrData);
+			infoseach.setAdapter(makFriAdapter);
 			break;
 		case 4:
 			break;
 		case 5:
+			//从服务器拉取数据
+			for(int i=0;i<10;i++){
+				SearchPeopleInfo fci=new SearchPeopleInfo();
+				fci.setUserNickname("userNickname"+i);
+				fci.setSear_location("sear_location"+i);
+				fci.setLasttime("lasttime"+i);
+				fci.setComnumber(""+i);
+				fci.setInfoContent("infoContent"+i);
+				fci.setSecContent("secContent"+i);
+				listSearchPeoData.add(fci);
+			}
+			searchPeoAdapter=new SearchPeoAdapter(getApplicationContext(), listSearchPeoData);
+			infoseach.setAdapter(searchPeoAdapter);
 			break;
 		case 6:
 			break;

@@ -55,6 +55,8 @@
         </activity>
         <activity android:name="com.league.activity.SechJobInfo" >
         </activity>
+        <activity android:name="com.league.activity.NearItemActivity" >
+        </activity>
         
 
         <service
