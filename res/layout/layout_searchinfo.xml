@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical" >
 
-    <include layout="@layout/near_title" />
+	<include layout="@layout/near_title" />
 
     <include layout="@layout/info_search" />
 

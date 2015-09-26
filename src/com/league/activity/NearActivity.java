@@ -88,21 +88,33 @@ public class NearActivity extends Activity implements OnClickListener{
 		switch(v.getId()){
 		case R.id.near_searchinfo:
 			Intent intent=new Intent(this,SechJobInfo.class);
+			intent.putExtra("mode", 1);
 			startActivity(intent);
 			break;
 		case R.id.near_featurecom:
-			Toast.makeText(this, "near_featurecom", 1).show();
+			Intent intent2=new Intent(this,SechJobInfo.class);
+			intent2.putExtra("mode", 2);
+			startActivity(intent2);
 			break;
 		case R.id.near_likefriend:
-			Toast.makeText(this, "near_likefriend", 1).show();
+			Intent intent3=new Intent(this,SechJobInfo.class);
+			intent3.putExtra("mode", 3);
+			startActivity(intent3);
 			break;
 		case R.id.near_sfcar:
-			Toast.makeText(this, "near_sfcar", 1).show();
+			Intent intent4=new Intent(this,SechJobInfo.class);
+			intent4.putExtra("mode", 4);
+			startActivity(intent4);
 			break;
 		case R.id.near_searchpeople:
+			Intent intent5=new Intent(this,SechJobInfo.class);
+			intent5.putExtra("mode", 5);
+			startActivity(intent5);
 			break;
 		case R.id.near_others:
-			Toast.makeText(this, "near_others", 1).show();
+			Intent intent6=new Intent(this,SechJobInfo.class);
+			intent6.putExtra("mode", 6);
+			startActivity(intent6);
 			break;
 		default:
 			break;
