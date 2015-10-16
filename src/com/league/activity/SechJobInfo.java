@@ -11,13 +11,17 @@ import com.league.bean.FeatureComInfo;
 import com.league.bean.JobInfoBean;
 import com.league.bean.MakingFriendInfo;
 import com.league.bean.SearchPeopleInfo;
+import com.league.dialog.NearRightDialog;
 import com.mine.league.R;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
@@ -65,9 +69,7 @@ public class SechJobInfo extends Activity implements OnClickListener{
 		near_t_rig=(ImageView) findViewById(R.id.near_ti_right);
 		near_right=(ImageButton) findViewById(R.id.near_right);
 		infoseach=(ListView) findViewById(R.id.infosearch_list);
-		if(Flag==1){
-			
-		}
+		
 		switch (Flag) {
 		case 1:
 			near_title.setText("求职信息");
@@ -190,7 +192,20 @@ public class SechJobInfo extends Activity implements OnClickListener{
 		case R.id.near_centertitle:
 			break;
 		case R.id.near_right:
-			break;
+			switch(Flag){
+			case 1:
+				NearRightDialog dialog=new NearRightDialog(this, 1);
+				Window dialogWindow=dialog.getWindow();
+				WindowManager.LayoutParams lp=dialogWindow.getAttributes();
+				dialogWindow.setGravity(Gravity.TOP|Gravity.RIGHT);
+				lp.x = 0; // 新位置X坐标
+				lp.y = 90; // 新位置Y坐标
+				lp.alpha = 0.7f; // 透明度
+				dialogWindow.setAttributes(lp);
+				dialog.show();
+				break;
+			}
+			
 			
 		}
 	}
