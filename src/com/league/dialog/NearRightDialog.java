@@ -1,10 +1,12 @@
 package com.league.dialog;
 
 
+import com.league.activity.WantAJob;
 import com.mine.league.R;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,7 +30,7 @@ public class NearRightDialog extends Dialog implements
 		layout_my = (LinearLayout) findViewById(R.id.mysearchjob);
 		layout_my.setOnClickListener(this);
 		txt1=(TextView) findViewById(R.id.searchjob);
-		txt2=(TextView) findViewById(R.id.mysearchjob);
+		txt2=(TextView) findViewById(R.id.mine);
 		
 		init();
 	}
@@ -47,7 +49,8 @@ public class NearRightDialog extends Dialog implements
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.want_job:
-			
+			Intent intent=new Intent(context,WantAJob.class);
+			context.startActivity(intent);
 			dismiss();
 			break;
 		case R.id.mysearchjob:

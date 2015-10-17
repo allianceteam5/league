@@ -51,7 +51,7 @@
             android:src="@drawable/near_myjob" />
 
         <TextView
-            android:id="@+id/mysearchjob"
+            android:id="@+id/mine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|right"
