@@ -143,6 +143,15 @@ public class SechJobInfo extends Activity implements OnClickListener{
 			}
 			feaComAdapter = new FeatureComAdapter(getApplicationContext(), listFeaCData);
 			infoseach.setAdapter(feaComAdapter);
+			infoseach.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			break;
 		case 3:
 			//从服务器拉取数据

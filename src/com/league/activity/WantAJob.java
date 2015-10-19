@@ -59,6 +59,7 @@ public class WantAJob extends Activity implements OnClickListener{
 			
 			break;
 		case R.id.publish:
+			
 			break;
 		}
 	}

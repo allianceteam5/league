@@ -1,6 +1,7 @@
 package com.league.dialog;
 
 
+import com.league.activity.MyJobHunting;
 import com.league.activity.WantAJob;
 import com.mine.league.R;
 
@@ -54,8 +55,8 @@ public class NearRightDialog extends Dialog implements
 			dismiss();
 			break;
 		case R.id.mysearchjob:
-			
-			
+			Intent intent1=new Intent(context,MyJobHunting.class);
+			context.startActivity(intent1);
 			dismiss();
 			break;
 		

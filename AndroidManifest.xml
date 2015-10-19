@@ -60,7 +60,8 @@
         <activity 
             android:name="com.league.activity.WantAJob">           
         </activity>
-
+        <activity 
+            android:name="com.league.activity.MyJobHunting"/>
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
