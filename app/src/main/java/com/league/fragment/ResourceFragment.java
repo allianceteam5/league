@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.league.activity.GrabRedEnvolope;
 import com.league.activity.NearActivity;
+import com.league.activity.OneYuan;
 import com.league.adapter.ViewPaperAdapter;
 import com.mine.league.R;
 
@@ -189,6 +190,8 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener,O
 		switch(v.getId()){
 		case R.id.resource_yiyuanduobao:
 
+			Intent intent3=new Intent(ctx, OneYuan.class);
+			startActivity(intent3);
 			break;
 		case R.id.resource_qianghongbao:
 			Intent intent2=new Intent(ctx, GrabRedEnvolope.class);

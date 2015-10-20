@@ -82,6 +82,8 @@
         </activity>
         <activity android:name="com.league.activity.GrabRedEnvolope" >
         </activity>
+        <activity android:name="com.league.activity.OneYuan" >
+        </activity>
     </application>
 
 </manifest>
