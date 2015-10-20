@@ -1,0 +1,207 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* .DS_Store
+* .gitignore
+* .idea/
+* .idea/.name
+* .idea/compiler.xml
+* .idea/copyright/
+* .idea/copyright/profiles_settings.xml
+* .idea/misc.xml
+* .idea/modules.xml
+* .idea/vcs.xml
+* .idea/workspace.xml
+* README.md
+* app/
+* app/build.gradle
+* app/libs/
+* app/libs/locSDK_6.11.jar
+* app/src/
+* app/src/main/
+* app/src/main/AndroidManifest.xml
+* app/src/main/java/
+* app/src/main/java/com/
+* app/src/main/java/com/league/
+* app/src/main/java/com/league/activity/
+* app/src/main/java/com/league/activity/MainActivity.java
+* app/src/main/java/com/league/activity/MyJobHunting.java
+* app/src/main/java/com/league/activity/NearActivity.java
+* app/src/main/java/com/league/activity/NearItemActivity.java
+* app/src/main/java/com/league/activity/SechJobInfo.java
+* app/src/main/java/com/league/activity/WantAJob.java
+* app/src/main/java/com/league/adapter/
+* app/src/main/java/com/league/adapter/FeatureComAdapter.java
+* app/src/main/java/com/league/adapter/JobInfoAdapter.java
+* app/src/main/java/com/league/adapter/MakingFriendAdapter.java
+* app/src/main/java/com/league/adapter/SearchPeoAdapter.java
+* app/src/main/java/com/league/adapter/ViewPaperAdapter.java
+* app/src/main/java/com/league/bean/
+* app/src/main/java/com/league/bean/FeatureComInfo.java
+* app/src/main/java/com/league/bean/JobInfoBean.java
+* app/src/main/java/com/league/bean/MakingFriendInfo.java
+* app/src/main/java/com/league/bean/SearchPeopleInfo.java
+* app/src/main/java/com/league/dialog/
+* app/src/main/java/com/league/dialog/NearRightDialog.java
+* app/src/main/java/com/league/fragment/
+* app/src/main/java/com/league/fragment/FriendsFragment.java
+* app/src/main/java/com/league/fragment/MessageFragment.java
+* app/src/main/java/com/league/fragment/PersonFragment.java
+* app/src/main/java/com/league/fragment/ResourceFragment.java
+* app/src/main/java/com/league/widget/
+* app/src/main/java/com/league/widget/CircleImageView.java
+* app/src/main/jniLibs/
+* app/src/main/jniLibs/arm64-v8a/
+* app/src/main/jniLibs/arm64-v8a/liblocSDK6a.so
+* app/src/main/jniLibs/armeabi-v7a/
+* app/src/main/jniLibs/armeabi-v7a/liblocSDK6a.so
+* app/src/main/jniLibs/armeabi/
+* app/src/main/jniLibs/armeabi/liblocSDK6a.so
+* app/src/main/jniLibs/mips/
+* app/src/main/jniLibs/mips/liblocSDK6a.so
+* app/src/main/jniLibs/mips64/
+* app/src/main/jniLibs/mips64/liblocSDK6a.so
+* app/src/main/jniLibs/x86/
+* app/src/main/jniLibs/x86/liblocSDK6a.so
+* app/src/main/jniLibs/x86_64/
+* app/src/main/jniLibs/x86_64/liblocSDK6a.so
+* app/src/main/res/
+* app/src/main/res/drawable-hdpi/
+* app/src/main/res/drawable-hdpi/example.png
+* app/src/main/res/drawable-hdpi/featurecommand.png
+* app/src/main/res/drawable-hdpi/friend_sex_man.png
+* app/src/main/res/drawable-hdpi/friend_sex_woman.png
+* app/src/main/res/drawable-hdpi/head.png
+* app/src/main/res/drawable-hdpi/home_normal.png
+* app/src/main/res/drawable-hdpi/home_pressed.png
+* app/src/main/res/drawable-hdpi/ic_launcher.png
+* app/src/main/res/drawable-hdpi/icon_back.png
+* app/src/main/res/drawable-hdpi/icon_dingwei.png
+* app/src/main/res/drawable-hdpi/icon_item_menu.png
+* app/src/main/res/drawable-hdpi/icon_xiaoxi.png
+* app/src/main/res/drawable-hdpi/interact_normal.png
+* app/src/main/res/drawable-hdpi/interact_pressed.png
+* app/src/main/res/drawable-hdpi/likemakefriend.png
+* app/src/main/res/drawable-hdpi/near_back.png
+* app/src/main/res/drawable-hdpi/near_myjob.png
+* app/src/main/res/drawable-hdpi/near_right.png
+* app/src/main/res/drawable-hdpi/near_t_right.png
+* app/src/main/res/drawable-hdpi/near_wantjob.png
+* app/src/main/res/drawable-hdpi/other.png
+* app/src/main/res/drawable-hdpi/personal_normal.png
+* app/src/main/res/drawable-hdpi/personal_pressed.png
+* app/src/main/res/drawable-hdpi/recom_normal.png
+* app/src/main/res/drawable-hdpi/recom_pressed.png
+* app/src/main/res/drawable-hdpi/resource_delete.png
+* app/src/main/res/drawable-hdpi/resource_right.png
+* app/src/main/res/drawable-hdpi/resource_selected.png
+* app/src/main/res/drawable-hdpi/search_ba.png
+* app/src/main/res/drawable-hdpi/search_icon.png
+* app/src/main/res/drawable-hdpi/searchjobinfo.png
+* app/src/main/res/drawable-hdpi/searchpeople.png
+* app/src/main/res/drawable-hdpi/shunfengcar.png
+* app/src/main/res/drawable-hdpi/title_search.png
+* app/src/main/res/drawable-mdpi/
+* app/src/main/res/drawable-mdpi/back1.png
+* app/src/main/res/drawable-mdpi/back2.png
+* app/src/main/res/drawable-mdpi/back3.png
+* app/src/main/res/drawable-mdpi/ic_launcher.png
+* app/src/main/res/drawable-xhdpi/
+* app/src/main/res/drawable-xhdpi/ic_launcher.png
+* app/src/main/res/drawable-xxhdpi/
+* app/src/main/res/drawable-xxhdpi/ic_launcher.png
+* app/src/main/res/drawable/
+* app/src/main/res/drawable/tab_home.xml
+* app/src/main/res/drawable/tab_interact.xml
+* app/src/main/res/drawable/tab_personal.xml
+* app/src/main/res/drawable/tab_recom.xml
+* app/src/main/res/layout/
+* app/src/main/res/layout/activity_main.xml
+* app/src/main/res/layout/activity_myjobhunting.xml
+* app/src/main/res/layout/activity_wangjob.xml
+* app/src/main/res/layout/dialog_resource_tab.xml
+* app/src/main/res/layout/featurecom_item.xml
+* app/src/main/res/layout/fragment_friends.xml
+* app/src/main/res/layout/fragment_message.xml
+* app/src/main/res/layout/fragment_person.xml
+* app/src/main/res/layout/fragment_resource.xml
+* app/src/main/res/layout/info_search.xml
+* app/src/main/res/layout/infojob_item.xml
+* app/src/main/res/layout/layout_bottom.xml
+* app/src/main/res/layout/layout_near.xml
+* app/src/main/res/layout/layout_near_jobinfo_item.xml
+* app/src/main/res/layout/layout_searchinfo.xml
+* app/src/main/res/layout/layout_title.xml
+* app/src/main/res/layout/layout_toptitle.xml
+* app/src/main/res/layout/makingfriend_item.xml
+* app/src/main/res/layout/near_title.xml
+* app/src/main/res/layout/searchpe_item.xml
+* app/src/main/res/values-v11/
+* app/src/main/res/values-v11/styles.xml
+* app/src/main/res/values-v14/
+* app/src/main/res/values-v14/styles.xml
+* app/src/main/res/values/
+* app/src/main/res/values/colors.xml
+* app/src/main/res/values/strings.xml
+* app/src/main/res/values/styles.xml
+* build.gradle
+* gradle/
+* gradle/wrapper/
+* gradle/wrapper/gradle-wrapper.jar
+* gradle/wrapper/gradle-wrapper.properties
+* gradlew
+* gradlew.bat
+* ic_launcher-web.png
+* proguard-project.txt
+* settings.gradle
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:19.1.0
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app/src/main/AndroidManifest.xml
+* assets/ => app/src/main/assets
+* libs/arm64-v8a/liblocSDK6a.so => app/src/main/jniLibs/arm64-v8a/liblocSDK6a.so
+* libs/armeabi-v7a/liblocSDK6a.so => app/src/main/jniLibs/armeabi-v7a/liblocSDK6a.so
+* libs/armeabi/liblocSDK6a.so => app/src/main/jniLibs/armeabi/liblocSDK6a.so
+* libs/locSDK_6.11.jar => app/libs/locSDK_6.11.jar
+* libs/mips/liblocSDK6a.so => app/src/main/jniLibs/mips/liblocSDK6a.so
+* libs/mips64/liblocSDK6a.so => app/src/main/jniLibs/mips64/liblocSDK6a.so
+* libs/x86/liblocSDK6a.so => app/src/main/jniLibs/x86/liblocSDK6a.so
+* libs/x86_64/liblocSDK6a.so => app/src/main/jniLibs/x86_64/liblocSDK6a.so
+* res/ => app/src/main/res/
+* src/ => app/src/main/java/
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)
