@@ -272,6 +272,7 @@
                 android:layout_marginRight="10dp"
                 android:text="加为好友"
                 android:textSize="16sp"
+
                 />
         </LinearLayout>
     </ScrollView>

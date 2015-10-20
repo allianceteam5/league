@@ -74,11 +74,13 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="RiMBqzhMB6yBFdSdzhuXHSqO" />
 
-        <activity android:name="com.league.activity.CommandItem" >
-        </activity>
         <activity android:name="com.league.activity.PostCard" >
         </activity>
         <activity android:name="com.league.activity.MyPost" >
+        </activity>
+        <activity android:name="com.league.activity.MakingFriItem" >
+        </activity>
+        <activity android:name="com.league.activity.GrabRedEnvolope" >
         </activity>
     </application>
 

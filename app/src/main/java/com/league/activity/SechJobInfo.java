@@ -169,6 +169,17 @@ public class SechJobInfo extends Activity implements OnClickListener {
                 }
                 makFriAdapter = new MakingFriendAdapter(getApplicationContext(), listMaFrData);
                 infoseach.setAdapter(makFriAdapter);
+                infoseach.setOnItemClickListener(new OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1,
+                                            int arg2, long arg3) {
+                        // TODO Auto-generated method stub
+                        Intent intent3 = new Intent(getApplicationContext(), MakingFriItem.class);
+                        startActivity(intent3);
+
+                    }
+                });
                 break;
             case 4:
                 break;
@@ -186,6 +197,7 @@ public class SechJobInfo extends Activity implements OnClickListener {
                 }
                 searchPeoAdapter = new SearchPeoAdapter(getApplicationContext(), listSearchPeoData);
                 infoseach.setAdapter(searchPeoAdapter);
+
                 break;
             case 6:
                 break;

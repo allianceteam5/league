@@ -3,6 +3,7 @@ package com.league.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.league.activity.GrabRedEnvolope;
 import com.league.activity.NearActivity;
 import com.league.adapter.ViewPaperAdapter;
 import com.mine.league.R;
@@ -187,8 +188,11 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener,O
 		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.resource_yiyuanduobao:
+
 			break;
 		case R.id.resource_qianghongbao:
+			Intent intent2=new Intent(ctx, GrabRedEnvolope.class);
+			startActivity(intent2);
 			break;
 		case R.id.resource_fujin:
 			Intent intent=new Intent(ctx,NearActivity.class);
