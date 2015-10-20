@@ -2,6 +2,8 @@ package com.league.dialog;
 
 
 import com.league.activity.MyJobHunting;
+import com.league.activity.MyPost;
+import com.league.activity.PostCard;
 import com.league.activity.WantAJob;
 import com.mine.league.R;
 
@@ -38,11 +40,18 @@ public class NearRightDialog extends Dialog implements
 
 	void init(){
 		switch(Flag){
-		case 1 :
-			txt1.setText("我要求职");
-			txt2.setText("我的求职");
-			
-			break;
+			case 1:
+				txt1.setText("我要求职");
+				txt2.setText("我的求职");
+				break;
+			case 2:
+				txt1.setText("发布帖子");
+				txt2.setText("我的帖子");
+				break;
+			case 3:
+				break;
+
+
 		}
 	}
 	@Override
@@ -50,13 +59,25 @@ public class NearRightDialog extends Dialog implements
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.want_job:
-			Intent intent=new Intent(context,WantAJob.class);
-			context.startActivity(intent);
+			if(Flag==1){
+				Intent intent=new Intent(context,WantAJob.class);
+				context.startActivity(intent);
+
+			}else if(Flag==2){
+				Intent intent2=new Intent(context, PostCard.class);
+				context.startActivity(intent2);
+			}
 			dismiss();
 			break;
 		case R.id.mysearchjob:
-			Intent intent1=new Intent(context,MyJobHunting.class);
-			context.startActivity(intent1);
+			if(Flag==1){
+				Intent intent1=new Intent(context,MyJobHunting.class);
+				context.startActivity(intent1);
+
+			}else if(Flag==2){
+				Intent intent3= new Intent(context, MyPost.class);
+				context.startActivity(intent3);
+			}
 			dismiss();
 			break;
 		
