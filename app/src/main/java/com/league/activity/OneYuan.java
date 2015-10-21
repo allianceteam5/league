@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mine.league.R;
 public class OneYuan extends Activity implements View.OnClickListener{
@@ -40,7 +41,21 @@ public class OneYuan extends Activity implements View.OnClickListener{
                 onBackPressed();
                 finish();
                 break;
-
+            case R.id.One_tengrab:
+                Toast.makeText(this,"10",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.One_Yuan:
+                Toast.makeText(this,"1",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.One_record:
+                Toast.makeText(this,"rec",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.One_question:
+                Toast.makeText(this,"que",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.tengrb_more:
+                Toast.makeText(this,"10more",Toast.LENGTH_LONG).show();
+                break;
         }
     }
 }
