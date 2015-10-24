@@ -7,18 +7,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.league.adapter.HorizonListAdapter;
+import com.league.bean.TenYuanGrabBean;
 import com.league.view.HorizontalListView;
 import com.mine.league.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class OneYuan extends Activity implements View.OnClickListener{
 
     private ImageView back1,back2,titleright,right1,right2;
     private TextView title;
     private HorizontalListView horizonList;
+    private List<TenYuanGrabBean> listTenYuanGrab=new ArrayList<TenYuanGrabBean>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_yuan);
         initView();
+        initData();
     }
     private void initView(){
         back1=(ImageView) findViewById(R.id.near_back);
@@ -35,6 +43,17 @@ public class OneYuan extends Activity implements View.OnClickListener{
         right2=(ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
         horizonList=(HorizontalListView)findViewById(R.id.horizon_listview);
+
+    }
+    void initData(){
+        for(int i=0;i<5;i++){
+            TenYuanGrabBean example=new TenYuanGrabBean();
+            example.setmMoney(50+i+"");
+            example.setmTotalPeo(500);
+            example.setmTakingPeo(200);
+            listTenYuanGrab.add(example);
+        }
+        horizonList.setAdapter(new HorizonListAdapter(getApplication(),listTenYuanGrab,0));
 
     }
     @Override
