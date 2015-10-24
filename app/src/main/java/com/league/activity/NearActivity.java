@@ -1,7 +1,5 @@
 package com.league.activity;
 
-import com.mine.league.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,15 +8,13 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.location.BDNotifyListener;//假如用到位置提醒功能，需要import该类
-import com.baidu.location.Poi;
 import com.baidu.location.LocationClientOption.LocationMode;
+import com.mine.league.R;
 /**  
  *   
  * @author liugang  
@@ -101,16 +97,16 @@ public class NearActivity extends Activity implements OnClickListener{
 			intent3.putExtra("mode", 3);
 			startActivity(intent3);
 			break;
-		case R.id.near_sfcar:
-			Intent intent4=new Intent(this,SechJobInfo.class);
-			intent4.putExtra("mode", 4);
-			startActivity(intent4);
-			break;
-		case R.id.near_searchpeople:
-			Intent intent5=new Intent(this,SechJobInfo.class);
-			intent5.putExtra("mode", 5);
-			startActivity(intent5);
-			break;
+//		case R.id.near_sfcar:
+//			Intent intent4=new Intent(this,SechJobInfo.class);
+//			intent4.putExtra("mode", 4);
+//			startActivity(intent4);
+//			break;
+//		case R.id.near_searchpeople:
+//			Intent intent5=new Intent(this,SechJobInfo.class);
+//			intent5.putExtra("mode", 5);
+//			startActivity(intent5);
+//			break;
 		case R.id.near_others:
 			Intent intent6=new Intent(this,SechJobInfo.class);
 			intent6.putExtra("mode", 6);

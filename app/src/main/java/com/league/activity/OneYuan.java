@@ -7,11 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.league.view.HorizontalListView;
 import com.mine.league.R;
 public class OneYuan extends Activity implements View.OnClickListener{
 
     private ImageView back1,back2,titleright,right1,right2;
     private TextView title;
+    private HorizontalListView horizonList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,7 @@ public class OneYuan extends Activity implements View.OnClickListener{
         right1.setVisibility(View.GONE);
         right2=(ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
+        horizonList=(HorizontalListView)findViewById(R.id.horizon_listview);
 
     }
     @Override

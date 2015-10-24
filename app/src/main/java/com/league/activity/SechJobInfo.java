@@ -1,19 +1,5 @@
 package com.league.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.league.adapter.FeatureComAdapter;
-import com.league.adapter.JobInfoAdapter;
-import com.league.adapter.MakingFriendAdapter;
-import com.league.adapter.SearchPeoAdapter;
-import com.league.bean.FeatureComInfo;
-import com.league.bean.JobInfoBean;
-import com.league.bean.MakingFriendInfo;
-import com.league.bean.SearchPeopleInfo;
-import com.league.dialog.NearRightDialog;
-import com.mine.league.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +14,20 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.league.adapter.FeatureComAdapter;
+import com.league.adapter.JobInfoAdapter;
+import com.league.adapter.MakingFriendAdapter;
+import com.league.adapter.SearchPeoAdapter;
+import com.league.bean.FeatureComInfo;
+import com.league.bean.JobInfoBean;
+import com.league.bean.MakingFriendInfo;
+import com.league.bean.SearchPeopleInfo;
+import com.league.dialog.NearRightDialog;
+import com.mine.league.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author liugang
@@ -81,13 +80,13 @@ public class SechJobInfo extends Activity implements OnClickListener {
             case 3:
                 near_title.setText("爱好交友");
                 break;
-            case 4:
-                near_title.setText("顺风车");
-                near_t_rig.setVisibility(View.INVISIBLE);
-                break;
-            case 5:
-                near_title.setText("寻人启事");
-                break;
+//            case 4:
+//                near_title.setText("顺风车");
+//                near_t_rig.setVisibility(View.INVISIBLE);
+//                break;
+//            case 5:
+//                near_title.setText("寻人启事");
+//                break;
             case 6:
                 near_title.setText("其他");
                 near_t_rig.setVisibility(View.INVISIBLE);
@@ -181,24 +180,24 @@ public class SechJobInfo extends Activity implements OnClickListener {
                     }
                 });
                 break;
-            case 4:
-                break;
-            case 5:
-                //从服务器拉取数据
-                for (int i = 0; i < 10; i++) {
-                    SearchPeopleInfo fci = new SearchPeopleInfo();
-                    fci.setUserNickname("userNickname" + i);
-                    fci.setSear_location("sear_location" + i);
-                    fci.setLasttime("lasttime" + i);
-                    fci.setComnumber("" + i);
-                    fci.setInfoContent("infoContent" + i);
-                    fci.setSecContent("secContent" + i);
-                    listSearchPeoData.add(fci);
-                }
-                searchPeoAdapter = new SearchPeoAdapter(getApplicationContext(), listSearchPeoData);
-                infoseach.setAdapter(searchPeoAdapter);
-
-                break;
+//            case 4:
+//                break;
+//            case 5:
+//                //从服务器拉取数据
+//                for (int i = 0; i < 10; i++) {
+//                    SearchPeopleInfo fci = new SearchPeopleInfo();
+//                    fci.setUserNickname("userNickname" + i);
+//                    fci.setSear_location("sear_location" + i);
+//                    fci.setLasttime("lasttime" + i);
+//                    fci.setComnumber("" + i);
+//                    fci.setInfoContent("infoContent" + i);
+//                    fci.setSecContent("secContent" + i);
+//                    listSearchPeoData.add(fci);
+//                }
+//                searchPeoAdapter = new SearchPeoAdapter(getApplicationContext(), listSearchPeoData);
+//                infoseach.setAdapter(searchPeoAdapter);
+//
+//                break;
             case 6:
                 break;
             default:
