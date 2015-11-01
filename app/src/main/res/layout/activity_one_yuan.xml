@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black2"
     android:orientation="vertical">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/near_title" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@id/title"
+        android:background="@color/black2" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black2"
             android:orientation="vertical">
-            <include
-                android:id="@+id/title"
-                layout="@layout/near_title"/>
-            <View
-                android:id="@+id/view"
-                android:layout_below="@id/title"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/black2"/>
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:orientation="horizontal"
                 android:background="@color/white"
-                >
+                android:orientation="horizontal">
+
                 <RelativeLayout
                     android:id="@+id/One_tengrab"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:onClick="onClick"
-                    android:layout_gravity="center_vertical"
-                    android:padding="3dp" >
+                    android:padding="3dp">
 
                     <RelativeLayout
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
-                        android:gravity="center" >
+                        android:gravity="center">
 
                         <ImageView
                             android:id="@+id/iv_1"
@@ -71,16 +77,16 @@
                     android:id="@+id/One_Yuan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:onClick="onClick"
-                    android:layout_gravity="center_vertical"
-                    android:padding="3dp" >
+                    android:padding="3dp">
 
                     <RelativeLayout
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
-                        android:gravity="center" >
+                        android:gravity="center">
 
                         <ImageView
                             android:id="@+id/iv_2"
@@ -104,20 +110,21 @@
                             android:textSize="18sp" />
                     </RelativeLayout>
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/One_record"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:onClick="onClick"
-                    android:layout_gravity="center_vertical"
-                    android:padding="3dp" >
+                    android:padding="3dp">
 
                     <RelativeLayout
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
-                        android:gravity="center" >
+                        android:gravity="center">
 
                         <ImageView
                             android:id="@+id/iv_3"
@@ -141,20 +148,21 @@
                             android:textSize="18sp" />
                     </RelativeLayout>
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/One_question"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:onClick="onClick"
-                    android:layout_gravity="center_vertical"
-                    android:padding="3dp" >
+                    android:padding="3dp">
 
                     <RelativeLayout
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
-                        android:gravity="center" >
+                        android:gravity="center">
 
                         <ImageView
                             android:id="@+id/iv_4"
@@ -179,54 +187,99 @@
                     </RelativeLayout>
                 </RelativeLayout>
             </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dip">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="50dip"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dip"
+                    android:gravity="center_vertical"
                     android:text="10元夺金"
                     android:textColor="@color/black"
-                    android:textSize="19sp"
-                    android:layout_marginLeft="15dip"
-                    android:layout_centerVertical="true"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentLeft="true"/>
+                    android:textSize="19sp" />
+
                 <TextView
                     android:id="@+id/tengrb_more"
                     android:layout_width="wrap_content"
                     android:layout_height="50dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dip"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onClick"
                     android:text="更多>>"
                     android:textColor="@color/black"
-                    android:textSize="19sp"
-                    android:layout_marginRight="15dip"
-                    android:layout_centerVertical="true"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentRight="true"
-                    android:clickable="true"
-                    android:onClick="onClick"/>
+                    android:textSize="19sp" />
             </RelativeLayout>
+
             <com.league.view.HorizontalListView
                 android:id="@+id/horizon_listview"
                 android:layout_width="wrap_content"
                 android:layout_height="170dip"
-                android:background="@color/white">
-            </com.league.view.HorizontalListView>
+                android:background="@color/white"></com.league.view.HorizontalListView>
+
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
+                android:layout_marginLeft="15dip"
+                android:gravity="center_vertical"
                 android:text="最新揭晓"
                 android:textColor="@color/black"
-                android:textSize="19sp"
-                android:layout_marginLeft="15dip"
-                android:gravity="center_vertical"/>
+                android:textSize="19sp" />
+
             <com.league.view.HorizontalListView
                 android:id="@+id/horizon_last"
                 android:layout_width="wrap_content"
                 android:layout_height="170dip"
-                android:background="@color/white">
-            </com.league.view.HorizontalListView>
+                android:background="@color/white"></com.league.view.HorizontalListView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dip"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dip"
+                    android:gravity="center_vertical"
+                    android:text="一元夺宝"
+                    android:textColor="@color/black"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/last_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dip"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onClick"
+                    android:text="更多>>"
+                    android:textColor="@color/black"
+                    android:textSize="19sp" />
+            </RelativeLayout>
+            <GridView
+                android:id="@+id/gridview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="2"
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dip"
+                android:stretchMode="columnWidth"
+                >
+
+            </GridView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

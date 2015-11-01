@@ -2,12 +2,18 @@ package com.league.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.league.adapter.HorizonLastAdapter;
 import com.league.adapter.HorizonListAdapter;
+import com.league.adapter.OneyuanGridAdapter;
+import com.league.bean.AnnouncedTheLatestBean;
+import com.league.bean.OneYuanBean;
 import com.league.bean.TenYuanGrabBean;
 import com.league.view.HorizontalListView;
 import com.mine.league.R;
@@ -15,12 +21,16 @@ import com.mine.league.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OneYuan extends Activity implements View.OnClickListener{
+public class OneYuan extends Activity implements View.OnClickListener {
 
-    private ImageView back1,back2,titleright,right1,right2;
+    private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
-    private HorizontalListView horizonList,horizonLast;
-    private List<TenYuanGrabBean> listTenYuanGrab=new ArrayList<TenYuanGrabBean>();
+    private HorizontalListView horizonList, horizonLast;
+    private GridView gridView;
+    private List<TenYuanGrabBean> listTenYuanGrab = new ArrayList<TenYuanGrabBean>();
+    private List<AnnouncedTheLatestBean> listAnnounced = new ArrayList<AnnouncedTheLatestBean>();
+    private List<OneYuanBean> listGrid = new ArrayList<OneYuanBean>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,55 +38,73 @@ public class OneYuan extends Activity implements View.OnClickListener{
         initView();
         initData();
     }
-    private void initView(){
-        back1=(ImageView) findViewById(R.id.near_back);
-        back2=(ImageView) findViewById(R.id.near_back_item);
+
+    private void initView() {
+        back1 = (ImageView) findViewById(R.id.near_back);
+        back2 = (ImageView) findViewById(R.id.near_back_item);
         back1.setVisibility(View.GONE);
         back2.setVisibility(View.VISIBLE);
         back2.setOnClickListener(this);
-        titleright=(ImageView) findViewById(R.id.near_ti_right);
+        titleright = (ImageView) findViewById(R.id.near_ti_right);
         titleright.setVisibility(View.GONE);
-        title=(TextView) findViewById(R.id.near_centertitle);
+        title = (TextView) findViewById(R.id.near_centertitle);
         title.setText("一元夺宝");
-        right1=(ImageView) findViewById(R.id.near_right);
+        right1 = (ImageView) findViewById(R.id.near_right);
         right1.setVisibility(View.GONE);
-        right2=(ImageView) findViewById(R.id.near_right_item);
+        right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-        horizonList=(HorizontalListView)findViewById(R.id.horizon_listview);
-        horizonLast=(HorizontalListView)findViewById(R.id.horizon_last);
+        horizonList = (HorizontalListView) findViewById(R.id.horizon_listview);
+        horizonLast = (HorizontalListView) findViewById(R.id.horizon_last);
+        gridView = (GridView) findViewById(R.id.gridview);
     }
-    void initData(){
-        for(int i=0;i<5;i++){
-            TenYuanGrabBean example=new TenYuanGrabBean();
-            example.setmMoney(50+i+"");
+
+    void initData() {
+        for (int i = 0; i < 5; i++) {
+            TenYuanGrabBean example = new TenYuanGrabBean();
+            example.setmMoney(50 + i + "");
             example.setmTotalPeo(500);
             example.setmTakingPeo(200);
             listTenYuanGrab.add(example);
         }
-        horizonList.setAdapter(new HorizonListAdapter(getApplication(),listTenYuanGrab));
+        horizonList.setAdapter(new HorizonListAdapter(getApplication(), listTenYuanGrab));
+        for (int i = 0; i < 5; i++) {
+            AnnouncedTheLatestBean atb = new AnnouncedTheLatestBean();
+            atb.setmName("name" + i);
+            listAnnounced.add(atb);
+        }
+        horizonLast.setAdapter(new HorizonLastAdapter(getApplication(), listAnnounced));
+        for (int i = 0; i < 6; i++) {
+            OneYuanBean oyb = new OneYuanBean();
+            oyb.setmPeriod(i);
+            oyb.setmName("name" + i);
+            oyb.setmTotalPeo((long) i);
+            listGrid.add(oyb);
 
+        }
+        gridView.setAdapter(new OneyuanGridAdapter(getApplication(), listGrid));
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.near_back_item:
                 onBackPressed();
                 finish();
                 break;
             case R.id.One_tengrab:
-                Toast.makeText(this,"10",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "10", Toast.LENGTH_LONG).show();
                 break;
             case R.id.One_Yuan:
-                Toast.makeText(this,"1",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "1", Toast.LENGTH_LONG).show();
                 break;
             case R.id.One_record:
-                Toast.makeText(this,"rec",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "rec", Toast.LENGTH_LONG).show();
                 break;
             case R.id.One_question:
-                Toast.makeText(this,"que",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "que", Toast.LENGTH_LONG).show();
                 break;
             case R.id.tengrb_more:
-                Toast.makeText(this,"10more",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "10more", Toast.LENGTH_LONG).show();
                 break;
         }
     }
