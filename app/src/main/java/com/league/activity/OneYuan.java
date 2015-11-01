@@ -2,9 +2,7 @@ package com.league.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +14,7 @@ import com.league.bean.AnnouncedTheLatestBean;
 import com.league.bean.OneYuanBean;
 import com.league.bean.TenYuanGrabBean;
 import com.league.view.HorizontalListView;
+import com.league.view.MyGridView;
 import com.mine.league.R;
 
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class OneYuan extends Activity implements View.OnClickListener {
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
     private HorizontalListView horizonList, horizonLast;
-    private GridView gridView;
+    private MyGridView gridView;
     private List<TenYuanGrabBean> listTenYuanGrab = new ArrayList<TenYuanGrabBean>();
     private List<AnnouncedTheLatestBean> listAnnounced = new ArrayList<AnnouncedTheLatestBean>();
     private List<OneYuanBean> listGrid = new ArrayList<OneYuanBean>();
@@ -55,7 +54,7 @@ public class OneYuan extends Activity implements View.OnClickListener {
         right2.setVisibility(View.GONE);
         horizonList = (HorizontalListView) findViewById(R.id.horizon_listview);
         horizonLast = (HorizontalListView) findViewById(R.id.horizon_last);
-        gridView = (GridView) findViewById(R.id.gridview);
+        gridView = (MyGridView) findViewById(R.id.gridview);
     }
 
     void initData() {
@@ -73,13 +72,12 @@ public class OneYuan extends Activity implements View.OnClickListener {
             listAnnounced.add(atb);
         }
         horizonLast.setAdapter(new HorizonLastAdapter(getApplication(), listAnnounced));
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             OneYuanBean oyb = new OneYuanBean();
             oyb.setmPeriod(i);
             oyb.setmName("name" + i);
             oyb.setmTotalPeo((long) i);
             listGrid.add(oyb);
-
         }
         gridView.setAdapter(new OneyuanGridAdapter(getApplication(), listGrid));
     }
