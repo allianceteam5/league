@@ -20,11 +20,12 @@ import java.util.List;
 public class HorizonListAdapter extends BaseAdapter {
     private Context context;
     private List<TenYuanGrabBean> listdata;
-    private int Flag=0;
-    public HorizonListAdapter(Context ctx,List<TenYuanGrabBean> list,int flag) {
-        listdata=list;
+
+
+    public HorizonListAdapter(Context ctx, List<TenYuanGrabBean> list) {
+        listdata = list;
         context = ctx;
-        Flag=flag;
+
     }
 
     @Override
@@ -44,37 +45,30 @@ public class HorizonListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(Flag==0){
-            ViewHolder holder=null;
-            if(convertView==null){
-                holder=new ViewHolder();
-                convertView= LayoutInflater.from(context).inflate(R.layout.horizontal_list_item,null);
-                holder.thumb= (ImageView) convertView.findViewById(R.id.ten_image);
-                holder.money= (TextView) convertView.findViewById(R.id.money);
-                holder.process= (TextView) convertView.findViewById(R.id.txt_progress);
-                holder.progressBar= (ProgressBar) convertView.findViewById(R.id.progressbar);
-                convertView.setTag(holder);
-            }else{
-                holder= (ViewHolder) convertView.getTag();
-            }
-            holder.money.setText(listdata.get(position).getmMoney()+"金币");
-            float persent=listdata.get(position).getmTakingPeo()/(float)listdata.get(position).getmTotalPeo();
-
-            holder.process.setText((int) (persent * 100) + "%");
-            holder.progressBar.setProgress((int)persent*100);
-
-        }else if(Flag==1){
-
+        ViewHolder holder = null;
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = LayoutInflater.from(context).inflate(R.layout.horizontal_list_item, null);
+            holder.thumb = (ImageView) convertView.findViewById(R.id.ten_image);
+            holder.money = (TextView) convertView.findViewById(R.id.money);
+            holder.process = (TextView) convertView.findViewById(R.id.txt_progress);
+            holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progressbar);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
+        holder.money.setText(listdata.get(position).getmMoney() + "金币");
+        float persent = listdata.get(position).getmTakingPeo() / (float) listdata.get(position).getmTotalPeo();
+
+        holder.process.setText((int) (persent * 100) + "%");
+        holder.progressBar.setProgress((int) persent * 100);
         return convertView;
     }
-    class ViewHolder{
+
+    class ViewHolder {
         ImageView thumb;
         TextView money;
         TextView process;
         ProgressBar progressBar;
-    }
-    class ViewSecondHoler{
-
     }
 }

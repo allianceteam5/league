@@ -19,7 +19,7 @@ public class OneYuan extends Activity implements View.OnClickListener{
 
     private ImageView back1,back2,titleright,right1,right2;
     private TextView title;
-    private HorizontalListView horizonList;
+    private HorizontalListView horizonList,horizonLast;
     private List<TenYuanGrabBean> listTenYuanGrab=new ArrayList<TenYuanGrabBean>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class OneYuan extends Activity implements View.OnClickListener{
         right2=(ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
         horizonList=(HorizontalListView)findViewById(R.id.horizon_listview);
-
+        horizonLast=(HorizontalListView)findViewById(R.id.horizon_last);
     }
     void initData(){
         for(int i=0;i<5;i++){
@@ -53,7 +53,7 @@ public class OneYuan extends Activity implements View.OnClickListener{
             example.setmTakingPeo(200);
             listTenYuanGrab.add(example);
         }
-        horizonList.setAdapter(new HorizonListAdapter(getApplication(),listTenYuanGrab,0));
+        horizonList.setAdapter(new HorizonListAdapter(getApplication(),listTenYuanGrab));
 
     }
     @Override

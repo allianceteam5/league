@@ -1,206 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black2"
     android:orientation="vertical">
-    <include
-        android:id="@+id/title"
-        layout="@layout/near_title"/>
-    <View
-        android:id="@+id/view"
-        android:layout_below="@id/title"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/black2"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        >
-        <RelativeLayout
-            android:id="@+id/One_tengrab"
-            android:layout_width="0dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClick"
-            android:layout_gravity="center_vertical"
-            android:padding="3dp" >
-
-            <RelativeLayout
-                android:layout_width="100dp"
+            android:background="@color/black2"
+            android:orientation="vertical">
+            <include
+                android:id="@+id/title"
+                layout="@layout/near_title"/>
+            <View
+                android:id="@+id/view"
+                android:layout_below="@id/title"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/black2"/>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_centerHorizontal="true"
-                android:gravity="center" >
+                android:orientation="horizontal"
+                android:background="@color/white"
+                >
+                <RelativeLayout
+                    android:id="@+id/One_tengrab"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:layout_gravity="center_vertical"
+                    android:padding="3dp" >
 
-                <ImageView
-                    android:id="@+id/iv_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@color/transparent"
-                    android:focusable="false"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/resource_one_dollar" />
+                    <RelativeLayout
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center" >
 
-                <TextView
-                    android:id="@+id/tv_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iv_1"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="6dp"
-                    android:text="10夺金"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </RelativeLayout>
-        </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/iv_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/transparent"
+                            android:focusable="false"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/resource_one_dollar" />
 
-        <RelativeLayout
-            android:id="@+id/One_Yuan"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClick"
-            android:layout_gravity="center_vertical"
-            android:padding="3dp" >
+                        <TextView
+                            android:id="@+id/tv_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/iv_1"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="6dp"
+                            android:text="10夺金"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/One_Yuan"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:layout_gravity="center_vertical"
+                    android:padding="3dp" >
+
+                    <RelativeLayout
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/iv_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/transparent"
+                            android:focusable="false"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/resource_one_grab" />
+
+                        <TextView
+                            android:id="@+id/tv_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/iv_2"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="6dp"
+                            android:text="一元夺宝"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/One_record"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:layout_gravity="center_vertical"
+                    android:padding="3dp" >
+
+                    <RelativeLayout
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/iv_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/transparent"
+                            android:focusable="false"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/resource_one_record" />
+
+                        <TextView
+                            android:id="@+id/tv_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/iv_3"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="6dp"
+                            android:text="夺宝记录"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/One_question"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:layout_gravity="center_vertical"
+                    android:padding="3dp" >
+
+                    <RelativeLayout
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center" >
+
+                        <ImageView
+                            android:id="@+id/iv_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/transparent"
+                            android:focusable="false"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/resource_one_question" />
+
+                        <TextView
+                            android:id="@+id/tv_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/iv_4"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="6dp"
+                            android:text="常见问题"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
             <RelativeLayout
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerHorizontal="true"
-                android:gravity="center" >
-
-                <ImageView
-                    android:id="@+id/iv_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@color/transparent"
-                    android:focusable="false"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/resource_one_grab" />
-
+                android:layout_width="match_parent"
+                android:layout_height="50dip">
                 <TextView
-                    android:id="@+id/tv_2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iv_2"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="6dp"
-                    android:text="一元夺宝"
+                    android:layout_height="50dip"
+                    android:text="10元夺金"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </RelativeLayout>
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/One_record"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClick"
-            android:layout_gravity="center_vertical"
-            android:padding="3dp" >
-
-            <RelativeLayout
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerHorizontal="true"
-                android:gravity="center" >
-
-                <ImageView
-                    android:id="@+id/iv_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@color/transparent"
-                    android:focusable="false"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/resource_one_record" />
-
+                    android:textSize="19sp"
+                    android:layout_marginLeft="15dip"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentLeft="true"/>
                 <TextView
-                    android:id="@+id/tv_3"
+                    android:id="@+id/tengrb_more"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iv_3"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="6dp"
-                    android:text="夺宝记录"
+                    android:layout_height="50dip"
+                    android:text="更多>>"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="19sp"
+                    android:layout_marginRight="15dip"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:clickable="true"
+                    android:onClick="onClick"/>
             </RelativeLayout>
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/One_question"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClick"
-            android:layout_gravity="center_vertical"
-            android:padding="3dp" >
+            <com.league.view.HorizontalListView
+                android:id="@+id/horizon_listview"
+                android:layout_width="wrap_content"
+                android:layout_height="170dip"
+                android:background="@color/white">
+            </com.league.view.HorizontalListView>
+            <TextView
 
-            <RelativeLayout
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerHorizontal="true"
-                android:gravity="center" >
-
-                <ImageView
-                    android:id="@+id/iv_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@color/transparent"
-                    android:focusable="false"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/resource_one_question" />
-
-                <TextView
-                    android:id="@+id/tv_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iv_4"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="6dp"
-                    android:text="常见问题"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-            </RelativeLayout>
-        </RelativeLayout>
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dip">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dip"
-            android:text="10元夺金"
-            android:textColor="@color/black"
-            android:textSize="19sp"
-            android:layout_marginLeft="15dip"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:layout_alignParentLeft="true"/>
-        <TextView
-            android:id="@+id/tengrb_more"
-            android:layout_width="wrap_content"
-            android:layout_height="50dip"
-            android:text="更多>>"
-            android:textColor="@color/black"
-            android:textSize="19sp"
-            android:layout_marginRight="15dip"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:layout_alignParentRight="true"
-            android:clickable="true"
-            android:onClick="onClick"/>
-    </RelativeLayout>
-    <com.league.view.HorizontalListView
-        android:id="@+id/horizon_listview"
-        android:layout_width="wrap_content"
-        android:layout_height="200dip">
-
-    </com.league.view.HorizontalListView>
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:text="最新揭晓"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                android:layout_marginLeft="15dip"
+                android:gravity="center_vertical"/>
+            <com.league.view.HorizontalListView
+                android:id="@+id/horizon_last"
+                android:layout_width="wrap_content"
+                android:layout_height="170dip"
+                android:background="@color/white">
+            </com.league.view.HorizontalListView>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
