@@ -1,8 +1,10 @@
 package com.league.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +68,13 @@ public class OneYuan extends Activity implements View.OnClickListener {
             listTenYuanGrab.add(example);
         }
         horizonList.setAdapter(new HorizonListAdapter(getApplication(), listTenYuanGrab));
+        horizonList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(OneYuan.this, TenYuanGrabItem.class);
+                startActivity(intent);
+            }
+        });
         for (int i = 0; i < 5; i++) {
             AnnouncedTheLatestBean atb = new AnnouncedTheLatestBean();
             atb.setmName("name" + i);
@@ -89,20 +98,23 @@ public class OneYuan extends Activity implements View.OnClickListener {
                 onBackPressed();
                 finish();
                 break;
+            case R.id.tengrb_more:
             case R.id.One_tengrab:
-                Toast.makeText(this, "10", Toast.LENGTH_LONG).show();
+                Intent intent1 = new Intent(OneYuan.this, TenyuanGrid.class);
+                startActivity(intent1);
+
                 break;
+            case R.id.last_more:
             case R.id.One_Yuan:
-                Toast.makeText(this, "1", Toast.LENGTH_LONG).show();
+                Intent intent2 = new Intent(OneYuan.this, OneYuanGrab.class);
+                startActivity(intent2);
+
                 break;
             case R.id.One_record:
                 Toast.makeText(this, "rec", Toast.LENGTH_LONG).show();
                 break;
             case R.id.One_question:
                 Toast.makeText(this, "que", Toast.LENGTH_LONG).show();
-                break;
-            case R.id.tengrb_more:
-                Toast.makeText(this, "10more", Toast.LENGTH_LONG).show();
                 break;
         }
     }

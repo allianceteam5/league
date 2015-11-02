@@ -17,6 +17,7 @@
         android:layout_height="10dp"
         android:layout_below="@id/title"
         android:background="@color/black2" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -26,7 +27,6 @@
             android:layout_height="wrap_content"
             android:background="@color/black2"
             android:orientation="vertical">
-
 
 
             <LinearLayout
@@ -269,16 +269,15 @@
                     android:textColor="@color/black"
                     android:textSize="19sp" />
             </RelativeLayout>
+
             <com.league.view.MyGridView
                 android:id="@+id/gridview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:numColumns="2"
-                android:verticalSpacing="10dp"
                 android:horizontalSpacing="10dip"
+                android:numColumns="2"
                 android:stretchMode="columnWidth"
-                >
-
+                android:verticalSpacing="10dp">
             </com.league.view.MyGridView>
         </LinearLayout>
     </ScrollView>
