@@ -269,7 +269,6 @@
                     android:textColor="@color/black"
                     android:textSize="19sp" />
             </RelativeLayout>
-
             <com.league.view.MyGridView
                 android:id="@+id/gridview"
                 android:layout_width="match_parent"
