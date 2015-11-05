@@ -49,6 +49,19 @@
                     android:text="消息"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/unread_msg_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@drawable/unread_count_bg"
+                    android:gravity="center"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:visibility="invisible" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -86,6 +99,14 @@
                     android:text="好友"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/unread_address_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="2dp"
+                    android:background="@drawable/unread_dot"
+                    android:visibility="visible" />
             </RelativeLayout>
         </RelativeLayout>
 
