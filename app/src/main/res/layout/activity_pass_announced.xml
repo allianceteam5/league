@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black2"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/near_title" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@id/title"
+        android:background="@color/black2" />
+    <TextView
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="第xxx期即将揭晓，正在倒计时..."
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="6dip"
+        android:layout_marginBottom="10dip"
+        android:onClick="onClick"/>
+    <ListView
+        android:id="@+id/pass_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+</LinearLayout>
