@@ -16,6 +16,7 @@ package com.easemob.chatuidemo;
 import android.app.Application;
 import android.content.Context;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
 
@@ -57,6 +58,7 @@ public class DemoApplication extends Application {
          * }
          */
         hxSDKHelper.onInit(applicationContext);
+		SDKInitializer.initialize(applicationContext);
 	}
 
 	public static DemoApplication getInstance() {

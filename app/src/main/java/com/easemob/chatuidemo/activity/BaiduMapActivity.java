@@ -13,6 +13,7 @@
  */
 package com.easemob.chatuidemo.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -48,7 +49,7 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.mine.league.R;
 
-public class BaiduMapActivity extends BaseActivity {
+public class BaiduMapActivity extends Activity {
 
 	private final static String TAG = "map";
 	static MapView mMapView = null;
@@ -96,7 +97,7 @@ public class BaiduMapActivity extends BaseActivity {
 		instance = this;
 		//在使用SDK各组件之前初始化context信息，传入ApplicationContext  
         //注意该方法要再setContentView方法之前实现  
-        SDKInitializer.initialize(getApplicationContext());  
+//        SDKInitializer.initialize(getApplicationContext());
 		setContentView(R.layout.activity_baidumap);
 		mMapView = (MapView) findViewById(R.id.bmapView);
 		sendButton = (Button) findViewById(R.id.btn_location_send);
