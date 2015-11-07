@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     private TextView title;//当前页标题
     private ImageView[] tabButtons;//下方四个tab
     private TextView[] tabText;
-    private int currentTabIndex = 0;//当前tab
+    private int currentTabIndex = 3;//当前tab
 
     private Fragment[] fragments;
     private ChatAllHistoryFragment chatHistoryFragment;
@@ -174,15 +174,15 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         tabButtons[1] = (ImageView) findViewById(R.id.ib_interact);
         tabButtons[2] = (ImageView) findViewById(R.id.ib_recom);
         tabButtons[3] = (ImageView) findViewById(R.id.ib_personal);
-        tabButtons[0].setSelected(true);//默认第一个tab被选中
-        title.setText("消息");
+        tabButtons[3].setSelected(true);//默认第四个tab被选中
+        title.setText("我");
 
         tabText = new TextView[4];
         tabText[0] = (TextView) findViewById(R.id.tv_home);
         tabText[1] = (TextView) findViewById(R.id.tv_interact);
         tabText[2] = (TextView) findViewById(R.id.tv_recom);
         tabText[3] = (TextView) findViewById(R.id.tv_personal);
-        tabText[0].setTextColor(Color.RED);
+        tabText[3].setTextColor(Color.RED);
 
         chatHistoryFragment = new ChatAllHistoryFragment();
         contactListFragment = new ContactlistFragment();
@@ -196,12 +196,12 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                 .add(R.id.fragment_container, personFragment)
                 .hide(contactListFragment)
                 .hide(resourceFragment)
-                .hide(personFragment).show(chatHistoryFragment).commit();
+                .hide(chatHistoryFragment).show(personFragment).commit();
     }
 
     public void onTabClicked(View view) {
 
-        addContactView.setVisibility(View.VISIBLE);
+        addContactView.setVisibility(View.GONE);
         switch (view.getId()) {
             case R.id.re_home:
                 title.setText("消息");

@@ -16,7 +16,7 @@ public class ApiUtil {
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     private static void printHttp(String baseUrl, RequestParams params) {
-        Log.d("http", "http请求: " + baseUrl + "&" + params);
+        Log.d("http", "http请求: " + baseUrl + "?" + params);
     }
 
     public static void professionList(Context context, TextHttpResponseHandler responseHandler) {
@@ -36,5 +36,9 @@ public class ApiUtil {
         params.add("professionid", String.valueOf(professionid));
         printHttp(IClientUrl.ApplyJobCreated, params);
         client.post(context, IClientUrl.ApplyJobCreated, params, responseHandler);
+    }
+
+    public static void applyjobSearch(){
+
     }
 }

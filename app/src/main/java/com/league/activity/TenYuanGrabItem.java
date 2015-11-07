@@ -10,7 +10,7 @@ import com.mine.league.R;
 
 public class TenYuanGrabItem extends Activity implements View.OnClickListener{
 
-    private ImageView back1, back2, titleright, right1, right2;
+    private ImageView back, titleright, right1, right2;
     private TextView title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +19,9 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
         initView();
     }
     private void initView() {
-        back1 = (ImageView) findViewById(R.id.near_back);
-        back2 = (ImageView) findViewById(R.id.near_back_item);
-        back1.setVisibility(View.GONE);
-        back2.setVisibility(View.VISIBLE);
-        back2.setOnClickListener(new View.OnClickListener() {
+        back = (ImageView) findViewById(R.id.near_back);
+        back = (ImageView) findViewById(R.id.near_back);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
