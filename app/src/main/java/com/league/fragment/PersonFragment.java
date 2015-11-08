@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.league.activity.personactivity.AlianceReward;
 import com.league.activity.personactivity.PersonInformationSetup;
 import com.league.activity.personactivity.PersonSetup;
 import com.mine.league.R;
@@ -42,6 +43,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
 
         layout.findViewById(R.id.setup).setOnClickListener(this);
         layout.findViewById(R.id.myown).setOnClickListener(this);
+        layout.findViewById(R.id.aliancereward).setOnClickListener(this);
     }
 
     @Override
@@ -55,7 +57,10 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                 Intent intent1=new Intent(ctx, PersonInformationSetup.class);
                 startActivity(intent1);
                 break;
-
+            case R.id.aliancereward:
+                Intent intent2 = new Intent(ctx, AlianceReward.class);
+                startActivity(intent2);
+                break;
         }
     }
 }

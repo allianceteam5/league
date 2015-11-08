@@ -8,15 +8,15 @@ import android.widget.TextView;
 
 import com.mine.league.R;
 
-public class PersonInformationSetup extends Activity implements View.OnClickListener{
+public class AlianceReward extends Activity {
 
     private ImageView back2, titleright, right1, right2;
-    private TextView title;
+    private TextView title,rules;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_information_setup);
+        setContentView(R.layout.activity_aliance_reward);
         initView();
 
     }
@@ -36,19 +36,12 @@ public class PersonInformationSetup extends Activity implements View.OnClickList
         titleright = (ImageView) findViewById(R.id.near_ti_right);
         titleright.setVisibility(View.GONE);
         title = (TextView) findViewById(R.id.near_centertitle);
-        title.setText("个人资料");
+        title.setText("联盟奖励");
         right1 = (ImageView) findViewById(R.id.near_right);
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.changeportrail:
-
-                break;
-        }
+        rules= (TextView) findViewById(R.id.ruledetails);
+        rules.setVisibility(View.VISIBLE);
     }
 }

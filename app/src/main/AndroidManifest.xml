@@ -375,6 +375,8 @@
             android:label="@string/title_activity_radio_select" />
         <activity android:name="com.league.activity.personactivity.PersonInformationSetup" >
         </activity>
+        <activity android:name="com.league.activity.personactivity.AlianceReward" >
+        </activity>
     </application>
 
 </manifest>
