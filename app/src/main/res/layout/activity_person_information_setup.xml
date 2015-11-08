@@ -316,6 +316,8 @@
                 android:layout_height="10dip"
                 android:background="@color/black2" />
             <RelativeLayout
+                android:onClick="onClick"
+                android:id="@+id/truenamemake"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
                 android:background="@color/white">

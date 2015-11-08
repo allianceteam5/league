@@ -377,6 +377,10 @@
         </activity>
         <activity android:name="com.league.activity.personactivity.AlianceReward" >
         </activity>
+        <activity android:name="com.league.activity.personactivity.Certification" >
+        </activity>
+        <activity android:name="com.league.activity.personactivity.MyCollection" >
+        </activity>
     </application>
 
 </manifest>
