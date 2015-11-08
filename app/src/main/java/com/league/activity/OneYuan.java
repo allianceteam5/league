@@ -81,6 +81,14 @@ public class OneYuan extends Activity implements View.OnClickListener {
             listAnnounced.add(atb);
         }
         horizonLast.setAdapter(new HorizonLastAdapter(getApplication(), listAnnounced));
+        horizonLast.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(OneYuan.this,AnnouncedTheLatestItem.class);
+                startActivity(intent);
+            }
+        });
         for (int i = 0; i < 5; i++) {
             OneYuanBean oyb = new OneYuanBean();
             oyb.setmPeriod(i);
@@ -89,6 +97,13 @@ public class OneYuan extends Activity implements View.OnClickListener {
             listGrid.add(oyb);
         }
         gridView.setAdapter(new OneyuanGridAdapter(getApplication(), listGrid));
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(OneYuan.this,OneYuanGrabItem.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

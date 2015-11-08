@@ -2,8 +2,10 @@ package com.league.activity;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,6 +60,13 @@ public class OneYuanGrab extends Activity implements View.OnClickListener {
             list.add(tygb);
         }
         gridView.setAdapter(new TenYuanGrabAdapter(getApplication(), list));
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(OneYuanGrab.this,OneYuanGrabItem.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

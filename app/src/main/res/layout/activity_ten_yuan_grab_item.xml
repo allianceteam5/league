@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black2"
-    android:orientation="vertical">
+    >
 
     <include
         android:id="@+id/title"
@@ -19,6 +19,7 @@
         android:background="@color/black2" />
 
     <ScrollView
+        android:layout_below="@id/view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -143,6 +144,7 @@
                 android:background="@color/black2"
                 />
             <RelativeLayout
+                android:id="@+id/passannounced"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
                 android:background="@color/white"
@@ -204,21 +206,32 @@
                     />
 
             </RelativeLayout>
-            <ListView
-                android:id="@+id/comment_list"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:background="@color/black2"
+                />
+            <com.league.widget.ListViewForScrollView
+                android:id="@+id/record_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </ListView>
+            </com.league.widget.ListViewForScrollView>
         </LinearLayout>
     </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dip"
         android:orientation="horizontal"
-        android:layout_marginLeft="20dip"
-        android:layout_marginRight="20dip">
+        android:layout_alignParentBottom="true"
+        android:background="@color/black2"
+
+        >
         <Button
+            android:id="@+id/takeinnow"
+            android:layout_marginTop="2dip"
+            android:layout_marginBottom="2dip"
+            android:layout_marginLeft="20dip"
             android:layout_marginRight="10dip"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
@@ -229,6 +242,9 @@
             android:background="@drawable/addfriendback"
             />
         <Button
+            android:layout_marginTop="2dip"
+            android:layout_marginBottom="2dip"
+            android:layout_marginRight="20dip"
             android:layout_marginLeft="10dip"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
@@ -239,4 +255,4 @@
             android:background="@drawable/addfriendback"
             />
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
