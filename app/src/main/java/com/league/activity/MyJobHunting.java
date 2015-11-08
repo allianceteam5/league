@@ -20,7 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class MyJobHunting extends Activity implements OnClickListener{
 
-	private ImageView back1,back2,title_right,right,delete;
+	private ImageView back,title_right,right,delete;
 	private ListView list;
 	private TextView title;
 	private List<JobInfoBean> listdata=new ArrayList<JobInfoBean>();
@@ -34,11 +34,8 @@ public class MyJobHunting extends Activity implements OnClickListener{
 		initData();
 	}
 	void init(){
-		back1=(ImageView) findViewById(R.id.near_back);
-		back1.setVisibility(View.GONE);
-		back2=(ImageView) findViewById(R.id.near_back_item);
-		back2.setVisibility(View.VISIBLE);
-		back2.setOnClickListener(this);
+		back=(ImageView) findViewById(R.id.near_back);
+		back.setOnClickListener(this);
 		title_right=(ImageView) findViewById(R.id.near_ti_right);
 		title_right.setVisibility(View.GONE);
 		title=(TextView) findViewById(R.id.near_centertitle);
@@ -83,7 +80,7 @@ public class MyJobHunting extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch(v.getId()){
-		case R.id.near_back_item:
+		case R.id.near_back:
 			onBackPressed();
 			finish();
 			break;

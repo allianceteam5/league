@@ -225,7 +225,7 @@ public class LoginActivity extends BaseActivity {
 		robotUser.setUsername(Constant.CHAT_ROBOT);
 		robotUser.setNick(strRobot);
 		robotUser.setHeader("");
-		userlist.put(Constant.CHAT_ROBOT, robotUser);
+//		userlist.put(Constant.CHAT_ROBOT, robotUser);
 		
 		// 存入内存
 		((DemoHXSDKHelper)HXSDKHelper.getInstance()).setContactList(userlist);

@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MyPost extends Activity implements OnClickListener{
 
-    private ImageView back1,back2,title_right,right,delete;
+    private ImageView back,title_right,right,delete;
     private ListView list;
     private TextView title;
     private List<FeatureComInfo> listdata=new ArrayList<FeatureComInfo>();
@@ -32,11 +32,8 @@ public class MyPost extends Activity implements OnClickListener{
         initdata();
     }
     void init(){
-        back1=(ImageView) findViewById(R.id.near_back);
-        back1.setVisibility(View.GONE);
-        back2=(ImageView) findViewById(R.id.near_back_item);
-        back2.setVisibility(View.VISIBLE);
-        back2.setOnClickListener(this);
+        back=(ImageView) findViewById(R.id.near_back);
+        back.setOnClickListener(this);
         title_right=(ImageView) findViewById(R.id.near_ti_right);
         title_right.setVisibility(View.GONE);
         title=(TextView) findViewById(R.id.near_centertitle);
@@ -77,7 +74,7 @@ public class MyPost extends Activity implements OnClickListener{
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.near_back_item:
+            case R.id.near_back:
                 onBackPressed();
                 finish();
                 break;

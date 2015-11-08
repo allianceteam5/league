@@ -3,17 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black2"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/autoviewpaper"
             android:layout_width="match_parent"
-            android:layout_height="160dp" >
-        </android.support.v4.view.ViewPager>
+            android:layout_height="160dp"></android.support.v4.view.ViewPager>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -22,7 +21,7 @@
             android:layout_centerHorizontal="true"
             android:background="#33000000"
             android:orientation="vertical"
-            android:padding="5dip" >
+            android:padding="5dip">
 
             <TextView
                 android:id="@+id/tv_image_description"
@@ -39,40 +38,39 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dip"
-                android:orientation="horizontal" >
-            </LinearLayout>
+                android:orientation="horizontal"></LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="140dp"
         android:background="@color/white"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:id="@+id/resource_yiyuanduobao"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            
-            android:padding="3dp" >
+            android:padding="3dp">
 
             <RelativeLayout
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
-                android:gravity="center" >
+                android:gravity="center">
 
                 <ImageView
                     android:id="@+id/ib_yiyuan"
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
                     android:background="#ffffff"
                     android:focusable="false"
                     android:scaleType="centerInside"
-                    android:src="@drawable/tab_home" />
+                    android:src="@drawable/yiyuanduobao" />
 
                 <TextView
                     android:id="@+id/tv_home"
@@ -99,24 +97,25 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-           
-            android:padding="3dp" >
+
+            android:padding="3dp">
 
             <RelativeLayout
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
-                android:gravity="center" >
+                android:gravity="center">
 
                 <ImageView
                     android:id="@+id/ib_hongbao"
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
                     android:background="#ffffff"
                     android:focusable="false"
                     android:scaleType="centerInside"
-                    android:src="@drawable/tab_interact" />
+                    android:src="@drawable/qianghongbao" />
 
                 <TextView
                     android:id="@+id/tv_interact"
@@ -143,24 +142,25 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            
-            android:padding="3dp" >
+
+            android:padding="3dp">
 
             <RelativeLayout
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
-                android:gravity="center" >
+                android:gravity="center">
 
                 <ImageView
                     android:id="@+id/ib_fujin"
                     android:layout_width="wrap_content"
                     android:layout_height="28dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
                     android:background="#ffffff"
                     android:focusable="false"
                     android:scaleType="centerInside"
-                    android:src="@drawable/tab_recom" />
+                    android:src="@drawable/fujin" />
 
                 <TextView
                     android:id="@+id/tv_recom"
@@ -170,6 +170,54 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
                     android:text="附近"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black2" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@color/transparent"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:id="@+id/resource_liaoba"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:padding="3dp">
+
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/ib_liaoba"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:background="#ffffff"
+                    android:focusable="false"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/liaoba" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ib_liaoba"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:text="聊吧"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
             </RelativeLayout>

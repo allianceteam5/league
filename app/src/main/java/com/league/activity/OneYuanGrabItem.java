@@ -31,9 +31,9 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         initData();
     }
     private void initView() {
-        back1 = (ImageView) findViewById(R.id.near_back);
-        back2 = (ImageView) findViewById(R.id.near_back_item);
-        back1.setVisibility(View.GONE);
+
+        back2 = (ImageView) findViewById(R.id.near_back);
+
         back2.setVisibility(View.VISIBLE);
         back2.setOnClickListener(new View.OnClickListener() {
             @Override

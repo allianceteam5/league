@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,6 +39,7 @@ public class SechJobInfo extends Activity implements OnClickListener {
     private ImageButton near_back, near_right;
     private TextView near_title;
     private ImageView near_t_rig;
+    private LinearLayout ll_more;
     private int Flag;
     private ListView infoseach;
     private List<JobInfoBean> listdata = new ArrayList<JobInfoBean>();
@@ -69,6 +71,7 @@ public class SechJobInfo extends Activity implements OnClickListener {
         near_t_rig = (ImageView) findViewById(R.id.near_ti_right);
         near_right = (ImageButton) findViewById(R.id.near_right);
         infoseach = (ListView) findViewById(R.id.infosearch_list);
+        ll_more = (LinearLayout) findViewById(R.id.near_more);
 
         switch (Flag) {
             case 1:
@@ -96,6 +99,7 @@ public class SechJobInfo extends Activity implements OnClickListener {
         }
         near_back.setOnClickListener(this);
         near_right.setOnClickListener(this);
+        ll_more.setOnClickListener(this);
     }
 
     public void initData() {
@@ -214,7 +218,8 @@ public class SechJobInfo extends Activity implements OnClickListener {
                 onBackPressed();
                 finish();
                 break;
-            case R.id.near_centertitle:
+            //选择分类刷选
+            case R.id.near_more:
                 break;
             case R.id.near_right:
                 switch (Flag) {
@@ -223,7 +228,7 @@ public class SechJobInfo extends Activity implements OnClickListener {
                         Window dialogWindow = dialog.getWindow();
                         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
                         dialogWindow.setGravity(Gravity.TOP | Gravity.RIGHT);
-                        lp.x = 0; // 新位置X坐标
+                        lp.x = -10; // 新位置X坐标
                         lp.y = 90; // 新位置Y坐标
                         lp.alpha = 0.7f; // 透明度
                         dialogWindow.setAttributes(lp);

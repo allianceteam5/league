@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.List;
-import com.league.activity.MainActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -192,7 +191,7 @@ public class ChatAllHistoryFragment extends Fragment implements OnClickListener 
 		adapter.notifyDataSetChanged();
 
 		// 更新消息未读数
-		((MainActivity) getActivity()).updateUnreadLabel();
+		((com.league.activity.MainActivity) getActivity()).updateUnreadLabel();
 		
 		return handled ? true : super.onContextItemSelected(item);
 	}
@@ -279,7 +278,7 @@ public class ChatAllHistoryFragment extends Fragment implements OnClickListener 
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!hidden && ! ((MainActivity)getActivity()).isConflict) {
+		if (!hidden && ! ((com.league.activity.MainActivity)getActivity()).isConflict) {
 			refresh();
 		}
 	}
@@ -287,9 +286,9 @@ public class ChatAllHistoryFragment extends Fragment implements OnClickListener 
 	@Override
     public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-        if(((MainActivity)getActivity()).isConflict){
+        if(((com.league.activity.MainActivity)getActivity()).isConflict){
         	outState.putBoolean("isConflict", true);
-        }else if(((MainActivity)getActivity()).getCurrentAccountRemoved()){
+        }else if(((com.league.activity.MainActivity)getActivity()).getCurrentAccountRemoved()){
         	outState.putBoolean(Constant.ACCOUNT_REMOVED, true);
         }
     }

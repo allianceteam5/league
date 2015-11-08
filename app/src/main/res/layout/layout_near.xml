@@ -2,15 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/black2"
     android:orientation="vertical">
 
     <include layout="@layout/layout_toptitle" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="126dp"
         android:background="@color/white"
         android:orientation="horizontal">
 
@@ -31,7 +30,7 @@
                 <ImageView
                     android:id="@+id/ib_yiyuan"
                     android:layout_width="wrap_content"
-                    android:layout_height="90dip"
+                    android:layout_height="66dip"
                     android:layout_centerHorizontal="true"
                     android:background="#ffffff"
                     android:focusable="false"
@@ -44,10 +43,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ib_yiyuan"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="3dp"
                     android:text="求职信息"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -68,7 +66,7 @@
                 <ImageView
                     android:id="@+id/ib_hongbao"
                     android:layout_width="wrap_content"
-                    android:layout_height="90dp"
+                    android:layout_height="66dp"
                     android:layout_centerHorizontal="true"
                     android:background="#ffffff"
                     android:focusable="false"
@@ -81,10 +79,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ib_hongbao"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="3dp"
                     android:text="特色推荐"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -105,7 +102,7 @@
                 <ImageView
                     android:id="@+id/ib_fujin"
                     android:layout_width="wrap_content"
-                    android:layout_height="90dp"
+                    android:layout_height="66dp"
                     android:layout_centerHorizontal="true"
                     android:background="#ffffff"
                     android:focusable="false"
@@ -118,18 +115,16 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ib_fujin"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="3dp"
                     android:text="爱好交友"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="126dp"
         android:background="@color/white"
         android:orientation="horizontal">
 
@@ -225,7 +220,7 @@
                 <ImageView
                     android:id="@+id/ib_hongbao3"
                     android:layout_width="wrap_content"
-                    android:layout_height="90dp"
+                    android:layout_height="66dp"
                     android:layout_centerHorizontal="true"
                     android:background="#ffffff"
                     android:focusable="false"
@@ -238,10 +233,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ib_hongbao3"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="3dp"
                     android:text="其他"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>
 

@@ -2,24 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="49.0dip"
-    android:background="@color/bar_color"
+    android:background="@color/black"
     android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48.0dip"
-        android:background="@color/bar_color" >
+        android:background="@color/black" >
 
         <ImageButton
             android:id="@+id/imgbtn_back"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:background="@color/transparent"
-            android:src="@drawable/icon_back"
-            android:visibility="gone" />
+            android:background="@drawable/arrow_left"/>
 
         <TextView
             android:id="@+id/oh_title"
@@ -33,11 +31,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@color/white"
-            android:drawableLeft="@drawable/icon_dingwei"
+            android:background="@color/transparent"
+            android:drawableLeft="@drawable/dingwei_white"
             android:paddingRight="10dp"
             android:text="正在定位中"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="16sp" />
     </RelativeLayout>
 

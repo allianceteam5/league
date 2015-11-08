@@ -18,7 +18,7 @@ import java.util.List;
 
 public class TenYuanGrabItem extends Activity implements View.OnClickListener{
 
-    private ImageView back1, back2, titleright, right1, right2;
+    private ImageView back, titleright, right1, right2;
     private TextView title;
     private ListViewForScrollView listView;
     private List<OneYuanTakingMember> list=new ArrayList<OneYuanTakingMember>();
@@ -31,11 +31,9 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
         initData();
     }
     private void initView() {
-        back1 = (ImageView) findViewById(R.id.near_back);
-        back2 = (ImageView) findViewById(R.id.near_back_item);
-        back1.setVisibility(View.GONE);
-        back2.setVisibility(View.VISIBLE);
-        back2.setOnClickListener(new View.OnClickListener() {
+        back = (ImageView) findViewById(R.id.near_back);
+        back = (ImageView) findViewById(R.id.near_back);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
