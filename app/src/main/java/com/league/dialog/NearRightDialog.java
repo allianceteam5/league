@@ -34,7 +34,6 @@ public class NearRightDialog extends Dialog implements
 		layout_my.setOnClickListener(this);
 		txt1=(TextView) findViewById(R.id.searchjob);
 		txt2=(TextView) findViewById(R.id.mine);
-		
 		init();
 	}
 
@@ -50,10 +49,9 @@ public class NearRightDialog extends Dialog implements
 				break;
 			case 3:
 				break;
-
-
 		}
 	}
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub

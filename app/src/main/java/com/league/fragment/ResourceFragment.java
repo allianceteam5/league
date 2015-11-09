@@ -189,7 +189,6 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener,O
 		// TODO Auto-generated method stub
 		switch(v.getId()){
 		case R.id.resource_yiyuanduobao:
-
 			Intent intent3=new Intent(ctx, OneYuan.class);
 			startActivity(intent3);
 			break;
