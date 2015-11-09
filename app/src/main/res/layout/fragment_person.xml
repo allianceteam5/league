@@ -164,6 +164,8 @@
                     android:background="@color/black2" />
 
                 <RelativeLayout
+                    android:id="@+id/aliancereward"
+                    android:onClick="onClick"
                     android:layout_width="0dip"
                     android:layout_height="100dip"
                     android:layout_weight="1">
@@ -178,6 +180,7 @@
                         android:textSize="20sp" />
 
                     <LinearLayout
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_above="@id/award"
@@ -286,6 +289,8 @@
                 android:background="@color/black2" />
 
             <RelativeLayout
+                android:id="@+id/mycollection"
+                android:onClick="onClick"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
                 android:background="@color/white">
