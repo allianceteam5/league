@@ -375,17 +375,11 @@
             android:label="@string/title_activity_radio_select" />
         <activity android:name="com.league.activity.personactivity.PersonInformationSetup" >
         </activity>
-<<<<<<< HEAD
-        <activity
-            android:name="com.league.activity.BaseActivity"
-            android:label="@string/title_activity_base" >
-=======
         <activity android:name="com.league.activity.personactivity.AlianceReward" >
         </activity>
         <activity android:name="com.league.activity.personactivity.Certification" >
         </activity>
         <activity android:name="com.league.activity.personactivity.MyCollection" >
->>>>>>> 0208320a4dbf9f248c216b1e3c59829524a16bb6
         </activity>
     </application>
 
