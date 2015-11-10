@@ -1,14 +1,5 @@
 package com.league.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.league.activity.GrabRedEnvolope;
-import com.league.activity.NearActivity;
-import com.league.activity.OneYuan;
-import com.league.adapter.ViewPaperAdapter;
-import com.mine.league.R;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -22,11 +13,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
+
+import com.league.activity.GrabRedEnvolope;
+import com.league.activity.LiaoBaActivity;
+import com.league.activity.NearActivity;
+import com.league.activity.OneYuan;
+import com.league.adapter.ViewPaperAdapter;
+import com.mine.league.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -117,6 +117,7 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener,O
 		layout.findViewById(R.id.resource_yiyuanduobao).setOnClickListener(this);
 		layout.findViewById(R.id.resource_qianghongbao).setOnClickListener(this);
 		layout.findViewById(R.id.resource_fujin).setOnClickListener(this);
+		layout.findViewById(R.id.resource_liaoba).setOnClickListener(this);
 	}
 	private void prepareData() {
 		imageViewList = new ArrayList<ImageView>();
@@ -200,6 +201,9 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener,O
 			Intent intent=new Intent(ctx,NearActivity.class);
 			startActivity(intent);
 			break;
+			case R.id.resource_liaoba:
+				Intent intent4=new Intent(ctx, LiaoBaActivity.class);
+				startActivity(intent4);
 		}
 	}
 	

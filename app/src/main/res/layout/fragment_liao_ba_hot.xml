@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.league.view.MyListView
+            android:id="@+id/liaoba_hot_list"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:divider="@color/black2"
+            android:dividerHeight="5dip"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip">
+
+        </com.league.view.MyListView>
+    </ScrollView>
+
+</LinearLayout>
