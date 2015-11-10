@@ -29,7 +29,7 @@ public class ApiUtil {
         params.add("jobproperty", String.valueOf(jobproperty));
         params.add("title", title);
         params.add("degree", String.valueOf(degree));
-        params.add("workat", String.valueOf(workat));
+        params.add("work_at", String.valueOf(workat));
         params.add("status", status);
         params.add("hidephone", String.valueOf(hidephone));
         params.add("content", content);
@@ -38,7 +38,41 @@ public class ApiUtil {
         client.post(context, IClientUrl.ApplyJobCreated, params, responseHandler);
     }
 
-    public static void applyjobSearch(){
-
+    public static void applyjobSearchAll(Context context, TextHttpResponseHandler responseHandler) {
+        client.post(context, IClientUrl.ApplyJobSearch, new RequestParams(), responseHandler);
     }
+
+    public static void applyjobSearchByPhone(Context context, String phone, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("phone", phone);
+        client.post(context, IClientUrl.ApplyJobSearch, params, responseHandler);
+    }
+
+    public static void applyjobSearchByTitle(Context context, String title, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("title", title);
+        client.post(context, IClientUrl.ApplyJobSearch, new RequestParams(), responseHandler);
+    }
+
+    public static void applyjobSearchByProfessionid(Context context, int professionid, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("professionid", String.valueOf(professionid));
+        client.post(context, IClientUrl.ApplyJobSearch, new RequestParams(), responseHandler);
+    }
+
+    public static void applyjobSearchByJobproperty(Context context, int jobproperty, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("jobproperty", String.valueOf(jobproperty));
+        client.post(context, IClientUrl.ApplyJobSearch, new RequestParams(), responseHandler);
+    }
+
+    public static void recommendationList(Context context, TextHttpResponseHandler responseHandler) {
+        client.post(context, IClientUrl.RecomendationList, new RequestParams(), responseHandler);
+    }
+
+    public static void hobbyList(Context context, TextHttpResponseHandler responseHandler) {
+        client.post(context, IClientUrl.HobbyList, new RequestParams(), responseHandler);
+    }
+
+
 }

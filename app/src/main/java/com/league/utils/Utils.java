@@ -20,7 +20,25 @@ import java.util.Date;
 
 public class Utils {
 
+    private static final long MONTH = 2678400000l;//31*24*60*60*1000
+    private static final long YEAR = 31536000000l;//365*24*60*60*1000
 
+    public static String generateStringByTime(long addtime) {
+        long tt = System.currentTimeMillis() - addtime * 1000;
+        if (tt < 60 * 1000) {
+            return "刚刚发布";
+        } else if (tt < 60 * 60 * 1000) {
+            return tt / 60 / 1000 + "分钟前";
+        } else if (tt < 24 * 60 * 60 * 1000) {
+            return tt / 60 / 60 / 1000 + "小时前";
+        } else if (tt < MONTH) {
+            return tt / 24 / 60 / 60 / 1000 + "天前";
+        } else if (tt < YEAR) {
+            return tt / 31 / 24 / 60 / 60 / 1000 + "个月前";
+        } else {
+            return tt / 365 / 24 / 60 / 60 / 1000 + "年前";
+        }
+    }
 
     /**
      * 判断是否有网络

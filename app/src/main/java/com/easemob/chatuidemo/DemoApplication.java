@@ -20,6 +20,8 @@ import com.baidu.mapapi.SDKInitializer;
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
 
+import io.paperdb.Paper;
+
 public class DemoApplication extends Application {
 
 	public static Context applicationContext;
@@ -59,6 +61,7 @@ public class DemoApplication extends Application {
          */
         hxSDKHelper.onInit(applicationContext);
 		SDKInitializer.initialize(applicationContext);
+		Paper.init(applicationContext);
 	}
 
 	public static DemoApplication getInstance() {

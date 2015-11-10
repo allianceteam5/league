@@ -1,6 +1,8 @@
 package com.league.activity;
 
-import com.league.utils.Contants;
+import com.easemob.chatuidemo.Constant;
+import com.league.bean.Kind;
+import com.league.utils.Constants;
 import com.league.utils.DateFormatUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
@@ -12,9 +14,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.TimeFormatException;
 import android.view.Gravity;
-import android.view.TextureView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -22,24 +22,27 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import cn.aigestudio.datepicker.cons.DPMode;
 import cn.aigestudio.datepicker.views.DatePicker;
+import io.paperdb.Paper;
 
 public class WantAJob extends Activity implements OnClickListener {
 
     private ImageView back, title_right, right, jobfull, jobpart;
-    private TextView title, save, tvDegree, tvWorkTime;
-    private RelativeLayout rl_degree, rl_time;
+    private TextView title, save, tvDegree, tvWorkTime,tvProfession;
+    private RelativeLayout rl_degree, rl_time, rl_profession;
     private EditText etTitle, etStatus, etContent, etPhone;
     private int selectedJobIndex = 0;
     private int selectedDegreeIndex = -1;
+    private int selectedProfessionIndex = -1;
+    private int selectedProfessionId = -1;
     private String worktime;
 
     @Override
@@ -68,9 +71,12 @@ public class WantAJob extends Activity implements OnClickListener {
         rl_degree.setOnClickListener(this);
         rl_time = (RelativeLayout) findViewById(R.id.taketime);
         rl_time.setOnClickListener(this);
+        rl_profession = (RelativeLayout) findViewById(R.id.profession);
+        rl_profession.setOnClickListener(this);
         etTitle = (EditText) findViewById(R.id.et_title);
         tvDegree = (TextView) findViewById(R.id.tv_degree);
         tvWorkTime = (TextView) findViewById(R.id.worktime);
+        tvProfession = (TextView) findViewById(R.id.tv_profession);
         tvWorkTime.setText(DateFormatUtils.NowTimeStamp2Date());
         etStatus = (EditText) findViewById(R.id.etStatus);
         etPhone = (EditText) findViewById(R.id.etPhone);
@@ -100,7 +106,7 @@ public class WantAJob extends Activity implements OnClickListener {
                 dialog.show();
                 DatePicker picker = new DatePicker(WantAJob.this);
                 Calendar calendar = Calendar.getInstance();
-                picker.setDate(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH));
+                picker.setDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH));
                 picker.setMode(DPMode.SINGLE);
                 picker.setOnDatePickedListener(new DatePicker.OnDatePickedListener() {
                     @Override
@@ -117,9 +123,16 @@ public class WantAJob extends Activity implements OnClickListener {
                 break;
             case R.id.education:
                 Intent intent = new Intent(WantAJob.this, RadioSelectActivity.class);
-                intent.putExtra(Contants.RADIOSELECEDTINDEX, selectedDegreeIndex);
-                intent.putExtra(Contants.RADIOSELECTKIND, Contants.RADIODEDREE);
-                startActivityForResult(intent, Contants.REQUESTCODE);
+                intent.putExtra(Constants.RADIOSELECEDTINDEX, selectedDegreeIndex);
+                intent.putExtra(Constants.RADIOSELECTKIND, Constants.RADIODEDREE);
+                startActivityForResult(intent, Constants.RADIODEDREE);
+                break;
+            //选择行业
+            case R.id.profession:
+                Intent intent1 = new Intent(WantAJob.this, RadioSelectActivity.class);
+                intent1.putExtra(Constants.RADIOSELECEDTINDEX, selectedProfessionIndex);
+                intent1.putExtra(Constants.RADIOSELECTKIND, Constants.RADIOPROFESSION);
+                startActivityForResult(intent1, Constants.RADIOPROFESSION);
                 break;
             //发布
             case R.id.near_save:
@@ -130,13 +143,18 @@ public class WantAJob extends Activity implements OnClickListener {
                     return;
                 }
 
+                if (selectedProfessionId < 0) {
+                    ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_profession));
+                    return;
+                }
+
                 if (selectedDegreeIndex < 0) {
                     ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_degree));
                     return;
                 }
 
-                if(TextUtils.isEmpty(worktime)){
-                    ToastUtils.showShortToast(getApplicationContext(),getString(R.string.waring_time));
+                if (TextUtils.isEmpty(worktime)) {
+                    ToastUtils.showShortToast(getApplicationContext(), getString(R.string.waring_time));
                     return;
                 }
 
@@ -161,17 +179,20 @@ public class WantAJob extends Activity implements OnClickListener {
                     return;
                 }
 
-                ApiUtil.applyJobCreated(getApplicationContext(), phone, selectedJobIndex, title, selectedDegreeIndex, DateFormatUtils.Date2TimeStamp(worktime), status, 0, content, 0, new JsonHttpResponseHandler() {
+                ApiUtil.applyJobCreated(getApplicationContext(), phone, selectedJobIndex, title, selectedDegreeIndex, DateFormatUtils.Date2TimeStamp(worktime), status, 0, content, selectedProfessionId, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         int flag = response.optInt("flag");
-
                         if (flag == 1)
                             ToastUtils.showLongToast(getApplicationContext(), getString(R.string.publish_success));
                         else
                             ToastUtils.showLongToast(getApplicationContext(), getString(R.string.publish_fail));
                         WantAJob.this.finish();
+                    }
 
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        ToastUtils.showLongToast(getApplicationContext(), getString(R.string.publish_fail));
                     }
                 });
                 break;
@@ -183,9 +204,15 @@ public class WantAJob extends Activity implements OnClickListener {
         // super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case Contants.REQUESTCODE:
-                    selectedDegreeIndex = data.getIntExtra(Contants.RADIOSELECEDTINDEX, 0);
-                    tvDegree.setText(Contants.DEGREEITEMS.get(selectedDegreeIndex));
+                case Constants.RADIODEDREE:
+                    selectedDegreeIndex = data.getIntExtra(Constants.RADIOSELECEDTINDEX, 0);
+                    tvDegree.setText(Constants.DEGREEITEMS.get(selectedDegreeIndex));
+                    break;
+                case Constants.RADIOPROFESSION:
+                    selectedProfessionIndex = data.getIntExtra(Constants.RADIOSELECEDTINDEX, 0);
+                    Kind profession = Paper.book().read(Constants.ProfessinListName, new ArrayList<Kind>()).get(selectedProfessionIndex);
+                    selectedProfessionId = profession.getId();
+                    tvProfession.setText(profession.getName());
                     break;
             }
         }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/black">
+
+    <ImageButton
+        android:id="@+id/liaoba_back"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/arrow_left" />
+
+    <TextView
+        android:id="@+id/liaoba_centertitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="聊吧"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+
+    <ImageButton
+        android:id="@+id/liaoba_mine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@color/transparent"
+        android:src="@drawable/liaoba_mine" />
+
+    <ImageButton
+        android:id="@+id/liaoba_publish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@id/liaoba_mine"
+        android:background="@color/transparent"
+        android:src="@drawable/liaoba_publish" />
+
+</RelativeLayout>

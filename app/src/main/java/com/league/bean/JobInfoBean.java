@@ -1,81 +1,156 @@
 package com.league.bean;
-/**  
- *   
- * @author liugang  
- * @date 2015年9月19日   
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.league.activity.PassAnnounced;
+
+/**
+ * @author liugang
+ * @date 2015年9月19日
  */
 public class JobInfoBean {
+    private int id;
+    private int userid;
+    private String title;
+    private String thumb;
+    private String nickname;
+    private String phone;
+    private int jobproperty;
+    private int degree;
+    private int hidephone;
+    private int professionid;
+    private String profession;
+    @JsonProperty("work_at")
+    private long worktime;
+    @JsonProperty("created_at")
+    private long createdtime;
+    private String status;
+    @JsonProperty("content")
+    private String intro;
 
-	String thumb;
-	String userNickname;
-	int fullorpart_timejob;
-	String profession;
-	String lasttime;
-	String infoContent;
-	String eduction;
-	String worktime;
-	String current_status;
-	String leave_message;
-	public String getThumb() {
-		return thumb;
-	}
-	public void setThumb(String thumb) {
-		this.thumb = thumb;
-	}
-	
-	public String getUserNickname() {
-		return userNickname;
-	}
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
-	}
-	public int getFullorpart_timejob() {
-		return fullorpart_timejob;
-	}
-	public void setFullorpart_timejob(int fullorpart_timejob) {
-		this.fullorpart_timejob = fullorpart_timejob;
-	}
-	public String getProfession() {
-		return profession;
-	}
-	public void setProfession(String profession) {
-		this.profession = profession;
-	}
-	public String getLasttime() {
-		return lasttime;
-	}
-	public void setLasttime(String lasttime) {
-		this.lasttime = lasttime;
-	}
-	public String getInfoContent() {
-		return infoContent;
-	}
-	public void setInfoContent(String infoContent) {
-		this.infoContent = infoContent;
-	}
-	public String getEduction() {
-		return eduction;
-	}
-	public void setEduction(String eduction) {
-		this.eduction = eduction;
-	}
-	public String getWorktime() {
-		return worktime;
-	}
-	public void setWorktime(String worktime) {
-		this.worktime = worktime;
-	}
-	public String getCurrent_status() {
-		return current_status;
-	}
-	public void setCurrent_status(String current_status) {
-		this.current_status = current_status;
-	}
-	public String getLeave_message() {
-		return leave_message;
-	}
-	public void setLeave_message(String leave_message) {
-		this.leave_message = leave_message;
-	}
-	
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public long getWorktime() {
+        return worktime;
+    }
+
+    public void setWorktime(long worktime) {
+        this.worktime = worktime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public int getJobproperty() {
+        return jobproperty;
+    }
+
+    public void setJobproperty(int jobproperty) {
+        this.jobproperty = jobproperty;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getDegree() {
+        return degree;
+    }
+
+    public void setDegree(int degree) {
+        this.degree = degree;
+    }
+
+    public int getHidephone() {
+        return hidephone;
+    }
+
+    public void setHidephone(int hidephone) {
+        this.hidephone = hidephone;
+    }
+
+    public int getProfessionid() {
+        return professionid;
+    }
+
+    public void setProfessionid(int professionid) {
+        this.professionid = professionid;
+    }
+
+    public long getCreatedtime() {
+        return createdtime;
+    }
+
+    public void setCreatedtime(long createdtime) {
+        this.createdtime = createdtime;
+    }
+
+    public String getJobPropertyName() {
+        if (jobproperty == 0)
+            return "全职";
+        else
+            return "兼职";
+    }
 }

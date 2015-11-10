@@ -6,9 +6,11 @@
     <string name="warning_title">请填写标题</string>
     <string name="waring_time">请填写时间</string>
     <string name="warning_degree">请选择学历</string>
+    <string name="warning_profession">请选择行业</string>
     <string name="warning_phone">请填写手机号码</string>
     <string name="warning_status">请填写目前状态</string>
     <string name="warning_intro">请填写自我介绍</string>
+    <string name="warning_internet">请连接网络</string>
     <string name="publish_success">发帖成功</string>
     <string name="publish_fail">发帖失败</string>
     <string name="text_ack_msg">Read</string>
@@ -307,5 +309,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_base">BaseActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

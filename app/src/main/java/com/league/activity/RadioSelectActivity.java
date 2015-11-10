@@ -12,7 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.league.utils.Contants;
+import com.league.bean.Kind;
+import com.league.utils.Constants;
 import com.mine.league.R;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.paperdb.Paper;
 
 public class RadioSelectActivity extends Activity implements View.OnClickListener {
     @Bind(R.id.txt_back)
@@ -29,7 +31,8 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
     @Bind(R.id.lv_position)
     ListView lvItems;
     RadioSelectAdapter radioSelectAdapter;
-    List<String> items;
+    List<String> items = new ArrayList<String>();
+    ArrayList<Kind> kinds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +41,22 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
         ButterKnife.bind(this);
         ivBack.setVisibility(View.VISIBLE);
         ivBack.setOnClickListener(this);
-        int kind = getIntent().getIntExtra(Contants.RADIOSELECTKIND, 0);
-        int selectedIndex = getIntent().getIntExtra(Contants.RADIOSELECEDTINDEX, 0);
+        int kind = getIntent().getIntExtra(Constants.RADIOSELECTKIND, 0);
+        int selectedIndex = getIntent().getIntExtra(Constants.RADIOSELECEDTINDEX, 0);
         if (selectedIndex < 0)
             selectedIndex = 0;
         switch (kind) {
-            case Contants.RADIODEDREE:
+            case Constants.RADIODEDREE:
 //                items = Arrays.asList(getResources().getStringArray(R.array.degree));
-                items = Contants.DEGREEITEMS;
+                items = Constants.DEGREEITEMS;
                 tvTitle.setText("学历");
                 break;
+            case Constants.RADIOPROFESSION:
+                kinds = Paper.book().read(Constants.ProfessinListName, new ArrayList<Kind>());
+                for (int i = 0; i < kinds.size(); i++)
+                    items.add(kinds.get(i).getName());
+                break;
             default:
-                items = new ArrayList<String>();
                 break;
         }
         radioSelectAdapter = new RadioSelectAdapter(getApplicationContext(), items);
@@ -61,7 +68,7 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.txt_back:
-                setResult(RESULT_OK, new Intent().putExtra(Contants.RADIOSELECEDTINDEX, radioSelectAdapter.getSelectedIndex()));
+                setResult(RESULT_OK, new Intent().putExtra(Constants.RADIOSELECEDTINDEX, radioSelectAdapter.getSelectedIndex()));
                 finish();
                 break;
         }
