@@ -63,7 +63,24 @@ public class LiaoBaAdapter extends BaseAdapter{
             holder=(ViewHolder)convertView.getTag();
         }
         holder.name.setText(list.get(position).getName());
+        holder.time.setText(list.get(position).getTime());
+        if(list.get(position).getHot_new_flag()==1){
+            holder.new_hot.setImageResource(R.drawable.liaoba_new);
+        }else if(list.get(position).getHot_new_flag()==2){
+            holder.new_hot.setImageResource(R.drawable.liaoba_hot);
+        }else holder.new_hot.setVisibility(View.GONE);
 
+        holder.title.setText(list.get(position).getTitle());
+        holder.content.setText(list.get(position).getContent());
+        if(list.get(position).getFlag_concern()==1){
+            holder.yiguanzhu.setVisibility(View.VISIBLE);
+            holder.guanzhu.setVisibility(View.GONE);
+        }else{
+            holder.yiguanzhu.setVisibility(View.GONE);
+            holder.guanzhu.setVisibility(View.VISIBLE);
+        }
+        holder.dianzanshu.setText(list.get(position).getDianzannum()+"");
+        holder.commentnum.setText(list.get(position).getCommentnum()+"");
         return convertView;
     }
     class ViewHolder{

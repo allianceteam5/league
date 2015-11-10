@@ -11,8 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d22ba5d-6b80-4562-b33c-f36408b75b0a" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/league/adapter/LiaoBaAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/league/adapter/LiaoBaAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/league/fragment/LiaoBaLatestFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/league/fragment/LiaoBaLatestFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_liao_ba_latest.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_liao_ba_latest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="league.iws" />
@@ -72,9 +72,10 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/league/fragment/LiaoBaLatestFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+              <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#593#609#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,8 +84,8 @@
       <file leaf-file-name="LiaoBaAdapter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/league/adapter/LiaoBaAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27659574">
-              <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.640592">
+              <caret line="82" column="71" selection-start-line="82" selection-start-column="71" selection-end-line="82" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#663#664#0" expanded="true" />
@@ -101,8 +102,8 @@
       <file leaf-file-name="item_liaoba_user.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_liaoba_user.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.9333334">
-              <caret line="14" column="34" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="34" />
+            <state vertical-scroll-proportion="-9.466666">
+              <caret line="56" column="45" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -1680,9 +1681,9 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_liao_ba_popularity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/league/view/MyListView.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_liao_ba_latest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/league/fragment/LiaoBaLatestFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/league/bean/LiaoBaUserInfo.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_liaoba_user.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/league/fragment/LiaoBaLatestFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/league/adapter/LiaoBaAdapter.java" />
       </list>
     </option>
@@ -2615,9 +2616,9 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1875" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13939394" sideWeight="0.49676377" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.083333336" sideWeight="0.49676377" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.10151515" sideWeight="0.49676377" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23939393" sideWeight="0.49676377" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27801418" sideWeight="0.5080906" order="7" side_tool="true" content_ui="tabs" />
@@ -2631,7 +2632,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928804" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29464287" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28733766" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11914894" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -2694,6 +2695,7 @@
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#593#609#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3105,16 +3107,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/league/fragment/LiaoBaLatestFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/league/bean/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15769945">
@@ -3171,7 +3163,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/league/adapter/JobInfoAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.66312057">
+        <state vertical-scroll-proportion="-0.93439716">
           <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
           <folding />
         </state>
@@ -3179,8 +3171,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_liaoba_user.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.9333334">
-          <caret line="14" column="34" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="34" />
+        <state vertical-scroll-proportion="-9.466666">
+          <caret line="56" column="45" selection-start-line="56" selection-start-column="35" selection-end-line="56" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -3188,10 +3180,21 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/league/fragment/LiaoBaLatestFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#593#609#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/league/adapter/LiaoBaAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27659574">
-          <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.640592">
+          <caret line="82" column="71" selection-start-line="82" selection-start-column="71" selection-end-line="82" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#663#664#0" expanded="true" />
