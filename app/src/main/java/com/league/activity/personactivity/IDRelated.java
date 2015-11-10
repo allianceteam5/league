@@ -1,7 +1,6 @@
 package com.league.activity.personactivity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,17 +8,19 @@ import android.widget.TextView;
 
 import com.mine.league.R;
 
-public class PersonSetup extends Activity implements View.OnClickListener{
+public class IDRelated extends Activity implements View.OnClickListener{
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_setup);
+        setContentView(R.layout.activity_idrelated);
         initView();
 
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -35,7 +36,7 @@ public class PersonSetup extends Activity implements View.OnClickListener{
         titleright = (ImageView) findViewById(R.id.near_ti_right);
         titleright.setVisibility(View.GONE);
         title = (TextView) findViewById(R.id.near_centertitle);
-        title.setText("设置");
+        title.setText("账号相关");
         right1 = (ImageView) findViewById(R.id.near_right);
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
@@ -44,18 +45,10 @@ public class PersonSetup extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.aboutus:
-                Intent intent=new Intent(getApplication(),AboutUs.class);
-                startActivity(intent);
+        switch (v.getId()){
+            case R.id.changecode:
                 break;
-            case R.id.feedback:
-                Intent intent1=new Intent(getApplication(),FeedBack.class);
-                startActivity(intent1);
-                break;
-            case R.id.idrelated:
-                Intent intent2 =new Intent(getApplication(),IDRelated.class);
-                startActivity(intent2);
+            case R.id.findcode:
                 break;
         }
     }

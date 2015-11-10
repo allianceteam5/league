@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.league.activity.personactivity.AlianceReward;
 import com.league.activity.personactivity.MyCollection;
+import com.league.activity.personactivity.MyMoneyBag;
 import com.league.activity.personactivity.PersonInformationSetup;
 import com.league.activity.personactivity.PersonSetup;
 import com.mine.league.R;
@@ -46,6 +47,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
         layout.findViewById(R.id.myown).setOnClickListener(this);
         layout.findViewById(R.id.aliancereward).setOnClickListener(this);
         layout.findViewById(R.id.mycollection).setOnClickListener(this);
+        layout.findViewById(R.id.mymoneybag).setOnClickListener(this);
     }
 
     @Override
@@ -66,6 +68,11 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
             case R.id.mycollection:
                 Intent intent3=new Intent(ctx, MyCollection.class);
                 startActivity(intent3);
+                break;
+            case R.id.mymoneybag:
+                Intent intent4=new Intent(ctx, MyMoneyBag.class);
+                startActivity(intent4);
+                break;
         }
     }
 }
