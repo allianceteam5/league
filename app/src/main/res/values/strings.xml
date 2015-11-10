@@ -13,6 +13,9 @@
     <string name="warning_internet">请连接网络</string>
     <string name="publish_success">发帖成功</string>
     <string name="publish_fail">发帖失败</string>
+    <string name="loading">加载中</string>
+    <string name="loading_done">没有更多数据</string>
+    <string name="input_string">请输入要查询的文字</string>
     <string name="text_ack_msg">Read</string>
     <string name="text_delivered_msg">Delivered</string>
     <string name="back">Back</string>

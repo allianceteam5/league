@@ -9,10 +9,10 @@ public class IClientUrl {
     public static final String ApplyJobCreated = testServerUrl + "applyjobs/create";
     public static final String ApplyJobUpdated = testServerUrl + "applyjobs/update";
     public static final String ApplyJobDeleted = testServerUrl + "applyjobs/delete";
-    public static final String ApplyJobSearch = testServerUrl + "applyjobs/search";
-
+    public static final String ApplyJobSearch = testServerUrl + "applyjobs/search" + "?page=";
     public static final String RecomendationList = testServerUrl + "kindsofrecommendation/list";
 
     public static final String HobbyList = testServerUrl + "hobbies/list";
+    public static final String HobbySearch = testServerUrl + "daters/search" + "?page=";
 
 }

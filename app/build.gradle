@@ -25,6 +25,12 @@ android {
         }
     }
 
+    allprojects {
+        repositories {
+            jcenter()
+        }
+    }
+
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
@@ -49,4 +55,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'cn.aigestudio.datepicker:DatePicker:2.1.0'
     compile 'io.paperdb:paperdb:1.0'
+    compile 'net.soulwolf.widget:dialogBuilder:1.0.0'
 }
