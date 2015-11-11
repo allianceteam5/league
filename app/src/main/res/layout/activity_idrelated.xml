@@ -18,6 +18,7 @@
         android:layout_below="@id/title"
         android:background="@color/black2" />
     <RelativeLayout
+        android:onClick="onClick"
         android:id="@+id/changecode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,6 +55,7 @@
         android:background="@color/black2" />
 
     <RelativeLayout
+
         android:id="@+id/findcode"
         android:onClick="onClick"
         android:layout_width="match_parent"

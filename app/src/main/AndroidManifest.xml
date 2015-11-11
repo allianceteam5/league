@@ -391,6 +391,16 @@
         </activity>
         <activity android:name="com.league.activity.personactivity.IDRelated" >
         </activity>
+        <activity android:name="com.league.activity.personactivity.ChangeCode" >
+        </activity>
+        <activity android:name="com.league.activity.personactivity.FindCode" >
+        </activity>
+        <activity android:name="com.league.activity.personactivity.MyRedBagBalance" >
+        </activity>
+        <activity android:name="com.league.activity.personactivity.Recharge" >
+        </activity>
+        <activity android:name="com.league.activity.personactivity.WithDraw" >
+        </activity>
     </application>
 
 </manifest>
