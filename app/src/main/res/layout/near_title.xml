@@ -25,14 +25,14 @@
             android:layout_height="wrap_content"
             android:text="title"
             android:textColor="@color/white"
-            android:layout_marginRight="4dp"
+            android:layout_marginRight="6dp"
             android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/near_ti_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/near_t_right" />
+            android:src="@drawable/near_top_down" />
     </LinearLayout>
 
     <ImageButton

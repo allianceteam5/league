@@ -1,6 +1,7 @@
 package com.league.utils.api;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -54,16 +55,19 @@ public class ApiUtil {
         client.post(context, IClientUrl.ApplyJobSearch, new RequestParams(), responseHandler);
     }
 
-    public static void applyjobSearchByProfessionid(Context context, int professionid, TextHttpResponseHandler responseHandler) {
+    public static void applyjobSearch(Context context, int professionid, String searchString, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.add("professionid", String.valueOf(professionid));
-        client.post(context, IClientUrl.ApplyJobSearch, new RequestParams(), responseHandler);
-    }
-
-    public static void applyjobSearchByJobproperty(Context context, int jobproperty, TextHttpResponseHandler responseHandler) {
-        RequestParams params = new RequestParams();
-        params.add("jobproperty", String.valueOf(jobproperty));
-        client.post(context, IClientUrl.ApplyJobSearch, new RequestParams(), responseHandler);
+        if (!TextUtils.isEmpty(searchString)) {
+            params.add("title", searchString);
+            professionid = 0;
+        }
+        if (professionid == 0) {
+            client.post(context, IClientUrl.ApplyJobSearch + currentPage, params, responseHandler);
+        } else {
+            params.add("professionid", String.valueOf(professionid));
+            printHttp(IClientUrl.ApplyJobSearch, params);
+            client.post(context, IClientUrl.ApplyJobSearch + currentPage, params, responseHandler);
+        }
     }
 
     public static void recommendationList(Context context, TextHttpResponseHandler responseHandler) {
@@ -74,5 +78,18 @@ public class ApiUtil {
         client.post(context, IClientUrl.HobbyList, new RequestParams(), responseHandler);
     }
 
-
+    public static void hobbySearch(Context context, int hobbyid, String searchString, int currentPage, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        if (!TextUtils.isEmpty(searchString)) {
+            params.add("title", searchString);
+            hobbyid = 0;
+        }
+        if (hobbyid == 0) {
+            client.post(context, IClientUrl.HobbySearch + currentPage, params, responseHandler);
+        } else {
+            params.add("hobbyid", String.valueOf(hobbyid));
+            printHttp(IClientUrl.ApplyJobSearch, params);
+            client.post(context, IClientUrl.HobbySearch + currentPage, params, responseHandler);
+        }
+    }
 }

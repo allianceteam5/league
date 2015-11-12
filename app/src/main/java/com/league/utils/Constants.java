@@ -17,6 +17,7 @@ public class Constants {
     public static final int REQUESTPROFESSION = 2;
     public static final String ProfessinListName = "professionListName";
     public static final String SingleJobInfoName = "singleJobInfoName";
+    public static final String SingleHobbyInfoName = "singleJobInfoName";
     public static final String RecommendationListName = "recommendationListName";
     public static final String HobbyListName = "hobbyListName";
     public static final String SharePrefrencesName = "pfy";

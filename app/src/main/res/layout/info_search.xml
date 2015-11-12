@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:background="@color/black2"
-	android:orientation="vertical">
-	<TextView
-		android:id="@+id/txt_search"
-		android:layout_width="match_parent"
+	android:layout_height="50dp"
+	android:background="@color/white">
+
+	<LinearLayout
+		android:layout_width="0px"
+		android:layout_height="0px"
+		android:focusable="true"
+		android:focusableInTouchMode="true" >
+
+		<requestFocus />
+	</LinearLayout>
+
+	<requestFocus />
+
+	<EditText
+		android:id="@+id/et_search_search"
+		android:layout_width="fill_parent"
 		android:layout_height="40dp"
-		android:drawableLeft="@drawable/search_icon"
-		android:background="@drawable/search_ba"
+		android:layout_centerVertical="true"
 		android:layout_margin="5dp"
-		android:paddingLeft="20dp"
-		android:text="搜索"
-		android:drawablePadding="10dp"
-		android:textColor="@color/black1"
-		android:gravity="center|left"
-		android:singleLine="true" />
-	
-</LinearLayout>
+		android:layout_toLeftOf="@+id/btn_search_sure"
+		android:background="@drawable/sousuokuang"
+		android:drawableLeft="@drawable/sousuoyemian"
+		android:hint="搜索"
+		android:paddingLeft="10dp"
+		android:singleLine="true"
+		android:textSize="16dp" />
+
+	<Button
+		android:id="@+id/btn_search_sure"
+		android:layout_width="60dp"
+		android:layout_height="30dp"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"
+		android:layout_marginLeft="5dp"
+		android:layout_marginRight="5dp"
+		android:background="@color/black2"
+		android:gravity="center"
+		android:text="确定"
+		android:textColor="@color/black"
+		android:textSize="16dp" />
+</RelativeLayout>
