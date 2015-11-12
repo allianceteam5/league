@@ -1,7 +1,6 @@
 package com.league.activity.personactivity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,17 +8,19 @@ import android.widget.TextView;
 
 import com.mine.league.R;
 
-public class PersonSetup extends Activity implements View.OnClickListener{
+public class AboutUs extends Activity {
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_setup);
+        setContentView(R.layout.activity_about_us);
         initView();
 
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -35,28 +36,10 @@ public class PersonSetup extends Activity implements View.OnClickListener{
         titleright = (ImageView) findViewById(R.id.near_ti_right);
         titleright.setVisibility(View.GONE);
         title = (TextView) findViewById(R.id.near_centertitle);
-        title.setText("设置");
+        title.setText("关于我们");
         right1 = (ImageView) findViewById(R.id.near_right);
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.aboutus:
-                Intent intent=new Intent(getApplication(),AboutUs.class);
-                startActivity(intent);
-                break;
-            case R.id.feedback:
-                Intent intent1=new Intent(getApplication(),FeedBack.class);
-                startActivity(intent1);
-                break;
-            case R.id.idrelated:
-                Intent intent2 =new Intent(getApplication(),IDRelated.class);
-                startActivity(intent2);
-                break;
-        }
     }
 }

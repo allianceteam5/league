@@ -87,6 +87,16 @@
         android:layout_alignParentRight="true"
         android:textSize="16sp"
         android:visibility="gone"/>
-
+    <TextView
+        android:id="@+id/near_commit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提交"
+        android:textColor="@color/red"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:textSize="18sp"
+        android:visibility="gone"/>
 
 </RelativeLayout>

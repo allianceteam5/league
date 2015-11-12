@@ -17,10 +17,9 @@
         android:layout_height="5dp"
         android:layout_below="@id/title"
         android:background="@color/black2" />
-
     <RelativeLayout
-        android:id="@+id/idrelated"
         android:onClick="onClick"
+        android:id="@+id/changecode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white">
@@ -34,40 +33,7 @@
             android:layout_marginLeft="10dip"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
-            android:text="账号相关"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dip"
-            android:src="@drawable/icon_right" />
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dip"
-        android:background="@color/black2" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dip"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:text="清理缓存"
+            android:text="修改账号密码"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -89,7 +55,8 @@
         android:background="@color/black2" />
 
     <RelativeLayout
-        android:id="@+id/feedback"
+
+        android:id="@+id/findcode"
         android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,7 +71,7 @@
             android:layout_marginLeft="10dip"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
-            android:text="意见反馈"
+            android:text="找回账号密码"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -118,45 +85,4 @@
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dip"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:background="@color/black2" />
-
-    <RelativeLayout
-        android:id="@+id/aboutus"
-        android:onClick="onClick"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dip"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:text="关于我们"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dip"
-            android:src="@drawable/icon_right" />
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black2" />
 </LinearLayout>

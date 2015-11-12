@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import com.mine.league.R;
 
-public class PersonSetup extends Activity implements View.OnClickListener{
+public class MyMoneyBag extends Activity implements View.OnClickListener{
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_setup);
+        setContentView(R.layout.activity_my_money_bag);
         initView();
 
     }
@@ -35,7 +35,7 @@ public class PersonSetup extends Activity implements View.OnClickListener{
         titleright = (ImageView) findViewById(R.id.near_ti_right);
         titleright.setVisibility(View.GONE);
         title = (TextView) findViewById(R.id.near_centertitle);
-        title.setText("设置");
+        title.setText("钱包");
         right1 = (ImageView) findViewById(R.id.near_right);
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
@@ -44,19 +44,18 @@ public class PersonSetup extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.aboutus:
-                Intent intent=new Intent(getApplication(),AboutUs.class);
+        switch (v.getId()){
+            case R.id.myredbagbalance:
+                Intent intent=new Intent(getApplication(),MyRedBagBalance.class);
                 startActivity(intent);
                 break;
-            case R.id.feedback:
-                Intent intent1=new Intent(getApplication(),FeedBack.class);
+            case R.id.chongzhi:
+                Intent intent1=new Intent(getApplication(),Recharge.class);
                 startActivity(intent1);
                 break;
-            case R.id.idrelated:
-                Intent intent2 =new Intent(getApplication(),IDRelated.class);
+            case R.id.tixian:
+                Intent intent2 =new Intent(getApplication(),WithDraw.class);
                 startActivity(intent2);
-                break;
         }
     }
 }
