@@ -10,6 +10,25 @@ public class BankCardInfo {
     private String userNumber;
     private String kaihudi;
 
+    private String bankName;
+    private String bankType;
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public String getBankType() {
+        return bankType;
+    }
+
+    public void setBankType(String bankType) {
+        this.bankType = bankType;
+    }
+
     public String getCardID() {
         return cardID;
     }

@@ -1,7 +1,6 @@
 package com.league.activity.personactivity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,15 +8,14 @@ import android.widget.TextView;
 
 import com.mine.league.R;
 
-public class WithDraw extends Activity implements View.OnClickListener{
+public class AddBankCard extends Activity {
 
     private ImageView back2, titleright, right1, right2;
     private TextView title;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_with_draw);
+        setContentView(R.layout.activity_add_bank_card);
         initView();
 
     }
@@ -37,25 +35,11 @@ public class WithDraw extends Activity implements View.OnClickListener{
         titleright = (ImageView) findViewById(R.id.near_ti_right);
         titleright.setVisibility(View.GONE);
         title = (TextView) findViewById(R.id.near_centertitle);
-        title.setText("提现");
+        title.setText("添加银行卡");
         right1 = (ImageView) findViewById(R.id.near_right);
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
 
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.addbankcard:
-                Intent intent=new Intent(getApplication(),AddBankCard.class);
-                startActivity(intent);
-                break;
-            case R.id.bankiditem:
-                Intent intent1 =new Intent(getApplication(),SelectBankcard.class);
-                startActivity(intent1);
-                break;
-        }
     }
 }

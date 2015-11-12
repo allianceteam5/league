@@ -34,7 +34,7 @@
                 android:textColor="@color/black1"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="10dp"
-                android:hint="输入当前密码"
+                android:hint="输入手机号"
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:paddingBottom="10dp"/>
@@ -65,7 +65,7 @@
             android:textColor="@color/black1"
             android:layout_marginTop="10dp"
             android:paddingLeft="10dp"
-            android:hint="输入新密码"
+            android:hint="输入验证码"
             android:background="@null"
             android:gravity="center_vertical"
             android:paddingBottom="10dp"/>

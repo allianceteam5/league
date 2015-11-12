@@ -81,7 +81,7 @@
                     android:layout_marginTop="3dp"
                     android:text="一元夺宝"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -126,7 +126,7 @@
                     android:layout_marginTop="3dp"
                     android:text="抢红包"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -171,7 +171,7 @@
                     android:layout_marginTop="3dp"
                     android:text="附近"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
@@ -219,7 +219,7 @@
                     android:layout_marginTop="3dp"
                     android:text="聊吧"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>

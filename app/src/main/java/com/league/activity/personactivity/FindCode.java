@@ -60,7 +60,7 @@ public class FindCode extends Activity implements View.OnClickListener{
                 timeCount.start();
                 break;
             case R.id.yanzheng:
-                Intent intent=new Intent(getApplication(),ChangeCode.class);
+                Intent intent=new Intent(getApplication(),SetCode.class);
                 startActivity(intent);
                 finish();
                 break;
