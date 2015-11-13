@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -106,13 +107,50 @@ public class SetCode extends Activity {
                     mEditList.get(4).setEnabled(false);
                     mEditList.get(5).setEnabled(true);
                     mEditList.get(5).requestFocus();
-                } else if(mEditList.get(5).isFocused())
-                {
-                    mEditList.get(5).clearFocus();
-
                 }
             }
         }
     };
 
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if(event.getKeyCode()==KeyEvent.KEYCODE_DEL){
+            if(mEditList.get(5).isFocused())
+            {
+                mEditList.get(5).clearFocus();
+                mEditList.get(5).setEnabled(false);
+                mEditList.get(4).setEnabled(true);
+                mEditList.get(4).requestFocus();
+            }
+            else if(mEditList.get(4).isFocused())
+            {
+                mEditList.get(4).clearFocus();
+                mEditList.get(4).setEnabled(false);
+                mEditList.get(3).setEnabled(true);
+                mEditList.get(3).requestFocus();
+            }
+            else if(mEditList.get(3).isFocused())
+            {
+                mEditList.get(3).clearFocus();
+                mEditList.get(3).setEnabled(false);
+                mEditList.get(2).setEnabled(true);
+                mEditList.get(2).requestFocus();
+            }
+            else if(mEditList.get(2).isFocused())
+            {
+                mEditList.get(2).clearFocus();
+                mEditList.get(2).setEnabled(false);
+                mEditList.get(1).setEnabled(true);
+                mEditList.get(1).requestFocus();
+            }
+            else if(mEditList.get(1).isFocused())
+            {
+                mEditList.get(1).clearFocus();
+                mEditList.get(1).setEnabled(false);
+                mEditList.get(0).setEnabled(true);
+                mEditList.get(0).requestFocus();
+            }
+        }
+        return super.dispatchKeyEvent(event);
+    }
 }

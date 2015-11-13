@@ -415,6 +415,8 @@
         </activity>
         <activity android:name="com.league.activity.personactivity.MyPersonHomepage" >
         </activity>
+        <activity android:name="com.league.activity.liaobaactivity.MyTopic" >
+        </activity>
     </application>
 
 </manifest>
