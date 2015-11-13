@@ -1,7 +1,6 @@
 package com.league.bean;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.league.activity.PassAnnounced;
 
 /**
  * @author liugang

@@ -18,10 +18,10 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-import com.league.activity.GrabRedEnvolope;
-import com.league.activity.LiaoBaActivity;
-import com.league.activity.NearActivity;
-import com.league.activity.OneYuan;
+import com.league.activity.near.NearActivity;
+import com.league.activity.postbar.LiaoBaActivity;
+import com.league.activity.redpacket.GrabRedEnvolope;
+import com.league.activity.treasure.OneYuan;
 import com.league.adapter.ViewPaperAdapter;
 import com.mine.league.R;
 
