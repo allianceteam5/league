@@ -96,6 +96,8 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/goldcoin"
+                    android:onClick="onClick"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -148,6 +150,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/bankcardnum"
+                    android:onClick="onClick"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -340,6 +344,8 @@
                     android:background="@color/black2" />
 
                 <LinearLayout
+                    android:id="@+id/paypassword"
+                    android:onClick="onClick"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -56,6 +56,19 @@ public class MyMoneyBag extends Activity implements View.OnClickListener{
             case R.id.tixian:
                 Intent intent2 =new Intent(getApplication(),WithDraw.class);
                 startActivity(intent2);
+                break;
+            case R.id.bankcardnum:
+                Intent intent3 =new Intent(getApplication(),SelectBankcard.class);
+                startActivity(intent3);
+                break;
+            case R.id.goldcoin:
+                Intent intent4 = new Intent(getApplication(),MyGoldCoin.class);
+                startActivity(intent4);
+                break;
+            case R.id.paypassword:
+                Intent intent5=new Intent(getApplication(),PayPassword.class);
+                startActivity(intent5);
+                break;
         }
     }
 }

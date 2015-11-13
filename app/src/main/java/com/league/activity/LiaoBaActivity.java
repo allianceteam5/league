@@ -1,15 +1,17 @@
 package com.league.activity;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.league.activity.personactivity.MyPersonHomepage;
 import com.league.adapter.ViewPagerTabAdapter;
 import com.league.fragment.LiaoBaConcernFragment;
 import com.league.fragment.LiaoBaHotFragment;
@@ -20,7 +22,7 @@ import com.mine.league.R;
 
 public class LiaoBaActivity extends FragmentActivity implements View.OnClickListener {
 
-    private ImageButton back;
+    private ImageButton back,mine;
     private ViewPager pager;
     private ViewPagerTabAdapter adapter;
     PagerSlidingTabStrip tabs;
@@ -112,6 +114,8 @@ public class LiaoBaActivity extends FragmentActivity implements View.OnClickList
 
             }
         });
+        mine= (ImageButton) findViewById(R.id.liaoba_mine);
+        mine.setOnClickListener(this);
     }
 
     @Override
@@ -120,6 +124,10 @@ public class LiaoBaActivity extends FragmentActivity implements View.OnClickList
             case R.id.liaoba_back:
                 onBackPressed();
                 finish();
+                break;
+            case R.id.liaoba_mine:
+                Intent intent = new Intent(getApplication(), MyPersonHomepage.class);
+                startActivity(intent);
                 break;
         }
     }

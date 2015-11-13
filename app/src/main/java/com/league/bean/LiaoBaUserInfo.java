@@ -14,6 +14,24 @@ public class LiaoBaUserInfo {
     private int flag_concern;
     private int dianzannum;
     private int commentnum;
+    private int funsnum;
+    private int likenum;
+
+    public int getFunsnum() {
+        return funsnum;
+    }
+
+    public void setFunsnum(int funsnum) {
+        this.funsnum = funsnum;
+    }
+
+    public int getLikenum() {
+        return likenum;
+    }
+
+    public void setLikenum(int likenum) {
+        this.likenum = likenum;
+    }
 
     public String getThumb() {
         return thumb;

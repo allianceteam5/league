@@ -401,6 +401,20 @@
         </activity>
         <activity android:name="com.league.activity.personactivity.WithDraw" >
         </activity>
+        <activity android:name="com.league.activity.personactivity.AddBankCard" >
+        </activity>
+        <activity android:name="com.league.activity.personactivity.SelectBankcard" >
+        </activity>
+        <activity android:name="com.league.activity.personactivity.MyGoldCoin" >
+        </activity>
+        <activity android:name="com.league.activity.personactivity.PayPassword" >
+        </activity>
+        <activity android:name="com.league.activity.personactivity.SetCode" >
+        </activity>
+        <activity android:name="com.league.activity.personactivity.PaymentOrder" >
+        </activity>
+        <activity android:name="com.league.activity.personactivity.MyPersonHomepage" >
+        </activity>
     </application>
 
 </manifest>
