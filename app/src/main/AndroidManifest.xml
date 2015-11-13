@@ -411,6 +411,10 @@
         </activity>
         <activity android:name="com.league.activity.personactivity.SetCode" >
         </activity>
+        <activity android:name="com.league.activity.personactivity.PaymentOrder" >
+        </activity>
+        <activity android:name="com.league.activity.personactivity.MyPersonHomepage" >
+        </activity>
     </application>
 
 </manifest>

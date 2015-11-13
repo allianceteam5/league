@@ -13,8 +13,8 @@
 
         <com.league.widget.CircleImageView
             android:id="@+id/thumb"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dip"
             android:src="@drawable/example" />
@@ -28,7 +28,7 @@
             android:gravity="center_vertical"
             android:text="王思聪"
             android:textColor="@color/black1"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/pushtime"
@@ -39,7 +39,7 @@
             android:gravity="center_vertical"
             android:text="3分钟前"
             android:textColor="@color/black1"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -50,8 +50,8 @@
 
         <ImageView
             android:id="@+id/new_hot"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dip"
             android:src="@drawable/liaoba_new" />
@@ -65,7 +65,7 @@
             android:gravity="center_vertical"
             android:text="周末又过去了"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -84,12 +84,12 @@
             android:gravity="center_vertical"
             android:text="一想到明天就要上班就不开心了"
             android:textColor="@color/black1"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <GridView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
         android:columnWidth="90dip"
         android:horizontalSpacing="10dip"
@@ -124,7 +124,7 @@
             android:gravity="center_vertical"
             android:text="已关注"
             android:textColor="@color/black1"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:visibility="gone" />
 
         <LinearLayout
@@ -148,7 +148,7 @@
                 android:gravity="center_vertical"
                 android:text="关注TA"
                 android:textColor="@color/black1"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:layout_marginLeft="10dip"/>
         </LinearLayout>
         <TextView
@@ -157,7 +157,7 @@
             android:layout_height="wrap_content"
             android:text="233"
             android:textColor="@color/black1"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             />
@@ -175,7 +175,7 @@
             android:layout_height="wrap_content"
             android:text="456"
             android:textColor="@color/black1"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:layout_toLeftOf="@id/img1"
             android:layout_marginRight="15dp"
             android:layout_centerVertical="true"

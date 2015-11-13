@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.mine.league.R;
 
-public class Recharge extends Activity {
+public class PaymentOrder extends Activity {
 
     private ImageView back2, titleright, right1, right2;
     private TextView title;
@@ -18,7 +18,7 @@ public class Recharge extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recharge);
+        setContentView(R.layout.activity_payment_order);
         initView();
 
     }
@@ -38,7 +38,7 @@ public class Recharge extends Activity {
         titleright = (ImageView) findViewById(R.id.near_ti_right);
         titleright.setVisibility(View.GONE);
         title = (TextView) findViewById(R.id.near_centertitle);
-        title.setText("充值");
+        title.setText("支付订单");
         right1 = (ImageView) findViewById(R.id.near_right);
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);

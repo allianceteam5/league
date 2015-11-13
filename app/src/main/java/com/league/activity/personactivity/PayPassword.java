@@ -48,7 +48,6 @@ public class PayPassword extends Activity implements OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.changecode:
-
                 Intent intent=new Intent(getApplication(),ChangeCode.class);
                 startActivity(intent);
                 break;
