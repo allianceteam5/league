@@ -53,6 +53,9 @@ public class SetCode extends Activity {
         mEditList.add((EditText) findViewById(R.id.edt4));
         mEditList.add((EditText) findViewById(R.id.edt5));
         mEditList.add((EditText) findViewById(R.id.edt6));
+        for(int i=1;i<mEditList.size();i++){
+            mEditList.get(i).setEnabled(false);
+        }
         for (int i = 0; i < mEditList.size(); i++) {
             mEditList.get(i).addTextChangedListener(tw);
         }
@@ -72,30 +75,41 @@ public class SetCode extends Activity {
                 if(mEditList.get(0).isFocused())
                 {
                     mEditList.get(0).clearFocus();
+                    mEditList.get(0).setEnabled(false);
+                    mEditList.get(1).setEnabled(true);
                     mEditList.get(1).requestFocus();
                 }
                 else if(mEditList.get(1).isFocused())
                 {
                     mEditList.get(1).clearFocus();
+                    mEditList.get(1).setEnabled(false);
+                    mEditList.get(2).setEnabled(true);
                     mEditList.get(2).requestFocus();
                 }
                 else if(mEditList.get(2).isFocused())
                 {
                     mEditList.get(2).clearFocus();
+                    mEditList.get(2).setEnabled(false);
+                    mEditList.get(3).setEnabled(true);
                     mEditList.get(3).requestFocus();
                 }
                 else if(mEditList.get(3).isFocused())
                 {
                     mEditList.get(3).clearFocus();
+                    mEditList.get(3).setEnabled(false);
+                    mEditList.get(4).setEnabled(true);
                     mEditList.get(4).requestFocus();
                 }
                 else if(mEditList.get(4).isFocused())
                 {
                     mEditList.get(4).clearFocus();
+                    mEditList.get(4).setEnabled(false);
+                    mEditList.get(5).setEnabled(true);
                     mEditList.get(5).requestFocus();
                 } else if(mEditList.get(5).isFocused())
                 {
                     mEditList.get(5).clearFocus();
+
                 }
             }
         }
