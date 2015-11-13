@@ -36,13 +36,13 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="16dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/near_partjobtype"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="全职"
                     android:textColor="@color/black" />
 
@@ -56,7 +56,7 @@
                 <TextView
                     android:id="@+id/near_userprofession"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="金融"
                     android:textColor="@color/black" />
             </LinearLayout>
@@ -65,7 +65,7 @@
         <TextView
             android:id="@+id/lasttime"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
@@ -88,7 +88,7 @@
         <TextView
             android:id="@+id/near_usercontent"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:ellipsize="end"
@@ -99,13 +99,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="学历 ："
                 android:textColor="@color/black"
@@ -114,7 +114,7 @@
             <TextView
                 android:id="@+id/near_usereducation"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
                 android:text="本科"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -122,13 +122,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="参加工作时间 ："
                 android:textColor="@color/black"
@@ -137,7 +137,7 @@
             <TextView
                 android:id="@+id/near_userworktime"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
                 android:text="2013-7-1"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -145,13 +145,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="目前状况 ："
                 android:textColor="@color/black"
@@ -160,7 +160,7 @@
             <TextView
                 android:id="@+id/near_usercurrentstaus"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:ellipsize="end"
                 android:singleLine="true"
@@ -171,14 +171,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="留言 ："
                 android:textColor="@color/black"
@@ -187,7 +187,7 @@
             <TextView
                 android:id="@+id/near_userleavemessage"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:ellipsize="end"
                 android:singleLine="true"
