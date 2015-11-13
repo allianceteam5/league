@@ -134,7 +134,7 @@ public class SechJobInfo extends BaseActivity implements OnClickListener, OnItem
                     @Override
                     public void run() {
                         currentPage = 1;
-                        switch (Flag){
+                        switch (Flag) {
                             case 1:
                                 jobInfoList.clear();
                                 break;
@@ -383,7 +383,7 @@ public class SechJobInfo extends BaseActivity implements OnClickListener, OnItem
     }
 
     public void updateHobbyView() {
-        if (hobbyInfoAdapter == null) {
+        if (jobInfoAdapter == null) {
             hobbyInfoAdapter = new HobbyInfoAdapter(getApplicationContext(), hobbyInfoList);
             infoseach.setAdapter(jobInfoAdapter);
             infoseach.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
@@ -436,7 +436,7 @@ public class SechJobInfo extends BaseActivity implements OnClickListener, OnItem
                         Window dialogWindow = dialog.getWindow();
                         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
                         dialogWindow.setGravity(Gravity.TOP | Gravity.RIGHT);
-                        lp.x = -10; // 新位置X坐标
+                        lp.x = 0; // 新位置X坐标
                         lp.y = 90; // 新位置Y坐标
                         lp.alpha = 0.7f; // 透明度
                         dialogWindow.setAttributes(lp);
@@ -452,6 +452,17 @@ public class SechJobInfo extends BaseActivity implements OnClickListener, OnItem
                         lp2.alpha = 0.7f; // 透明度
                         dialogWindow2.setAttributes(lp2);
                         dialog2.show();
+                        break;
+                    case 3:
+                        NearRightDialog dialog3 = new NearRightDialog(this, 2);
+                        Window dialogWindow3 = dialog3.getWindow();
+                        WindowManager.LayoutParams lp3 = dialogWindow3.getAttributes();
+                        dialogWindow2.setGravity(Gravity.TOP | Gravity.RIGHT);
+                        lp2.x = 0; // 新位置X坐标
+                        lp2.y = 90; // 新位置Y坐标
+                        lp2.alpha = 0.7f; // 透明度
+                        dialogWindow3.setAttributes(lp3);
+                        dialog3.show();
                         break;
                 }
 

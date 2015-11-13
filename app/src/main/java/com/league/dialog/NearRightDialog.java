@@ -48,6 +48,8 @@ public class NearRightDialog extends Dialog implements
 				txt2.setText("我的帖子");
 				break;
 			case 3:
+				txt1.setText("我要交友");
+				txt2.setText("我的交友");
 				break;
 		}
 	}
@@ -64,6 +66,8 @@ public class NearRightDialog extends Dialog implements
 			}else if(Flag==2){
 				Intent intent2=new Intent(context, PostCard.class);
 				context.startActivity(intent2);
+			}else if (Flag == 3){
+
 			}
 			dismiss();
 			break;
