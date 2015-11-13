@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '22.0.0'
+    buildToolsVersion '22.0.0 '
 
     defaultConfig {
         applicationId "com.mine.league"
@@ -28,6 +28,12 @@ android {
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
+    }
+
+    allprojects {
+        repositories {
+            jcenter()
+        }
     }
 }
 

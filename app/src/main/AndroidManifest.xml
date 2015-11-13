@@ -49,36 +49,6 @@
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:theme="@android:style/Theme.NoTitleBar" >
-        <activity
-            android:name="com.league.activity.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.league.activity.NearActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.league.activity.SechJobInfo"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.league.activity.JobInfoActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.league.activity.WantAJob"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.league.activity.MyJobHunting"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name="com.league.activity.CommandItem"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
 
         <!-- 百度地图所需的service -->
         <service
@@ -90,14 +60,46 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="0MvVkDhUNGmwhG8HHFqAyTsv" />
 
-        <activity android:name="com.league.activity.PostCard" />
-        <activity android:name="com.league.activity.MyPost" />
-        <activity android:name="com.league.activity.MakingFriItem" />
-        <activity android:name="com.league.activity.GrabRedEnvolope" />
-        <activity android:name="com.league.activity.OneYuan" />
-        <activity android:name="com.league.activity.TenyuanGrid" />
-        <activity android:name="com.league.activity.OneYuanGrab" />
-        <activity android:name="com.league.activity.TenYuanGrabItem" />
+        <activity
+            android:name="com.league.activity.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.league.activity.near.NearActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.league.activity.near.NearKindActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.league.activity.near.JobInfoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.league.activity.near.WantAJob"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.league.activity.near.MyJobHunting"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.league.activity.near.CommandItem"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name="com.league.activity.near.PostCard" />
+        <activity android:name="com.league.activity.near.MyPost" />
+        <activity android:name="com.league.activity.near.MakingFriItem" />
+        <activity android:name="com.league.activity.near.RadioSelectActivity" />
+
+        <activity android:name="com.league.activity.redpacket.GrabRedEnvolope" />
+        <activity android:name="com.league.activity.treasure.OneYuan" />
+        <activity android:name="com.league.activity.treasure.TenyuanGrid" />
+        <activity android:name="com.league.activity.treasure.OneYuanGrab" />
+        <activity android:name="com.league.activity.treasure.TenYuanGrabItem" />
 
         <!-- 开屏页 -->
         <activity
@@ -365,14 +367,11 @@
             android:name="UMENG_APPKEY"
             android:value="53912a3156240b01a7075ed1" />
 
-        <activity android:name="com.league.activity.AnnouncedTheLatestItem" />
-        <activity android:name="com.league.activity.OneYuanGrabItem" />
-        <activity android:name="com.league.activity.PassAnnounced" />
-        <activity android:name="com.league.activity.BuyList" />
+        <activity android:name="com.league.activity.treasure.AnnouncedTheLatestItem" />
+        <activity android:name="com.league.activity.treasure.OneYuanGrabItem" />
+        <activity android:name="com.league.activity.treasure.PassAnnounced" />
+        <activity android:name="com.league.activity.treasure.BuyList" />
         <activity android:name="com.league.activity.personactivity.PersonSetup" />
-        <activity
-            android:name="com.league.activity.RadioSelectActivity"
-            android:label="@string/title_activity_radio_select" />
         <activity android:name="com.league.activity.personactivity.PersonInformationSetup" >
         </activity>
         <activity android:name="com.league.activity.personactivity.AlianceReward" >
@@ -381,7 +380,7 @@
         </activity>
         <activity android:name="com.league.activity.personactivity.MyCollection" >
         </activity>
-        <activity android:name="com.league.activity.LiaoBaActivity" >
+        <activity android:name="com.league.activity.postbar.LiaoBaActivity" >
         </activity>
         <activity android:name="com.league.activity.personactivity.MyMoneyBag" >
         </activity>
