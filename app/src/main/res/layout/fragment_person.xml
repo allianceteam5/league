@@ -73,7 +73,6 @@
                 android:background="@color/black2" />
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -85,27 +84,29 @@
                     android:layout_weight="1">
 
                     <TextView
-
                         android:id="@+id/zhijiealliancenum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
                         android:text="10人"
                         android:textColor="@color/red"
+                        android:layout_below="@+id/ll1"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="14dp"
                         android:textSize="20sp" />
 
                     <LinearLayout
+                        android:id="@+id/ll1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_above="@id/zhijiealliancenum"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dip"
-                        android:orientation="horizontal">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
+                            android:layout_marginRight="4dp"
                             android:src="@drawable/zhijielianmeng" />
 
                         <TextView
@@ -113,7 +114,7 @@
                             android:layout_height="wrap_content"
                             android:text="直接联盟"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </RelativeLayout>
 
@@ -131,23 +132,26 @@
                         android:id="@+id/fivefloartotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="30人"
-                        android:textColor="@color/orange"
+                        android:text="10人"
+                        android:textColor="@color/red"
+                        android:layout_below="@+id/ll2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="14dp"
                         android:textSize="20sp" />
 
                     <LinearLayout
+                        android:id="@+id/ll2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_above="@id/fivefloartotal"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dip"
-                        android:orientation="horizontal">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
+                            android:layout_marginRight="4dp"
                             android:src="@drawable/wucengtotal" />
 
                         <TextView
@@ -155,7 +159,7 @@
                             android:layout_height="wrap_content"
                             android:text="五层总数"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </RelativeLayout>
 
@@ -175,24 +179,26 @@
                         android:id="@+id/award"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="150元"
-                        android:textColor="@color/greenn"
+                        android:text="10人"
+                        android:textColor="@color/red"
+                        android:layout_below="@+id/ll3"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="14dp"
                         android:textSize="20sp" />
 
                     <LinearLayout
-
+                        android:id="@+id/ll3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_above="@id/award"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dip"
-                        android:orientation="horizontal">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
+                            android:layout_marginRight="4dp"
                             android:src="@drawable/lianmengaward" />
 
                         <TextView
@@ -200,7 +206,7 @@
                             android:layout_height="wrap_content"
                             android:text="联盟奖励"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>
@@ -246,11 +252,9 @@
             </RelativeLayout>
 
             <View
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="10dip"
                 android:background="@color/black2" />
-
 
             <RelativeLayout
                 android:id="@+id/mymoneybag"
