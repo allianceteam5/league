@@ -18,7 +18,7 @@ import java.util.List;
 
 public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
-    private ImageView back1, back2, titleright, right1, right2;
+    private ImageView back2, titleright, right1, right2;
     private TextView title;
     private ListViewForScrollView listView;
     private List<OneYuanTakingMember> list=new ArrayList<OneYuanTakingMember>();
@@ -45,7 +45,7 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         titleright = (ImageView) findViewById(R.id.near_ti_right);
         titleright.setVisibility(View.GONE);
         title = (TextView) findViewById(R.id.near_centertitle);
-        title.setText("商品名称");
+        title.setText("奖品详情");
         right1 = (ImageView) findViewById(R.id.near_right);
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);

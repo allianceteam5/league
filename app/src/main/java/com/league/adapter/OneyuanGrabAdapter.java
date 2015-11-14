@@ -17,11 +17,11 @@ import java.util.List;
 /**
  * Created by liug on 15/11/1.
  */
-public class OneyuanGridAdapter extends BaseAdapter {
+public class OneyuanGrabAdapter extends BaseAdapter {
     private Context ctx;
     private List<OneYuanBean> list;
 
-    public OneyuanGridAdapter(Context ctx, List<OneYuanBean> list) {
+    public OneyuanGrabAdapter(Context ctx, List<OneYuanBean> list) {
         this.ctx = ctx;
         this.list = list;
     }

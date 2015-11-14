@@ -557,35 +557,32 @@
                         android:src="@drawable/example" />
 
                     <RelativeLayout
-                        android:layout_width="120dip"
-                        android:layout_height="30dip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="8dip">
+                        android:layout_marginTop="3dip"
+                        android:layout_marginBottom="2dp">
 
                         <TextView
                             android:id="@+id/txt4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
+                            android:gravity="center"
                             android:text="倒计时"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="14sp"
+                            android:layout_marginLeft="10dp"/>
 
                         <TextView
                             android:id="@+id/txt_countdown1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dip"
+                            android:layout_marginLeft="4dip"
                             android:layout_toRightOf="@id/txt4"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:gravity="center_vertical"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:singleLine="true"
+                            android:gravity="center"
                             android:text="02:04:21"
                             android:textColor="@color/red"
-                            android:textSize="18sp" />
+                            android:textSize="14sp" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -604,19 +601,21 @@
                         android:src="@drawable/example" />
 
                     <RelativeLayout
-                        android:layout_width="120dip"
-                        android:layout_height="30dip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="8dip">
+                        android:layout_marginTop="3dip"
+                        android:layout_marginBottom="2dp">
 
                         <TextView
                             android:id="@+id/txt5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
                             android:text="倒计时"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/txt_countdown2"
@@ -624,15 +623,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dip"
                             android:layout_toRightOf="@id/txt5"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:gravity="center_vertical"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:singleLine="true"
+                            android:gravity="center"
                             android:text="02:04:21"
                             android:textColor="@color/red"
-                            android:textSize="18sp" />
+                            android:textSize="14sp" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -651,19 +645,21 @@
                         android:src="@drawable/example" />
 
                     <RelativeLayout
-                        android:layout_width="120dip"
-                        android:layout_height="30dip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="8dip">
+                        android:layout_marginTop="3dip"
+                        android:layout_marginBottom="2dp">
 
                         <TextView
                             android:id="@+id/txt6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
                             android:text="倒计时"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/txt_countdown3"
@@ -671,15 +667,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dip"
                             android:layout_toRightOf="@id/txt6"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:gravity="center_vertical"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:singleLine="true"
+                            android:gravity="center"
                             android:text="02:04:21"
                             android:textColor="@color/red"
-                            android:textSize="18sp" />
+                            android:textSize="14sp" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -688,11 +679,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dip">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="50dip"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dip"
@@ -704,7 +697,7 @@
                 <TextView
                     android:id="@+id/last_more"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dip"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="15dip"
@@ -719,10 +712,10 @@
                 android:id="@+id/gridview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:horizontalSpacing="10dip"
+                android:horizontalSpacing="2dip"
                 android:numColumns="2"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="10dp">
+                android:verticalSpacing="2dp">
             </com.league.view.MyGridView>
         </LinearLayout>
     </ScrollView>

@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.league.adapter.OneyuanGridAdapter;
+import com.league.adapter.OneyuanGrabAdapter;
 import com.league.bean.AnnouncedTheLatestBean;
 import com.league.bean.OneYuanBean;
 import com.league.bean.TenYuanGrabBean;
@@ -109,7 +109,7 @@ public class OneYuan extends Activity implements View.OnClickListener {
 //            oyb.setmTotalPeo((long) i);i
             listGrid.add(oyb);
         }
-        gridView.setAdapter(new OneyuanGridAdapter(getApplication(), listGrid));
+        gridView.setAdapter(new OneyuanGrabAdapter(getApplication(), listGrid));
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
