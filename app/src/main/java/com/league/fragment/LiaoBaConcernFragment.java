@@ -1,12 +1,15 @@
 package com.league.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment ;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
+import com.league.activity.liaobaactivity.TopicContent;
 import com.league.adapter.LiaoBaAdapter;
 import com.league.bean.LiaoBaUserInfo;
 import com.league.view.MyListView;
@@ -41,5 +44,12 @@ public class LiaoBaConcernFragment extends Fragment {
             list.add(lbi);
         }
         listView.setAdapter(new LiaoBaAdapter(list,getActivity().getApplication()));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity().getApplication(), TopicContent.class);
+                startActivity(intent);
+            }
+        });
     }
 }

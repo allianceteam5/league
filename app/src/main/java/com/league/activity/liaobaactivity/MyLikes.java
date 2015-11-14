@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,51 +16,45 @@ import com.mine.league.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyTopic extends Activity {
+public class MyLikes extends Activity {
 
-    private ImageButton back,publish,mine,search;
+    private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
     private ListView listView;
     private List<LiaoBaUserInfo> list=new ArrayList<LiaoBaUserInfo>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_topic);
+        setContentView(R.layout.activity_my_likes);
         initView();
         initData();
     }
-    private void initView(){
-        back= (ImageButton) findViewById(R.id.liaoba_back);
-        back.setOnClickListener(new View.OnClickListener() {
+
+    private void initView() {
+
+        back2 = (ImageView) findViewById(R.id.near_back);
+
+        back2.setVisibility(View.VISIBLE);
+        back2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
                 finish();
             }
         });
-        publish= (ImageButton) findViewById(R.id.liaoba_publish);
-        publish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        mine =(ImageButton) findViewById(R.id.liaoba_mine);
-        mine.setVisibility(View.GONE);
-        search= (ImageButton) findViewById(R.id.liaoba_search);
-        search.setVisibility(View.VISIBLE);
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        title= (TextView) findViewById(R.id.liaoba_centertitle);
-        title.setText("我的话题");
-        listView= (ListView) findViewById(R.id.mytopic_listview);
+        titleright = (ImageView) findViewById(R.id.near_ti_right);
+        titleright.setVisibility(View.GONE);
+        title = (TextView) findViewById(R.id.near_centertitle);
+        title.setText("我的点赞");
+        right1 = (ImageView) findViewById(R.id.near_right);
+        right1.setVisibility(View.GONE);
+        right2 = (ImageView) findViewById(R.id.near_right_item);
+        right2.setVisibility(View.GONE);
+        listView= (ListView) findViewById(R.id.mylikes_listview);
     }
     private void initData(){
-        for(int i=0;i<3;i++){
+
+        for(int i=0;i<10;i++){
             LiaoBaUserInfo lbi=new LiaoBaUserInfo();
             lbi.setName("王思聪"+i);
             lbi.setTime(i+"分钟前");

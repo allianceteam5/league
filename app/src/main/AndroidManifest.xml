@@ -94,7 +94,6 @@
         <activity android:name="com.league.activity.near.MyPost" />
         <activity android:name="com.league.activity.near.MakingFriItem" />
         <activity android:name="com.league.activity.near.RadioSelectActivity" />
-
         <activity android:name="com.league.activity.redpacket.GrabRedEnvolope" />
         <activity android:name="com.league.activity.treasure.OneYuan" />
         <activity android:name="com.league.activity.treasure.TenyuanGrid" />
@@ -415,6 +414,10 @@
         <activity android:name="com.league.activity.personactivity.MyPersonHomepage" >
         </activity>
         <activity android:name="com.league.activity.liaobaactivity.MyTopic" >
+        </activity>
+        <activity android:name="com.league.activity.liaobaactivity.MyLikes" >
+        </activity>
+        <activity android:name="com.league.activity.liaobaactivity.TopicContent" >
         </activity>
     </application>
 

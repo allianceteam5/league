@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.league.activity.liaobaactivity.MyLikes;
 import com.league.activity.liaobaactivity.MyTopic;
 import com.mine.league.R;
 
@@ -31,6 +32,8 @@ public class MyPersonHomepage extends Activity implements View.OnClickListener{
                 startActivity(intent1);
                 break;
             case R.id.mylikes:
+                Intent intent2 =new Intent(getApplication(), MyLikes.class);
+                startActivity(intent2);
                 break;
         }
     }

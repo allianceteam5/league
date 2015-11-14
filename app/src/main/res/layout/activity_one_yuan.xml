@@ -69,7 +69,7 @@
                             android:layout_marginTop="6dp"
                             android:text="10夺金"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </RelativeLayout>
                 </RelativeLayout>
 
@@ -107,7 +107,7 @@
                             android:layout_marginTop="6dp"
                             android:text="一元夺宝"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </RelativeLayout>
                 </RelativeLayout>
 
@@ -145,7 +145,7 @@
                             android:layout_marginTop="6dp"
                             android:text="夺宝记录"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </RelativeLayout>
                 </RelativeLayout>
 
@@ -183,7 +183,7 @@
                             android:layout_marginTop="6dp"
                             android:text="常见问题"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </RelativeLayout>
                 </RelativeLayout>
             </LinearLayout>
@@ -201,7 +201,7 @@
                     android:gravity="center_vertical"
                     android:text="10元夺金"
                     android:textColor="@color/black"
-                    android:textSize="19sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tengrb_more"
@@ -215,7 +215,7 @@
                     android:onClick="onClick"
                     android:text="更多>>"
                     android:textColor="@color/black"
-                    android:textSize="19sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <com.league.view.HorizontalListView
@@ -232,7 +232,7 @@
                 android:gravity="center_vertical"
                 android:text="最新揭晓"
                 android:textColor="@color/black"
-                android:textSize="19sp" />
+                android:textSize="16sp" />
 
             <com.league.view.HorizontalListView
                 android:id="@+id/horizon_last"
@@ -253,7 +253,7 @@
                     android:gravity="center_vertical"
                     android:text="一元夺宝"
                     android:textColor="@color/black"
-                    android:textSize="19sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/last_more"
@@ -267,7 +267,7 @@
                     android:onClick="onClick"
                     android:text="更多>>"
                     android:textColor="@color/black"
-                    android:textSize="19sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
             <com.league.view.MyGridView
                 android:id="@+id/gridview"

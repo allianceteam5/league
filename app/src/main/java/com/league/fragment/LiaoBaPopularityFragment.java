@@ -36,5 +36,6 @@ public class LiaoBaPopularityFragment extends Fragment {
             list.add(lbi);
         }
         listView.setAdapter(new LiaobaPopularityAdapter(list,getActivity().getApplication()));
+
     }
 }
