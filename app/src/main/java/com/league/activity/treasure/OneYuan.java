@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,11 @@ public class OneYuan extends Activity implements View.OnClickListener {
     private ImageView back, titleright, right1, right2;
     private TextView title;
     private MyGridView gridView;
+
+    private ImageView tenImage1,tenImage2,tenImage3;
+    private TextView money1,money2,money3;
+    private TextView txtProgress1,txtProgress2,txtProgress3;
+    private ProgressBar progressbar1,progressbar2,progressbar3;
     private List<TenYuanGrabBean> listTenYuanGrab = new ArrayList<TenYuanGrabBean>();
     private List<AnnouncedTheLatestBean> listAnnounced = new ArrayList<AnnouncedTheLatestBean>();
     private List<OneYuanBean> listGrid = new ArrayList<OneYuanBean>();
@@ -48,6 +54,19 @@ public class OneYuan extends Activity implements View.OnClickListener {
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
         gridView = (MyGridView) findViewById(R.id.gridview);
+        tenImage1= (ImageView) findViewById(R.id.ten_image1);
+        tenImage2= (ImageView) findViewById(R.id.ten_image2);
+        tenImage3= (ImageView) findViewById(R.id.ten_image3);
+        money1= (TextView) findViewById(R.id.money1);
+        money2= (TextView) findViewById(R.id.money2);
+        money3= (TextView) findViewById(R.id.money3);
+        txtProgress1= (TextView) findViewById(R.id.txt_progress1);
+        txtProgress2= (TextView) findViewById(R.id.txt_progress2);
+        txtProgress3= (TextView) findViewById(R.id.txt_progress3);
+        progressbar1= (ProgressBar) findViewById(R.id.progressbar1);
+        progressbar1.setProgress(50);
+        progressbar2= (ProgressBar) findViewById(R.id.progressbar2);
+        progressbar3= (ProgressBar) findViewById(R.id.progressbar3);
     }
 
     void initData() {
