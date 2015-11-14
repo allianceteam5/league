@@ -16,6 +16,7 @@ import com.league.adapter.OneyuanGridAdapter;
 import com.league.bean.AnnouncedTheLatestBean;
 import com.league.bean.OneYuanBean;
 import com.league.bean.TenYuanGrabBean;
+import com.league.utils.Constants;
 import com.league.utils.api.ApiUtil;
 import com.league.view.MyGridView;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -26,6 +27,8 @@ import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.paperdb.Paper;
 
 public class OneYuan extends Activity implements View.OnClickListener {
 
@@ -81,39 +84,23 @@ public class OneYuan extends Activity implements View.OnClickListener {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<TenYuanGrabBean> response) {
                 listTenYuanGrab.addAll(response);
-                Picasso.with(getApplication()).load(listTenYuanGrab.get(0).getPicture()).into(tenImage1);
-                Picasso.with(getApplication()).load(listTenYuanGrab.get(1).getPicture()).into(tenImage2);
-                Picasso.with(getApplication()).load(listTenYuanGrab.get(2).getPicture()).into(tenImage3);
-                money1.setText(listTenYuanGrab.get(0).getTitle());
-                money2.setText(listTenYuanGrab.get(1).getTitle());
-                money3.setText(listTenYuanGrab.get(2).getTitle());
-                float need1 = Float.valueOf(listTenYuanGrab.get(0).getNeeded());
-                float remain1 = Float.valueOf(listTenYuanGrab.get(0).getRemain());
-                txtProgress1.setText((int) ((need1 - remain1) / need1) * 100 + "%");
-                float need2 = Float.valueOf(listTenYuanGrab.get(1).getNeeded());
-                float remain2 = Float.valueOf(listTenYuanGrab.get(1).getRemain());
-                txtProgress2.setText((int) ((need2 - remain2) / need1) * 100 + "%");
-                float need3 = Float.valueOf(listTenYuanGrab.get(2).getNeeded());
-                float remain3 = Float.valueOf(listTenYuanGrab.get(2).getRemain());
-                txtProgress3.setText((int) ((need3 - remain3) / need1) * 100 + "%");
-                progressbar1.setProgress((int) ((need1 - remain1) / need1) * 100);
-                progressbar2.setProgress((int) ((need2 - remain2) / need1) * 100);
-                progressbar3.setProgress((int) ((need3 - remain3) / need1) * 100);
+                Paper.book().write(Constants.TenYuanThree, listTenYuanGrab);
+                updateTenYuan();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<TenYuanGrabBean> errorResponse) {
-
+                listTenYuanGrab = Paper.book().read(Constants.TenYuanThree);
+                if (listTenYuanGrab != null && listTenYuanGrab.size() == 3)
+                    updateTenYuan();
             }
 
             @Override
             protected ArrayList<TenYuanGrabBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-
                 return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<TenYuanGrabBean>>() {
                 });
             }
         });
-
 
         for (int i = 0; i < 5; i++) {
             OneYuanBean oyb = new OneYuanBean();
@@ -132,6 +119,28 @@ public class OneYuan extends Activity implements View.OnClickListener {
         });
     }
 
+
+    private void updateTenYuan() {
+        Picasso.with(getApplication()).load(listTenYuanGrab.get(0).getPicture()).into(tenImage1);
+        Picasso.with(getApplication()).load(listTenYuanGrab.get(1).getPicture()).into(tenImage2);
+        Picasso.with(getApplication()).load(listTenYuanGrab.get(2).getPicture()).into(tenImage3);
+        money1.setText(listTenYuanGrab.get(0).getTitle());
+        money2.setText(listTenYuanGrab.get(1).getTitle());
+        money3.setText(listTenYuanGrab.get(2).getTitle());
+        float need1 = Float.valueOf(listTenYuanGrab.get(0).getNeeded());
+        float remain1 = Float.valueOf(listTenYuanGrab.get(0).getRemain());
+        txtProgress1.setText((int) ((need1 - remain1) / need1) * 100 + "%");
+        float need2 = Float.valueOf(listTenYuanGrab.get(1).getNeeded());
+        float remain2 = Float.valueOf(listTenYuanGrab.get(1).getRemain());
+        txtProgress2.setText((int) ((need2 - remain2) / need1) * 100 + "%");
+        float need3 = Float.valueOf(listTenYuanGrab.get(2).getNeeded());
+        float remain3 = Float.valueOf(listTenYuanGrab.get(2).getRemain());
+        txtProgress3.setText((int) ((need3 - remain3) / need1) * 100 + "%");
+        progressbar1.setProgress((int) ((need1 - remain1) / need1) * 100);
+        progressbar2.setProgress((int) ((need2 - remain2) / need1) * 100);
+        progressbar3.setProgress((int) ((need3 - remain3) / need1) * 100);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -143,13 +152,11 @@ public class OneYuan extends Activity implements View.OnClickListener {
             case R.id.One_tengrab:
                 Intent intent1 = new Intent(OneYuan.this, TenyuanGrid.class);
                 startActivity(intent1);
-
                 break;
             case R.id.last_more:
             case R.id.One_Yuan:
                 Intent intent2 = new Intent(OneYuan.this, OneYuanGrab.class);
                 startActivity(intent2);
-
                 break;
             case R.id.One_record:
                 Toast.makeText(this, "rec", Toast.LENGTH_LONG).show();

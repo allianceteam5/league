@@ -25,4 +25,6 @@ public class Constants {
     public static final String SkipGuideAcitivity = "skipguidactivity";
     public static final String DownloadPath = "/mnt/sdcard/Download/";
 
+    public static final String TenYuanThree = "tenyuanthree";
+
 }
