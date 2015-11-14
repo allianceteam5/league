@@ -96,7 +96,7 @@
         <activity android:name="com.league.activity.near.RadioSelectActivity" />
         <activity android:name="com.league.activity.redpacket.GrabRedEnvolope" />
         <activity android:name="com.league.activity.treasure.OneYuan" />
-        <activity android:name="com.league.activity.treasure.TenyuanGrid" />
+        <activity android:name="com.league.activity.treasure.TenyuanGrab" />
         <activity android:name="com.league.activity.treasure.OneYuanGrab" />
         <activity android:name="com.league.activity.treasure.TenYuanGrabItem" />
 

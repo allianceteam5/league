@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.league.bean.TenYuanGrabBean;
 import com.mine.league.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,21 +48,26 @@ public class TenYuanGrabAdapter extends BaseAdapter {
         if(convertView==null){
             holder=new ViewHolder();
             convertView= LayoutInflater.from(ctx).inflate(R.layout.gridview_tenyuan_item,null);
+            holder.thumb= (ImageView) convertView.findViewById(R.id.ten_image);
             holder.period = (TextView) convertView.findViewById(R.id.period);
-            holder.mName_Monery = (TextView) convertView.findViewById(R.id.name_money);
-            holder.totalPeo = (TextView) convertView.findViewById(R.id.totalpeo);
+            holder.mName_Monery = (TextView) convertView.findViewById(R.id.name);
+            holder.progress= (TextView) convertView.findViewById(R.id.progress);
             holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progressbar);
-            holder.takingPeo = (TextView) convertView.findViewById(R.id.takingpeo);
+            holder.totalPeo = (TextView) convertView.findViewById(R.id.totalpeo);
             holder.leavePeo=(TextView) convertView.findViewById(R.id.leavepeo);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-//        holder.period.setText("(第" + list.get(position).getmPeriods() + "期)");
-//        holder.mName_Monery.setText(list.get(position).getmMoney());
-//        holder.totalPeo.setText(list.get(position).getmTotalPeo() + "人次");
-//        holder.takingPeo.setText("已参与"+list.get(position).getmTakingPeo());
-//        holder.leavePeo.setText("剩余"+list.get(position).getmLessPeo());
+        Picasso.with(ctx).load(list.get(position).getPicture()).into(holder.thumb);
+        holder.period.setText("(第" + list.get(position).getVersion() + "期)");
+        holder.mName_Monery.setText(list.get(position).getTitle());
+        float need=Float.valueOf(list.get(position).getNeeded());
+        float remain=Float.valueOf(list.get(position).getRemain());
+        holder.progress.setText((int)((need-remain)/need*100)+"%");
+        holder.totalPeo.setText(list.get(position).getNeeded() + "人次");
+        holder.leavePeo.setText("剩余"+list.get(position).getRemain());
+        holder.progressBar.setProgress((int)((need-remain)/need*100));
         return convertView;
     }
 
@@ -69,9 +75,9 @@ public class TenYuanGrabAdapter extends BaseAdapter {
         ImageView thumb;
         TextView period;
         TextView mName_Monery;
+        TextView progress;
         TextView totalPeo;
         ProgressBar progressBar;
-        TextView takingPeo;
         TextView leavePeo;
     }
 }

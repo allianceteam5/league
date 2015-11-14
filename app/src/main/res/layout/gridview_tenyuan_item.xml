@@ -3,111 +3,125 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/ten_image"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/example" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dip"
-        android:layout_marginLeft="5dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
         android:layout_marginRight="5dip"
-        android:layout_marginTop="5dip">
-
+        android:layout_marginTop="3dip">
         <TextView
             android:id="@+id/period"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
-            android:text="(第44期)"
+            android:singleLine="true"
+            android:text="第44期"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/period"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="500金币"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="3dip">
 
         <TextView
-            android:id="@+id/name_money"
+            android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dip"
-            android:layout_toRightOf="@id/period"
-            android:ellipsize="marquee"
-            android:focusableInTouchMode="true"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:singleLine="true"
-            android:text="xx"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:text="开奖进度："
+            android:textColor="@color/black1"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:text="60%"
+            android:textColor="@color/black1"
+            android:textSize="12sp" />
     </RelativeLayout>
+    <ProgressBar
+        android:id="@+id/progressbar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="140dp"
+        android:layout_height="6dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:max="100"
+        android:progressDrawable="@drawable/progressbar"
+        android:layout_gravity="center_horizontal"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dip"
-        android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip"
-        android:layout_marginTop="5dip">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="3dip">
 
         <TextView
             android:id="@+id/txt1"
+            android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
-            android:layout_height="20dip"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="总需："
             android:textColor="@color/black1"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/totalpeo"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
             android:layout_toRightOf="@id/txt1"
             android:gravity="center_vertical"
             android:text="60人次"
             android:textColor="@color/black1"
-            android:textSize="16sp" />
-    </RelativeLayout>
-
-    <ProgressBar
-        android:id="@+id/progressbar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="10dip"
-        android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip"
-        android:max="100" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dip"
-        android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip"
-        android:layout_marginTop="5dip">
-
-        <TextView
-            android:id="@+id/takingpeo"
-            android:layout_width="wrap_content"
-            android:layout_height="20dip"
-            android:gravity="center_vertical"
-            android:text="已参与22"
-            android:textColor="@color/black1"
-            android:textSize="16sp" />
-
+            android:textSize="12sp" />
         <TextView
             android:id="@+id/leavepeo"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dip"
-            android:layout_toRightOf="@id/takingpeo"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
             android:layout_alignParentRight="true"
             android:gravity="center_vertical"
-            android:text="剩余38"
-            android:textColor="@color/blue"
-            android:textSize="16sp" />
+            android:text="60"
+            android:textColor="@color/red"
+            android:textSize="12sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@id/leavepeo"
+            android:gravity="center_vertical"
+            android:text="剩余"
+            android:textColor="@color/black1"
+            android:textSize="12sp" />
     </RelativeLayout>
 </LinearLayout>

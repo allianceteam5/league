@@ -102,8 +102,8 @@
     <orderEntry type="library" exported="" name="dialogBuilder-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="imageloader" level="project" />
     <orderEntry type="library" exported="" name="objenesis-2.1" level="project" />
-    <orderEntry type="library" exported="" name="protobuf-java-2.6.1" level="project" />
     <orderEntry type="library" exported="" name="kryo-serializers-0.33" level="project" />
+    <orderEntry type="library" exported="" name="protobuf-java-2.6.1" level="project" />
     <orderEntry type="library" exported="" name="jackson-annotations-2.6.0" level="project" />
     <orderEntry type="library" exported="" name="easemobchat_2.2.2" level="project" />
     <orderEntry type="library" exported="" name="paperdb-1.0" level="project" />
