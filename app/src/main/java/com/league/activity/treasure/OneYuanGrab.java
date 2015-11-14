@@ -10,8 +10,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.league.adapter.TenYuanGrabAdapter;
-import com.league.bean.TenYuanGrabBean;
+import com.league.adapter.OneyuanGrabAdapter;
+import com.league.bean.OneYuanBean;
 import com.mine.league.R;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class OneYuanGrab extends Activity implements View.OnClickListener {
     private ImageView back, titleright, right1, right2;
     private TextView title;
     private GridView gridView;
-    private List<TenYuanGrabBean> list = new ArrayList<TenYuanGrabBean>();
+    private List<OneYuanBean> list = new ArrayList<OneYuanBean>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class OneYuanGrab extends Activity implements View.OnClickListener {
 
     private void initData() {
         for (int i = 0; i < 6; i++) {
-            TenYuanGrabBean tygb = new TenYuanGrabBean();
+            OneYuanBean tygb = new OneYuanBean();
 //            tygb.setmPeriods(44);
 //            tygb.setmMoney("商品"+i);
 //            tygb.setmTotalPeo(60);
@@ -56,7 +56,7 @@ public class OneYuanGrab extends Activity implements View.OnClickListener {
 //            tygb.setmLessPeo(38);
             list.add(tygb);
         }
-        gridView.setAdapter(new TenYuanGrabAdapter(getApplication(), list));
+        gridView.setAdapter(new OneyuanGrabAdapter(getApplication(), list));
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

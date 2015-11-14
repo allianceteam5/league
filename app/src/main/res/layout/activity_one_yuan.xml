@@ -560,7 +560,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="3dip">
+                        android:layout_marginTop="3dip"
+                        android:layout_marginBottom="2dp">
 
                         <TextView
                             android:id="@+id/txt4"
@@ -603,7 +604,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="3dip">
+                        android:layout_marginTop="3dip"
+                        android:layout_marginBottom="2dp">
 
                         <TextView
                             android:id="@+id/txt5"
@@ -646,7 +648,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="3dip">
+                        android:layout_marginTop="3dip"
+                        android:layout_marginBottom="2dp">
 
                         <TextView
                             android:id="@+id/txt6"
@@ -676,11 +679,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dip">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="50dip"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dip"
@@ -692,7 +697,7 @@
                 <TextView
                     android:id="@+id/last_more"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dip"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="15dip"
@@ -707,10 +712,10 @@
                 android:id="@+id/gridview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:horizontalSpacing="10dip"
+                android:horizontalSpacing="2dip"
                 android:numColumns="2"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="10dp">
+                android:verticalSpacing="2dp">
             </com.league.view.MyGridView>
         </LinearLayout>
     </ScrollView>
