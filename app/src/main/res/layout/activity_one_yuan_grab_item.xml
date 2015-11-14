@@ -29,51 +29,73 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/example" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
-                android:layout_marginTop="10dip">
-
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="2dip"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/running"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/period"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dip"
+                    android:gravity="center_vertical"
+                    android:text="第200期"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="20dip"
+                    android:layout_marginLeft="4dip"
                     android:gravity="center_vertical"
                     android:text="商品名称"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </RelativeLayout>
-
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <ProgressBar
+                android:id="@+id/progressbar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="8dip"
+                android:progressDrawable="@drawable/bigprogressbar"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"
-                android:layout_marginTop="10dip">
+                android:layout_marginTop="6dip">
 
                 <TextView
                     android:id="@+id/txt2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="总需："
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:text="总需"
+                    android:textColor="@color/black1"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/totalpeo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dip"
+                    android:layout_marginLeft="4dip"
                     android:layout_toRightOf="@id/txt2"
                     android:gravity="center_vertical"
                     android:text="60人次"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textColor="@color/black1"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/leavepeo"
@@ -82,31 +104,23 @@
                     android:layout_alignParentRight="true"
                     android:gravity="center_vertical"
                     android:text="剩余40"
-                    android:textColor="@color/blue"
-                    android:textSize="20sp" />
+                    android:textColor="@color/red"
+                    android:textSize="14sp" />
             </RelativeLayout>
-
-            <ProgressBar
-                android:id="@+id/progressbar"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="10dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:layout_marginTop="10dip" />
 
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="4dip"
+                android:layout_height="8dip"
                 android:background="@color/black2" />
 
             <RelativeLayout
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:onClick="onClick">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -116,7 +130,7 @@
                     android:gravity="center_vertical"
                     android:text="图文详情"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -129,9 +143,11 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:id="@+id/passanou"
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:onClick="onClick">
 
@@ -144,7 +160,7 @@
                     android:gravity="center_vertical"
                     android:text="往期揭晓"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -162,8 +178,10 @@
                 android:background="@color/black2" />
 
             <RelativeLayout
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="wrap_content"
                 android:background="@color/white">
 
                 <TextView
@@ -176,7 +194,7 @@
                     android:gravity="center_vertical"
                     android:text="参与记录"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -188,7 +206,7 @@
                     android:layout_toRightOf="@id/txt3"
                     android:text="自时间起"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -227,7 +245,7 @@
             android:background="@drawable/addfriendback"
             android:text="立即参与"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <Button
             android:layout_width="0dip"
@@ -240,6 +258,6 @@
             android:background="@drawable/addfriendback"
             android:text="直接兑换"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
     </LinearLayout>
 </RelativeLayout>
