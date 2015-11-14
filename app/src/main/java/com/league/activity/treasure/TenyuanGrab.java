@@ -19,6 +19,7 @@ import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
 
 import org.apache.http.Header;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +62,7 @@ public class TenyuanGrab extends Activity {
     }
 
     private void initData() {
-        ApiUtil.grabcornsSearch(getApplication(), 0,1,new BaseJsonHttpResponseHandler<ArrayList<TenYuanGrabBean>>() {
+        ApiUtil.grabcornsSearch(getApplication(), 0, 1, new BaseJsonHttpResponseHandler<ArrayList<TenYuanGrabBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<TenYuanGrabBean> response) {
                 list.addAll(response);
@@ -78,7 +79,9 @@ public class TenyuanGrab extends Activity {
 
             @Override
             protected ArrayList<TenYuanGrabBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<TenYuanGrabBean>>() {
+                JSONObject jsonObject=new JSONObject(rawJsonData);
+
+                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<TenYuanGrabBean>>() {
                 });
             }
         });
