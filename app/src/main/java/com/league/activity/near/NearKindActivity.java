@@ -31,7 +31,7 @@ import com.league.adapter.SearchPeoAdapter;
 import com.league.bean.FeatureComInfo;
 import com.league.bean.HobbyInfoBean;
 import com.league.bean.JobInfoBean;
-import com.league.bean.Kind;
+import com.league.bean.KindBean;
 import com.league.bean.SearchPeopleInfo;
 import com.league.dialog.NearRightDialog;
 import com.league.utils.Constants;
@@ -78,7 +78,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     private FeatureComAdapter feaComAdapter;
     private HobbyInfoAdapter hobbyInfoAdapter;
     private SearchPeoAdapter searchPeoAdapter;
-    private ArrayList<Kind> kinds;
+    private ArrayList<KindBean> kinds;
     private List<String> items;
     private List<JobInfoBean> jobInfoList = new ArrayList<JobInfoBean>();
     private List<HobbyInfoBean> hobbyInfoList = new ArrayList<HobbyInfoBean>();
@@ -186,22 +186,22 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
         switch (Flag) {
             case 1:
                 near_title.setText("求职信息");
-                kinds = Paper.book().read(Constants.ProfessinListName, new ArrayList<Kind>());
+                kinds = Paper.book().read(Constants.ProfessinListName, new ArrayList<KindBean>());
 
-                ApiUtil.professionList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<Kind>>() {
+                ApiUtil.professionList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<KindBean>>() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<Kind> response) {
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<KindBean> response) {
                         kinds = response;
                         Paper.book().write(Constants.ProfessinListName, kinds);
                     }
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<Kind> errorResponse) {
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<KindBean> errorResponse) {
 
                     }
 
                     @Override
-                    protected ArrayList<Kind> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                    protected ArrayList<KindBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                         Log.d("response", rawJsonData);
                         return getKinds(rawJsonData, "profession");
                     }
@@ -209,22 +209,22 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 break;
             case 2:
                 near_title.setText("特色推荐");
-                kinds = Paper.book().read(Constants.RecommendationListName, new ArrayList<Kind>());
+                kinds = Paper.book().read(Constants.RecommendationListName, new ArrayList<KindBean>());
 
-                ApiUtil.recommendationList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<Kind>>() {
+                ApiUtil.recommendationList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<KindBean>>() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<Kind> response) {
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<KindBean> response) {
                         kinds = response;
                         Paper.book().write(Constants.RecommendationListName, kinds);
                     }
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<Kind> errorResponse) {
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<KindBean> errorResponse) {
 
                     }
 
                     @Override
-                    protected ArrayList<Kind> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                    protected ArrayList<KindBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                         Log.d("response", rawJsonData);
                         return getKinds(rawJsonData, "kind");
                     }
@@ -232,22 +232,22 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 break;
             case 3:
                 near_title.setText("爱好交友");
-                kinds = Paper.book().read(Constants.HobbyListName, new ArrayList<Kind>());
+                kinds = Paper.book().read(Constants.HobbyListName, new ArrayList<KindBean>());
 
-                ApiUtil.hobbyList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<Kind>>() {
+                ApiUtil.hobbyList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<KindBean>>() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<Kind> response) {
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<KindBean> response) {
                         kinds = response;
                         Paper.book().write(Constants.HobbyListName, kinds);
                     }
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<Kind> errorResponse) {
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<KindBean> errorResponse) {
 
                     }
 
                     @Override
-                    protected ArrayList<Kind> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                    protected ArrayList<KindBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                         Log.d("response", rawJsonData);
                         return getKinds(rawJsonData, "hobby");
                     }
@@ -263,12 +263,12 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     }
 
     @NonNull
-    private ArrayList<Kind> getKinds(String rawJsonData, String kindname) throws JSONException {
+    private ArrayList<KindBean> getKinds(String rawJsonData, String kindname) throws JSONException {
         JSONArray json = new JSONArray(rawJsonData);
-        ArrayList<Kind> kindList = new ArrayList<Kind>();
+        ArrayList<KindBean> kindList = new ArrayList<KindBean>();
         for (int i = 0; i < json.length(); i++) {
             JSONObject jsonObject = json.optJSONObject(i);
-            kindList.add(new Kind(jsonObject.optInt("id"), jsonObject.optString(kindname)));
+            kindList.add(new KindBean(jsonObject.optInt("id"), jsonObject.optString(kindname)));
         }
         return kindList;
     }
@@ -445,7 +445,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
         }
     }
 
-    public List<String> getListString(List<Kind> kinds) {
+    public List<String> getListString(List<KindBean> kinds) {
         if (kinds == null)
             return new ArrayList<String>();
         List<String> items = new ArrayList<String>();

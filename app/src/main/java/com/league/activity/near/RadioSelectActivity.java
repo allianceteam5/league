@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.league.bean.Kind;
+import com.league.bean.KindBean;
 import com.league.utils.Constants;
 import com.mine.league.R;
 
@@ -32,7 +32,7 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
     ListView lvItems;
     RadioSelectAdapter radioSelectAdapter;
     List<String> items = new ArrayList<String>();
-    ArrayList<Kind> kinds;
+    ArrayList<KindBean> kinds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
                 tvTitle.setText("学历");
                 break;
             case Constants.RADIOPROFESSION:
-                kinds = Paper.book().read(Constants.ProfessinListName, new ArrayList<Kind>());
+                kinds = Paper.book().read(Constants.ProfessinListName, new ArrayList<KindBean>());
                 for (int i = 0; i < kinds.size(); i++)
                     items.add(kinds.get(i).getName());
                 break;

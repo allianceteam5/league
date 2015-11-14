@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.league.bean.Kind;
+import com.league.bean.KindBean;
 import com.league.utils.Constants;
 import com.league.utils.DateFormatUtils;
 import com.league.utils.ToastUtils;
@@ -208,7 +208,7 @@ public  class WantAJob extends Activity implements View.OnClickListener {
                     break;
                 case Constants.RADIOPROFESSION:
                     selectedProfessionIndex = data.getIntExtra(Constants.RADIOSELECEDTINDEX, 0);
-                    Kind profession = Paper.book().read(Constants.ProfessinListName, new ArrayList<Kind>()).get(selectedProfessionIndex);
+                    KindBean profession = Paper.book().read(Constants.ProfessinListName, new ArrayList<KindBean>()).get(selectedProfessionIndex);
                     selectedProfessionId = profession.getId();
                     tvProfession.setText(profession.getName());
                     break;
