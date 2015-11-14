@@ -107,7 +107,7 @@ public class OneYuan extends Activity implements View.OnClickListener {
 //            oyb.setmPeriod(i);
 //            oyb.setmName("name" + i);
 //            oyb.setmTotalPeo((long) i);i
-            listGrid.add(oyb);
+//            listGrid.add(oyb);
         }
         gridView.setAdapter(new OneyuanGrabAdapter(getApplication(), listGrid));
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

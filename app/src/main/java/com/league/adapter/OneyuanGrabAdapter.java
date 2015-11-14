@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.league.bean.OneYuanBean;
 import com.mine.league.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -45,30 +46,36 @@ public class OneyuanGrabAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
-
             holder = new ViewHolder();
             convertView = LayoutInflater.from(ctx).inflate(R.layout.gridview_one_item, null);
-            holder.period = (TextView) convertView.findViewById(R.id.period);
+            holder.thumb = (ImageView) convertView.findViewById(R.id.ten_image);
             holder.mName = (TextView) convertView.findViewById(R.id.name);
             holder.totalPeo = (TextView) convertView.findViewById(R.id.totalpeo);
+            holder.leavePeo = (TextView) convertView.findViewById(R.id.leavepeo);
             holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progressbar);
             holder.progress = (TextView) convertView.findViewById(R.id.progress);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-//        holder.period.setText("(第" + list.get(position).getmPeriod() + "期)");
-//        holder.mName.setText(list.get(position).getmName());
-//        holder.totalPeo.setText(list.get(position).getmTotalPeo() + "人次");
+        OneYuanBean oneYuanBean = list.get(position);
+        Picasso.with(ctx).load(oneYuanBean.getPicture()).into(holder.thumb);
+        holder.mName.setText(oneYuanBean.getTitle());
+        holder.totalPeo.setText(oneYuanBean.getNeeded() + "人次");
+        holder.leavePeo.setText(oneYuanBean.getRemain());
+        float need = Float.valueOf(oneYuanBean.getNeeded());
+        float remain = Float.valueOf(oneYuanBean.getRemain());
+        holder.progress.setText((int) ((need - remain) / need) * 100 + "%");
+        holder.progressBar.setProgress((int) ((need - remain) / need) * 100);
 
         return convertView;
     }
 
     class ViewHolder {
         ImageView thumb;
-        TextView period;
         TextView mName;
         TextView totalPeo;
+        TextView leavePeo;
         ProgressBar progressBar;
         TextView progress;
     }
