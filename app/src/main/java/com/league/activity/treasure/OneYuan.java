@@ -9,13 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.league.adapter.HorizonLastAdapter;
-import com.league.adapter.HorizonListAdapter;
 import com.league.adapter.OneyuanGridAdapter;
 import com.league.bean.AnnouncedTheLatestBean;
 import com.league.bean.OneYuanBean;
 import com.league.bean.TenYuanGrabBean;
-import com.league.view.HorizontalListView;
 import com.league.view.MyGridView;
 import com.mine.league.R;
 
@@ -26,7 +23,6 @@ public class OneYuan extends Activity implements View.OnClickListener {
 
     private ImageView back, titleright, right1, right2;
     private TextView title;
-    private HorizontalListView horizonList, horizonLast;
     private MyGridView gridView;
     private List<TenYuanGrabBean> listTenYuanGrab = new ArrayList<TenYuanGrabBean>();
     private List<AnnouncedTheLatestBean> listAnnounced = new ArrayList<AnnouncedTheLatestBean>();
@@ -51,8 +47,6 @@ public class OneYuan extends Activity implements View.OnClickListener {
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-        horizonList = (HorizontalListView) findViewById(R.id.horizon_listview);
-        horizonLast = (HorizontalListView) findViewById(R.id.horizon_last);
         gridView = (MyGridView) findViewById(R.id.gridview);
     }
 
@@ -64,28 +58,13 @@ public class OneYuan extends Activity implements View.OnClickListener {
             example.setmTakingPeo(200);
             listTenYuanGrab.add(example);
         }
-        horizonList.setAdapter(new HorizonListAdapter(getApplication(), listTenYuanGrab));
-        horizonList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(OneYuan.this, TenYuanGrabItem.class);
-                startActivity(intent);
-            }
-        });
+
         for (int i = 0; i < 5; i++) {
             AnnouncedTheLatestBean atb = new AnnouncedTheLatestBean();
             atb.setmName("name" + i);
             listAnnounced.add(atb);
         }
-        horizonLast.setAdapter(new HorizonLastAdapter(getApplication(), listAnnounced));
-        horizonLast.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(OneYuan.this,AnnouncedTheLatestItem.class);
-                startActivity(intent);
-            }
-        });
         for (int i = 0; i < 5; i++) {
             OneYuanBean oyb = new OneYuanBean();
             oyb.setmPeriod(i);
