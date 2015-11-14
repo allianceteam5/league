@@ -92,4 +92,11 @@ public class ApiUtil {
             client.post(context, IClientUrl.HobbySearch + currentPage, params, responseHandler);
         }
     }
+
+    public static void grabcornsSearch(Context context,int type,int currentPage, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.add("type",String.valueOf(type));
+        printHttp(IClientUrl.GrabcornsSearch, params);
+        client.post(context,IClientUrl.GrabcornsSearch + currentPage, params,responseHandler);
+    }
 }

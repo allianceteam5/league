@@ -17,5 +17,7 @@ public class IClientUrl {
     public static final String HobbyList = testServerUrl + "hobbies/list";
     public static final String HobbySearch = testServerUrl + "daters/search?page=";
     public static final String HobbyCreated = testServerUrl + "daters/create";
+    public static final String GrabcornsView = testServerUrl + "grabcorns/view";
+    public static final String GrabcornsSearch = testServerUrl + "grabcorns/search?page=";
 
 }
