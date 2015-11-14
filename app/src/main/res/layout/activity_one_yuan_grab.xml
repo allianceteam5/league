@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <include layout="@layout/refresh_head" />
+        <include layout="@layout/refresh_head"/>
         <!-- 支持所有实现Pullable接口的View -->
 
         <com.league.widget.pulltorefreshandload.PullableGridView
@@ -26,7 +26,8 @@
             android:numColumns="2"
             android:stretchMode="columnWidth"
             android:verticalSpacing="2dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            >
         </com.league.widget.pulltorefreshandload.PullableGridView>
         <include layout="@layout/load_more" />
 

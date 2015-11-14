@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.activity.BaseActivity;
 import com.league.adapter.OneyuanGrabAdapter;
 import com.league.bean.OneYuanBean;
 import com.league.bean.TenYuanGrabBean;
@@ -31,7 +32,7 @@ import java.util.List;
 
 import io.paperdb.Paper;
 
-public class OneYuanGrab extends Activity implements View.OnClickListener {
+public class OneYuanGrab extends BaseActivity implements View.OnClickListener {
 
     private ImageView back, titleright, right1, right2;
     private TextView title;
@@ -41,11 +42,13 @@ public class OneYuanGrab extends Activity implements View.OnClickListener {
     private int totalPage = 1;
     private int currentPage = 1;
     private int type = 0;
+    private PullToRefreshLayout pullToRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_yuan_grab);
+        showProgressDialog();
         initView();
     }
 
@@ -63,8 +66,9 @@ public class OneYuanGrab extends Activity implements View.OnClickListener {
         gridView = (GridView) findViewById(R.id.gridview_one);
         oneyuanGrabAdapter = new OneyuanGrabAdapter(getApplication(), list);
         gridView.setAdapter(oneyuanGrabAdapter);
-        ((PullToRefreshLayout) findViewById(R.id.refresh_view))
-                .setOnRefreshListener(new MyListener());
+        pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
+        pullToRefreshLayout.setOnRefreshListener(new MyListener());
+        pullToRefreshLayout.setVisibility(View.GONE);
         initData(type,currentPage);
     }
 
@@ -77,10 +81,13 @@ public class OneYuanGrab extends Activity implements View.OnClickListener {
                 }
                 list.addAll(response);
                 updateView();
+                pullToRefreshLayout.setVisibility(View.VISIBLE);
+                closeProgressDialog();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<OneYuanBean> errorResponse) {
+                closeProgressDialog();
             }
 
             @Override
@@ -120,7 +127,7 @@ public class OneYuanGrab extends Activity implements View.OnClickListener {
                     // 千万别忘了告诉控件刷新完毕了哦！
                     pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                 }
-            }.sendEmptyMessageDelayed(0, 2000);
+            }.sendEmptyMessageDelayed(0, 1500);
 
         }
 
@@ -139,7 +146,7 @@ public class OneYuanGrab extends Activity implements View.OnClickListener {
                     // 千万别忘了告诉控件加载完毕了哦！
                     pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                 }
-            }.sendEmptyMessageDelayed(0, 2000);
+            }.sendEmptyMessageDelayed(0, 1500);
         }
 
     }
