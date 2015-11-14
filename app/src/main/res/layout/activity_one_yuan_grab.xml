@@ -10,19 +10,27 @@
         android:id="@+id/title"
         layout="@layout/near_title"
         />
-    <View
-        android:id="@+id/view"
+    <com.league.widget.pulltorefreshandload.PullToRefreshLayout
+        android:id="@+id/refresh_view"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_below="@id/title"
-        android:background="@color/black2" />
-    <GridView
-        android:id="@+id/gridview_one"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:horizontalSpacing="2dip"
-        android:numColumns="2"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="2dp">
-    </GridView>
+        android:layout_height="match_parent" >
+
+        <include layout="@layout/refresh_head" />
+        <!-- 支持所有实现Pullable接口的View -->
+
+        <com.league.widget.pulltorefreshandload.PullableGridView
+            android:id="@+id/gridview_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="2dip"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="2dp"
+            android:layout_marginTop="5dp">
+        </com.league.widget.pulltorefreshandload.PullableGridView>
+        <include layout="@layout/load_more" />
+
+    </com.league.widget.pulltorefreshandload.PullToRefreshLayout>
+
+
 </LinearLayout>

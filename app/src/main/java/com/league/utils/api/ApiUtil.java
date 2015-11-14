@@ -103,4 +103,11 @@ public class ApiUtil {
     public static void grabcornsGetthree(Context context,TextHttpResponseHandler responseHandler){
         client.post(context,IClientUrl.GrabcornsGetthree ,new RequestParams(),responseHandler);
     }
+
+    public static void grabCommoditiesSearch(Context context,int type,int currentPage, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.add("type",String.valueOf(type));
+        printHttp(IClientUrl.GrabCommoditiesSearch, params);
+        client.post(context,IClientUrl.GrabCommoditiesSearch + currentPage, params,responseHandler);
+    }
 }
