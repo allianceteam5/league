@@ -21,4 +21,6 @@ public class IClientUrl {
     public static final String GrabcornsSearch = testServerUrl + "grabcorns/search?page=";
     public static final String GrabcornsGetthree = testServerUrl + "grabcorns/getthree";
 
+    public static final String GrabCommoditiesSearch = testServerUrl + "grabcommodities/search?page=";
+
 }
