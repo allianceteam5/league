@@ -64,8 +64,6 @@
         <attr name="unselectedColor" />
         <!-- Color of the selected line that represents the current page. -->
         <attr name="selectedColor" />
-        <!-- Width of each indicator line. -->
-        <attr name="lineWidth" format="dimension" />
         <!-- Width of each indicator line's stroke. -->
         <attr name="strokeWidth" />
         <!-- Width of the gap between each indicator line. -->
