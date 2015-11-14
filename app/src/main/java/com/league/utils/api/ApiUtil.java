@@ -99,4 +99,8 @@ public class ApiUtil {
         printHttp(IClientUrl.GrabcornsSearch, params);
         client.post(context,IClientUrl.GrabcornsSearch + currentPage, params,responseHandler);
     }
+
+    public static void grabcornsGetthree(Context context,TextHttpResponseHandler responseHandler){
+        client.post(context,IClientUrl.GrabcornsGetthree ,new RequestParams(),responseHandler);
+    }
 }
