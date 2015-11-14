@@ -3,14 +3,14 @@ package com.league.bean;
 /**
  * Created by pfy on 2015/11/8.
  */
-public class Kind {
+public class KindBean {
     private int id;
     private String name;
 
-    public Kind(){
+    public KindBean(){
     }
 
-    public Kind(int id, String name) {
+    public KindBean(int id, String name) {
         this.id = id;
         this.name = name;
     }
