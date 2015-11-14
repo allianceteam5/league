@@ -86,9 +86,9 @@ public class OneYuan extends Activity implements View.OnClickListener {
 
         for (int i = 0; i < 5; i++) {
             OneYuanBean oyb = new OneYuanBean();
-            oyb.setmPeriod(i);
-            oyb.setmName("name" + i);
-            oyb.setmTotalPeo((long) i);
+//            oyb.setmPeriod(i);
+//            oyb.setmName("name" + i);
+//            oyb.setmTotalPeo((long) i);i
             listGrid.add(oyb);
         }
         gridView.setAdapter(new OneyuanGridAdapter(getApplication(), listGrid));

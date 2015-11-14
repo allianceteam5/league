@@ -57,9 +57,9 @@ public class OneyuanGridAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.period.setText("(第" + list.get(position).getmPeriod() + "期)");
-        holder.mName.setText(list.get(position).getmName());
-        holder.totalPeo.setText(list.get(position).getmTotalPeo() + "人次");
+//        holder.period.setText("(第" + list.get(position).getmPeriod() + "期)");
+//        holder.mName.setText(list.get(position).getmName());
+//        holder.totalPeo.setText(list.get(position).getmTotalPeo() + "人次");
 
         return convertView;
     }
