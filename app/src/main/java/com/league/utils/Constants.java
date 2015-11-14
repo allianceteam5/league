@@ -1,6 +1,5 @@
 package com.league.utils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,5 +25,6 @@ public class Constants {
     public static final String DownloadPath = "/mnt/sdcard/Download/";
 
     public static final String TenYuanThree = "tenyuanthree";
+    public static final String TenYuanMore = "tenyuanmore";
 
 }

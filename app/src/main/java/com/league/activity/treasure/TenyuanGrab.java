@@ -9,14 +9,23 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.adapter.TenYuanGrabAdapter;
 import com.league.bean.TenYuanGrabBean;
+import com.league.utils.Constants;
+import com.league.utils.api.ApiUtil;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TenyuanGrid extends Activity {
+import io.paperdb.Paper;
+
+public class TenyuanGrab extends Activity {
 
     private ImageView back, titleright, right1, right2;
     private TextView title;
@@ -52,23 +61,37 @@ public class TenyuanGrid extends Activity {
     }
 
     private void initData() {
-        for (int i = 0; i < 6; i++) {
-            TenYuanGrabBean tygb = new TenYuanGrabBean();
-//            tygb.setmPeriods(44);
-//            tygb.setmMoney("500金币");
-//            tygb.setmTotalPeo(60);
-//            tygb.setmTakingPeo(22);
-//            tygb.setmLessPeo(38);38
-            list.add(tygb);
-        }
-        gridView.setAdapter(new TenYuanGrabAdapter(getApplication(), list));
+        ApiUtil.grabcornsSearch(getApplication(), 0,1,new BaseJsonHttpResponseHandler<ArrayList<TenYuanGrabBean>>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<TenYuanGrabBean> response) {
+                list.addAll(response);
+                Paper.book().write(Constants.TenYuanMore, list);
+                updateTenYuan();
+            }
 
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<TenYuanGrabBean> errorResponse) {
+                list = Paper.book().read(Constants.TenYuanMore);
+                if (list != null)
+                    updateTenYuan();
+            }
+
+            @Override
+            protected ArrayList<TenYuanGrabBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<TenYuanGrabBean>>() {
+                });
+            }
+        });
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(TenyuanGrid.this, TenYuanGrabItem.class);
+                Intent intent = new Intent(TenyuanGrab.this, TenYuanGrabItem.class);
                 startActivity(intent);
             }
         });
+
+    }
+    void updateTenYuan(){
+        gridView.setAdapter(new TenYuanGrabAdapter(getApplication(), list));
     }
 }

@@ -150,7 +150,7 @@ public class OneYuan extends Activity implements View.OnClickListener {
                 break;
             case R.id.tengrb_more:
             case R.id.One_tengrab:
-                Intent intent1 = new Intent(OneYuan.this, TenyuanGrid.class);
+                Intent intent1 = new Intent(OneYuan.this, TenyuanGrab.class);
                 startActivity(intent1);
                 break;
             case R.id.last_more:
