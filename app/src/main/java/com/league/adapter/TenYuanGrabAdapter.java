@@ -57,11 +57,11 @@ public class TenYuanGrabAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.period.setText("(第" + list.get(position).getmPeriods() + "期)");
-        holder.mName_Monery.setText(list.get(position).getmMoney());
-        holder.totalPeo.setText(list.get(position).getmTotalPeo() + "人次");
-        holder.takingPeo.setText("已参与"+list.get(position).getmTakingPeo());
-        holder.leavePeo.setText("剩余"+list.get(position).getmLessPeo());
+//        holder.period.setText("(第" + list.get(position).getmPeriods() + "期)");
+//        holder.mName_Monery.setText(list.get(position).getmMoney());
+//        holder.totalPeo.setText(list.get(position).getmTotalPeo() + "人次");
+//        holder.takingPeo.setText("已参与"+list.get(position).getmTakingPeo());
+//        holder.leavePeo.setText("剩余"+list.get(position).getmLessPeo());
         return convertView;
     }
 

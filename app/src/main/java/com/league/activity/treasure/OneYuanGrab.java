@@ -49,11 +49,11 @@ public class OneYuanGrab extends Activity implements View.OnClickListener {
     private void initData() {
         for (int i = 0; i < 6; i++) {
             TenYuanGrabBean tygb = new TenYuanGrabBean();
-            tygb.setmPeriods(44);
-            tygb.setmMoney("商品"+i);
-            tygb.setmTotalPeo(60);
-            tygb.setmTakingPeo(22);
-            tygb.setmLessPeo(38);
+//            tygb.setmPeriods(44);
+//            tygb.setmMoney("商品"+i);
+//            tygb.setmTotalPeo(60);
+//            tygb.setmTakingPeo(22);
+//            tygb.setmLessPeo(38);
             list.add(tygb);
         }
         gridView.setAdapter(new TenYuanGrabAdapter(getApplication(), list));

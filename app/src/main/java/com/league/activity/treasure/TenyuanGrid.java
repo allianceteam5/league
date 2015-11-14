@@ -9,7 +9,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.league.activity.treasure.TenYuanGrabItem;
 import com.league.adapter.TenYuanGrabAdapter;
 import com.league.bean.TenYuanGrabBean;
 import com.mine.league.R;
@@ -55,11 +54,11 @@ public class TenyuanGrid extends Activity {
     private void initData() {
         for (int i = 0; i < 6; i++) {
             TenYuanGrabBean tygb = new TenYuanGrabBean();
-            tygb.setmPeriods(44);
-            tygb.setmMoney("500金币");
-            tygb.setmTotalPeo(60);
-            tygb.setmTakingPeo(22);
-            tygb.setmLessPeo(38);
+//            tygb.setmPeriods(44);
+//            tygb.setmMoney("500金币");
+//            tygb.setmTotalPeo(60);
+//            tygb.setmTakingPeo(22);
+//            tygb.setmLessPeo(38);38
             list.add(tygb);
         }
         gridView.setAdapter(new TenYuanGrabAdapter(getApplication(), list));

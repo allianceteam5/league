@@ -57,11 +57,11 @@ public class HorizonListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.money.setText(listdata.get(position).getmMoney() + "金币");
-        float persent = listdata.get(position).getmTakingPeo() / (float) listdata.get(position).getmTotalPeo();
-
-        holder.process.setText((int) (persent * 100) + "%");
-        holder.progressBar.setProgress((int) persent * 100);
+//        holder.money.setText(listdata.get(position).getmMoney() + "金币");
+//        float persent = listdata.get(position).getmTakingPeo() / (float) listdata.get(position).getmTotalPeo();
+//
+//        holder.process.setText((int) (persent * 100) + "%");
+//        holder.progressBar.setProgress((int) persent * 100);
         return convertView;
     }
 
