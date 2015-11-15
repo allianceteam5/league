@@ -64,7 +64,7 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
         android:max="100"
-        android:progressDrawable="@drawable/progressbar"
+        android:progressDrawable="@drawable/progressbar_color"
         android:layout_gravity="center_horizontal"/>
 
 
