@@ -2,6 +2,7 @@
 <resources>
     <color name="dialog_loading_bg">#c8000000</color>
     <color name="window_blue_bg">#009ee5</color>
+    <color name="light_blue">#6593cb</color>
     <!-- 白色 -->
     <color name="white">#ffffff</color>
     <!-- 透明 -->

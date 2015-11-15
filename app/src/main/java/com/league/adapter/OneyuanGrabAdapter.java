@@ -48,7 +48,7 @@ public class OneyuanGrabAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(ctx).inflate(R.layout.gridview_one_item, null);
-            holder.thumb = (ImageView) convertView.findViewById(R.id.ten_image);
+            holder.thumb = (ImageView) convertView.findViewById(R.id.one_image);
             holder.mName = (TextView) convertView.findViewById(R.id.name);
             holder.totalPeo = (TextView) convertView.findViewById(R.id.totalpeo);
             holder.leavePeo = (TextView) convertView.findViewById(R.id.leavepeo);
@@ -59,7 +59,8 @@ public class OneyuanGrabAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         OneYuanBean oneYuanBean = list.get(position);
-        Picasso.with(ctx).load(oneYuanBean.getPicture()).into(holder.thumb);
+//        Picasso.with(ctx).load(oneYuanBean.getPicture()).into(holder.thumb);
+        Picasso.with(ctx).load(list.get(position).getPicture()).into(holder.thumb);
         holder.mName.setText(oneYuanBean.getTitle());
         holder.totalPeo.setText(oneYuanBean.getNeeded() + "人次");
         holder.leavePeo.setText(oneYuanBean.getRemain());

@@ -1,5 +1,7 @@
 package com.league.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by liug on 15/11/1.
  */
@@ -46,12 +48,17 @@ public class OneYuanBean {
      * picture5 : http://img4.imgtn.bdimg.com/it/u=3142945243,3383730469&fm=21&gp=0.jpg
      * picture6 : http://img4.imgtn.bdimg.com/it/u=3142945243,3383730469&fm=21&gp=0.jpg
      */
-
+    @JsonIgnore
     private String picture1;
+    @JsonIgnore
     private String picture2;
+    @JsonIgnore
     private String picture3;
+    @JsonIgnore
     private String picture4;
+    @JsonIgnore
     private String picture5;
+    @JsonIgnore
     private String picture6;
 
     public void setId(String id) {

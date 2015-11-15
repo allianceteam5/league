@@ -1,5 +1,7 @@
 package com.league.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by liug on 15/10/24.
  */
@@ -100,6 +102,27 @@ public class TenYuanGrabBean {
     public void setPicture6(String picture6) {
         this.picture6 = picture6;
     }
+
+    /**
+     * picture1 : http://img2.imgtn.bdimg.com/it/u=597462513,3132102173&fm=21&gp=0.jpg
+     * picture2 : http://img2.imgtn.bdimg.com/it/u=597462513,3132102173&fm=21&gp=0.jpg
+     * picture3 : http://pic55.nipic.com/file/20141208/8337244_105659585000_2.jpg
+     * picture4 : http://pic55.nipic.com/file/20141208/8337244_105659585000_2.jpg
+     * picture5 : http://img4.imgtn.bdimg.com/it/u=3142945243,3383730469&fm=21&gp=0.jpg
+     * picture6 : http://img4.imgtn.bdimg.com/it/u=3142945243,3383730469&fm=21&gp=0.jpg
+     */
+    @JsonIgnore
+    private String picture1;
+    @JsonIgnore
+    private String picture2;
+    @JsonIgnore
+    private String picture3;
+    @JsonIgnore
+    private String picture4;
+    @JsonIgnore
+    private String picture5;
+    @JsonIgnore
+    private String picture6;
 
     public void setId(String id) {
         this.id = id;
@@ -223,5 +246,53 @@ public class TenYuanGrabBean {
 
     public TenYuanGrabBean() {
 
+    }
+
+    public void setPicture1(String picture1) {
+        this.picture1 = picture1;
+    }
+
+    public void setPicture2(String picture2) {
+        this.picture2 = picture2;
+    }
+
+    public void setPicture3(String picture3) {
+        this.picture3 = picture3;
+    }
+
+    public void setPicture4(String picture4) {
+        this.picture4 = picture4;
+    }
+
+    public void setPicture5(String picture5) {
+        this.picture5 = picture5;
+    }
+
+    public void setPicture6(String picture6) {
+        this.picture6 = picture6;
+    }
+
+    public String getPicture1() {
+        return picture1;
+    }
+
+    public String getPicture2() {
+        return picture2;
+    }
+
+    public String getPicture3() {
+        return picture3;
+    }
+
+    public String getPicture4() {
+        return picture4;
+    }
+
+    public String getPicture5() {
+        return picture5;
+    }
+
+    public String getPicture6() {
+        return picture6;
     }
 }
