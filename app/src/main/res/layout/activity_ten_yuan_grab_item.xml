@@ -114,7 +114,7 @@
             <RelativeLayout
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:id="@+id/passanou"
+                android:id="@+id/passannounced"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -217,6 +217,7 @@
             android:textSize="16sp" />
 
         <Button
+            android:id="@+id/buyall"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dip"
@@ -225,7 +226,7 @@
             android:layout_marginTop="2dip"
             android:layout_weight="1"
             android:background="@drawable/addfriendback"
-            android:text="直接兑换"
+            android:text="购买全部"
             android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>
