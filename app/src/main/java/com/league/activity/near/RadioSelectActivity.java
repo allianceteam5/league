@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.easemob.chatuidemo.Constant;
 import com.league.bean.KindBean;
 import com.league.utils.Constants;
 import com.mine.league.R;
@@ -47,14 +48,26 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
             selectedIndex = 0;
         switch (kind) {
             case Constants.RADIODEDREE:
-                //                items = Arrays.asList(getResources().getStringArray(R.array.degree));
                 items = Constants.DEGREEITEMS;
                 tvTitle.setText("学历");
                 break;
             case Constants.RADIOPROFESSION:
+                tvTitle.setText("选择行业");
                 kinds = Paper.book().read(Constants.ProfessinListName, new ArrayList<KindBean>());
-                for (int i = 0; i < kinds.size(); i++)
-                    items.add(kinds.get(i).getName());
+                initItems(kinds);
+                break;
+            case Constants.RADIOSEX:
+                tvTitle.setText("选择性别");
+                items = Constants.SEXITEMS;
+                break;
+            case Constants.RADIOAGE:
+                tvTitle.setText("选择年龄");
+                items = Constants.AGEITEMS;
+                break;
+            case Constants.RADIOHOBBY:
+                tvTitle.setText("选择兴趣组");
+                kinds = Paper.book().read(Constants.HobbyListName, new ArrayList<KindBean>());
+                initItems(kinds);
                 break;
             default:
                 break;
@@ -64,6 +77,10 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
         lvItems.setAdapter(radioSelectAdapter);
     }
 
+    private void initItems(List<KindBean> kinds){
+        for (int i = 0; i < kinds.size(); i++)
+            items.add(kinds.get(i).getName());
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

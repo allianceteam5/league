@@ -11,6 +11,11 @@
     <string name="warning_status">请填写目前状态</string>
     <string name="warning_intro">请填写自我介绍</string>
     <string name="warning_internet">请连接网络</string>
+    <string name="warning_image">请选择照片</string>
+    <string name="warning_age">请选择年龄</string>
+    <string name="warning_sex">请选择性别</string>
+    <string name="warning_hobby">请选择兴趣组</string>
+    <string name="warning_message">请写上留言</string>
     <string name="publish_success">发帖成功</string>
     <string name="publish_fail">发帖失败</string>
     <string name="loading_done">没有更多数据</string>

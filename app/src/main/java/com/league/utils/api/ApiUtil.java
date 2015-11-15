@@ -13,7 +13,7 @@ import com.loopj.android.http.TextHttpResponseHandler;
  */
 public class ApiUtil {
 
-    private static String testPhone = "2";
+    private static String testPhone = "1";
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     private static void printHttp(String baseUrl, RequestParams params) {
@@ -76,6 +76,16 @@ public class ApiUtil {
 
     public static void hobbyList(Context context, TextHttpResponseHandler responseHandler) {
         client.post(context, IClientUrl.HobbyList, new RequestParams(), responseHandler);
+    }
+
+    public static void hobbyCreated(Context context,String picture,int sex,int age,int hobbyid,String content,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.add("picture",picture);
+        params.add("sex",String.valueOf(sex));
+        params.add("age",String.valueOf(age));
+        params.add("hobbyid",String.valueOf(hobbyid));
+        params.add("content",content);
+        client.post(context,IClientUrl.HobbyCreated,params,responseHandler);
     }
 
     public static void hobbySearch(Context context, int hobbyid, String searchString, int currentPage, TextHttpResponseHandler responseHandler) {
