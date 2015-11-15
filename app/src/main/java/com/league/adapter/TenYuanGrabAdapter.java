@@ -66,7 +66,7 @@ public class TenYuanGrabAdapter extends BaseAdapter {
         float remain=Float.valueOf(list.get(position).getRemain());
         holder.progress.setText((int)((need-remain)/need*100)+"%");
         holder.totalPeo.setText(list.get(position).getNeeded() + "人次");
-        holder.leavePeo.setText("剩余"+list.get(position).getRemain());
+        holder.leavePeo.setText(list.get(position).getRemain()+"");
         holder.progressBar.setProgress((int)((need-remain)/need*100));
         return convertView;
     }
