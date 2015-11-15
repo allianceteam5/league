@@ -59,7 +59,6 @@ public class OneyuanGrabAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         OneYuanBean oneYuanBean = list.get(position);
-//        Picasso.with(ctx).load(oneYuanBean.getPicture()).into(holder.thumb);
         Picasso.with(ctx).load(list.get(position).getPicture()).into(holder.thumb);
         holder.mName.setText(oneYuanBean.getTitle());
         holder.totalPeo.setText(oneYuanBean.getNeeded() + "人次");
