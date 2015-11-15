@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="总需："
+            android:text="总需"
             android:textColor="@color/black1"
             android:textSize="12sp" />
 
@@ -98,7 +98,6 @@
             android:id="@+id/totalpeo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
             android:layout_toRightOf="@id/txt1"
             android:gravity="center_vertical"
             android:text="60人次"
@@ -117,7 +116,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dip"
             android:layout_toLeftOf="@id/leavepeo"
             android:gravity="center_vertical"
             android:text="剩余"
