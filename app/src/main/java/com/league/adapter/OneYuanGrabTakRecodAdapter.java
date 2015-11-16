@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.league.bean.OneYuanTakingMember;
+import com.league.bean.TenYuanGrabRecordBean;
 import com.mine.league.R;
 
 import java.util.List;
@@ -18,10 +18,10 @@ import java.util.List;
  */
 public class OneYuanGrabTakRecodAdapter extends BaseAdapter{
 
-    private List<OneYuanTakingMember> list;
+    private List<TenYuanGrabRecordBean> list;
     private Context ctx;
 
-    public OneYuanGrabTakRecodAdapter(List<OneYuanTakingMember> list, Context ctx) {
+    public OneYuanGrabTakRecodAdapter(List<TenYuanGrabRecordBean> list, Context ctx) {
         this.list = list;
         this.ctx = ctx;
     }
@@ -55,9 +55,9 @@ public class OneYuanGrabTakRecodAdapter extends BaseAdapter{
         }else{
             holder= (ViewHolder) convertView.getTag();
         }
-        holder.name.setText(list.get(position).getName());
-        holder.takTime.setText(list.get(position).getTakeTime());
-        holder.takNum.setText(list.get(position).getTakeNum()+"");
+//        holder.name.setText(list.get(position).getName());
+//        holder.takTime.setText(list.get(position).getTakeTime());
+//        holder.takNum.setText(list.get(position).getTakeNum()+"");
         return convertView;
     }
     class ViewHolder{
