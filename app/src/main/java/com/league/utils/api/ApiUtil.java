@@ -126,7 +126,5 @@ public class ApiUtil {
         params.put("phone", phone);
         client.post(context,IClientUrl.GrabcornsGetTenDetail,params,responseHandler);
     }
-    public static void oneYuanGrabGetSix(Context context,TextHttpResponseHandler responseHandler){
-        client.post(context,IClientUrl.OneYuanGrabGetSix,new RequestParams(),responseHandler);
-    }
+
 }
