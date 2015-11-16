@@ -254,6 +254,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 });
                 break;
             case 4:
+                closeProgressDialog();
                 near_title.setText("其他");
                 near_t_rig.setVisibility(View.INVISIBLE);
                 break;
@@ -358,7 +359,8 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                     }
                 });
                 break;
-            case 6:
+            case 4:
+                closeProgressDialog();
                 break;
             default:
                 break;

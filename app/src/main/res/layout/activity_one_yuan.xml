@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/red" >
+        android:background="@color/red">
 
         <ImageButton
             android:id="@+id/near_back"
@@ -19,21 +19,23 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/arrow_left"/>
+            android:background="@drawable/arrow_left" />
+
         <LinearLayout
             android:id="@+id/near_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_centerInParent="true"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/near_centertitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
                 android:text="title"
                 android:textColor="@color/white"
-                android:layout_marginRight="6dp"
                 android:textSize="20sp" />
 
             <ImageView
@@ -63,6 +65,7 @@
             android:background="@color/transparent"
             android:src="@drawable/icon_item_menu"
             android:visibility="gone" />
+
         <ImageButton
             android:id="@+id/near_right_delete"
             android:layout_width="wrap_content"
@@ -73,39 +76,42 @@
             android:background="@color/transparent"
             android:src="@drawable/resource_delete"
             android:visibility="gone" />
+
         <TextView
             android:id="@+id/near_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:text="发帖"
             android:textColor="@color/red"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
             android:textSize="18sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/ruledetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:text="规则说明"
             android:textColor="@color/red"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
             android:textSize="16sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/near_commit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:text="提交"
             android:textColor="@color/red"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
             android:textSize="18sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -286,10 +292,12 @@
                     </RelativeLayout>
                 </RelativeLayout>
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@color/black2"/>
+                android:background="@color/black2" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
@@ -320,11 +328,13 @@
                     android:textColor="@color/black1"
                     android:textSize="16sp" />
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -348,50 +358,55 @@
                         android:text="500金币"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="2dip"
-                        android:gravity="center_horizontal"
-                        >
+                        android:gravity="center_horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center_vertical"
                             android:text="开奖进度"
                             android:textColor="@color/black1"
-                            android:textSize="12sp"
-                            android:gravity="center_vertical"
-                            android:layout_alignParentLeft="true"
-                            android:layout_marginLeft="10dp"/>
+                            android:textSize="12sp" />
+
                         <TextView
                             android:id="@+id/txt_progress1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dip"
+                            android:gravity="center_vertical"
                             android:text="60%"
                             android:textColor="@color/black1"
-                            android:textSize="12sp"
-                            android:gravity="center_vertical"
-                            android:layout_marginRight="10dip"
-                            android:layout_alignParentRight="true"/>
+                            android:textSize="12sp" />
                     </RelativeLayout>
+
                     <ProgressBar
-                        android:layout_marginTop="2dp"
                         android:id="@+id/progressbar1"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="90dp"
                         android:layout_height="6dip"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="2dp"
                         android:max="100"
-                        android:progressDrawable="@drawable/progressbar"
-                        style="@android:style/Widget.ProgressBar.Horizontal"
-                        android:layout_marginBottom="10dp"/>
+                        android:progressDrawable="@drawable/progressbar" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="4dp"
                     android:layout_marginTop="4dp"
-                    android:background="@color/black2"/>
+                    android:background="@color/black2" />
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -415,50 +430,55 @@
                         android:text="500金币"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="2dip"
-                        android:gravity="center_horizontal"
-                        >
+                        android:gravity="center_horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center_vertical"
                             android:text="开奖进度"
                             android:textColor="@color/black1"
-                            android:textSize="12sp"
-                            android:gravity="center_vertical"
-                            android:layout_alignParentLeft="true"
-                            android:layout_marginLeft="10dp"/>
+                            android:textSize="12sp" />
+
                         <TextView
                             android:id="@+id/txt_progress2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dip"
+                            android:gravity="center_vertical"
                             android:text="60%"
                             android:textColor="@color/black1"
-                            android:textSize="12sp"
-                            android:gravity="center_vertical"
-                            android:layout_marginRight="10dip"
-                            android:layout_alignParentRight="true"/>
+                            android:textSize="12sp" />
                     </RelativeLayout>
+
                     <ProgressBar
-                        android:layout_marginTop="2dp"
                         android:id="@+id/progressbar2"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="90dp"
                         android:layout_height="6dip"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="2dp"
                         android:max="100"
-                        android:progressDrawable="@drawable/progressbar"
-                        style="@android:style/Widget.ProgressBar.Horizontal"
-                        android:layout_marginBottom="10dp"/>
+                        android:progressDrawable="@drawable/progressbar" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="4dp"
                     android:layout_marginTop="4dp"
-                    android:background="@color/black2"/>
+                    android:background="@color/black2" />
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -482,199 +502,217 @@
                         android:text="500金币"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="2dip"
-                        android:gravity="center_horizontal"
-                        >
+                        android:gravity="center_horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center_vertical"
                             android:text="开奖进度"
                             android:textColor="@color/black1"
-                            android:textSize="12sp"
-                            android:gravity="center_vertical"
-                            android:layout_alignParentLeft="true"
-                            android:layout_marginLeft="10dp"/>
+                            android:textSize="12sp" />
+
                         <TextView
                             android:id="@+id/txt_progress3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dip"
+                            android:gravity="center_vertical"
                             android:text="60%"
                             android:textColor="@color/black1"
-                            android:textSize="12sp"
-                            android:gravity="center_vertical"
-                            android:layout_marginRight="10dip"
-                            android:layout_alignParentRight="true"/>
+                            android:textSize="12sp" />
                     </RelativeLayout>
+
                     <ProgressBar
-                        android:layout_marginTop="2dp"
                         android:id="@+id/progressbar3"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
                         android:layout_width="90dp"
                         android:layout_height="6dip"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="2dp"
                         android:max="100"
-                        android:progressDrawable="@drawable/progressbar"
-                        style="@android:style/Widget.ProgressBar.Horizontal"
-                        android:layout_marginBottom="10dp"/>
+                        android:progressDrawable="@drawable/progressbar" />
                 </LinearLayout>
             </LinearLayout>
+
             <View
 
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@color/black2"/>
-            <TextView
+                android:background="@color/black2" />
 
-                android:layout_width="match_parent"
-                android:layout_height="50dip"
-                android:paddingLeft="15dip"
-                android:gravity="center_vertical"
-                android:text="最新揭晓"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:background="@color/white"/>
             <LinearLayout
+                android:id="@+id/ll_announced"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dip"
+                    android:text="最新揭晓"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
                 <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/lastnew_image1"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/example" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:id="@+id/ll_announced1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="3dip"
-                        android:layout_marginBottom="2dp">
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/txt4"
-                            android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/lastnew_image1"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/example" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="倒计时"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginTop="3dip">
 
-                        <TextView
-                            android:id="@+id/txt_countdown1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dip"
-                            android:layout_toRightOf="@id/txt4"
-                            android:gravity="center"
-                            android:text="02:04:21"
-                            android:textColor="@color/red"
-                            android:textSize="14sp" />
-                    </RelativeLayout>
+                            <TextView
+                                android:id="@+id/txt4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:gravity="center"
+                                android:text="倒计时"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/txt_countdown1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="4dip"
+                                android:layout_toRightOf="@id/txt4"
+                                android:gravity="center"
+                                android:text="02:04:21"
+                                android:textColor="@color/red"
+                                android:textSize="14sp" />
+                        </RelativeLayout>
 
-                    <ImageView
-                        android:id="@+id/lastnew_image2"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/example" />
+                    </LinearLayout>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:id="@+id/ll_announced2"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="3dip"
-                        android:layout_marginBottom="2dp">
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/txt5"
-                            android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/lastnew_image2"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/example" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:text="倒计时"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginTop="3dip">
 
-                        <TextView
-                            android:id="@+id/txt_countdown2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dip"
-                            android:layout_toRightOf="@id/txt5"
-                            android:gravity="center"
-                            android:text="02:04:21"
-                            android:textColor="@color/red"
-                            android:textSize="14sp" />
-                    </RelativeLayout>
+                            <TextView
+                                android:id="@+id/txt5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:gravity="center"
+                                android:text="倒计时"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/txt_countdown2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dip"
+                                android:layout_toRightOf="@id/txt5"
+                                android:gravity="center"
+                                android:text="02:04:21"
+                                android:textColor="@color/red"
+                                android:textSize="14sp" />
+                        </RelativeLayout>
 
-                    <ImageView
-                        android:id="@+id/lastnew_image3"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/example" />
+                    </LinearLayout>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:id="@+id/ll_announced3"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="3dip"
-                        android:layout_marginBottom="2dp">
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/txt6"
-                            android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/lastnew_image3"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/example" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:text="倒计时"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginTop="3dip">
 
-                        <TextView
-                            android:id="@+id/txt_countdown3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dip"
-                            android:layout_toRightOf="@id/txt6"
-                            android:gravity="center"
-                            android:text="02:04:21"
-                            android:textColor="@color/red"
-                            android:textSize="14sp" />
-                    </RelativeLayout>
+                            <TextView
+                                android:id="@+id/txt6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:gravity="center"
+                                android:text="倒计时"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
 
+                            <TextView
+                                android:id="@+id/txt_countdown3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dip"
+                                android:layout_toRightOf="@id/txt6"
+                                android:gravity="center"
+                                android:text="02:04:21"
+                                android:textColor="@color/red"
+                                android:textSize="14sp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
                 </LinearLayout>
-
             </LinearLayout>
 
             <RelativeLayout
@@ -708,6 +746,7 @@
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </RelativeLayout>
+
             <com.league.view.MyGridView
                 android:id="@+id/gridview"
                 android:layout_width="match_parent"
@@ -715,8 +754,7 @@
                 android:horizontalSpacing="2dip"
                 android:numColumns="2"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="2dp">
-            </com.league.view.MyGridView>
+                android:verticalSpacing="2dp"></com.league.view.MyGridView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
