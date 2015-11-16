@@ -1,6 +1,7 @@
 package com.league.dialog;
 
 
+import com.league.activity.near.MakingFriItem;
 import com.league.activity.near.MyJobHunting;
 import com.league.activity.near.MyPost;
 import com.league.activity.near.NearActivity;
@@ -72,6 +73,7 @@ public class NearRightDialog extends Dialog implements
 					context.startActivity(new Intent(context, PostCard.class));
 					break;
 				case 3:
+					context.startActivity(new Intent(context, MakingFriItem.class));
 					break;
 				case 4:
 					break;

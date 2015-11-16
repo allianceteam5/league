@@ -72,8 +72,8 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex-cache" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/cn.aigestudio.datepicker/DatePicker/2.1.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.jungly/GridPasswordView/0.2/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/io.paperdb/paperdb/1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/net.soulwolf.widget/dialogBuilder/1.0.0/jars" />
@@ -94,6 +94,14 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
+    <orderEntry type="library" exported="" name="butterknife-7.0.1" level="project" />
+    <orderEntry type="library" exported="" name="appcompat-v7-22.0.0" level="project" />
+    <orderEntry type="library" exported="" name="DatePicker-2.1.0" level="project" />
+    <orderEntry type="library" exported="" name="picasso-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="1_picasso-2.4.0" level="project" />
+=======
+>>>>>>> 200c126dcb0d6a6d8683de366ba2fbff70f3f81c
     <orderEntry type="library" exported="" name="asm-5.0.3" level="project" />
     <orderEntry type="library" exported="" name="GridPasswordView-0.2" level="project" />
     <orderEntry type="library" exported="" name="jackson-databind-2.3.1" level="project" />
@@ -104,11 +112,15 @@
     <orderEntry type="library" exported="" name="kryo-3.0.2" level="project" />
     <orderEntry type="library" exported="" name="umeng-analytics-v5.2.4" level="project" />
     <orderEntry type="library" exported="" name="dialogBuilder-1.0.0" level="project" />
+<<<<<<< HEAD
+    <orderEntry type="library" exported="" name="support-annotations-22.0.0" level="project" />
+=======
     <orderEntry type="library" exported="" name="imageloader" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="objenesis-2.1" level="project" />
     <orderEntry type="library" exported="" name="protobuf-java-2.6.1" level="project" />
     <orderEntry type="library" exported="" name="kryo-serializers-0.33" level="project" />
+>>>>>>> 200c126dcb0d6a6d8683de366ba2fbff70f3f81c
     <orderEntry type="library" exported="" name="jackson-annotations-2.6.0" level="project" />
     <orderEntry type="library" exported="" name="easemobchat_2.2.2" level="project" />
     <orderEntry type="library" exported="" name="paperdb-1.0" level="project" />
@@ -116,6 +128,21 @@
     <orderEntry type="library" exported="" name="bolts-android-1.2.0" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.8" level="project" />
     <orderEntry type="library" exported="" name="locSDK_6.11" level="project" />
+    <orderEntry type="library" exported="" name="easemobchat_2.2.2" level="project" />
+    <orderEntry type="library" exported="" name="minlog-1.3.0" level="project" />
+    <orderEntry type="library" exported="" name="GridPasswordView-0.2" level="project" />
+    <orderEntry type="library" exported="" name="kryo-serializers-0.33" level="project" />
+    <orderEntry type="library" exported="" name="imageloader" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
+    <orderEntry type="library" exported="" name="jackson-core-2.5.0" level="project" />
+    <orderEntry type="library" exported="" name="baidumapapi_v3_2_0" level="project" />
+    <orderEntry type="library" exported="" name="jackson-databind-2.3.1" level="project" />
+    <orderEntry type="library" exported="" name="protobuf-java-2.6.1" level="project" />
+    <orderEntry type="library" exported="" name="umeng-analytics-v5.2.4" level="project" />
+    <orderEntry type="library" exported="" name="kryo-3.0.2" level="project" />
+    <orderEntry type="library" exported="" name="android-async-http-1.4.8" level="project" />
+    <orderEntry type="library" exported="" name="paperdb-1.0" level="project" />
+    <orderEntry type="module" module-name="multi-image-selector" exported="" />
     <orderEntry type="library" exported="" name="minlog-1.3.0" level="project" />
     <orderEntry type="library" exported="" name="jackson-core-2.5.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />

@@ -100,6 +100,10 @@
         <activity android:name="com.league.activity.treasure.OneYuanGrab" />
         <activity android:name="com.league.activity.treasure.TenYuanGrabItem" />
 
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
+
         <!-- 开屏页 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.SplashActivity"
