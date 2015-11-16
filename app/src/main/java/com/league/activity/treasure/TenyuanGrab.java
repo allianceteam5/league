@@ -3,7 +3,6 @@ package com.league.activity.treasure;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -81,7 +80,7 @@ public class TenyuanGrab extends Activity {
             @Override
             protected ArrayList<TenYuanGrabBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                 JSONObject jsonObject=new JSONObject(rawJsonData);
-                Log.i("heh", jsonObject.optString("items"));
+
                 return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<TenYuanGrabBean>>() {
                 });
             }
@@ -90,6 +89,7 @@ public class TenyuanGrab extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(TenyuanGrab.this, TenYuanGrabItem.class);
+                intent.putExtra("id",list.get(position).getId());
                 startActivity(intent);
             }
         });

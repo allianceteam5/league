@@ -326,6 +326,8 @@
                 android:orientation="horizontal"
                 android:background="@color/white">
                 <LinearLayout
+                    android:id="@+id/ten1"
+                    android:onClick="onClick"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -393,6 +395,8 @@
                     android:layout_marginTop="4dp"
                     android:background="@color/black2"/>
                 <LinearLayout
+                    android:id="@+id/ten2"
+                    android:onClick="onClick"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -460,6 +464,8 @@
                     android:layout_marginTop="4dp"
                     android:background="@color/black2"/>
                 <LinearLayout
+                    android:id="@+id/ten3"
+                    android:onClick="onClick"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

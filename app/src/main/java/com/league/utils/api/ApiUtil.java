@@ -110,4 +110,13 @@ public class ApiUtil {
         printHttp(IClientUrl.GrabCommoditiesSearch, params);
         client.post(context,IClientUrl.GrabCommoditiesSearch + currentPage, params,responseHandler);
     }
+    public static void grabcornsGetDetail(Context context,String grabcoinid,String phone,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("grabcornid", grabcoinid);
+        params.put("phone", phone);
+        client.post(context,IClientUrl.GrabcornsGetTenDetail,params,responseHandler);
+    }
+    public static void oneYuanGrabGetSix(Context context,TextHttpResponseHandler responseHandler){
+        client.post(context,IClientUrl.OneYuanGrabGetSix,new RequestParams(),responseHandler);
+    }
 }

@@ -101,19 +101,30 @@ public class OneYuan extends Activity implements View.OnClickListener {
                 });
             }
         });
+        ApiUtil.oneYuanGrabGetSix(getApplication(), new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
+                listGrid.addAll(response);
+                gridView.setAdapter(new OneyuanGrabAdapter(getApplication(), listGrid));
+            }
 
-        for (int i = 0; i < 5; i++) {
-            OneYuanBean oyb = new OneYuanBean();
-//            oyb.setmPeriod(i);
-//            oyb.setmName("name" + i);
-//            oyb.setmTotalPeo((long) i);i
-//            listGrid.add(oyb);
-        }
-        gridView.setAdapter(new OneyuanGrabAdapter(getApplication(), listGrid));
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<OneYuanBean> errorResponse) {
+
+            }
+
+            @Override
+            protected ArrayList<OneYuanBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<OneYuanBean>>() {
+                });
+            }
+        });
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(OneYuan.this, OneYuanGrabItem.class);
+                intent.putExtra("id",listGrid.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -132,13 +143,13 @@ public class OneYuan extends Activity implements View.OnClickListener {
         txtProgress1.setText((int) ((need1 - remain1) / need1) * 100 + "%");
         float need2 = Float.valueOf(listTenYuanGrab.get(1).getNeeded());
         float remain2 = Float.valueOf(listTenYuanGrab.get(1).getRemain());
-        txtProgress2.setText((int) ((need2 - remain2) / need1) * 100 + "%");
+        txtProgress2.setText((int) ((need2 - remain2) / need2) * 100 + "%");
         float need3 = Float.valueOf(listTenYuanGrab.get(2).getNeeded());
         float remain3 = Float.valueOf(listTenYuanGrab.get(2).getRemain());
-        txtProgress3.setText((int) ((need3 - remain3) / need1) * 100 + "%");
+        txtProgress3.setText((int) ((need3 - remain3) / need3) * 100 + "%");
         progressbar1.setProgress((int) ((need1 - remain1) / need1) * 100);
-        progressbar2.setProgress((int) ((need2 - remain2) / need1) * 100);
-        progressbar3.setProgress((int) ((need3 - remain3) / need1) * 100);
+        progressbar2.setProgress((int) ((need2 - remain2) / need2) * 100);
+        progressbar3.setProgress((int) ((need3 - remain3) / need3) * 100);
     }
 
     @Override
@@ -163,6 +174,21 @@ public class OneYuan extends Activity implements View.OnClickListener {
                 break;
             case R.id.One_question:
                 Toast.makeText(this, "que", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.ten1:
+                Intent intent = new Intent(getApplication(), TenYuanGrabItem.class);
+                intent.putExtra("id",listTenYuanGrab.get(0).getId());
+                startActivity(intent);
+                break;
+            case R.id.ten2:
+                Intent ten2 = new Intent(getApplication(), TenYuanGrabItem.class);
+                ten2.putExtra("id", listTenYuanGrab.get(1).getId());
+                startActivity(ten2);
+                break;
+            case R.id.ten3:
+                Intent ten3 = new Intent(getApplication(), TenYuanGrabItem.class);
+                ten3.putExtra("id", listTenYuanGrab.get(2).getId());
+                startActivity(ten3);
                 break;
         }
     }

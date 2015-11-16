@@ -7,6 +7,7 @@ import java.util.List;
  * Created by pfy on 2015/11/7.
  */
 public class Constants {
+    public static String PHONENUM="1";
     public static final String RADIOSELECTKIND = "radioSelectKind";
     public static final String RADIOSELECEDTINDEX = "radioSelectedIndex";
     public static final int RADIODEDREE = 1;
@@ -26,5 +27,7 @@ public class Constants {
 
     public static final String TenYuanThree = "tenyuanthree";
     public static final String TenYuanMore = "tenyuanmore";
+    public static final String TenYuanDetail="tenyuandetail";
+
 
 }

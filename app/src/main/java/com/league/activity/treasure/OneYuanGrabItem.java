@@ -8,20 +8,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.league.adapter.OneYuanGrabTakRecodAdapter;
-import com.league.bean.OneYuanTakingMember;
 import com.league.widget.ListViewForScrollView;
 import com.mine.league.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
     private ImageView back2, titleright, right1, right2;
     private TextView title;
     private ListViewForScrollView listView;
-    private List<OneYuanTakingMember> list=new ArrayList<OneYuanTakingMember>();
+//    private List<OneYuanTakingMember> list=new ArrayList<OneYuanTakingMember>();
     private Button takeinNow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +51,14 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
     }
 
     public void initData(){
-        for(int i=0;i<5;i++){
-            OneYuanTakingMember oytm=new OneYuanTakingMember();
-            oytm.setName("小杜 "+i);
-            oytm.setTakeTime("15:34:13");
-            oytm.setTakeNum(i);
-            list.add(oytm);
-        }
-        listView.setAdapter(new OneYuanGrabTakRecodAdapter(list,getApplication()));
+//        for(int i=0;i<5;i++){
+//            OneYuanTakingMember oytm=new OneYuanTakingMember();
+//            oytm.setName("小杜 "+i);
+//            oytm.setTakeTime("15:34:13");
+//            oytm.setTakeNum(i);
+//            list.add(oytm);
+//        }
+//        listView.setAdapter(new OneYuanGrabTakRecodAdapter(list,getApplication()));
     }
     @Override
     public void onClick(View v) {
