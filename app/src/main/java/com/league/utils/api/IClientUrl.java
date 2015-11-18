@@ -27,4 +27,5 @@ public class IClientUrl {
     public static final String OneYuanGrabGetSix="grabcommodities/getthree";
 
     public static final String GetQiniuToken = testServerUrl + "users/token";
+
 }

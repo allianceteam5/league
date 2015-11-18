@@ -9,10 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v4.view.ViewPager
+        <LinearLayout
             android:id="@+id/autoviewpaper"
             android:layout_width="match_parent"
-            android:layout_height="160dp"></android.support.v4.view.ViewPager>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -28,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="第一个引导页面"
+                android:text="1"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
 

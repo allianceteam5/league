@@ -9,6 +9,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,7 +40,7 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener,O
 	private Activity ctx;
 	private List<ImageView> imageViewList;
 	private TextView tvDescription;
-	private LinearLayout llPoints;
+	private LinearLayout llPoints,viewpaperLayout;
 	private String[] imageDescriptions;
 	private int previousSelectPosition = 0;
 	private ViewPager mViewPager;
@@ -90,7 +91,12 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener,O
 	}
 
 	public void initView() {
-		mViewPager = (ViewPager) layout.findViewById(R.id.autoviewpaper);
+		viewpaperLayout = (LinearLayout) layout.findViewById(R.id.autoviewpaper);
+		mViewPager=new ViewPager(getActivity());
+		DisplayMetrics dm=new DisplayMetrics();
+		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+		mViewPager.setLayoutParams(new LinearLayout.LayoutParams(dm.widthPixels, dm.heightPixels  / 3));
+		viewpaperLayout.addView(mViewPager);
 		tvDescription = (TextView) layout.findViewById(R.id.tv_image_description);
 		llPoints = (LinearLayout)layout.findViewById(R.id.ll_points);
 
@@ -149,8 +155,8 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener,O
 	}
 
 	private String[] getImageDescription() {
-		return new String[] { "第一个引导页面", "第二个引导页面", "第三个引导页面", "第四个引导页面",
-				"第五个引导页面" };
+		return new String[] { "1", "2", "3", "4",
+				"5" };
 	}
 
 	@Override
