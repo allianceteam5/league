@@ -20,6 +20,8 @@ public class ComplexPreferences {
     public static final String USERNAME = "username";
     public static final String USER = "user";
     public static final String USERID = "userid";
+    public static final String SCREEN_WIDTH = "screen_width";
+
 
     private ComplexPreferences(Context context) {
         this.context = context;
@@ -90,7 +92,14 @@ public class ComplexPreferences {
 //        return getObject(USER, new TypeReference<User>() {
 //        });
 //    }
+    public static void setScreenWidth(int w) {
+        editor.putInt(SCREEN_WIDTH, w);
+        editor.commit();
+    }
 
+    public static int getScreenWidth() {
+        return preferences.getInt(SCREEN_WIDTH,640);
+    }
     public static void setObject(String key, Object object) {
         if (object == null) {
             throw new IllegalArgumentException("object is null");

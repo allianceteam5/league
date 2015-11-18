@@ -25,23 +25,26 @@ android {
         }
     }
 
+//    repositories {
+//        maven { url "https://jitpack.io" }
+//    }
 
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
     }
 
-    allprojects {
-        repositories {
-            jcenter()
-        }
-    }
+//    allprojects {
+//        repositories {
+//            jcenter()
+//        }
+//    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':multi-image-selector')
-    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:support-v4:21.0.0'
     compile files('libs/locSDK_6.11.jar')
     compile files('libs/baidumapapi_v3_2_0.jar')
     compile files('libs/bolts-android-1.2.0.jar')
@@ -58,4 +61,5 @@ dependencies {
     compile 'io.paperdb:paperdb:1.0'
     compile 'net.soulwolf.widget:dialogBuilder:1.0.0'
     compile 'com.jungly:GridPasswordView:0.2'
+    compile 'com.qiniu:qiniu-android-sdk:7.0.3'
 }

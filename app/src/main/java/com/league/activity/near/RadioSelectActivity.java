@@ -69,6 +69,11 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
                 kinds = Paper.book().read(Constants.HobbyListName, new ArrayList<KindBean>());
                 initItems(kinds);
                 break;
+            case Constants.RADIORECOMMENDATION:
+                tvTitle.setText("选择推荐");
+                kinds = Paper.book().read(Constants.RecommendationListName, new ArrayList<KindBean>());
+                initItems(kinds);
+                break;
             default:
                 break;
         }

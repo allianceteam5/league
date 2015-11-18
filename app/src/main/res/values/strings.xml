@@ -14,8 +14,11 @@
     <string name="warning_image">请选择照片</string>
     <string name="warning_age">请选择年龄</string>
     <string name="warning_sex">请选择性别</string>
+    <string name="warning_position">请输入位置</string>
     <string name="warning_hobby">请选择兴趣组</string>
     <string name="warning_message">请写上留言</string>
+    <string name="warning_reason">请写上推荐原因</string>
+    <string name="warning_recommendation">请选择推荐类型</string>
     <string name="publish_success">发帖成功</string>
     <string name="publish_fail">发帖失败</string>
     <string name="loading_done">没有更多数据</string>
@@ -333,5 +336,6 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_recommendation_pushlish">RecommendationPushlishActivity</string>
 
 </resources>
