@@ -6,6 +6,7 @@ import com.league.activity.near.MyJobHunting;
 import com.league.activity.near.MyPost;
 import com.league.activity.near.NearActivity;
 import com.league.activity.near.PostCard;
+import com.league.activity.near.RecommendationPushlishActivity;
 import com.league.activity.near.WantAJob;
 import com.mine.league.R;
 
@@ -70,7 +71,7 @@ public class NearRightDialog extends Dialog implements
 					context.startActivity(new Intent(context, WantAJob.class));
 					break;
 				case 2:
-					context.startActivity(new Intent(context, PostCard.class));
+					context.startActivity(new Intent(context, RecommendationPushlishActivity.class));
 					break;
 				case 3:
 					context.startActivity(new Intent(context, MakingFriItem.class));

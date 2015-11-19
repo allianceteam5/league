@@ -99,10 +99,9 @@
         <activity android:name="com.league.activity.treasure.TenyuanGrab" />
         <activity android:name="com.league.activity.treasure.OneYuanGrab" />
         <activity android:name="com.league.activity.treasure.TenYuanGrabItem" />
-
         <activity
-            android:configChanges="orientation|screenSize"
-            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
+            android:configChanges="orientation|screenSize" />
 
         <!-- 开屏页 -->
         <activity
@@ -422,6 +421,10 @@
         <activity android:name="com.league.activity.liaobaactivity.MyLikes" >
         </activity>
         <activity android:name="com.league.activity.liaobaactivity.TopicContent" >
+        </activity>
+        <activity
+            android:name="com.league.activity.near.RecommendationPushlishActivity"
+            android:label="@string/title_activity_recommendation_pushlish" >
         </activity>
     </application>
 

@@ -29,7 +29,7 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 public class MakingFriItem extends Activity implements View.OnClickListener {
 
-    private static final int REQUEST_IMAGE = 2;
+    private final int REQUEST_IMAGE = 2;
     private ArrayList<String> mSelectPath = new ArrayList<>();
     private ImageView back, title_right, right, ivPhone;
     private TextView title, save, tvSex, tvAge, tvHobby;
@@ -146,7 +146,7 @@ public class MakingFriItem extends Activity implements View.OnClickListener {
             if (resultCode == RESULT_OK) {
                 mSelectPath = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
                 if (mSelectPath.size() == 1) {
-                        Picasso.with(getApplicationContext()).load(new File(mSelectPath.get(0))).resize(140,140).centerCrop().into(ivPhone);
+                    Picasso.with(getApplicationContext()).load(new File(mSelectPath.get(0))).resize(140, 140).centerCrop().into(ivPhone);
                 }
             }
         }

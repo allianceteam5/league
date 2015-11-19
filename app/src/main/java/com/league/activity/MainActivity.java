@@ -39,6 +39,7 @@ import com.league.fragment.FriendsFragment;
 import com.league.fragment.MessageFragment;
 import com.league.fragment.PersonFragment;
 import com.league.fragment.ResourceFragment;
+import com.league.utils.ComplexPreferences;
 import com.mine.league.R;
 import com.umeng.analytics.MobclickAgent;
 
@@ -53,6 +54,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -126,6 +128,12 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         }
 
         setContentView(R.layout.activity_main);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        ComplexPreferences.getComplexPreferences(getApplicationContext()).setScreenWidth(metrics.widthPixels);
+//        metaSpUtil.setScreenHeight(this, metrics.heightPixels);
+
         init();
 
         MobclickAgent.updateOnlineConfig(this);

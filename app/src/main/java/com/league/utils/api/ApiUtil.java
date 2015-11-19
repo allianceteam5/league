@@ -74,6 +74,21 @@ public class ApiUtil {
         client.post(context, IClientUrl.RecomendationList, new RequestParams(), responseHandler);
     }
 
+    public static void recommendationCreated(Context context,String title,int kindid, String position,String phone,String reason,String pictures, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("phone",testPhone);
+        params.add("kindid",String.valueOf(kindid));
+        params.add("title",title);
+        params.add("sellerphone",phone);
+        params.add("reason",reason);
+        params.add("pictures",pictures);
+//        params.add("");
+        printHttp(IClientUrl.RecomendationCreated,params);
+        client.post(context, IClientUrl.RecomendationCreated, params, responseHandler);
+    }
+
+
+
     public static void hobbyList(Context context, TextHttpResponseHandler responseHandler) {
         client.post(context, IClientUrl.HobbyList, new RequestParams(), responseHandler);
     }
@@ -126,6 +141,7 @@ public class ApiUtil {
         params.put("phone", phone);
         client.post(context,IClientUrl.GrabcornsGetTenDetail,params,responseHandler);
     }
+<<<<<<< HEAD
     public static void grabcommoditiesGetDetail(Context context,String grabcommodityid,String phone,TextHttpResponseHandler responseHandler){
         RequestParams params=new RequestParams();
         params.put("grabcommodityid",grabcommodityid);
@@ -147,5 +163,12 @@ public class ApiUtil {
         params.put("phone",phone);
         params.put("type",type);
         client.post(context,IClientUrl.getGrabcoinBuyAll,params,responseHandler);
+=======
+    public static void oneYuanGrabGetSix(Context context,TextHttpResponseHandler responseHandler){
+        client.post(context,IClientUrl.OneYuanGrabGetSix,new RequestParams(),responseHandler);
+    }
+    public static void getQiniuToken(Context context, TextHttpResponseHandler responseHandler){
+        client.get(context,IClientUrl.GetQiniuToken,responseHandler);
+>>>>>>> 604ccf37d0578113e437e171e1573e4dc41cbedb
     }
 }
