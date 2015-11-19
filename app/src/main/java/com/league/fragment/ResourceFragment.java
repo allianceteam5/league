@@ -50,8 +50,7 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener,O
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
-
-			mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+			mViewPager.setCurrentItem((mViewPager.getCurrentItem() + 1)%imageViewList.size());
 		}
 	};
 
@@ -109,14 +108,6 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener,O
 		tvDescription.setText(imageDescriptions[previousSelectPosition]);
 		llPoints.getChildAt(previousSelectPosition).setEnabled(true);
 
-		/**
-		 * 2147483647 / 2 = 1073741820 - 1
-		 * 设置ViewPager的当前项为一个比较大的数，以便一开始就可以左右循环滑动
-		 */
-		int n = Integer.MAX_VALUE / 2 % imageViewList.size();
-		int itemPosition = Integer.MAX_VALUE / 2 - n;
-
-		mViewPager.setCurrentItem(itemPosition);
 	}
 
 	private void setOnClickListener(){

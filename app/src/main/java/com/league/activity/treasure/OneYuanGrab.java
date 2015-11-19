@@ -1,7 +1,6 @@
 package com.league.activity.treasure;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,8 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.adapter.OneyuanGrabAdapter;
 import com.league.bean.OneYuanBean;
-import com.league.bean.TenYuanGrabBean;
-import com.league.utils.Constants;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -29,8 +26,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.paperdb.Paper;
 
 public class OneYuanGrab extends BaseActivity implements View.OnClickListener {
 
@@ -105,6 +100,7 @@ public class OneYuanGrab extends BaseActivity implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(OneYuanGrab.this,OneYuanGrabItem.class);
+                intent.putExtra("id",list.get(position).getId());
                 startActivity(intent);
             }
         });

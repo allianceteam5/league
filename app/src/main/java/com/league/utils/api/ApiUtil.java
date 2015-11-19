@@ -126,5 +126,26 @@ public class ApiUtil {
         params.put("phone", phone);
         client.post(context,IClientUrl.GrabcornsGetTenDetail,params,responseHandler);
     }
+    public static void grabcommoditiesGetDetail(Context context,String grabcommodityid,String phone,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("grabcommodityid",grabcommodityid);
+        params.put("phone",phone);
+        client.post(context,IClientUrl.GrabCommoditiesDetail,params,responseHandler);
+    }
 
+    public static void grabcoinBuy(Context context,String grabcornid,String phone,String count,String type,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("grabcornid",grabcornid);
+        params.put("phone",phone);
+        params.put("count",count);
+        params.put("type",type);
+        client.post(context,IClientUrl.GrabcoinBuy,params,responseHandler);
+    }
+    public static void grabcoinBuyAll(Context context,String grabcornid,String phone,String type,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("grabcornid",grabcornid);
+        params.put("phone",phone);
+        params.put("type",type);
+        client.post(context,IClientUrl.getGrabcoinBuyAll,params,responseHandler);
+    }
 }

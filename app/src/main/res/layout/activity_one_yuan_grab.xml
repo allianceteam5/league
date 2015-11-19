@@ -21,7 +21,7 @@
         <com.league.widget.pulltorefreshandload.PullableGridView
             android:id="@+id/gridview_one"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:horizontalSpacing="2dip"
             android:numColumns="2"
             android:stretchMode="columnWidth"

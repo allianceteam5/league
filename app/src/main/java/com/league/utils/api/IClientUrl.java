@@ -23,5 +23,8 @@ public class IClientUrl {
     public static final String GrabcornsGetTenDetail = testServerUrl+ "grabcorns/view";
 
     public static final String GrabCommoditiesSearch = testServerUrl + "grabcommodities/search?page=";
+    public static final String GrabCommoditiesDetail=testServerUrl+"grabcommodities/view";
+    public static final String GrabcoinBuy=testServerUrl+"grabcorns/buy";
+    public static final String getGrabcoinBuyAll=testServerUrl+"grabcorns/buyall";
 
 }

@@ -22,12 +22,13 @@
             android:background="@color/white"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imgview"
+            <LinearLayout
+                android:id="@+id/viewpaper"
                 android:layout_width="match_parent"
-                android:layout_height="180dip"
-                android:scaleType="fitXY"
-                android:src="@drawable/example" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

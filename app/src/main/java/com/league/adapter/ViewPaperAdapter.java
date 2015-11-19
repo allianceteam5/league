@@ -1,11 +1,11 @@
 package com.league.adapter;
 
-import java.util.List;
-
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import java.util.List;
 
 /**  
  *   
@@ -23,7 +23,7 @@ public class ViewPaperAdapter extends PagerAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return Integer.MAX_VALUE;
+		return mImageViewList.size();
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class ViewPaperAdapter extends PagerAdapter{
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
 		// TODO Auto-generated method stub
-		container.addView(mImageViewList.get(position % mImageViewList.size()));  
+		container.addView(mImageViewList.get(position % mImageViewList.size()));
         return mImageViewList.get(position % mImageViewList.size());  
 	}
 	

@@ -8,8 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.league.bean.TenYuanGrabRecordBean;
+import com.league.bean.GrabRecordBean;
 import com.mine.league.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -18,10 +19,10 @@ import java.util.List;
  */
 public class OneYuanGrabTakRecodAdapter extends BaseAdapter{
 
-    private List<TenYuanGrabRecordBean> list;
+    private List<GrabRecordBean> list;
     private Context ctx;
 
-    public OneYuanGrabTakRecodAdapter(List<TenYuanGrabRecordBean> list, Context ctx) {
+    public OneYuanGrabTakRecodAdapter(List<GrabRecordBean> list, Context ctx) {
         this.list = list;
         this.ctx = ctx;
     }
@@ -55,9 +56,10 @@ public class OneYuanGrabTakRecodAdapter extends BaseAdapter{
         }else{
             holder= (ViewHolder) convertView.getTag();
         }
-//        holder.name.setText(list.get(position).getName());
-//        holder.takTime.setText(list.get(position).getTakeTime());
-//        holder.takNum.setText(list.get(position).getTakeNum()+"");
+        holder.name.setText(list.get(position).getNickname());
+        holder.takTime.setText(list.get(position).getCreated_at());
+        holder.takNum.setText(list.get(position).getCount());
+        Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.thumb);
         return convertView;
     }
     class ViewHolder{
