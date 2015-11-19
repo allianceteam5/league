@@ -22,22 +22,17 @@ import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
-import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.TextHttpResponseHandler;
 import com.mine.league.R;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
-import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import io.paperdb.Paper;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
@@ -140,8 +135,8 @@ public class RecommendationPushlishActivity extends BaseActivity implements View
                     ArrayList<String> imgs = new ArrayList<String>(imgList);
                     Intent intent = new Intent(RecommendationPushlishActivity.this, ShowBigImgActivity.class);
                     imgs.remove(imgList.size() - 1);
-//                    intent.putStringArrayListExtra(IConstants.PARAMS_IMG_LIST, imgs);
-//                    intent.putExtra(IConstants.PARAMS_INDEX, position);
+                    intent.putStringArrayListExtra(PARAMS_IMG_LIST, imgs);
+                    intent.putExtra(PARAMS_INDEX, position);
                     startActivity(intent);
                 }
             }
@@ -152,7 +147,7 @@ public class RecommendationPushlishActivity extends BaseActivity implements View
         Intent intent = new Intent(RecommendationPushlishActivity.this, MultiImageSelectorActivity.class);
         // 是否显示调用相机拍照
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
-//                // 最大图片选择数量
+        // 最大图片选择数量
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_COUNT, 10 - imgList.size());
         // 设置模式 (支持 单选/MultiImageSelectorActivity.MODE_SINGLE 或者 多选/MultiImageSelectorActivity.MODE_MULTI)
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_MULTI);
@@ -191,7 +186,7 @@ public class RecommendationPushlishActivity extends BaseActivity implements View
                     final String key = "items/" + System.currentTimeMillis() + ".jpg";
                     String token = response.optString("token");
                     imgUrls.append(QINIU_PREFIX + key);
-                    imgUrls.append(",");
+                    imgUrls.append(" ");
                     uploadManager.put(imgList.get(index), key, token,
                             new UpCompletionHandler() {
                                 @Override
@@ -228,13 +223,12 @@ public class RecommendationPushlishActivity extends BaseActivity implements View
             }
 
             String imgStr = imgUrls.toString();
-            if (imgStr.endsWith(",")) {
-                imgStr = imgStr.substring(0, imgStr.length() - 1);
-            }
-            ApiUtil.recommendationCreated(getApplicationContext(), title, selectedRecommendationId, "", phone, content, imgStr, new JsonHttpResponseHandler() {
+            imgStr = imgStr.trim();
+            ApiUtil.recommendationCreated(getApplicationContext(), title, selectedRecommendationId, position, phone, content, imgStr, new JsonHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                     closeProgressDialog();
+                    Toast.makeText(getApplicationContext(), "发布失败", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override

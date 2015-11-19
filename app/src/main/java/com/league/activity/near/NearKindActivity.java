@@ -24,15 +24,13 @@ import android.widget.Toast;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
-import com.league.adapter.FeatureComAdapter;
 import com.league.adapter.HobbyInfoAdapter;
 import com.league.adapter.JobInfoAdapter;
-import com.league.adapter.SearchPeoAdapter;
-import com.league.bean.FeatureComInfo;
+import com.league.adapter.RecommendationInfoAdapter;
 import com.league.bean.HobbyInfoBean;
 import com.league.bean.JobInfoBean;
 import com.league.bean.KindBean;
-import com.league.bean.SearchPeopleInfo;
+import com.league.bean.RecommendationInfoBean;
 import com.league.dialog.NearRightDialog;
 import com.league.utils.Constants;
 import com.league.utils.ToastUtils;
@@ -70,18 +68,16 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     private Button btnSure;
     private LinearLayout ll_more;
     private int Flag;
-    private ListView infoseach;
-    private List<FeatureComInfo> listFeaCData = new ArrayList<FeatureComInfo>();
+    private ListView listview;
     private List<HobbyInfoBean> listMaFrData = new ArrayList<HobbyInfoBean>();
-    private List<SearchPeopleInfo> listSearchPeoData = new ArrayList<SearchPeopleInfo>();
     private JobInfoAdapter jobInfoAdapter;
-    private FeatureComAdapter feaComAdapter;
+    private RecommendationInfoAdapter recommendationInfoAdapter;
     private HobbyInfoAdapter hobbyInfoAdapter;
-    private SearchPeoAdapter searchPeoAdapter;
     private ArrayList<KindBean> kinds;
     private List<String> items;
-    private List<JobInfoBean> jobInfoList = new ArrayList<JobInfoBean>();
+    private List<JobInfoBean> jobInfoList = new ArrayList<>();
     private List<HobbyInfoBean> hobbyInfoList = new ArrayList<HobbyInfoBean>();
+    private List<RecommendationInfoBean> recomemdationInfoList = new ArrayList<>();
     private int currentPage = 1;
     private int sumPage;
     private int kindid = 0;
@@ -89,7 +85,6 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     private String searchString = "";
     DialogBuilder builder;
     ListMasterDialog dialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +106,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
         near_title = (TextView) findViewById(R.id.near_centertitle);
         near_t_rig = (ImageView) findViewById(R.id.near_ti_right);
         near_right = (ImageButton) findViewById(R.id.near_right);
-        infoseach = (ListView) findViewById(R.id.infosearch_list);
+        listview = (ListView) findViewById(R.id.infosearch_list);
         ll_more = (LinearLayout) findViewById(R.id.near_more);
         etSearch = (EditText) findViewById(R.id.et_search_search);
         btnSure = (Button) findViewById(R.id.btn_search_sure);
@@ -140,6 +135,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                                 jobInfoList.clear();
                                 break;
                             case 2:
+                                recomemdationInfoList.clear();
                                 break;
                             case 3:
                                 hobbyInfoList.clear();
@@ -286,8 +282,8 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<JobInfoBean> response) {
                         jobInfoList.addAll(response);
-                        closeProgressDialog();
                         updateApplyJobView();
+                        closeProgressDialog();
                     }
 
                     @Override
@@ -307,30 +303,27 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 });
                 break;
             case 2:
-                closeProgressDialog();
-                //从服务器拉取数据
-                for (int i = 0; i < 10; i++) {
-                    FeatureComInfo fci = new FeatureComInfo();
-                    fci.setUserNickname("userNickname" + i);
-                    fci.setFea_location("fea_location" + i);
-                    fci.setType("type" + i);
-                    fci.setLasttime("lasttime" + i);
-                    fci.setComnumber("" + i);
-                    fci.setInfoContent("infoContent" + i);
-                    fci.setSecContent("secContent" + i);
-                    listFeaCData.add(fci);
-                }
-                feaComAdapter = new FeatureComAdapter(getApplicationContext(), listFeaCData);
-                infoseach.setAdapter(feaComAdapter);
-                infoseach.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+                ApiUtil.recommendationsSearch(getApplicationContext(), "", 0, "", currentPage, new BaseJsonHttpResponseHandler<ArrayList<RecommendationInfoBean>>() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<RecommendationInfoBean> response) {
+                        recomemdationInfoList.addAll(response);
+                        updateRecommendationView();
+                        closeProgressDialog();
+                    }
 
                     @Override
-                    public void onItemClick(AdapterView<?> arg0, View arg1,
-                                            int arg2, long arg3) {
-                        // TODO Auto-generated method stub
-                        Intent intent2 = new Intent(getApplicationContext(), CommandItem.class);
-                        startActivity(intent2);
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<RecommendationInfoBean> errorResponse) {
+                        closeProgressDialog();
+                        ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_internet));
+                    }
 
+                    @Override
+                    protected ArrayList<RecommendationInfoBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                        Log.d("response", rawJsonData);
+                        JSONObject jsonObject = new JSONObject(rawJsonData);
+                        sumPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
+                        return new ObjectMapper().readValue(jsonObject.optJSONArray("items").toString(), new TypeReference<ArrayList<RecommendationInfoBean>>() {
+                        });
                     }
                 });
                 break;
@@ -339,8 +332,8 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<HobbyInfoBean> response) {
                         hobbyInfoList.addAll(response);
-                        closeProgressDialog();
                         updateHobbyView();
+                        closeProgressDialog();
                     }
 
                     @Override
@@ -370,8 +363,8 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     public void updateApplyJobView() {
         if (jobInfoAdapter == null) {
             jobInfoAdapter = new JobInfoAdapter(getApplicationContext(), jobInfoList);
-            infoseach.setAdapter(jobInfoAdapter);
-            infoseach.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            listview.setAdapter(jobInfoAdapter);
+            listview.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
@@ -386,11 +379,30 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
         }
     }
 
+    public void updateRecommendationView() {
+        if (recommendationInfoAdapter == null){
+            recommendationInfoAdapter = new RecommendationInfoAdapter(getApplicationContext(), recomemdationInfoList);
+            listview.setAdapter(recommendationInfoAdapter);
+//            listview.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+//
+//                @Override
+//                public void onItemClick(AdapterView<?> arg0, View arg1,
+//                                        int arg2, long arg3) {
+//                    // TODO Auto-generated method stub
+//                    Intent intent = new Intent(getApplicationContext(), RecommendationInfoActivity.class);
+//                    startActivity(intent);
+//                }
+//            });
+        }else {
+            recommendationInfoAdapter.notifyDataSetChanged();
+        }
+    }
+
     public void updateHobbyView() {
-        if (jobInfoAdapter == null) {
+        if (hobbyInfoAdapter == null) {
             hobbyInfoAdapter = new HobbyInfoAdapter(getApplicationContext(), hobbyInfoList);
-            infoseach.setAdapter(jobInfoAdapter);
-            infoseach.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            listview.setAdapter(jobInfoAdapter);
+            listview.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {

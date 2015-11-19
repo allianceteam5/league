@@ -7,12 +7,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp" >
+        android:layout_height="60dp" >
 
         <com.league.widget.CircleImageView
             android:id="@+id/near_feauserthumb"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:src="@drawable/head" >
@@ -29,20 +29,23 @@
             <TextView
                 android:id="@+id/near_feausername"
                 android:layout_width="wrap_content"
-                android:layout_height="16dp"
+                android:layout_height="wrap_content"
                 android:text="用户昵称"
+                android:textSize="18dp"
                 android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/near_fea_location"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="地区"
+                    android:textSize="16dp"
                     android:textColor="@color/black" />
 
                 <View
@@ -50,15 +53,16 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:background="@color/black2" />
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@color/black" />
 
                 <TextView
                     android:id="@+id/near_fea_type"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="外卖"
+                    android:textSize="16dp"
                     android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
@@ -66,30 +70,32 @@
         <TextView
             android:id="@+id/commentnum"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:text="2"
-            android:textColor="@color/black" />
+            android:textSize="16dp"
+            android:textColor="@color/red" />
 
         <ImageView
             android:id="@+id/xiaoxi"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="6dp"
             android:layout_toLeftOf="@+id/commentnum"
             android:src="@drawable/icon_xiaoxi" />
 
         <TextView
             android:id="@+id/lasttime"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/xiaoxi"
             android:text="11分钟前"
+            android:textSize="16dp"
             android:textColor="@color/black" />
     </RelativeLayout>
 
@@ -108,7 +114,7 @@
         <TextView
             android:id="@+id/near_fea_content"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:ellipsize="end"
@@ -116,52 +122,33 @@
             android:text="这事一个测试。来测试单行和最后结尾是否是省略号结束的，你卡看啊"
             android:textColor="@color/black"
             android:textSize="18sp" />
-
         <TextView
             android:id="@+id/fea_seccontent"
             android:layout_width="match_parent"
             android:layout_height="18dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:ellipsize="end"
             android:singleLine="true"
             android:text="很不错的一家店呀，大家都来侃侃"
             android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <LinearLayout
+            android:textSize="16sp"
+            android:layout_marginBottom="10dp"/>
+        <com.league.widget.NoScrollGridView
+            android:id="@+id/gridview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal" >
-
-            <ImageView 
-                android:id="@+id/feature_pic_1"
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_weight="1"
-                android:src="@drawable/example"/>
-            <ImageView 
-                android:id="@+id/feature_pic_2"
-               	android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_weight="1"
-                android:src="@drawable/example"/>
-            <ImageView 
-                android:id="@+id/feature_pic_3"
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_weight="1"
-                android:src="@drawable/example"/>
-            <ImageView 
-                android:id="@+id/feature_pic_4"
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_weight="1"
-                android:src="@drawable/example"/>
-        </LinearLayout>
+            android:paddingBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:gravity="center"
+            android:horizontalSpacing="5dp"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10dp"
+            android:listSelector="#00000000"
+            android:background="@color/white"/>
     </LinearLayout>
 
 </LinearLayout>

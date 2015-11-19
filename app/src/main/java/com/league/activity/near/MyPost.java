@@ -10,8 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
-import com.league.adapter.FeatureComAdapter;
-import com.league.bean.FeatureComInfo;
+import com.league.adapter.RecommendationInfoAdapter;
 import com.mine.league.R;
 
 import java.util.ArrayList;
@@ -22,8 +21,8 @@ public class MyPost extends Activity implements OnClickListener{
     private ImageView back,title_right,right,delete;
     private ListView list;
     private TextView title;
-    private List<FeatureComInfo> listdata=new ArrayList<FeatureComInfo>();
-    private FeatureComAdapter adapter;
+//    private List<FeatureComInfo> listdata=new ArrayList<FeatureComInfo>();
+    private RecommendationInfoAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,17 +46,17 @@ public class MyPost extends Activity implements OnClickListener{
     }
     void initdata(){
         for (int i = 0; i < 1; i++) {
-            FeatureComInfo fci = new FeatureComInfo();
-            fci.setUserNickname("userNickname" + i);
-            fci.setFea_location("fea_location" + i);
-            fci.setType("type" + i);
-            fci.setLasttime("lasttime" + i);
-            fci.setComnumber("" + i);
-            fci.setInfoContent("infoContent" + i);
-            fci.setSecContent("secContent" + i);
-            listdata.add(fci);
+//            FeatureComInfo fci = new FeatureComInfo();
+//            fci.setUserNickname("userNickname" + i);
+//            fci.setFea_location("fea_location" + i);
+//            fci.setType("type" + i);
+//            fci.setLasttime("lasttime" + i);
+//            fci.setComnumber("" + i);
+//            fci.setInfoContent("infoContent" + i);
+//            fci.setSecContent("secContent" + i);
+//            listdata.add(fci);
         }
-        adapter = new FeatureComAdapter(getApplicationContext(), listdata);
+//        adapter = new RecommendationInfoAdapter(getApplicationContext(), listdata);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -65,7 +64,7 @@ public class MyPost extends Activity implements OnClickListener{
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     int arg2, long arg3) {
                 // TODO Auto-generated method stub
-                Intent intent2 = new Intent(getApplicationContext(), CommandItem.class);
+                Intent intent2 = new Intent(getApplicationContext(), RecommendationInfoActivity.class);
                 startActivity(intent2);
 
             }

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.mine.league.R;
 
-public class CommandItem extends Activity implements View.OnClickListener {
+public class RecommendationInfoActivity extends Activity implements View.OnClickListener {
 
     private ImageView back,titleright,right1,right2;
     private TextView title;

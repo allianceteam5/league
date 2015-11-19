@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.league.utils.ComplexPreferences;
+import com.league.utils.IContants;
+import com.league.widget.CirclePageIndicator;
 import com.mine.league.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -21,11 +24,11 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ShowBigImgActivity extends BaseActivity {
+public class ShowBigImgActivity extends BaseActivity implements IContants{
     @Bind(R.id.viewpager)
     ViewPager viewpager;
-//    @Bind(R.id.indicator)
-//    CirclePageIndicator indicator;
+    @Bind(R.id.indicator)
+    CirclePageIndicator indicator;
 
     private SimpleImgAdapter adapter;
     private ArrayList<String> data;
@@ -37,13 +40,13 @@ public class ShowBigImgActivity extends BaseActivity {
         setContentView(R.layout.activity_show_big_img);
         ButterKnife.bind(this);
 
-//        data = getIntent().getStringArrayListExtra(PARAMS_IMG_LIST);
+        data = getIntent().getStringArrayListExtra(PARAMS_IMG_LIST);
 
-//        index = getIntent().getIntExtra(PARAMS_INDEX, 0);
+        index = getIntent().getIntExtra(PARAMS_INDEX, 0);
         viewpager.setOffscreenPageLimit(1);
         adapter=new SimpleImgAdapter(this, data);
         viewpager.setAdapter(adapter);
-//        indicator.setViewPager(viewpager);
+        indicator.setViewPager(viewpager);
         viewpager.setCurrentItem(index);
     }
 
@@ -80,13 +83,16 @@ public class ShowBigImgActivity extends BaseActivity {
             ImageView img = (ImageView) view.findViewById(R.id.img);
             final ProgressBar progressBar= (ProgressBar) view.findViewById(R.id.progressBar);
             String path=list.get(position);
-            if(path.startsWith("http")){
+//            if(path.startsWith("http")){
 //                path=AppUtil.qiniuResize(path);
-            }else {
-                path="file://"+path;
+//            }else {
+//                path="file://"+path;
+//            }
+            if (!path.startsWith("http")){
+                path = "file://" + path;
             }
             //Log.i("qiniu", "qiniu resizeAndWater=" + path);
-            Picasso.with(mContext).load(path).into(img, new Callback() {
+            Picasso.with(mContext).load(path).resize(ComplexPreferences.getScreenWidth(),ComplexPreferences.getScreenWidth() * 2).centerCrop().into(img, new Callback() {
                 @Override
                 public void onSuccess() {
                     progressBar.setVisibility(View.GONE);

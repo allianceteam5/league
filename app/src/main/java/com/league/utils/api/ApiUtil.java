@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.league.utils.Constants;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -74,7 +75,19 @@ public class ApiUtil {
         client.post(context, IClientUrl.RecomendationList, new RequestParams(), responseHandler);
     }
 
-    public static void recommendationCreated(Context context,String title,int kindid, String position,String phone,String reason,String pictures, TextHttpResponseHandler responseHandler) {
+    public static void recommendationsSearch(Context context,String phone,int kindid,String title,int currentPage, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        if(!TextUtils.isEmpty(phone))
+            params.add("phone",phone);
+        if(!TextUtils.isEmpty(title))
+            params.add("title",title);
+        if (kindid > 0)
+            params.add("kindid",String.valueOf(kindid));
+        printHttp(IClientUrl.RecomendationSearch + currentPage,params);
+        client.post(context,IClientUrl.RecomendationSearch + currentPage,params,responseHandler);
+    }
+
+    public static void recommendationCreated(Context context,String title,int kindid, String location,String phone,String reason,String pictures, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.add("phone",testPhone);
         params.add("kindid",String.valueOf(kindid));
@@ -82,8 +95,8 @@ public class ApiUtil {
         params.add("sellerphone",phone);
         params.add("reason",reason);
         params.add("pictures",pictures);
-//        params.add("");
-        printHttp(IClientUrl.RecomendationCreated,params);
+        params.add("location",location);
+        printHttp(IClientUrl.RecomendationCreated, params);
         client.post(context, IClientUrl.RecomendationCreated, params, responseHandler);
     }
 
@@ -145,6 +158,6 @@ public class ApiUtil {
         client.post(context,IClientUrl.OneYuanGrabGetSix,new RequestParams(),responseHandler);
     }
     public static void getQiniuToken(Context context, TextHttpResponseHandler responseHandler){
-        client.get(context,IClientUrl.GetQiniuToken,responseHandler);
+        client.get(context, IClientUrl.GetQiniuToken, responseHandler);
     }
 }

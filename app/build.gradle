@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "22.0.0"
+    buildToolsVersion "23.0.0 rc3"
 
     defaultConfig {
         applicationId "com.mine.league"
@@ -62,4 +62,5 @@ dependencies {
     compile 'net.soulwolf.widget:dialogBuilder:1.0.0'
     compile 'com.jungly:GridPasswordView:0.2'
     compile 'com.qiniu:qiniu-android-sdk:7.0.3'
+
 }
