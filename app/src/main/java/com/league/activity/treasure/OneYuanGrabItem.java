@@ -23,6 +23,7 @@ import com.league.bean.GrabRecordBean;
 import com.league.bean.MyRecordGrabBean;
 import com.league.bean.OneGrabDetailBean;
 import com.league.bean.OneYuanBean;
+import com.league.dialog.TakeInDialog;
 import com.league.utils.Constants;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.ListViewForScrollView;
@@ -43,7 +44,7 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
     private ImageView back2, titleright, right1, right2;
     private TextView title;
     private ListViewForScrollView listView;
-    private Button takeinNow;
+    private Button takeinNow,takeinAll;
 
     private OneYuanBean detail;
     private List<GrabRecordBean> records;
@@ -100,6 +101,8 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         listView= (ListViewForScrollView) findViewById(R.id.record_list);
         takeinNow=(Button)findViewById(R.id.takeinnow);
         takeinNow.setOnClickListener(this);
+        takeinAll= (Button) findViewById(R.id.takeall);
+        takeinAll.setOnClickListener(this);
 
         state= (ImageView) findViewById(R.id.state);
         period= (TextView) findViewById(R.id.period);
@@ -214,10 +217,24 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.takeinnow:
+                //弹出对话框
+                TakeInDialog takeInDialog=new TakeInDialog(OneYuanGrabItem.this,id,1);
+                takeInDialog.show();
                 break;
             case R.id.passanou:
                 Intent intent=new Intent(OneYuanGrabItem.this,PassAnnounced.class);
                 startActivity(intent);
+                break;
+            case R.id.takeall:
+                Intent inten=new Intent(OneYuanGrabItem.this,BuyList.class);
+                inten.putExtra("type",1);
+                inten.putExtra("number",detail.getRemain());
+                inten.putExtra("id",id);
+                inten.putExtra("buytype",1);
+                startActivity(inten);
+                break;
+            case R.id.picturesdetail:
+//                Intent intentpicture=new Intent ();
                 break;
         }
     }

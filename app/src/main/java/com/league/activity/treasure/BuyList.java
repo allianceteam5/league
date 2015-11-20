@@ -22,18 +22,21 @@ public class BuyList extends Activity implements View.OnClickListener{
     private TextView title;
     private ImageView balancepay,coinpay,alliancepay,bankcardpay;
     private ImageView balancepayed,coinpayed,alliancepayed,bankcardpayed;
-    int type=-1;
+    private int paytype=-1,type;
     private Button buy;
     private String id,number;
     private int buytype;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_list);
         id=getIntent().getStringExtra("id");
         number=getIntent().getStringExtra("number");
-        buytype=getIntent().getIntExtra("buytype",-1);//0表示正常购买 1表示购买全部
-        if(buytype==-1)
+        buytype=getIntent().getIntExtra("buytype", -1);//0表示正常购买 1表示购买全部
+        type=getIntent().getIntExtra("type",-1);
+        if(buytype==-1||type==-1)
             return ;
         initView();
 
@@ -86,7 +89,7 @@ public class BuyList extends Activity implements View.OnClickListener{
                 alliancepayed.setVisibility(View.GONE);
                 bankcardpay.setVisibility(View.VISIBLE);
                 bankcardpayed.setVisibility(View.GONE);
-                type=0;
+                paytype=0;
                 break;
             case R.id.select2:
                 balancepay.setVisibility(View.VISIBLE);
@@ -97,7 +100,7 @@ public class BuyList extends Activity implements View.OnClickListener{
                 alliancepayed.setVisibility(View.GONE);
                 bankcardpay.setVisibility(View.VISIBLE);
                 bankcardpayed.setVisibility(View.GONE);
-                type=1;
+                paytype=1;
                 break;
             case R.id.select3:
                 balancepay.setVisibility(View.VISIBLE);
@@ -108,7 +111,7 @@ public class BuyList extends Activity implements View.OnClickListener{
                 alliancepayed.setVisibility(View.VISIBLE);
                 bankcardpay.setVisibility(View.VISIBLE);
                 bankcardpayed.setVisibility(View.GONE);
-                type=2;
+                paytype=2;
                 break;
             case R.id.select4:
                 balancepay.setVisibility(View.VISIBLE);
@@ -119,15 +122,15 @@ public class BuyList extends Activity implements View.OnClickListener{
                 alliancepayed.setVisibility(View.GONE);
                 bankcardpay.setVisibility(View.GONE);
                 bankcardpayed.setVisibility(View.VISIBLE);
-                type=4;
+                paytype=4;
                 break;
             case R.id.makepayment:
-                if(type==-1){
+                if(paytype==-1){
                     ToastUtils.showShortToast(getApplication(),"请选择支付方式");
 
                 }else{
-                    if(buytype==0){
-                        ApiUtil.grabcoinBuy(getApplication(), id, Constants.PHONENUM, number, type + "", new BaseJsonHttpResponseHandler<BuySucessBean>() {
+                    if(buytype==0&&type==0){
+                        ApiUtil.grabcoinBuy(getApplication(), id, Constants.PHONENUM, number, paytype + "", new BaseJsonHttpResponseHandler<BuySucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, BuySucessBean response) {
                                 onBackPressed();
@@ -145,8 +148,45 @@ public class BuyList extends Activity implements View.OnClickListener{
                                 return null;
                             }
                         });
-                    }else if(buytype==1){
-                        ApiUtil.grabcoinBuyAll(getApplication(), id, Constants.PHONENUM, type + "", new BaseJsonHttpResponseHandler<BuySucessBean>() {
+                    }else if(buytype==1&&type==0){
+                        ApiUtil.grabcoinBuyAll(getApplication(), id, Constants.PHONENUM, paytype + "", new BaseJsonHttpResponseHandler<BuySucessBean>() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, BuySucessBean response) {
+                                onBackPressed();
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, BuySucessBean errorResponse) {
+
+                            }
+
+                            @Override
+                            protected BuySucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                                return null;
+                            }
+                        });
+                    }else if(buytype==0&&type==1){
+                        ApiUtil.oneYuanBuy(getApplication(), id, Constants.PHONENUM, number, paytype + "", new BaseJsonHttpResponseHandler<BuySucessBean>() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, BuySucessBean response) {
+                                onBackPressed();
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, BuySucessBean errorResponse) {
+
+                            }
+
+                            @Override
+                            protected BuySucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+
+                                return null;
+                            }
+                        });
+                    }else if(buytype==1&&type==1){
+                        ApiUtil.oneyuanBuyAll(getApplication(), id, Constants.PHONENUM, paytype + "", new BaseJsonHttpResponseHandler<BuySucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, BuySucessBean response) {
                                 onBackPressed();

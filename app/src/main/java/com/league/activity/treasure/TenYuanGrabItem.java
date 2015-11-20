@@ -175,7 +175,7 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
         switch (v.getId()){
             case R.id.takeinnow:
                 //弹出对话框
-                TakeInDialog takeInDialog=new TakeInDialog(TenYuanGrabItem.this,id);
+                TakeInDialog takeInDialog=new TakeInDialog(TenYuanGrabItem.this,id,0);
                 takeInDialog.show();
 
                 break;
@@ -185,6 +185,7 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
                 break;
             case R.id.buyall:
                 Intent inten=new Intent(TenYuanGrabItem.this,BuyList.class);
+                inten.putExtra("type",0);
                 inten.putExtra("number",detail.getRemain());
                 inten.putExtra("id",id);
                 inten.putExtra("buytype",1);

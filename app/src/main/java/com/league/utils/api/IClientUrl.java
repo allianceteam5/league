@@ -21,13 +21,15 @@ public class IClientUrl {
 
     public static final String GrabcornsSearch = testServerUrl + "grabcorns/search?page=";
     public static final String GrabcornsGetthree = testServerUrl + "grabcorns/getthree";
-    public static final String GrabcornsGetTenDetail = testServerUrl+ "grabcorns/view";
+    public static final String GrabcornsGetTenDetail = testServerUrl + "grabcorns/view";
 
     public static final String GrabCommoditiesSearch = testServerUrl + "grabcommodities/search?page=";
-    public static final String GrabCommoditiesDetail=testServerUrl+"grabcommodities/view";
-    public static final String GrabcoinBuy=testServerUrl+"grabcorns/buy";
-    public static final String getGrabcoinBuyAll=testServerUrl+"grabcorns/buyall";
-    public static final String OneYuanGrabGetSix="grabcommodities/getthree";
+    public static final String GrabCommoditiesDetail = testServerUrl + "grabcommodities/view";
+    public static final String GrabcoinBuy = testServerUrl + "grabcorns/buy";
+    public static final String getGrabcoinBuyAll = testServerUrl + "grabcorns/buyall";
+    public static final String OneYuanGrabGetSix = "grabcommodities/getthree";
 
     public static final String GetQiniuToken = testServerUrl + "users/token";
+    public static final String OneyuanBuy = testServerUrl + "grabcommodities/buy";
+    public static final String OneyuanBuyAll = testServerUrl + "grabcorns/buyall";
 }

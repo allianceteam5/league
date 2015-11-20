@@ -116,6 +116,7 @@
                 android:background="@color/black2" />
 
             <RelativeLayout
+                android:id="@+id/picturesdetail"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
@@ -249,6 +250,7 @@
             android:textSize="16sp" />
 
         <Button
+            android:id="@+id/takeall"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dip"

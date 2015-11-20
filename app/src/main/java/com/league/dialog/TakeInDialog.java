@@ -30,11 +30,13 @@ public class TakeInDialog extends Dialog implements android.view.View.OnClickLis
     View localView;
     private RelativeLayout clearallpan;
     private String coinID;
+    private int type;
 
-    public TakeInDialog(Context context,String coinID) {
+    public TakeInDialog(Context context,String coinID,int type) {
         super(context);
         this.context = context;
         this.coinID=coinID;
+        this.type=type;//type==0表示10夺金type==1表示一元夺宝
     }
 
     @Override
@@ -105,6 +107,7 @@ public class TakeInDialog extends Dialog implements android.view.View.OnClickLis
                 inten.putExtra("number",number.getText().toString());
                 inten.putExtra("id",coinID);
                 inten.putExtra("buytype",0);
+                inten.putExtra("type",type);
                 context.startActivity(inten);
                 this.dismiss();
                 break;
