@@ -141,7 +141,6 @@ public class ApiUtil {
         params.put("phone", phone);
         client.post(context,IClientUrl.GrabcornsGetTenDetail,params,responseHandler);
     }
-<<<<<<< HEAD
     public static void grabcommoditiesGetDetail(Context context,String grabcommodityid,String phone,TextHttpResponseHandler responseHandler){
         RequestParams params=new RequestParams();
         params.put("grabcommodityid",grabcommodityid);
@@ -157,18 +156,17 @@ public class ApiUtil {
         params.put("type",type);
         client.post(context,IClientUrl.GrabcoinBuy,params,responseHandler);
     }
-    public static void grabcoinBuyAll(Context context,String grabcornid,String phone,String type,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("grabcornid",grabcornid);
-        params.put("phone",phone);
-        params.put("type",type);
-        client.post(context,IClientUrl.getGrabcoinBuyAll,params,responseHandler);
-=======
+    public static void grabcoinBuyAll(Context context,String grabcornid,String phone,String type,TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("grabcornid", grabcornid);
+        params.put("phone", phone);
+        params.put("type", type);
+        client.post(context, IClientUrl.getGrabcoinBuyAll, params, responseHandler);
+    }
     public static void oneYuanGrabGetSix(Context context,TextHttpResponseHandler responseHandler){
         client.post(context,IClientUrl.OneYuanGrabGetSix,new RequestParams(),responseHandler);
     }
     public static void getQiniuToken(Context context, TextHttpResponseHandler responseHandler){
         client.get(context,IClientUrl.GetQiniuToken,responseHandler);
->>>>>>> 604ccf37d0578113e437e171e1573e4dc41cbedb
     }
 }

@@ -24,14 +24,10 @@ public class IClientUrl {
     public static final String GrabcornsGetTenDetail = testServerUrl+ "grabcorns/view";
 
     public static final String GrabCommoditiesSearch = testServerUrl + "grabcommodities/search?page=";
-<<<<<<< HEAD
     public static final String GrabCommoditiesDetail=testServerUrl+"grabcommodities/view";
     public static final String GrabcoinBuy=testServerUrl+"grabcorns/buy";
     public static final String getGrabcoinBuyAll=testServerUrl+"grabcorns/buyall";
-=======
     public static final String OneYuanGrabGetSix="grabcommodities/getthree";
 
     public static final String GetQiniuToken = testServerUrl + "users/token";
->>>>>>> 604ccf37d0578113e437e171e1573e4dc41cbedb
-
 }
