@@ -181,6 +181,7 @@
             android:layout_centerVertical="true"
             />
         <ImageView
+
             android:id="@+id/dianzan"
             android:layout_width="15dp"
             android:layout_height="15dp"

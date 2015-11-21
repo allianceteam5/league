@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.league.bean.BuySucessBean;
+import com.league.bean.SucessBean;
 import com.league.utils.Constants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
@@ -130,76 +130,76 @@ public class BuyList extends Activity implements View.OnClickListener{
 
                 }else{
                     if(buytype==0&&type==0){
-                        ApiUtil.grabcoinBuy(getApplication(), id, Constants.PHONENUM, number, paytype + "", new BaseJsonHttpResponseHandler<BuySucessBean>() {
+                        ApiUtil.grabcoinBuy(getApplication(), id, Constants.PHONENUM, number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
-                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, BuySucessBean response) {
+                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                 onBackPressed();
                                 finish();
                             }
 
                             @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, BuySucessBean errorResponse) {
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
 
                             }
 
                             @Override
-                            protected BuySucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
 
                                 return null;
                             }
                         });
                     }else if(buytype==1&&type==0){
-                        ApiUtil.grabcoinBuyAll(getApplication(), id, Constants.PHONENUM, paytype + "", new BaseJsonHttpResponseHandler<BuySucessBean>() {
+                        ApiUtil.grabcoinBuyAll(getApplication(), id, Constants.PHONENUM, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
-                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, BuySucessBean response) {
+                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                 onBackPressed();
                                 finish();
                             }
 
                             @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, BuySucessBean errorResponse) {
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
 
                             }
 
                             @Override
-                            protected BuySucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                                 return null;
                             }
                         });
                     }else if(buytype==0&&type==1){
-                        ApiUtil.oneYuanBuy(getApplication(), id, Constants.PHONENUM, number, paytype + "", new BaseJsonHttpResponseHandler<BuySucessBean>() {
+                        ApiUtil.oneYuanBuy(getApplication(), id, Constants.PHONENUM, number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
-                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, BuySucessBean response) {
+                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                 onBackPressed();
                                 finish();
                             }
 
                             @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, BuySucessBean errorResponse) {
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
 
                             }
 
                             @Override
-                            protected BuySucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
 
                                 return null;
                             }
                         });
                     }else if(buytype==1&&type==1){
-                        ApiUtil.oneyuanBuyAll(getApplication(), id, Constants.PHONENUM, paytype + "", new BaseJsonHttpResponseHandler<BuySucessBean>() {
+                        ApiUtil.oneyuanBuyAll(getApplication(), id, Constants.PHONENUM, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
-                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, BuySucessBean response) {
+                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                 onBackPressed();
                                 finish();
                             }
 
                             @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, BuySucessBean errorResponse) {
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
 
                             }
 
                             @Override
-                            protected BuySucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                                 return null;
                             }
                         });

@@ -184,4 +184,42 @@ public class ApiUtil {
         params.put("type", type);
         client.post(context, IClientUrl.OneyuanBuyAll, params, responseHandler);
     }
+    //聊吧获取最新发布接口
+    public static void liaobagetlatest(Context context,String phone,int currentPage,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        client.post(context,IClientUrl.LiaobaGetLatest+currentPage,params,responseHandler);
+    }
+    //获取聊吧最热接口
+    public static void liaobaGetHot(Context context,String phone,int currentPage,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        client.post(context,IClientUrl.LiaobaGetHot+currentPage,params,responseHandler);
+    }
+    //获取我的关注
+    public static void liaobaGetConcern(Context context,String phone,int currentPage,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        client.post(context,IClientUrl.LiaobaGetConcern+currentPage,params,responseHandler);
+    }
+    //获取聊吧人气
+    public static void liaobaGetPopularity(Context context,String phone,int currentPage,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        client.post(context,IClientUrl.LiaobaGetPopularity+currentPage,params,responseHandler);
+    }
+    //点赞
+    public static void liaobaLike(Context context,String phone,String tbmessageid,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("tbmessageid",tbmessageid);
+        params.put("phone",phone);
+        client.post(context,IClientUrl.LiaobaLike,params,responseHandler);
+    }
+    //取消点赞
+    public static void liaobaCanclelike(Context context,String phone,String tbmessageid,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("tbmessageid",tbmessageid);
+        client.post(context,IClientUrl.LiaobaCancellike,params,responseHandler);
+    }
 }

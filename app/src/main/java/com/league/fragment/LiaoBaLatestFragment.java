@@ -2,58 +2,194 @@ package com.league.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.liaobaactivity.TopicContent;
 import com.league.adapter.LiaoBaAdapter;
 import com.league.bean.LiaoBaUserInfo;
-import com.league.view.MyListView;
+import com.league.bean.SucessBean;
+import com.league.interf.ListItemClickHelp;
+import com.league.utils.Constants;
+import com.league.utils.api.ApiUtil;
+import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class LiaoBaLatestFragment extends Fragment {
+public class LiaoBaLatestFragment extends Fragment implements ListItemClickHelp{
 
     private View layout;
-    private MyListView listView;
+    private ListView listView;
 
     private List<LiaoBaUserInfo> list=new ArrayList<LiaoBaUserInfo>();
+    private int totalPage;
+    private int currentPage=1;
+    private PullToRefreshLayout pullToRefreshLayout;
+    private LiaoBaAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         layout=inflater.inflate(R.layout.fragment_liao_ba_latest,container,false);
         initView();
+        initData(currentPage);
         return layout;
     }
     private void initView(){
-        listView= (MyListView) layout.findViewById(R.id.liaoba_latest_list);
-        for(int i=0;i<10;i++){
-            LiaoBaUserInfo lbi=new LiaoBaUserInfo();
-            lbi.setName("王思聪"+i);
-            lbi.setTime(i+"分钟前");
-            lbi.setHot_new_flag(1);
-            lbi.setTitle("标题"+i);
-            lbi.setContent("内容"+i);
-            lbi.setFlag_concern(i%2);
-            lbi.setDianzannum(i);
-            lbi.setCommentnum(i);
-            list.add(lbi);
-        }
-        listView.setAdapter(new LiaoBaAdapter(list,getActivity().getApplication()));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView= (ListView) layout.findViewById(R.id.liaoba_latest_list);
+        adapter=new LiaoBaAdapter(list, getActivity().getApplication(),0,this);
+        listView.setAdapter(adapter);
+        pullToRefreshLayout = (PullToRefreshLayout) layout.findViewById(R.id.refresh_view);
+        pullToRefreshLayout.setOnRefreshListener(new MyListener());
+        pullToRefreshLayout.setVisibility(View.GONE);
+
+    }
+    private void initData(final int currentPage){
+        ApiUtil.liaobagetlatest(getActivity().getApplication(), Constants.PHONENUM, currentPage,new BaseJsonHttpResponseHandler<ArrayList<LiaoBaUserInfo>>() {
+
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getActivity().getApplication(), TopicContent.class);
-                startActivity(intent);
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaUserInfo> response) {
+                if(currentPage==1){
+                    list.clear();
+                }
+                list.addAll(response);
+                adapter.notifyDataSetChanged();
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(getActivity().getApplication(), TopicContent.class);
+                        startActivity(intent);
+                    }
+                });
+                pullToRefreshLayout.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaUserInfo> errorResponse) {
+                Toast.makeText(getActivity(),"哎呀网络不好",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            protected ArrayList<LiaoBaUserInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                JSONObject jsonObject=new JSONObject(rawJsonData);
+                totalPage=jsonObject.optJSONObject("_meta").optInt("pageCount");
+                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaUserInfo>>() {});
             }
         });
+    }
+
+    @Override
+    public void onClick(View item, View widget, final int position, int which) {
+        switch (which){
+            case R.id.dianzan:
+                if("1".equals(list.get(position).getIsliked())){
+                    list.get(position).setIsliked("0");
+                    ApiUtil.liaobaCanclelike(getActivity(), Constants.PHONENUM, list.get(position).getId(), new BaseJsonHttpResponseHandler<SucessBean>() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                            if("1".equals(response.getFlag())){
+                                int num=Integer.valueOf(list.get(position).getLikecount());
+                                num--;
+                                list.get(position).setLikecount(num+"");
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+
+                        }
+
+                        @Override
+                        protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                            return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                            });
+                        }
+                    });
+                }else{
+                    list.get(position).setIsliked("1");
+                    ApiUtil.liaobaLike(getActivity(), Constants.PHONENUM, list.get(position).getId(), new BaseJsonHttpResponseHandler<SucessBean>() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                            if ("1".equals(response.getFlag())) {
+                                int num = Integer.valueOf(list.get(position).getLikecount());
+                                num++;
+                                list.get(position).setLikecount(num + "");
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+
+                        }
+
+                        @Override
+                        protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                            return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                            });
+                        }
+                    });
+                }
+        }
+    }
+
+    public class MyListener implements PullToRefreshLayout.OnRefreshListener
+    {
+
+        @Override
+        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout)
+        {
+            // 下拉刷新操作
+            new Handler()
+            {
+                @Override
+                public void handleMessage(Message msg)
+                {
+                    currentPage = 1;
+                    initData(currentPage);
+                    // 千万别忘了告诉控件刷新完毕了哦！
+                    pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                }
+            }.sendEmptyMessageDelayed(0, 1000);
+
+        }
+
+        @Override
+        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout)
+        {
+            // 加载操作
+            new Handler()
+            {
+                @Override
+                public void handleMessage(Message msg)
+                {
+                    currentPage++;
+                    if(currentPage <= totalPage)
+                        initData(currentPage);
+                    // 千万别忘了告诉控件加载完毕了哦！
+                    pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                }
+            }.sendEmptyMessageDelayed(0, 1000);
+        }
+
     }
 }
