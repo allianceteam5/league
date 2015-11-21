@@ -166,10 +166,47 @@ public class ApiUtil {
         params.put("phone", phone);
         client.post(context,IClientUrl.GrabcornsGetTenDetail,params,responseHandler);
     }
+    public static void grabcommoditiesGetDetail(Context context,String grabcommodityid,String phone,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("grabcommodityid",grabcommodityid);
+        params.put("phone",phone);
+        client.post(context,IClientUrl.GrabCommoditiesDetail,params,responseHandler);
+    }
+
+    public static void grabcoinBuy(Context context,String grabcornid,String phone,String count,String type,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("grabcornid",grabcornid);
+        params.put("phone",phone);
+        params.put("count",count);
+        params.put("type",type);
+        client.post(context,IClientUrl.GrabcoinBuy,params,responseHandler);
+    }
+    public static void grabcoinBuyAll(Context context,String grabcornid,String phone,String type,TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("grabcornid", grabcornid);
+        params.put("phone", phone);
+        params.put("type", type);
+        client.post(context, IClientUrl.getGrabcoinBuyAll, params, responseHandler);
+    }
     public static void oneYuanGrabGetSix(Context context,TextHttpResponseHandler responseHandler){
         client.post(context,IClientUrl.OneYuanGrabGetSix,new RequestParams(),responseHandler);
     }
     public static void getQiniuToken(Context context, TextHttpResponseHandler responseHandler){
         client.get(context, IClientUrl.GetQiniuToken, responseHandler);
+    }
+    public static void oneYuanBuy(Context context,String grabcommodityid,String phone,String count,String type,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("grabcommodityid",grabcommodityid);
+        params.put("phone",phone);
+        params.put("count",count);
+        params.put("type",type);
+        client.post(context, IClientUrl.OneyuanBuy, params, responseHandler);
+    }
+    public static void oneyuanBuyAll(Context context,String grabcommodityid,String phone,String type,TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("grabcommodityid", grabcommodityid);
+        params.put("phone", phone);
+        params.put("type", type);
+        client.post(context, IClientUrl.OneyuanBuyAll, params, responseHandler);
     }
 }

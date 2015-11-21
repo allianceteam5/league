@@ -1,6 +1,5 @@
 package com.league.activity.treasure;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +13,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.adapter.OneyuanGrabAdapter;
-import com.league.bean.AnnouncedTheLatestBean;
 import com.league.bean.OneYuanBean;
 import com.league.bean.TenYuanGrabBean;
 import com.league.utils.Constants;
@@ -44,8 +42,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
     private ProgressBar progressbar1, progressbar2, progressbar3;
     private List<TenYuanGrabBean> listTenYuanGrab = new ArrayList<TenYuanGrabBean>();
     private List<TenYuanGrabBean> announcedList = new ArrayList<TenYuanGrabBean>();
-    private List<OneYuanBean> listGrid = new ArrayList<OneYuanBean>();
-    private OneyuanGrabAdapter oneyuanGrabAdapter;
+
     private List<OneYuanBean> list = new ArrayList<OneYuanBean>();
     private String pictureUrl = "http://pica.nipic.com/2007-12-24/20071224162158623_2.jpg";
 
@@ -92,54 +89,20 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
     }
 
     void initData() {
-        ApiUtil.grabcornsGetthree(getApplication(), new BaseJsonHttpResponseHandler<ArrayList<TenYuanGrabBean>>() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<TenYuanGrabBean> response) {
-                listTenYuanGrab.addAll(response);
-                Paper.book().write(Constants.TenYuanThree, listTenYuanGrab);
-                updateTenYuan();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<TenYuanGrabBean> errorResponse) {
-                listTenYuanGrab = Paper.book().read(Constants.TenYuanThree);
-                if (listTenYuanGrab != null && listTenYuanGrab.size() == 3)
-                    updateTenYuan();
-            }
-
-            @Override
-            protected ArrayList<TenYuanGrabBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<TenYuanGrabBean>>() {
-                });
-            }
-        });
-        //type=1时是获取最近揭晓的信息
-        ApiUtil.grabcornsSearch(getApplicationContext(), 1, 1,  new BaseJsonHttpResponseHandler<ArrayList<TenYuanGrabBean>>() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<TenYuanGrabBean> response) {
-                announcedList.addAll(response);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<TenYuanGrabBean> errorResponse) {
-            }
-
-            @Override
-            protected ArrayList<TenYuanGrabBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<TenYuanGrabBean>>() {
-                });
-            }
-        });
-
         ApiUtil.grabCommoditiesSearch(getApplication(), 0, 1, new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
-                list.addAll(response);
+
+                for(int i=0;i<6;i++){
+                    list.add(response.get(i));
+                }
+
                 gridView.setAdapter(new OneyuanGrabAdapter(getApplication(), list));
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(OneYuan.this, OneYuanGrabItem.class);
+                        intent.putExtra("id",list.get(position).getId());
                         startActivity(intent);
                     }
                 });
@@ -159,6 +122,47 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
                 });
             }
         });
+        ApiUtil.grabcornsGetthree(getApplication(), new BaseJsonHttpResponseHandler<ArrayList<TenYuanGrabBean>>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<TenYuanGrabBean> response) {
+
+                listTenYuanGrab.addAll(response);
+                Paper.book().write(Constants.TenYuanThree, listTenYuanGrab);
+                updateTenYuan();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<TenYuanGrabBean> errorResponse) {
+                listTenYuanGrab = Paper.book().read(Constants.TenYuanThree);
+                if (listTenYuanGrab != null && listTenYuanGrab.size() == 3)
+                    updateTenYuan();
+            }
+
+            @Override
+            protected ArrayList<TenYuanGrabBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<TenYuanGrabBean>>() {
+                });
+            }
+        });
+        //type=1时是获取最近揭晓的信息
+        ApiUtil.grabcornsSearch(getApplicationContext(), 1, 1, new BaseJsonHttpResponseHandler<ArrayList<TenYuanGrabBean>>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<TenYuanGrabBean> response) {
+                announcedList.addAll(response);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<TenYuanGrabBean> errorResponse) {
+            }
+
+            @Override
+            protected ArrayList<TenYuanGrabBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<TenYuanGrabBean>>() {
+                });
+            }
+        });
+
+
     }
 
 

@@ -3,7 +3,7 @@ package com.league.bean;
 /**
  * Created by liug on 15/11/16.
  */
-public class TenYuanGrabRecordBean {
+public class GrabRecordBean {
     /**
      * id : 18
      * userid : 3

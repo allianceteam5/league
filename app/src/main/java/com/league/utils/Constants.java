@@ -33,6 +33,9 @@ public class Constants {
     public static final String TenYuanThree = "tenyuanthree";
     public static final String TenYuanMore = "tenyuanmore";
     public static final String TenYuanDetail="tenyuandetail";
+    public static final String OneYuanDetail="oneyuandetail";
+    public static final String TenyuanGrabRecords="tenyuangrabrecords";
+    public static final String OneYuanDetailRecords="oneyuandetailrecords";
 
 
 }
