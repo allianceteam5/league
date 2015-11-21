@@ -15,34 +15,29 @@ import android.widget.Toast;
 
 import com.league.activity.BaseActivity;
 import com.league.activity.ShowBigImgActivity;
-import com.league.adapter.ImgGridAdapter;
+import com.league.adapter.ImgGridWithPickImgAdapter;
 import com.league.bean.KindBean;
 import com.league.interf.OnAllComplete;
 import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
-import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.TextHttpResponseHandler;
 import com.mine.league.R;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
-import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import io.paperdb.Paper;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
-public class RecommendationPushlishActivity extends BaseActivity implements View.OnClickListener, IContants {
+public class RecommendationInfoPublishActivity extends BaseActivity implements View.OnClickListener, IContants {
     private ImageView back, title_right, right;
     private TextView ettitle, save, tvKind;
     private RelativeLayout rl_kind;
@@ -51,7 +46,7 @@ public class RecommendationPushlishActivity extends BaseActivity implements View
     private int selectedRecommendationIndex = -1;
     private int selectedRecommendationId = -1;
     private List<String> imgList;
-    private ImgGridAdapter adapter;
+    private ImgGridWithPickImgAdapter adapter;
     private StringBuilder imgUrls = new StringBuilder();
     private int sucNum = 0;
     String title, position, phone, content;
@@ -59,7 +54,7 @@ public class RecommendationPushlishActivity extends BaseActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recommendation_pushlish);
+        setContentView(R.layout.activity_recommendationinfo_pushlish);
         back = (ImageView) findViewById(R.id.near_back);
         back.setOnClickListener(this);
         title_right = (ImageView) findViewById(R.id.near_ti_right);
@@ -90,7 +85,7 @@ public class RecommendationPushlishActivity extends BaseActivity implements View
                 finish();
                 break;
             case R.id.rl_kind:
-                Intent intent = new Intent(RecommendationPushlishActivity.this, RadioSelectActivity.class);
+                Intent intent = new Intent(RecommendationInfoPublishActivity.this, RadioSelectActivity.class);
                 intent.putExtra(Constants.RADIOSELECEDTINDEX, selectedRecommendationIndex);
                 intent.putExtra(Constants.RADIOSELECTKIND, Constants.RADIORECOMMENDATION);
                 startActivityForResult(intent, Constants.RADIORECOMMENDATION);
@@ -128,7 +123,7 @@ public class RecommendationPushlishActivity extends BaseActivity implements View
     private void initGridView() {
         imgList = new ArrayList<String>();
         imgList.add(String.valueOf(R.drawable.upload_default));
-        adapter = new ImgGridAdapter(this, imgList);
+        adapter = new ImgGridWithPickImgAdapter(this, imgList);
         gridview.setAdapter(adapter);
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -138,10 +133,10 @@ public class RecommendationPushlishActivity extends BaseActivity implements View
                     pickImage();
                 } else {
                     ArrayList<String> imgs = new ArrayList<String>(imgList);
-                    Intent intent = new Intent(RecommendationPushlishActivity.this, ShowBigImgActivity.class);
+                    Intent intent = new Intent(RecommendationInfoPublishActivity.this, ShowBigImgActivity.class);
                     imgs.remove(imgList.size() - 1);
-//                    intent.putStringArrayListExtra(IConstants.PARAMS_IMG_LIST, imgs);
-//                    intent.putExtra(IConstants.PARAMS_INDEX, position);
+                    intent.putStringArrayListExtra(PARAMS_IMG_LIST, imgs);
+                    intent.putExtra(PARAMS_INDEX, position);
                     startActivity(intent);
                 }
             }
@@ -149,10 +144,10 @@ public class RecommendationPushlishActivity extends BaseActivity implements View
     }
 
     private void pickImage() {
-        Intent intent = new Intent(RecommendationPushlishActivity.this, MultiImageSelectorActivity.class);
+        Intent intent = new Intent(RecommendationInfoPublishActivity.this, MultiImageSelectorActivity.class);
         // 是否显示调用相机拍照
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
-//                // 最大图片选择数量
+        // 最大图片选择数量
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_COUNT, 10 - imgList.size());
         // 设置模式 (支持 单选/MultiImageSelectorActivity.MODE_SINGLE 或者 多选/MultiImageSelectorActivity.MODE_MULTI)
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_MULTI);
@@ -191,7 +186,7 @@ public class RecommendationPushlishActivity extends BaseActivity implements View
                     final String key = "items/" + System.currentTimeMillis() + ".jpg";
                     String token = response.optString("token");
                     imgUrls.append(QINIU_PREFIX + key);
-                    imgUrls.append(",");
+                    imgUrls.append(" ");
                     uploadManager.put(imgList.get(index), key, token,
                             new UpCompletionHandler() {
                                 @Override
@@ -228,13 +223,12 @@ public class RecommendationPushlishActivity extends BaseActivity implements View
             }
 
             String imgStr = imgUrls.toString();
-            if (imgStr.endsWith(",")) {
-                imgStr = imgStr.substring(0, imgStr.length() - 1);
-            }
-            ApiUtil.recommendationCreated(getApplicationContext(), title, selectedRecommendationId, "", phone, content, imgStr, new JsonHttpResponseHandler() {
+            imgStr = imgStr.trim();
+            ApiUtil.recommendationCreated(getApplicationContext(), title, selectedRecommendationId, position, phone, content, imgStr, new JsonHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                     closeProgressDialog();
+                    Toast.makeText(getApplicationContext(), "发布失败", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override

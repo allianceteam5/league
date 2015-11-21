@@ -24,8 +24,8 @@ public class HobbyInfoBean {
 	private String id;
 	private String userid;
 	private String picture;
-	private String sex;
-	private String age;
+	private int sex;
+	private int age;
 	private String hobbyid;
 	private String hobby;
 	private String content;
@@ -47,11 +47,11 @@ public class HobbyInfoBean {
 		this.picture = picture;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(int sex) {
 		this.sex = sex;
 	}
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
@@ -95,11 +95,11 @@ public class HobbyInfoBean {
 		return picture;
 	}
 
-	public String getSex() {
+	public int getSex() {
 		return sex;
 	}
 
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
 

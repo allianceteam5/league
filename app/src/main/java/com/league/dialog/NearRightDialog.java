@@ -1,13 +1,11 @@
 package com.league.dialog;
 
 
-import com.league.activity.near.MakingFriItem;
-import com.league.activity.near.MyJobHunting;
+import com.league.activity.near.HobbyInfoPublishActivity;
 import com.league.activity.near.MyPost;
-import com.league.activity.near.NearActivity;
-import com.league.activity.near.PostCard;
-import com.league.activity.near.RecommendationPushlishActivity;
-import com.league.activity.near.WantAJob;
+import com.league.activity.near.RecommendationInfoPublishActivity;
+import com.league.activity.near.JobInfoPublishActivity;
+import com.league.utils.IContants;
 import com.mine.league.R;
 
 import android.app.Dialog;
@@ -18,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class NearRightDialog extends Dialog implements
-		android.view.View.OnClickListener {
+		android.view.View.OnClickListener,IContants {
 
 	Context context;
 	private LinearLayout layout_want, layout_my;
@@ -68,13 +66,13 @@ public class NearRightDialog extends Dialog implements
 		case R.id.want_job:
 			switch (Flag) {
 				case 1:
-					context.startActivity(new Intent(context, WantAJob.class));
+					context.startActivity(new Intent(context, JobInfoPublishActivity.class));
 					break;
 				case 2:
-					context.startActivity(new Intent(context, RecommendationPushlishActivity.class));
+					context.startActivity(new Intent(context, RecommendationInfoPublishActivity.class));
 					break;
 				case 3:
-					context.startActivity(new Intent(context, MakingFriItem.class));
+					context.startActivity(new Intent(context, HobbyInfoPublishActivity.class));
 					break;
 				case 4:
 					break;
@@ -82,18 +80,9 @@ public class NearRightDialog extends Dialog implements
 			dismiss();
 			break;
 		case R.id.mysearchjob:
-			switch (Flag) {
-				case 1:
-					context.startActivity(new Intent(context, MyJobHunting.class));
-					break;
-				case 2:
-					context.startActivity(new Intent(context, MyPost.class));
-					break;
-				case 3:
-					break;
-				case 4:
-					break;
-			}
+			Intent intent = new Intent(context, MyPost.class);
+			intent.putExtra(MYPOST_FLAG,Flag);
+			context.startActivity(intent);
 			dismiss();
 			break;
 		default:

@@ -3,7 +3,6 @@ package com.league.activity.near;
 import com.league.bean.JobInfoBean;
 import com.league.utils.Constants;
 import com.league.utils.DateFormatUtils;
-import com.league.utils.Utils;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
@@ -15,8 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -68,9 +65,9 @@ public class JobInfoActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_near_jobinfo_item);
+		setContentView(R.layout.activity_jobinfo);
 		ButterKnife.bind(this);
-		jobinfo = Paper.book().read(Constants.SingleJobInfoName,new JobInfoBean());
+		jobinfo = Paper.book().read(Constants.SingleInfoName,new JobInfoBean());
 		initView();
 	}
 
@@ -79,7 +76,7 @@ public class JobInfoActivity extends Activity implements OnClickListener{
 		titleright.setVisibility(View.GONE);
 		title.setText("求职详情");
 		right1.setVisibility(View.GONE);
-		right2.setVisibility(View.VISIBLE);
+		right2.setVisibility(View.GONE);
 		addFriend.setOnClickListener(this);
 		Picasso.with(getApplicationContext()).load(jobinfo.getThumb()).into(ivThumb);
 		tvNickname.setText(jobinfo.getNickname());

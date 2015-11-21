@@ -97,7 +97,8 @@ public class ComplexPreferences {
         editor.commit();
     }
 
-    public static int getScreenWidth() {
+    public static int getScreenWidth(Context context) {
+        getComplexPreferences(context);
         return preferences.getInt(SCREEN_WIDTH,640);
     }
     public static void setObject(String key, Object object) {

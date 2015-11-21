@@ -25,7 +25,7 @@ public class Utils {
 
     public static String generateStringByTime(long addtime) {
         long tt = System.currentTimeMillis() - addtime * 1000;
-        if (tt < 60 * 1000) {
+        if (tt < 10 * 60 * 1000) {
             return "刚刚发布";
         } else if (tt < 60 * 60 * 1000) {
             return tt / 60 / 1000 + "分钟前";
