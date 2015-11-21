@@ -44,9 +44,9 @@ public class ApiUtil {
         client.post(context, IClientUrl.ApplyJobSearch, new RequestParams(), responseHandler);
     }
 
-    public static void applyjobSearchByPhone(Context context, String phone, TextHttpResponseHandler responseHandler) {
+    public static void applyjobSearchByPhone(Context context, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.add("phone", phone);
+        params.add("phone", testPhone);
         client.post(context, IClientUrl.ApplyJobSearch, params, responseHandler);
     }
 
@@ -75,14 +75,16 @@ public class ApiUtil {
         client.post(context, IClientUrl.RecomendationList, new RequestParams(), responseHandler);
     }
 
-    public static void recommendationsSearch(Context context,String phone,int kindid,String title,int currentPage, TextHttpResponseHandler responseHandler){
+    public static void recommendationsSearch(Context context,boolean isMy,int kindid,String title,int recommendationId,int currentPage, TextHttpResponseHandler responseHandler){
         RequestParams params = new RequestParams();
-        if(!TextUtils.isEmpty(phone))
-            params.add("phone",phone);
+        if(isMy)
+            params.add("phone",testPhone);
         if(!TextUtils.isEmpty(title))
             params.add("title",title);
         if (kindid > 0)
             params.add("kindid",String.valueOf(kindid));
+        if (recommendationId > 0)
+            params.add("recommendationid",String.valueOf(recommendationId));
         printHttp(IClientUrl.RecomendationSearch + currentPage,params);
         client.post(context,IClientUrl.RecomendationSearch + currentPage,params,responseHandler);
     }
@@ -100,7 +102,13 @@ public class ApiUtil {
         client.post(context, IClientUrl.RecomendationCreated, params, responseHandler);
     }
 
-
+    public static void recommendationCommentCreated(Context context,int recommendationid,String content,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.add("phone",testPhone);
+        params.add("recommendationid",String.valueOf(recommendationid));
+        params.add("content", content);
+        client.post(context, IClientUrl.RecomendationCommentCreated,params,responseHandler);
+    }
 
     public static void hobbyList(Context context, TextHttpResponseHandler responseHandler) {
         client.post(context, IClientUrl.HobbyList, new RequestParams(), responseHandler);
@@ -108,16 +116,20 @@ public class ApiUtil {
 
     public static void hobbyCreated(Context context,String picture,int sex,int age,int hobbyid,String content,TextHttpResponseHandler responseHandler){
         RequestParams params = new RequestParams();
+        params.add("phone",testPhone);
         params.add("picture",picture);
         params.add("sex",String.valueOf(sex));
         params.add("age",String.valueOf(age));
         params.add("hobbyid",String.valueOf(hobbyid));
         params.add("content",content);
+        printHttp(IClientUrl.HobbyCreated,params);
         client.post(context,IClientUrl.HobbyCreated,params,responseHandler);
     }
 
-    public static void hobbySearch(Context context, int hobbyid, String searchString, int currentPage, TextHttpResponseHandler responseHandler) {
+    public static void hobbySearch(Context context,boolean isMy, int hobbyid, String searchString, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
+        if (isMy)
+            params.add("phone", testPhone);
         if (!TextUtils.isEmpty(searchString)) {
             params.add("title", searchString);
             hobbyid = 0;

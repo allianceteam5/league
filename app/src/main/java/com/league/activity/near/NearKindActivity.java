@@ -77,7 +77,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     private List<String> items;
     private List<JobInfoBean> jobInfoList = new ArrayList<>();
     private List<HobbyInfoBean> hobbyInfoList = new ArrayList<HobbyInfoBean>();
-    private List<RecommendationInfoBean> recomemdationInfoList = new ArrayList<>();
+    private List<RecommendationInfoBean> recommendationInfoList = new ArrayList<>();
     private int currentPage = 1;
     private int sumPage;
     private int kindid = 0;
@@ -135,7 +135,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                                 jobInfoList.clear();
                                 break;
                             case 2:
-                                recomemdationInfoList.clear();
+                                recommendationInfoList.clear();
                                 break;
                             case 3:
                                 hobbyInfoList.clear();
@@ -303,10 +303,10 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 });
                 break;
             case 2:
-                ApiUtil.recommendationsSearch(getApplicationContext(), "", 0, "", currentPage, new BaseJsonHttpResponseHandler<ArrayList<RecommendationInfoBean>>() {
+                ApiUtil.recommendationsSearch(getApplicationContext(), false, 0, "",0, currentPage, new BaseJsonHttpResponseHandler<ArrayList<RecommendationInfoBean>>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<RecommendationInfoBean> response) {
-                        recomemdationInfoList.addAll(response);
+                        recommendationInfoList.addAll(response);
                         updateRecommendationView();
                         closeProgressDialog();
                     }
@@ -328,7 +328,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 });
                 break;
             case 3:
-                ApiUtil.hobbySearch(getApplicationContext(), kindid, searchString, currentPage, new BaseJsonHttpResponseHandler<ArrayList<HobbyInfoBean>>() {
+                ApiUtil.hobbySearch(getApplicationContext(), false, kindid, searchString, currentPage, new BaseJsonHttpResponseHandler<ArrayList<HobbyInfoBean>>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<HobbyInfoBean> response) {
                         hobbyInfoList.addAll(response);
@@ -370,7 +370,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                                         int position, long id) {
                     // TODO Auto-generated method stub
                     Intent intent = new Intent(getApplicationContext(), JobInfoActivity.class);
-                    Paper.book().write(Constants.SingleJobInfoName, jobInfoList.get(position));
+                    Paper.book().write(Constants.SingleInfoName, jobInfoList.get(position));
                     startActivity(intent);
                 }
             });
@@ -381,19 +381,19 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
 
     public void updateRecommendationView() {
         if (recommendationInfoAdapter == null){
-            recommendationInfoAdapter = new RecommendationInfoAdapter(getApplicationContext(), recomemdationInfoList);
+            recommendationInfoAdapter = new RecommendationInfoAdapter(getApplicationContext(), recommendationInfoList);
             listview.setAdapter(recommendationInfoAdapter);
-//            listview.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-//
-//                @Override
-//                public void onItemClick(AdapterView<?> arg0, View arg1,
-//                                        int arg2, long arg3) {
-//                    // TODO Auto-generated method stub
-//                    Intent intent = new Intent(getApplicationContext(), RecommendationInfoActivity.class);
-//                    startActivity(intent);
-//                }
-//            });
-        }else {
+            listview.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    // TODO Auto-generated method stub
+                    Intent intent = new Intent(getApplicationContext(), RecommendationInfoActivity.class);
+                    Paper.book().write(Constants.SingleInfoName, recommendationInfoList.get(position));
+                    startActivity(intent);
+                }
+            });
+        } else {
             recommendationInfoAdapter.notifyDataSetChanged();
         }
     }
@@ -401,19 +401,19 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     public void updateHobbyView() {
         if (hobbyInfoAdapter == null) {
             hobbyInfoAdapter = new HobbyInfoAdapter(getApplicationContext(), hobbyInfoList);
-            listview.setAdapter(jobInfoAdapter);
+            listview.setAdapter(hobbyInfoAdapter);
             listview.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     // TODO Auto-generated method stub
-//                    Intent intent = new Intent(getApplicationContext(), NearItemActivity.class);
-//                    Paper.book().write(Constants.SingleHobbyInfoName, hobbyInfoList.get(position));
-//                    startActivity(intent);
+                    Intent intent = new Intent(getApplicationContext(), HobbyInfoActivity.class);
+                    Paper.book().write(Constants.SingleInfoName, hobbyInfoList.get(position));
+                    startActivity(intent);
                 }
             });
         } else {
-            jobInfoAdapter.notifyDataSetChanged();
+            hobbyInfoAdapter.notifyDataSetChanged();
         }
     }
 

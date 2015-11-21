@@ -18,13 +18,13 @@ import java.util.List;
 /**
  * Created by zhang on 15/4/21.
  */
-public class ImgGridAdapter extends BaseAdapter {
+public class ImgGridWithPickImgAdapter extends BaseAdapter {
     private List<String> data = new ArrayList<String>();
     private Context mContext;
     private LayoutInflater mInflater;
     private int screenW;
 
-    public ImgGridAdapter(Context context, List<String> data) {
+    public ImgGridWithPickImgAdapter(Context context, List<String> data) {
         this.mContext = context;
         this.data = data;
         screenW = ComplexPreferences.getScreenWidth(context);
@@ -32,8 +32,6 @@ public class ImgGridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (data == null)
-            return 0;
         return data.size();
     }
 
@@ -54,7 +52,15 @@ public class ImgGridAdapter extends BaseAdapter {
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             convertView = imageView;
         }
-        Picasso.with(mContext).load(data.get(position)).resize(screenW / 4, screenW / 4).centerCrop().into(((ImageView) convertView));
+        if (position == data.size() - 1) {
+            Picasso.with(mContext).load(R.drawable.upload_default)./*resize(screenW / 4, screenW / 4).centerCrop().*/into(((ImageView) convertView));
+            if(data.size()==10){
+                convertView.setVisibility(View.GONE);
+            }
+        } else {
+            Picasso.with(mContext).load("file://" + data.get(position)).resize(screenW / 4, screenW / 4).centerCrop().into(((ImageView) convertView));
+        }
+
         return convertView;
     }
 }

@@ -1,6 +1,10 @@
 package com.league.bean;
 
+import android.text.TextUtils;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by pfy on 2015/11/19.
@@ -18,6 +22,11 @@ public class RecommendationInfoBean {
      * reason : 好吃好吃
      * pictures : wggerhghfh
      * created_at : 1446816282
+     * longitude : 1.1
+     * latitude : 1.1
+     * phone : 1
+     * thumb : http://7xkbeq.com1.z0.glb.clouddn.com/Fo-v4V7aCVADWiMXJm9TW-kx37U2
+     * nickname : 测试1
      */
 
     private int id;
@@ -30,15 +39,13 @@ public class RecommendationInfoBean {
     private String reason;
     private String pictures;
     private long created_at;
-
-    private ArrayList<CommentBean> comments;
-    /**
-     * longitude : 1.1
-     * latitude : 1.1
-     */
-
     private double longitude;
     private double latitude;
+    private String phone;
+    private String thumb;
+    private String nickname;
+
+    private ArrayList<CommentBean> comments = new ArrayList<>();
 
     public RecommendationInfoBean() {
     }
@@ -145,5 +152,45 @@ public class RecommendationInfoBean {
 
     public double getLatitude() {
         return latitude;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public List<String> getPictureLimitFour(){
+        if (TextUtils.isEmpty(pictures))
+            return null;
+        List<String> pictureList = Arrays.asList(pictures.trim().split(" "));
+        if (pictureList.size() > 4)
+            return pictureList.subList(0,4);
+        return pictureList;
+
+    }
+
+    public List<String> getPictureList(){
+        if (TextUtils.isEmpty(pictures))
+            return null;
+        return Arrays.asList(pictures.trim().split(" "));
     }
 }

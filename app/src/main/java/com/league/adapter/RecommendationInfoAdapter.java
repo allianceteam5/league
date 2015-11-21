@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.league.bean.RecommendationInfoBean;
 import com.league.utils.Utils;
-import com.league.widget.CircleImageView;
 import com.mine.league.R;
+import com.squareup.picasso.Picasso;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -54,7 +54,7 @@ public class RecommendationInfoAdapter extends BaseAdapter{
 		// TODO Auto-generated method stub
 		ViewHolder holder;
 		if(convertView==null){
-			convertView=LayoutInflater.from(ctx).inflate(R.layout.featurecom_item, null);
+			convertView=LayoutInflater.from(ctx).inflate(R.layout.layout_item_recommendationinfo, null);
 			holder=new ViewHolder();
 			holder.thumb=(ImageView) convertView.findViewById(R.id.near_feauserthumb);
 			holder.userNickname=(TextView) convertView.findViewById(R.id.near_feausername);
@@ -64,14 +64,13 @@ public class RecommendationInfoAdapter extends BaseAdapter{
 			holder.comnum=(TextView) convertView.findViewById(R.id.commentnum);
 			holder.infoContent=(TextView) convertView.findViewById(R.id.near_fea_content);
 			holder.secondContent=(TextView) convertView.findViewById(R.id.fea_seccontent);
-			holder.gridView=(GridView) convertView.findViewById(R.id.gridview);
+			holder.gridview=(GridView) convertView.findViewById(R.id.gridview);
 			convertView.setTag(holder);
 		}else{
 			holder=(ViewHolder) convertView.getTag();			
 		}
-		//头像
-		//
-//		holder.userNickname.setText();
+		holder.userNickname.setText(list.get(position).getNickname());
+		Picasso.with(ctx).load(list.get(position).getThumb()).resize(60,60).centerCrop().into(holder.thumb);
 		holder.fea_location.setText(list.get(position).getLocation());
 		holder.type.setText(list.get(position).getKind());
 		holder.lasttime.setText(Utils.generateStringByTime(list.get(position).getCreated_at()));
@@ -79,6 +78,12 @@ public class RecommendationInfoAdapter extends BaseAdapter{
 		holder.infoContent.setText(list.get(position).getTitle());
 		holder.secondContent.setText(list.get(position).getReason());
 		//设置四张图片
+		final List<String> imgList = list.get(position).getPictureLimitFour();
+		ImgGridAdapter adapter = new ImgGridAdapter(ctx, imgList);
+		if (imgList == null)
+			holder.gridview.setVisibility(View.GONE);
+		else
+			holder.gridview.setAdapter(adapter);
 		return convertView;
 	}
 	class ViewHolder{
@@ -90,6 +95,6 @@ public class RecommendationInfoAdapter extends BaseAdapter{
 		TextView comnum;
 		TextView infoContent;
 		TextView secondContent;
-		GridView gridView;
+		GridView gridview;
 	}
 }

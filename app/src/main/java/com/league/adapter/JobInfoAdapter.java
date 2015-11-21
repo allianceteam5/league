@@ -7,7 +7,6 @@ import com.league.bean.JobInfoBean;
 import com.league.utils.Constants;
 import com.league.utils.DateFormatUtils;
 import com.league.utils.Utils;
-import com.league.widget.CircleImageView;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
@@ -59,7 +58,7 @@ public class JobInfoAdapter extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(ctx).inflate(R.layout.infojob_item, null);
+            convertView = LayoutInflater.from(ctx).inflate(R.layout.layout_item_infojob, null);
             holder.thumb = (ImageView) convertView.findViewById(R.id.near_userthumb);
             holder.userNickname = (TextView) convertView.findViewById(R.id.near_username);
             holder.fullorpart_timejob = (TextView) convertView.findViewById(R.id.near_partjobtype);

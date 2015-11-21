@@ -19,6 +19,7 @@
     <string name="warning_message">请写上留言</string>
     <string name="warning_reason">请写上推荐原因</string>
     <string name="warning_recommendation">请选择推荐类型</string>
+    <string name="warning_comment">请输入您的评价</string>
     <string name="publish_success">发帖成功</string>
     <string name="publish_fail">发帖失败</string>
     <string name="loading_done">没有更多数据</string>
@@ -337,5 +338,6 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_recommendation_pushlish">RecommendationPushlishActivity</string>
+    <string name="title_activity_comment">CommentActivity</string>
 
 </resources>

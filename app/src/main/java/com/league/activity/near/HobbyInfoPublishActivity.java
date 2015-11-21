@@ -1,6 +1,5 @@
 package com.league.activity.near;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,13 +8,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.league.activity.BaseActivity;
 import com.league.bean.KindBean;
+import com.league.interf.OnAllComplete;
 import com.league.utils.Constants;
+import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.mine.league.R;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UploadManager;
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
@@ -27,7 +33,7 @@ import java.util.ArrayList;
 import io.paperdb.Paper;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
-public class MakingFriItem extends Activity implements View.OnClickListener {
+public class HobbyInfoPublishActivity extends BaseActivity implements View.OnClickListener, IContants {
 
     private final int REQUEST_IMAGE = 2;
     private ArrayList<String> mSelectPath = new ArrayList<>();
@@ -39,12 +45,13 @@ public class MakingFriItem extends Activity implements View.OnClickListener {
     private int selectedAgeIndex = -1;
     private int selectedHobbyIndex = -1;
     private int selectedHobbyId = -1;
-    private String worktime;
+    private StringBuffer picture = new StringBuffer();
+    private String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_makingfri_item);
+        setContentView(R.layout.layout_hobbyinfo_publish);
         initView();
     }
 
@@ -76,14 +83,14 @@ public class MakingFriItem extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(MakingFriItem.this, RadioSelectActivity.class);
+        Intent intent = new Intent(HobbyInfoPublishActivity.this, RadioSelectActivity.class);
         switch (v.getId()) {
             case R.id.near_back:
                 onBackPressed();
                 finish();
                 break;
             case R.id.iv_phone:
-                Intent intent1 = new Intent(MakingFriItem.this, MultiImageSelectorActivity.class);
+                Intent intent1 = new Intent(HobbyInfoPublishActivity.this, MultiImageSelectorActivity.class);
                 // 是否显示调用相机拍照
                 intent1.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
 //                // 最大图片选择数量
@@ -108,37 +115,83 @@ public class MakingFriItem extends Activity implements View.OnClickListener {
                 startActivityForResult(intent, Constants.RADIOHOBBY);
                 break;
             case R.id.near_save:
-                if(mSelectPath.size() == 0){
-                    ToastUtils.showShortToast(getApplicationContext(),getString(R.string.warning_image));
+                if (mSelectPath.size() == 0) {
+                    ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_image));
                     return;
                 }
-                if(selectedAgeIndex<0){
-                    ToastUtils.showShortToast(getApplicationContext(),getString(R.string.warning_age));
+                if (selectedAgeIndex < 0) {
+                    ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_age));
                     return;
                 }
-                if(selectedHobbyIndex<0){
-                    ToastUtils.showShortToast(getApplicationContext(),getString(R.string.warning_hobby));
+                if (selectedHobbyIndex < 0) {
+                    ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_hobby));
                     return;
                 }
-                String message = etMessage.getText().toString();
-                if(TextUtils.isEmpty(message)){
-                    ToastUtils.showShortToast(getApplicationContext(),getString(R.string.warning_message));
+                message = etMessage.getText().toString();
+                if (TextUtils.isEmpty(message)) {
+                    ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_message));
                     return;
                 }
 
-                ApiUtil.hobbyCreated(getApplicationContext(),"",selectedSexIndex,selectedAgeIndex,selectedHobbyId,message,new JsonHttpResponseHandler(){
+                final UploadManager uploadManager = new UploadManager();
+                showProgressDialog();
+                ApiUtil.getQiniuToken(getApplicationContext(), new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        final String key = "items/" + System.currentTimeMillis() + ".jpg";
+                        String token = response.optString("token");
+                        picture.append(QINIU_PREFIX + key);
+                        uploadManager.put(mSelectPath.get(0), key, token,
+                                new UpCompletionHandler() {
+                                    @Override
+                                    public void complete(String s, ResponseInfo responseInfo, JSONObject jsonObject) {
+                                        if (responseInfo.error == null) {
+                                            onAllComplete.allComplete(true);
+                                        } else {
+                                            closeProgressDialog();
+                                            return;
+                                        }
+                                    }
+                                }, null);
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        closeProgressDialog();
                     }
                 });
 
                 break;
         }
     }
+
+    private OnAllComplete onAllComplete = new OnAllComplete() {
+        @Override
+        public void allComplete(boolean result) {
+            if (!result) {
+                closeProgressDialog();
+                return;
+            }
+
+            ApiUtil.hobbyCreated(getApplicationContext(), picture.toString(), selectedSexIndex, selectedAgeIndex, selectedHobbyId, message, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    closeProgressDialog();
+                    if (response.optInt("flag") == 1) {
+                        Toast.makeText(getApplicationContext(), "发布成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    closeProgressDialog();
+                    Toast.makeText(getApplicationContext(), "发布失败", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

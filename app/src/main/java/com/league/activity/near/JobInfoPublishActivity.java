@@ -31,7 +31,7 @@ import cn.aigestudio.datepicker.cons.DPMode;
 import cn.aigestudio.datepicker.views.DatePicker;
 import io.paperdb.Paper;
 
-public  class WantAJob extends Activity implements View.OnClickListener {
+public  class JobInfoPublishActivity extends Activity implements View.OnClickListener {
 
     private ImageView back, title_right, right, jobfull, jobpart;
     private TextView title, save, tvDegree, tvWorkTime,tvProfession;
@@ -47,7 +47,7 @@ public  class WantAJob extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wangjob);
+        setContentView(R.layout.activity_jobinfo_publish);
         init();
     }
 
@@ -100,9 +100,9 @@ public  class WantAJob extends Activity implements View.OnClickListener {
                 selectedJobIndex = 1;
                 break;
             case R.id.taketime:
-                final AlertDialog dialog = new AlertDialog.Builder(WantAJob.this).create();
+                final AlertDialog dialog = new AlertDialog.Builder(JobInfoPublishActivity.this).create();
                 dialog.show();
-                DatePicker picker = new DatePicker(WantAJob.this);
+                DatePicker picker = new DatePicker(JobInfoPublishActivity.this);
                 Calendar calendar = Calendar.getInstance();
                 picker.setDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH));
                 picker.setMode(DPMode.SINGLE);
@@ -120,14 +120,14 @@ public  class WantAJob extends Activity implements View.OnClickListener {
                 dialog.getWindow().setGravity(Gravity.CENTER);
                 break;
             case R.id.education:
-                Intent intent = new Intent(WantAJob.this, RadioSelectActivity.class);
+                Intent intent = new Intent(JobInfoPublishActivity.this, RadioSelectActivity.class);
                 intent.putExtra(Constants.RADIOSELECEDTINDEX, selectedDegreeIndex);
                 intent.putExtra(Constants.RADIOSELECTKIND, Constants.RADIODEDREE);
                 startActivityForResult(intent, Constants.RADIODEDREE);
                 break;
             //选择行业
             case R.id.profession:
-                Intent intent1 = new Intent(WantAJob.this, RadioSelectActivity.class);
+                Intent intent1 = new Intent(JobInfoPublishActivity.this, RadioSelectActivity.class);
                 intent1.putExtra(Constants.RADIOSELECEDTINDEX, selectedProfessionIndex);
                 intent1.putExtra(Constants.RADIOSELECTKIND, Constants.RADIOPROFESSION);
                 startActivityForResult(intent1, Constants.RADIOPROFESSION);
@@ -185,7 +185,7 @@ public  class WantAJob extends Activity implements View.OnClickListener {
                             ToastUtils.showLongToast(getApplicationContext(), getString(R.string.publish_success));
                         else
                             ToastUtils.showLongToast(getApplicationContext(), getString(R.string.publish_fail));
-                        WantAJob.this.finish();
+                        JobInfoPublishActivity.this.finish();
                     }
 
                     @Override

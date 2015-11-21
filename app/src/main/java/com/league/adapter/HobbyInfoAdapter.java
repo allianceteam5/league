@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.league.bean.HobbyInfoBean;
 import com.mine.league.R;
+import com.squareup.picasso.Picasso;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -30,6 +31,8 @@ public class HobbyInfoAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
+		if (list == null)
+			return 0;
 		return list.size();
 	}
 
@@ -50,26 +53,29 @@ public class HobbyInfoAdapter extends BaseAdapter{
 		// TODO Auto-generated method stub
 		ViewHolder holder;
 		if(convertView==null){
-			convertView=LayoutInflater.from(ctx).inflate(R.layout.makingfriend_item, null);
+			convertView=LayoutInflater.from(ctx).inflate(R.layout.layout_item_hobbyinfo, null);
 			holder=new ViewHolder();
 			holder.thumb=(ImageView) convertView.findViewById(R.id.near_friend_userthumb);
 			holder.username=(TextView) convertView.findViewById(R.id.near_friend_username);
 			holder.sex=(ImageView) convertView.findViewById(R.id.near_firend_usersex);
 			holder.intest=(TextView) convertView.findViewById(R.id.near_friend_intes);
 			holder.leavemessage=(TextView) convertView.findViewById(R.id.near_friend_leave);
+			holder.lasttime = (TextView) convertView.findViewById(R.id.lasttime);
 			convertView.setTag(holder);
 			
 		}else{
 			holder=(ViewHolder) convertView.getTag();
 			
 		}
+		Picasso.with(ctx).load(list.get(position).getPicture()).resize(120,120).centerCrop().into(holder.thumb);
 		holder.username.setText(list.get(position).getNickname());
-		if(list.get(position).getSex().equals("男")){
+		if(list.get(position).getSex() == 1){
 			holder.sex.setImageResource(R.drawable.friend_sex_man);
 		}else
 			holder.sex.setImageResource(R.drawable.friend_sex_woman);
 		holder.intest.setText(list.get(position).getHobby());
 		holder.leavemessage.setText(list.get(position).getContent());
+		holder.lasttime.setText(list.get(position).getCreated_at());
 		
 		
 		return convertView;
@@ -80,5 +86,6 @@ public class HobbyInfoAdapter extends BaseAdapter{
 		ImageView sex;
 		TextView intest;
 		TextView leavemessage;
+		TextView lasttime;
 	}
 }

@@ -92,7 +92,7 @@ public class ShowBigImgActivity extends BaseActivity implements IContants{
                 path = "file://" + path;
             }
             //Log.i("qiniu", "qiniu resizeAndWater=" + path);
-            Picasso.with(mContext).load(path).resize(ComplexPreferences.getScreenWidth(),ComplexPreferences.getScreenWidth() * 2).centerCrop().into(img, new Callback() {
+            Picasso.with(mContext).load(path).into(img, new Callback() {
                 @Override
                 public void onSuccess() {
                     progressBar.setVisibility(View.GONE);
