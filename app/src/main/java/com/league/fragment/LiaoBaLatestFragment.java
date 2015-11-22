@@ -33,11 +33,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LiaoBaLatestFragment extends Fragment implements ListItemClickHelp{
+public class LiaoBaLatestFragment extends Fragment{
 
     private View layout;
     private ListView listView;
-
     private List<LiaoBaUserInfo> list=new ArrayList<LiaoBaUserInfo>();
     private int totalPage;
     private int currentPage=1;
@@ -55,7 +54,7 @@ public class LiaoBaLatestFragment extends Fragment implements ListItemClickHelp{
     }
     private void initView(){
         listView= (ListView) layout.findViewById(R.id.liaoba_latest_list);
-        adapter=new LiaoBaAdapter(list, getActivity().getApplication(),0,this);
+        adapter=new LiaoBaAdapter(list, getActivity().getApplication(),0);
         listView.setAdapter(adapter);
         pullToRefreshLayout = (PullToRefreshLayout) layout.findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
@@ -72,13 +71,6 @@ public class LiaoBaLatestFragment extends Fragment implements ListItemClickHelp{
                 }
                 list.addAll(response);
                 adapter.notifyDataSetChanged();
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(getActivity().getApplication(), TopicContent.class);
-                        startActivity(intent);
-                    }
-                });
                 pullToRefreshLayout.setVisibility(View.VISIBLE);
             }
 
@@ -94,62 +86,6 @@ public class LiaoBaLatestFragment extends Fragment implements ListItemClickHelp{
                 return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaUserInfo>>() {});
             }
         });
-    }
-
-    @Override
-    public void onClick(View item, View widget, final int position, int which) {
-        switch (which){
-            case R.id.dianzan:
-                if("1".equals(list.get(position).getIsliked())){
-                    list.get(position).setIsliked("0");
-                    ApiUtil.liaobaCanclelike(getActivity(), Constants.PHONENUM, list.get(position).getId(), new BaseJsonHttpResponseHandler<SucessBean>() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                            if("1".equals(response.getFlag())){
-                                int num=Integer.valueOf(list.get(position).getLikecount());
-                                num--;
-                                list.get(position).setLikecount(num+"");
-                                adapter.notifyDataSetChanged();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-
-                        }
-
-                        @Override
-                        protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                            return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
-                            });
-                        }
-                    });
-                }else{
-                    list.get(position).setIsliked("1");
-                    ApiUtil.liaobaLike(getActivity(), Constants.PHONENUM, list.get(position).getId(), new BaseJsonHttpResponseHandler<SucessBean>() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                            if ("1".equals(response.getFlag())) {
-                                int num = Integer.valueOf(list.get(position).getLikecount());
-                                num++;
-                                list.get(position).setLikecount(num + "");
-                                adapter.notifyDataSetChanged();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-
-                        }
-
-                        @Override
-                        protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                            return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
-                            });
-                        }
-                    });
-                }
-        }
     }
 
     public class MyListener implements PullToRefreshLayout.OnRefreshListener

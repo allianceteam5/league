@@ -76,7 +76,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     private ArrayList<KindBean> kinds;
     private List<String> items;
     private List<JobInfoBean> jobInfoList = new ArrayList<>();
-    private List<HobbyInfoBean> hobbyInfoList = new ArrayList<HobbyInfoBean>();
+    private List<HobbyInfoBean> hobbyInfoList = new ArrayList<>();
     private List<RecommendationInfoBean> recommendationInfoList = new ArrayList<>();
     private int currentPage = 1;
     private int sumPage;
@@ -278,7 +278,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
         }
         switch (Flag) {
             case 1:
-                ApiUtil.applyjobSearch(getApplicationContext(), kindid, searchString, currentPage, new BaseJsonHttpResponseHandler<ArrayList<JobInfoBean>>() {
+                ApiUtil.applyjobSearch(getApplicationContext(), false, kindid, searchString, currentPage, new BaseJsonHttpResponseHandler<ArrayList<JobInfoBean>>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<JobInfoBean> response) {
                         jobInfoList.addAll(response);
@@ -303,7 +303,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 });
                 break;
             case 2:
-                ApiUtil.recommendationsSearch(getApplicationContext(), false, 0, searchString, 0, currentPage, new BaseJsonHttpResponseHandler<ArrayList<RecommendationInfoBean>>() {
+                ApiUtil.recommendationsSearch(getApplicationContext(), false, kindid, searchString, 0, currentPage, new BaseJsonHttpResponseHandler<ArrayList<RecommendationInfoBean>>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<RecommendationInfoBean> response) {
                         recommendationInfoList.addAll(response);
@@ -380,7 +380,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     }
 
     public void updateRecommendationView() {
-        if (recommendationInfoAdapter == null){
+        if (recommendationInfoAdapter == null) {
             recommendationInfoAdapter = new RecommendationInfoAdapter(getApplicationContext(), recommendationInfoList);
             listview.setAdapter(recommendationInfoAdapter);
             listview.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
@@ -433,17 +433,10 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 }
                 firstWindowLoad = false;
                 currentPage = 1;
-                switch (Flag){
-                    case 1:
-                        jobInfoList.clear();
-                        break;
-                    case 2:
-                        recommendationInfoList.clear();
-                        break;
-                    case 3:
-                        hobbyInfoList.clear();
-                        break;
-                }
+                jobInfoList.clear();
+                recommendationInfoList.clear();
+                hobbyInfoList.clear();
+                kindid = 0;
                 initData();
                 break;
             //选择分类刷选
@@ -489,7 +482,10 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
             kindid = kinds.get(i - 1).getId();
         currentPage = 1;
         jobInfoList.clear();
+        recommendationInfoList.clear();
+        hobbyInfoList.clear();
         firstWindowLoad = false;
+        searchString = "";
         initData();
     }
 }

@@ -73,7 +73,7 @@ public class MyPost extends BaseActivity implements OnClickListener, IContants {
         switch (flag) {
             case 1:
                 title.setText("我的求职");
-                ApiUtil.applyjobSearchByPhone(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<JobInfoBean>>() {
+                ApiUtil.applyjobSearch(getApplicationContext(), true, 0, "", 1, new BaseJsonHttpResponseHandler<ArrayList<JobInfoBean>>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<JobInfoBean> response) {
                         jobInfoList = response;
@@ -157,7 +157,8 @@ public class MyPost extends BaseActivity implements OnClickListener, IContants {
                 break;
         }
     }
-    public void updateApplyJobView(){
+
+    public void updateApplyJobView() {
         jobInfoAdapter = new JobInfoAdapter(getApplicationContext(), jobInfoList);
         list.setAdapter(jobInfoAdapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -166,14 +167,14 @@ public class MyPost extends BaseActivity implements OnClickListener, IContants {
                                     int position, long id) {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(getApplicationContext(), JobInfoActivity.class);
-                Paper.book().write(Constants.SingleInfoName,jobInfoList.get(position));
+                Paper.book().write(Constants.SingleInfoName, jobInfoList.get(position));
                 startActivity(intent);
             }
         });
     }
 
     public void updateRecommendationView() {
-        if (recommendationInfoAdapter == null){
+        if (recommendationInfoAdapter == null) {
             recommendationInfoAdapter = new RecommendationInfoAdapter(getApplicationContext(), recommendationInfoList);
             list.setAdapter(recommendationInfoAdapter);
             list.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {

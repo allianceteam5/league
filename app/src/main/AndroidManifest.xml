@@ -426,6 +426,18 @@
             android:name="com.league.activity.near.CommentActivity"
             android:label="@string/title_activity_comment" >
         </activity>
+        <activity
+            android:name="com.league.activity.postbar.PostbarPublishActivity"
+            android:label="@string/title_activity_postbar_publish" >
+        </activity>
+        <activity
+            android:name="com.league.activity.postbar.ConcernListActivity"
+            android:label="@string/title_activity_concern_list" >
+        </activity>
+        <activity
+            android:name="com.league.activity.postbar.MessageListActivity"
+            android:label="@string/title_activity_message_list" >
+        </activity>
     </application>
 
 </manifest>

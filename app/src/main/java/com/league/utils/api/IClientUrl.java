@@ -7,8 +7,6 @@ public class IClientUrl {
     public static final String testServerUrl = "http://183.129.190.82:50001/v1/";
     public static final String ProfessionList = testServerUrl + "professions/list";
     public static final String ApplyJobCreated = testServerUrl + "applyjobs/create";
-    public static final String ApplyJobUpdated = testServerUrl + "applyjobs/update";
-    public static final String ApplyJobDeleted = testServerUrl + "applyjobs/delete";
     public static final String ApplyJobSearch = testServerUrl + "applyjobs/search?page=";
 
     public static final String RecomendationList = testServerUrl + "kindsofrecommendation/list";
@@ -33,10 +31,16 @@ public class IClientUrl {
     public static final String GetQiniuToken = testServerUrl + "users/token";
     public static final String OneyuanBuy = testServerUrl + "grabcommodities/buy";
     public static final String OneyuanBuyAll = testServerUrl + "grabcorns/buyall";
+
     public static final String LiaobaGetLatest = testServerUrl + "tbmessages/new?page=";
     public static final String LiaobaGetHot = testServerUrl + "tbmessages/hot?page=";
     public static final String LiaobaLike = testServerUrl + "tbmessages/like";
     public static final String LiaobaCancellike = testServerUrl + "tbmessages/cancellike";
     public static final String LiaobaGetConcern = testServerUrl + "tbmessages/myconcerns?page=";
     public static final String LiaobaGetPopularity = testServerUrl + "tbusers/hot?page=";
+    public static final String LiaoBaConcernAdd = testServerUrl + "concerns/add";
+    public static final String LiaoBaConcernDelete = testServerUrl + "concerns/delete";
+    public static final String LiaoBaTbmessagesSend = testServerUrl + "tbmessages/send";
+    public static final String LiaoBaTbmessagesDelete = testServerUrl + "tbmessages/delete";
+    public static final String LiaoBaTbusersConcernsList = testServerUrl + "tbusers/myconcerns?page=";
 }

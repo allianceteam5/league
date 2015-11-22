@@ -4,39 +4,14 @@
     android:layout_height="wrap_content"
     android:background="@color/white">
 
-    <LinearLayout
-        android:id="@+id/ll_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp">
-        <ImageView
-            android:id="@+id/icon_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_popularity_1"
-            android:visibility="visible"/>
-
-        <TextView
-            android:id="@+id/tv_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/liaobapopularitybg"
-            android:text="4"
-            android:layout_marginLeft="5dp"
-            android:textColor="#F25B06"
-            android:gravity="center"
-            android:visibility="gone"/>
-    </LinearLayout>
-
     <com.league.widget.CircleImageView
         android:id="@+id/head_portrait"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/example" />
 
     <LinearLayout
@@ -61,19 +36,12 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <ImageView
-                android:id="@+id/iconright"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/icon_popularity_1_copy" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:orientation="horizontal">
 
             <TextView
@@ -102,12 +70,10 @@
         android:layout_height="36dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/liaobaconcern"
         android:gravity="center"
-        android:text="关注TA"
+        android:text="取消关注"
         android:textColor="@color/orange"
         android:textSize="16sp" />
 </RelativeLayout>

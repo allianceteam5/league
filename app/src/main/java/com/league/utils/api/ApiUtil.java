@@ -40,35 +40,18 @@ public class ApiUtil {
         client.post(context, IClientUrl.ApplyJobCreated, params, responseHandler);
     }
 
-    public static void applyjobSearchAll(Context context, TextHttpResponseHandler responseHandler) {
-        client.post(context, IClientUrl.ApplyJobSearch, new RequestParams(), responseHandler);
-    }
-
-    public static void applyjobSearchByPhone(Context context, TextHttpResponseHandler responseHandler) {
+    public static void applyjobSearch(Context context, boolean isMy, int professionid, String searchString, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.add("phone", testPhone);
-        client.post(context, IClientUrl.ApplyJobSearch, params, responseHandler);
-    }
-
-    public static void applyjobSearchByTitle(Context context, String title, TextHttpResponseHandler responseHandler) {
-        RequestParams params = new RequestParams();
-        params.add("title", title);
-        client.post(context, IClientUrl.ApplyJobSearch, new RequestParams(), responseHandler);
-    }
-
-    public static void applyjobSearch(Context context, int professionid, String searchString, int currentPage, TextHttpResponseHandler responseHandler) {
-        RequestParams params = new RequestParams();
+        if (isMy)
+            params.add("phone", testPhone);
         if (!TextUtils.isEmpty(searchString)) {
             params.add("title", searchString);
             professionid = 0;
         }
-        if (professionid == 0) {
-            client.post(context, IClientUrl.ApplyJobSearch + currentPage, params, responseHandler);
-        } else {
+        if (professionid > 0)
             params.add("professionid", String.valueOf(professionid));
-            printHttp(IClientUrl.ApplyJobSearch, params);
-            client.post(context, IClientUrl.ApplyJobSearch + currentPage, params, responseHandler);
-        }
+        printHttp(IClientUrl.ApplyJobSearch, params);
+        client.post(context, IClientUrl.ApplyJobSearch + currentPage, params, responseHandler);
     }
 
     public static void recommendationList(Context context, TextHttpResponseHandler responseHandler) {
@@ -79,8 +62,10 @@ public class ApiUtil {
         RequestParams params = new RequestParams();
         if (isMy)
             params.add("phone", testPhone);
-        if (!TextUtils.isEmpty(title))
+        if (!TextUtils.isEmpty(title)) {
             params.add("title", title);
+            recommendationId = 0;
+        }
         if (kindid > 0)
             params.add("kindid", String.valueOf(kindid));
         if (recommendationId > 0)
@@ -134,13 +119,11 @@ public class ApiUtil {
             params.add("content", searchString);
             hobbyid = 0;
         }
-        if (hobbyid == 0) {
-            client.post(context, IClientUrl.HobbySearch + currentPage, params, responseHandler);
-        } else {
+        if (hobbyid > 0) {
             params.add("hobbyid", String.valueOf(hobbyid));
-            printHttp(IClientUrl.ApplyJobSearch, params);
-            client.post(context, IClientUrl.HobbySearch + currentPage, params, responseHandler);
         }
+        printHttp(IClientUrl.ApplyJobSearch, params);
+        client.post(context, IClientUrl.HobbySearch + currentPage, params, responseHandler);
     }
 
     public static void grabcornsSearch(Context context, int type, int currentPage, TextHttpResponseHandler responseHandler) {
@@ -246,18 +229,52 @@ public class ApiUtil {
     }
 
     //点赞
-    public static void liaobaLike(Context context, String phone, String tbmessageid, TextHttpResponseHandler responseHandler) {
+    public static void liaobaLike(Context context, String tbmessageid, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("tbmessageid", tbmessageid);
-        params.put("phone", phone);
+        params.put("phone", testPhone);
         client.post(context, IClientUrl.LiaobaLike, params, responseHandler);
     }
 
     //取消点赞
-    public static void liaobaCanclelike(Context context, String phone, String tbmessageid, TextHttpResponseHandler responseHandler) {
+    public static void liaobaCancellike(Context context, String tbmessageid, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.put("phone", phone);
+        params.put("phone", testPhone);
         params.put("tbmessageid", tbmessageid);
         client.post(context, IClientUrl.LiaobaCancellike, params, responseHandler);
     }
+
+    /**
+     * @param context
+     * @param concernphone
+     * @param type            type=1 关注 type=0 取消关注
+     * @param responseHandler
+     */
+    public static void liaobaConcern(Context context, String concernphone, int type, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("myphone", testPhone);
+        params.put("concernphone", concernphone);
+        if (type == 1)
+            client.post(context, IClientUrl.LiaoBaConcernAdd, params, responseHandler);
+        if (type == 0) {
+            client.post(context, IClientUrl.LiaoBaConcernDelete, params, responseHandler);
+        }
+    }
+
+    public static void liaobaTbmessagesCreated(Context context, String title, String content, String pictures, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("phone", testPhone);
+        params.add("title", title);
+        params.add("content", content);
+        params.add("pictures", pictures);
+        printHttp(IClientUrl.LiaoBaTbmessagesSend, params);
+        client.post(context, IClientUrl.LiaoBaTbmessagesSend, params, responseHandler);
+    }
+
+    public static void liaobaGetMyConcernList(Context context, int currentPage ,TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        client.post(context, IClientUrl.LiaoBaTbusersConcernsList + currentPage, params, responseHandler);
+    }
+
 }

@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LiaoBaHotFragment extends Fragment implements ListItemClickHelp{
+public class LiaoBaHotFragment extends Fragment{
     private View layout;
     private ListView listView;
 
@@ -52,7 +52,7 @@ public class LiaoBaHotFragment extends Fragment implements ListItemClickHelp{
     }
     private void initView(){
         listView= (ListView) layout.findViewById(R.id.liaoba_hot_list);
-        adapter=new LiaoBaAdapter(list, getActivity().getApplication(),1,this);
+        adapter=new LiaoBaAdapter(list, getActivity().getApplication(),1);
         listView.setAdapter(adapter);
         pullToRefreshLayout = (PullToRefreshLayout) layout.findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
@@ -69,13 +69,6 @@ public class LiaoBaHotFragment extends Fragment implements ListItemClickHelp{
                 Log.i("test", response.size() + "");
                 list.addAll(response);
                 adapter.notifyDataSetChanged();
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(getActivity().getApplication(), TopicContent.class);
-                        startActivity(intent);
-                    }
-                });
                 pullToRefreshLayout.setVisibility(View.VISIBLE);
             }
 
@@ -92,11 +85,6 @@ public class LiaoBaHotFragment extends Fragment implements ListItemClickHelp{
                 });
             }
         });
-    }
-
-    @Override
-    public void onClick(View item, View widget, int position, int which) {
-
     }
 
     public class MyListener implements PullToRefreshLayout.OnRefreshListener

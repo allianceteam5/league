@@ -18,8 +18,8 @@ public class PopularityBean {
     private String nickname;
     private String thumb;
     private String signature;
-    private String concerncount;
-    private String isconcerned;
+    private int concerncount;
+    private int isconcerned;
 
     public void setPhone(String phone) {
         this.phone = phone;
@@ -37,11 +37,11 @@ public class PopularityBean {
         this.signature = signature;
     }
 
-    public void setConcerncount(String concerncount) {
+    public void setConcerncount(int concerncount) {
         this.concerncount = concerncount;
     }
 
-    public void setIsconcerned(String isconcerned) {
+    public void setIsconcerned(int isconcerned) {
         this.isconcerned = isconcerned;
     }
 
@@ -61,11 +61,11 @@ public class PopularityBean {
         return signature;
     }
 
-    public String getConcerncount() {
+    public int getConcerncount() {
         return concerncount;
     }
 
-    public String getIsconcerned() {
+    public int getIsconcerned() {
         return isconcerned;
     }
 }
