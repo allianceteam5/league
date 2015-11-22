@@ -418,6 +418,8 @@
         </activity>
         <activity android:name="com.league.activity.liaobaactivity.TopicContent" >
         </activity>
+        <activity android:name="com.league.activity.treasure.PictureDetails" >
+        </activity>
         <activity
             android:name="com.league.activity.near.RecommendationInfoPublishActivity"
             android:label="@string/title_activity_recommendation_pushlish" >
@@ -425,6 +427,8 @@
         <activity
             android:name="com.league.activity.near.CommentActivity"
             android:label="@string/title_activity_comment" >
+        </activity>
+        <activity android:name="com.league.activity.treasure.GrabRecord" >
         </activity>
     </application>
 

@@ -145,11 +145,24 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 android:textSize="14sp"
                 android:textColor="@color/black1"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="4dp"
                 android:background="@drawable/takegrabstatebackground"/>
+            <com.league.widget.ListViewForScrollView
+                android:id="@+id/myrecordlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:scrollbars="none"
+                android:visibility="gone">
+
+            </com.league.widget.ListViewForScrollView>
             <View
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -211,9 +224,9 @@
                     android:textSize="16sp" />
 
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dip"
                     android:layout_marginRight="10dip"
@@ -221,6 +234,17 @@
                     android:text="自时间起"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/starttime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="100dip"
+                    android:layout_marginRight="10dip"
+                    android:text="2015"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
             </RelativeLayout>
 

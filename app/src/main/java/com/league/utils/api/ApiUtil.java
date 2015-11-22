@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.league.utils.Constants;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -246,5 +245,29 @@ public class ApiUtil {
         params.put("phone",phone);
         params.put("tbmessageid",tbmessageid);
         client.post(context,IClientUrl.LiaobaCancellike,params,responseHandler);
+    }
+    //获取往期揭晓
+    public static void grabcommoditiesPassAnnounced(Context context,String kind,int currentPage,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("kind",kind);
+        client.post(context,IClientUrl.getGrabCommoditiesPass+currentPage,params,responseHandler);
+    }
+    //获取夺金记录
+    public static void getGrabCoinRecords(Context context,String phone,int currentPage,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        client.post(context,IClientUrl.getGrabCoinRecords+currentPage,params,responseHandler);
+    }
+    //获取夺宝记录
+    public static void getGrabCommodyRecords(Context context,String phone,int currentpage,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        client.post(context,IClientUrl.getGrabCommodyReocrds+currentpage,params,responseHandler);
+    }
+    //获取中奖记录
+    public static void getGrabWinRecords(Context context,String phone,int currentpage,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        client.post(context,IClientUrl.getGrabWinRecords+currentpage,params,responseHandler);
     }
 }

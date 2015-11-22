@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.adapter.DetailMyRecords;
 import com.league.adapter.OneYuanGrabTakRecodAdapter;
 import com.league.adapter.ViewPaperAdapter;
 import com.league.bean.GrabRecordBean;
@@ -48,9 +49,10 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
     private OneYuanBean detail;
     private List<GrabRecordBean> records;
+    private List<MyRecordGrabBean> myrecords=new ArrayList<MyRecordGrabBean>();
     private String id;
     private ImageView state;
-    private TextView period,name,totalneed,remain;
+    private TextView period,name,totalneed,remain,starttime;
     private ProgressBar progressbar;
     private float needed,remained;
     private LinearLayout linearLayout;
@@ -58,6 +60,8 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
     private List<ImageView> listviews;
     private ViewPaperAdapter mViewPaperAdapter;
     String[] pictures;
+    private TextView tv;//夺宝记录
+    private ListViewForScrollView myrecordlist;
 
     private Handler handler=new Handler(){
         @Override
@@ -65,7 +69,9 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
             switch (msg.what){
                 case 0:
-                    viewPager.setCurrentItem((viewPager.getCurrentItem() + 1)%listviews.size());
+                    if(listviews.size()!=0){
+                        viewPager.setCurrentItem((viewPager.getCurrentItem() + 1)%listviews.size());
+                    }
                     break;
             }
         }
@@ -79,7 +85,8 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         initData();
     }
     private void initView() {
-
+        myrecordlist= (ListViewForScrollView) findViewById(R.id.myrecordlist);
+        tv= (TextView) findViewById(R.id.viewtakestate);
         back2 = (ImageView) findViewById(R.id.near_back);
 
         back2.setVisibility(View.VISIBLE);
@@ -109,6 +116,7 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         name= (TextView) findViewById(R.id.name);
         totalneed= (TextView) findViewById(R.id.totalpeo);
         remain= (TextView) findViewById(R.id.leavepeo);
+        starttime= (TextView) findViewById(R.id.starttime);
         progressbar= (ProgressBar) findViewById(R.id.progressbar);
         linearLayout= (LinearLayout) findViewById(R.id.viewpaper);
         viewPager=new ViewPager(this);
@@ -125,10 +133,10 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, OneGrabDetailBean response) {
                 detail=response.getOneYuanBean();
                 records=response.getGrabRecordBean();
-
-                Paper.book().write(Constants.OneYuanDetail+id,detail);
+                myrecords.addAll(response.getMyRecordGrabBean());
+                Paper.book().write(Constants.OneYuanDetail + id, detail);
                 Paper.book().write(Constants.OneYuanDetailRecords+id,records);
-                updateView(detail, records);
+                updateView(detail, records, myrecords);
 
             }
 
@@ -137,7 +145,7 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
                 detail = Paper.book().read(Constants.OneYuanDetail + id);
                 records=Paper.book().read(Constants.OneYuanDetailRecords+id);
                 if (detail != null) {
-                    updateView(detail,records);
+                    updateView(detail,records,myrecords);
                 }
             }
 
@@ -168,7 +176,7 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
             }
         }).start();
     }
-    void updateView(OneYuanBean detail,List<GrabRecordBean> records){
+    void updateView(OneYuanBean detail,List<GrabRecordBean> records,List<MyRecordGrabBean> myrecords){
 
         if(detail.getIslotteried().equals("0")){
             state.setImageResource(R.drawable.running);
@@ -182,7 +190,7 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         needed=Float.valueOf(detail.getNeeded());
         remained=Float.valueOf(detail.getRemain());
         progressbar.setProgress((int) ((needed - remained) / needed * 100));
-
+        starttime.setText(detail.getCreated_at());
         pictures=detail.getPictures().split(" ");
         ImageView iv=null;
         for(int i=0;i<pictures.length;i++) {
@@ -211,7 +219,14 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
             }
         });
         listView.setAdapter(new OneYuanGrabTakRecodAdapter(records,getApplication()));
-
+        if(myrecords.size()==0){
+            tv.setVisibility(View.VISIBLE);
+            myrecordlist.setVisibility(View.GONE);
+        }else{
+            tv.setVisibility(View.GONE);
+            myrecordlist.setVisibility(View.VISIBLE);
+            myrecordlist.setAdapter(new DetailMyRecords(myrecords,getApplication()));
+        }
     }
     @Override
     public void onClick(View v) {
@@ -221,8 +236,9 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
                 TakeInDialog takeInDialog=new TakeInDialog(OneYuanGrabItem.this,id,1);
                 takeInDialog.show();
                 break;
-            case R.id.passanou:
+            case R.id.passanou://往期揭晓
                 Intent intent=new Intent(OneYuanGrabItem.this,PassAnnounced.class);
+                intent.putExtra("id",detail.getKind());
                 startActivity(intent);
                 break;
             case R.id.takeall:
