@@ -3,6 +3,7 @@ package com.league.adapter;
 import java.util.List;
 
 import com.league.bean.HobbyInfoBean;
+import com.league.utils.Utils;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
@@ -75,7 +76,7 @@ public class HobbyInfoAdapter extends BaseAdapter{
 			holder.sex.setImageResource(R.drawable.friend_sex_woman);
 		holder.intest.setText(list.get(position).getHobby());
 		holder.leavemessage.setText(list.get(position).getContent());
-		holder.lasttime.setText(list.get(position).getCreated_at());
+		holder.lasttime.setText(Utils.generateStringByTime(list.get(position).getCreated_at()));
 		
 		
 		return convertView;

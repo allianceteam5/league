@@ -9,12 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="6dp">
 
         <com.league.widget.CircleImageView
             android:id="@+id/thumb"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dip"
             android:src="@drawable/example" />
@@ -28,7 +29,7 @@
             android:gravity="center_vertical"
             android:text="王思聪"
             android:textColor="@color/black1"
-            android:textSize="15sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/pushtime"
@@ -133,7 +134,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-
             android:orientation="horizontal">
 
             <ImageView
@@ -160,12 +160,13 @@
             android:textSize="15sp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="6dp"
             />
         <ImageView
             android:id="@+id/img1"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_marginRight="10dip"
+            android:layout_marginRight="6dip"
             android:layout_toLeftOf="@id/comnum"
             android:src="@drawable/liaoba_com"
             android:layout_centerVertical="true"/>
@@ -177,7 +178,7 @@
             android:textColor="@color/black1"
             android:textSize="15sp"
             android:layout_toLeftOf="@id/img1"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="25dp"
             android:layout_centerVertical="true"
             />
         <ImageView
@@ -185,7 +186,7 @@
             android:id="@+id/dianzan"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_marginRight="10dip"
+            android:layout_marginRight="6dip"
             android:layout_toLeftOf="@id/dianzannum"
             android:src="@drawable/liaoba_dianzan"
             android:layout_centerVertical="true"/>
