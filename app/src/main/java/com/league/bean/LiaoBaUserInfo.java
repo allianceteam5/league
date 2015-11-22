@@ -31,7 +31,7 @@ public class LiaoBaUserInfo {
     private String pictures;
     private String likecount;
     private String replycount;
-    private String created_at;
+    private long created_at;
     private String title;
     private String phone;
     private String nickname;
@@ -87,7 +87,7 @@ public class LiaoBaUserInfo {
         this.replycount = replycount;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(long created_at) {
         this.created_at = created_at;
     }
 
@@ -147,7 +147,7 @@ public class LiaoBaUserInfo {
         return replycount;
     }
 
-    public String getCreated_at() {
+    public long getCreated_at() {
         return created_at;
     }
 

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.league.bean.LiaoBaUserInfo;
 import com.league.interf.ListItemClickHelp;
+import com.league.utils.Utils;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
@@ -69,7 +70,7 @@ public class LiaoBaAdapter extends BaseAdapter{
         }
         Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.thumb);
         holder.name.setText(list.get(position).getNickname());
-        holder.time.setText(list.get(position).getCreated_at());
+        holder.time.setText(Utils.generateStringByTime(list.get(position).getCreated_at()));
         if(type==0){
             holder.new_hot.setImageResource(R.drawable.liaoba_new);
         }else if(type==1){

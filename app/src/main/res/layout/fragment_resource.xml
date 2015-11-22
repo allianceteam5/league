@@ -220,7 +220,7 @@
                     android:layout_below="@id/ib_liaoba"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
-                    android:text="聊吧"
+                    android:text="说·吧"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </RelativeLayout>
