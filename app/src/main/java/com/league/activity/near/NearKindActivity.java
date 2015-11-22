@@ -303,7 +303,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 });
                 break;
             case 2:
-                ApiUtil.recommendationsSearch(getApplicationContext(), false, 0, "",0, currentPage, new BaseJsonHttpResponseHandler<ArrayList<RecommendationInfoBean>>() {
+                ApiUtil.recommendationsSearch(getApplicationContext(), false, 0, searchString, 0, currentPage, new BaseJsonHttpResponseHandler<ArrayList<RecommendationInfoBean>>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<RecommendationInfoBean> response) {
                         recommendationInfoList.addAll(response);
@@ -433,7 +433,17 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 }
                 firstWindowLoad = false;
                 currentPage = 1;
-                jobInfoList.clear();
+                switch (Flag){
+                    case 1:
+                        jobInfoList.clear();
+                        break;
+                    case 2:
+                        recommendationInfoList.clear();
+                        break;
+                    case 3:
+                        hobbyInfoList.clear();
+                        break;
+                }
                 initData();
                 break;
             //选择分类刷选
