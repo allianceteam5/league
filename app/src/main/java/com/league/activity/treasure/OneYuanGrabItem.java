@@ -234,7 +234,9 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
                 startActivity(inten);
                 break;
             case R.id.picturesdetail:
-//                Intent intentpicture=new Intent ();
+                Intent intentpicture=new Intent (OneYuanGrabItem.this,PictureDetails.class);
+                intentpicture.putExtra("picturesdetail",detail.getDetails());
+                startActivity(intentpicture);
                 break;
         }
     }

@@ -53,6 +53,7 @@ public class LiaobaPopularityAdapter extends BaseAdapter{
             convertView= LayoutInflater.from(ctx).inflate(R.layout.item_liaoba_popularity,null);
             holder=new ViewHolder();
             holder.iconLeft= (ImageView) convertView.findViewById(R.id.icon_left);
+            holder.iconleftnum= (TextView) convertView.findViewById(R.id.icon_left_num);
             holder.headPortrait= (CircleImageView) convertView.findViewById(R.id.head_portrait);
             holder.usrName= (TextView) convertView.findViewById(R.id.usrname);
             holder.iconRight= (ImageView) convertView.findViewById(R.id.iconright);
@@ -126,7 +127,31 @@ public class LiaobaPopularityAdapter extends BaseAdapter{
                     }
                 });
             }
-        }else{
+        }else if(position>2&&position<10){
+            holder.iconLeft.setVisibility(View.GONE);
+            holder.iconleftnum.setVisibility(View.VISIBLE);
+            holder.iconleftnum.setText(position + 1 + "");
+            Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.headPortrait);
+            holder.usrName.setText(list.get(position).getNickname());
+            holder.iconRight.setVisibility(View.INVISIBLE);
+            holder.funNum.setText(list.get(position).getConcerncount());
+            if("1".equals(list.get(position).getIsconcerned())){
+                holder.concern.setText("已关注");
+                holder.concern.setEnabled(false);
+                holder.concern.setBackgroundResource(R.drawable.liaobaconcerned);
+            }else{
+                final View view=convertView;
+                final int pos=position;
+                final int id=holder.concern.getId();
+                holder.concern.setText("关注");
+                holder.concern.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        callBack.onClick(view,parent,pos,id);
+                    }
+                });
+            }
+        }else {
             holder.iconLeft.setVisibility(View.INVISIBLE);
             Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.headPortrait);
             holder.usrName.setText(list.get(position).getNickname());
@@ -153,6 +178,7 @@ public class LiaobaPopularityAdapter extends BaseAdapter{
     }
     class ViewHolder{
         ImageView iconLeft;
+        TextView iconleftnum;
         CircleImageView headPortrait;
         TextView usrName;
         ImageView iconRight;
