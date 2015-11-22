@@ -33,4 +33,10 @@ public class IClientUrl {
     public static final String GetQiniuToken = testServerUrl + "users/token";
     public static final String OneyuanBuy = testServerUrl + "grabcommodities/buy";
     public static final String OneyuanBuyAll = testServerUrl + "grabcorns/buyall";
+    public static final String LiaobaGetLatest = testServerUrl + "tbmessages/new?page=";
+    public static final String LiaobaGetHot = testServerUrl + "tbmessages/hot?page=";
+    public static final String LiaobaLike = testServerUrl + "tbmessages/like";
+    public static final String LiaobaCancellike = testServerUrl + "tbmessages/cancellike";
+    public static final String LiaobaGetConcern = testServerUrl + "tbmessages/myconcerns?page=";
+    public static final String LiaobaGetPopularity = testServerUrl + "tbusers/hot?page=";
 }

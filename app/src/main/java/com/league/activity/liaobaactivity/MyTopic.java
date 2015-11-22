@@ -1,15 +1,12 @@
 package com.league.activity.liaobaactivity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.league.adapter.LiaoBaAdapter;
 import com.league.bean.LiaoBaUserInfo;
 import com.mine.league.R;
 
@@ -60,25 +57,25 @@ public class MyTopic extends Activity {
         listView= (ListView) findViewById(R.id.mytopic_listview);
     }
     private void initData(){
-        for(int i=0;i<3;i++){
-            LiaoBaUserInfo lbi=new LiaoBaUserInfo();
-            lbi.setName("王思聪"+i);
-            lbi.setTime(i+"分钟前");
-            lbi.setHot_new_flag(1);
-            lbi.setTitle("标题"+i);
-            lbi.setContent("内容"+i);
-            lbi.setFlag_concern(i%2);
-            lbi.setDianzannum(i);
-            lbi.setCommentnum(i);
-            list.add(lbi);
-        }
-        listView.setAdapter(new LiaoBaAdapter(list,getApplication()));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplication(), TopicContent.class);
-                startActivity(intent);
-            }
-        });
+//        for(int i=0;i<3;i++){
+//            LiaoBaUserInfo lbi=new LiaoBaUserInfo();
+////            lbi.setName("王思聪"+i);
+////            lbi.setTime(i+"分钟前");
+////            lbi.setHot_new_flag(1);
+////            lbi.setTitle("标题"+i);
+////            lbi.setContent("内容"+i);
+////            lbi.setFlag_concern(i%2);
+////            lbi.setDianzannum(i);
+////            lbi.setCommentnum(i);
+//            list.add(lbi);
+//        }
+//        listView.setAdapter(new LiaoBaAdapter(list,getApplication(),-1));
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent = new Intent(getApplication(), TopicContent.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }

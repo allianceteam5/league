@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.league.bean.LiaoBaUserInfo;
+import com.league.interf.ListItemClickHelp;
 import com.mine.league.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -20,10 +22,13 @@ public class LiaoBaAdapter extends BaseAdapter{
 
     private List<LiaoBaUserInfo> list;
     private Context ctx;
-
-    public LiaoBaAdapter(List<LiaoBaUserInfo> list, Context ctx) {
+    private int type=0;//0表示最新 1表示最热
+    private ListItemClickHelp callBack;
+    public LiaoBaAdapter(List<LiaoBaUserInfo> list, Context ctx,int type,ListItemClickHelp callBack) {
         this.list = list;
         this.ctx = ctx;
+        this.type=type;
+        this.callBack=callBack;
     }
 
     @Override
@@ -42,8 +47,8 @@ public class LiaoBaAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+    public View getView(final int position, View convertView, final ViewGroup parent) {
+        final ViewHolder holder;
         if(convertView==null){
             convertView= LayoutInflater.from(ctx).inflate(R.layout.item_liaoba_user,null);
             holder=new ViewHolder();
@@ -62,25 +67,41 @@ public class LiaoBaAdapter extends BaseAdapter{
         }else{
             holder=(ViewHolder)convertView.getTag();
         }
-        holder.name.setText(list.get(position).getName());
-        holder.time.setText(list.get(position).getTime());
-        if(list.get(position).getHot_new_flag()==1){
+        Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.thumb);
+        holder.name.setText(list.get(position).getNickname());
+        holder.time.setText(list.get(position).getCreated_at());
+        if(type==0){
             holder.new_hot.setImageResource(R.drawable.liaoba_new);
-        }else if(list.get(position).getHot_new_flag()==2){
+        }else if(type==1){
             holder.new_hot.setImageResource(R.drawable.liaoba_hot);
         }else holder.new_hot.setVisibility(View.GONE);
 
         holder.title.setText(list.get(position).getTitle());
         holder.content.setText(list.get(position).getContent());
-        if(list.get(position).getFlag_concern()==1){
+
+        if("1".equals(list.get(position).getIsconcerned())){
             holder.yiguanzhu.setVisibility(View.VISIBLE);
             holder.guanzhu.setVisibility(View.GONE);
         }else{
             holder.yiguanzhu.setVisibility(View.GONE);
             holder.guanzhu.setVisibility(View.VISIBLE);
         }
-        holder.dianzanshu.setText(list.get(position).getDianzannum()+"");
-        holder.commentnum.setText(list.get(position).getCommentnum()+"");
+        holder.dianzanshu.setText(list.get(position).getLikecount());
+        holder.commentnum.setText(list.get(position).getReplycount());
+        if("1".equals(list.get(position).getIsliked())){
+           holder.like.setImageResource(R.drawable.liaoba_like);
+        }else{
+            holder.like.setImageResource(R.drawable.liaoba_dianzan);
+        }
+        final View view=convertView;
+        final int pos=position;
+        final int one=holder.like.getId();
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callBack.onClick(view,parent,pos,one);
+            }
+        });
         return convertView;
     }
     class ViewHolder{

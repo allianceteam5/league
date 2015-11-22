@@ -4,20 +4,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/black2">
-
-    <ScrollView
+    <com.league.widget.pulltorefreshandload.PullToRefreshLayout
+        android:id="@+id/refresh_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.league.view.MyListView
+        android:layout_height="match_parent" >
+
+        <include layout="@layout/refresh_head"/>
+        <!-- 支持所有实现Pullable接口的View -->
+
+        <com.league.widget.pulltorefreshandload.PullableListView
             android:id="@+id/liaoba_latest_list"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:divider="@color/black2"
             android:dividerHeight="5dip"
             android:layout_marginLeft="5dip"
-            android:layout_marginRight="5dip">
+            android:layout_marginRight="5dip"
+            android:scrollbars="none"
+            >
+        </com.league.widget.pulltorefreshandload.PullableListView>
+        <include layout="@layout/load_more" />
 
-        </com.league.view.MyListView>
-    </ScrollView>
+    </com.league.widget.pulltorefreshandload.PullToRefreshLayout>
 
 </LinearLayout>

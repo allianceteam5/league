@@ -3,7 +3,7 @@ package com.league.bean;
 /**
  * Created by liug on 15/11/20.
  */
-public class BuySucessBean {
+public class SucessBean {
 
     /**
      * flag : 1
