@@ -14,6 +14,21 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         />
+    <TextView
+        android:id="@+id/icon_left_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icon_popularity_leftnum"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/orange"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:visibility="gone"
+        />
     <com.league.widget.CircleImageView
         android:id="@+id/head_portrait"
         android:layout_width="35dp"
