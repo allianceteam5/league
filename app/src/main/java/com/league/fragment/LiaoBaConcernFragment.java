@@ -57,7 +57,7 @@ public class LiaoBaConcernFragment extends Fragment implements ListItemClickHelp
 
     }
     private void initData(final int currentPage){
-        ApiUtil.liaobaGetConcern(getActivity(), Constants.PHONENUM, currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaUserInfo>>() {
+        ApiUtil.liaobaGetConcern(getActivity(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaUserInfo>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaUserInfo> response) {
                 if(currentPage==1){

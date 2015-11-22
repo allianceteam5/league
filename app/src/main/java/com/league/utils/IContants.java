@@ -11,4 +11,5 @@ public interface IContants {
     public static final String COMMENT_ID = "comment_id";
     public static final int ONE = 1;
     public static final String MYPOST_FLAG = "mypost_flag";
+    public static final String MODE = "mode";
 }

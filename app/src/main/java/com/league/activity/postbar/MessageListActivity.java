@@ -3,6 +3,7 @@ package com.league.activity.postbar;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -13,8 +14,12 @@ import android.widget.Toast;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
+import com.league.adapter.LiaoBaAdapter;
 import com.league.adapter.LiaobaConcernListAdapter;
+import com.league.bean.LiaoBaUserInfo;
 import com.league.bean.PopularityBean;
+import com.league.utils.Constants;
+import com.league.utils.IContants;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -29,7 +34,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MessageListActivity extends BaseActivity implements View.OnClickListener{
+public class MessageListActivity extends BaseActivity implements View.OnClickListener,IContants{
     @Bind(R.id.near_back)
     ImageButton nearBack;
     @Bind(R.id.near_centertitle)
@@ -42,22 +47,30 @@ public class MessageListActivity extends BaseActivity implements View.OnClickLis
     PullToRefreshLayout pullToRefreshLayout;
     @Bind(R.id.liaoba_concern_list)
     ListView listView;
-    private List<PopularityBean> list = new ArrayList<PopularityBean>();
-    private LiaobaConcernListAdapter adapter;
+    private  List<LiaoBaUserInfo> list=new ArrayList<LiaoBaUserInfo>();
+    private LiaoBaAdapter adapter;
     private int totalPage;
     private int currentPage = 1;
+    private int mode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_concern_list);
         ButterKnife.bind(this);
-
+        mode = getIntent().getIntExtra(MODE,0);
         nearBack.setOnClickListener(this);
         nearTiRight.setVisibility(View.GONE);
-        nearCentertitle.setText("我的点赞");
         nearRight.setVisibility(View.GONE);
+        switch (mode){
+            case 1:
+                nearCentertitle.setText("我的点赞");
+                break;
+            case 2:
+                nearCentertitle.setText("我的话题");
+                break;
+        }
 
-        adapter = new LiaobaConcernListAdapter(list, getApplicationContext());
+        adapter = new LiaoBaAdapter(list, getApplicationContext(), 2);
         listView.setAdapter(adapter);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);
@@ -76,30 +89,63 @@ public class MessageListActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initData(final int currentPage) {
-        ApiUtil.liaobaGetMyConcernList(getApplicationContext(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<PopularityBean>>() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<PopularityBean> response) {
-                if (currentPage == 1) {
-                    list.clear();
-                }
-                list.addAll(response);
-                adapter.notifyDataSetChanged();
-                pullToRefreshLayout.setVisibility(View.VISIBLE);
-            }
+        switch (mode){
+            case 1:
+                ApiUtil.liaobaTbmessagesMyLikesList(getApplicationContext(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaUserInfo>>() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaUserInfo> response) {
+                        if (currentPage == 1) {
+                            list.clear();
+                        }
+                        Log.i("test", response.size() + "");
+                        list.addAll(response);
+                        adapter.notifyDataSetChanged();
+                        pullToRefreshLayout.setVisibility(View.VISIBLE);
+                    }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<PopularityBean> errorResponse) {
-                Toast.makeText(getApplicationContext(), "哎呀网络不好", Toast.LENGTH_SHORT).show();
-            }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaUserInfo> errorResponse) {
+                        Toast.makeText(getApplicationContext(), "哎呀网络不好", Toast.LENGTH_SHORT).show();
+                    }
 
-            @Override
-            protected ArrayList<PopularityBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                JSONObject jsonObject = new JSONObject(rawJsonData);
-                totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
-                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<PopularityBean>>() {
+                    @Override
+                    protected ArrayList<LiaoBaUserInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                        JSONObject jsonObject = new JSONObject(rawJsonData);
+                        totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
+                        return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaUserInfo>>() {
+                        });
+                    }
                 });
-            }
-        });
+                break;
+            case 2:
+                ApiUtil.liaobaTbmessagesMyList(getApplicationContext(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaUserInfo>>() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaUserInfo> response) {
+                        if (currentPage == 1) {
+                            list.clear();
+                        }
+                        Log.i("test", response.size() + "");
+                        list.addAll(response);
+                        adapter.notifyDataSetChanged();
+                        pullToRefreshLayout.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaUserInfo> errorResponse) {
+                        Toast.makeText(getApplicationContext(), "哎呀网络不好", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    protected ArrayList<LiaoBaUserInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                        JSONObject jsonObject = new JSONObject(rawJsonData);
+                        totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
+                        return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaUserInfo>>() {
+                        });
+                    }
+                });
+                break;
+        }
+
     }
 
     public class MyListener implements PullToRefreshLayout.OnRefreshListener {

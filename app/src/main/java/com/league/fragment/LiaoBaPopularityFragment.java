@@ -55,7 +55,7 @@ public class LiaoBaPopularityFragment extends Fragment{
     }
 
     private void initData(final int currentPage){
-        ApiUtil.liaobaGetPopularity(getActivity(), Constants.PHONENUM, currentPage, new BaseJsonHttpResponseHandler<ArrayList<PopularityBean>>() {
+        ApiUtil.liaobaGetPopularity(getActivity(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<PopularityBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<PopularityBean> response) {
                 if(currentPage==1){

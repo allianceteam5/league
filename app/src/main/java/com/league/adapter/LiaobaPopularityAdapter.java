@@ -86,9 +86,9 @@ public class LiaobaPopularityAdapter extends BaseAdapter {
             holder.iconLeftRank.setVisibility(View.GONE);
             holder.iconRight.setVisibility(View.GONE);
             holder.tvLeftRank.setVisibility(View.VISIBLE);
-            holder.tvLeftRank.setText(position+"");
+            holder.tvLeftRank.setText((position + 1) + "");
         }
-        if(position > 9){
+        if (position > 9) {
             holder.iconLeftRank.setVisibility(View.GONE);
             holder.iconRight.setVisibility(View.GONE);
         }
@@ -101,7 +101,7 @@ public class LiaobaPopularityAdapter extends BaseAdapter {
             holder.concern.setEnabled(false);
             holder.concern.setBackgroundResource(R.drawable.liaobaconcerned);
         }
-        holder.concern.setOnClickListener(new View.OnClickListener(){
+        holder.concern.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ApiUtil.liaobaConcern(ctx, list.get(position).getPhone(), 1, new BaseJsonHttpResponseHandler<SucessBean>() {

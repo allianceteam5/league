@@ -27,7 +27,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 />
-            <ImageView
+           <!-- <ImageView
                 android:id="@+id/search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                 android:src="@drawable/liaoba_publish"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_toLeftOf="@id/search"/>
+                android:layout_toLeftOf="@id/search"/>-->
         </RelativeLayout>
         <LinearLayout
             android:layout_width="wrap_content"

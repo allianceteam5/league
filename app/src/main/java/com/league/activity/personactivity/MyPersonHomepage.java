@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.league.activity.liaobaactivity.MyLikes;
-import com.league.activity.liaobaactivity.MyTopic;
 import com.league.activity.postbar.ConcernListActivity;
+import com.league.activity.postbar.MessageListActivity;
+import com.league.utils.IContants;
 import com.mine.league.R;
 
-public class MyPersonHomepage extends Activity implements View.OnClickListener {
+import butterknife.internal.ListenerClass;
+
+public class MyPersonHomepage extends Activity implements View.OnClickListener,IContants {
 
 
     @Override
@@ -31,12 +33,14 @@ public class MyPersonHomepage extends Activity implements View.OnClickListener {
                 startActivity(intent3);
                 break;
             case R.id.mytopic:
-                Intent intent1 = new Intent(getApplication(), MyTopic.class);
-                startActivity(intent1);
+                Intent intent2 = new Intent(getApplication(), MessageListActivity.class);
+                intent2.putExtra(MODE,2);
+                startActivity(intent2);
                 break;
             case R.id.mylikes:
-                Intent intent2 = new Intent(getApplication(), MyLikes.class);
-                startActivity(intent2);
+                Intent intent1 = new Intent(getApplication(), MessageListActivity.class);
+                intent1.putExtra(MODE,1);
+                startActivity(intent1);
                 break;
         }
     }
