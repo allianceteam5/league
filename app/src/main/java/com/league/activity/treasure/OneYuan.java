@@ -209,6 +209,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
                 startActivity(record);
                 break;
             case R.id.One_question:
+
                 Toast.makeText(this, "que", Toast.LENGTH_LONG).show();
                 break;
             case R.id.ten1:
