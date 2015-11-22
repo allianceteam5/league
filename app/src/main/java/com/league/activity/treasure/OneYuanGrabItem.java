@@ -55,7 +55,10 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
     private TextView period,name,totalneed,remain,starttime;
     private ProgressBar progressbar;
     private float needed,remained;
-    private LinearLayout linearLayout;
+    private LinearLayout linearLayout,llPoints;
+    private String[] imageDescriptions;
+    private TextView tvDescription;
+    private int previousSelectPosition = 0;
     private ViewPager viewPager;
     private List<ImageView> listviews;
     private ViewPaperAdapter mViewPaperAdapter;
@@ -110,6 +113,10 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         takeinNow.setOnClickListener(this);
         takeinAll= (Button) findViewById(R.id.takeall);
         takeinAll.setOnClickListener(this);
+
+        tvDescription = (TextView) findViewById(R.id.tv_image_description);
+        llPoints = (LinearLayout) findViewById(R.id.ll_points);
+
 
         state= (ImageView) findViewById(R.id.state);
         period= (TextView) findViewById(R.id.period);
@@ -192,11 +199,23 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         progressbar.setProgress((int) ((needed - remained) / needed * 100));
         starttime.setText(detail.getCreated_at());
         pictures=detail.getPictures().split(" ");
+        imageDescriptions = getImageDescription();
         ImageView iv=null;
+        View view;
         for(int i=0;i<pictures.length;i++) {
             iv = new ImageView(this);
             Picasso.with(getApplication()).load(pictures[i]).into(iv);
             listviews.add(iv);
+
+            // 添加点view对象
+            view = new View(this);
+            view.setBackgroundDrawable(getResources().getDrawable(
+                    R.drawable.ic_launcher));
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(5, 5);
+            lp.leftMargin = 10;
+            view.setLayoutParams(lp);
+            view.setEnabled(false);
+            llPoints.addView(view);
         }
 
         mViewPaperAdapter=new ViewPaperAdapter(listviews);
@@ -210,7 +229,14 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
             @Override
             public void onPageSelected(int position) {
-
+                // 改变图片的描述信息
+                tvDescription
+                        .setText(imageDescriptions[position % listviews.size()]);
+                // 切换选中的点,把前一个点置为normal状态
+                llPoints.getChildAt(previousSelectPosition).setEnabled(false);
+                // 把当前选中的position对应的点置为enabled状态
+                llPoints.getChildAt(position % listviews.size()).setEnabled(true);
+                previousSelectPosition = position % listviews.size();
             }
 
             @Override
@@ -227,6 +253,16 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
             myrecordlist.setVisibility(View.VISIBLE);
             myrecordlist.setAdapter(new DetailMyRecords(myrecords,getApplication()));
         }
+        tvDescription.setText(imageDescriptions[previousSelectPosition]);
+        llPoints.getChildAt(previousSelectPosition).setEnabled(true);
+    }
+    private String[] getImageDescription() {
+        int num=pictures.length;
+        String[] temp=new String[num];
+        for(int i=0;i<num;i++){
+           temp[i]=i+1+"";
+        }
+        return temp;
     }
     @Override
     public void onClick(View v) {

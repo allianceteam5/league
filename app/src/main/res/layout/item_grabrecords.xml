@@ -3,193 +3,265 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white">
+
     <ImageView
         android:id="@+id/picture"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:orientation="vertical"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/picture">
+        android:layout_toRightOf="@id/picture"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="第"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="第"/>
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/period"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="200"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="200"/>
+                android:textSize="14sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="期"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="期"/>
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:text="500夺金"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="500夺金"/>
+                android:textSize="14sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="总需："
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="总需："/>
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/totalpeople"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:text="1300"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="1300"/>
+                android:textSize="14sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="本期参与："
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="本期参与："/>
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/thistake"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:text="1"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="1"/>
+                android:textSize="14sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="揭晓时间："
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="揭晓时间："/>
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/endtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:text="1"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="1"/>
+                android:textSize="14sp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/winner"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/winnerbacknormal"
             android:orientation="vertical"
-            android:background="@drawable/winnerbackground"
             android:visibility="gone">
+
             <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="获得者："
                     android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:text="获得者："/>
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/winname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
+                    android:text="1"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:text="1"/>
+                    android:textSize="14sp" />
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="本期参与："
                     android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:text="本期参与："/>
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
+                    android:text="1"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:text="1"/>
+                    android:textSize="14sp" />
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="幸运号码："
                     android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:text="幸运号码："/>
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/winnumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
+                    android:text="1"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:text="1"/>
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:id="@+id/twobutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/checkstate"
+                android:clickable="false"
+                android:text="已领取"
+                android:textColor="@color/black1"
+                android:textSize="14sp" />
+
+            <Button
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/checkstate"
+                android:text="查看状态"
+                android:textColor="@color/black1"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/onebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/applyfor"
+                android:gravity="center"
+                android:text="查看状态"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

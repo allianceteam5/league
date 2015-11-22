@@ -57,6 +57,8 @@ public class GrabRecordAdapter extends BaseAdapter{
             holder.winnercount= (TextView) convertView.findViewById(R.id.count);
             holder.winnernumber= (TextView) convertView.findViewById(R.id.winnumber);
             holder.linearlayout=convertView.findViewById(R.id.winner);
+            holder.twobutton=convertView.findViewById(R.id.twobutton);
+            holder.onebutton=convertView.findViewById(R.id.onebutton);
             convertView.setTag(holder);
         }else{
             holder= (ViewHolder) convertView.getTag();
@@ -75,11 +77,26 @@ public class GrabRecordAdapter extends BaseAdapter{
             holder.winnernumber.setText(list.get(position).getWinnernumber());
             holder.winnercount.setText(list.get(position).getWinnercount());
         }
+        if(list.get(position).getFlag()!=null&&list.get(position).getFlag().equals("0")){
+            holder.linearlayout.setVisibility(View.VISIBLE);
+            holder.linearlayout.setBackgroundResource(R.drawable.winnerbackground);
+            holder.onebutton.setVisibility(View.VISIBLE);
+            holder.winnername.setText("恭喜您获得本次奖品");
+            holder.winnernumber.setText(list.get(position).getWinnernumber());
+            holder.winnercount.setText(list.get(position).getWinnercount());
+        }else if(list.get(position).getFlag()!=null&&!list.get(position).getFlag().equals("0")){
+            holder.linearlayout.setVisibility(View.VISIBLE);
+            holder.linearlayout.setBackgroundResource(R.drawable.winnerbackground);
+            holder.twobutton.setVisibility(View.VISIBLE);
+            holder.winnername.setText("恭喜您获得本次奖品");
+            holder.winnernumber.setText(list.get(position).getWinnernumber());
+            holder.winnercount.setText(list.get(position).getWinnercount());
+        }
         return convertView;
     }
     class ViewHolder {
         ImageView picture;
         TextView version,title,total,thiscount,endtime,winnername,winnercount,winnernumber;
-        View linearlayout;
+        View linearlayout,twobutton,onebutton;
     }
 }
