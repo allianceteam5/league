@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
+        android:layout_above="@id/bottom"
         android:scrollbars="none">
 
         <LinearLayout
@@ -70,30 +71,32 @@
 
                 <ImageView
                     android:id="@+id/state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/running" />
+                    android:layout_width="40dp"
+                    android:layout_height="15dp"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="top"
+                    android:src="@drawable/running"
+                    />
 
                 <TextView
                     android:id="@+id/period"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dip"
-                    android:gravity="center_vertical"
+                    android:gravity="left"
                     android:text="第200期"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dip"
-                    android:gravity="center_vertical"
+                    android:gravity="left"
                     android:text="商品名称"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -293,13 +296,13 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="48dip"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:orientation="horizontal"
         >
-
         <Button
             android:id="@+id/takeinnow"
             android:layout_width="0dip"
