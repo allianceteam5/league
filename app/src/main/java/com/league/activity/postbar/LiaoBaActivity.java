@@ -22,7 +22,7 @@ import com.mine.league.R;
 
 public class LiaoBaActivity extends FragmentActivity implements View.OnClickListener {
 
-    private ImageButton back,mine;
+    private ImageButton back, mine, publish;
     private ViewPager pager;
     private ViewPagerTabAdapter adapter;
     PagerSlidingTabStrip tabs;
@@ -48,6 +48,8 @@ public class LiaoBaActivity extends FragmentActivity implements View.OnClickList
     private void initView() {
         back = (ImageButton) findViewById(R.id.liaoba_back);
         back.setOnClickListener(this);
+        publish = (ImageButton) findViewById(R.id.liaoba_publish);
+        publish.setOnClickListener(this);
         latest = new LiaoBaLatestFragment();
         popularity = new LiaoBaPopularityFragment();
         hot = new LiaoBaHotFragment();
@@ -61,15 +63,15 @@ public class LiaoBaActivity extends FragmentActivity implements View.OnClickList
         view = (LinearLayout) tabs.getChildAt(0);
         tabViews = new TextView[4];
         colors = new ColorStateList[2];
-        colors[0]=getResources().getColorStateList(R.color.red);
-        colors[1]=getResources().getColorStateList(R.color.black);
-        tabViews[0]= (TextView) view.getChildAt(0);
+        colors[0] = getResources().getColorStateList(R.color.red);
+        colors[1] = getResources().getColorStateList(R.color.black);
+        tabViews[0] = (TextView) view.getChildAt(0);
         tabViews[0].setTextColor(colors[0]);
-        tabViews[1]= (TextView) view.getChildAt(1);
+        tabViews[1] = (TextView) view.getChildAt(1);
         tabViews[1].setTextColor(colors[1]);
-        tabViews[2]= (TextView) view.getChildAt(2);
+        tabViews[2] = (TextView) view.getChildAt(2);
         tabViews[2].setTextColor(colors[1]);
-        tabViews[3]= (TextView) view.getChildAt(3);
+        tabViews[3] = (TextView) view.getChildAt(3);
         tabViews[3].setTextColor(colors[1]);
         tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -114,7 +116,7 @@ public class LiaoBaActivity extends FragmentActivity implements View.OnClickList
 
             }
         });
-        mine= (ImageButton) findViewById(R.id.liaoba_mine);
+        mine = (ImageButton) findViewById(R.id.liaoba_mine);
         mine.setOnClickListener(this);
     }
 
@@ -128,6 +130,9 @@ public class LiaoBaActivity extends FragmentActivity implements View.OnClickList
             case R.id.liaoba_mine:
                 Intent intent = new Intent(getApplication(), MyPersonHomepage.class);
                 startActivity(intent);
+                break;
+            case R.id.liaoba_publish:
+                startActivity(new Intent(LiaoBaActivity.this, PostbarPublishActivity.class));
                 break;
         }
     }

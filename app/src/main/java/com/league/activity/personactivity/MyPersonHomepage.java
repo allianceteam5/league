@@ -7,9 +7,10 @@ import android.view.View;
 
 import com.league.activity.liaobaactivity.MyLikes;
 import com.league.activity.liaobaactivity.MyTopic;
+import com.league.activity.postbar.ConcernListActivity;
 import com.mine.league.R;
 
-public class MyPersonHomepage extends Activity implements View.OnClickListener{
+public class MyPersonHomepage extends Activity implements View.OnClickListener {
 
 
     @Override
@@ -20,19 +21,21 @@ public class MyPersonHomepage extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.back:
                 onBackPressed();
                 finish();
                 break;
             case R.id.myconcern:
+                Intent intent3 = new Intent(MyPersonHomepage.this, ConcernListActivity.class);
+                startActivity(intent3);
                 break;
             case R.id.mytopic:
-                Intent intent1=new Intent(getApplication(), MyTopic.class);
+                Intent intent1 = new Intent(getApplication(), MyTopic.class);
                 startActivity(intent1);
                 break;
             case R.id.mylikes:
-                Intent intent2 =new Intent(getApplication(), MyLikes.class);
+                Intent intent2 = new Intent(getApplication(), MyLikes.class);
                 startActivity(intent2);
                 break;
         }

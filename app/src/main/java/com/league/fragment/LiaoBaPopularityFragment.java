@@ -29,11 +29,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LiaoBaPopularityFragment extends Fragment implements ListItemClickHelp{
+public class LiaoBaPopularityFragment extends Fragment{
     private View layout;
     private ListView listView;
     private List<PopularityBean> list =new ArrayList<PopularityBean>();
-    LiaobaPopularityAdapter adapter;
+    private LiaobaPopularityAdapter adapter;
     private int totalPage;
     private int currentPage=1;
     private PullToRefreshLayout pullToRefreshLayout;
@@ -47,7 +47,7 @@ public class LiaoBaPopularityFragment extends Fragment implements ListItemClickH
     }
     private void initView(){
         listView= (ListView) layout.findViewById(R.id.liaoba_popularity_list);
-        adapter=new LiaobaPopularityAdapter(list,getActivity().getApplication(),this);
+        adapter=new LiaobaPopularityAdapter(list,getActivity().getApplication());
         listView.setAdapter(adapter);
         pullToRefreshLayout = (PullToRefreshLayout) layout.findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
@@ -78,10 +78,6 @@ public class LiaoBaPopularityFragment extends Fragment implements ListItemClickH
                 return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<PopularityBean>>() {});
             }
         });
-    }
-    @Override
-    public void onClick(View item, View widget, int position, int which) {
-
     }
 
     public class MyListener implements PullToRefreshLayout.OnRefreshListener

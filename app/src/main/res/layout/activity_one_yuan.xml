@@ -748,7 +748,8 @@
                 android:horizontalSpacing="2dip"
                 android:numColumns="2"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="2dp">
+                android:verticalSpacing="2dp"
+                android:listSelector="#00000000">
 
             </com.league.view.MyGridView>
         </LinearLayout>

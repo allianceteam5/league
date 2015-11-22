@@ -1,5 +1,8 @@
 package com.league.bean;
 
+import android.text.TextUtils;
+
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,15 +32,15 @@ public class LiaoBaUserInfo {
     private String userid;
     private String content;
     private String pictures;
-    private String likecount;
-    private String replycount;
+    private int likecount;
+    private int replycount;
     private long created_at;
     private String title;
     private String phone;
     private String nickname;
     private String thumb;
-    private String isconcerned;
-    private String isliked;
+    private int isconcerned;
+    private int isliked;
     /**
      * id : 1
      * tbmessageid : 1
@@ -79,11 +82,11 @@ public class LiaoBaUserInfo {
         this.pictures = pictures;
     }
 
-    public void setLikecount(String likecount) {
+    public void setLikecount(int likecount) {
         this.likecount = likecount;
     }
 
-    public void setReplycount(String replycount) {
+    public void setReplycount(int replycount) {
         this.replycount = replycount;
     }
 
@@ -107,11 +110,11 @@ public class LiaoBaUserInfo {
         this.thumb = thumb;
     }
 
-    public void setIsconcerned(String isconcerned) {
+    public void setIsconcerned(int isconcerned) {
         this.isconcerned = isconcerned;
     }
 
-    public void setIsliked(String isliked) {
+    public void setIsliked(int isliked) {
         this.isliked = isliked;
     }
 
@@ -139,11 +142,11 @@ public class LiaoBaUserInfo {
         return pictures;
     }
 
-    public String getLikecount() {
+    public int getLikecount() {
         return likecount;
     }
 
-    public String getReplycount() {
+    public int getReplycount() {
         return replycount;
     }
 
@@ -167,11 +170,11 @@ public class LiaoBaUserInfo {
         return thumb;
     }
 
-    public String getIsconcerned() {
+    public int getIsconcerned() {
         return isconcerned;
     }
 
-    public String getIsliked() {
+    public int getIsliked() {
         return isliked;
     }
 
@@ -181,5 +184,11 @@ public class LiaoBaUserInfo {
 
     public List<LikesEntity> getLikes() {
         return likes;
+    }
+
+    public List<String> getPictureList(){
+        if (TextUtils.isEmpty(pictures))
+            return null;
+        return Arrays.asList(pictures.trim().split(" "));
     }
 }

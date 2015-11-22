@@ -78,12 +78,14 @@ public class RecommendationInfoAdapter extends BaseAdapter{
 		holder.infoContent.setText(list.get(position).getTitle());
 		holder.secondContent.setText(list.get(position).getReason());
 		//设置四张图片
-		final List<String> imgList = list.get(position).getPictureLimitFour();
-		ImgGridAdapter adapter = new ImgGridAdapter(ctx, imgList);
-		if (imgList == null)
+		List<String> imgList = list.get(position).getPictureLimitFour();
+		if (imgList == null) {
 			holder.gridview.setVisibility(View.GONE);
-		else
+		}
+		else{
+			ImgGridAdapter adapter = new ImgGridAdapter(ctx, imgList);
 			holder.gridview.setAdapter(adapter);
+		}
 		return convertView;
 	}
 	class ViewHolder{

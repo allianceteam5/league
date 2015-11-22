@@ -49,7 +49,7 @@ public class LiaoBaConcernFragment extends Fragment implements ListItemClickHelp
     }
     private void initView(){
         listView= (ListView) layout.findViewById(R.id.liaoba_concern_list);
-        adapter=new LiaoBaAdapter(list, getActivity().getApplication(),0,this);
+        adapter=new LiaoBaAdapter(list, getActivity().getApplication(),0);
         listView.setAdapter(adapter);
         pullToRefreshLayout = (PullToRefreshLayout) layout.findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
