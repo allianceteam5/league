@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:text="第"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:gravity="center_vertical"
             />
         <TextView
@@ -25,7 +25,7 @@
             android:id="@+id/period"
             android:text="xxx"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:gravity="center_vertical"
             />
         <TextView
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:text="期 （揭晓时间 "
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:gravity="center_vertical"
             />
         <TextView
@@ -44,7 +44,7 @@
             android:id="@+id/announcedtime"
             android:text="2015-10-21 15:00"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:gravity="center_vertical"
             />
         <TextView
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:text=")"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:gravity="center_vertical"
             />
     </LinearLayout>
@@ -63,8 +63,8 @@
         android:layout_height="wrap_content">
         <com.league.widget.CircleImageView
             android:id="@+id/thumb"
-            android:layout_width="60dip"
-            android:layout_height="60dip"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
             android:layout_marginLeft="10dip"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
@@ -88,14 +88,14 @@
                     android:layout_height="wrap_content"
                     android:text="获奖者："
                     android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:textSize="14sp"/>
                 <TextView
                     android:id="@+id/holdername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="一元就中"
                     android:textColor="@color/red"
-                    android:textSize="22sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -106,14 +106,14 @@
                     android:layout_height="wrap_content"
                     android:text="ID ："
                     android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:textSize="14sp"/>
                 <TextView
                     android:id="@+id/holderid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="511112"
                     android:textColor="@color/red"
-                    android:textSize="22sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -124,14 +124,14 @@
                     android:layout_height="wrap_content"
                     android:text="幸运号码："
                     android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:textSize="14sp"/>
                 <TextView
                     android:id="@+id/holdernum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2222233333"
                     android:textColor="@color/red"
-                    android:textSize="22sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -142,20 +142,20 @@
                     android:layout_height="wrap_content"
                     android:text="本期参与："
                     android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:textSize="14sp"/>
                 <TextView
                     android:id="@+id/taknum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10"
                     android:textColor="@color/red"
-                    android:textSize="22sp"/>
+                    android:textSize="14sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="人次"
                     android:textColor="@color/black"
-                    android:textSize="22sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
         </LinearLayout>

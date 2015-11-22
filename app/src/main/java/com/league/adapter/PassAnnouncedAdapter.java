@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.league.bean.PassAnnouncedBean;
 import com.mine.league.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -58,13 +59,14 @@ public class PassAnnouncedAdapter extends BaseAdapter{
         }else{
             holder= (ViewHolder) convertView.getTag();
         }
-        holder.period.setText(list.get(position).getPeroid()+"");
-        holder.announTime.setText(list.get(position).getTime());
+        holder.period.setText(list.get(position).getVersion());
+        holder.announTime.setText(list.get(position).getEnd_at());
 
-        holder.holderName.setText(list.get(position).getHolderName());
-        holder.holderId.setText(list.get(position).getHolderId());
-        holder.holderNum.setText(list.get(position).getLuckNum());
-        holder.takNum.setText(list.get(position).getTakPeoNum()+"");
+        holder.holderName.setText(list.get(position).getNickname());
+        holder.holderId.setText(list.get(position).getWinneruserid());
+        holder.holderNum.setText(list.get(position).getWinnernumber());
+        holder.takNum.setText(list.get(position).getCount());
+        Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.thumb);
         return convertView;
     }
     class ViewHolder{

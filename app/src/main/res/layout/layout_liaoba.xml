@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="聊吧"
+        android:text="说·吧"
         android:textColor="@color/white"
         android:textSize="20sp" />
 

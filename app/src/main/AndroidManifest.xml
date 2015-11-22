@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mine.league"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -48,7 +48,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.NoTitleBar" >
+        android:theme="@android:style/Theme.NoTitleBar">
 
         <!-- 百度地图所需的service -->
         <service
@@ -103,7 +103,7 @@
         <activity
             android:name="com.easemob.chatuidemo.activity.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
+            android:theme="@style/horizontal_slide">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -305,8 +305,8 @@
             android:theme="@style/horizontal_slide" />
 
         <!-- 开机自启动服务 -->
-        <receiver android:name="com.easemob.chat.StartServiceReceiver" >
-            <intent-filter android:priority="1000" >
+        <receiver android:name="com.easemob.chat.StartServiceReceiver">
+            <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
 
@@ -318,7 +318,7 @@
         <receiver
             android:name="com.easemob.chat.EMGCMBroadcastReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
@@ -332,7 +332,7 @@
 
         <receiver
             android:name="com.easemob.chatuidemo.receiver.GCMPushBroadCast"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.easemob.sdk.push" />
 
@@ -349,7 +349,7 @@
         <!-- 声明sdk所需的service -->
         <service android:name="com.easemob.chat.EMChatService" />
         <!-- 声明sdk所需的receiver -->
-        <receiver android:name="com.easemob.chat.EMMonitorReceiver" >
+        <receiver android:name="com.easemob.chat.EMMonitorReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
@@ -370,74 +370,47 @@
         <activity android:name="com.league.activity.treasure.PassAnnounced" />
         <activity android:name="com.league.activity.treasure.BuyList" />
         <activity android:name="com.league.activity.personactivity.PersonSetup" />
-        <activity android:name="com.league.activity.personactivity.PersonInformationSetup" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.AlianceReward" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.Certification" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.MyCollection" >
-        </activity>
-        <activity android:name="com.league.activity.postbar.LiaoBaActivity" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.MyMoneyBag" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.AboutUs" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.FeedBack" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.IDRelated" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.ChangeCode" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.FindCode" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.MyRedBagBalance" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.Recharge" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.WithDraw" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.AddBankCard" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.SelectBankcard" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.MyGoldCoin" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.PayPassword" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.SetCode" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.PaymentOrder" >
-        </activity>
-        <activity android:name="com.league.activity.personactivity.MyPersonHomepage" >
-        </activity>
-        <activity android:name="com.league.activity.liaobaactivity.MyTopic" >
-        </activity>
-        <activity android:name="com.league.activity.liaobaactivity.MyLikes" >
-        </activity>
-        <activity android:name="com.league.activity.liaobaactivity.TopicContent" >
-        </activity>
+        <activity android:name="com.league.activity.personactivity.PersonInformationSetup"></activity>
+        <activity android:name="com.league.activity.personactivity.AlianceReward"></activity>
+        <activity android:name="com.league.activity.personactivity.Certification"></activity>
+        <activity android:name="com.league.activity.personactivity.MyCollection"></activity>
+        <activity android:name="com.league.activity.postbar.LiaoBaActivity"></activity>
+        <activity android:name="com.league.activity.personactivity.MyMoneyBag"></activity>
+        <activity android:name="com.league.activity.personactivity.AboutUs"></activity>
+        <activity android:name="com.league.activity.personactivity.FeedBack"></activity>
+        <activity android:name="com.league.activity.personactivity.IDRelated"></activity>
+        <activity android:name="com.league.activity.personactivity.ChangeCode"></activity>
+        <activity android:name="com.league.activity.personactivity.FindCode"></activity>
+        <activity android:name="com.league.activity.personactivity.MyRedBagBalance"></activity>
+        <activity android:name="com.league.activity.personactivity.Recharge"></activity>
+        <activity android:name="com.league.activity.personactivity.WithDraw"></activity>
+        <activity android:name="com.league.activity.personactivity.AddBankCard"></activity>
+        <activity android:name="com.league.activity.personactivity.SelectBankcard"></activity>
+        <activity android:name="com.league.activity.personactivity.MyGoldCoin"></activity>
+        <activity android:name="com.league.activity.personactivity.PayPassword"></activity>
+        <activity android:name="com.league.activity.personactivity.SetCode"></activity>
+        <activity android:name="com.league.activity.personactivity.PaymentOrder"></activity>
+        <activity android:name="com.league.activity.personactivity.MyPersonHomepage"></activity>
+        <activity android:name="com.league.activity.liaobaactivity.MyTopic"></activity>
+        <activity android:name="com.league.activity.liaobaactivity.MyLikes"></activity>
+        <activity android:name="com.league.activity.liaobaactivity.TopicContent"></activity>
+        <activity android:name="com.league.activity.treasure.PictureDetails"></activity>
         <activity
             android:name="com.league.activity.near.RecommendationInfoPublishActivity"
-            android:label="@string/title_activity_recommendation_pushlish" >
-        </activity>
+            android:label="@string/title_activity_recommendation_pushlish"></activity>
         <activity
             android:name="com.league.activity.near.CommentActivity"
-            android:label="@string/title_activity_comment" >
-        </activity>
+            android:label="@string/title_activity_comment"></activity>
         <activity
             android:name="com.league.activity.postbar.PostbarPublishActivity"
-            android:label="@string/title_activity_postbar_publish" >
-        </activity>
+            android:label="@string/title_activity_postbar_publish"></activity>
         <activity
             android:name="com.league.activity.postbar.ConcernListActivity"
-            android:label="@string/title_activity_concern_list" >
-        </activity>
+            android:label="@string/title_activity_concern_list"></activity>
         <activity
             android:name="com.league.activity.postbar.MessageListActivity"
-            android:label="@string/title_activity_message_list" >
-        </activity>
+            android:label="@string/title_activity_message_list"></activity>
+        <activity android:name="com.league.activity.treasure.GrabRecord"></activity>
     </application>
 
 </manifest>

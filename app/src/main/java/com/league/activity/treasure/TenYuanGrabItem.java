@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.adapter.DetailMyRecords;
 import com.league.adapter.OneYuanGrabTakRecodAdapter;
 import com.league.adapter.ViewPaperAdapter;
 import com.league.bean.GrabRecordBean;
@@ -46,17 +47,23 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
     private ListViewForScrollView recordListView;
     private TenYuanGrabBean detail;
     private List<GrabRecordBean> records;
+    private List<MyRecordGrabBean> myrecords=new ArrayList<MyRecordGrabBean>();
     private Button takeinNow,buyAll;
     private String id;
     private ImageView state;
-    private TextView period,name,totalneed,remain;
+    private TextView period,name,totalneed,remain,starttime;
     private ProgressBar progressbar;
     private float needed,remained;
-    private LinearLayout linearLayout;
+    private LinearLayout linearLayout,llPoints;
+    private String[] imageDescriptions;
+    private TextView tvDescription;
+    private int previousSelectPosition = 0;
     private ViewPager viewPager;
     private List<ImageView> listImageViews=new ArrayList<ImageView>();
     private ViewPaperAdapter mViewPaperAdapter;
     private String[] pictures;
+    private TextView tv;//夺宝记录
+    private ListViewForScrollView myrecordlist;
 
 
     private Handler handler=new Handler(){
@@ -81,6 +88,8 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
 
     }
     private void initView() {
+        myrecordlist= (ListViewForScrollView) findViewById(R.id.myrecordlist);
+        tv= (TextView) findViewById(R.id.viewtakestate);
         back = (ImageView) findViewById(R.id.near_back);
         back = (ImageView) findViewById(R.id.near_back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -104,12 +113,15 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
         buyAll= (Button) findViewById(R.id.buyall);
         buyAll.setOnClickListener(this);
 
+        tvDescription = (TextView) findViewById(R.id.tv_image_description);
+        llPoints = (LinearLayout) findViewById(R.id.ll_points);
 
         state= (ImageView) findViewById(R.id.state);
         period= (TextView) findViewById(R.id.period);
         name= (TextView) findViewById(R.id.name);
         totalneed= (TextView) findViewById(R.id.totalpeo);
         remain= (TextView) findViewById(R.id.leavepeo);
+        starttime= (TextView) findViewById(R.id.starttime);
         progressbar= (ProgressBar) findViewById(R.id.progressbar);
         linearLayout= (LinearLayout) findViewById(R.id.viewpaper);
         viewPager=new ViewPager(this);
@@ -127,9 +139,10 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, TenGrabDetailBean response) {
                 detail = response.getTenYuanGrabBean();
                 records=response.getGrabRecordBean();
+                myrecords.addAll(response.getMyRecordGrabBean());
                 Paper.book().write(Constants.TenYuanDetail + id, detail);
-                Paper.book().write(Constants.TenyuanGrabRecords+id,records);
-                updateView(detail,records);
+                Paper.book().write(Constants.TenyuanGrabRecords + id, records);
+                updateView(detail,records,myrecords);
             }
 
             @Override
@@ -137,7 +150,7 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
                 detail = Paper.book().read(Constants.TenYuanDetail + id);
                 records=Paper.book().read(Constants.TenyuanGrabRecords+id);
                 if (detail != null) {
-                    updateView(detail,records);
+                    updateView(detail,records,myrecords);
                 }
             }
 
@@ -181,6 +194,7 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
                 break;
             case R.id.passannounced:
                 Intent intent=new Intent(TenYuanGrabItem.this,PassAnnounced.class);
+                intent.putExtra("id",detail.getKind());
                 startActivity(intent);
                 break;
             case R.id.buyall:
@@ -194,7 +208,7 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
         }
     }
 
-    void updateView(TenYuanGrabBean detail,List<GrabRecordBean> records){
+    void updateView(TenYuanGrabBean detail,List<GrabRecordBean> records,List<MyRecordGrabBean> myrecords){
 
         if(detail.getIslotteried().equals("0")){
             state.setImageResource(R.drawable.running);
@@ -208,12 +222,25 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
         needed=Float.valueOf(detail.getNeeded());
         remained=Float.valueOf(detail.getRemain());
         progressbar.setProgress((int) ((needed - remained) / needed * 100));
+        starttime.setText(detail.getCreated_at());
         pictures=detail.getPictures().split(" ");
+        imageDescriptions = getImageDescription();
         ImageView iv=null;
+        View view;
         for(int i=0;i<pictures.length;i++) {
             iv = new ImageView(this);
             Picasso.with(getApplication()).load(pictures[i]).into(iv);
             listImageViews.add(iv);
+
+            // 添加点view对象
+            view = new View(this);
+            view.setBackgroundDrawable(getResources().getDrawable(
+                    R.drawable.ic_launcher));
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(5, 5);
+            lp.leftMargin = 10;
+            view.setLayoutParams(lp);
+            view.setEnabled(false);
+            llPoints.addView(view);
         }
 
         mViewPaperAdapter=new ViewPaperAdapter(listImageViews);
@@ -226,7 +253,14 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
 
             @Override
             public void onPageSelected(int position) {
-
+                // 改变图片的描述信息
+                tvDescription
+                        .setText(imageDescriptions[position % listImageViews.size()]);
+                // 切换选中的点,把前一个点置为normal状态
+                llPoints.getChildAt(previousSelectPosition).setEnabled(false);
+                // 把当前选中的position对应的点置为enabled状态
+                llPoints.getChildAt(position % listImageViews.size()).setEnabled(true);
+                previousSelectPosition = position % listImageViews.size();
             }
 
             @Override
@@ -235,6 +269,25 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
             }
         });
         recordListView.setAdapter(new OneYuanGrabTakRecodAdapter(records,getApplication()));
+        if(myrecords.size()==0){
+            tv.setVisibility(View.VISIBLE);
+            myrecordlist.setVisibility(View.GONE);
+        }else{
+            tv.setVisibility(View.GONE);
+            myrecordlist.setVisibility(View.VISIBLE);
+            myrecordlist.setAdapter(new DetailMyRecords(myrecords,getApplication()));
+        }
+
+        tvDescription.setText(imageDescriptions[previousSelectPosition]);
+        llPoints.getChildAt(previousSelectPosition).setEnabled(true);
     }
 
+    private String[] getImageDescription() {
+        int num=pictures.length;
+        String[] temp=new String[num];
+        for(int i=0;i<num;i++){
+            temp[i]=i+1+"";
+        }
+        return temp;
+    }
 }

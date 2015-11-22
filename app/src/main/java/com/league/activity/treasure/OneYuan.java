@@ -205,7 +205,8 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
                 startActivity(intent2);
                 break;
             case R.id.One_record:
-                Toast.makeText(this, "rec", Toast.LENGTH_LONG).show();
+                Intent record =new Intent(getApplication(),GrabRecord.class);
+                startActivity(record);
                 break;
             case R.id.One_question:
                 Toast.makeText(this, "que", Toast.LENGTH_LONG).show();
