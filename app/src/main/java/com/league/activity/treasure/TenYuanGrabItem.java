@@ -99,7 +99,10 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
 
         initView();
         initData();
-
+        title.setFocusable(true);
+        title.setFocusableInTouchMode(true);
+        title.requestFocus();
+        title.requestFocusFromTouch();
     }
     private void initView() {
         myrecordlist= (ListViewForScrollView) findViewById(R.id.myrecordlist);
