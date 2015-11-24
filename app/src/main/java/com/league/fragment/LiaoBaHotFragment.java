@@ -59,7 +59,7 @@ public class LiaoBaHotFragment extends Fragment{
         pullToRefreshLayout.setVisibility(View.GONE);
     }
     private void initData(final int currentPage){
-        ApiUtil.liaobagetlatest(getActivity().getApplication(), Constants.PHONENUM, currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaUserInfo>>() {
+        ApiUtil.liaobagetlatest(getActivity().getApplication(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaUserInfo>>() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaUserInfo> response) {

@@ -38,7 +38,7 @@ public class LiaoBaAdapter extends BaseAdapter implements IContants {
 
     private List<LiaoBaUserInfo> list;
     private Context ctx;
-    private int type = 0;//0表示最新 1表示最热
+    private int type = 0;//0表示最新 1表示最热 其他表示正常
 
     public LiaoBaAdapter(List<LiaoBaUserInfo> list, Context ctx, int type) {
         this.list = list;

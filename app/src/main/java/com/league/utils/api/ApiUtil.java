@@ -200,30 +200,30 @@ public class ApiUtil {
     }
 
     //聊吧获取最新发布接口
-    public static void liaobagetlatest(Context context, String phone, int currentPage, TextHttpResponseHandler responseHandler) {
+    public static void liaobagetlatest(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.put("phone", phone);
+        params.put("phone", testPhone);
         client.post(context, IClientUrl.LiaobaGetLatest + currentPage, params, responseHandler);
     }
 
     //获取聊吧最热接口
-    public static void liaobaGetHot(Context context, String phone, int currentPage, TextHttpResponseHandler responseHandler) {
+    public static void liaobaGetHot(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.put("phone", phone);
+        params.put("phone", testPhone);
         client.post(context, IClientUrl.LiaobaGetHot + currentPage, params, responseHandler);
     }
 
     //获取我的关注
-    public static void liaobaGetConcern(Context context, String phone, int currentPage, TextHttpResponseHandler responseHandler) {
+    public static void liaobaGetConcern(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.put("phone", phone);
+        params.put("phone", testPhone);
         client.post(context, IClientUrl.LiaobaGetConcern + currentPage, params, responseHandler);
     }
 
     //获取聊吧人气
-    public static void liaobaGetPopularity(Context context, String phone, int currentPage, TextHttpResponseHandler responseHandler) {
+    public static void liaobaGetPopularity(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.put("phone", phone);
+        params.put("phone", testPhone);
         client.post(context, IClientUrl.LiaobaGetPopularity + currentPage, params, responseHandler);
     }
 
@@ -274,6 +274,18 @@ public class ApiUtil {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         client.post(context, IClientUrl.LiaoBaTbusersConcernsList + currentPage, params, responseHandler);
+    }
+
+    public static void liaobaTbmessagesMyLikesList(Context context, int currentPage ,TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        client.post(context, IClientUrl.LiaoBaTbmessagesMyLikesList + currentPage, params, responseHandler);
+    }
+
+    public static void liaobaTbmessagesMyList(Context context, int currentPage ,TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        client.post(context, IClientUrl.LiaoBaTbmessagesMyList + currentPage, params, responseHandler);
     }
 
     //获取往期揭晓

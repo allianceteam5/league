@@ -391,8 +391,6 @@
         <activity android:name="com.league.activity.personactivity.SetCode" />
         <activity android:name="com.league.activity.personactivity.PaymentOrder" />
         <activity android:name="com.league.activity.personactivity.MyPersonHomepage" />
-        <activity android:name="com.league.activity.liaobaactivity.MyTopic" />
-        <activity android:name="com.league.activity.liaobaactivity.MyLikes" />
         <activity android:name="com.league.activity.liaobaactivity.TopicContent" />
         <activity android:name="com.league.activity.treasure.PictureDetails" />
         <activity
