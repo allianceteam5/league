@@ -47,5 +47,6 @@ public class IClientUrl {
     public static final String getGrabCommoditiesPass = testServerUrl + "grabcommodities/formeractivities?page=";
     public static final String getGrabCoinRecords = testServerUrl + "grabcornrecords/list?page=";
     public static final String getGrabCommodyReocrds = testServerUrl + "grabcommodityrecords/list?page=";
-    public static final String getGrabWinRecords=testServerUrl+"grabcornrecords/win?page=";
+    public static final String getGrabWinRecords = testServerUrl + "grabcornrecords/win?page=";
+    public static final String getGrabLatestAnnounced = testServerUrl + "grabcommodities/search";
 }
