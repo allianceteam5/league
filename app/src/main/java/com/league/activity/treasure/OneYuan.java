@@ -35,7 +35,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
 
     private ImageView back, titleright, right1, right2;
     private TextView title;
-    private MyGridView gridView,latestGridView;
+    private MyGridView gridView, latestGridView;
 
     private ImageView tenImage1, tenImage2, tenImage3;
     private TextView money1, money2, money3;
@@ -53,6 +53,10 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
         showProgressDialog();
         initView();
         initData();
+        title.setFocusable(true);
+        title.setFocusableInTouchMode(true);
+        title.requestFocus();
+        title.requestFocusFromTouch();
     }
 
     private void initView() {
@@ -67,7 +71,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
         gridView = (MyGridView) findViewById(R.id.gridview);
-        latestGridView= (MyGridView) findViewById(R.id.gridview_latest);
+        latestGridView = (MyGridView) findViewById(R.id.gridview_latest);
         tenImage1 = (ImageView) findViewById(R.id.ten_image1);
         tenImage2 = (ImageView) findViewById(R.id.ten_image2);
         tenImage3 = (ImageView) findViewById(R.id.ten_image3);
@@ -147,15 +151,15 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
         ApiUtil.getGrabLatestAnnounced(getApplication(), new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
-                for(int i=0;i<3;i++){
+                for (int i = 0; i < 3; i++) {
                     announcedList.add(response.get(i));
                 }
-                latestGridView.setAdapter(new LatestAnnouncedAdapter(announcedList,getApplication()));
+                latestGridView.setAdapter(new LatestAnnouncedAdapter(announcedList, getApplication()));
                 latestGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent=new Intent(OneYuan.this,OneYuanGrabItem.class);
-                        intent.putExtra("id",announcedList.get(position).getId());
+                        Intent intent = new Intent(OneYuan.this, OneYuanGrabItem.class);
+                        intent.putExtra("id", announcedList.get(position).getId());
                         startActivity(intent);
                     }
                 });
@@ -168,7 +172,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
 
             @Override
             protected ArrayList<OneYuanBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                JSONObject jsonObject=new JSONObject(rawJsonData);
+                JSONObject jsonObject = new JSONObject(rawJsonData);
                 return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<OneYuanBean>>() {
                 });
             }
@@ -202,7 +206,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.latest_more:
-                Intent latest=new Intent(OneYuan.this,LatestAnnounce.class);
+                Intent latest = new Intent(OneYuan.this, LatestAnnounce.class);
                 startActivity(latest);
                 break;
             case R.id.near_back:
@@ -220,7 +224,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
                 startActivity(intent2);
                 break;
             case R.id.One_record:
-                Intent record =new Intent(getApplication(),GrabRecord.class);
+                Intent record = new Intent(getApplication(), GrabRecord.class);
                 startActivity(record);
                 break;
             case R.id.One_question:
@@ -229,7 +233,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.ten1:
                 Intent intent = new Intent(getApplication(), TenYuanGrabItem.class);
-                intent.putExtra("id",listTenYuanGrab.get(0).getId());
+                intent.putExtra("id", listTenYuanGrab.get(0).getId());
                 startActivity(intent);
                 break;
             case R.id.ten2:

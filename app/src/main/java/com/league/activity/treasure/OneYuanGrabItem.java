@@ -100,6 +100,10 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         id=getIntent().getStringExtra("id");
         initView();
         initData();
+        title.setFocusable(true);
+        title.setFocusableInTouchMode(true);
+        title.requestFocus();
+        title.requestFocusFromTouch();
     }
     private void initView() {
         myrecordlist= (ListViewForScrollView) findViewById(R.id.myrecordlist);
