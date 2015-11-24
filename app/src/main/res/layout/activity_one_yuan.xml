@@ -128,10 +128,10 @@
 
 
             <LinearLayout
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@color/white"
+                android:focusable="true"
                 android:orientation="horizontal">
 
                 <RelativeLayout
@@ -327,19 +327,18 @@
 
                 <LinearLayout
                     android:id="@+id/ten1"
-                    android:onClick="onClick"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/white"
+                    android:onClick="onClick"
                     android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/ten_image1"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
-                        android:layout_gravity="center_horizontal"
-                         />
+                        android:layout_gravity="center_horizontal" />
 
                     <TextView
                         android:id="@+id/money1"
@@ -401,19 +400,18 @@
 
                 <LinearLayout
                     android:id="@+id/ten2"
-                    android:onClick="onClick"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/white"
+                    android:onClick="onClick"
                     android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/ten_image2"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
-                        android:layout_gravity="center_horizontal"
-                         />
+                        android:layout_gravity="center_horizontal" />
 
                     <TextView
                         android:id="@+id/money2"
@@ -475,19 +473,18 @@
 
                 <LinearLayout
                     android:id="@+id/ten3"
-                    android:onClick="onClick"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/white"
+                    android:onClick="onClick"
                     android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/ten_image3"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
-                        android:layout_gravity="center_horizontal"
-                         />
+                        android:layout_gravity="center_horizontal" />
 
                     <TextView
                         android:id="@+id/money3"
@@ -547,175 +544,58 @@
                 android:layout_height="10dp"
                 android:background="@color/black2" />
 
-            <LinearLayout
-                android:id="@+id/ll_announced"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:paddingBottom="6dp">
+                android:layout_marginTop="5dp"
+                android:background="@color/white">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dip"
-                    android:background="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dip"
                     android:gravity="center_vertical"
-                    android:paddingLeft="15dip"
                     android:text="最新揭晓"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/latest_more"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dip"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onClick"
+                    android:text="更多>>"
+                    android:textColor="@color/black1"
+                    android:textSize="16sp" />
+            </RelativeLayout>
 
-                    <LinearLayout
-                        android:id="@+id/ll_announced1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:orientation="vertical">
+            <com.league.view.MyGridView
+                android:id="@+id/gridview_latest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="2dip"
+                android:listSelector="#00000000"
+                android:numColumns="3"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="2dp"></com.league.view.MyGridView>
 
-                        <ImageView
-                            android:id="@+id/lastnew_image1"
-                            android:layout_width="90dp"
-                            android:layout_height="90dp"
-                            android:layout_gravity="center_horizontal"
-                             />
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="2dp"
-                            android:layout_marginTop="3dip">
-
-                            <TextView
-                                android:id="@+id/txt4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:gravity="center"
-                                android:text="倒计时"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/txt_countdown1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="4dip"
-                                android:layout_toRightOf="@id/txt4"
-                                android:gravity="center"
-                                android:text="02:04:21"
-                                android:textColor="@color/red"
-                                android:textSize="14sp" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_announced2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/lastnew_image2"
-                            android:layout_width="90dp"
-                            android:layout_height="90dp"
-                            android:layout_gravity="center_horizontal"
-                            />
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="2dp"
-                            android:layout_marginTop="3dip">
-
-                            <TextView
-                                android:id="@+id/txt5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:gravity="center"
-                                android:text="倒计时"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/txt_countdown2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dip"
-                                android:layout_toRightOf="@id/txt5"
-                                android:gravity="center"
-                                android:text="02:04:21"
-                                android:textColor="@color/red"
-                                android:textSize="14sp" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_announced3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/lastnew_image3"
-                            android:layout_width="90dp"
-                            android:layout_height="90dp"
-                            android:layout_gravity="center_horizontal"
-                             />
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="2dp"
-                            android:layout_marginTop="3dip">
-
-                            <TextView
-                                android:id="@+id/txt6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:gravity="center"
-                                android:text="倒计时"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/txt_countdown3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dip"
-                                android:layout_toRightOf="@id/txt6"
-                                android:gravity="center"
-                                android:text="02:04:21"
-                                android:textColor="@color/red"
-                                android:textSize="14sp" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/black2"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:background="@color/white">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -735,10 +615,11 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="15dip"
+                    android:clickable="true"
                     android:gravity="center_vertical"
                     android:onClick="onClick"
                     android:text="更多>>"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black1"
                     android:textSize="16sp" />
             </RelativeLayout>
 
@@ -747,11 +628,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:horizontalSpacing="2dip"
+                android:listSelector="#00000000"
                 android:numColumns="2"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="2dp"
-                android:listSelector="#00000000">
-            </com.league.view.MyGridView>
+                android:verticalSpacing="2dp"></com.league.view.MyGridView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

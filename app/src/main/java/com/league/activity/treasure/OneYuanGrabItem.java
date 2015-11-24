@@ -3,6 +3,7 @@ package com.league.activity.treasure;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -27,6 +29,7 @@ import com.league.bean.OneYuanBean;
 import com.league.dialog.TakeInDialog;
 import com.league.utils.Constants;
 import com.league.utils.api.ApiUtil;
+import com.league.widget.CircleImageView;
 import com.league.widget.ListViewForScrollView;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
@@ -55,7 +58,18 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
     private TextView period,name,totalneed,remain,starttime;
     private ProgressBar progressbar;
     private float needed,remained;
-    private LinearLayout linearLayout,llPoints;
+    private LinearLayout linearLayout,llPoints,winnerresult;
+    private RelativeLayout viewTimeCount;
+    private TextView timeCount;//倒计时textview
+    private Button countdetail;//计算详情
+    private TimeCount count;//计时器
+    private TextView lucknum;//幸运号码
+    private Button countdetail1;//计算详情，幸运号码旁边那个
+    private CircleImageView winnerThumb;//获奖者头像
+    private TextView winnerName;//获奖者名字
+    private TextView winnerId;//获奖者ID；
+    private TextView winnerCount;//获奖者参与人次
+    private TextView winnerEndTime;//揭晓时间
     private String[] imageDescriptions;
     private TextView tvDescription;
     private int previousSelectPosition = 0;
@@ -116,7 +130,17 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
         tvDescription = (TextView) findViewById(R.id.tv_image_description);
         llPoints = (LinearLayout) findViewById(R.id.ll_points);
-
+        viewTimeCount= (RelativeLayout) findViewById(R.id.viewtimecount);
+        timeCount= (TextView) findViewById(R.id.countdown);
+        countdetail= (Button) findViewById(R.id.countdetail);
+        winnerresult= (LinearLayout) findViewById(R.id.viewwinneresult);
+        lucknum= (TextView) findViewById(R.id.luckynumber);
+        countdetail1= (Button) findViewById(R.id.countdetail1);
+        winnerThumb= (CircleImageView) findViewById(R.id.thumb);
+        winnerName= (TextView) findViewById(R.id.holdername);
+        winnerId= (TextView) findViewById(R.id.holderid);
+        winnerCount= (TextView) findViewById(R.id.taknum);
+        winnerEndTime= (TextView) findViewById(R.id.endtime);
 
         state= (ImageView) findViewById(R.id.state);
         period= (TextView) findViewById(R.id.period);
@@ -187,8 +211,18 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
         if(detail.getIslotteried().equals("0")){
             state.setImageResource(R.drawable.running);
+            viewTimeCount.setVisibility(View.VISIBLE);
+            winnerresult.setVisibility(View.GONE);
+            count=new TimeCount(100000,1000);
+            count.start();
         }else{
             state.setImageResource(R.drawable.grabstate_finished);
+            viewTimeCount.setVisibility(View.GONE);
+            winnerresult.setVisibility(View.VISIBLE);
+            lucknum.setText(detail.getWinnernumber());
+            winnerId.setText(detail.getWinneruserid());
+            winnerEndTime.setText(detail.getEnd_at());
+            //数据不全  bean 缺中奖者头像  name count
         }
         period.setText("第"+detail.getVersion()+"期");
         name.setText(detail.getTitle());
@@ -204,6 +238,7 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         View view;
         for(int i=0;i<pictures.length;i++) {
             iv = new ImageView(this);
+            iv.setScaleType(ImageView.ScaleType.FIT_XY);
             Picasso.with(getApplication()).load(pictures[i]).into(iv);
             listviews.add(iv);
 
@@ -290,6 +325,22 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
                 intentpicture.putExtra("picturesdetail",detail.getDetails());
                 startActivity(intentpicture);
                 break;
+        }
+    }
+    class TimeCount extends CountDownTimer {
+
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+
+            timeCount.setText("还剩 " + millisUntilFinished / 1000 + "秒");
+        }
+
+        @Override
+        public void onFinish() {
         }
     }
 }

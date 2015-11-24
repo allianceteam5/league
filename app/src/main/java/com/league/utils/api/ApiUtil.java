@@ -312,4 +312,10 @@ public class ApiUtil {
         params.put("phone",phone);
         client.post(context,IClientUrl.getGrabWinRecords+currentpage,params,responseHandler);
     }
+    //获取最新揭晓
+    public static void getGrabLatestAnnounced(Context context,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("type","1");
+        client.post(context,IClientUrl.getGrabLatestAnnounced,params,responseHandler);
+    }
 }

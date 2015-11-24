@@ -1,18 +1,20 @@
 package com.league.activity.treasure;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
-import com.league.adapter.PassAnnouncedAdapter;
-import com.league.bean.PassAnnouncedBean;
+import com.league.adapter.LatestAnnouncedAdapter;
+import com.league.bean.OneYuanBean;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -24,78 +26,79 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PassAnnounced extends BaseActivity{
+public class LatestAnnounce extends BaseActivity implements View.OnClickListener{
 
-    private ImageView back1, back2, titleright, right1, right2;
+    private ImageView back, titleright, right1, right2;
     private TextView title;
-    private ListView listView;
-    private List<PassAnnouncedBean> list=new ArrayList<PassAnnouncedBean>();
+    private GridView gridView;
+    private LatestAnnouncedAdapter adapter;
+    private List<OneYuanBean> list = new ArrayList<OneYuanBean>();
     private int totalPage = 1;
     private int currentPage = 1;
-    private int type = 0;
+    private int type = 1;
     private PullToRefreshLayout pullToRefreshLayout;
-    private PassAnnouncedAdapter adapter;
-    private String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pass_announced);
-        id=getIntent().getStringExtra("id");
+        setContentView(R.layout.activity_latest_announce);
         showProgressDialog();
         initView();
     }
+
     private void initView() {
-
-        back2 = (ImageView) findViewById(R.id.near_back);
-
-        back2.setVisibility(View.VISIBLE);
-        back2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-                finish();
-            }
-        });
+        back = (ImageView) findViewById(R.id.near_back);
+        back.setOnClickListener(this);
         titleright = (ImageView) findViewById(R.id.near_ti_right);
         titleright.setVisibility(View.GONE);
         title = (TextView) findViewById(R.id.near_centertitle);
-        title.setText("往期揭晓");
+        title.setText("最新揭晓");
         right1 = (ImageView) findViewById(R.id.near_right);
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
-        right2.setVisibility(View.INVISIBLE);
-        listView= (ListView) findViewById(R.id.pass_list);
-        adapter=new PassAnnouncedAdapter(list,getApplication());
-        listView.setAdapter(adapter);
+        right2.setVisibility(View.GONE);
+        gridView = (GridView) findViewById(R.id.gridview_latest);
+        adapter = new LatestAnnouncedAdapter(list,getApplication());
+        gridView.setAdapter(adapter);
         pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);
         initData(type,currentPage);
     }
     private void initData(int type, final int currentPage){
-        ApiUtil.grabcommoditiesPassAnnounced(getApplication(), id, currentPage, new BaseJsonHttpResponseHandler<ArrayList<PassAnnouncedBean>>() {
+        ApiUtil.grabCommoditiesSearch(getApplication(), type, currentPage, new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<PassAnnouncedBean> response) {
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
                 if (currentPage == 1) {
                     list.clear();
                 }
                 list.addAll(response);
-                adapter.notifyDataSetChanged();
+                updateView();
                 pullToRefreshLayout.setVisibility(View.VISIBLE);
                 closeProgressDialog();
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<PassAnnouncedBean> errorResponse) {
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<OneYuanBean> errorResponse) {
                 closeProgressDialog();
             }
 
             @Override
-            protected ArrayList<PassAnnouncedBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+            protected ArrayList<OneYuanBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                 JSONObject jsonObject = new JSONObject(rawJsonData);
                 totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
-                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<PassAnnouncedBean>>() {
+                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<OneYuanBean>>() {
                 });
+            }
+        });
+    }
+    private void updateView() {
+        adapter.notifyDataSetChanged();
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(LatestAnnounce.this,OneYuanGrabItem.class);
+                intent.putExtra("id",list.get(position).getId());
+                startActivity(intent);
             }
         });
     }
@@ -139,5 +142,15 @@ public class PassAnnounced extends BaseActivity{
             }.sendEmptyMessageDelayed(0, 1000);
         }
 
+    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.near_back:
+                onBackPressed();
+                finish();
+                break;
+
+        }
     }
 }

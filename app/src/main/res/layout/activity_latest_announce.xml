@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black2"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/title"
+        layout="@layout/near_title"
+        />
+    <com.league.widget.pulltorefreshandload.PullToRefreshLayout
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <include layout="@layout/refresh_head"/>
+        <!-- 支持所有实现Pullable接口的View -->
+
+        <com.league.widget.pulltorefreshandload.PullableGridView
+            android:id="@+id/gridview_latest"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:horizontalSpacing="2dip"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            android:listSelector="#00000000"
+            android:verticalSpacing="2dp"
+            android:layout_marginTop="5dp"
+            >
+        </com.league.widget.pulltorefreshandload.PullableGridView>
+        <include layout="@layout/load_more" />
+
+    </com.league.widget.pulltorefreshandload.PullToRefreshLayout>
+
+
+</LinearLayout>

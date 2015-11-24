@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
+import com.league.adapter.LatestAnnouncedAdapter;
 import com.league.adapter.OneyuanGrabAdapter;
 import com.league.bean.OneYuanBean;
 import com.league.bean.TenYuanGrabBean;
@@ -34,17 +35,16 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
 
     private ImageView back, titleright, right1, right2;
     private TextView title;
-    private MyGridView gridView;
+    private MyGridView gridView,latestGridView;
 
-    private ImageView tenImage1, tenImage2, tenImage3,announcedImage1,announcedImage2,announcedImage3;
+    private ImageView tenImage1, tenImage2, tenImage3;
     private TextView money1, money2, money3;
     private TextView txtProgress1, txtProgress2, txtProgress3;
     private ProgressBar progressbar1, progressbar2, progressbar3;
     private List<TenYuanGrabBean> listTenYuanGrab = new ArrayList<TenYuanGrabBean>();
-    private List<TenYuanGrabBean> announcedList = new ArrayList<TenYuanGrabBean>();
+    private List<OneYuanBean> announcedList = new ArrayList<>();
 
     private List<OneYuanBean> list = new ArrayList<OneYuanBean>();
-    private String pictureUrl = "http://pica.nipic.com/2007-12-24/20071224162158623_2.jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
         gridView = (MyGridView) findViewById(R.id.gridview);
+        latestGridView= (MyGridView) findViewById(R.id.gridview_latest);
         tenImage1 = (ImageView) findViewById(R.id.ten_image1);
         tenImage2 = (ImageView) findViewById(R.id.ten_image2);
         tenImage3 = (ImageView) findViewById(R.id.ten_image3);
@@ -80,12 +81,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
         progressbar1.setProgress(50);
         progressbar2 = (ProgressBar) findViewById(R.id.progressbar2);
         progressbar3 = (ProgressBar) findViewById(R.id.progressbar3);
-        announcedImage1 = (ImageView) findViewById(R.id.lastnew_image1);
-        announcedImage2 = (ImageView) findViewById(R.id.lastnew_image2);
-        announcedImage3 = (ImageView) findViewById(R.id.lastnew_image3);
-        Picasso.with(getApplicationContext()).load(pictureUrl).into(announcedImage1);
-        Picasso.with(getApplicationContext()).load(pictureUrl).into(announcedImage2);
-        Picasso.with(getApplicationContext()).load(pictureUrl).into(announcedImage3);
+
     }
 
     void initData() {
@@ -93,16 +89,19 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
 
-                for(int i=0;i<6;i++){
-                    list.add(response.get(i));
+                if (response.size() > 6) {
+                    for (int i = 0; i < 6; i++) {
+                        list.add(response.get(i));
+                    }
+                } else {
+                    list.addAll(response);
                 }
-
                 gridView.setAdapter(new OneyuanGrabAdapter(getApplication(), list));
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(OneYuan.this, OneYuanGrabItem.class);
-                        intent.putExtra("id",list.get(position).getId());
+                        intent.putExtra("id", list.get(position).getId());
                         startActivity(intent);
                     }
                 });
@@ -144,24 +143,36 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
                 });
             }
         });
-        //type=1时是获取最近揭晓的信息
-        ApiUtil.grabcornsSearch(getApplicationContext(), 1, 1, new BaseJsonHttpResponseHandler<ArrayList<TenYuanGrabBean>>() {
+        //type=1时是获取最新揭晓的信息
+        ApiUtil.getGrabLatestAnnounced(getApplication(), new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<TenYuanGrabBean> response) {
-                announcedList.addAll(response);
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
+                for(int i=0;i<3;i++){
+                    announcedList.add(response.get(i));
+                }
+                latestGridView.setAdapter(new LatestAnnouncedAdapter(announcedList,getApplication()));
+                latestGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent=new Intent(OneYuan.this,OneYuanGrabItem.class);
+                        intent.putExtra("id",announcedList.get(position).getId());
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<TenYuanGrabBean> errorResponse) {
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<OneYuanBean> errorResponse) {
+
             }
 
             @Override
-            protected ArrayList<TenYuanGrabBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<TenYuanGrabBean>>() {
+            protected ArrayList<OneYuanBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                JSONObject jsonObject=new JSONObject(rawJsonData);
+                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<OneYuanBean>>() {
                 });
             }
         });
-
 
     }
 
@@ -190,6 +201,10 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.latest_more:
+                Intent latest=new Intent(OneYuan.this,LatestAnnounce.class);
+                startActivity(latest);
+                break;
             case R.id.near_back:
                 onBackPressed();
                 finish();
