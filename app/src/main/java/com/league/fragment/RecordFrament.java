@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,7 +41,7 @@ public class RecordFrament extends Fragment {
     private int currentPage = 1;
     private PullToRefreshLayout pullToRefreshLayout;
     private GrabRecordAdapter adapter;
-
+    public RecordFrament(){}
     public RecordFrament(int type) {
         this.type = type;
     }

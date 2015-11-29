@@ -329,7 +329,7 @@ public abstract class ImageWorker {
 
         /**
          * Returns the ImageView associated with this task as long as the ImageView's task still
-         * points to this task as well. Returns null otherwise.
+         * pointsred to this task as well. Returns null otherwise.
          */
         private ImageView getAttachedImageView() {
             final ImageView imageView = imageViewReference.get();

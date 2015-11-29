@@ -2,20 +2,20 @@ package com.league.activity.redpacket;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
 
+import com.league.dialog.GrabEnvolopeDialog;
 import com.mine.league.R;
-
-import java.util.List;
 
 public class GrabRedEnvolope extends Activity implements OnClickListener {
 
@@ -58,7 +58,8 @@ public class GrabRedEnvolope extends Activity implements OnClickListener {
                 finish();
                 break;
             case R.id.grab:
-
+                Intent intent=new Intent(GrabRedEnvolope.this, GrabEnvolopeDialog.class);
+                startActivity(intent);
                 break;
         }
     }

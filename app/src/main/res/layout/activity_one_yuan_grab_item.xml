@@ -37,18 +37,9 @@
                 android:layout_alignBottom="@id/viewpaper"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:background="#33000000"
+                android:background="@color/transparent"
                 android:orientation="vertical"
                 android:padding="5dip">
-
-                <TextView
-                    android:id="@+id/tv_image_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="1"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:id="@+id/ll_points"
@@ -146,6 +137,7 @@
                     android:textSize="14sp" />
             </RelativeLayout>
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/viewtimecount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -165,14 +157,56 @@
                     android:layout_centerVertical="true"
                     android:drawableLeft="@drawable/timecountdownimage"
                     android:layout_marginLeft="10dp"/>
+
                 <TextView
-                    android:id="@+id/countdown"
+                    android:id="@+id/count1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/txt"
+                    android:text="剩余"/>
+                <TextView
+                    android:id="@+id/countminu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:textSize="16sp"
+
+                    android:textColor="@color/white"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/count1"/>
+                <TextView
+                    android:id="@+id/count2"
+                    android:layout_marginLeft="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/countminu"
+                    android:text="分"/>
+                <TextView
+                    android:id="@+id/countmill"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
+
+                    android:layout_marginLeft="2dp"
                     android:textColor="@color/white"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/txt"/>
+                    android:layout_toRightOf="@id/count2"/>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="@color/white"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/countmill"
+                    android:text="秒"/>
                 <Button
                     android:id="@+id/countdetail"
                     android:layout_alignParentRight="true"
@@ -463,28 +497,25 @@
                     android:textSize="16sp" />
 
                 <TextView
-
+                    android:id="@+id/since"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dip"
-                    android:layout_marginRight="10dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="5dip"
                     android:layout_toRightOf="@id/txt3"
                     android:text="自时间起"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
+                    android:textColor="@color/black1"
+                    android:textSize="12sp" />
                 <TextView
                     android:id="@+id/starttime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/since"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="100dip"
-                    android:layout_marginRight="10dip"
                     android:text="2015"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textColor="@color/black1"
+                    android:textSize="12sp" />
             </RelativeLayout>
 
             <View

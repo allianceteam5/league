@@ -53,6 +53,24 @@ public class PassAnnouncedBean {
     private String nickname;
     private String numbers;
     private String count;
+    private String worth;
+    private String isgot;
+
+    public String getWorth() {
+        return worth;
+    }
+
+    public void setWorth(String worth) {
+        this.worth = worth;
+    }
+
+    public String getIsgot() {
+        return isgot;
+    }
+
+    public void setIsgot(String isgot) {
+        this.isgot = isgot;
+    }
 
     public void setId(String id) {
         this.id = id;

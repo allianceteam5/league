@@ -294,7 +294,7 @@
     <string name="dismiss_group">Dismiss group</string>
     <string name="add_public_group_chat">Add public group</string>
     <string name="gorup_not_found">Can not find this group</string>
-    <string name= "no_more_messages">no more messages</string>
+    <string name="no_more_messages">no more messages</string>
     <string name="join_public_group">Join public group</string>
     <string name="chatroom_allow_owner_leave">Allow chatroom owner leave</string>
     <string name="group_id">Group ID</string>
@@ -335,7 +335,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_base">BaseActivity</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_recommendation_pushlish">RecommendationPushlishActivity</string>
     <string name="title_activity_comment">CommentActivity</string>

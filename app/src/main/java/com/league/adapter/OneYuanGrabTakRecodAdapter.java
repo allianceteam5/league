@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.league.bean.GrabRecordBean;
+import com.league.utils.Utils;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
@@ -57,7 +58,7 @@ public class OneYuanGrabTakRecodAdapter extends BaseAdapter{
             holder= (ViewHolder) convertView.getTag();
         }
         holder.name.setText(list.get(position).getNickname());
-        holder.takTime.setText(list.get(position).getCreated_at());
+        holder.takTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(list.get(position).getCreated_at())*1000));
         holder.takNum.setText(list.get(position).getCount());
         Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.thumb);
         return convertView;

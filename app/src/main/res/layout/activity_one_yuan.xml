@@ -584,15 +584,14 @@
                 android:listSelector="#00000000"
                 android:numColumns="3"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="2dp"
-                >
+                android:verticalSpacing="2dp">
 
             </com.league.view.MyGridView>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@color/black2"/>
+                android:background="@color/black2" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

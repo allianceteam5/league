@@ -40,6 +40,60 @@ public class TenYuanGrabBean {
     private String foruser;
     private String kind;
     private String pictures;
+    private String worth;
+    private String isgot;
+    private String nickname;
+    private String phone;
+    private String thumb;
+    private String count;
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
+    public String getWorth() {
+        return worth;
+    }
+
+    public void setWorth(String worth) {
+        this.worth = worth;
+    }
+
+    public String getIsgot() {
+        return isgot;
+    }
+
+    public void setIsgot(String isgot) {
+        this.isgot = isgot;
+    }
 
     public void setId(String id) {
         this.id = id;
