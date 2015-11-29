@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.TextView;
 
 import com.league.activity.near.NearActivity;
 import com.league.activity.postbar.LiaoBaActivity;
@@ -38,9 +37,7 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
     private View layout;
     private Activity ctx;
     private List<ImageView> imageViewList;
-    private TextView tvDescription;
     private LinearLayout llPoints, viewpaperLayout;
-    private String[] imageDescriptions;
     private int previousSelectPosition = 0;
     private ViewPager mViewPager;
     private boolean isLoop = true;
@@ -95,7 +92,6 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         mViewPager.setLayoutParams(new LinearLayout.LayoutParams(dm.widthPixels, dm.heightPixels / 3));
         viewpaperLayout.addView(mViewPager);
-        tvDescription = (TextView) layout.findViewById(R.id.tv_image_description);
         llPoints = (LinearLayout) layout.findViewById(R.id.ll_points);
 
         prepareData();
@@ -103,10 +99,8 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
         ViewPaperAdapter adapter = new ViewPaperAdapter(imageViewList);
         mViewPager.setAdapter(adapter);
         mViewPager.setOnPageChangeListener(this);
-
-        tvDescription.setText(imageDescriptions[previousSelectPosition]);
         llPoints.getChildAt(previousSelectPosition).setEnabled(true);
-
+        llPoints.getChildAt(previousSelectPosition).setBackground(getResources().getDrawable(R.drawable.pointsred));
     }
 
     private void setOnClickListener() {
@@ -119,7 +113,6 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
     private void prepareData() {
         imageViewList = new ArrayList<ImageView>();
         int[] imageResIDs = getImageResIDs();
-        imageDescriptions = getImageDescription();
 
         ImageView iv;
         View view;
@@ -131,8 +124,8 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
             // 添加点view对象
             view = new View(ctx);
             view.setBackgroundDrawable(getResources().getDrawable(
-                    R.drawable.ic_launcher));
-            LayoutParams lp = new LayoutParams(5, 5);
+                    R.drawable.pointswhite));
+            LayoutParams lp = new LayoutParams(25, 25);
             lp.leftMargin = 10;
             view.setLayoutParams(lp);
             view.setEnabled(false);
@@ -143,11 +136,6 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
     private int[] getImageResIDs() {
         return new int[]{R.drawable.back1, R.drawable.back2, R.drawable.back3,
                 R.drawable.back1, R.drawable.back2};
-    }
-
-    private String[] getImageDescription() {
-        return new String[]{"1", "2", "3", "4",
-                "5"};
     }
 
     @Override
@@ -165,13 +153,12 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
     @Override
     public void onPageSelected(int arg0) {
         // TODO Auto-generated method stub
-        // 改变图片的描述信息
-        tvDescription
-                .setText(imageDescriptions[arg0 % imageViewList.size()]);
         // 切换选中的点,把前一个点置为normal状态
         llPoints.getChildAt(previousSelectPosition).setEnabled(false);
+        llPoints.getChildAt(previousSelectPosition).setBackground(getResources().getDrawable(R.drawable.pointswhite));
         // 把当前选中的position对应的点置为enabled状态
         llPoints.getChildAt(arg0 % imageViewList.size()).setEnabled(true);
+        llPoints.getChildAt(arg0 % imageViewList.size()).setBackground(getResources().getDrawable(R.drawable.pointsred));
         previousSelectPosition = arg0 % imageViewList.size();
     }
 
@@ -201,6 +188,7 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
             case R.id.resource_liaoba:
                 Intent intent4 = new Intent(ctx, LiaoBaActivity.class);
                 startActivity(intent4);
+                break;
         }
     }
 

@@ -9,6 +9,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import com.league.bean.TenGrabDetailBean;
 import com.league.bean.TenYuanGrabBean;
 import com.league.dialog.TakeInDialog;
 import com.league.utils.Constants;
+import com.league.utils.Utils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
 import com.league.widget.ListViewForScrollView;
@@ -54,7 +56,7 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
     private Button takeinNow,buyAll;
     private String id;
     private ImageView state;
-    private TextView period,name,totalneed,remain,starttime;
+    private TextView period,name,totalneed,remain,starttime,date;
     private ProgressBar progressbar;
     private float needed,remained;
     private LinearLayout linearLayout,llPoints,winnerresult;
@@ -69,8 +71,6 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
     private TextView winnerId;//获奖者ID；
     private TextView winnerCount;//获奖者参与人次
     private TextView winnerEndTime;//揭晓时间
-    private String[] imageDescriptions;
-    private TextView tvDescription;
     private int previousSelectPosition = 0;
     private ViewPager viewPager;
     private List<ImageView> listImageViews=new ArrayList<ImageView>();
@@ -129,8 +129,6 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
         takeinNow.setOnClickListener(this);
         buyAll= (Button) findViewById(R.id.buyall);
         buyAll.setOnClickListener(this);
-
-        tvDescription = (TextView) findViewById(R.id.tv_image_description);
         llPoints = (LinearLayout) findViewById(R.id.ll_points);
         viewTimeCount= (RelativeLayout) findViewById(R.id.viewtimecount);
         timeCount= (TextView) findViewById(R.id.countdown);
@@ -147,6 +145,7 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
         state= (ImageView) findViewById(R.id.state);
         period= (TextView) findViewById(R.id.period);
         name= (TextView) findViewById(R.id.name);
+        date= (TextView) findViewById(R.id.date);
         totalneed= (TextView) findViewById(R.id.totalpeo);
         remain= (TextView) findViewById(R.id.leavepeo);
         starttime= (TextView) findViewById(R.id.starttime);
@@ -157,8 +156,6 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         viewPager.setLayoutParams(new LinearLayout.LayoutParams(dm.widthPixels, dm.heightPixels * 2 / 5));
         linearLayout.addView(viewPager);
-
-
     }
 
     public void initData(){
@@ -240,10 +237,16 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
 
         if(detail.getIslotteried().equals("0")){
             state.setImageResource(R.drawable.running);
-            viewTimeCount.setVisibility(View.VISIBLE);
             winnerresult.setVisibility(View.GONE);
-            count=new TimeCount(100000,1000);
-            count.start();
+            if(detail.getEnd_at().equals("0")){
+                viewTimeCount.setVisibility(View.GONE);
+            }else{
+                viewTimeCount.setVisibility(View.VISIBLE);
+                Log.i("currenttime",System.currentTimeMillis()/1000+"");
+                count=new TimeCount(Long.valueOf(detail.getEnd_at())*1000-System.currentTimeMillis(),1000);
+                count.start();
+            }
+
         }else{
             state.setImageResource(R.drawable.grabstate_finished);
             viewTimeCount.setVisibility(View.GONE);
@@ -251,18 +254,21 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
             lucknum.setText(detail.getWinnernumber());
             winnerId.setText(detail.getWinneruserid());
             winnerEndTime.setText(detail.getEnd_at());
+
             //数据不全  bean 缺中奖者头像  name count
+
         }
+
         period.setText("第"+detail.getVersion()+"期");
         name.setText(detail.getTitle());
+        date.setText(Utils.TimeStamp2Date(Integer.valueOf(detail.getDate())));
         totalneed.setText(detail.getNeeded());
         remain.setText("剩余"+detail.getRemain());
         needed=Float.valueOf(detail.getNeeded());
         remained=Float.valueOf(detail.getRemain());
         progressbar.setProgress((int) ((needed - remained) / needed * 100));
-        starttime.setText(detail.getCreated_at());
+        starttime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(detail.getCreated_at())*1000));
         pictures=detail.getPictures().split(" ");
-        imageDescriptions = getImageDescription();
         ImageView iv=null;
         View view;
         for(int i=0;i<pictures.length;i++) {
@@ -274,8 +280,8 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
             // 添加点view对象
             view = new View(this);
             view.setBackgroundDrawable(getResources().getDrawable(
-                    R.drawable.ic_launcher));
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(5, 5);
+                    R.drawable.pointswhite));
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(25, 25);
             lp.leftMargin = 10;
             view.setLayoutParams(lp);
             view.setEnabled(false);
@@ -292,13 +298,13 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
 
             @Override
             public void onPageSelected(int position) {
-                // 改变图片的描述信息
-                tvDescription
-                        .setText(imageDescriptions[position % listImageViews.size()]);
+
                 // 切换选中的点,把前一个点置为normal状态
                 llPoints.getChildAt(previousSelectPosition).setEnabled(false);
+                llPoints.getChildAt(previousSelectPosition).setBackground(getResources().getDrawable(R.drawable.pointswhite));
                 // 把当前选中的position对应的点置为enabled状态
                 llPoints.getChildAt(position % listImageViews.size()).setEnabled(true);
+                llPoints.getChildAt(position % listImageViews.size()).setBackground(getResources().getDrawable(R.drawable.pointsred));
                 previousSelectPosition = position % listImageViews.size();
             }
 
@@ -307,7 +313,7 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
 
             }
         });
-        recordListView.setAdapter(new OneYuanGrabTakRecodAdapter(records,getApplication()));
+        recordListView.setAdapter(new OneYuanGrabTakRecodAdapter(records, getApplication()));
         if(myrecords.size()==0){
             tv.setVisibility(View.VISIBLE);
             myrecordlist.setVisibility(View.GONE);
@@ -316,19 +322,11 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
             myrecordlist.setVisibility(View.VISIBLE);
             myrecordlist.setAdapter(new DetailMyRecords(myrecords,getApplication()));
         }
-
-        tvDescription.setText(imageDescriptions[previousSelectPosition]);
         llPoints.getChildAt(previousSelectPosition).setEnabled(true);
+        llPoints.getChildAt(previousSelectPosition).setBackground(getResources().getDrawable(R.drawable.pointsred));
     }
 
-    private String[] getImageDescription() {
-        int num=pictures.length;
-        String[] temp=new String[num];
-        for(int i=0;i<num;i++){
-            temp[i]=i+1+"";
-        }
-        return temp;
-    }
+
     class TimeCount extends CountDownTimer {
 
         public TimeCount(long millisInFuture, long countDownInterval) {
@@ -338,7 +336,7 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
         @Override
         public void onTick(long millisUntilFinished) {
 
-            timeCount.setText("还剩 " + millisUntilFinished / 1000 + "秒");
+            timeCount.setText("还剩 " + millisUntilFinished / 60000 + "分 "+(millisUntilFinished %60000)/1000+"秒");
         }
 
         @Override

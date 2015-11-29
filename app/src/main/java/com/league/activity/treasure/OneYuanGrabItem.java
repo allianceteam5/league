@@ -9,6 +9,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import com.league.bean.OneGrabDetailBean;
 import com.league.bean.OneYuanBean;
 import com.league.dialog.TakeInDialog;
 import com.league.utils.Constants;
+import com.league.utils.Utils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
 import com.league.widget.ListViewForScrollView;
@@ -60,7 +62,7 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
     private float needed,remained;
     private LinearLayout linearLayout,llPoints,winnerresult;
     private RelativeLayout viewTimeCount;
-    private TextView timeCount;//倒计时textview
+    private TextView timeMinutes,timeMill;//倒计时textview
     private Button countdetail;//计算详情
     private TimeCount count;//计时器
     private TextView lucknum;//幸运号码
@@ -70,8 +72,6 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
     private TextView winnerId;//获奖者ID；
     private TextView winnerCount;//获奖者参与人次
     private TextView winnerEndTime;//揭晓时间
-    private String[] imageDescriptions;
-    private TextView tvDescription;
     private int previousSelectPosition = 0;
     private ViewPager viewPager;
     private List<ImageView> listviews;
@@ -132,14 +132,16 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         takeinAll= (Button) findViewById(R.id.takeall);
         takeinAll.setOnClickListener(this);
 
-        tvDescription = (TextView) findViewById(R.id.tv_image_description);
         llPoints = (LinearLayout) findViewById(R.id.ll_points);
         viewTimeCount= (RelativeLayout) findViewById(R.id.viewtimecount);
-        timeCount= (TextView) findViewById(R.id.countdown);
+        timeMinutes= (TextView) findViewById(R.id.countminu);
+        timeMill= (TextView) findViewById(R.id.countmill);
         countdetail= (Button) findViewById(R.id.countdetail);
+        countdetail.setOnClickListener(this);
         winnerresult= (LinearLayout) findViewById(R.id.viewwinneresult);
         lucknum= (TextView) findViewById(R.id.luckynumber);
         countdetail1= (Button) findViewById(R.id.countdetail1);
+        countdetail1.setOnClickListener(this);
         winnerThumb= (CircleImageView) findViewById(R.id.thumb);
         winnerName= (TextView) findViewById(R.id.holdername);
         winnerId= (TextView) findViewById(R.id.holderid);
@@ -190,6 +192,7 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
                 OneYuanBean oyb=new ObjectMapper().readValue(jsonObject.optString("detail"), new TypeReference<OneYuanBean>() {});
                 List<GrabRecordBean> grb=new ObjectMapper().readValue(jsonObject.optString("records"), new TypeReference<ArrayList<GrabRecordBean>>() {
                 });
+                Log.i("grb",grb.size()+"");
                 List<MyRecordGrabBean> mrgb=new ObjectMapper().readValue(jsonObject.optString("myrecords"), new TypeReference<ArrayList<MyRecordGrabBean>>() {
                 });
                 OneGrabDetailBean ogdb=new OneGrabDetailBean();
@@ -215,10 +218,14 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
         if(detail.getIslotteried().equals("0")){
             state.setImageResource(R.drawable.running);
-            viewTimeCount.setVisibility(View.VISIBLE);
             winnerresult.setVisibility(View.GONE);
-            count=new TimeCount(100000,1000);
-            count.start();
+            if(detail.getEnd_at().equals("0")){
+                viewTimeCount.setVisibility(View.GONE);
+            }else{
+                viewTimeCount.setVisibility(View.VISIBLE);
+                count=new TimeCount(Long.valueOf(detail.getEnd_at())*1000-System.currentTimeMillis(),1000);
+                count.start();
+            }
         }else{
             state.setImageResource(R.drawable.grabstate_finished);
             viewTimeCount.setVisibility(View.GONE);
@@ -235,9 +242,9 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         needed=Float.valueOf(detail.getNeeded());
         remained=Float.valueOf(detail.getRemain());
         progressbar.setProgress((int) ((needed - remained) / needed * 100));
-        starttime.setText(detail.getCreated_at());
+        starttime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(detail.getCreated_at()) * 1000));
         pictures=detail.getPictures().split(" ");
-        imageDescriptions = getImageDescription();
+
         ImageView iv=null;
         View view;
         for(int i=0;i<pictures.length;i++) {
@@ -249,8 +256,8 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
             // 添加点view对象
             view = new View(this);
             view.setBackgroundDrawable(getResources().getDrawable(
-                    R.drawable.ic_launcher));
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(5, 5);
+                    R.drawable.pointswhite));
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(25, 25);
             lp.leftMargin = 10;
             view.setLayoutParams(lp);
             view.setEnabled(false);
@@ -268,13 +275,12 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
             @Override
             public void onPageSelected(int position) {
-                // 改变图片的描述信息
-                tvDescription
-                        .setText(imageDescriptions[position % listviews.size()]);
                 // 切换选中的点,把前一个点置为normal状态
                 llPoints.getChildAt(previousSelectPosition).setEnabled(false);
+                llPoints.getChildAt(previousSelectPosition).setBackground(getResources().getDrawable(R.drawable.pointswhite));
                 // 把当前选中的position对应的点置为enabled状态
                 llPoints.getChildAt(position % listviews.size()).setEnabled(true);
+                llPoints.getChildAt(position % listviews.size()).setBackground(getResources().getDrawable(R.drawable.pointsred));
                 previousSelectPosition = position % listviews.size();
             }
 
@@ -292,17 +298,11 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
             myrecordlist.setVisibility(View.VISIBLE);
             myrecordlist.setAdapter(new DetailMyRecords(myrecords,getApplication()));
         }
-        tvDescription.setText(imageDescriptions[previousSelectPosition]);
+
         llPoints.getChildAt(previousSelectPosition).setEnabled(true);
+        llPoints.getChildAt(previousSelectPosition).setBackground(getResources().getDrawable(R.drawable.pointsred));
     }
-    private String[] getImageDescription() {
-        int num=pictures.length;
-        String[] temp=new String[num];
-        for(int i=0;i<num;i++){
-           temp[i]=i+1+"";
-        }
-        return temp;
-    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -329,6 +329,12 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
                 intentpicture.putExtra("picturesdetail",detail.getDetails());
                 startActivity(intentpicture);
                 break;
+            case R.id.countdetail1:
+            case R.id.countdetail:
+                Intent count=new Intent(OneYuanGrabItem.this,CountDetailActivity.class);
+
+                startActivity(count);
+                break;
         }
     }
     class TimeCount extends CountDownTimer {
@@ -339,8 +345,14 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
         @Override
         public void onTick(long millisUntilFinished) {
-
-            timeCount.setText("还剩 " + millisUntilFinished / 1000 + "秒");
+            long minutes=millisUntilFinished / 60000;
+            long mill=(millisUntilFinished %60000)/1000;
+            if(timeMinutes.getText().toString().equals(minutes+"")){
+                timeMill.setText(mill+"");
+            }else{
+                timeMill.setText(mill + "");
+                timeMinutes.setText(minutes+"");
+            }
         }
 
         @Override

@@ -1,20 +1,14 @@
 package com.league.utils;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
-import android.widget.Toast;
 
-import org.apache.http.message.BasicNameValuePair;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -86,5 +80,20 @@ public class Utils {
             sDensity = dm.density;
         }
         return (int) (sDensity * nDip);
+    }
+
+    public static String TimeStamp2Date(long timestamp) {
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date(
+                timestamp * 1000));
+    }
+
+    public static String TimeStamp2SystemNotificationDate(long timestamp) {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(
+                timestamp));
+    }
+
+    public static String TimeStamp2DateChinese(long timestamp) {
+        return new SimpleDateFormat("yyyy年MM月dd日").format(new Date(
+                timestamp * 1000));
     }
 }

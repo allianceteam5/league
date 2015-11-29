@@ -2,6 +2,7 @@ package com.league.activity.treasure;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -86,6 +87,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
         progressbar2 = (ProgressBar) findViewById(R.id.progressbar2);
         progressbar3 = (ProgressBar) findViewById(R.id.progressbar3);
 
+
     }
 
     void initData() {
@@ -105,6 +107,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(OneYuan.this, OneYuanGrabItem.class);
+                        Log.i("nicaia",list.get(position).getId());
                         intent.putExtra("id", list.get(position).getId());
                         startActivity(intent);
                     }
@@ -151,9 +154,14 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
         ApiUtil.getGrabLatestAnnounced(getApplication(), new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
-                for (int i = 0; i < 3; i++) {
-                    announcedList.add(response.get(i));
+                if(response.size()<3){
+                    announcedList.addAll(response);
+                }else{
+                    for (int i = 0; i < 3; i++) {
+                        announcedList.add(response.get(i));
+                    }
                 }
+
                 latestGridView.setAdapter(new LatestAnnouncedAdapter(announcedList, getApplication()));
                 latestGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -190,16 +198,16 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
         money3.setText(listTenYuanGrab.get(2).getTitle());
         float need1 = Float.valueOf(listTenYuanGrab.get(0).getNeeded());
         float remain1 = Float.valueOf(listTenYuanGrab.get(0).getRemain());
-        txtProgress1.setText((int) ((need1 - remain1) / need1) * 100 + "%");
+        txtProgress1.setText((int)((need1 - remain1) / need1 * 100) + "%");
         float need2 = Float.valueOf(listTenYuanGrab.get(1).getNeeded());
         float remain2 = Float.valueOf(listTenYuanGrab.get(1).getRemain());
-        txtProgress2.setText((int) ((need2 - remain2) / need2) * 100 + "%");
+        txtProgress2.setText((int)((need2 - remain2) / need2 * 100) + "%");
         float need3 = Float.valueOf(listTenYuanGrab.get(2).getNeeded());
         float remain3 = Float.valueOf(listTenYuanGrab.get(2).getRemain());
-        txtProgress3.setText((int) ((need3 - remain3) / need3) * 100 + "%");
-        progressbar1.setProgress((int) ((need1 - remain1) / need1) * 100);
-        progressbar2.setProgress((int) ((need2 - remain2) / need2) * 100);
-        progressbar3.setProgress((int) ((need3 - remain3) / need3) * 100);
+        txtProgress3.setText((int)((need3 - remain3) / need3 * 100) + "%");
+        progressbar1.setProgress((int) ((need1 - remain1) / need1 * 100));
+        progressbar2.setProgress((int) ((need2 - remain2) / need2 * 100));
+        progressbar3.setProgress((int) ((need3 - remain3) / need3 * 100));
     }
 
     @Override
@@ -246,6 +254,9 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
                 ten3.putExtra("id", listTenYuanGrab.get(2).getId());
                 startActivity(ten3);
                 break;
+
         }
     }
+
+
 }

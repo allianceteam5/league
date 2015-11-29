@@ -20,6 +20,7 @@ public class GrabRecordBean {
     private String id;
     private String userid;
     private String grabcornid;
+    private String grabcommodityid;
     private String count;
     private String numbers;
     private String type;
@@ -27,6 +28,23 @@ public class GrabRecordBean {
     private String phone;
     private String nickname;
     private String thumb;
+    private String isgotback;
+
+    public String getGrabcommodityid() {
+        return grabcommodityid;
+    }
+
+    public void setGrabcommodityid(String grabcommodityid) {
+        this.grabcommodityid = grabcommodityid;
+    }
+
+    public String getIsgotback() {
+        return isgotback;
+    }
+
+    public void setIsgotback(String isgotback) {
+        this.isgotback = isgotback;
+    }
 
     public void setId(String id) {
         this.id = id;

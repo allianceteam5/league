@@ -19,7 +19,6 @@ public class ApiUtil {
     private static void printHttp(String baseUrl, RequestParams params) {
         Log.d("http", "http请求: " + baseUrl + "?" + params);
     }
-
     public static void professionList(Context context, TextHttpResponseHandler responseHandler) {
         client.post(context, IClientUrl.ProfessionList, new RequestParams(), responseHandler);
     }
@@ -174,9 +173,6 @@ public class ApiUtil {
         client.post(context, IClientUrl.getGrabcoinBuyAll, params, responseHandler);
     }
 
-    public static void oneYuanGrabGetSix(Context context, TextHttpResponseHandler responseHandler) {
-        client.post(context, IClientUrl.OneYuanGrabGetSix, new RequestParams(), responseHandler);
-    }
 
     public static void getQiniuToken(Context context, TextHttpResponseHandler responseHandler) {
         client.get(context, IClientUrl.GetQiniuToken, responseHandler);
@@ -270,52 +266,69 @@ public class ApiUtil {
         client.post(context, IClientUrl.LiaoBaTbmessagesSend, params, responseHandler);
     }
 
-    public static void liaobaGetMyConcernList(Context context, int currentPage ,TextHttpResponseHandler responseHandler) {
+    public static void liaobaGetMyConcernList(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         client.post(context, IClientUrl.LiaoBaTbusersConcernsList + currentPage, params, responseHandler);
     }
 
-    public static void liaobaTbmessagesMyLikesList(Context context, int currentPage ,TextHttpResponseHandler responseHandler) {
+    public static void liaobaTbmessagesMyLikesList(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         client.post(context, IClientUrl.LiaoBaTbmessagesMyLikesList + currentPage, params, responseHandler);
     }
 
-    public static void liaobaTbmessagesMyList(Context context, int currentPage ,TextHttpResponseHandler responseHandler) {
+    public static void liaobaTbmessagesMyList(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         client.post(context, IClientUrl.LiaoBaTbmessagesMyList + currentPage, params, responseHandler);
     }
 
     //获取往期揭晓
-    public static void grabcommoditiesPassAnnounced(Context context,String kind,int currentPage,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("kind",kind);
-        client.post(context,IClientUrl.getGrabCommoditiesPass+currentPage,params,responseHandler);
+    public static void grabcommoditiesPassAnnounced(Context context, String kind, int currentPage, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("kind", kind);
+        client.post(context, IClientUrl.getGrabCommoditiesPass + currentPage, params, responseHandler);
     }
+
     //获取夺金记录
-    public static void getGrabCoinRecords(Context context,String phone,int currentPage,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        client.post(context,IClientUrl.getGrabCoinRecords+currentPage,params,responseHandler);
+    public static void getGrabCoinRecords(Context context, String phone, int currentPage, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        client.post(context, IClientUrl.getGrabCoinRecords + currentPage, params, responseHandler);
     }
+
     //获取夺宝记录
-    public static void getGrabCommodyRecords(Context context,String phone,int currentpage,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        client.post(context,IClientUrl.getGrabCommodyReocrds+currentpage,params,responseHandler);
+    public static void getGrabCommodyRecords(Context context, String phone, int currentpage, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        client.post(context, IClientUrl.getGrabCommodyReocrds + currentpage, params, responseHandler);
     }
+
     //获取中奖记录
-    public static void getGrabWinRecords(Context context,String phone,int currentpage,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        client.post(context,IClientUrl.getGrabWinRecords+currentpage,params,responseHandler);
+    public static void getGrabWinRecords(Context context, String phone, int currentpage, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        client.post(context, IClientUrl.getGrabWinRecords + currentpage, params, responseHandler);
     }
+
     //获取最新揭晓
-    public static void getGrabLatestAnnounced(Context context,TextHttpResponseHandler responseHandler){
+    public static void getGrabLatestAnnounced(Context context, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("type", "1");
+        client.post(context, IClientUrl.getGrabLatestAnnounced, params, responseHandler);
+    }
+
+    //抢红包接口 type=1 金币  =2 夺宝币
+    public static void getGrabEnvelope(Context context, String phone, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        client.post(context, IClientUrl.getGrabEnvelopes, params, responseHandler);
+    }
+    //获取更多购买记录
+    public static void getMoreRecordCorn(Context context,String grabcornid,TextHttpResponseHandler responseHandler){
         RequestParams params=new RequestParams();
-        params.put("type","1");
-        client.post(context,IClientUrl.getGrabLatestAnnounced,params,responseHandler);
+        params.put("grabcornid",grabcornid);
+        client.post(context,IClientUrl.getMoreRecordCorn,params,responseHandler);
     }
 }

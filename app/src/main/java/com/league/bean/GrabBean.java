@@ -47,6 +47,15 @@ public class GrabBean {
     private String thumb;
     private String picture;
     private String flag;
+    private String isgotback;
+
+    public String getIsgotback() {
+        return isgotback;
+    }
+
+    public void setIsgotback(String isgotback) {
+        this.isgotback = isgotback;
+    }
 
     public String getFlag() {
         return flag;
