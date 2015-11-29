@@ -33,6 +33,7 @@ import com.league.utils.Utils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
 import com.league.widget.ListViewForScrollView;
+import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
@@ -79,6 +80,11 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
     String[] pictures;
     private TextView tv;//夺宝记录
     private ListViewForScrollView myrecordlist;
+
+    private PullToRefreshLayout pullToRefreshLayout;
+    private int totalPage = 2;
+    private int currentPage = 1;
+    private OneYuanGrabTakRecodAdapter recordAdapter;
 
     private Handler handler=new Handler(){
         @Override
@@ -162,6 +168,9 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         viewPager.setLayoutParams(new LinearLayout.LayoutParams(dm.widthPixels, dm.heightPixels * 2 / 5));
         linearLayout.addView(viewPager);
         listviews=new ArrayList<ImageView>();
+
+        pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
+        pullToRefreshLayout.setOnRefreshListener(new MyListener());
     }
 
     public void initData(){
@@ -289,7 +298,8 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
             }
         });
-        listView.setAdapter(new OneYuanGrabTakRecodAdapter(records,getApplication()));
+        recordAdapter=new OneYuanGrabTakRecodAdapter(records,getApplication());
+        listView.setAdapter(recordAdapter);
         if(myrecords.size()==0){
             tv.setVisibility(View.VISIBLE);
             myrecordlist.setVisibility(View.GONE);
@@ -357,6 +367,73 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
         @Override
         public void onFinish() {
+            initData();
         }
+    }
+    public class MyListener implements PullToRefreshLayout.OnRefreshListener
+    {
+
+        @Override
+        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout)
+        {
+            // 下拉刷新操作
+            new Handler()
+            {
+                @Override
+                public void handleMessage(Message msg)
+                {
+                    initData();
+                    totalPage = 2;
+                    currentPage = 1;
+                    // 千万别忘了告诉控件刷新完毕了哦！
+                    pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                }
+            }.sendEmptyMessageDelayed(0, 1000);
+
+        }
+
+        @Override
+        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout)
+        {
+            // 加载操作
+            new Handler()
+            {
+                @Override
+                public void handleMessage(Message msg)
+                {
+                    currentPage++;
+                    if(currentPage <= totalPage){
+                        ApiUtil.getMoreRecordCommodity(getApplicationContext(), id, currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabRecordBean>>() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<GrabRecordBean> response) {
+                                if (totalPage == 1) {
+                                    records.clear();
+                                }
+                                records.addAll(response);
+                                recordAdapter.notifyDataSetChanged();
+                                pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<GrabRecordBean> errorResponse) {
+                                pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                            }
+
+                            @Override
+                            protected ArrayList<GrabRecordBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                                JSONObject jsonObject = new JSONObject(rawJsonData);
+                                totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
+                                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<GrabRecordBean>>() {
+                                });
+                            }
+                        });
+                    }else{
+                        pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                    }
+
+                }
+            }.sendEmptyMessageDelayed(0, 1000);
+        }
+
     }
 }

@@ -326,9 +326,15 @@ public class ApiUtil {
         client.post(context, IClientUrl.getGrabEnvelopes, params, responseHandler);
     }
     //获取更多购买记录
-    public static void getMoreRecordCorn(Context context,String grabcornid,TextHttpResponseHandler responseHandler){
+    public static void getMoreRecordCorn(Context context,String grabcornid,int currentPage,TextHttpResponseHandler responseHandler){
         RequestParams params=new RequestParams();
         params.put("grabcornid",grabcornid);
-        client.post(context,IClientUrl.getMoreRecordCorn,params,responseHandler);
+        client.post(context,IClientUrl.getMoreRecordCorn+currentPage,params,responseHandler);
+    }
+    //获取更多购买记录一元夺宝的
+    public static void getMoreRecordCommodity(Context context,String grabcommodityid,int currentPage,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("grabcommodityid",grabcommodityid);
+        client.post(context,IClientUrl.getMoreRecordCommodity+currentPage,params,responseHandler);
     }
 }

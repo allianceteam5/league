@@ -80,6 +80,7 @@ public class PassAnnounced extends BaseActivity{
                     list.clear();
                 }
                 list.addAll(response);
+
                 adapter.notifyDataSetChanged();
                 pullToRefreshLayout.setVisibility(View.VISIBLE);
                 closeProgressDialog();

@@ -52,5 +52,6 @@ public class IClientUrl {
     public static final String getGrabWinRecords = testServerUrl + "grabcornrecords/win?page=";
     public static final String getGrabLatestAnnounced = testServerUrl + "grabcommodities/search";
     public static final String getGrabEnvelopes = testServerUrl + "envelopes/draw";
-    public static final String getMoreRecordCorn = testServerUrl + "grabcorns/morerecords";
+    public static final String getMoreRecordCorn = testServerUrl + "grabcorns/morerecords?page=";
+    public static final String getMoreRecordCommodity = testServerUrl + "grabcommodities/morerecords?page=";
 }

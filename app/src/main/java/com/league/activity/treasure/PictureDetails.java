@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.league.adapter.PicturesDetailAdapter;
 import com.mine.league.R;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by liug on 15/11/22.
@@ -16,9 +16,9 @@ import com.mine.league.R;
 public class PictureDetails extends Activity implements View.OnClickListener{
     private ImageView back, titleright, right1, right2;
     private TextView title;
-    private ListView listView;
     private String details;
     private String[] pictures;
+    private LinearLayout viewGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +27,7 @@ public class PictureDetails extends Activity implements View.OnClickListener{
         if("".equals(details)){
             return;
         }else{
-            pictures=details.split(" ");
+            pictures=details.trim().split(" ");
         }
         initView();
     }
@@ -42,8 +42,14 @@ public class PictureDetails extends Activity implements View.OnClickListener{
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-        listView = (ListView) findViewById(R.id.listview_details);
-        listView.setAdapter(new PicturesDetailAdapter(pictures,getApplication()));
+        viewGroup= (LinearLayout) findViewById(R.id.viewgroup);
+        for(String picture :pictures){
+            ImageView imageView=new ImageView(this);
+            imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            Picasso.with(getApplicationContext()).load(picture).into(imageView);
+            viewGroup.addView(imageView);
+        }
     }
 
     @Override
