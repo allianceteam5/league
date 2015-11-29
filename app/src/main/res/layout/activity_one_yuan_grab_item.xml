@@ -547,37 +547,79 @@
         android:layout_width="match_parent"
         android:layout_height="48dip"
         android:layout_alignParentBottom="true"
-        android:background="@color/black2"
+        android:background="@color/white"
         android:orientation="horizontal"
-
         >
+        <LinearLayout
+            android:id="@+id/bottomnormal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="gone">
+            <Button
+                android:id="@+id/takeinnow"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="2dip"
+                android:layout_weight="1"
+                android:background="@drawable/addfriendback"
+                android:text="立即参与"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/takeinnow"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dip"
-            android:layout_marginLeft="20dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="2dip"
-            android:layout_weight="1"
-            android:background="@drawable/addfriendback"
-            android:text="立即参与"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            <Button
+                android:id="@+id/takeall"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="20dip"
+                android:layout_marginTop="2dip"
+                android:layout_weight="1"
+                android:background="@drawable/addfriendback"
+                android:text="直接兑换"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/bottom_go"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:visibility="gone">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dip"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:layout_marginTop="2dip"
+                android:layout_centerVertical="true"
+                android:background="@color/transparent"
+                android:text="新的一期正在进行。。。"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:gravity="center"/>
 
-        <Button
-            android:id="@+id/takeall"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="20dip"
-            android:layout_marginTop="2dip"
-            android:layout_weight="1"
-            android:background="@drawable/addfriendback"
-            android:text="直接兑换"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            <Button
+                android:id="@+id/gorightnow"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dip"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:layout_marginTop="2dip"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/addfriendback"
+                android:text="立即前往"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </RelativeLayout>
     </LinearLayout>
+
 </RelativeLayout>

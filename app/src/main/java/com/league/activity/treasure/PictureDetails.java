@@ -46,7 +46,7 @@ public class PictureDetails extends Activity implements View.OnClickListener{
         for(String picture :pictures){
             ImageView imageView=new ImageView(this);
             imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             Picasso.with(getApplicationContext()).load(picture).into(imageView);
             viewGroup.addView(imageView);
         }

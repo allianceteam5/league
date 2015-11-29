@@ -47,6 +47,7 @@ public class IClientUrl {
     public static final String LiaoBaTbmessagesMyList = testServerUrl + "tbmessages/me?page=";
 
     public static final String getGrabCommoditiesPass = testServerUrl + "grabcommodities/formeractivities?page=";
+    public static final String getGrabCornsPass = testServerUrl + "grabcorns/formeractivities?page=";
     public static final String getGrabCoinRecords = testServerUrl + "grabcornrecords/list?page=";
     public static final String getGrabCommodyReocrds = testServerUrl + "grabcommodityrecords/list?page=";
     public static final String getGrabWinRecords = testServerUrl + "grabcornrecords/win?page=";
@@ -54,4 +55,5 @@ public class IClientUrl {
     public static final String getGrabEnvelopes = testServerUrl + "envelopes/draw";
     public static final String getMoreRecordCorn = testServerUrl + "grabcorns/morerecords?page=";
     public static final String getMoreRecordCommodity = testServerUrl + "grabcommodities/morerecords?page=";
+    public static final String applyForCorns = testServerUrl + "grabcorns/getcorns";
 }

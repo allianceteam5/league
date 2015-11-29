@@ -1,6 +1,5 @@
 package com.league.activity.treasure;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -20,6 +19,7 @@ import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.activity.BaseActivity;
 import com.league.adapter.DetailMyRecords;
 import com.league.adapter.OneYuanGrabTakRecodAdapter;
 import com.league.adapter.ViewPaperAdapter;
@@ -27,8 +27,10 @@ import com.league.bean.GrabRecordBean;
 import com.league.bean.MyRecordGrabBean;
 import com.league.bean.OneGrabDetailBean;
 import com.league.bean.OneYuanBean;
+import com.league.bean.PassAnnouncedBean;
 import com.league.dialog.TakeInDialog;
 import com.league.utils.Constants;
+import com.league.utils.ToastUtils;
 import com.league.utils.Utils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
@@ -46,7 +48,7 @@ import java.util.List;
 
 import io.paperdb.Paper;
 
-public class OneYuanGrabItem extends Activity implements View.OnClickListener{
+public class OneYuanGrabItem extends BaseActivity implements View.OnClickListener{
 
     private ImageView back2, titleright, right1, right2;
     private TextView title;
@@ -61,7 +63,8 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
     private TextView period,name,totalneed,remain,starttime;
     private ProgressBar progressbar;
     private float needed,remained;
-    private LinearLayout linearLayout,llPoints,winnerresult;
+    private LinearLayout linearLayout,llPoints,winnerresult,bottonnormal;
+    private RelativeLayout bottongo;
     private RelativeLayout viewTimeCount;
     private TextView timeMinutes,timeMill;//倒计时textview
     private Button countdetail;//计算详情
@@ -77,10 +80,10 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
     private ViewPager viewPager;
     private List<ImageView> listviews;
     private ViewPaperAdapter mViewPaperAdapter;
-    String[] pictures;
+    private String[] pictures;
     private TextView tv;//夺宝记录
     private ListViewForScrollView myrecordlist;
-
+    private Button goRightNow;
     private PullToRefreshLayout pullToRefreshLayout;
     private int totalPage = 2;
     private int currentPage = 1;
@@ -104,6 +107,7 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_yuan_grab_item);
         id=getIntent().getStringExtra("id");
+        showProgressDialog();
         initView();
         initData();
         title.setFocusable(true);
@@ -171,6 +175,11 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
         pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
+
+        bottonnormal= (LinearLayout) findViewById(R.id.bottomnormal);
+        bottongo= (RelativeLayout) findViewById(R.id.bottom_go);
+        goRightNow= (Button) findViewById(R.id.gorightnow);
+        goRightNow.setOnClickListener(this);
     }
 
     public void initData(){
@@ -183,7 +192,7 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
                 Paper.book().write(Constants.OneYuanDetail + id, detail);
                 Paper.book().write(Constants.OneYuanDetailRecords+id,records);
                 updateView(detail, records, myrecords);
-
+                closeProgressDialog();
             }
 
             @Override
@@ -193,6 +202,7 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
                 if (detail != null) {
                     updateView(detail,records,myrecords);
                 }
+                closeProgressDialog();
             }
 
             @Override
@@ -227,6 +237,8 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
 
         if(detail.getIslotteried().equals("0")){
             state.setImageResource(R.drawable.running);
+            bottonnormal.setVisibility(View.VISIBLE);
+            bottongo.setVisibility(View.GONE);
             winnerresult.setVisibility(View.GONE);
             if(detail.getEnd_at().equals("0")){
                 viewTimeCount.setVisibility(View.GONE);
@@ -237,12 +249,17 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
             }
         }else{
             state.setImageResource(R.drawable.grabstate_finished);
+            bottongo.setVisibility(View.VISIBLE);
+            bottonnormal.setVisibility(View.GONE);
             viewTimeCount.setVisibility(View.GONE);
             winnerresult.setVisibility(View.VISIBLE);
             lucknum.setText(detail.getWinnernumber());
             winnerId.setText(detail.getWinneruserid());
-            winnerEndTime.setText(detail.getEnd_at());
-            //数据不全  bean 缺中奖者头像  name count
+            winnerEndTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(detail.getEnd_at()) * 1000));
+            winnerName.setText(detail.getNickname());
+            winnerCount.setText(detail.getCount());
+            Picasso.with(getApplicationContext()).load(detail.getThumb()).into(winnerThumb);
+
         }
         period.setText("第"+detail.getVersion()+"期");
         name.setText(detail.getTitle());
@@ -323,7 +340,8 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
                 break;
             case R.id.passanou://往期揭晓
                 Intent intent=new Intent(OneYuanGrabItem.this,PassAnnounced.class);
-                intent.putExtra("id",detail.getKind());
+                intent.putExtra("type",1);
+                intent.putExtra("kind",detail.getKind());
                 startActivity(intent);
                 break;
             case R.id.takeall:
@@ -342,8 +360,35 @@ public class OneYuanGrabItem extends Activity implements View.OnClickListener{
             case R.id.countdetail1:
             case R.id.countdetail:
                 Intent count=new Intent(OneYuanGrabItem.this,CountDetailActivity.class);
-
                 startActivity(count);
+                break;
+            case R.id.gorightnow:
+                ApiUtil.grabcommoditiesPassAnnounced(getApplication(), detail.getKind(), 1, new BaseJsonHttpResponseHandler<ArrayList<PassAnnouncedBean>>() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<PassAnnouncedBean> response) {
+                        if (response.size() != 0 && response.get(0).getEnd_at().equals("0")) {
+                            Intent go = new Intent(OneYuanGrabItem.this, OneYuanGrabItem.class);
+                            go.putExtra("id", response.get(0).getId());
+                            startActivity(go);
+                        } else {
+                            ToastUtils.showShortToast(getApplicationContext(),"没有下一期了");
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<PassAnnouncedBean> errorResponse) {
+                        ToastUtils.showShortToast(getApplicationContext(), "网络不给力");
+                    }
+
+                    @Override
+                    protected ArrayList<PassAnnouncedBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                        JSONObject jsonObject = new JSONObject(rawJsonData);
+                        return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<PassAnnouncedBean>>() {
+                        });
+                    }
+                });
+
                 break;
         }
     }

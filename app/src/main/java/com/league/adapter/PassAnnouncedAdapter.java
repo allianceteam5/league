@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.league.bean.PassAnnouncedBean;
+import com.league.utils.Utils;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
@@ -60,7 +61,7 @@ public class PassAnnouncedAdapter extends BaseAdapter{
             holder= (ViewHolder) convertView.getTag();
         }
         holder.period.setText(list.get(position).getVersion());
-        holder.announTime.setText(list.get(position).getEnd_at());
+        holder.announTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(list.get(position).getEnd_at()) * 1000));
 
         holder.holderName.setText(list.get(position).getNickname());
         holder.holderId.setText(list.get(position).getWinneruserid());

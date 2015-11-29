@@ -1,6 +1,5 @@
 package com.league.activity.treasure;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.activity.BaseActivity;
 import com.league.adapter.DetailMyRecords;
 import com.league.adapter.OneYuanGrabTakRecodAdapter;
 import com.league.adapter.ViewPaperAdapter;
@@ -45,7 +45,7 @@ import java.util.List;
 
 import io.paperdb.Paper;
 
-public class TenYuanGrabItem extends Activity implements View.OnClickListener{
+public class TenYuanGrabItem extends BaseActivity implements View.OnClickListener{
 
     private ImageView back, titleright, right1, right2;
     private TextView title;
@@ -99,7 +99,7 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ten_yuan_grab_item);
         id=getIntent().getStringExtra("id");
-
+        showProgressDialog();
         initView();
         initData();
         title.setFocusable(true);
@@ -175,6 +175,7 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
                 Paper.book().write(Constants.TenYuanDetail + id, detail);
                 Paper.book().write(Constants.TenyuanGrabRecords + id, records);
                 updateView(detail,records,myrecords);
+                closeProgressDialog();
             }
 
             @Override
@@ -183,7 +184,9 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
                 records=Paper.book().read(Constants.TenyuanGrabRecords+id);
                 if (detail != null) {
                     updateView(detail,records,myrecords);
+
                 }
+                closeProgressDialog();
             }
 
             @Override
@@ -226,7 +229,8 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
                 break;
             case R.id.passannounced:
                 Intent intent=new Intent(TenYuanGrabItem.this,PassAnnounced.class);
-                intent.putExtra("id",detail.getKind());
+                intent.putExtra("type",0);
+                intent.putExtra("kind",detail.getKind());
                 startActivity(intent);
                 break;
             case R.id.buyall:
@@ -259,8 +263,10 @@ public class TenYuanGrabItem extends Activity implements View.OnClickListener{
             winnerresult.setVisibility(View.VISIBLE);
             lucknum.setText(detail.getWinnernumber());
             winnerId.setText(detail.getWinneruserid());
-            winnerEndTime.setText(detail.getEnd_at());
-
+            winnerEndTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(detail.getEnd_at()) * 1000));
+            winnerName.setText(detail.getNickname());
+            winnerCount.setText(detail.getCount());
+            Picasso.with(getApplicationContext()).load(detail.getThumb()).into(winnerThumb);
             //数据不全  bean 缺中奖者头像  name count
 
         }

@@ -48,6 +48,24 @@ public class GrabBean {
     private String picture;
     private String flag;
     private String isgotback;
+    private String winnerrecordid;
+    private String isgot;
+
+    public String getIsgot() {
+        return isgot;
+    }
+
+    public void setIsgot(String isgot) {
+        this.isgot = isgot;
+    }
+
+    public String getWinnerrecordid() {
+        return winnerrecordid;
+    }
+
+    public void setWinnerrecordid(String winnerrecordid) {
+        this.winnerrecordid = winnerrecordid;
+    }
 
     public String getIsgotback() {
         return isgotback;

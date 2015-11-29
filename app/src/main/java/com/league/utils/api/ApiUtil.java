@@ -284,13 +284,18 @@ public class ApiUtil {
         client.post(context, IClientUrl.LiaoBaTbmessagesMyList + currentPage, params, responseHandler);
     }
 
-    //获取往期揭晓
+    //获取往期揭晓 一元夺宝的
     public static void grabcommoditiesPassAnnounced(Context context, String kind, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("kind", kind);
         client.post(context, IClientUrl.getGrabCommoditiesPass + currentPage, params, responseHandler);
     }
-
+    //获取往期揭晓 10夺金
+    public static void grabcornsPassAnnounced(Context context, String kind, int currentPage, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("kind", kind);
+        client.post(context, IClientUrl.getGrabCornsPass + currentPage, params, responseHandler);
+    }
     //获取夺金记录
     public static void getGrabCoinRecords(Context context, String phone, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
@@ -336,5 +341,12 @@ public class ApiUtil {
         RequestParams params=new RequestParams();
         params.put("grabcommodityid",grabcommodityid);
         client.post(context,IClientUrl.getMoreRecordCommodity+currentPage,params,responseHandler);
+    }
+    //申请提取
+    public static void applyForCorns(Context context,String phone,String grabcornid,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("grabcornid",grabcornid);
+        client.post(context,IClientUrl.applyForCorns,params,responseHandler);
     }
 }

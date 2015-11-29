@@ -222,25 +222,12 @@
             android:visibility="gone">
 
             <Button
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/checkstate"
                 android:clickable="false"
                 android:text="已领取"
-                android:textColor="@color/black1"
-                android:textSize="14sp" />
-
-            <Button
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/checkstate"
-                android:text="查看状态"
                 android:textColor="@color/black1"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -254,12 +241,14 @@
             android:visibility="gone">
 
             <Button
-                android:layout_width="wrap_content"
+                android:id="@+id/applyfortake"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/applyfor"
                 android:gravity="center"
-                android:text="查看状态"
+                android:text="申请提取"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </LinearLayout>
