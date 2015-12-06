@@ -57,7 +57,7 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
 
     private OneYuanBean detail;
     private List<GrabRecordBean> records;
-    private List<MyRecordGrabBean> myrecords=new ArrayList<MyRecordGrabBean>();
+    private List<MyRecordGrabBean> myrecords;
     private String id;
     private ImageView state;
     private TextView period,name,totalneed,remain,starttime;
@@ -115,6 +115,8 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
         title.requestFocus();
         title.requestFocusFromTouch();
     }
+
+
     private void initView() {
         myrecordlist= (ListViewForScrollView) findViewById(R.id.myrecordlist);
         tv= (TextView) findViewById(R.id.viewtakestate);
@@ -188,7 +190,7 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, OneGrabDetailBean response) {
                 detail=response.getOneYuanBean();
                 records=response.getGrabRecordBean();
-                myrecords.addAll(response.getMyRecordGrabBean());
+                myrecords=response.getMyRecordGrabBean();
                 Paper.book().write(Constants.OneYuanDetail + id, detail);
                 Paper.book().write(Constants.OneYuanDetailRecords+id,records);
                 updateView(detail, records, myrecords);
@@ -237,12 +239,15 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
 
         if(detail.getIslotteried().equals("0")){
             state.setImageResource(R.drawable.running);
-            bottonnormal.setVisibility(View.VISIBLE);
-            bottongo.setVisibility(View.GONE);
+
             winnerresult.setVisibility(View.GONE);
             if(detail.getEnd_at().equals("0")){
+                bottonnormal.setVisibility(View.VISIBLE);
+                bottongo.setVisibility(View.GONE);
                 viewTimeCount.setVisibility(View.GONE);
             }else{
+                bottongo.setVisibility(View.VISIBLE);
+                bottonnormal.setVisibility(View.GONE);
                 viewTimeCount.setVisibility(View.VISIBLE);
                 count=new TimeCount(Long.valueOf(detail.getEnd_at())*1000-System.currentTimeMillis(),1000);
                 count.start();
@@ -273,6 +278,8 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
 
         ImageView iv=null;
         View view;
+        listviews.clear();
+        llPoints.removeAllViews();
         for(int i=0;i<pictures.length;i++) {
             iv = new ImageView(this);
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -347,7 +354,7 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
             case R.id.takeall:
                 Intent inten=new Intent(OneYuanGrabItem.this,BuyList.class);
                 inten.putExtra("type",1);
-                inten.putExtra("number",detail.getRemain());
+                inten.putExtra("number",detail.getNeeded());
                 inten.putExtra("id",id);
                 inten.putExtra("buytype",1);
                 startActivity(inten);
@@ -412,7 +419,9 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
 
         @Override
         public void onFinish() {
-            initData();
+            if(timeMinutes.getText().toString().equals("0")&&timeMill.getText().equals("1")){
+                initData();
+            }
         }
     }
     public class MyListener implements PullToRefreshLayout.OnRefreshListener

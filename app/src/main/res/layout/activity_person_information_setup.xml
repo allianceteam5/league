@@ -18,17 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:layout_below="@id/title"
-                android:background="@color/black2" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="40dp"
                 android:background="@color/white"
                 android:id="@+id/changeportrail"
                 android:onClick="onClick">
@@ -41,7 +33,7 @@
                     android:layout_marginLeft="10dip"
                     android:text="头像"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/img1"
@@ -72,7 +64,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="40dp"
                 android:background="@color/white">
 
                 <TextView
@@ -83,7 +75,7 @@
                     android:layout_marginLeft="10dip"
                     android:text="昵称"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/img2"
@@ -102,7 +94,7 @@
                     android:layout_toLeftOf="@id/img2"
                     android:text="飞翔的鸟"
                     android:textColor="@color/black1"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -115,7 +107,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="40dip"
                 android:background="@color/white">
 
                 <TextView
@@ -126,7 +118,7 @@
                     android:layout_marginLeft="10dip"
                     android:text="账户"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/numberid"
@@ -137,7 +129,7 @@
                     android:layout_marginRight="10dip"
                     android:text="12138"
                     android:textColor="@color/black1"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     />
             </RelativeLayout>
 
@@ -150,7 +142,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="40dip"
                 android:background="@color/white">
 
                 <TextView
@@ -161,7 +153,7 @@
                     android:layout_marginLeft="10dip"
                     android:text="我的二维码"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/img4"
@@ -189,7 +181,7 @@
                 android:background="@color/black2" />
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="40dip"
                 android:background="@color/white">
 
                 <TextView
@@ -200,7 +192,7 @@
                     android:layout_marginLeft="10dip"
                     android:text="性别"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/img5"
@@ -219,7 +211,7 @@
                     android:layout_toLeftOf="@id/img5"
                     android:text="女"
                     android:textColor="@color/black1"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -232,7 +224,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="40dip"
                 android:background="@color/white">
 
                 <TextView
@@ -243,7 +235,7 @@
                     android:layout_marginLeft="10dip"
                     android:text="地区"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/img6"
@@ -262,7 +254,7 @@
                     android:layout_toLeftOf="@id/img6"
                     android:text="上海"
                     android:textColor="@color/black1"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -275,7 +267,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="40dip"
                 android:background="@color/white">
 
                 <TextView
@@ -286,7 +278,7 @@
                     android:layout_marginLeft="10dip"
                     android:text="个性签名"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/img7"
@@ -308,7 +300,7 @@
 
                     android:singleLine="true"
                     android:textColor="@color/black1"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -320,7 +312,7 @@
                 android:onClick="onClick"
                 android:id="@+id/truenamemake"
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="40dip"
                 android:background="@color/white">
 
                 <TextView
@@ -331,7 +323,7 @@
                     android:layout_marginLeft="10dip"
                     android:text="实名认证"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
 
@@ -350,8 +342,10 @@
                 android:layout_marginRight="10dip"
                 android:background="@color/black2" />
             <RelativeLayout
+                android:onClick="onClick"
+                android:id="@+id/shippingaddress"
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="40dip"
                 android:background="@color/white">
 
                 <TextView
@@ -362,7 +356,7 @@
                     android:layout_marginLeft="10dip"
                     android:text="收货地址"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
 
@@ -376,13 +370,13 @@
             </RelativeLayout>
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginLeft="15dip"
                 android:layout_marginRight="15dip"
-                android:layout_marginTop="20dip"
+                android:layout_marginTop="10dip"
                 android:layout_marginBottom="50dip"
                 android:text="安全退出"
-                android:textSize="22sp"
+                android:textSize="16sp"
                 android:textColor="@color/white"
                 android:background="@drawable/btn_exit"/>
 

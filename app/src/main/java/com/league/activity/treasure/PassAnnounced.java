@@ -1,9 +1,11 @@
 package com.league.activity.treasure;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -90,6 +92,14 @@ public class PassAnnounced extends BaseActivity{
                     }
 
                     adapter.notifyDataSetChanged();
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent(PassAnnounced.this, OneYuanGrabItem.class);
+                            intent.putExtra("id", list.get(position).getId());
+                            startActivity(intent);
+                        }
+                    });
                     pullToRefreshLayout.setVisibility(View.VISIBLE);
                     closeProgressDialog();
                 }
@@ -120,6 +130,14 @@ public class PassAnnounced extends BaseActivity{
                     }
 
                     adapter.notifyDataSetChanged();
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent(PassAnnounced.this, TenYuanGrabItem.class);
+                            intent.putExtra("id", list.get(position).getId());
+                            startActivity(intent);
+                        }
+                    });
                     pullToRefreshLayout.setVisibility(View.VISIBLE);
                     closeProgressDialog();
                 }

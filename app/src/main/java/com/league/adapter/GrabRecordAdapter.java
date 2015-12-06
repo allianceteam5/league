@@ -111,7 +111,7 @@ public class GrabRecordAdapter extends BaseAdapter{
 
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                            if(response.getFlag().equals(1)){
+                            if(response.getFlag().equals("1")){
                                 holder.onebutton.setVisibility(View.GONE);
                                 holder.twobutton.setVisibility(View.VISIBLE);
                             }

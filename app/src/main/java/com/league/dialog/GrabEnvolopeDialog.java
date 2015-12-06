@@ -18,13 +18,14 @@ import com.mine.league.R;
 
 import org.apache.http.Header;
 
-public class GrabEnvolopeDialog extends BaseActivity implements View.OnClickListener{
+public class GrabEnvolopeDialog extends BaseActivity implements View.OnClickListener {
 
     private ImageButton close;
     private TextView result;
     private Button share;
-    private TextView num,numbite;
-    private View viewGet,viewLoss;
+    private TextView num, numbite;
+    private View viewGet, viewLoss;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,44 +34,46 @@ public class GrabEnvolopeDialog extends BaseActivity implements View.OnClickList
         initView();
         initData();
     }
-    private void initView(){
-        close= (ImageButton) findViewById(R.id.close);
+
+    private void initView() {
+        close = (ImageButton) findViewById(R.id.close);
         close.setOnClickListener(this);
-        result= (TextView) findViewById(R.id.result);
-        share= (Button) findViewById(R.id.share);
+        result = (TextView) findViewById(R.id.result);
+        share = (Button) findViewById(R.id.share);
         share.setOnClickListener(this);
-        num= (TextView) findViewById(R.id.num);
-        numbite= (TextView) findViewById(R.id.numbyte);
-        viewGet=findViewById(R.id.get);
-        viewLoss=findViewById(R.id.loss);
+        num = (TextView) findViewById(R.id.num);
+        numbite = (TextView) findViewById(R.id.numbyte);
+        viewGet = findViewById(R.id.get);
+        viewLoss = findViewById(R.id.loss);
     }
-    private void initData(){
+
+    private void initData() {
         ApiUtil.getGrabEnvelope(getApplicationContext(), Constants.PHONENUM, new BaseJsonHttpResponseHandler<EnvelopeBean>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, EnvelopeBean response) {
                 closeProgressDialog();
-                if(response.getFlag()==1){
-                    if(response.getCount()==0){
+                if (response.getFlag() == 1) {
+                    if (response.getCount() == 0) {
                         result.setText("很遗憾您没有抢到红包！");
                         viewLoss.setVisibility(View.VISIBLE);
                         viewGet.setVisibility(View.GONE);
-                    }else{
-                        if(response.getType()==1){
+                    } else {
+                        if (response.getType() == 1) {
                             result.setText("恭喜您！");
                             viewLoss.setVisibility(View.GONE);
                             viewGet.setVisibility(View.VISIBLE);
-                            num.setText(""+response.getCount());
+                            num.setText("" + response.getCount());
                             numbite.setText("元");
                         }
-                        if(response.getType()==2){
+                        if (response.getType() == 2) {
                             result.setText("恭喜您！");
                             viewLoss.setVisibility(View.GONE);
                             viewGet.setVisibility(View.VISIBLE);
-                            num.setText(""+response.getCount());
+                            num.setText("" + response.getCount());
                             numbite.setText("夺宝币");
                         }
                     }
-                }else if(response.getFlag()==2){
+                } else if (response.getFlag() == 2) {
                     result.setText("今天红包已经抢完了");
                     viewLoss.setVisibility(View.VISIBLE);
                     viewGet.setVisibility(View.GONE);
@@ -80,7 +83,7 @@ public class GrabEnvolopeDialog extends BaseActivity implements View.OnClickList
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, EnvelopeBean errorResponse) {
                 closeProgressDialog();
-                ToastUtils.showShortToast(getApplicationContext(),"网络连接失败，再试试");
+                ToastUtils.showShortToast(getApplicationContext(), "网络连接失败，再试试");
             }
 
             @Override
@@ -90,11 +93,16 @@ public class GrabEnvolopeDialog extends BaseActivity implements View.OnClickList
             }
         });
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.close:
                 finish();
+                break;
+            case R.id.share:
+                ShareDialog shareDialog=new ShareDialog(GrabEnvolopeDialog.this);
+                shareDialog.show();
                 break;
 
         }

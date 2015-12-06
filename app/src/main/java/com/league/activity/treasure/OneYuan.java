@@ -2,7 +2,6 @@ package com.league.activity.treasure;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -107,7 +106,6 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(OneYuan.this, OneYuanGrabItem.class);
-                        Log.i("nicaia",list.get(position).getId());
                         intent.putExtra("id", list.get(position).getId());
                         startActivity(intent);
                     }

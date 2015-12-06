@@ -24,10 +24,12 @@ import com.league.adapter.OneYuanGrabTakRecodAdapter;
 import com.league.adapter.ViewPaperAdapter;
 import com.league.bean.GrabRecordBean;
 import com.league.bean.MyRecordGrabBean;
+import com.league.bean.PassAnnouncedBean;
 import com.league.bean.TenGrabDetailBean;
 import com.league.bean.TenYuanGrabBean;
 import com.league.dialog.TakeInDialog;
 import com.league.utils.Constants;
+import com.league.utils.ToastUtils;
 import com.league.utils.Utils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
@@ -52,14 +54,15 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
     private ListViewForScrollView recordListView;
     private TenYuanGrabBean detail;
     private List<GrabRecordBean> records;
-    private List<MyRecordGrabBean> myrecords=new ArrayList<MyRecordGrabBean>();
+    private List<MyRecordGrabBean> myrecords;
     private Button takeinNow,buyAll;
     private String id;
     private ImageView state;
     private TextView period,name,totalneed,remain,starttime,date;
     private ProgressBar progressbar;
     private float needed,remained;
-    private LinearLayout linearLayout,llPoints,winnerresult;
+    private LinearLayout linearLayout,llPoints,winnerresult,bottonnormal;
+    private RelativeLayout bottongo;
     private RelativeLayout viewTimeCount;
     private TextView timeMinutes,timeMill;//倒计时textview
     private Button countdetail;//计算详情
@@ -78,7 +81,7 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
     private String[] pictures;
     private TextView tv;//夺宝记录
     private ListViewForScrollView myrecordlist;
-
+    private Button goRightNow;
     private PullToRefreshLayout pullToRefreshLayout;
     private int totalPage = 2;
     private int currentPage = 1;
@@ -107,6 +110,8 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
         title.requestFocus();
         title.requestFocusFromTouch();
     }
+
+
     private void initView() {
         myrecordlist= (ListViewForScrollView) findViewById(R.id.myrecordlist);
         tv= (TextView) findViewById(R.id.viewtakestate);
@@ -163,6 +168,11 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
 
         pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
+
+        bottonnormal= (LinearLayout) findViewById(R.id.bottomnormal);
+        bottongo= (RelativeLayout) findViewById(R.id.bottom_go);
+        goRightNow= (Button) findViewById(R.id.gorightnow);
+        goRightNow.setOnClickListener(this);
     }
 
     public void initData(){
@@ -171,10 +181,10 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, TenGrabDetailBean response) {
                 detail = response.getTenYuanGrabBean();
                 records=response.getGrabRecordBean();
-                myrecords.addAll(response.getMyRecordGrabBean());
+                myrecords=response.getMyRecordGrabBean();
                 Paper.book().write(Constants.TenYuanDetail + id, detail);
                 Paper.book().write(Constants.TenyuanGrabRecords + id, records);
-                updateView(detail,records,myrecords);
+                updateView(detail, records,myrecords);
                 closeProgressDialog();
             }
 
@@ -235,11 +245,39 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.buyall:
                 Intent inten=new Intent(TenYuanGrabItem.this,BuyList.class);
-                inten.putExtra("type",0);
-                inten.putExtra("number",detail.getRemain());
+                inten.putExtra("type",0);//type==0表示10夺金购买
+                inten.putExtra("number",detail.getNeeded());
                 inten.putExtra("id",id);
-                inten.putExtra("buytype",1);
+                inten.putExtra("buytype",1);//购买全部
                 startActivity(inten);
+                break;
+            case R.id.gorightnow:
+                ApiUtil.grabcornsPassAnnounced(getApplication(), detail.getKind(), 1, new BaseJsonHttpResponseHandler<ArrayList<PassAnnouncedBean>>() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<PassAnnouncedBean> response) {
+                        if (response.size() != 0 && response.get(0).getEnd_at().equals("0")) {
+                            Intent go = new Intent(TenYuanGrabItem.this, TenYuanGrabItem.class);
+                            go.putExtra("id", response.get(0).getId());
+                            startActivity(go);
+                        } else {
+                            ToastUtils.showShortToast(getApplicationContext(), "没有下一期了");
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<PassAnnouncedBean> errorResponse) {
+                        ToastUtils.showShortToast(getApplicationContext(), "网络不给力");
+                    }
+
+                    @Override
+                    protected ArrayList<PassAnnouncedBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                        JSONObject jsonObject = new JSONObject(rawJsonData);
+                        return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<PassAnnouncedBean>>() {
+                        });
+                    }
+                });
+
                 break;
         }
     }
@@ -251,13 +289,19 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
             winnerresult.setVisibility(View.GONE);
             if(detail.getEnd_at().equals("0")){
                 viewTimeCount.setVisibility(View.GONE);
+                bottonnormal.setVisibility(View.VISIBLE);
+                bottongo.setVisibility(View.GONE);
             }else{
+                bottongo.setVisibility(View.VISIBLE);
+                bottonnormal.setVisibility(View.GONE);
                 viewTimeCount.setVisibility(View.VISIBLE);
                 count=new TimeCount(Long.valueOf(detail.getEnd_at())*1000-System.currentTimeMillis(),1000);
                 count.start();
             }
 
         }else{
+            bottongo.setVisibility(View.VISIBLE);
+            bottonnormal.setVisibility(View.GONE);
             state.setImageResource(R.drawable.grabstate_finished);
             viewTimeCount.setVisibility(View.GONE);
             winnerresult.setVisibility(View.VISIBLE);
@@ -267,7 +311,6 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
             winnerName.setText(detail.getNickname());
             winnerCount.setText(detail.getCount());
             Picasso.with(getApplicationContext()).load(detail.getThumb()).into(winnerThumb);
-            //数据不全  bean 缺中奖者头像  name count
 
         }
 
@@ -283,6 +326,8 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
         pictures=detail.getPictures().split(" ");
         ImageView iv=null;
         View view;
+        listImageViews.clear();
+        llPoints.removeAllViews();
         for(int i=0;i<pictures.length;i++) {
             iv = new ImageView(this);
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -356,11 +401,14 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
                 timeMill.setText(mill + "");
                 timeMinutes.setText(minutes+"");
             }
+            if(timeMinutes.getText().toString().equals("0")&&timeMill.getText().equals("1")){
+                initData();
+            }
         }
 
         @Override
         public void onFinish() {
-            initData();
+
         }
     }
 
