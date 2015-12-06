@@ -44,7 +44,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':multi-image-selector')
-    compile 'com.android.support:support-v4:21.0.0'
     compile files('libs/locSDK_6.11.jar')
     compile files('libs/baidumapapi_v3_2_0.jar')
     compile files('libs/bolts-android-1.2.0.jar')

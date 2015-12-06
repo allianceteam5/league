@@ -349,4 +349,15 @@ public class ApiUtil {
         params.put("grabcornid",grabcornid);
         client.post(context,IClientUrl.applyForCorns,params,responseHandler);
     }
+    //获取收货地址
+    public static void getShipAddress(Context context,String phone,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        client.post(context,IClientUrl.getShippingAddress,params,responseHandler);
+    }
+    //获取即将揭晓的三个
+    public static void getTheLatest(Context context,int currentPage,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        client.post(context,IClientUrl.getTheLatest+currentPage,params,responseHandler);
+    }
 }

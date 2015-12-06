@@ -1,12 +1,32 @@
 package com.league.activity.personinfoactivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.adapter.AddressAdapter;
+import com.league.bean.ShippingAddressBean;
+import com.league.utils.Constants;
 import com.league.utils.PersonInfoBaseActivity;
+import com.league.utils.api.ApiUtil;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
 
-public class ShippingAddress extends PersonInfoBaseActivity {
+import org.apache.http.Header;
 
+import java.util.ArrayList;
+import java.util.List;
+
+public class ShippingAddress extends PersonInfoBaseActivity implements View.OnClickListener {
+
+    private ListView listView;
+    private List<ShippingAddressBean> mAddressData=new ArrayList<>();
+    private AddressAdapter addressAdapter;
+    private View empty;
+    private Button newAdd1,newAdd2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,11 +41,59 @@ public class ShippingAddress extends PersonInfoBaseActivity {
 
     @Override
     protected void initView() {
-
+        listView= (ListView) findViewById(R.id.addresslistview);
+        empty=findViewById(R.id.list_emptyview);
+        empty.setVisibility(View.GONE);
+        newAdd1= (Button) findViewById(R.id.newadd);
+        newAdd1.setOnClickListener(this);
+        newAdd2= (Button) findViewById(R.id.addshipaddress);
+        newAdd2.setOnClickListener(this);
+        addressAdapter=new AddressAdapter(mAddressData,getApplicationContext());
+        listView.setAdapter(addressAdapter);
+        newAdd1.setVisibility(View.GONE);
+        showProgressDialog();
     }
 
     @Override
     protected void initData() {
+        ApiUtil.getShipAddress(getApplicationContext(), Constants.PHONENUM, new BaseJsonHttpResponseHandler<ArrayList<ShippingAddressBean>>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<ShippingAddressBean> response) {
+                mAddressData.clear();
+                mAddressData.addAll(response);
+                addressAdapter.notifyDataSetChanged();
+                if(response.size()==0){
+                    listView.setVisibility(View.GONE);
+                    empty.setVisibility(View.VISIBLE);
+                    newAdd1.setVisibility(View.GONE);
+                }else{
+                    listView.setVisibility(View.VISIBLE);
+                    empty.setVisibility(View.GONE);
+                    newAdd1.setVisibility(View.VISIBLE);
+                }
+                closeProgressDialog();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<ShippingAddressBean> errorResponse) {
+                closeProgressDialog();
+            }
+
+            @Override
+            protected ArrayList<ShippingAddressBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<ShippingAddressBean>>() {});
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.newadd:
+            case R.id.addshipaddress:
+
+                break;
+        }
 
     }
 }

@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.adapter.LatestAnnouncedAdapter;
 import com.league.adapter.OneyuanGrabAdapter;
+import com.league.bean.AnnouncedTheLatestBean;
 import com.league.bean.OneYuanBean;
 import com.league.bean.TenYuanGrabBean;
 import com.league.utils.Constants;
@@ -42,7 +43,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
     private TextView txtProgress1, txtProgress2, txtProgress3;
     private ProgressBar progressbar1, progressbar2, progressbar3;
     private List<TenYuanGrabBean> listTenYuanGrab = new ArrayList<TenYuanGrabBean>();
-    private List<OneYuanBean> announcedList = new ArrayList<>();
+    private List<AnnouncedTheLatestBean> announcedList = new ArrayList<>();
 
     private List<OneYuanBean> list = new ArrayList<OneYuanBean>();
 
@@ -148,10 +149,10 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
                 });
             }
         });
-        //type=1时是获取最新揭晓的信息
-        ApiUtil.getGrabLatestAnnounced(getApplication(), new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
+        //新接口获取即将揭晓
+        ApiUtil.getTheLatest(getApplication(),1, new BaseJsonHttpResponseHandler<ArrayList<AnnouncedTheLatestBean>>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<AnnouncedTheLatestBean> response) {
                 if(response.size()<3){
                     announcedList.addAll(response);
                 }else{
@@ -172,17 +173,52 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<OneYuanBean> errorResponse) {
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<AnnouncedTheLatestBean> errorResponse) {
 
             }
 
             @Override
-            protected ArrayList<OneYuanBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+            protected ArrayList<AnnouncedTheLatestBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                 JSONObject jsonObject = new JSONObject(rawJsonData);
-                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<OneYuanBean>>() {
+                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<AnnouncedTheLatestBean>>() {
                 });
             }
         });
+        //type=1时是获取最新揭晓的信息
+//        ApiUtil.getGrabLatestAnnounced(getApplication(), new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
+//                if(response.size()<3){
+//                    announcedList.addAll(response);
+//                }else{
+//                    for (int i = 0; i < 3; i++) {
+//                        announcedList.add(response.get(i));
+//                    }
+//                }
+//
+//                latestGridView.setAdapter(new LatestAnnouncedAdapter(announcedList, getApplication()));
+//                latestGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        Intent intent = new Intent(OneYuan.this, OneYuanGrabItem.class);
+//                        intent.putExtra("id", announcedList.get(position).getId());
+//                        startActivity(intent);
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<OneYuanBean> errorResponse) {
+//
+//            }
+//
+//            @Override
+//            protected ArrayList<OneYuanBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+//                JSONObject jsonObject = new JSONObject(rawJsonData);
+//                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<OneYuanBean>>() {
+//                });
+//            }
+//        });
 
     }
 
