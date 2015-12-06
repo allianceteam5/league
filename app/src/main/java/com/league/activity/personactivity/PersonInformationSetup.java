@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.league.activity.personinfoactivity.ShippingAddress;
 import com.mine.league.R;
 
 public class PersonInformationSetup extends Activity implements View.OnClickListener{
@@ -53,6 +54,10 @@ public class PersonInformationSetup extends Activity implements View.OnClickList
             case R.id.truenamemake:
                 Intent intent=new Intent(PersonInformationSetup.this,Certification.class);
                 startActivity(intent);
+                break;
+            case R.id.shippingaddress:
+                Intent address=new Intent(PersonInformationSetup.this, ShippingAddress.class);
+                startActivity(address);
                 break;
         }
     }

@@ -26,7 +26,6 @@ import com.easemob.chatuidemo.activity.ChatAllHistoryFragment;
 import com.easemob.chatuidemo.activity.ContactlistFragment;
 import com.easemob.chatuidemo.activity.GroupsActivity;
 import com.easemob.chatuidemo.activity.LoginActivity;
-import com.easemob.chatuidemo.activity.SettingsFragment;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.InviteMessage;
@@ -35,15 +34,12 @@ import com.easemob.chatuidemo.utils.CommonUtils;
 import com.easemob.util.EMLog;
 import com.easemob.util.HanziToPinyin;
 import com.easemob.util.NetUtils;
-import com.league.fragment.FriendsFragment;
-import com.league.fragment.MessageFragment;
 import com.league.fragment.PersonFragment;
 import com.league.fragment.ResourceFragment;
 import com.league.utils.ComplexPreferences;
 import com.mine.league.R;
 import com.umeng.analytics.MobclickAgent;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
@@ -163,7 +159,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     }
 
     public void init() {
-        title = (TextView) findViewById(R.id.txt_title);
+        title = (TextView) findViewById(R.id.tv_title);
         addContactView = (ImageView) findViewById(R.id.iv_new_contact);
         addContactView.setVisibility(View.GONE);
 

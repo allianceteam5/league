@@ -1,6 +1,7 @@
 package com.league.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,8 +93,10 @@ public class LiaobaPopularityAdapter extends BaseAdapter {
             holder.iconLeftRank.setVisibility(View.GONE);
             holder.iconRight.setVisibility(View.GONE);
         }
+        if(!TextUtils.isEmpty(list.get(position).getThumb())){
+            Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.headPortrait);
+        }
 
-        Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.headPortrait);
         holder.usrName.setText(list.get(position).getNickname());
         holder.funNum.setText(list.get(position).getConcerncount() + "");
         if (1 == list.get(position).getIsconcerned()) {

@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.easemob.chatuidemo.Constant;
 import com.league.bean.KindBean;
 import com.league.utils.Constants;
 import com.mine.league.R;
@@ -25,9 +24,9 @@ import butterknife.ButterKnife;
 import io.paperdb.Paper;
 
 public class RadioSelectActivity extends Activity implements View.OnClickListener {
-    @Bind(R.id.txt_back)
+    @Bind(R.id.ib_back)
     ImageView ivBack;
-    @Bind(R.id.txt_title)
+    @Bind(R.id.tv_title)
     TextView tvTitle;
     @Bind(R.id.lv_position)
     ListView lvItems;
@@ -89,7 +88,7 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.txt_back:
+            case R.id.ib_back:
                 setResult(RESULT_OK, new Intent().putExtra(Constants.RADIOSELECEDTINDEX, radioSelectAdapter.getSelectedIndex()));
                 finish();
                 break;

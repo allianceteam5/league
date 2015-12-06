@@ -409,12 +409,14 @@
             android:name="com.league.activity.postbar.MessageListActivity"
             android:label="@string/title_activity_message_list" />
         <activity android:name="com.league.activity.treasure.GrabRecord" />
-        <activity android:name="com.league.activity.treasure.LatestAnnounce"></activity>
+        <activity android:name="com.league.activity.treasure.LatestAnnounce" />
         <activity
             android:name="com.league.dialog.GrabEnvolopeDialog"
             android:screenOrientation="portrait"
-            android:theme="@style/grabenvolopedialog"></activity>
-        <activity android:name="com.league.activity.treasure.CountDetailActivity"></activity>
+            android:theme="@style/grabenvolopedialog" />
+        <activity android:name="com.league.activity.treasure.CountDetailActivity" />
+        <activity android:name="com.league.activity.personinfoactivity.ShippingAddress" />
+        <activity android:name="com.league.utils.PersonInfoBaseActivity"></activity>
     </application>
 
 </manifest>

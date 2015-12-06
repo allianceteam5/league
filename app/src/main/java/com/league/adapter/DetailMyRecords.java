@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.league.bean.MyRecordGrabBean;
@@ -47,6 +48,7 @@ public class DetailMyRecords extends BaseAdapter{
             convertView= LayoutInflater.from(ctx).inflate(R.layout.item_detail_myrecords,null);
             holder.count= (TextView) convertView.findViewById(R.id.myrecordscount);
             holder.number= (TextView) convertView.findViewById(R.id.myrecordsnumber);
+            holder.more= (Button) convertView.findViewById(R.id.getmore);
             convertView.setTag(holder);
         }else{
             holder= (ViewHolder) convertView.getTag();
@@ -57,5 +59,6 @@ public class DetailMyRecords extends BaseAdapter{
     }
     class ViewHolder{
         TextView count,number;
+        Button more;
     }
 }

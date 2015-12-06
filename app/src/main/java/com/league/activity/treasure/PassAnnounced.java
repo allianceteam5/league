@@ -1,9 +1,11 @@
 package com.league.activity.treasure;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,15 +34,19 @@ public class PassAnnounced extends BaseActivity{
     private List<PassAnnouncedBean> list=new ArrayList<PassAnnouncedBean>();
     private int totalPage = 1;
     private int currentPage = 1;
-    private int type = 0;
+    private int type = 0;//0表示10夺金  1表示一元夺宝
     private PullToRefreshLayout pullToRefreshLayout;
     private PassAnnouncedAdapter adapter;
-    private String id;
+    private String kind;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pass_announced);
-        id=getIntent().getStringExtra("id");
+        kind=getIntent().getStringExtra("kind");
+        type=getIntent().getIntExtra("type",-1);
+        if(type==-1){
+            return;
+        }
         showProgressDialog();
         initView();
     }
@@ -73,31 +79,83 @@ public class PassAnnounced extends BaseActivity{
         initData(type,currentPage);
     }
     private void initData(int type, final int currentPage){
-        ApiUtil.grabcommoditiesPassAnnounced(getApplication(), id, currentPage, new BaseJsonHttpResponseHandler<ArrayList<PassAnnouncedBean>>() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<PassAnnouncedBean> response) {
-                if (currentPage == 1) {
-                    list.clear();
+        if(type==1){
+            ApiUtil.grabcommoditiesPassAnnounced(getApplication(), kind, currentPage, new BaseJsonHttpResponseHandler<ArrayList<PassAnnouncedBean>>() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<PassAnnouncedBean> response) {
+                    if (currentPage == 1) {
+                        list.clear();
+                    }
+                    list.addAll(response);
+                    if (list.get(0).getEnd_at().equals("0")) {
+                        list.remove(0);
+                    }
+
+                    adapter.notifyDataSetChanged();
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent(PassAnnounced.this, OneYuanGrabItem.class);
+                            intent.putExtra("id", list.get(position).getId());
+                            startActivity(intent);
+                        }
+                    });
+                    pullToRefreshLayout.setVisibility(View.VISIBLE);
+                    closeProgressDialog();
                 }
-                list.addAll(response);
-                adapter.notifyDataSetChanged();
-                pullToRefreshLayout.setVisibility(View.VISIBLE);
-                closeProgressDialog();
-            }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<PassAnnouncedBean> errorResponse) {
-                closeProgressDialog();
-            }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<PassAnnouncedBean> errorResponse) {
+                    closeProgressDialog();
+                }
 
-            @Override
-            protected ArrayList<PassAnnouncedBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                JSONObject jsonObject = new JSONObject(rawJsonData);
-                totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
-                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<PassAnnouncedBean>>() {
-                });
-            }
-        });
+                @Override
+                protected ArrayList<PassAnnouncedBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                    JSONObject jsonObject = new JSONObject(rawJsonData);
+                    totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
+                    return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<PassAnnouncedBean>>() {
+                    });
+                }
+            });
+        }else if(type==0){
+            ApiUtil.grabcornsPassAnnounced(getApplication(), kind, currentPage, new BaseJsonHttpResponseHandler<ArrayList<PassAnnouncedBean>>() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<PassAnnouncedBean> response) {
+                    if (currentPage == 1) {
+                        list.clear();
+                    }
+                    list.addAll(response);
+                    if(list.get(0).getEnd_at().equals("0")){
+                        list.remove(0);
+                    }
+
+                    adapter.notifyDataSetChanged();
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent(PassAnnounced.this, TenYuanGrabItem.class);
+                            intent.putExtra("id", list.get(position).getId());
+                            startActivity(intent);
+                        }
+                    });
+                    pullToRefreshLayout.setVisibility(View.VISIBLE);
+                    closeProgressDialog();
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<PassAnnouncedBean> errorResponse) {
+                    closeProgressDialog();
+                }
+
+                @Override
+                protected ArrayList<PassAnnouncedBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                    JSONObject jsonObject = new JSONObject(rawJsonData);
+                    totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
+                    return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<PassAnnouncedBean>>() {
+                    });
+                }
+            });
+        }
     }
 
     public class MyListener implements PullToRefreshLayout.OnRefreshListener

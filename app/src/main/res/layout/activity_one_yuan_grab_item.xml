@@ -9,227 +9,143 @@
     <include
         android:id="@+id/title"
         layout="@layout/near_title" />
-
-    <ScrollView
+    <com.league.widget.pulltorefreshandload.PullToRefreshLayout
+        android:id="@+id/refresh_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
-        android:layout_above="@id/bottom"
-        android:scrollbars="none">
+        android:layout_above="@id/bottom">
 
-        <LinearLayout
+        <include layout="@layout/refresh_head"/>
+        <!-- 支持所有实现Pullable接口的View -->
+
+        <com.league.widget.pulltorefreshandload.PullableScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical">
-
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:scrollbars="none">
             <LinearLayout
-                android:id="@+id/viewpaper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:orientation="vertical">
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/viewpaper"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/transparent"
-                android:orientation="vertical"
-                android:padding="5dip">
-
                 <LinearLayout
-                    android:id="@+id/ll_points"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/viewpaper"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dip"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                 </LinearLayout>
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:layout_marginTop="2dip"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/state"
-                    android:layout_width="40dp"
-                    android:layout_height="15dp"
-                    android:scaleType="fitXY"
-                    android:layout_gravity="top"
-                    android:src="@drawable/running" />
-
-                <TextView
-                    android:id="@+id/period"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dip"
-                    android:gravity="left"
-                    android:text="第200期"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:layout_alignBottom="@id/viewpaper"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/transparent"
+                    android:orientation="vertical"
+                    android:padding="5dip">
 
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dip"
-                    android:gravity="left"
-                    android:text="商品名称"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_points"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dip"
+                        android:orientation="horizontal">
 
-            <ProgressBar
-                android:id="@+id/progressbar"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="8dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:layout_marginTop="8dip"
-                android:progressDrawable="@drawable/bigprogressbar" />
+                    </LinearLayout>
+                </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:layout_marginTop="6dip">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginTop="2dip"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/txt2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="总需"
-                    android:textColor="@color/black1"
-                    android:textSize="14sp" />
+                    <ImageView
+                        android:id="@+id/state"
+                        android:layout_width="40dp"
+                        android:layout_height="15dp"
+                        android:scaleType="fitXY"
+                        android:layout_gravity="top"
+                        android:src="@drawable/running" />
 
-                <TextView
-                    android:id="@+id/totalpeo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dip"
-                    android:layout_toRightOf="@id/txt2"
-                    android:gravity="center_vertical"
-                    android:text="60人次"
-                    android:textColor="@color/black1"
-                    android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/period"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dip"
+                        android:gravity="left"
+                        android:text="第200期"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/leavepeo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical"
-                    android:text="剩余40"
-                    android:textColor="@color/red"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:visibility="gone"
-                android:id="@+id/viewtimecount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/timecountdownbg">
-                <TextView
-                    android:id="@+id/txt"
-                    android:layout_alignParentLeft="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="  揭晓倒计时："
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:layout_centerVertical="true"
-                    android:drawableLeft="@drawable/timecountdownimage"
-                    android:layout_marginLeft="10dp"/>
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dip"
+                        android:gravity="left"
+                        android:text="商品名称"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/count1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/txt"
-                    android:text="剩余"/>
-                <TextView
-                    android:id="@+id/countminu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:textSize="16sp"
+                <ProgressBar
+                    android:id="@+id/progressbar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginTop="8dip"
+                    android:progressDrawable="@drawable/bigprogressbar" />
 
-                    android:textColor="@color/white"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/count1"/>
-                <TextView
-                    android:id="@+id/count2"
-                    android:layout_marginLeft="2dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/countminu"
-                    android:text="分"/>
-                <TextView
-                    android:id="@+id/countmill"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-
-                    android:layout_marginLeft="2dp"
-                    android:textColor="@color/white"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/count2"/>
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:layout_marginLeft="2dp"
-                    android:textColor="@color/white"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/countmill"
-                    android:text="秒"/>
-                <Button
-                    android:id="@+id/countdetail"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:text="计算详情"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:background="@drawable/countdetail"/>
-            </RelativeLayout>
-            <LinearLayout
-                android:id="@+id/viewwinneresult"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical"
-                android:visibility="gone"
-                >
                 <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginTop="6dip">
+
+                    <TextView
+                        android:id="@+id/txt2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="总需"
+                        android:textColor="@color/black1"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/totalpeo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dip"
+                        android:layout_toRightOf="@id/txt2"
+                        android:gravity="center_vertical"
+                        android:text="60人次"
+                        android:textColor="@color/black1"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/leavepeo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical"
+                        android:text="剩余40"
+                        android:textColor="@color/red"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:id="@+id/viewtimecount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -238,25 +154,68 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/timecountdownbg">
                     <TextView
-                        android:id="@+id/txt1"
+                        android:id="@+id/txt"
                         android:layout_alignParentLeft="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="幸运号码："
+                        android:text="  揭晓倒计时："
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/timecountdownimage"
                         android:layout_marginLeft="10dp"/>
+
                     <TextView
-                        android:id="@+id/luckynumber"
+                        android:id="@+id/count1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:textColor="@color/white"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@id/txt1"/>
+                        android:layout_toRightOf="@id/txt"
+                        android:text="剩余"/>
+                    <TextView
+                        android:id="@+id/countminu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:textSize="16sp"
+
+                        android:textColor="@color/white"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/count1"/>
+                    <TextView
+                        android:id="@+id/count2"
+                        android:layout_marginLeft="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/countminu"
+                        android:text="分"/>
+                    <TextView
+                        android:id="@+id/countmill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+
+                        android:layout_marginLeft="2dp"
+                        android:textColor="@color/white"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/count2"/>
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="@color/white"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/countmill"
+                        android:text="秒"/>
                     <Button
-                        android:id="@+id/countdetail1"
+                        android:id="@+id/countdetail"
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -268,306 +227,403 @@
                         android:textSize="14sp"
                         android:background="@drawable/countdetail"/>
                 </RelativeLayout>
-                <RelativeLayout
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                <LinearLayout
+                    android:id="@+id/viewwinneresult"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.league.widget.CircleImageView
-                        android:id="@+id/thumb"
-                        android:layout_width="30dip"
-                        android:layout_height="30dip"
-                        android:layout_marginLeft="10dip"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:src="@drawable/example"/>
-                    <LinearLayout
-                        android:layout_marginTop="10dip"
-                        android:layout_marginBottom="10dip"
-                        android:layout_marginLeft="20dip"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_toRightOf="@id/thumb"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    >
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <LinearLayout
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/timecountdownbg">
+                        <TextView
+                            android:id="@+id/txt1"
+                            android:layout_alignParentLeft="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="获奖者："
-                                android:textColor="@color/black1"
-                                android:textSize="14sp"/>
-                            <TextView
-                                android:id="@+id/holdername"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="一元就中"
-                                android:textColor="@color/blue"
-                                android:textSize="14sp"/>
-                        </LinearLayout>
-                        <LinearLayout
+                            android:text="幸运号码："
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"/>
+                        <TextView
+                            android:id="@+id/luckynumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="ID ："
-                                android:textColor="@color/black1"
-                                android:textSize="14sp"/>
-                            <TextView
-                                android:id="@+id/holderid"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="511112"
-                                android:textColor="@color/black1"
-                                android:textSize="14sp"/>
-                        </LinearLayout>
-                        <LinearLayout
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@id/txt1"/>
+                        <Button
+                            android:id="@+id/countdetail1"
+                            android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="本期参与："
-                                android:textColor="@color/black1"
-                                android:textSize="14sp"/>
-                            <TextView
-                                android:id="@+id/taknum"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="10"
-                                android:textColor="@color/red"
-                                android:textSize="14sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="人次"
-                                android:textColor="@color/black1"
-                                android:textSize="14sp"/>
-                        </LinearLayout>
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:text="计算详情"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:background="@drawable/countdetail"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.league.widget.CircleImageView
+                            android:id="@+id/thumb"
+                            android:layout_width="30dip"
+                            android:layout_height="30dip"
+                            android:layout_marginLeft="10dip"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/example"/>
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_marginTop="10dip"
+                            android:layout_marginBottom="10dip"
+                            android:layout_marginLeft="20dip"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_toRightOf="@id/thumb"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
+                            android:orientation="vertical">
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="揭晓时间："
-                                android:textColor="@color/black1"
-                                android:textSize="14sp"/>
-                            <TextView
-                                android:id="@+id/endtime"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="获奖者："
+                                    android:textColor="@color/black1"
+                                    android:textSize="14sp"/>
+                                <TextView
+                                    android:id="@+id/holdername"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="一元就中"
+                                    android:textColor="@color/blue"
+                                    android:textSize="14sp"/>
+                            </LinearLayout>
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="511112"
-                                android:textColor="@color/black1"
-                                android:textSize="14sp"/>
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="ID ："
+                                    android:textColor="@color/black1"
+                                    android:textSize="14sp"/>
+                                <TextView
+                                    android:id="@+id/holderid"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="511112"
+                                    android:textColor="@color/black1"
+                                    android:textSize="14sp"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="本期参与："
+                                    android:textColor="@color/black1"
+                                    android:textSize="14sp"/>
+                                <TextView
+                                    android:id="@+id/taknum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="10"
+                                    android:textColor="@color/red"
+                                    android:textSize="14sp"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="人次"
+                                    android:textColor="@color/black1"
+                                    android:textSize="14sp"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="揭晓时间："
+                                    android:textColor="@color/black1"
+                                    android:textSize="14sp"/>
+                                <TextView
+                                    android:id="@+id/endtime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="511112"
+                                    android:textColor="@color/black1"
+                                    android:textSize="14sp"/>
+                            </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/viewtakestate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/takegrabstatebackground"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:padding="4dp"
+                    android:text="您没有参与本次夺宝哦~"
+                    android:textColor="@color/black1"
+                    android:textSize="14sp" />
+
+                <com.league.widget.ListViewForScrollView
+                    android:id="@+id/myrecordlist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:scrollbars="none"
+                    android:divider="@null"
+                    android:visibility="gone"
+                    >
+
+                </com.league.widget.ListViewForScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dip"
+                    android:background="@color/black2" />
+
+                <RelativeLayout
+                    android:id="@+id/picturesdetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:onClick="onClick">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:gravity="center_vertical"
+                        android:text="图文详情"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:src="@drawable/icon_right" />
+
                 </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/black2" />
+
+                <RelativeLayout
+                    android:id="@+id/passanou"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:onClick="onClick">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:gravity="center_vertical"
+                        android:text="往期揭晓"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:src="@drawable/icon_right" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dip"
+                    android:background="@color/black2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white">
+
+                    <TextView
+                        android:id="@+id/txt3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:gravity="center_vertical"
+                        android:text="参与记录"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/since"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:layout_marginRight="5dip"
+                        android:layout_toRightOf="@id/txt3"
+                        android:text="自时间起"
+                        android:textColor="@color/black1"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/starttime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/since"
+                        android:layout_centerVertical="true"
+                        android:text="2015"
+                        android:textColor="@color/black1"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dip"
+                    android:background="@color/black2" />
+
+                <com.league.widget.ListViewForScrollView
+                    android:id="@+id/record_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    android:background="@color/black2">
+
+                </com.league.widget.ListViewForScrollView>
             </LinearLayout>
-            <TextView
-                android:id="@+id/viewtakestate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/takegrabstatebackground"
-                android:gravity="center_horizontal|center_vertical"
-                android:padding="4dp"
-                android:text="您没有参与本次夺宝哦~"
-                android:textColor="@color/black1"
-                android:textSize="14sp" />
+        </com.league.widget.pulltorefreshandload.PullableScrollView>
+        <include layout="@layout/load_more" />
 
-            <com.league.widget.ListViewForScrollView
-                android:id="@+id/myrecordlist"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:scrollbars="none"
-                android:visibility="gone">
-
-            </com.league.widget.ListViewForScrollView>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="8dip"
-                android:background="@color/black2" />
-
-            <RelativeLayout
-                android:id="@+id/picturesdetail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/white"
-                android:onClick="onClick">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:gravity="center_vertical"
-                    android:text="图文详情"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dip"
-                    android:src="@drawable/icon_right" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/black2" />
-
-            <RelativeLayout
-                android:id="@+id/passanou"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/white"
-                android:onClick="onClick">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:gravity="center_vertical"
-                    android:text="往期揭晓"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dip"
-                    android:src="@drawable/icon_right" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dip"
-                android:background="@color/black2" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/white">
-
-                <TextView
-                    android:id="@+id/txt3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:gravity="center_vertical"
-                    android:text="参与记录"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/since"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="5dip"
-                    android:layout_toRightOf="@id/txt3"
-                    android:text="自时间起"
-                    android:textColor="@color/black1"
-                    android:textSize="12sp" />
-                <TextView
-                    android:id="@+id/starttime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/since"
-                    android:layout_centerVertical="true"
-                    android:text="2015"
-                    android:textColor="@color/black1"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:background="@color/black2" />
-
-            <com.league.widget.ListViewForScrollView
-                android:id="@+id/record_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </com.league.widget.ListViewForScrollView>
-        </LinearLayout>
-    </ScrollView>
+    </com.league.widget.pulltorefreshandload.PullToRefreshLayout>
 
     <LinearLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="48dip"
         android:layout_alignParentBottom="true"
-        android:background="@color/black2"
+        android:background="@color/white"
         android:orientation="horizontal"
-
         >
+        <LinearLayout
+            android:id="@+id/bottomnormal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="gone">
+            <Button
+                android:id="@+id/takeinnow"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="2dip"
+                android:layout_weight="1"
+                android:background="@drawable/addfriendback"
+                android:text="立即参与"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/takeinnow"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dip"
-            android:layout_marginLeft="20dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="2dip"
-            android:layout_weight="1"
-            android:background="@drawable/addfriendback"
-            android:text="立即参与"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            <Button
+                android:id="@+id/takeall"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="20dip"
+                android:layout_marginTop="2dip"
+                android:layout_weight="1"
+                android:background="@drawable/addfriendback"
+                android:text="直接兑换"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/bottom_go"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:visibility="gone">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dip"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:layout_marginTop="2dip"
+                android:layout_centerVertical="true"
+                android:background="@color/transparent"
+                android:text="新的一期正在进行。。。"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:gravity="center"/>
 
-        <Button
-            android:id="@+id/takeall"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="20dip"
-            android:layout_marginTop="2dip"
-            android:layout_weight="1"
-            android:background="@drawable/addfriendback"
-            android:text="直接兑换"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            <Button
+                android:id="@+id/gorightnow"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dip"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="4dip"
+                android:layout_marginTop="2dip"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/addfriendback"
+                android:text="立即前往"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </RelativeLayout>
     </LinearLayout>
+
 </RelativeLayout>

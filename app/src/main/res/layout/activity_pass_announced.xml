@@ -27,10 +27,8 @@
             android:id="@+id/pass_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:horizontalSpacing="2dip"
-            android:numColumns="2"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="2dp"
+            android:divider="@color/black2"
+            android:dividerHeight="2dp"
             android:layout_marginTop="5dp"
             >
         </com.league.widget.pulltorefreshandload.PullableListView>

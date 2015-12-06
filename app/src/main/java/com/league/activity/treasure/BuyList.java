@@ -1,12 +1,12 @@
 package com.league.activity.treasure;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
 import com.league.utils.Constants;
 import com.league.utils.ToastUtils;
@@ -15,8 +15,7 @@ import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
 
 import org.apache.http.Header;
-
-public class BuyList extends Activity implements View.OnClickListener{
+public class BuyList extends BaseActivity implements View.OnClickListener{
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
@@ -26,6 +25,7 @@ public class BuyList extends Activity implements View.OnClickListener{
     private Button buy;
     private String id,number;
     private int buytype;
+    private TextView totalText;
 
 
     @Override
@@ -35,10 +35,11 @@ public class BuyList extends Activity implements View.OnClickListener{
         id=getIntent().getStringExtra("id");
         number=getIntent().getStringExtra("number");
         buytype=getIntent().getIntExtra("buytype", -1);//0表示正常购买 1表示购买全部
-        type=getIntent().getIntExtra("type",-1);
+        type=getIntent().getIntExtra("type",-1);//type=0 10夺金   =1一元夺宝
         if(buytype==-1||type==-1)
             return ;
         initView();
+        initData();
 
     }
     private void initView() {
@@ -75,8 +76,13 @@ public class BuyList extends Activity implements View.OnClickListener{
         bankcardpay.setOnClickListener(this);
         buy= (Button) findViewById(R.id.makepayment);
         buy.setOnClickListener(this);
+        totalText= (TextView) findViewById(R.id.number);
+
     }
 
+    private void initData(){
+        totalText.setText(number);
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){

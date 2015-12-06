@@ -151,7 +151,6 @@ public class RecordFrament extends Fragment {
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<GrabBean> errorResponse) {
-//                    Toast.makeText(getActivity(), "哎呀网络不好+2", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override

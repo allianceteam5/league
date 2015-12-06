@@ -63,13 +63,13 @@
                 android:text="人次"
                 android:textSize="14sp"
                 android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="查看Ta的号码"
-                android:textColor="@color/red"
-                android:textSize="14sp"
-                android:layout_marginLeft="10dip"/>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="查看Ta的号码"-->
+                <!--android:textColor="@color/red"-->
+                <!--android:textSize="14sp"-->
+                <!--android:layout_marginLeft="10dip"/>-->
         </LinearLayout>
     </LinearLayout>
 
