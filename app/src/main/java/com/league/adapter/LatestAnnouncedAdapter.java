@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.league.bean.OneYuanBean;
+import com.league.bean.AnnouncedTheLatestBean;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
@@ -19,10 +19,10 @@ import java.util.List;
  * Created by liug on 15/11/24.
  */
 public class LatestAnnouncedAdapter extends BaseAdapter {
-    private List<OneYuanBean> list;
+    private List<AnnouncedTheLatestBean> list;
     private Context context;
 
-    public LatestAnnouncedAdapter(List<OneYuanBean> list, Context context) {
+    public LatestAnnouncedAdapter(List<AnnouncedTheLatestBean> list, Context context) {
         this.list = list;
         this.context = context;
     }

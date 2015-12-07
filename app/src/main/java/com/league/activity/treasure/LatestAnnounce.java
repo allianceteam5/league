@@ -14,7 +14,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.adapter.LatestAnnouncedAdapter;
-import com.league.bean.OneYuanBean;
+import com.league.bean.AnnouncedTheLatestBean;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -32,10 +32,9 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
     private TextView title;
     private GridView gridView;
     private LatestAnnouncedAdapter adapter;
-    private List<OneYuanBean> list = new ArrayList<OneYuanBean>();
+    private List<AnnouncedTheLatestBean> list = new ArrayList<>();
     private int totalPage = 1;
     private int currentPage = 1;
-    private int type = 1;
     private PullToRefreshLayout pullToRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +61,13 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
         pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);
-        initData(type,currentPage);
+        initData(currentPage);
     }
-    private void initData(int type, final int currentPage){
-        ApiUtil.grabCommoditiesSearch(getApplication(), type, currentPage, new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
+    private void initData(final int currentPage){
+        //新接口获取即将揭晓
+        ApiUtil.getTheLatest(getApplicationContext(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<AnnouncedTheLatestBean>>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<AnnouncedTheLatestBean> response) {
                 if (currentPage == 1) {
                     list.clear();
                 }
@@ -78,18 +78,44 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<OneYuanBean> errorResponse) {
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<AnnouncedTheLatestBean> errorResponse) {
                 closeProgressDialog();
             }
 
             @Override
-            protected ArrayList<OneYuanBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+            protected ArrayList<AnnouncedTheLatestBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                 JSONObject jsonObject = new JSONObject(rawJsonData);
                 totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
-                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<OneYuanBean>>() {
+                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<AnnouncedTheLatestBean>>() {
                 });
             }
         });
+
+//        ApiUtil.grabCommoditiesSearch(getApplication(), type, currentPage, new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
+//                if (currentPage == 1) {
+//                    list.clear();
+//                }
+//                list.addAll(response);
+//                updateView();
+//                pullToRefreshLayout.setVisibility(View.VISIBLE);
+//                closeProgressDialog();
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<OneYuanBean> errorResponse) {
+//                closeProgressDialog();
+//            }
+//
+//            @Override
+//            protected ArrayList<OneYuanBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+//                JSONObject jsonObject = new JSONObject(rawJsonData);
+//                totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
+//                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<OneYuanBean>>() {
+//                });
+//            }
+//        });
     }
     private void updateView() {
         adapter.notifyDataSetChanged();
@@ -116,7 +142,7 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
                 public void handleMessage(Message msg)
                 {
                     currentPage = 1;
-                    initData(type,currentPage);
+                    initData(currentPage);
                     // 千万别忘了告诉控件刷新完毕了哦！
                     pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                 }
@@ -135,7 +161,7 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
                 {
                     currentPage++;
                     if(currentPage <= totalPage)
-                        initData(type,currentPage);
+                        initData(currentPage);
                     // 千万别忘了告诉控件加载完毕了哦！
                     pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                 }

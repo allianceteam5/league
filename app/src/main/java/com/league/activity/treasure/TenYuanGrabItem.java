@@ -92,7 +92,9 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
 
             switch (msg.what){
                 case 0:
-                    viewPager.setCurrentItem((viewPager.getCurrentItem() + 1)%listImageViews.size());
+                    if(listImageViews.size()!=0){
+                        viewPager.setCurrentItem((viewPager.getCurrentItem() + 1)%listImageViews.size());
+                    }
                     break;
             }
         }

@@ -58,7 +58,7 @@ public class OneYuanGrabTakRecodAdapter extends BaseAdapter{
             holder= (ViewHolder) convertView.getTag();
         }
         holder.name.setText(list.get(position).getNickname());
-        holder.takTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(list.get(position).getCreated_at())*1000));
+        holder.takTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(list.get(position).getCreated_at())));
         holder.takNum.setText(list.get(position).getCount());
         Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.thumb);
         return convertView;

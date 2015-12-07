@@ -88,7 +88,7 @@ public class Utils {
     }
 
     public static String TimeStamp2SystemNotificationDate(long timestamp) {
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(
                 timestamp));
     }
 
@@ -96,4 +96,5 @@ public class Utils {
         return new SimpleDateFormat("yyyy年MM月dd日").format(new Date(
                 timestamp * 1000));
     }
+
 }
