@@ -61,5 +61,4 @@ dependencies {
     compile 'net.soulwolf.widget:dialogBuilder:1.0.0'
     compile 'com.jungly:GridPasswordView:0.2'
     compile 'com.qiniu:qiniu-android-sdk:7.0.3'
-    compile 'com.zhy:autolayout:1.3.0'
 }
