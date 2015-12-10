@@ -58,9 +58,9 @@ public class HobbyInfoPublishActivity extends BaseActivity implements View.OnCli
     private void initView() {
         back = (ImageView) findViewById(R.id.near_back);
         back.setOnClickListener(this);
-        title_right = (ImageView) findViewById(R.id.near_ti_right);
+        title_right = (ImageView) findViewById(R.id.near_title_right);
         title_right.setVisibility(View.GONE);
-        title = (TextView) findViewById(R.id.near_centertitle);
+        title = (TextView) findViewById(R.id.near_title);
         title.setText("交友发帖");
         right = (ImageView) findViewById(R.id.near_right);
         right.setVisibility(View.GONE);

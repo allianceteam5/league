@@ -47,9 +47,9 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
     private void initView() {
         back = (ImageView) findViewById(R.id.near_back);
         back.setOnClickListener(this);
-        titleright = (ImageView) findViewById(R.id.near_ti_right);
+        titleright = (ImageView) findViewById(R.id.near_title_right);
         titleright.setVisibility(View.GONE);
-        title = (TextView) findViewById(R.id.near_centertitle);
+        title = (TextView) findViewById(R.id.near_title);
         title.setText("最新揭晓");
         right1 = (ImageView) findViewById(R.id.near_right);
         right1.setVisibility(View.GONE);

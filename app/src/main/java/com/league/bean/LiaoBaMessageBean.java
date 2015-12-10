@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by liug on 15/11/10.
  */
-public class LiaoBaUserInfo {
+public class LiaoBaMessageBean {
 
     /**
      * id : 1
@@ -58,11 +58,6 @@ public class LiaoBaUserInfo {
      */
 
     private List<ReplysEntity> replys;
-    /**
-     * phone : 1
-     * nickname : 测试1
-     * thumb : http://7xkbeq.com1.z0.glb.clouddn.com/Fo-v4V7aCVADWiMXJm9TW-kx37U2
-     */
 
     private List<LikesEntity> likes;
 

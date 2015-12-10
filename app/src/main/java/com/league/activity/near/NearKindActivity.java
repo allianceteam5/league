@@ -103,8 +103,8 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
 
     private void init() {
         near_back = (ImageButton) findViewById(R.id.near_back);
-        near_title = (TextView) findViewById(R.id.near_centertitle);
-        near_t_rig = (ImageView) findViewById(R.id.near_ti_right);
+        near_title = (TextView) findViewById(R.id.near_title);
+        near_t_rig = (ImageView) findViewById(R.id.near_title_right);
         near_right = (ImageButton) findViewById(R.id.near_right);
         listview = (ListView) findViewById(R.id.infosearch_list);
         ll_more = (LinearLayout) findViewById(R.id.near_more);

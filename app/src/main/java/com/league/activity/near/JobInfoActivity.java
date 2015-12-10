@@ -27,13 +27,13 @@ import io.paperdb.Paper;
 public class JobInfoActivity extends Activity implements OnClickListener{
 	@Bind(R.id.near_back)
 	ImageView back;
-	@Bind(R.id.near_ti_right)
+	@Bind(R.id.near_title_right)
 	ImageView titleright;
 	@Bind(R.id.near_right)
 	ImageView right1;
 	@Bind(R.id.near_right_item)
 	ImageView right2;
-	@Bind(R.id.near_centertitle)
+	@Bind(R.id.near_title)
 	TextView title;
 	@Bind(R.id.addfriend)
 	Button addFriend;

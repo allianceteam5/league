@@ -12,4 +12,5 @@ public interface IContants {
     public static final int ONE = 1;
     public static final String MYPOST_FLAG = "mypost_flag";
     public static final String MODE = "mode";
+    public static final String TBMESSAGEID = "tbmessageid";
 }

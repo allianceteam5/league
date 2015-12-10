@@ -16,9 +16,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.ShowBigImgActivity;
 import com.league.activity.liaobaactivity.TopicContent;
-import com.league.bean.LiaoBaUserInfo;
+import com.league.bean.LiaoBaMessageBean;
 import com.league.bean.SucessBean;
-import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.Utils;
 import com.league.utils.api.ApiUtil;
@@ -36,11 +35,11 @@ import java.util.List;
  */
 public class LiaoBaAdapter extends BaseAdapter implements IContants {
 
-    private List<LiaoBaUserInfo> list;
+    private List<LiaoBaMessageBean> list;
     private Context ctx;
     private int type = 0;//0表示最新 1表示最热 其他表示正常
 
-    public LiaoBaAdapter(List<LiaoBaUserInfo> list, Context ctx, int type) {
+    public LiaoBaAdapter(List<LiaoBaMessageBean> list, Context ctx, int type) {
         this.list = list;
         this.ctx = ctx;
         this.type = type;
@@ -126,6 +125,7 @@ public class LiaoBaAdapter extends BaseAdapter implements IContants {
             public void onClick(View v) {
                 Intent intent = new Intent(ctx, TopicContent.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(TBMESSAGEID,list.get(position).getId());
                 ctx.startActivity(intent);
             }
         });

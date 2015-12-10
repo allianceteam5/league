@@ -14,9 +14,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.adapter.LiaobaConcernListAdapter;
-import com.league.adapter.LiaobaPopularityAdapter;
 import com.league.bean.PopularityBean;
-import com.league.utils.Constants;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -34,9 +32,9 @@ import butterknife.ButterKnife;
 public class ConcernListActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.near_back)
     ImageButton nearBack;
-    @Bind(R.id.near_centertitle)
+    @Bind(R.id.near_title)
     TextView nearCentertitle;
-    @Bind(R.id.near_ti_right)
+    @Bind(R.id.near_title_right)
     ImageView nearTiRight;
     @Bind(R.id.near_right)
     ImageButton nearRight;

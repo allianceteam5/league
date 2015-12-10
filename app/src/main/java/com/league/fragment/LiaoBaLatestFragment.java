@@ -1,6 +1,5 @@
 package com.league.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,18 +8,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.league.activity.liaobaactivity.TopicContent;
 import com.league.adapter.LiaoBaAdapter;
-import com.league.bean.LiaoBaUserInfo;
-import com.league.bean.SucessBean;
-import com.league.interf.ListItemClickHelp;
-import com.league.utils.Constants;
+import com.league.bean.LiaoBaMessageBean;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -37,7 +31,7 @@ public class LiaoBaLatestFragment extends Fragment{
 
     private View layout;
     private ListView listView;
-    private List<LiaoBaUserInfo> list=new ArrayList<LiaoBaUserInfo>();
+    private List<LiaoBaMessageBean> list=new ArrayList<LiaoBaMessageBean>();
     private int totalPage;
     private int currentPage=1;
     private PullToRefreshLayout pullToRefreshLayout;
@@ -62,10 +56,10 @@ public class LiaoBaLatestFragment extends Fragment{
 
     }
     private void initData(final int currentPage){
-        ApiUtil.liaobagetlatest(getActivity().getApplication(), currentPage,new BaseJsonHttpResponseHandler<ArrayList<LiaoBaUserInfo>>() {
+        ApiUtil.liaobagetlatest(getActivity().getApplication(), currentPage,new BaseJsonHttpResponseHandler<ArrayList<LiaoBaMessageBean>>() {
 
             @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaUserInfo> response) {
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaMessageBean> response) {
                 if(currentPage==1){
                     list.clear();
                 }
@@ -75,15 +69,15 @@ public class LiaoBaLatestFragment extends Fragment{
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaUserInfo> errorResponse) {
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaMessageBean> errorResponse) {
                 Toast.makeText(getActivity(),"哎呀网络不好",Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            protected ArrayList<LiaoBaUserInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+            protected ArrayList<LiaoBaMessageBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                 JSONObject jsonObject=new JSONObject(rawJsonData);
                 totalPage=jsonObject.optJSONObject("_meta").optInt("pageCount");
-                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaUserInfo>>() {});
+                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaMessageBean>>() {});
             }
         });
     }

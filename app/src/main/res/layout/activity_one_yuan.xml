@@ -30,7 +30,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/near_centertitle"
+                android:id="@+id/near_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="6dp"
@@ -39,7 +39,7 @@
                 android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/near_ti_right"
+                android:id="@+id/near_title_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/near_top_down" />
@@ -90,7 +90,7 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/ruledetails"
+            android:id="@+id/near_rule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

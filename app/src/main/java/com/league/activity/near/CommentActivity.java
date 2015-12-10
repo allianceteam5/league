@@ -24,9 +24,9 @@ import butterknife.ButterKnife;
 public class CommentActivity extends BaseActivity implements View.OnClickListener,IContants{
     @Bind(R.id.near_back)
     ImageButton nearBack;
-    @Bind(R.id.near_centertitle)
+    @Bind(R.id.near_title)
     TextView nearCentertitle;
-    @Bind(R.id.near_ti_right)
+    @Bind(R.id.near_title_right)
     ImageView nearTiRight;
     @Bind(R.id.near_right)
     ImageButton nearRight;

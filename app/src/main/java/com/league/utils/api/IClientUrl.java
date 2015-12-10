@@ -45,6 +45,8 @@ public class IClientUrl {
     public static final String LiaoBaTbusersConcernsList = testServerUrl + "tbusers/myconcerns?page=";
     public static final String LiaoBaTbmessagesMyLikesList = testServerUrl + "tbmessages/mylikes?page=";
     public static final String LiaoBaTbmessagesMyList = testServerUrl + "tbmessages/me?page=";
+    public static final String LiaoBaTbmessagesView = testServerUrl + "tbmessages/view";
+
 
     public static final String getGrabCommoditiesPass = testServerUrl + "grabcommodities/formeractivities?page=";
     public static final String getGrabCornsPass = testServerUrl + "grabcorns/formeractivities?page=";

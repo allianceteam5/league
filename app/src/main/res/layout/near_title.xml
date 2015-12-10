@@ -20,7 +20,7 @@
         android:layout_centerInParent="true"
         android:gravity="center">
         <TextView
-            android:id="@+id/near_centertitle"
+            android:id="@+id/near_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="title"
@@ -29,7 +29,7 @@
             android:textSize="20sp" />
 
         <ImageView
-            android:id="@+id/near_ti_right"
+            android:id="@+id/near_title_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/near_top_down" />
@@ -77,7 +77,7 @@
         android:textSize="18sp"
         android:visibility="gone"/>
     <TextView
-        android:id="@+id/ruledetails"
+        android:id="@+id/near_rule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="规则说明"

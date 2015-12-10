@@ -54,9 +54,9 @@ public  class JobInfoPublishActivity extends Activity implements View.OnClickLis
     void init() {
         back = (ImageView) findViewById(R.id.near_back);
         back.setOnClickListener(this);
-        title_right = (ImageView) findViewById(R.id.near_ti_right);
+        title_right = (ImageView) findViewById(R.id.near_title_right);
         title_right.setVisibility(View.GONE);
-        title = (TextView) findViewById(R.id.near_centertitle);
+        title = (TextView) findViewById(R.id.near_title);
         title.setText("我要求职");
         right = (ImageView) findViewById(R.id.near_right);
         right.setVisibility(View.GONE);

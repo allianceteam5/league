@@ -15,10 +15,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.adapter.LiaoBaAdapter;
-import com.league.adapter.LiaobaConcernListAdapter;
-import com.league.bean.LiaoBaUserInfo;
-import com.league.bean.PopularityBean;
-import com.league.utils.Constants;
+import com.league.bean.LiaoBaMessageBean;
 import com.league.utils.IContants;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
@@ -37,9 +34,9 @@ import butterknife.ButterKnife;
 public class MessageListActivity extends BaseActivity implements View.OnClickListener,IContants{
     @Bind(R.id.near_back)
     ImageButton nearBack;
-    @Bind(R.id.near_centertitle)
+    @Bind(R.id.near_title)
     TextView nearCentertitle;
-    @Bind(R.id.near_ti_right)
+    @Bind(R.id.near_title_right)
     ImageView nearTiRight;
     @Bind(R.id.near_right)
     ImageButton nearRight;
@@ -47,7 +44,7 @@ public class MessageListActivity extends BaseActivity implements View.OnClickLis
     PullToRefreshLayout pullToRefreshLayout;
     @Bind(R.id.liaoba_concern_list)
     ListView listView;
-    private  List<LiaoBaUserInfo> list=new ArrayList<LiaoBaUserInfo>();
+    private  List<LiaoBaMessageBean> list=new ArrayList<LiaoBaMessageBean>();
     private LiaoBaAdapter adapter;
     private int totalPage;
     private int currentPage = 1;
@@ -91,9 +88,9 @@ public class MessageListActivity extends BaseActivity implements View.OnClickLis
     private void initData(final int currentPage) {
         switch (mode){
             case 1:
-                ApiUtil.liaobaTbmessagesMyLikesList(getApplicationContext(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaUserInfo>>() {
+                ApiUtil.liaobaTbmessagesMyLikesList(getApplicationContext(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaMessageBean>>() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaUserInfo> response) {
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaMessageBean> response) {
                         if (currentPage == 1) {
                             list.clear();
                         }
@@ -104,23 +101,23 @@ public class MessageListActivity extends BaseActivity implements View.OnClickLis
                     }
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaUserInfo> errorResponse) {
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaMessageBean> errorResponse) {
                         Toast.makeText(getApplicationContext(), "哎呀网络不好", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    protected ArrayList<LiaoBaUserInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                    protected ArrayList<LiaoBaMessageBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                         JSONObject jsonObject = new JSONObject(rawJsonData);
                         totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
-                        return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaUserInfo>>() {
+                        return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaMessageBean>>() {
                         });
                     }
                 });
                 break;
             case 2:
-                ApiUtil.liaobaTbmessagesMyList(getApplicationContext(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaUserInfo>>() {
+                ApiUtil.liaobaTbmessagesMyList(getApplicationContext(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaMessageBean>>() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaUserInfo> response) {
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaMessageBean> response) {
                         if (currentPage == 1) {
                             list.clear();
                         }
@@ -131,15 +128,15 @@ public class MessageListActivity extends BaseActivity implements View.OnClickLis
                     }
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaUserInfo> errorResponse) {
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaMessageBean> errorResponse) {
                         Toast.makeText(getApplicationContext(), "哎呀网络不好", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    protected ArrayList<LiaoBaUserInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                    protected ArrayList<LiaoBaMessageBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                         JSONObject jsonObject = new JSONObject(rawJsonData);
                         totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
-                        return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaUserInfo>>() {
+                        return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaMessageBean>>() {
                         });
                     }
                 });

@@ -17,9 +17,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.liaobaactivity.TopicContent;
 import com.league.adapter.LiaoBaAdapter;
-import com.league.bean.LiaoBaUserInfo;
+import com.league.bean.LiaoBaMessageBean;
 import com.league.interf.ListItemClickHelp;
-import com.league.utils.Constants;
+import com.league.utils.IContants;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -31,80 +31,74 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LiaoBaConcernFragment extends Fragment implements ListItemClickHelp{
+public class LiaoBaConcernFragment extends Fragment implements ListItemClickHelp, IContants {
     private View layout;
     private ListView listView;
-    private List<LiaoBaUserInfo> list=new ArrayList<LiaoBaUserInfo>();
+    private List<LiaoBaMessageBean> list = new ArrayList<LiaoBaMessageBean>();
     private int totalPage;
-    private int currentPage=1;
+    private int currentPage = 1;
     private PullToRefreshLayout pullToRefreshLayout;
     private LiaoBaAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        layout=inflater.inflate(R.layout.fragment_liao_ba_concern,container,false);
+        layout = inflater.inflate(R.layout.fragment_liao_ba_concern, container, false);
         initView();
         initData(currentPage);
         return layout;
     }
-    private void initView(){
-        listView= (ListView) layout.findViewById(R.id.liaoba_concern_list);
-        adapter=new LiaoBaAdapter(list, getActivity().getApplication(),0);
+
+    private void initView() {
+        listView = (ListView) layout.findViewById(R.id.liaoba_concern_list);
+        adapter = new LiaoBaAdapter(list, getActivity().getApplication(), 0);
         listView.setAdapter(adapter);
         pullToRefreshLayout = (PullToRefreshLayout) layout.findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);
 
     }
-    private void initData(final int currentPage){
-        ApiUtil.liaobaGetConcern(getActivity(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaUserInfo>>() {
+
+    private void initData(final int currentPage) {
+        ApiUtil.liaobaGetConcern(getActivity(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaMessageBean>>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaUserInfo> response) {
-                if(currentPage==1){
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaMessageBean> response) {
+                if (currentPage == 1) {
                     list.clear();
                 }
                 list.addAll(response);
                 adapter.notifyDataSetChanged();
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(getActivity().getApplication(), TopicContent.class);
-                        startActivity(intent);
-                    }
-                });
                 pullToRefreshLayout.setVisibility(View.VISIBLE);
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaUserInfo> errorResponse) {
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaMessageBean> errorResponse) {
                 Toast.makeText(getActivity(), "哎呀网络不好", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            protected ArrayList<LiaoBaUserInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                JSONObject jsonObject=new JSONObject(rawJsonData);
-                totalPage=jsonObject.optJSONObject("_meta").optInt("pageCount");
-                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaUserInfo>>() {});
+            protected ArrayList<LiaoBaMessageBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                JSONObject jsonObject = new JSONObject(rawJsonData);
+                totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
+                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaMessageBean>>() {
+                });
             }
         });
     }
+
     @Override
     public void onClick(View item, View widget, int position, int which) {
 
     }
 
-    public class MyListener implements PullToRefreshLayout.OnRefreshListener
-    {
+    public class MyListener implements PullToRefreshLayout.OnRefreshListener {
 
         @Override
-        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
             // 下拉刷新操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage = 1;
                     initData(currentPage);
                     // 千万别忘了告诉控件刷新完毕了哦！
@@ -115,16 +109,13 @@ public class LiaoBaConcernFragment extends Fragment implements ListItemClickHelp
         }
 
         @Override
-        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
             // 加载操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage++;
-                    if(currentPage <= totalPage)
+                    if (currentPage <= totalPage)
                         initData(currentPage);
                     // 千万别忘了告诉控件加载完毕了哦！
                     pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);

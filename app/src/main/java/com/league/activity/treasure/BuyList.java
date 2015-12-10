@@ -54,9 +54,9 @@ public class BuyList extends BaseActivity implements View.OnClickListener{
                 finish();
             }
         });
-        titleright = (ImageView) findViewById(R.id.near_ti_right);
+        titleright = (ImageView) findViewById(R.id.near_title_right);
         titleright.setVisibility(View.GONE);
-        title = (TextView) findViewById(R.id.near_centertitle);
+        title = (TextView) findViewById(R.id.near_title);
         title.setText("结算");
         right1 = (ImageView) findViewById(R.id.near_right);
         right1.setVisibility(View.GONE);

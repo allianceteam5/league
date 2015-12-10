@@ -14,11 +14,8 @@ import android.widget.Toast;
 
 import com.league.activity.BaseActivity;
 import com.league.activity.ShowBigImgActivity;
-import com.league.activity.near.RadioSelectActivity;
 import com.league.adapter.ImgGridWithPickImgAdapter;
-import com.league.bean.KindBean;
 import com.league.interf.OnAllComplete;
-import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
@@ -37,15 +34,14 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import io.paperdb.Paper;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 public class PostbarPublishActivity extends BaseActivity implements View.OnClickListener, IContants {
     @Bind(R.id.near_back)
     ImageButton nearBack;
-    @Bind(R.id.near_centertitle)
+    @Bind(R.id.near_title)
     TextView nearCentertitle;
-    @Bind(R.id.near_ti_right)
+    @Bind(R.id.near_title_right)
     ImageView nearTiRight;
     @Bind(R.id.near_right)
     ImageButton nearRight;

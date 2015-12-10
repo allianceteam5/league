@@ -1,9 +1,7 @@
 package com.league.activity.near;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -60,9 +58,9 @@ public class MyPost extends BaseActivity implements OnClickListener, IContants {
     void init() {
         back = (ImageView) findViewById(R.id.near_back);
         back.setOnClickListener(this);
-        title_right = (ImageView) findViewById(R.id.near_ti_right);
+        title_right = (ImageView) findViewById(R.id.near_title_right);
         title_right.setVisibility(View.GONE);
-        title = (TextView) findViewById(R.id.near_centertitle);
+        title = (TextView) findViewById(R.id.near_title);
         right = (ImageView) findViewById(R.id.near_right);
         right.setVisibility(View.GONE);
         list = (ListView) findViewById(R.id.list_myhunting);

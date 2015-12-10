@@ -256,6 +256,7 @@ public class ApiUtil {
         }
     }
 
+    //聊吧新建消息
     public static void liaobaTbmessagesCreated(Context context, String title, String content, String pictures, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.add("phone", testPhone);
@@ -266,22 +267,33 @@ public class ApiUtil {
         client.post(context, IClientUrl.LiaoBaTbmessagesSend, params, responseHandler);
     }
 
+    //聊吧获取我的关注列表
     public static void liaobaGetMyConcernList(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         client.post(context, IClientUrl.LiaoBaTbusersConcernsList + currentPage, params, responseHandler);
     }
 
+    //聊吧获取我的点赞列表
     public static void liaobaTbmessagesMyLikesList(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         client.post(context, IClientUrl.LiaoBaTbmessagesMyLikesList + currentPage, params, responseHandler);
     }
 
+    //聊吧获取我的消息列表
     public static void liaobaTbmessagesMyList(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         client.post(context, IClientUrl.LiaoBaTbmessagesMyList + currentPage, params, responseHandler);
+    }
+
+    //聊吧消息详情
+    public static void liaobaTbmessagesMyList(Context context,String tbmessageid, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("tbmessageid",tbmessageid);
+        client.post(context, IClientUrl.LiaoBaTbmessagesView,params,responseHandler);
     }
 
     //获取往期揭晓 一元夺宝的

@@ -57,9 +57,9 @@ public class RecommendationInfoPublishActivity extends BaseActivity implements V
         setContentView(R.layout.activity_recommendationinfo_pushlish);
         back = (ImageView) findViewById(R.id.near_back);
         back.setOnClickListener(this);
-        title_right = (ImageView) findViewById(R.id.near_ti_right);
+        title_right = (ImageView) findViewById(R.id.near_title_right);
         title_right.setVisibility(View.GONE);
-        ettitle = (TextView) findViewById(R.id.near_centertitle);
+        ettitle = (TextView) findViewById(R.id.near_title);
         ettitle.setText("发表推荐");
         right = (ImageView) findViewById(R.id.near_right);
         right.setVisibility(View.GONE);
