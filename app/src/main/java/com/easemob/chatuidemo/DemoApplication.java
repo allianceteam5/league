@@ -15,10 +15,10 @@ package com.easemob.chatuidemo;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.easemob.EMCallBack;
-import com.easemob.chat.EMChatManager;
 
 import io.paperdb.Paper;
 
@@ -112,5 +112,11 @@ public class DemoApplication extends Application {
 	public void logout(final boolean isGCM,final EMCallBack emCallBack) {
 		// 先调用sdk logout，在清理app中自己的数据
 	    hxSDKHelper.logout(isGCM,emCallBack);
+	}
+
+	@Override
+	protected void attachBaseContext(Context base) {
+		super.attachBaseContext(base);
+		MultiDex.install(this);
 	}
 }

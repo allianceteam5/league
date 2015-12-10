@@ -10,6 +10,7 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -39,6 +40,19 @@ android {
 //            jcenter()
 //        }
 //    }
+//    afterEvaluate {
+//        tasks.matching {
+//            it.name.startsWith('dex')
+//        }.each { dx ->
+//            if (dx.additionalParameters == null) {
+//                dx.additionalParameters = []
+//            }
+//            dx.additionalParameters += '--multi-dex' // enable multidex
+//
+//            // optional
+//            // dx.additionalParameters += "--main-dex-list=$projectDir/<filename>".toString() // enable the main-dex-list
+//        }
+//    }
 }
 
 dependencies {
@@ -60,4 +74,5 @@ dependencies {
     compile 'net.soulwolf.widget:dialogBuilder:1.0.0'
     compile 'com.jungly:GridPasswordView:0.2'
     compile 'com.qiniu:qiniu-android-sdk:7.0.3'
+    compile 'com.android.support:multidex:1.0.0'
 }
