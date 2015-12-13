@@ -1,6 +1,25 @@
 package com.league.activity;
 
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.easemob.EMCallBack;
 import com.easemob.EMConnectionListener;
 import com.easemob.EMError;
@@ -39,25 +58,6 @@ import com.league.fragment.ResourceFragment;
 import com.league.utils.ComplexPreferences;
 import com.mine.league.R;
 import com.umeng.analytics.MobclickAgent;
-
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -191,7 +191,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         chatHistoryFragment = new ChatAllHistoryFragment();
         contactListFragment = new ContactlistFragment();
         resourceFragment = new ResourceFragment();
-        personFragment = new PersonFragment();
+        personFragment = PersonFragment.getInstance();
         fragments = new Fragment[]{chatHistoryFragment, contactListFragment, resourceFragment, personFragment};
         getFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, resourceFragment)
