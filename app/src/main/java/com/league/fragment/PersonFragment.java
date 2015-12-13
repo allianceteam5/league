@@ -7,13 +7,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.personactivity.AlianceReward;
 import com.league.activity.personactivity.MyCollection;
 import com.league.activity.personactivity.MyMoneyBag;
 import com.league.activity.personactivity.PersonInformationSetup;
 import com.league.activity.personactivity.PersonSetup;
+import com.league.bean.UserInfoBean;
+import com.league.utils.Constants;
+import com.league.utils.api.ApiUtil;
+import com.league.widget.CircleImageView;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+
+import org.apache.http.Header;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import io.paperdb.Paper;
 
 /**
  * @author liugang
@@ -23,7 +37,19 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
 
     private View layout;
     private Activity ctx;
-
+    private UserInfoBean userInfoBean;
+    @Bind(R.id.mythumb)
+    CircleImageView mThumb;
+    @Bind(R.id.nickname)
+    TextView mNickname;
+    @Bind(R.id.phonenumber)
+    TextView mPhone;
+    @Bind(R.id.zhijiealliancenum)
+    TextView mDirectAllianceCount;
+    @Bind(R.id.fivefloartotal)
+    TextView mAllFive;
+    @Bind(R.id.award)
+    TextView mAward;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,6 +64,14 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                 parent.removeView(layout);
             }
         }
+        ButterKnife.bind(ctx,layout);
+//        mThumb= (CircleImageView) layout.findViewById(R.id.mythumb);
+//        mNickname= (TextView) layout.findViewById(R.id.nickname);
+//        mPhone= (TextView) layout.findViewById(R.id.phonenumber);
+//        mDirectAllianceCount= (TextView) layout.findViewById(R.id.zhijiealliancenum);
+//        mAllFive= (TextView) layout.findViewById(R.id.fivefloartotal);
+//        mAward= (TextView) layout.findViewById(R.id.award);
+        initData();
         return layout;
     }
 
@@ -76,6 +110,35 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
         }
     }
     private void initData(){
+        ApiUtil.getUserDetail(ctx, Constants.PHONENUM, new BaseJsonHttpResponseHandler<UserInfoBean>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, UserInfoBean response) {
+                userInfoBean=response;
+                Paper.book().write("UserInfoBean",response);
+//                Picasso.with(ctx).load(response.getThumb()).into(mThumb);
+//                mNickname.setText(response.getNickname());
+//                mPhone.setText(response.getPhone());
+//                mDirectAllianceCount.setText(response.getDirectalliancecount());
+//                mAllFive.setText(response.getAllalliancecount());
+//                mAward.setText(response.getAlliancerewards());
+            }
 
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, UserInfoBean errorResponse) {
+
+            }
+
+            @Override
+            protected UserInfoBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<UserInfoBean>() {
+                });
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 }

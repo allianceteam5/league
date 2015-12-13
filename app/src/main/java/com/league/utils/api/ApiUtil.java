@@ -390,4 +390,32 @@ public class ApiUtil {
         params.put("phone",phone);
         client.post(context,IClientUrl.getUserDetail,params,responseHandler);
     }
+    //修改用户个性签名
+    public static void modifyUserDetailSignature(Context context,String phone,String sign,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("signature",sign);
+        client.post(context,IClientUrl.modifyUserDetail,params,responseHandler);
+    }
+    //修改用户地区
+    public static void modifyUserDetailArea(Context context,String phone,String area,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("area",area);
+        client.post(context,IClientUrl.modifyUserDetail,params,responseHandler);
+    }
+    //修改用户性别
+    public static void modifyUserDetaiSex(Context context,String phone,int gender,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("gender",gender);
+        client.post(context,IClientUrl.modifyUserDetail,params,responseHandler);
+    }
+    //修改用户昵称
+    public static void modifyUserDetailNickname(Context context,String phone,String nick,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("nickname",nick);
+        client.post(context,IClientUrl.modifyUserDetail,params,responseHandler);
+    }
 }

@@ -417,7 +417,11 @@
         <activity android:name="com.league.activity.treasure.CountDetailActivity" />
         <activity android:name="com.league.activity.personinfoactivity.ShippingAddress" />
         <activity android:name="com.league.utils.PersonInfoBaseActivity" />
-        <activity android:name="com.league.activity.personinfoactivity.AddShippingAdr"></activity>
+        <activity android:name="com.league.activity.personinfoactivity.AddShippingAdr" />
+        <activity android:name="com.league.activity.personinfoactivity.SignatureActivity" />
+        <activity android:name="com.league.activity.personinfoactivity.MyAreaActivity" />
+        <activity android:name="com.league.activity.personinfoactivity.MyGenderActivity" />
+        <activity android:name="com.league.activity.personinfoactivity.NickNameActivity"></activity>
     </application>
 
 </manifest>

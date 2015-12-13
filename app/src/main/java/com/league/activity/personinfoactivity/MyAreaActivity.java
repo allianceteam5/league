@@ -1,25 +1,29 @@
-package com.league.dialog;
+package com.league.activity.personinfoactivity;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.animation.AnimationUtils;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.Button;
 
 import com.cascade.CityModel;
 import com.cascade.DistrictModel;
 import com.cascade.ProvinceModel;
 import com.cascade.XmlParserHandler;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kankan.ArrayWheelAdapter;
 import com.kankan.OnWheelChangedListener;
 import com.kankan.WheelView;
+import com.league.bean.SucessBean;
+import com.league.bean.UserInfoBean;
+import com.league.utils.Constants;
+import com.league.utils.PersonInfoBaseActivity;
+import com.league.utils.ToastUtils;
+import com.league.utils.api.ApiUtil;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+
+import org.apache.http.Header;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -29,50 +33,79 @@ import java.util.Map;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-/**
- * Created by liug on 15/12/11.
- */
-public class WheelCascade extends Dialog implements View.OnClickListener, OnWheelChangedListener {
-    private Context context;
-    View localView;
+import io.paperdb.Paper;
+
+public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnClickListener,OnWheelChangedListener {
+    private Button mOption;
     private WheelView mViewProvince;
     private WheelView mViewCity;
     private WheelView mViewDistrict;
-    private TextView mBtnConfirm;
-    public WheelCascade(Context context,ProvinceListener listener) {
-        super(context);
-        this.context=context;
-        this.listener=listener;
-    }
-    public interface ProvinceListener{
-        void refreshProvince(String string);
-    }
-    private ProvinceListener listener;
+    private UserInfoBean userInfoBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setTitle("地区");
 
-        // 这句代码换掉dialog默认背景，否则dialog的边缘发虚透明而且很宽
-        // 总之达不到想要的效果
-        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        LayoutInflater inflater = LayoutInflater.from(context);
-        //((AnimationActivity) context).getLayoutInflater();
-        localView = inflater.inflate(R.layout.dialog_wheel, null);
-        localView.setAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_bottom_to_top));
-        setContentView(localView);
-        // 这句话起全屏的作用
-        getWindow().setLayout(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_my_area;
+    }
+
+    @Override
+    protected void initView() {
         setUpViews();
+        mOption= (Button) findViewById(R.id.newadd);
+        mOption.setVisibility(View.VISIBLE);
+        mOption.setText("提交");
+        mOption.setOnClickListener(this);
+    }
+
+    @Override
+    protected void initData() {
+        userInfoBean=Paper.book().read("UserInfoBean");
         setUpListener();
         setUpData();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+         case R.id.newadd:
+             String temp=mCurrentProviceName + mCurrentCityName + mCurrentDistrictName;
+             ApiUtil.modifyUserDetailArea(getApplicationContext(), Constants.PHONENUM, temp, new BaseJsonHttpResponseHandler<SucessBean>() {
+                 @Override
+                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                     if(response.getFlag().equals("1")){
+                         userInfoBean.setArea(mCurrentProviceName + mCurrentCityName + mCurrentDistrictName);
+                         Paper.book().write("UserInfoBean",userInfoBean);
+                         onBackPressed();
+                         finish();
+                     }else{
+                         ToastUtils.showShortToast(getApplicationContext(), "网络不好，再试试");
+                     }
+                 }
+
+                 @Override
+                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                     ToastUtils.showShortToast(getApplicationContext(),"网络不好，再试试");
+                 }
+
+                 @Override
+                 protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                     return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {});
+                 }
+             });
+             break;
+        }
     }
     private void setUpViews() {
         mViewProvince = (WheelView) findViewById(R.id.id_province);
         mViewCity = (WheelView) findViewById(R.id.id_city);
         mViewDistrict = (WheelView) findViewById(R.id.id_district);
-        mBtnConfirm = (TextView) findViewById(R.id.btn_confirm);
     }
+
     private void setUpListener() {
         // 添加change事件
         mViewProvince.addChangingListener(this);
@@ -80,13 +113,11 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
         mViewCity.addChangingListener(this);
         // 添加change事件
         mViewDistrict.addChangingListener(this);
-        // 添加onclick事件
-        mBtnConfirm.setOnClickListener(this);
     }
 
     private void setUpData() {
         initProvinceDatas();
-        mViewProvince.setViewAdapter(new ArrayWheelAdapter<String>(context, mProvinceDatas));
+        mViewProvince.setViewAdapter(new ArrayWheelAdapter<String>(MyAreaActivity.this, mProvinceDatas));
         // 设置可见条目数量
         mViewProvince.setVisibleItems(7);
         mViewCity.setVisibleItems(7);
@@ -94,26 +125,10 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
         updateCities();
         updateAreas();
     }
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_confirm:
-                dismiss();
-                listener.refreshProvince(mCurrentProviceName + mCurrentCityName + mCurrentDistrictName);
-                break;
-            default:
-                break;
-        }
-    }
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        this.dismiss();
-        listener.refreshProvince(mCurrentProviceName + mCurrentCityName + mCurrentDistrictName);
-        return super.onTouchEvent(event);
-    }
 
     @Override
     public void onChanged(WheelView wheel, int oldValue, int newValue) {
+        // TODO Auto-generated method stub
         if (wheel == mViewProvince) {
             updateCities();
         } else if (wheel == mViewCity) {
@@ -123,6 +138,7 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
             mCurrentZipCode = mZipcodeDatasMap.get(mCurrentDistrictName);
         }
     }
+
     /**
      * 根据当前的市，更新区WheelView的信息
      */
@@ -132,9 +148,9 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
         String[] areas = mDistrictDatasMap.get(mCurrentCityName);
 
         if (areas == null) {
-            areas = new String[]{""};
+            areas = new String[] { "" };
         }
-        mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(context, areas));
+        mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(this, areas));
         mViewDistrict.setCurrentItem(0);
     }
 
@@ -146,12 +162,14 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
         mCurrentProviceName = mProvinceDatas[pCurrent];
         String[] cities = mCitisDatasMap.get(mCurrentProviceName);
         if (cities == null) {
-            cities = new String[]{""};
+            cities = new String[] { "" };
         }
-        mViewCity.setViewAdapter(new ArrayWheelAdapter<String>(context, cities));
+        mViewCity.setViewAdapter(new ArrayWheelAdapter<String>(this, cities));
         mViewCity.setCurrentItem(0);
         updateAreas();
     }
+
+
     /**
      * 所有省
      */
@@ -181,20 +199,21 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
     /**
      * 当前区的名称
      */
-    protected String mCurrentDistrictName = "";
+    protected String mCurrentDistrictName ="";
 
     /**
      * 当前区的邮政编码
      */
-    protected String mCurrentZipCode = "";
+    protected String mCurrentZipCode ="";
 
     /**
      * 解析省市区的XML数据
      */
 
-    protected void initProvinceDatas() {
+    protected void initProvinceDatas()
+    {
         List<ProvinceModel> provinceList = null;
-        AssetManager asset = context.getAssets();
+        AssetManager asset = getAssets();
         try {
             InputStream input = asset.open("province_data.xml");
             // 创建一个解析xml的工厂对象
@@ -207,10 +226,10 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
             // 获取解析出来的数据
             provinceList = handler.getDataList();
             //*/ 初始化默认选中的省、市、区
-            if (provinceList != null && !provinceList.isEmpty()) {
+            if (provinceList!= null && !provinceList.isEmpty()) {
                 mCurrentProviceName = provinceList.get(0).getName();
                 List<CityModel> cityList = provinceList.get(0).getCityList();
-                if (cityList != null && !cityList.isEmpty()) {
+                if (cityList!= null && !cityList.isEmpty()) {
                     mCurrentCityName = cityList.get(0).getName();
                     List<DistrictModel> districtList = cityList.get(0).getDistrictList();
                     mCurrentDistrictName = districtList.get(0).getName();
@@ -219,18 +238,18 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
             }
             //*/
             mProvinceDatas = new String[provinceList.size()];
-            for (int i = 0; i < provinceList.size(); i++) {
+            for (int i=0; i< provinceList.size(); i++) {
                 // 遍历所有省的数据
                 mProvinceDatas[i] = provinceList.get(i).getName();
                 List<CityModel> cityList = provinceList.get(i).getCityList();
                 String[] cityNames = new String[cityList.size()];
-                for (int j = 0; j < cityList.size(); j++) {
+                for (int j=0; j< cityList.size(); j++) {
                     // 遍历省下面的所有市的数据
                     cityNames[j] = cityList.get(j).getName();
                     List<DistrictModel> districtList = cityList.get(j).getDistrictList();
                     String[] distrinctNameArray = new String[districtList.size()];
                     DistrictModel[] distrinctArray = new DistrictModel[districtList.size()];
-                    for (int k = 0; k < districtList.size(); k++) {
+                    for (int k=0; k<districtList.size(); k++) {
                         // 遍历市下面所有区/县的数据
                         DistrictModel districtModel = new DistrictModel(districtList.get(k).getName(), districtList.get(k).getZipcode());
                         // 区/县对于的邮编，保存到mZipcodeDatasMap

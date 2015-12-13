@@ -7,20 +7,44 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.league.activity.personinfoactivity.MyAreaActivity;
+import com.league.activity.personinfoactivity.MyGenderActivity;
+import com.league.activity.personinfoactivity.NickNameActivity;
 import com.league.activity.personinfoactivity.ShippingAddress;
+import com.league.activity.personinfoactivity.SignatureActivity;
+import com.league.bean.UserInfoBean;
+import com.league.widget.CircleImageView;
 import com.mine.league.R;
+import com.squareup.picasso.Picasso;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import io.paperdb.Paper;
 
 public class PersonInformationSetup extends Activity implements View.OnClickListener{
 
     private ImageView back2, titleright, right1, right2;
     private TextView title;
-
+    private UserInfoBean userInfoBean;
+    @Bind(R.id.thumbnail)
+    CircleImageView mThumbnail;
+    @Bind(R.id.nickname)
+    TextView mNickName;
+    @Bind(R.id.numberid)
+    TextView mNumberID;
+    @Bind(R.id.gender)
+    TextView mGender;
+    @Bind(R.id.area)
+    TextView mArea;
+    @Bind(R.id.signature)
+    TextView mSignature;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_information_setup);
+        ButterKnife.bind(this);
         initView();
-
+        initData();
     }
 
     private void initView() {
@@ -44,7 +68,15 @@ public class PersonInformationSetup extends Activity implements View.OnClickList
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
     }
-
+    private void initData(){
+        userInfoBean= Paper.book().read("UserInfoBean");
+        Picasso.with(this).load(userInfoBean.getThumb()).into(mThumbnail);
+        mNickName.setText(userInfoBean.getNickname());
+        mNumberID.setText(userInfoBean.getPhone());
+        mGender.setText(userInfoBean.getGender() == 0 ? "女" : "男");
+        mArea.setText(userInfoBean.getArea());
+        mSignature.setText(userInfoBean.getSignature());
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -59,6 +91,25 @@ public class PersonInformationSetup extends Activity implements View.OnClickList
                 Intent address=new Intent(PersonInformationSetup.this, ShippingAddress.class);
                 startActivity(address);
                 break;
+            case R.id.mysignature:
+                Intent signature=new Intent(PersonInformationSetup.this, SignatureActivity.class);
+                startActivity(signature);
+                break;
+            case R.id.myarea:
+                startActivity(new Intent(PersonInformationSetup.this, MyAreaActivity.class));
+                break;
+            case R.id.mygender:
+                startActivity(new Intent(PersonInformationSetup.this, MyGenderActivity.class));
+                break;
+            case R.id.mynickname:
+                startActivity(new Intent(PersonInformationSetup.this, NickNameActivity.class));
+                break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
 }
