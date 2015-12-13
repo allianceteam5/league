@@ -329,12 +329,6 @@ public class ApiUtil {
         client.post(context, IClientUrl.getGrabWinRecords + currentpage, params, responseHandler);
     }
 
-    //获取最新揭晓
-    public static void getGrabLatestAnnounced(Context context, TextHttpResponseHandler responseHandler) {
-        RequestParams params = new RequestParams();
-        params.put("type", "1");
-        client.post(context, IClientUrl.getGrabLatestAnnounced, params, responseHandler);
-    }
 
     //抢红包接口 type=1 金币  =2 夺宝币
     public static void getGrabEnvelope(Context context, String phone, TextHttpResponseHandler responseHandler) {
@@ -371,5 +365,29 @@ public class ApiUtil {
     public static void getTheLatest(Context context,int currentPage,TextHttpResponseHandler responseHandler){
         RequestParams params = new RequestParams();
         client.post(context,IClientUrl.getTheLatest+currentPage,params,responseHandler);
+    }
+    //增加收货地址
+    public static void addShipAddress(Context context,String phone,String aphone,String name,String postcode,String address,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("aphone",aphone);
+        params.put("name",name);
+        params.put("isdefault",0);
+        params.put("postcode",postcode);
+        params.put("address",address);
+        client.post(context,IClientUrl.addShippingAddress,params,responseHandler);
+    }
+    //删除收货地址
+    public static void deleteShipAddress(Context context,String phone,String addressID,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("addressid",addressID);
+        client.post(context,IClientUrl.deleteShipAddress,params,responseHandler);
+    }
+    //获取用户详情
+    public static void getUserDetail(Context context,String phone,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        client.post(context,IClientUrl.getUserDetail,params,responseHandler);
     }
 }

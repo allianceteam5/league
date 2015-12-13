@@ -146,4 +146,5 @@
     <color name="btn_answer_normal">#2dafa3</color>
 
     <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="province_line_border">#C7C7C7</color>
 </resources>

@@ -1,7 +1,9 @@
 package com.league.activity.personinfoactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -70,6 +72,19 @@ public class ShippingAddress extends PersonInfoBaseActivity implements View.OnCl
                     listView.setVisibility(View.VISIBLE);
                     empty.setVisibility(View.GONE);
                     newAdd1.setVisibility(View.VISIBLE);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent add=new Intent(ShippingAddress.this,AddShippingAdr.class);
+                            add.putExtra("flag",1);//1表示修改地址
+                            add.putExtra("name",mAddressData.get(position).getName());
+                            add.putExtra("aphone",mAddressData.get(position).getAphone());
+                            add.putExtra("postcode",mAddressData.get(position).getPostcode());
+                            add.putExtra("address",mAddressData.get(position).getAddress());
+                            add.putExtra("addressID",mAddressData.get(position).getId());
+                            startActivity(add);
+                        }
+                    });
                 }
                 closeProgressDialog();
             }
@@ -91,9 +106,17 @@ public class ShippingAddress extends PersonInfoBaseActivity implements View.OnCl
         switch (v.getId()){
             case R.id.newadd:
             case R.id.addshipaddress:
-
+                Intent add=new Intent(ShippingAddress.this,AddShippingAdr.class);
+                add.putExtra("flag",0);//0表示新添加地址
+                startActivity(add);
                 break;
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
 }
