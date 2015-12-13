@@ -226,7 +226,15 @@ public class LoginActivity extends BaseActivity {
 		robotUser.setNick(strRobot);
 		robotUser.setHeader("");
 //		userlist.put(Constant.CHAT_ROBOT, robotUser);
-		
+
+		//添加"朋友圈"
+		User circle = new User();
+		String strCircle = getResources().getString(R.string.friend_circle);
+		circle.setUsername(Constant.FRIEDN_CIRCLE);
+		circle.setNick(strCircle);
+		circle.setHeader("");
+		userlist.put(Constant.FRIEDN_CIRCLE,circle);
+
 		// 存入内存
 		((DemoHXSDKHelper)HXSDKHelper.getInstance()).setContactList(userlist);
 		// 存入db

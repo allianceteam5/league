@@ -1,5 +1,7 @@
 package com.league.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by liug on 15/12/12.
  */
@@ -34,8 +36,9 @@ public class UserInfoBean {
      * isdraw : 1
      */
 
-    private int id;
     private String phone;
+    @JsonProperty("id")
+    private String hxId;
     private String pwd;
     private String authKey;
     private String fatherid;
@@ -59,11 +62,8 @@ public class UserInfoBean {
     private Object platform;
     private int friendcount;
     private int concerncount;
-    private int isdraw;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    private int isdraw;
 
     public void setPhone(String phone) {
         this.phone = phone;
@@ -165,10 +165,6 @@ public class UserInfoBean {
         this.isdraw = isdraw;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -267,5 +263,13 @@ public class UserInfoBean {
 
     public int getIsdraw() {
         return isdraw;
+    }
+
+    public void setHxId(String hxId) {
+        this.hxId = hxId;
+    }
+
+    public String getHxId() {
+        return hxId;
     }
 }

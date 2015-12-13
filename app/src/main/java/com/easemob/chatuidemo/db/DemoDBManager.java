@@ -77,7 +77,7 @@ public class DemoDBManager {
                 }
                 
                 if (username.equals(Constant.NEW_FRIENDS_USERNAME) || username.equals(Constant.GROUP_USERNAME)
-                        || username.equals(Constant.CHAT_ROOM)|| username.equals(Constant.CHAT_ROBOT)) {
+                        || username.equals(Constant.CHAT_ROOM)|| username.equals(Constant.CHAT_ROBOT) || username.equals(Constant.FRIEDN_CIRCLE)) {
                     user.setHeader("");
                 } else if (Character.isDigit(headerName.charAt(0))) {
                     user.setHeader("#");

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mine.league"
     android:versionCode="1"
-    android:versionName="1.0">
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -48,7 +48,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.NoTitleBar">
+        android:theme="@android:style/Theme.NoTitleBar" >
 
         <!-- 百度地图所需的service -->
         <service
@@ -103,7 +103,7 @@
         <activity
             android:name="com.easemob.chatuidemo.activity.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide">
+            android:theme="@style/horizontal_slide" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -305,8 +305,8 @@
             android:theme="@style/horizontal_slide" />
 
         <!-- 开机自启动服务 -->
-        <receiver android:name="com.easemob.chat.StartServiceReceiver">
-            <intent-filter android:priority="1000">
+        <receiver android:name="com.easemob.chat.StartServiceReceiver" >
+            <intent-filter android:priority="1000" >
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
 
@@ -318,7 +318,7 @@
         <receiver
             android:name="com.easemob.chat.EMGCMBroadcastReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND">
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
@@ -332,7 +332,7 @@
 
         <receiver
             android:name="com.easemob.chatuidemo.receiver.GCMPushBroadCast"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.easemob.sdk.push" />
 
@@ -349,7 +349,7 @@
         <!-- 声明sdk所需的service -->
         <service android:name="com.easemob.chat.EMChatService" />
         <!-- 声明sdk所需的receiver -->
-        <receiver android:name="com.easemob.chat.EMMonitorReceiver">
+        <receiver android:name="com.easemob.chat.EMMonitorReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
@@ -416,12 +416,12 @@
             android:theme="@style/grabenvolopedialog" />
         <activity android:name="com.league.activity.treasure.CountDetailActivity" />
         <activity android:name="com.league.activity.personinfoactivity.ShippingAddress" />
-        <activity android:name="com.league.utils.PersonInfoBaseActivity" />
         <activity android:name="com.league.activity.personinfoactivity.AddShippingAdr" />
         <activity android:name="com.league.activity.personinfoactivity.SignatureActivity" />
         <activity android:name="com.league.activity.personinfoactivity.MyAreaActivity" />
         <activity android:name="com.league.activity.personinfoactivity.MyGenderActivity" />
         <activity android:name="com.league.activity.personinfoactivity.NickNameActivity"></activity>
+        <activity android:name="com.league.activity.circle.CircleActivity"/>
     </application>
 
 </manifest>

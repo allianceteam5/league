@@ -145,13 +145,13 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 
         // setContactListener监听联系人的变化等
         EMContactManager.getInstance().setContactListener(new MyContactListener());
-        // 注册一个监听连接状态的listener
 
+        // 注册一个监听连接状态的listener
         connectionListener = new MyConnectionListener();
         EMChatManager.getInstance().addConnectionListener(connectionListener);
 
-        groupChangeListener = new MyGroupChangeListener();
         // 注册群聊相关的listener
+        groupChangeListener = new MyGroupChangeListener();
         EMGroupManager.getInstance().addGroupChangeListener(groupChangeListener);
 
         //异步获取当前用户的昵称和头像
@@ -314,6 +314,14 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                 robotUser.setNick(strRobot);
                 robotUser.setHeader("");
 //                userlist.put(Constant.CHAT_ROBOT, robotUser);
+
+                //添加"朋友圈"
+                User circle = new User();
+                String strCircle = context.getString(R.string.friend_circle);
+                circle.setUsername(Constant.FRIEDN_CIRCLE);
+                circle.setNick(strCircle);
+                circle.setHeader("");
+                userlist.put(Constant.FRIEDN_CIRCLE, circle);
 
                 // 存入内存
                 ((DemoHXSDKHelper) HXSDKHelper.getInstance()).setContactList(userlist);

@@ -155,16 +155,15 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 	private void init() {     
 		// setContactListener监听联系人的变化等
 		EMContactManager.getInstance().setContactListener(new MyContactListener());
+
 		// 注册一个监听连接状态的listener
-		
 		connectionListener = new MyConnectionListener();
 		EMChatManager.getInstance().addConnectionListener(connectionListener);
-		
-		groupChangeListener = new MyGroupChangeListener();
-		// 注册群聊相关的listener
+
+        // 注册群聊相关的listener
+        groupChangeListener = new MyGroupChangeListener();
         EMGroupManager.getInstance().addGroupChangeListener(groupChangeListener);
-		
-		
+
 		//内部测试方法，请忽略
 		registerInternalDebugReceiver();
 	}
