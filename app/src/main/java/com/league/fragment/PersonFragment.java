@@ -1,12 +1,15 @@
 package com.league.fragment;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -22,11 +25,10 @@ import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import io.paperdb.Paper;
 
 /**
@@ -34,22 +36,31 @@ import io.paperdb.Paper;
  * @date 2015年9月15日
  */
 public class PersonFragment extends Fragment implements View.OnClickListener {
-
+    protected Dialog loadingDialog;
     private View layout;
     private Activity ctx;
     private UserInfoBean userInfoBean;
-    @Bind(R.id.mythumb)
+//    @Bind(R.id.mythumb)
     CircleImageView mThumb;
-    @Bind(R.id.nickname)
+//    @Bind(R.id.nickname)
     TextView mNickname;
-    @Bind(R.id.phonenumber)
+//    @Bind(R.id.phonenumber)
     TextView mPhone;
-    @Bind(R.id.zhijiealliancenum)
+//    @Bind(R.id.zhijiealliancenum)
     TextView mDirectAllianceCount;
-    @Bind(R.id.fivefloartotal)
+//    @Bind(R.id.fivefloartotal)
     TextView mAllFive;
-    @Bind(R.id.award)
+//    @Bind(R.id.award)
     TextView mAward;
+
+    private static PersonFragment instance;
+    private PersonFragment(){}
+    public static synchronized PersonFragment getInstance(){
+        if(instance==null){
+            instance=new PersonFragment();
+        }
+        return instance;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,21 +68,23 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
         if (layout == null) {
             ctx = this.getActivity();
             layout = ctx.getLayoutInflater().inflate(R.layout.fragment_person, null);
-            setOnClickListener();
+
         } else {
             ViewGroup parent = (ViewGroup) layout.getParent();
             if (parent != null) {
                 parent.removeView(layout);
             }
         }
-        ButterKnife.bind(ctx,layout);
-//        mThumb= (CircleImageView) layout.findViewById(R.id.mythumb);
-//        mNickname= (TextView) layout.findViewById(R.id.nickname);
-//        mPhone= (TextView) layout.findViewById(R.id.phonenumber);
-//        mDirectAllianceCount= (TextView) layout.findViewById(R.id.zhijiealliancenum);
-//        mAllFive= (TextView) layout.findViewById(R.id.fivefloartotal);
-//        mAward= (TextView) layout.findViewById(R.id.award);
+//        ButterKnife.bind(ctx,layout);
+        mThumb= (CircleImageView) layout.findViewById(R.id.mythumb);
+        mNickname= (TextView) layout.findViewById(R.id.nickname);
+        mPhone= (TextView) layout.findViewById(R.id.phonenumber);
+        mDirectAllianceCount= (TextView) layout.findViewById(R.id.zhijiealliancenum);
+        mAllFive= (TextView) layout.findViewById(R.id.fivefloartotal);
+        mAward= (TextView) layout.findViewById(R.id.award);
+        showProgressDialog();
         initData();
+        setOnClickListener();
         return layout;
     }
 
@@ -113,14 +126,15 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
         ApiUtil.getUserDetail(ctx, Constants.PHONENUM, new BaseJsonHttpResponseHandler<UserInfoBean>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, UserInfoBean response) {
-                userInfoBean=response;
-                Paper.book().write("UserInfoBean",response);
-//                Picasso.with(ctx).load(response.getThumb()).into(mThumb);
-//                mNickname.setText(response.getNickname());
-//                mPhone.setText(response.getPhone());
-//                mDirectAllianceCount.setText(response.getDirectalliancecount());
-//                mAllFive.setText(response.getAllalliancecount());
-//                mAward.setText(response.getAlliancerewards());
+                userInfoBean = response;
+                Paper.book().write("UserInfoBean", response);
+                Picasso.with(ctx).load(response.getThumb()).into(mThumb);
+                mNickname.setText(response.getNickname());
+                mPhone.setText(response.getPhone());
+                mDirectAllianceCount.setText(response.getDirectalliancecount() + "");
+                mAllFive.setText(response.getAllalliancecount() + "");
+                mAward.setText(response.getAlliancerewards() + "");
+                closeProgressDialog();
             }
 
             @Override
@@ -140,5 +154,33 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         initData();
+    }
+    private Dialog createLoadingDialog(Context context) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.dialog_loading, null);// 得到加载view
+        Dialog loadingDialog = new Dialog(context, R.style.loading_dialog);// 创建自定义样式dialog
+
+        loadingDialog.setCancelable(false);// 不可以用“返回键”取消
+        loadingDialog.setContentView(view, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));// 设置布局
+        return loadingDialog;
+
+    }
+    /**
+     * 显示等待对话框
+     */
+    public void showProgressDialog() {
+        loadingDialog = createLoadingDialog(ctx);
+        loadingDialog.show();
+    }
+
+    /**
+     * 关闭等待对话框
+     */
+    public void closeProgressDialog() {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
     }
 }

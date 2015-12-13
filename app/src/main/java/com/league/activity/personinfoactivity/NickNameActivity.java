@@ -28,6 +28,7 @@ public class NickNameActivity extends PersonInfoBaseActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("昵称");
     }
 
     @Override
