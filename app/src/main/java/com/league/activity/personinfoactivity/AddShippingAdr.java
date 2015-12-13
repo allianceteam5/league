@@ -85,34 +85,65 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
                 break;
             case R.id.newadd:
                 showProgressDialog();
-                ApiUtil.addShipAddress(getApplicationContext(), Constants.PHONENUM, mPhoneNum.getText().toString(),
-                        mConsignee.getText().toString(), mPostId.getText().toString(), mDetail.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                closeProgressDialog();
-                                if (response.getFlag().equals("1")) {
-                                    onBackPressed();
-                                    finish();
-                                } else {
-                                    ToastUtils.showShortToast(getApplicationContext(), "添加失败，再试试");
+                if(getIntent().getIntExtra("flag",0)==0){
+                    ApiUtil.addShipAddress(getApplicationContext(), Constants.PHONENUM, mPhoneNum.getText().toString(),
+                            mConsignee.getText().toString(), mPostId.getText().toString(), province.getText().toString()+mDetail.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                                    closeProgressDialog();
+                                    if (response.getFlag().equals("1")) {
+                                        onBackPressed();
+                                        finish();
+                                    } else {
+                                        ToastUtils.showShortToast(getApplicationContext(), "添加失败，再试试");
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                                closeProgressDialog();
-                                ToastUtils.showShortToast(getApplicationContext(), "网络连接失败，再试试");
-                            }
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                                    closeProgressDialog();
+                                    ToastUtils.showShortToast(getApplicationContext(), "网络连接失败，再试试");
+                                }
 
-                            @Override
-                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
-                                });
-                            }
-                        });
+                                @Override
+                                protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                                    return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                                    });
+                                }
+                            });
+                }else{
+                    ApiUtil.modifyShipAddress(getApplicationContext(), Constants.PHONENUM, getIntent().getLongExtra("addressID",-1)+"",
+                            mPhoneNum.getText().toString(),
+                            mConsignee.getText().toString(), mPostId.getText().toString(), province.getText().toString()+mDetail.getText().toString(),
+                            new BaseJsonHttpResponseHandler<SucessBean>() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                                    closeProgressDialog();
+                                    if (response.getFlag().equals("1")) {
+                                        onBackPressed();
+                                        finish();
+                                    } else {
+                                        ToastUtils.showShortToast(getApplicationContext(), "添加失败，再试试");
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                                    closeProgressDialog();
+                                    ToastUtils.showShortToast(getApplicationContext(), "网络连接失败，再试试");
+                                }
+
+                                @Override
+                                protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                                    return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                                    });
+                                }
+                            });
+                }
+
                 break;
             case R.id.delete:
-                ApiUtil.deleteShipAddress(getApplicationContext(), Constants.PHONENUM, getIntent().getLongExtra("addressID",0)+"", new BaseJsonHttpResponseHandler<SucessBean>() {
+                ApiUtil.deleteShipAddress(getApplicationContext(), Constants.PHONENUM, getIntent().getLongExtra("addressID", 0) + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                         if (response.getFlag().equals("1")) {
@@ -140,7 +171,8 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
         mConsignee.setText(getIntent().getStringExtra("name"));
         mPhoneNum.setText(getIntent().getStringExtra("aphone"));
         mPostId.setText(getIntent().getStringExtra("postcode"));
-        mDetail.setText(getIntent().getStringExtra("address"));
+//        mDetail.setText(getIntent().getStringExtra("address"));
+
         mSave.setText("修改");
         mDelete.setVisibility(View.VISIBLE);
 

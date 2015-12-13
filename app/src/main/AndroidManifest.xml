@@ -421,7 +421,8 @@
         <activity android:name="com.league.activity.personinfoactivity.SignatureActivity" />
         <activity android:name="com.league.activity.personinfoactivity.MyAreaActivity" />
         <activity android:name="com.league.activity.personinfoactivity.MyGenderActivity" />
-        <activity android:name="com.league.activity.personinfoactivity.NickNameActivity"></activity>
+        <activity android:name="com.league.activity.personinfoactivity.NickNameActivity" />
+        <activity android:name="com.league.activity.personinfoactivity.InviteFriendActivity"></activity>
     </application>
 
 </manifest>

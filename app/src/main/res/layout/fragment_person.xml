@@ -214,15 +214,14 @@
             </LinearLayout>
 
             <View
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="10dip"
                 android:background="@color/black2" />
 
             <RelativeLayout
-                android:visibility="gone"
+                android:id="@+id/invitefriend"
                 android:layout_width="match_parent"
-                android:layout_height="50dip"
+                android:layout_height="wrap_content"
                 android:background="@color/white">
 
                 <ImageView
@@ -235,6 +234,9 @@
                     android:src="@drawable/yaoqinghaoyouicon" />
 
                 <TextView
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -242,7 +244,7 @@
                     android:layout_toRightOf="@id/img1"
                     android:text="邀请好友"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
