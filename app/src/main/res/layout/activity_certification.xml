@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:textColor="@color/white"
-        android:text="修改"
+        android:text="绑定"
         android:textSize="14sp"
         android:layout_marginTop="5dip"
         android:layout_marginLeft="15dip"

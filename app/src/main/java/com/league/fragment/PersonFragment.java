@@ -75,4 +75,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+    private void initData(){
+
+    }
 }

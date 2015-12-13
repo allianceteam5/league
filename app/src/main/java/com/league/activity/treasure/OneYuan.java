@@ -60,6 +60,12 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
         title.requestFocusFromTouch();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
+
     private void initView() {
         back = (ImageView) findViewById(R.id.near_back);
         back.setOnClickListener(this);
@@ -153,6 +159,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
         ApiUtil.getTheLatest(getApplication(),1, new BaseJsonHttpResponseHandler<ArrayList<AnnouncedTheLatestBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<AnnouncedTheLatestBean> response) {
+                announcedList.clear();
                 if(response.size()<3){
                     announcedList.addAll(response);
                 }else{
@@ -163,9 +170,14 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
 
                 latestGridView.setAdapter(new LatestAnnouncedAdapter(announcedList, getApplication()));
                 latestGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    Intent intent;
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(OneYuan.this, OneYuanGrabItem.class);
+                        if(announcedList.get(position).getTbk().equals("1")){
+                            intent = new Intent(OneYuan.this, OneYuanGrabItem.class);
+                        }else{
+                            intent=new Intent(OneYuan.this,TenYuanGrabItem.class);
+                        }
                         intent.putExtra("id", announcedList.get(position).getId());
                         startActivity(intent);
                     }

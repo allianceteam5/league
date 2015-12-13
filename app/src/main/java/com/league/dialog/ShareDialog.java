@@ -20,6 +20,7 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
     private ImageView weixin,qq,friends;
     private Context context;
     View localView;
+
     public ShareDialog(Context context) {
         super(context);
         this.context=context;

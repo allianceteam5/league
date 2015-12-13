@@ -122,7 +122,12 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(LatestAnnounce.this,OneYuanGrabItem.class);
+                Intent intent;
+                if(list.get(position).getTbk().equals("1")){
+                    intent=new Intent(LatestAnnounce.this,OneYuanGrabItem.class);
+                }else{
+                    intent=new Intent(LatestAnnounce.this,TenYuanGrabItem.class);
+                }
                 intent.putExtra("id",list.get(position).getId());
                 startActivity(intent);
             }

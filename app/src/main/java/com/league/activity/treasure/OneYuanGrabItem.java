@@ -116,6 +116,11 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
         title.requestFocusFromTouch();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
 
     private void initView() {
         myrecordlist= (ListViewForScrollView) findViewById(R.id.myrecordlist);

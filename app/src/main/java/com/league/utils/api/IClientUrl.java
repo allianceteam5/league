@@ -53,11 +53,13 @@ public class IClientUrl {
     public static final String getGrabCoinRecords = testServerUrl + "grabcornrecords/list?page=";
     public static final String getGrabCommodyReocrds = testServerUrl + "grabcommodityrecords/list?page=";
     public static final String getGrabWinRecords = testServerUrl + "grabcornrecords/win?page=";
-    public static final String getGrabLatestAnnounced = testServerUrl + "grabcommodities/search";
     public static final String getGrabEnvelopes = testServerUrl + "envelopes/draw";
     public static final String getMoreRecordCorn = testServerUrl + "grabcorns/morerecords?page=";
     public static final String getMoreRecordCommodity = testServerUrl + "grabcommodities/morerecords?page=";
     public static final String applyForCorns = testServerUrl + "grabcorns/getcorns";
     public static final String getShippingAddress = testServerUrl + "users/listaddresses";
     public static final String getTheLatest = testServerUrl + "grab/list?page=";
+    public static final String addShippingAddress = testServerUrl + "users/createaddress";
+    public static final String deleteShipAddress = testServerUrl + "users/deleteaddress";
+    public static final String getUserDetail=testServerUrl+"users/view";
 }
