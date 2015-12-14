@@ -53,17 +53,29 @@ import com.easemob.chatuidemo.utils.CommonUtils;
 import com.easemob.util.EMLog;
 import com.easemob.util.HanziToPinyin;
 import com.easemob.util.NetUtils;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.bean.JobInfoBean;
+import com.league.bean.KindBean;
+import com.league.bean.UserBasicInfo;
 import com.league.fragment.PersonFragment;
 import com.league.fragment.ResourceFragment;
 import com.league.utils.ComplexPreferences;
+import com.league.utils.Constants;
+import com.league.utils.api.ApiUtil;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
 import com.umeng.analytics.MobclickAgent;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import io.paperdb.Paper;
 
 
 public class MainActivity extends BaseActivity implements EMEventListener {
@@ -268,22 +280,15 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         });
     }
 
-    static void asyncFetchContactsFromServer() {
+    void asyncFetchContactsFromServer() {
         HXSDKHelper.getInstance().asyncFetchContactsFromServer(new EMValueCallBack<List<String>>() {
 
             @Override
             public void onSuccess(List<String> usernames) {
                 Context context = HXSDKHelper.getInstance().getAppContext();
-
+                Map<String, User> userlist = new HashMap<String, User>();
                 System.out.println("----------------" + usernames.toString());
                 EMLog.d("roster", "contacts size: " + usernames.size());
-                Map<String, User> userlist = new HashMap<String, User>();
-                for (String username : usernames) {
-                    User user = new User();
-                    user.setUsername(username);
-                    setUserHearder(username, user);
-                    userlist.put(username, user);
-                }
                 // 添加user"申请与通知"
                 User newFriends = new User();
                 newFriends.setUsername(Constant.NEW_FRIENDS_USERNAME);
@@ -321,6 +326,29 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                 circle.setUsername(Constant.FRIEDN_CIRCLE);
                 circle.setNick(strCircle);
                 circle.setHeader("");
+
+                //修改avatar
+                getAvatar(new AvatarFetchListener() {
+                    @Override
+                    public void success(List<UserBasicInfo> users) {
+                        User user = new User();
+//                        user.setUsername(users);
+//                        setUserHearder(username, user);
+//                        userlist.put(username, user);
+                    }
+
+                    @Override
+                    public void error() {
+
+                    }
+                });
+//                for (String username : usernames) {
+//                    User user = new User();
+//                    user.setUsername(username);
+//                    setUserHearder(username, user);
+//                    userlist.put(username, user);
+//                }
+
                 userlist.put(Constant.FRIEDN_CIRCLE, circle);
 
                 // 存入内存
@@ -330,24 +358,24 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                 List<User> users = new ArrayList<User>(userlist.values());
                 dao.saveContactList(users);
 
-                HXSDKHelper.getInstance().notifyContactsSyncListener(true);
-
-                if (HXSDKHelper.getInstance().isGroupsSyncedWithServer()) {
-                    HXSDKHelper.getInstance().notifyForRecevingEvents();
-                }
-
-                ((DemoHXSDKHelper) HXSDKHelper.getInstance()).getUserProfileManager().asyncFetchContactInfosFromServer(usernames, new EMValueCallBack<List<User>>() {
-
-                    @Override
-                    public void onSuccess(List<User> uList) {
-                        ((DemoHXSDKHelper) HXSDKHelper.getInstance()).updateContactList(uList);
-                        ((DemoHXSDKHelper) HXSDKHelper.getInstance()).getUserProfileManager().notifyContactInfosSyncListener(true);
-                    }
-
-                    @Override
-                    public void onError(int error, String errorMsg) {
-                    }
-                });
+//                HXSDKHelper.getInstance().notifyContactsSyncListener(true);
+//
+//                if (HXSDKHelper.getInstance().isGroupsSyncedWithServer()) {
+//                    HXSDKHelper.getInstance().notifyForRecevingEvents();
+//                }
+//
+//                ((DemoHXSDKHelper) HXSDKHelper.getInstance()).getUserProfileManager().asyncFetchContactInfosFromServer(usernames, new EMValueCallBack<List<User>>() {
+//
+//                    @Override
+//                    public void onSuccess(List<User> uList) {
+//                        ((DemoHXSDKHelper) HXSDKHelper.getInstance()).updateContactList(uList);
+//                        ((DemoHXSDKHelper) HXSDKHelper.getInstance()).getUserProfileManager().notifyContactInfosSyncListener(true);
+//                    }
+//
+//                    @Override
+//                    public void onError(int error, String errorMsg) {
+//                    }
+//                });
             }
 
             @Override
@@ -375,6 +403,32 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         });
     }
 
+    public interface AvatarFetchListener{
+        public void success(List<UserBasicInfo> users);
+        public void error();
+    }
+    public void getAvatar(final AvatarFetchListener listener){
+        ApiUtil.friendList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<UserBasicInfo>>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<UserBasicInfo> response) {
+                if (listener!=null)
+                    listener.success(response);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<UserBasicInfo> errorResponse) {
+                if(listener!=null)
+                    listener.error();
+            }
+
+            @Override
+            protected ArrayList<UserBasicInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                Log.d("response", rawJsonData);
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<UserBasicInfo>>() {
+                });
+            }
+        });
+    }
     /**
      * 设置hearder属性，方便通讯中对联系人按header分类显示，以及通过右侧ABCD...字母栏快速定位联系人
      *

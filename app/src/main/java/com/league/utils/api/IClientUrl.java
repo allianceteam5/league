@@ -8,8 +8,11 @@ public class IClientUrl {
     public static final String ProfessionList = testServerUrl + "professions/list";
     public static final String ApplyJobCreated = testServerUrl + "applyjobs/create";
     public static final String ApplyJobSearch = testServerUrl + "applyjobs/search?page=";
-
     public static final String RecomendationList = testServerUrl + "kindsofrecommendation/list";
+
+    public static final String Login = testServerUrl + "";
+    public static final String FriendList = testServerUrl + "friends/list ";
+
     public static final String RecomendationSearch = testServerUrl + "recommendations/search?page=";
     public static final String RecomendationCreated = testServerUrl + "recommendations/create";
     public static final String RecomendationCommentCreated = testServerUrl + "recommendationcomments/create";

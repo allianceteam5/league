@@ -248,22 +248,22 @@ public class ContactlistFragment extends Fragment {
 
 		registerForContextMenu(listView);
 		
-		progressBar = (View) getView().findViewById(R.id.progress_bar);
-
-		contactSyncListener = new HXContactSyncListener();
-		HXSDKHelper.getInstance().addSyncContactListener(contactSyncListener);
-		
-		blackListSyncListener = new HXBlackListSyncListener();
-		HXSDKHelper.getInstance().addSyncBlackListListener(blackListSyncListener);
-		
-		contactInfoSyncListener = new HXContactInfoSyncListener();
-		((DemoHXSDKHelper)HXSDKHelper.getInstance()).getUserProfileManager().addSyncContactInfoListener(contactInfoSyncListener);
-		
-		if (!HXSDKHelper.getInstance().isContactsSyncedWithServer()) {
-			progressBar.setVisibility(View.VISIBLE);
-		} else {
-			progressBar.setVisibility(View.GONE);
-		}
+//		progressBar = (View) getView().findViewById(R.id.progress_bar);
+//
+//		contactSyncListener = new HXContactSyncListener();
+//		HXSDKHelper.getInstance().addSyncContactListener(contactSyncListener);
+//
+//		blackListSyncListener = new HXBlackListSyncListener();
+//		HXSDKHelper.getInstance().addSyncBlackListListener(blackListSyncListener);
+//
+//		contactInfoSyncListener = new HXContactInfoSyncListener();
+//		((DemoHXSDKHelper)HXSDKHelper.getInstance()).getUserProfileManager().addSyncContactInfoListener(contactInfoSyncListener);
+//
+//		if (!HXSDKHelper.getInstance().isContactsSyncedWithServer()) {
+//			progressBar.setVisibility(View.VISIBLE);
+//		} else {
+//			progressBar.setVisibility(View.GONE);
+//		}
 	}
 
 	@Override
