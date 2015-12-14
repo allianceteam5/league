@@ -390,6 +390,17 @@ public class ApiUtil {
         params.put("address",address);
         client.post(context,IClientUrl.addShippingAddress,params,responseHandler);
     }
+    //修改收货地址
+    public static void modifyShipAddress(Context context,String phone,String addressid,String aphone,String name,String postcode,String address,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("addressid",addressid);
+        params.put("aphone",aphone);
+        params.put("name",name);
+        params.put("postcode",postcode);
+        params.put("address",address);
+        client.post(context,IClientUrl.modifyShippingAddress,params,responseHandler);
+    }
     //删除收货地址
     public static void deleteShipAddress(Context context,String phone,String addressID,TextHttpResponseHandler responseHandler){
         RequestParams params=new RequestParams();
@@ -431,4 +442,5 @@ public class ApiUtil {
         params.put("nickname",nick);
         client.post(context,IClientUrl.modifyUserDetail,params,responseHandler);
     }
+
 }

@@ -63,6 +63,7 @@ public class IClientUrl {
     public static final String getShippingAddress = testServerUrl + "users/listaddresses";
     public static final String getTheLatest = testServerUrl + "grab/list?page=";
     public static final String addShippingAddress = testServerUrl + "users/createaddress";
+    public static final String modifyShippingAddress=testServerUrl+"users/modifyaddress";
     public static final String deleteShipAddress = testServerUrl + "users/deleteaddress";
     public static final String getUserDetail = testServerUrl + "users/view";
     public static final String modifyUserDetail = testServerUrl + "users/modify";

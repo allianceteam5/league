@@ -422,6 +422,8 @@
         <activity android:name="com.league.activity.personinfoactivity.MyGenderActivity" />
         <activity android:name="com.league.activity.personinfoactivity.NickNameActivity"></activity>
         <activity android:name="com.league.activity.circle.CircleActivity"/>
+        <activity android:name="com.league.activity.personinfoactivity.NickNameActivity" />
+        <activity android:name="com.league.activity.personinfoactivity.InviteFriendActivity"></activity>
     </application>
 
 </manifest>
