@@ -28,6 +28,7 @@ public class DbOpenHelper extends SQLiteOpenHelper{
 			+ UserDao.TABLE_NAME + " ("
 			+ UserDao.COLUMN_NAME_NICK + " TEXT, "
 			+ UserDao.COLUMN_NAME_AVATAR + " TEXT, "
+			+ UserDao.COLUMN_NAME_PHONE + " TEXT, "
 			+ UserDao.COLUMN_NAME_ID + " TEXT PRIMARY KEY);";
 	
 	private static final String INIVTE_MESSAGE_TABLE_CREATE = "CREATE TABLE "

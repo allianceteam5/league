@@ -170,7 +170,7 @@ public class ContactlistFragment extends Fragment {
 		blackList = EMContactManager.getInstance().getBlackListUsernames();
 		contactList = new ArrayList<User>();
 		// 获取设置contactlist
-		getContactList();
+//		getContactList();
 		
 		//搜索框
 		query = (EditText) getView().findViewById(R.id.query);
