@@ -100,7 +100,7 @@ public class ContactAdapter extends ArrayAdapter<User>  implements SectionIndexe
 		} else {
 		    holder.tvHeader.setVisibility(View.GONE);
 		}
-		//显示申请与通知item
+
 		if(username.equals(Constant.NEW_FRIENDS_USERNAME)){
 		    holder.nameTextview.setText(user.getNick());
 		    holder.avatar.setImageResource(R.drawable.new_friends_icon);
@@ -110,6 +110,10 @@ public class ContactAdapter extends ArrayAdapter<User>  implements SectionIndexe
 			}else{
 			    holder.unreadMsgView.setVisibility(View.INVISIBLE);
 			}
+		}else if(username.equals(Constant.FRIEDN_CIRCLE)){
+			//显示申请与通知item
+			holder.nameTextview.setText(user.getNick());
+			holder.avatar.setImageResource(R.drawable.friend_circle);
 		}else if(username.equals(Constant.GROUP_USERNAME)){
 			//群聊item
 		    holder.nameTextview.setText(user.getNick());

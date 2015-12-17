@@ -54,6 +54,7 @@ import com.easemob.applib.controller.HXSDKHelper.HXSyncListener;
 import com.easemob.chat.EMContactManager;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.league.activity.circle.CircleActivity;
 import com.mine.league.R;
 import com.easemob.chatuidemo.adapter.ContactAdapter;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
@@ -169,7 +170,7 @@ public class ContactlistFragment extends Fragment {
 		blackList = EMContactManager.getInstance().getBlackListUsernames();
 		contactList = new ArrayList<User>();
 		// 获取设置contactlist
-		getContactList();
+//		getContactList();
 		
 		//搜索框
 		query = (EditText) getView().findViewById(R.id.query);
@@ -219,10 +220,13 @@ public class ContactlistFragment extends Fragment {
 				} else if(Constant.CHAT_ROOM.equals(username)){
 					//进入聊天室列表页面
 				    startActivity(new Intent(getActivity(), PublicChatRoomsActivity.class));
-				}else if(Constant.CHAT_ROBOT.equals(username)){
+				} else if(Constant.CHAT_ROBOT.equals(username)){
 					//进入Robot列表页面
 					startActivity(new Intent(getActivity(), RobotsActivity.class));
-				}else {
+				} else if (Constant.FRIEDN_CIRCLE.equals(username)){
+					//进入朋友圈页面
+					startActivity(new Intent(getActivity(), CircleActivity.class));
+				} else {
 					// demo中直接进入聊天页面，实际一般是进入用户详情页
 					startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", adapter.getItem(position).getUsername()));
 				}
@@ -244,22 +248,22 @@ public class ContactlistFragment extends Fragment {
 
 		registerForContextMenu(listView);
 		
-		progressBar = (View) getView().findViewById(R.id.progress_bar);
-
-		contactSyncListener = new HXContactSyncListener();
-		HXSDKHelper.getInstance().addSyncContactListener(contactSyncListener);
-		
-		blackListSyncListener = new HXBlackListSyncListener();
-		HXSDKHelper.getInstance().addSyncBlackListListener(blackListSyncListener);
-		
-		contactInfoSyncListener = new HXContactInfoSyncListener();
-		((DemoHXSDKHelper)HXSDKHelper.getInstance()).getUserProfileManager().addSyncContactInfoListener(contactInfoSyncListener);
-		
-		if (!HXSDKHelper.getInstance().isContactsSyncedWithServer()) {
-			progressBar.setVisibility(View.VISIBLE);
-		} else {
-			progressBar.setVisibility(View.GONE);
-		}
+//		progressBar = (View) getView().findViewById(R.id.progress_bar);
+//
+//		contactSyncListener = new HXContactSyncListener();
+//		HXSDKHelper.getInstance().addSyncContactListener(contactSyncListener);
+//
+//		blackListSyncListener = new HXBlackListSyncListener();
+//		HXSDKHelper.getInstance().addSyncBlackListListener(blackListSyncListener);
+//
+//		contactInfoSyncListener = new HXContactInfoSyncListener();
+//		((DemoHXSDKHelper)HXSDKHelper.getInstance()).getUserProfileManager().addSyncContactInfoListener(contactInfoSyncListener);
+//
+//		if (!HXSDKHelper.getInstance().isContactsSyncedWithServer()) {
+//			progressBar.setVisibility(View.VISIBLE);
+//		} else {
+//			progressBar.setVisibility(View.GONE);
+//		}
 	}
 
 	@Override
@@ -438,6 +442,8 @@ public class ContactlistFragment extends Fragment {
 		contactList.clear();
 		//获取本地好友列表
 		Map<String, User> users = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getContactList();
+		//加上从服务器后台获取好友的头像
+
 		Iterator<Entry<String, User>> iterator = users.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<String, User> entry = iterator.next();
@@ -445,7 +451,7 @@ public class ContactlistFragment extends Fragment {
 			        && !entry.getKey().equals(Constant.GROUP_USERNAME)
 			        && !entry.getKey().equals(Constant.CHAT_ROOM)
 					&& !entry.getKey().equals(Constant.CHAT_ROBOT)
-					&& !blackList.contains(entry.getKey()))
+					&& !blackList.contains(entry.getKey())&&!entry.getKey().equals(Constant.FRIEDN_CIRCLE))
 				contactList.add(entry.getValue());
 		}
 		// 排序
@@ -469,7 +475,8 @@ public class ContactlistFragment extends Fragment {
 		// 把"申请与通知"添加到首位
 		if(users.get(Constant.NEW_FRIENDS_USERNAME) != null)
 		    contactList.add(0, users.get(Constant.NEW_FRIENDS_USERNAME));
-		
+		if (users.get(Constant.FRIEDN_CIRCLE) != null)
+			contactList.add(0, users.get(Constant.FRIEDN_CIRCLE));
 	}
 	
 	void hideSoftKeyboard() {

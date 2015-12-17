@@ -19,6 +19,7 @@ public class User extends EMContact {
 	private int unreadMsgCount;
 	private String header;
 	private String avatar;
+	private String phone;
 	
 	public User(){}
 	
@@ -41,8 +42,14 @@ public class User extends EMContact {
 	public void setUnreadMsgCount(int unreadMsgCount) {
 		this.unreadMsgCount = unreadMsgCount;
 	}
-	
-	
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 	public String getAvatar() {
         return avatar;

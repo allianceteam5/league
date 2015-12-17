@@ -19,6 +19,19 @@ public class ApiUtil {
     private static void printHttp(String baseUrl, RequestParams params) {
         Log.d("http", "http请求: " + baseUrl + "?" + params);
     }
+
+    public static void login(Context context,String phone,String pwd,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.add("phone",phone);
+        params.add("pwd",pwd);
+        client.post(context, IClientUrl.Login, params, responseHandler);
+    }
+
+    public static void friendList(Context context,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.add("phone",testPhone);
+        client.post(context,IClientUrl.FriendList,params,responseHandler);
+    }
     public static void professionList(Context context, TextHttpResponseHandler responseHandler) {
         client.post(context, IClientUrl.ProfessionList, new RequestParams(), responseHandler);
     }

@@ -1,10 +1,5 @@
 package com.easemob.chatuidemo.db;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -17,6 +12,11 @@ import com.easemob.chatuidemo.domain.InviteMessage.InviteMesageStatus;
 import com.easemob.chatuidemo.domain.RobotUser;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.util.HanziToPinyin;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DemoDBManager {
     static private DemoDBManager dbMgr = new DemoDBManager();
@@ -46,6 +46,8 @@ public class DemoDBManager {
                     values.put(UserDao.COLUMN_NAME_NICK, user.getNick());
                 if(user.getAvatar() != null)
                     values.put(UserDao.COLUMN_NAME_AVATAR, user.getAvatar());
+                if (user.getPhone() != null)
+                    values.put(UserDao.COLUMN_NAME_PHONE, user.getPhone());
                 db.replace(UserDao.TABLE_NAME, null, values);
             }
         }
@@ -65,10 +67,12 @@ public class DemoDBManager {
                 String username = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_ID));
                 String nick = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_NICK));
                 String avatar = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_AVATAR));
+                String phone = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_PHONE));
                 User user = new User();
                 user.setUsername(username);
                 user.setNick(nick);
                 user.setAvatar(avatar);
+                user.setPhone(phone);
                 String headerName = null;
                 if (!TextUtils.isEmpty(user.getNick())) {
                     headerName = user.getNick();
@@ -77,7 +81,7 @@ public class DemoDBManager {
                 }
                 
                 if (username.equals(Constant.NEW_FRIENDS_USERNAME) || username.equals(Constant.GROUP_USERNAME)
-                        || username.equals(Constant.CHAT_ROOM)|| username.equals(Constant.CHAT_ROBOT)) {
+                        || username.equals(Constant.CHAT_ROOM)|| username.equals(Constant.CHAT_ROBOT) || username.equals(Constant.FRIEDN_CIRCLE)) {
                     user.setHeader("");
                 } else if (Character.isDigit(headerName.charAt(0))) {
                     user.setHeader("#");
@@ -119,6 +123,8 @@ public class DemoDBManager {
             values.put(UserDao.COLUMN_NAME_NICK, user.getNick());
         if(user.getAvatar() != null)
             values.put(UserDao.COLUMN_NAME_AVATAR, user.getAvatar());
+        if (user.getPhone() != null)
+            values.put(UserDao.COLUMN_NAME_PHONE, user.getPhone());
         if(db.isOpen()){
             db.replace(UserDao.TABLE_NAME, null, values);
         }
