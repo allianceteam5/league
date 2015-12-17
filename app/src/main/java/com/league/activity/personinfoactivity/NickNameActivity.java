@@ -55,6 +55,7 @@ public class NickNameActivity extends PersonInfoBaseActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.newadd:
+                mOption.setClickable(false);
                 ApiUtil.modifyUserDetailNickname(getApplicationContext(), Constants.PHONENUM, mInputNickname.getText().toString(),
                         new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
@@ -72,6 +73,7 @@ public class NickNameActivity extends PersonInfoBaseActivity implements View.OnC
                             @Override
                             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
                                 ToastUtils.showShortToast(getApplicationContext(),"网络不好，再试试");
+                                mOption.setClickable(true);
                             }
 
                             @Override
