@@ -96,6 +96,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
         layout.findViewById(R.id.aliancereward).setOnClickListener(this);
         layout.findViewById(R.id.mycollection).setOnClickListener(this);
         layout.findViewById(R.id.mymoneybag).setOnClickListener(this);
+        layout.findViewById(R.id.invitefriend).setOnClickListener(this);
     }
 
     @Override

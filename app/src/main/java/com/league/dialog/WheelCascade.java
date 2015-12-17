@@ -99,7 +99,8 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
         switch (v.getId()) {
             case R.id.btn_confirm:
                 dismiss();
-                listener.refreshProvince(mCurrentProviceName + mCurrentCityName + mCurrentDistrictName);
+                String temp=mCurrentProviceName+" " + mCurrentCityName +" "+ mCurrentDistrictName+" ";
+                listener.refreshProvince(temp);
                 break;
             default:
                 break;
@@ -108,7 +109,8 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         this.dismiss();
-        listener.refreshProvince(mCurrentProviceName + mCurrentCityName + mCurrentDistrictName);
+        String temp=mCurrentProviceName+" " + mCurrentCityName +" "+ mCurrentDistrictName+" ";
+        listener.refreshProvince(temp);
         return super.onTouchEvent(event);
     }
 

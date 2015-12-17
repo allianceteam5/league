@@ -37,6 +37,9 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
     EditText mDetail;
     @Bind(R.id.delete)
     Button mDelete;
+
+    private String withSpaceProvice;
+    private String[] pro_city;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +81,8 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
 
                     @Override
                     public void refreshProvince(String string) {
-                        province.setText(string);
+                        withSpaceProvice=new String(string);
+                        province.setText(string.replace(" ",""));
                     }
                 });
                 dialog.show();
@@ -87,7 +91,7 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
                 showProgressDialog();
                 if(getIntent().getIntExtra("flag",0)==0){
                     ApiUtil.addShipAddress(getApplicationContext(), Constants.PHONENUM, mPhoneNum.getText().toString(),
-                            mConsignee.getText().toString(), mPostId.getText().toString(), province.getText().toString()+mDetail.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
+                            mConsignee.getText().toString(), mPostId.getText().toString(), withSpaceProvice+mDetail.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
                                 @Override
                                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                     closeProgressDialog();
@@ -112,9 +116,16 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
                                 }
                             });
                 }else{
+                    int index=0;
+                    for(int j=0;j<3;index++){
+                        if(withSpaceProvice.charAt(index)==' '){
+                            j++;
+                        }
+                    }
+                    index--;
                     ApiUtil.modifyShipAddress(getApplicationContext(), Constants.PHONENUM, getIntent().getLongExtra("addressID",-1)+"",
                             mPhoneNum.getText().toString(),
-                            mConsignee.getText().toString(), mPostId.getText().toString(), province.getText().toString()+mDetail.getText().toString(),
+                            mConsignee.getText().toString(), mPostId.getText().toString(), withSpaceProvice.substring(0,index)+" "+mDetail.getText().toString(),
                             new BaseJsonHttpResponseHandler<SucessBean>() {
                                 @Override
                                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
@@ -171,8 +182,10 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
         mConsignee.setText(getIntent().getStringExtra("name"));
         mPhoneNum.setText(getIntent().getStringExtra("aphone"));
         mPostId.setText(getIntent().getStringExtra("postcode"));
-//        mDetail.setText(getIntent().getStringExtra("address"));
-
+        withSpaceProvice=getIntent().getStringExtra("address");
+        pro_city=withSpaceProvice.split(" ",4);
+        mDetail.setText(pro_city[3]);
+        province.setText(pro_city[0]+pro_city[1]+pro_city[2]);
         mSave.setText("修改");
         mDelete.setVisibility(View.VISIBLE);
 

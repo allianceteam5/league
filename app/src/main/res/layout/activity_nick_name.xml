@@ -6,6 +6,10 @@
     android:orientation="vertical">
     <include layout="@layout/layout_title">
     </include>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/transparent"/>
     <EditText
         android:id="@+id/inputnickname"
         android:layout_width="match_parent"
