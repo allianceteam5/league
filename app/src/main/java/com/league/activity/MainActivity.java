@@ -55,13 +55,10 @@ import com.easemob.util.HanziToPinyin;
 import com.easemob.util.NetUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.league.bean.JobInfoBean;
-import com.league.bean.KindBean;
 import com.league.bean.UserBasicInfo;
 import com.league.fragment.PersonFragment;
 import com.league.fragment.ResourceFragment;
 import com.league.utils.ComplexPreferences;
-import com.league.utils.Constants;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
@@ -74,8 +71,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import io.paperdb.Paper;
 
 
 public class MainActivity extends BaseActivity implements EMEventListener {
@@ -134,7 +129,6 @@ public class MainActivity extends BaseActivity implements EMEventListener {
             startActivity(new Intent(this, LoginActivity.class));
             return;
         }
-        getAvatar();
         setContentView(R.layout.activity_main);
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -168,6 +162,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 
         //异步获取当前用户的昵称和头像
         ((DemoHXSDKHelper) HXSDKHelper.getInstance()).getUserProfileManager().asyncGetCurrentUserInfo();
+//        getAvatar();
     }
 
     public void init() {
@@ -324,36 +319,39 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         userlist.put(Constant.FRIEDN_CIRCLE, circle);
 
         //修改avatar
-        getAvatar();
-//        getAvatar(new AvatarFetchListener() {
-//            @Override
-//            public void success(List<UserBasicInfo> users) {
-//                for (UserBasicInfo userBasicInfo : users) {
-//                    User user = new User();
-//                    user.setNick(userBasicInfo.getNickname());
-//                    user.setUsername(userBasicInfo.getHuanxinid());
-//                    user.setAvatar(userBasicInfo.getThumb());
-//                    user.setPhone(userBasicInfo.getPhone());
-//                }
-//
-//
-//                // 存入内存
-//                ((DemoHXSDKHelper) HXSDKHelper.getInstance()).setContactList(userlist);
-//                // 存入db
-//                UserDao dao = new UserDao(context);
-//                final List<User> userList = new ArrayList<User>(userlist.values());
-//                dao.saveContactList(userList);
-////                        User user = new User();
-////                        user.setUsername(users);
-////                        setUserHearder(username, user);
-////                        userlist.put(username, user);
-//            }
-//
-//            @Override
-//            public void error() {
-//
-//            }
-//        });
+        getAvatar(new AvatarFetchListener() {
+            @Override
+            public void success(List<UserBasicInfo> users) {
+                for (UserBasicInfo userBasicInfo : users) {
+                    User user = new User();
+                    user.setNick(userBasicInfo.getNickname());
+                    user.setUsername(userBasicInfo.getHuanxinid());
+                    user.setAvatar(userBasicInfo.getThumb());
+                    user.setPhone(userBasicInfo.getPhone());
+                    setUserHearder(userBasicInfo.getHuanxinid(), user);
+                    userlist.put(userBasicInfo.getHuanxinid(),user);
+                }
+
+
+                // 存入内存
+                ((DemoHXSDKHelper) HXSDKHelper.getInstance()).setContactList(userlist);
+                // 存入db
+                UserDao dao = new UserDao(context);
+                final List<User> userList = new ArrayList<User>(userlist.values());
+                dao.saveContactList(userList);
+
+                HXSDKHelper.getInstance().notifyContactsSyncListener(true);
+//                        User user = new User();
+//                        user.setUsername(users);
+//                        setUserHearder(username, user);
+//                        userlist.put(username, user);
+            }
+
+            @Override
+            public void error() {
+
+            }
+        });
 //                for (String username : usernames) {
 //                    User user = new User();
 //                    user.setUsername(username);
@@ -429,22 +427,28 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     }
 
     public void getAvatar() {
-        ApiUtil.friendList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<UserBasicInfo>>() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<UserBasicInfo> response) {
-            }
+//        new Thread(){
+//            @Override
+//            public void run() {
+                ApiUtil.friendList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<UserBasicInfo>>() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<UserBasicInfo> response) {
+                    }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<UserBasicInfo> errorResponse) {
-            }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<UserBasicInfo> errorResponse) {
+                    }
 
-            @Override
-            protected ArrayList<UserBasicInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                Log.d("response", rawJsonData);
-                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<UserBasicInfo>>() {
+                    @Override
+                    protected ArrayList<UserBasicInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                        Log.d("response", rawJsonData);
+                        return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<UserBasicInfo>>() {
+                        });
+                    }
                 });
-            }
-        });
+//            }
+//        }.start();
+
     }
 
     /**

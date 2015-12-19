@@ -54,7 +54,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
     TextView mAward;
 
     private static PersonFragment instance;
-    private PersonFragment(){}
+    public PersonFragment(){}
     public static synchronized PersonFragment getInstance(){
         if(instance==null){
             instance=new PersonFragment();

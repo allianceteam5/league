@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.SyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 /**
@@ -30,7 +31,7 @@ public class ApiUtil {
     public static void friendList(Context context,TextHttpResponseHandler responseHandler){
         RequestParams params = new RequestParams();
         params.add("phone",testPhone);
-        client.post(context,IClientUrl.FriendList,params,responseHandler);
+        new SyncHttpClient().post(context,IClientUrl.FriendList,params,responseHandler);
     }
     public static void professionList(Context context, TextHttpResponseHandler responseHandler) {
         client.post(context, IClientUrl.ProfessionList, new RequestParams(), responseHandler);

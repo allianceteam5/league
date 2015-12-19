@@ -170,7 +170,7 @@ public class ContactlistFragment extends Fragment {
 		blackList = EMContactManager.getInstance().getBlackListUsernames();
 		contactList = new ArrayList<User>();
 		// 获取设置contactlist
-//		getContactList();
+		getContactList();
 		
 		//搜索框
 		query = (EditText) getView().findViewById(R.id.query);
@@ -248,7 +248,8 @@ public class ContactlistFragment extends Fragment {
 
 		registerForContextMenu(listView);
 		
-//		progressBar = (View) getView().findViewById(R.id.progress_bar);
+		progressBar = (View) getView().findViewById(R.id.progress_bar);
+		progressBar.setVisibility(View.GONE);
 //
 //		contactSyncListener = new HXContactSyncListener();
 //		HXSDKHelper.getInstance().addSyncContactListener(contactSyncListener);
@@ -442,7 +443,6 @@ public class ContactlistFragment extends Fragment {
 		contactList.clear();
 		//获取本地好友列表
 		Map<String, User> users = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getContactList();
-		//加上从服务器后台获取好友的头像
 
 		Iterator<Entry<String, User>> iterator = users.entrySet().iterator();
 		while (iterator.hasNext()) {
