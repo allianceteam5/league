@@ -10,9 +10,9 @@ public class UserInfoBean {
     /**
      * id : 3
      * phone : 1
-     * pwd :
+     * pwd : 202cb962ac59075b964b07152d234b70
      * authKey :
-     * fatherid : 15088783890
+     * fatherid : 1
      * directalliancecount : 0
      * allalliancecount : 0
      * corns : 103423
@@ -20,20 +20,21 @@ public class UserInfoBean {
      * envelope : 10
      * cornsforgrab : 1000010
      * alliancerewards : 0
-     * nickname : 测试1
+     * nickname : 测啊
      * thumb : http://7xkbeq.com1.z0.glb.clouddn.com/Fo-v4V7aCVADWiMXJm9TW-kx37U2
      * gender : 0
-     * area : 诉讼
+     * area : 安徽省安庆市枞阳县
      * job : 顾客
      * hobby : 投稿
-     * signature : 对方犯规
+     * signature : 哈哈毛线啊
      * created_at : 0
      * updated_at : 0
      * channel :
      * platform : null
      * friendcount : 0
      * concerncount : 2
-     * isdraw : 1
+     * isdraw : 0
+     * status : 0
      */
 
     private String phone;
@@ -62,7 +63,7 @@ public class UserInfoBean {
     private Object platform;
     private int friendcount;
     private int concerncount;
-
+    private int status;
     private int isdraw;
 
     public void setPhone(String phone) {
@@ -165,6 +166,11 @@ public class UserInfoBean {
         this.isdraw = isdraw;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+
     public String getPhone() {
         return phone;
     }
@@ -265,6 +271,9 @@ public class UserInfoBean {
         return isdraw;
     }
 
+    public int getStatus() {
+        return status;
+    }
     public void setHxId(String hxId) {
         this.hxId = hxId;
     }

@@ -29,6 +29,6 @@
         android:maxLines="3"
         android:maxLength="64"
         android:gravity="left|top"
-        android:background="@null"
+        android:background="@color/white"
         />
 </LinearLayout>

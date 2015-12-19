@@ -2,6 +2,7 @@ package com.league.activity.personinfoactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -80,6 +81,7 @@ public class ShippingAddress extends PersonInfoBaseActivity implements View.OnCl
                             add.putExtra("name",mAddressData.get(position).getName());
                             add.putExtra("aphone",mAddressData.get(position).getAphone());
                             add.putExtra("postcode",mAddressData.get(position).getPostcode());
+                            Log.i("whatfuck",mAddressData.get(position).getAddress());
                             add.putExtra("address",mAddressData.get(position).getAddress());
                             add.putExtra("addressID",mAddressData.get(position).getId());
                             startActivity(add);

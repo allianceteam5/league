@@ -64,7 +64,8 @@ public class AddressAdapter extends BaseAdapter{
             holder.deaulttext.setVisibility(View.GONE);
             holder.selected.setVisibility(View.INVISIBLE);
         }
-        holder.detail.setText(list.get(position).getAddress());
+        String temp=new String(list.get(position).getAddress());
+        holder.detail.setText(temp.replace(" ", ""));
         return convertView;
     }
     class ViewHolder{

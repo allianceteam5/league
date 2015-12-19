@@ -1,10 +1,5 @@
 package com.easemob.chatuidemo.db;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -17,6 +12,11 @@ import com.easemob.chatuidemo.domain.InviteMessage.InviteMesageStatus;
 import com.easemob.chatuidemo.domain.RobotUser;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.util.HanziToPinyin;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DemoDBManager {
     static private DemoDBManager dbMgr = new DemoDBManager();

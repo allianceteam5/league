@@ -40,7 +40,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="vivi"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -62,7 +62,7 @@
                             android:id="@+id/phonenumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="18710602731"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -89,7 +89,7 @@
                         android:id="@+id/zhijiealliancenum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10人"
+                        android:text="人"
                         android:textColor="@color/red"
                         android:layout_below="@+id/ll1"
                         android:layout_centerHorizontal="true"
@@ -134,7 +134,7 @@
                         android:id="@+id/fivefloartotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10人"
+                        android:text="人"
                         android:textColor="@color/red"
                         android:layout_below="@+id/ll2"
                         android:layout_centerHorizontal="true"
@@ -181,7 +181,7 @@
                         android:id="@+id/award"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10人"
+                        android:text="人"
                         android:textColor="@color/red"
                         android:layout_below="@+id/ll3"
                         android:layout_centerHorizontal="true"

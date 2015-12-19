@@ -19,6 +19,7 @@ import com.league.activity.personactivity.MyCollection;
 import com.league.activity.personactivity.MyMoneyBag;
 import com.league.activity.personactivity.PersonInformationSetup;
 import com.league.activity.personactivity.PersonSetup;
+import com.league.activity.personinfoactivity.InviteFriendActivity;
 import com.league.bean.UserInfoBean;
 import com.league.utils.Constants;
 import com.league.utils.api.ApiUtil;
@@ -95,6 +96,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
         layout.findViewById(R.id.aliancereward).setOnClickListener(this);
         layout.findViewById(R.id.mycollection).setOnClickListener(this);
         layout.findViewById(R.id.mymoneybag).setOnClickListener(this);
+        layout.findViewById(R.id.invitefriend).setOnClickListener(this);
     }
 
     @Override
@@ -121,7 +123,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent4);
                 break;
             case R.id.invitefriend:
-//                startActivity(new Intent(ctx, InviteFriendActivity.class));
+                startActivity(new Intent(ctx, InviteFriendActivity.class));
                 break;
         }
     }
