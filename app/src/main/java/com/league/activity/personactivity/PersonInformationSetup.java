@@ -9,7 +9,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,6 +27,8 @@ import com.league.activity.personinfoactivity.SignatureActivity;
 import com.league.bean.UserInfoBean;
 import com.league.interf.OnAllComplete;
 import com.league.utils.IContants;
+import com.league.utils.ImgUtils;
+import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
 import com.league.widget.PickImgPopWindow;
@@ -38,6 +42,7 @@ import com.squareup.picasso.Picasso;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import butterknife.Bind;
@@ -50,7 +55,7 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
     private TextView title;
     private UserInfoBean userInfoBean;
     @Bind(R.id.thumbnail)
-    CircleImageView mThumbnail;
+    ImageView mThumbnail;
     @Bind(R.id.nickname)
     TextView mNickName;
     @Bind(R.id.numberid)
@@ -63,9 +68,10 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
     TextView mSignature;
     private PickImgPopWindow pickImgPopWindow;
     private Bitmap bitmap;
-    private Uri uri;
+    private Uri imgUri;
     public final int SELECT_CAMER = 1; // 用相机拍摄照片
     public final int SELECT_PICTURE = 2; // 从图库中选择图片
+    public final int CROP_PHOTO = 3;// 系统的裁剪图片
     private StringBuffer picture = new StringBuffer();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,11 +103,14 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
 
-        pickImgPopWindow = new PickImgPopWindow(this, findViewById(android.R.id.content), new PickImgPopWindow.PopClickListener() {
+        pickImgPopWindow = new PickImgPopWindow(this, findViewById(R.id.ll_global), new PickImgPopWindow.PopClickListener() {
             @Override
             public void onClick(int index) {
                 switch (index) {
                     case 0:
+                        File tempFile = new File(Environment.getExternalStorageDirectory(),
+                                ImgUtils.getImageFileName());
+                        imgUri = Uri.fromFile(tempFile);
                         Intent camerInetent = new Intent(
                                 MediaStore.ACTION_IMAGE_CAPTURE);
                         startActivityForResult(camerInetent, SELECT_CAMER);
@@ -171,30 +180,27 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case SELECT_CAMER:
-                    Bundle bundle = data.getExtras();
-                    bitmap = (Bitmap) bundle.get("data");// 获取相机返回的数据，并转换为Bitmap图片格式
-                    uri = data.getData();
-                    if (uri == null)
-                        uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null));
-                    Log.i("picture uri", uri.getPath());
-                    mThumbnail.setImageURI(uri);
-                    uploadAvatar(getRealFilePath(getApplicationContext(),uri));
+                    updateAvatar(imgUri);
+                    Intent intent = new Intent("com.android.camera.action.CROP");
+                    intent.setDataAndType(imgUri, "image/*");
+//                    intent.putExtra("scale", true);
+                    //开启裁剪功能
+                    intent.putExtra("crop", "true");
+                    //设定宽高的比例
+                    intent.putExtra("aspectX", 1);
+                    intent.putExtra("aspectY", 1);
+                    //设定裁剪图片宽高
+                    intent.putExtra("outputX", 160);
+                    intent.putExtra("outputY", 160);
+                    intent.putExtra("return-data", true);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
+                    startActivityForResult(intent, CROP_PHOTO);
+                    break;
+                case CROP_PHOTO:
+                    updateAvatar(imgUri);
                     break;
                 case SELECT_PICTURE:
-                    uri = data.getData();
-                    ContentResolver cr = this.getContentResolver();
-                    try {
-                        if (bitmap != null) {
-                            bitmap.recycle();
-                            bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                        }
-                    } catch (FileNotFoundException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    Log.i("picture uri", uri.getPath());
-                    mThumbnail.setImageURI(uri);
-                    uploadAvatar(getRealFilePath(getApplicationContext(),uri));
+                    updateAvatar(data.getData());
                     break;
             }
         } else {
@@ -202,33 +208,22 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
                     .show();
         }
     }
-
-    public  String getRealFilePath(Context context, Uri uri) {
-        if (null == uri) return null;
-        final String scheme = uri.getScheme();
-        String data = null;
-        if (scheme == null)
-            data = uri.getPath();
-        else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
-            data = uri.getPath();
-        } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
-            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
-            if (null != cursor) {
-                if (cursor.moveToFirst()) {
-                    int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-                    if (index > -1) {
-                        data = cursor.getString(index);
-                    }
-                }
-                cursor.close();
-            }
-        }
-        return data;
+    public void updateAvatar(Uri uri) {
+        String imagePath = ImgUtils.getRealFilePath(getApplicationContext(), uri);
+        Log.d("url",imagePath);
+        //本地为什么放不进去 实在不行先要上传到七牛 再用七牛的链接地址更新头像
+        Picasso.with(getApplicationContext()).load("file://" + ImgUtils.getRealFilePath(getApplicationContext(), uri)).resize(160, 160).centerCrop().into(mThumbnail);
+        if (!TextUtils.isEmpty(imagePath)) {
+            String zoomedImgePath = ImgUtils.saveBitmapToSDCard(ImgUtils.zoomBitmap(PersonInformationSetup.this,uri, 160, 160));
+            Picasso.with(getApplicationContext()).load("file://" + zoomedImgePath).resize(160, 160).centerCrop().into(mThumbnail);
+            uploadAvatar(zoomedImgePath);
+        } else
+            ToastUtils.showShortToast(this, "头像获取失败");
     }
 
     public void uploadAvatar(final String imagePath){
         final UploadManager uploadManager = new UploadManager();
-        showProgressDialog();
+//        showProgressDialog();
         ApiUtil.getQiniuToken(getApplicationContext(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -262,6 +257,8 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
                 closeProgressDialog();
                 return;
             }
+            //头像地址放在picture里
+            Picasso.with(getApplicationContext()).load(picture.toString()).resize(160, 160).centerCrop().into(mThumbnail);
 //            加上修改头像的接口
 //            ApiUtil.hobbyCreated(getApplicationContext(), picture.toString(), selectedSexIndex, selectedAgeIndex, selectedHobbyId, message, new JsonHttpResponseHandler() {
 //                @Override
