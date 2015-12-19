@@ -67,4 +67,14 @@ public class IClientUrl {
     public static final String deleteShipAddress = testServerUrl + "users/deleteaddress";
     public static final String getUserDetail = testServerUrl + "users/view";
     public static final String modifyUserDetail = testServerUrl + "users/modify";
+
+    //圈子
+    public static final String CircleMessageSend = testServerUrl + "messages/send";
+    public static final String CircleMessageDelete = testServerUrl + "/messages/delete";
+    public static final String CircleMessageGet = testServerUrl + "messages/get";
+    public static final String CircleMessageMoreReply = testServerUrl + "messages/ morereplys";
+    public static final String CircleMessageConcelZan = testServerUrl + "messages/cancelzan";
+    public static final String CircleMessageZan = testServerUrl + "messages/zan";
+    public static final String CircleMessageReply = testServerUrl + "messages/reply";
+
 }

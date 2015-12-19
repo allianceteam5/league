@@ -180,7 +180,7 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case SELECT_CAMER:
-                    updateAvatar(imgUri);
+//                    updateAvatar(imgUri);
                     Intent intent = new Intent("com.android.camera.action.CROP");
                     intent.setDataAndType(imgUri, "image/*");
 //                    intent.putExtra("scale", true);

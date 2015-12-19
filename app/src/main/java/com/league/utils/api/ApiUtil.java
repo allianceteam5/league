@@ -31,7 +31,7 @@ public class ApiUtil {
     public static void friendList(Context context,TextHttpResponseHandler responseHandler){
         RequestParams params = new RequestParams();
         params.add("phone",testPhone);
-        new SyncHttpClient().post(context,IClientUrl.FriendList,params,responseHandler);
+        new SyncHttpClient().post(context, IClientUrl.FriendList, params, responseHandler);
     }
     public static void professionList(Context context, TextHttpResponseHandler responseHandler) {
         client.post(context, IClientUrl.ProfessionList, new RequestParams(), responseHandler);
@@ -442,6 +442,32 @@ public class ApiUtil {
         params.put("phone",phone);
         params.put("nickname",nick);
         client.post(context,IClientUrl.modifyUserDetail,params,responseHandler);
+    }
+
+    //圈子创建内容
+    public static void circleMessagesCreated(Context context, String content, String pictures, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("phone", testPhone);
+        params.add("content", content);
+        params.add("pictures", pictures);
+        printHttp(IClientUrl.CircleMessageSend, params);
+        client.post(context, IClientUrl.CircleMessageSend, params, responseHandler);
+    }
+    //圈子删除内容
+    public static void circleMessageDelete(Context context, String messageid, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.add("phone", testPhone);
+        params.add("messageid",messageid);
+        printHttp(IClientUrl.CircleMessageDelete, params);
+        client.post(context,IClientUrl.CircleMessageDelete, params,responseHandler);
+    }
+
+    //获取好友动态
+    public static void circleMessageGet(Context context, String phone , TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.add("phone",phone);
+        printHttp(IClientUrl.CircleMessageDelete, params);
+        client.post(context,IClientUrl.CircleMessageDelete,params,responseHandler);
     }
 
 }
