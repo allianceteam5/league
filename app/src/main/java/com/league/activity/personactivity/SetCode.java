@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jungly.gridpasswordview.GridPasswordView;
-import com.league.utils.ToastUtils;
 import com.mine.league.R;
 
 public class SetCode extends Activity {
@@ -44,6 +43,5 @@ public class SetCode extends Activity {
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
         gridPasswordView= (GridPasswordView) findViewById(R.id.gpv_passwd);
-        ToastUtils.showShortToast(this, "gridPasswordView.getPassWord()");
     }
 }

@@ -418,7 +418,6 @@
         <activity android:name="com.league.activity.personactivity.IDRelated" />
         <activity android:name="com.league.activity.personactivity.ChangeCode" />
         <activity android:name="com.league.activity.personactivity.FindCode" />
-        <activity android:name="com.league.activity.personactivity.MyRedBagBalance" />
         <activity android:name="com.league.activity.personactivity.Recharge" />
         <activity android:name="com.league.activity.personactivity.WithDraw" />
         <activity android:name="com.league.activity.personactivity.AddBankCard" />
