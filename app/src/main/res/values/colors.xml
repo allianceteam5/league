@@ -147,4 +147,15 @@
 
     <color name="background_tab_pressed">#6633B5E5</color>
     <color name="province_line_border">#C7C7C7</color>
+
+    <color name="backgroud">#BCBCBC</color>
+    <color name="line_color">#cccccc</color>
+    <color name="black_transparent">#b0000000</color>
+    <!-- drawable -->
+    <drawable name="d_white">#FFFFFF</drawable>
+    <drawable name="d_red">#cc0000</drawable>
+    <drawable name="d_item_pressed">#eeeeee</drawable>
+    <drawable name="actionbar_bg">#333333</drawable>
+    <drawable name="title_bg">#00000000</drawable>
+    <drawable name="actionbar_pressed_bg">#111111</drawable>
 </resources>

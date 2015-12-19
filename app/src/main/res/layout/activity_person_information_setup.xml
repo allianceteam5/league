@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    android:id="@+id/ll_global"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black2"
     android:orientation="vertical">
+
     <include
         android:id="@+id/title"
         layout="@layout/near_title" />
@@ -14,384 +14,391 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <RelativeLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:background="@color/white"
-                android:id="@+id/changeportrail"
-                android:onClick="onClick">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
+                <RelativeLayout
+                    android:id="@+id/changeportrail"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@color/white"
+                    android:onClick="onClick">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:text="头像"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:src="@drawable/icon_right" />
+
+                    <com.league.widget.CircleImageView
+                        android:id="@+id/thumbnail"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="6dip"
+                        android:layout_toLeftOf="@id/img1"
+                        android:src="@drawable/example" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
                     android:layout_marginLeft="10dip"
-                    android:text="头像"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/img1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginRight="10dip"
-                    android:src="@drawable/icon_right" />
+                    android:background="@color/black2" />
 
-                <com.league.widget.CircleImageView
-                    android:id="@+id/thumbnail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="2dip"
-                    android:layout_toLeftOf="@id/img1"
-                    android:src="@drawable/example" />
+                <RelativeLayout
+                    android:id="@+id/mynickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@color/white"
+                    android:onClick="onClick">
 
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:text="昵称"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:background="@color/black2" />
+                    <ImageView
+                        android:id="@+id/img2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:src="@drawable/icon_right" />
 
-            <RelativeLayout
-                android:onClick="onClick"
-                android:id="@+id/mynickname"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/white">
+                    <TextView
+                        android:id="@+id/nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:layout_toLeftOf="@id/img2"
+                        android:text="飞翔的鸟"
+                        android:textColor="@color/black1"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
                     android:layout_marginLeft="10dip"
-                    android:text="昵称"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/img2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginRight="10dip"
-                    android:src="@drawable/icon_right" />
+                    android:background="@color/black2" />
 
-                <TextView
-                    android:id="@+id/nickname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dip"
-                    android:layout_toLeftOf="@id/img2"
-                    android:text="飞翔的鸟"
-                    android:textColor="@color/black1"
-                    android:textSize="16sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="42dip"
+                    android:background="@color/white">
 
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:text="账户"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:background="@color/black2" />
+                    <TextView
+                        android:id="@+id/numberid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:text="12138"
+                        android:textColor="@color/black1"
+                        android:textSize="16sp" />
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dip"
-                android:background="@color/white">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="42dip"
+                    android:background="@color/white"
+                    android:visibility="gone">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:text="我的二维码"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:src="@drawable/icon_right" />
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:layout_toLeftOf="@id/img4"
+                        android:src="@drawable/twobarcode" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dip"
+                    android:background="@color/black2" />
+
+                <RelativeLayout
+                    android:id="@+id/mygender"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dip"
+                    android:background="@color/white"
+                    android:onClick="onClick">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:text="性别"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/img5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:src="@drawable/icon_right" />
+
+                    <TextView
+                        android:id="@+id/gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:layout_toLeftOf="@id/img5"
+                        android:text="女"
+                        android:textColor="@color/black1"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
                     android:layout_marginLeft="10dip"
-                    android:text="账户"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/numberid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginRight="10dip"
-                    android:text="12138"
-                    android:textColor="@color/black1"
-                    android:textSize="16sp"
-                    />
-            </RelativeLayout>
+                    android:background="@color/black2" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:background="@color/black2" />
+                <RelativeLayout
+                    android:id="@+id/myarea"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dip"
+                    android:background="@color/white"
+                    android:onClick="onClick">
 
-            <RelativeLayout
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="40dip"
-                android:background="@color/white">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:text="地区"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
+                    <ImageView
+                        android:id="@+id/img6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:src="@drawable/icon_right" />
+
+                    <TextView
+                        android:id="@+id/area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:layout_toLeftOf="@id/img6"
+                        android:text="上海"
+                        android:textColor="@color/black1"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
                     android:layout_marginLeft="10dip"
-                    android:text="我的二维码"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/img4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginRight="10dip"
-                    android:src="@drawable/icon_right" />
+                    android:background="@color/black2" />
 
-                <ImageView
+                <RelativeLayout
+                    android:id="@+id/mysignature"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dip"
+                    android:background="@color/white"
+                    android:onClick="onClick">
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dip"
-                    android:layout_toLeftOf="@id/img4"
-                    android:src="@drawable/twobarcode" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:text="个性签名"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/img7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:src="@drawable/icon_right" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dip"
-                android:background="@color/black2" />
-            <RelativeLayout
-                android:onClick="onClick"
-                android:id="@+id/mygender"
-                android:layout_width="match_parent"
-                android:layout_height="40dip"
-                android:background="@color/white">
+                    <TextView
+                        android:id="@+id/signature"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:layout_toLeftOf="@id/img7"
+                        android:ellipsize="end"
+                        android:gravity="right"
+                        android:singleLine="true"
+                        android:text="我就是我 颜色不一样的我啊，你怎么说随便咯"
+                        android:textColor="@color/black1"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dip"
+                    android:background="@color/black2" />
+
+                <RelativeLayout
+                    android:id="@+id/truenamemake"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dip"
+                    android:background="@color/white"
+                    android:onClick="onClick">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:text="实名认证"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:src="@drawable/icon_right" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
                     android:layout_marginLeft="10dip"
-                    android:text="性别"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/img5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginRight="10dip"
-                    android:src="@drawable/icon_right" />
+                    android:background="@color/black2" />
 
-                <TextView
-                    android:id="@+id/gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dip"
-                    android:layout_toLeftOf="@id/img5"
-                    android:text="女"
-                    android:textColor="@color/black1"
-                    android:textSize="16sp" />
+                <RelativeLayout
+                    android:id="@+id/shippingaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dip"
+                    android:background="@color/white"
+                    android:onClick="onClick">
 
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dip"
+                        android:text="收货地址"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:background="@color/black2" />
+                    <ImageView
 
-            <RelativeLayout
-                android:onClick="onClick"
-                android:id="@+id/myarea"
-                android:layout_width="match_parent"
-                android:layout_height="40dip"
-                android:background="@color/white">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dip"
+                        android:src="@drawable/icon_right" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:text="地区"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                </RelativeLayout>
+            </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/img6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dip"
-                    android:src="@drawable/icon_right" />
-
-                <TextView
-                    android:id="@+id/area"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dip"
-                    android:layout_toLeftOf="@id/img6"
-                    android:text="上海"
-                    android:textColor="@color/black1"
-                    android:textSize="16sp" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:background="@color/black2" />
-
-            <RelativeLayout
-                android:onClick="onClick"
-                android:id="@+id/mysignature"
-                android:layout_width="match_parent"
-                android:layout_height="40dip"
-                android:background="@color/white">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:text="个性签名"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/img7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dip"
-                    android:src="@drawable/icon_right" />
-
-                <TextView
-                    android:id="@+id/signature"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dip"
-                    android:layout_toLeftOf="@id/img7"
-                    android:text="我就是我 颜色不一样的我啊，你怎么说随便咯"
-                    android:ellipsize="end"
-                    android:gravity="right"
-                    android:singleLine="true"
-                    android:textColor="@color/black1"
-                    android:textSize="16sp" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dip"
-                android:background="@color/black2" />
-            <RelativeLayout
-                android:onClick="onClick"
-                android:id="@+id/truenamemake"
-                android:layout_width="match_parent"
-                android:layout_height="40dip"
-                android:background="@color/white">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:text="实名认证"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dip"
-                    android:src="@drawable/icon_right" />
-
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:background="@color/black2" />
-            <RelativeLayout
-                android:onClick="onClick"
-                android:id="@+id/shippingaddress"
-                android:layout_width="match_parent"
-                android:layout_height="40dip"
-                android:background="@color/white">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:text="收货地址"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dip"
-                    android:src="@drawable/icon_right" />
-
-            </RelativeLayout>
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="42dp"
+                android:layout_marginBottom="50dip"
                 android:layout_marginLeft="15dip"
                 android:layout_marginRight="15dip"
-                android:layout_marginTop="10dip"
-                android:layout_marginBottom="50dip"
+                android:layout_marginTop="16dip"
+                android:background="@drawable/btn_exit"
                 android:text="安全退出"
-                android:textSize="16sp"
                 android:textColor="@color/white"
-                android:background="@drawable/btn_exit"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
     </ScrollView>

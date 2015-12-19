@@ -138,7 +138,7 @@ public class HobbyInfoPublishActivity extends BaseActivity implements View.OnCli
                 ApiUtil.getQiniuToken(getApplicationContext(), new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        final String key = "items/" + System.currentTimeMillis() + ".jpg";
+                        final String key = "items/" + System.currentTimeMillis() + ".png";
                         String token = response.optString("token");
                         picture.append(QINIU_PREFIX + key);
                         uploadManager.put(mSelectPath.get(0), key, token,

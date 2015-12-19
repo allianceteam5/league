@@ -1,8 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="240dp"
@@ -14,7 +12,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
                 android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -25,7 +24,7 @@
                 android:textSize="16sp"
                 android:gravity="center"/>
             <TextView
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:layout_centerVertical="true"
                 android:clickable="true"
                 android:onClick="onClick"
@@ -40,33 +39,29 @@
                 android:textSize="16sp"/>
         </RelativeLayout>
 
-
-
         <LinearLayout
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dip"
             android:orientation="horizontal">
 
             <com.kankan.WheelView
                 android:id="@+id/id_province"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"></com.kankan.WheelView>
 
             <com.kankan.WheelView
                 android:id="@+id/id_city"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"></com.kankan.WheelView>
 
             <com.kankan.WheelView
                 android:id="@+id/id_district"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"></com.kankan.WheelView>
         </LinearLayout>
-
     </LinearLayout>
 </RelativeLayout>

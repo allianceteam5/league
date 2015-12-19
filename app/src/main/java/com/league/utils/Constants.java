@@ -1,5 +1,8 @@
 package com.league.utils;
 
+import android.os.Environment;
+
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,6 +39,31 @@ public class Constants {
     public static final String OneYuanDetail="oneyuandetail";
     public static final String TenyuanGrabRecords="tenyuangrabrecords";
     public static final String OneYuanDetailRecords="oneyuandetailrecords";
+
+    public static final String temDirStr = Environment.getExternalStorageDirectory() + "/league";
+    public static final String tempImageDirStr = temDirStr + "/images";
+    public static File tempDir;
+    public static File temImageDir;
+    public static String PrefixUrl = "file:///android_asset/index.html#";
+
+    public static File getTempDir() {
+        if (tempDir != null)
+            return tempDir;
+        tempDir = new File(temDirStr);
+        if (!tempDir.exists())
+            tempDir.mkdirs();
+        return tempDir;
+    }
+
+    public static File getTempImageDir() {
+        if (temImageDir != null)
+            return temImageDir;
+        temImageDir = new File(tempImageDirStr);
+        if (!temImageDir.exists())
+            temImageDir.mkdirs();
+        return temImageDir;
+    }
+
 
 
 }
