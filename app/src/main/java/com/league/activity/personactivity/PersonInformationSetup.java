@@ -1,12 +1,7 @@
 package com.league.activity.personactivity;
 
-import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,7 +25,6 @@ import com.league.utils.IContants;
 import com.league.utils.ImgUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
-import com.league.widget.CircleImageView;
 import com.league.widget.PickImgPopWindow;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.mine.league.R;
@@ -43,7 +37,6 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -212,11 +205,11 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
         String imagePath = ImgUtils.getRealFilePath(getApplicationContext(), uri);
         Log.d("url",imagePath);
         //本地为什么放不进去 实在不行先要上传到七牛 再用七牛的链接地址更新头像
-        Picasso.with(getApplicationContext()).load("file://" + ImgUtils.getRealFilePath(getApplicationContext(), uri)).resize(160, 160).centerCrop().into(mThumbnail);
+        Picasso.with(this).load("file://" + ImgUtils.getRealFilePath(getApplicationContext(), uri)).resize(160, 160).centerCrop().into(mThumbnail);
         if (!TextUtils.isEmpty(imagePath)) {
             String zoomedImgePath = ImgUtils.saveBitmapToSDCard(ImgUtils.zoomBitmap(PersonInformationSetup.this,uri, 160, 160));
-            Picasso.with(getApplicationContext()).load("file://" + zoomedImgePath).resize(160, 160).centerCrop().into(mThumbnail);
-            uploadAvatar(zoomedImgePath);
+            Picasso.with(this).load("file://" + zoomedImgePath).resize(160, 160).centerCrop().into(mThumbnail);
+//            uploadAvatar(zoomedImgePath);
         } else
             ToastUtils.showShortToast(this, "头像获取失败");
     }

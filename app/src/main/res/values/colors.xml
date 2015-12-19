@@ -158,4 +158,6 @@
     <drawable name="actionbar_bg">#333333</drawable>
     <drawable name="title_bg">#00000000</drawable>
     <drawable name="actionbar_pressed_bg">#111111</drawable>
+
+    <color name="moneybag">#252A32</color>
 </resources>

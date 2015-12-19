@@ -24,69 +24,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/blue"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/moneybag">
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_marginTop="20dp"
+                    android:text="我的余额(元)"
+                    android:textColor="@color/black1"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_horizontal"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:text="我的余额(元)"
-                        android:textColor="@color/black1"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="25dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:text="6800.00"
-                        android:textColor="@color/white"
-                        android:textSize="22sp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/black2" />
-
-                <LinearLayout
-                    android:id="@+id/myredbagbalance"
-                    android:onClick="onClick"
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:text="我的红包余额(元)"
-                        android:textColor="@color/black1"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="25dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:text="10.00"
-                        android:textColor="@color/white"
-                        android:textSize="22sp" />
-                </LinearLayout>
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginTop="20dp"
+                    android:text="6800.00"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
             </LinearLayout>
 
             <LinearLayout

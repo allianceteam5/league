@@ -20,6 +20,8 @@ import com.umeng.socialize.sso.UMQQSsoHandler;
 import com.umeng.socialize.sso.UMSsoHandler;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
 
+import io.paperdb.Paper;
+
 public class InviteFriendActivity extends PersonInfoBaseActivity implements View.OnClickListener{
     private ImageView mQRCode;
     // 首先在您的Activity中添加如下成员变量
@@ -29,7 +31,8 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
         super.onCreate(savedInstanceState);
         setTitle("邀请好友");
         CreateQRImage mCreateQR=new CreateQRImage(mQRCode);
-        mCreateQR.createQRImage("https://www.baidu.com/");
+        String url=Paper.book().read("signupurl").toString();
+        mCreateQR.createQRImage(url);
         com.umeng.socialize.utils.Log.LOG = true;
 
         //参数1为当前Activity，参数2为开发者在QQ互联申请的APP ID，参数3为开发者在QQ互联申请的APP kEY.
@@ -43,14 +46,14 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
         SmsHandler smsHandler = new SmsHandler();
         smsHandler.addToSocialSDK();
         // wx967daebe835fbeac是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
-        String appID = "wx967daebe835fbeac";
-        String appSecret = "5fa9e68ca3970e87a1f83e563c8dcbce";
+        String appID = "wx98e6c27800ad7a60";
+        String appSecret = "a7d7ab547a7f2b333f243bf68ac96728";
         // 添加微信平台
         UMWXHandler wxHandler = new UMWXHandler(this,appID,appSecret);
         wxHandler.addToSocialSDK();
         mController.getConfig().setSsoHandler(new SinaSsoHandler());
         // 设置分享内容
-        mController.setShareContent("友盟社会化组件（SDK）让移动应用快速整合社交分享功能，http://www.umeng.com/social");
+        mController.setShareContent("欢迎下载自己人联盟APP "+url);
 
     }
 

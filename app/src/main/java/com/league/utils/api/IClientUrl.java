@@ -76,5 +76,7 @@ public class IClientUrl {
     public static final String CircleMessageConcelZan = testServerUrl + "messages/cancelzan";
     public static final String CircleMessageZan = testServerUrl + "messages/zan";
     public static final String CircleMessageReply = testServerUrl + "messages/reply";
+    
+    public static final String getSignUpUrl=testServerUrl+"users/getsignupurl";
 
 }

@@ -25,6 +25,7 @@ import com.league.utils.Constants;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
@@ -85,6 +86,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
         mAward= (TextView) layout.findViewById(R.id.award);
         showProgressDialog();
         initData();
+        getUrl();
         setOnClickListener();
         return layout;
     }
@@ -153,6 +155,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
                 });
             }
         });
+
     }
 
     @Override
@@ -187,5 +190,20 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
         if (loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.dismiss();
         }
+    }
+    //这个有问题啊 ！！！！！
+    private void getUrl(){
+        ApiUtil.getSignupUrl(ctx, Constants.PHONENUM,new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Paper.book().write("signupurl",responseString);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Paper.book().write("signupurl",responseString);
+            }
+
+        });
     }
 }

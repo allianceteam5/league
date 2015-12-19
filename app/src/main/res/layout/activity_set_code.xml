@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black2"
@@ -19,85 +19,12 @@
         android:textSize="16sp"
         android:padding="10dp"
         />
-    <LinearLayout
+    <com.jungly.gridpasswordview.GridPasswordView
+        android:id="@+id/gpv_passwd"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/codeinputback">
-        <EditText
-            android:id="@+id/edt1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:maxLength="1"
-            android:password="true"
-            android:background="@null"
-
-            android:focusable="true"/>
-        <EditText
-            android:id="@+id/edt2"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:maxLength="1"
-            android:password="true"
-            android:background="@null"
-            />
-        <EditText
-            android:id="@+id/edt3"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:maxLength="1"
-            android:password="true"
-            android:background="@null"
-            />
-        <EditText
-            android:id="@+id/edt4"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:maxLength="1"
-            android:password="true"
-            android:background="@null"
-            />
-        <EditText
-            android:id="@+id/edt5"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:maxLength="1"
-            android:password="true"
-            android:background="@null"
-            />
-        <EditText
-            android:id="@+id/edt6"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:maxLength="1"
-            android:password="true"
-            android:background="@null"
-            />
-
-    </LinearLayout>
-
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        app:passwordLength="6"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 </LinearLayout>

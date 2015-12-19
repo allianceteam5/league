@@ -443,6 +443,7 @@ public class ApiUtil {
         params.put("nickname",nick);
         client.post(context,IClientUrl.modifyUserDetail,params,responseHandler);
     }
+<<<<<<< HEAD
 
     //圈子创建内容
     public static void circleMessagesCreated(Context context, String content, String pictures, TextHttpResponseHandler responseHandler) {
@@ -470,4 +471,10 @@ public class ApiUtil {
         client.post(context,IClientUrl.CircleMessageDelete,params,responseHandler);
     }
 
+    //获取邀请好友注册的url
+    public static void getSignupUrl(Context context,String phone,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone", phone);
+        client.post(context,IClientUrl.getSignUpUrl,params,responseHandler);
+    }
 }

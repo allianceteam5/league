@@ -45,10 +45,6 @@ public class MyMoneyBag extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.myredbagbalance:
-                Intent intent=new Intent(getApplication(),MyRedBagBalance.class);
-                startActivity(intent);
-                break;
             case R.id.chongzhi:
                 Intent intent1=new Intent(getApplication(),Recharge.class);
                 startActivity(intent1);
