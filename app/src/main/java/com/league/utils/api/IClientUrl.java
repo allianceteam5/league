@@ -67,4 +67,6 @@ public class IClientUrl {
     public static final String deleteShipAddress = testServerUrl + "users/deleteaddress";
     public static final String getUserDetail = testServerUrl + "users/view";
     public static final String modifyUserDetail = testServerUrl + "users/modify";
+    public static final String getSignUpUrl=testServerUrl+"users/getsignupurl";
+
 }

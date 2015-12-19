@@ -31,7 +31,7 @@ public class ApiUtil {
     public static void friendList(Context context,TextHttpResponseHandler responseHandler){
         RequestParams params = new RequestParams();
         params.add("phone",testPhone);
-        new SyncHttpClient().post(context,IClientUrl.FriendList,params,responseHandler);
+        new SyncHttpClient().post(context, IClientUrl.FriendList, params, responseHandler);
     }
     public static void professionList(Context context, TextHttpResponseHandler responseHandler) {
         client.post(context, IClientUrl.ProfessionList, new RequestParams(), responseHandler);
@@ -443,5 +443,10 @@ public class ApiUtil {
         params.put("nickname",nick);
         client.post(context,IClientUrl.modifyUserDetail,params,responseHandler);
     }
-
+    //获取邀请好友注册的url
+    public static void getSignupUrl(Context context,String phone,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone", phone);
+        client.post(context,IClientUrl.getSignUpUrl,params,responseHandler);
+    }
 }
