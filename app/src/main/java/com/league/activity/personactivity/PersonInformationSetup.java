@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.easemob.chatuidemo.domain.User;
 import com.league.activity.BaseActivity;
 import com.league.activity.personinfoactivity.MyAreaActivity;
 import com.league.activity.personinfoactivity.MyGenderActivity;
@@ -122,7 +123,7 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
         });
     }
     private void initData(){
-        userInfoBean= Paper.book().read("UserInfoBean");
+        userInfoBean= Paper.book().read(UserInfo);
         Picasso.with(this).load(userInfoBean.getThumb()).into(mThumbnail);
         mNickName.setText(userInfoBean.getNickname());
         mNumberID.setText(userInfoBean.getPhone());

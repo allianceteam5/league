@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.easemob.chatuidemo.Constant;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
@@ -21,18 +22,19 @@ public class ApiUtil {
         Log.d("http", "http请求: " + baseUrl + "?" + params);
     }
 
-    public static void login(Context context,String phone,String pwd,TextHttpResponseHandler responseHandler){
+    public static void login(Context context, String phone, String pwd, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.add("phone",phone);
-        params.add("pwd",pwd);
+        params.add("phone", phone);
+        params.add("pwd", pwd);
         client.post(context, IClientUrl.Login, params, responseHandler);
     }
 
-    public static void friendList(Context context,TextHttpResponseHandler responseHandler){
+    public static void friendList(Context context, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.add("phone",testPhone);
+        params.add("phone", testPhone);
         new SyncHttpClient().post(context, IClientUrl.FriendList, params, responseHandler);
     }
+
     public static void professionList(Context context, TextHttpResponseHandler responseHandler) {
         client.post(context, IClientUrl.ProfessionList, new RequestParams(), responseHandler);
     }
@@ -281,6 +283,17 @@ public class ApiUtil {
         client.post(context, IClientUrl.LiaoBaTbmessagesSend, params, responseHandler);
     }
 
+    //圈子状态评论
+    public static void liaobaTbmessageComment(Context context, String tbmessageid,String content,String tphone, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.add("tbmessageid", tbmessageid);
+        params.add("fphone", testPhone);
+        params.add("content", content);
+        params.add("tphone", tphone);
+        printHttp(IClientUrl.LiaoBaTbmessagesReply, params);
+        client.post(context, IClientUrl.LiaoBaTbmessagesReply,params,responseHandler);
+    }
+
     //聊吧获取我的关注列表
     public static void liaobaGetMyConcernList(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
@@ -303,11 +316,11 @@ public class ApiUtil {
     }
 
     //聊吧消息详情
-    public static void liaobaTbmessagesMyList(Context context,String tbmessageid, TextHttpResponseHandler responseHandler) {
+    public static void liaobaTbmessagesView(Context context, String tbmessageid, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
-        params.put("tbmessageid",tbmessageid);
-        client.post(context, IClientUrl.LiaoBaTbmessagesView,params,responseHandler);
+        params.put("tbmessageid", tbmessageid);
+        client.post(context, IClientUrl.LiaoBaTbmessagesView, params, responseHandler);
     }
 
     //获取往期揭晓 一元夺宝的
@@ -316,12 +329,14 @@ public class ApiUtil {
         params.put("kind", kind);
         client.post(context, IClientUrl.getGrabCommoditiesPass + currentPage, params, responseHandler);
     }
+
     //获取往期揭晓 10夺金
     public static void grabcornsPassAnnounced(Context context, String kind, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("kind", kind);
         client.post(context, IClientUrl.getGrabCornsPass + currentPage, params, responseHandler);
     }
+
     //获取夺金记录
     public static void getGrabCoinRecords(Context context, String phone, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
@@ -350,100 +365,112 @@ public class ApiUtil {
         params.put("phone", phone);
         client.post(context, IClientUrl.getGrabEnvelopes, params, responseHandler);
     }
+
     //获取更多购买记录
-    public static void getMoreRecordCorn(Context context,String grabcornid,int currentPage,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("grabcornid",grabcornid);
-        client.post(context,IClientUrl.getMoreRecordCorn+currentPage,params,responseHandler);
-    }
-    //获取更多购买记录一元夺宝的
-    public static void getMoreRecordCommodity(Context context,String grabcommodityid,int currentPage,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("grabcommodityid",grabcommodityid);
-        client.post(context,IClientUrl.getMoreRecordCommodity+currentPage,params,responseHandler);
-    }
-    //申请提取
-    public static void applyForCorns(Context context,String phone,String grabcornid,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        params.put("grabcornid",grabcornid);
-        client.post(context,IClientUrl.applyForCorns,params,responseHandler);
-    }
-    //获取收货地址
-    public static void getShipAddress(Context context,String phone,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        client.post(context,IClientUrl.getShippingAddress,params,responseHandler);
-    }
-    //获取即将揭晓的三个
-    public static void getTheLatest(Context context,int currentPage,TextHttpResponseHandler responseHandler){
+    public static void getMoreRecordCorn(Context context, String grabcornid, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        client.post(context,IClientUrl.getTheLatest+currentPage,params,responseHandler);
+        params.put("grabcornid", grabcornid);
+        client.post(context, IClientUrl.getMoreRecordCorn + currentPage, params, responseHandler);
     }
+
+    //获取更多购买记录一元夺宝的
+    public static void getMoreRecordCommodity(Context context, String grabcommodityid, int currentPage, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("grabcommodityid", grabcommodityid);
+        client.post(context, IClientUrl.getMoreRecordCommodity + currentPage, params, responseHandler);
+    }
+
+    //申请提取
+    public static void applyForCorns(Context context, String phone, String grabcornid, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        params.put("grabcornid", grabcornid);
+        client.post(context, IClientUrl.applyForCorns, params, responseHandler);
+    }
+
+    //获取收货地址
+    public static void getShipAddress(Context context, String phone, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        client.post(context, IClientUrl.getShippingAddress, params, responseHandler);
+    }
+
+    //获取即将揭晓的三个
+    public static void getTheLatest(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        client.post(context, IClientUrl.getTheLatest + currentPage, params, responseHandler);
+    }
+
     //增加收货地址
-    public static void addShipAddress(Context context,String phone,String aphone,String name,String postcode,String address,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        params.put("aphone",aphone);
-        params.put("name",name);
-        params.put("isdefault",0);
-        params.put("postcode",postcode);
-        params.put("address",address);
-        client.post(context,IClientUrl.addShippingAddress,params,responseHandler);
+    public static void addShipAddress(Context context, String phone, String aphone, String name, String postcode, String address, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        params.put("aphone", aphone);
+        params.put("name", name);
+        params.put("isdefault", 0);
+        params.put("postcode", postcode);
+        params.put("address", address);
+        client.post(context, IClientUrl.addShippingAddress, params, responseHandler);
     }
+
     //修改收货地址
-    public static void modifyShipAddress(Context context,String phone,String addressid,String aphone,String name,String postcode,String address,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        params.put("addressid",addressid);
-        params.put("aphone",aphone);
-        params.put("name",name);
-        params.put("postcode",postcode);
-        params.put("address",address);
-        client.post(context,IClientUrl.modifyShippingAddress,params,responseHandler);
+    public static void modifyShipAddress(Context context, String phone, String addressid, String aphone, String name, String postcode, String address, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        params.put("addressid", addressid);
+        params.put("aphone", aphone);
+        params.put("name", name);
+        params.put("postcode", postcode);
+        params.put("address", address);
+        client.post(context, IClientUrl.modifyShippingAddress, params, responseHandler);
     }
+
     //删除收货地址
-    public static void deleteShipAddress(Context context,String phone,String addressID,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        params.put("addressid",addressID);
-        client.post(context,IClientUrl.deleteShipAddress,params,responseHandler);
+    public static void deleteShipAddress(Context context, String phone, String addressID, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        params.put("addressid", addressID);
+        client.post(context, IClientUrl.deleteShipAddress, params, responseHandler);
     }
+
     //获取用户详情
-    public static void getUserDetail(Context context,String phone,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        client.post(context,IClientUrl.getUserDetail,params,responseHandler);
+    public static void getUserDetail(Context context, String phone, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        client.post(context, IClientUrl.getUserDetail, params, responseHandler);
     }
+
     //修改用户个性签名
-    public static void modifyUserDetailSignature(Context context,String phone,String sign,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        params.put("signature",sign);
-        client.post(context,IClientUrl.modifyUserDetail,params,responseHandler);
+    public static void modifyUserDetailSignature(Context context, String phone, String sign, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        params.put("signature", sign);
+        client.post(context, IClientUrl.modifyUserDetail, params, responseHandler);
     }
+
     //修改用户地区
-    public static void modifyUserDetailArea(Context context,String phone,String area,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        params.put("area",area);
-        client.post(context,IClientUrl.modifyUserDetail,params,responseHandler);
+    public static void modifyUserDetailArea(Context context, String phone, String area, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        params.put("area", area);
+        client.post(context, IClientUrl.modifyUserDetail, params, responseHandler);
     }
+
     //修改用户性别
-    public static void modifyUserDetaiSex(Context context,String phone,int gender,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        params.put("gender",gender);
-        client.post(context,IClientUrl.modifyUserDetail,params,responseHandler);
+    public static void modifyUserDetaiSex(Context context, String phone, int gender, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        params.put("gender", gender);
+        client.post(context, IClientUrl.modifyUserDetail, params, responseHandler);
     }
+
     //修改用户昵称
-    public static void modifyUserDetailNickname(Context context,String phone,String nick,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        params.put("nickname",nick);
-        client.post(context,IClientUrl.modifyUserDetail,params,responseHandler);
+    public static void modifyUserDetailNickname(Context context, String phone, String nick, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        params.put("nickname", nick);
+        client.post(context, IClientUrl.modifyUserDetail, params, responseHandler);
     }
-<<<<<<< HEAD
 
     //圈子创建内容
     public static void circleMessagesCreated(Context context, String content, String pictures, TextHttpResponseHandler responseHandler) {
@@ -454,27 +481,70 @@ public class ApiUtil {
         printHttp(IClientUrl.CircleMessageSend, params);
         client.post(context, IClientUrl.CircleMessageSend, params, responseHandler);
     }
+
     //圈子删除内容
-    public static void circleMessageDelete(Context context, String messageid, TextHttpResponseHandler responseHandler){
+    public static void circleMessageDelete(Context context, String messageid, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.add("phone", testPhone);
-        params.add("messageid",messageid);
+        params.add("messageid", messageid);
         printHttp(IClientUrl.CircleMessageDelete, params);
-        client.post(context,IClientUrl.CircleMessageDelete, params,responseHandler);
+        client.post(context, IClientUrl.CircleMessageDelete, params, responseHandler);
     }
 
     //获取好友动态
-    public static void circleMessageGet(Context context, String phone , TextHttpResponseHandler responseHandler){
+    public static void circleMessageGet(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.add("phone",phone);
-        printHttp(IClientUrl.CircleMessageDelete, params);
-        client.post(context,IClientUrl.CircleMessageDelete,params,responseHandler);
+        params.add("phone", testPhone);
+        printHttp(IClientUrl.CircleMessageGet, params);
+        client.post(context, IClientUrl.CircleMessageGet + currentPage, params, responseHandler);
+    }
+
+    //圈子获取更多评论
+    public static void circleMessageMoreReply(Context context, String messageid, int currentPage, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("messageid", messageid);
+        printHttp(IClientUrl.CircleMessageMoreReply, params);
+        client.post(context, IClientUrl.CircleMessageMoreReply + currentPage, params, responseHandler);
+    }
+
+    //圈子状态评论
+    public static void circleMessageComment(Context context, String messageid,String content,String tphone, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.add("messageid", messageid);
+        params.add("fphone", testPhone);
+        params.add("content", content);
+        if (!TextUtils.isEmpty(tphone))
+            params.add("tphone", tphone);
+        printHttp(IClientUrl.CircleMessageReply, params);
+        client.post(context, IClientUrl.CircleMessageReply,params,responseHandler);
+    }
+
+    //圈子消息点赞 type=0取消点赞 type=1 点赞
+    public static void circleMessageZanOrCancel(Context context, String messageid, int type, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("messageid", messageid);
+        params.add("phone", testPhone);
+        if (type == 1)
+            client.post(context, IClientUrl.CircleMessageZan, params, responseHandler);
+        if (type == 0)
+            client.post(context, IClientUrl.CircleMessageConcelZan, params, responseHandler);
+    }
+
+    //圈子消息收藏 type=0取消收藏 type=1 收藏
+    public static void circleMessageCollectOrCancel(Context context, String messageid, int type, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("messageid", messageid);
+        params.add("phone", testPhone);
+        if (type == 1)
+            client.post(context, IClientUrl.CircleMessageCollect, params, responseHandler);
+        if (type == 0)
+            client.post(context, IClientUrl.CircleMessageCollectCancel, params, responseHandler);
     }
 
     //获取邀请好友注册的url
-    public static void getSignupUrl(Context context,String phone,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
+    public static void getSignupUrl(Context context, String phone, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
         params.put("phone", phone);
-        client.post(context,IClientUrl.getSignUpUrl,params,responseHandler);
+        client.post(context, IClientUrl.getSignUpUrl, params, responseHandler);
     }
 }

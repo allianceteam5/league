@@ -1,6 +1,5 @@
 package com.league.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,13 +8,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.league.activity.liaobaactivity.TopicContent;
 import com.league.adapter.LiaoBaAdapter;
 import com.league.bean.LiaoBaMessageBean;
 import com.league.interf.ListItemClickHelp;

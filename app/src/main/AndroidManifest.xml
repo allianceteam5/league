@@ -426,7 +426,7 @@
         <activity android:name="com.league.activity.personactivity.SetCode" />
         <activity android:name="com.league.activity.personactivity.PaymentOrder" />
         <activity android:name="com.league.activity.personactivity.MyPersonHomepage" />
-        <activity android:name="com.league.activity.liaobaactivity.TopicContent" />
+        <activity android:name="com.league.activity.postbar.TopicContent" />
         <activity android:name="com.league.activity.treasure.PictureDetails" />
         <activity
             android:name="com.league.activity.near.RecommendationInfoPublishActivity"
@@ -461,6 +461,10 @@
         <activity
             android:name="com.league.activity.circle.CirclePublishActivity"
             android:label="@string/title_activity_circle_publish" >
+        </activity>
+        <activity
+            android:name="com.league.activity.postbar.LiaobaCommentActivity"
+            android:label="@string/title_activity_circle_comment" >
         </activity>
     </application>
 

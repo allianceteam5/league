@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.league.activity.personactivity.PersonSetup;
 import com.league.activity.personinfoactivity.InviteFriendActivity;
 import com.league.bean.UserInfoBean;
 import com.league.utils.Constants;
+import com.league.utils.IContants;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -37,19 +39,18 @@ import io.paperdb.Paper;
  * @author liugang
  * @date 2015年9月15日
  */
-public class PersonFragment extends Fragment implements View.OnClickListener {
+public class PersonFragment extends Fragment implements View.OnClickListener,IContants {
     protected Dialog loadingDialog;
     private View layout;
     private Activity ctx;
     private UserInfoBean userInfoBean;
 //    @Bind(R.id.mythumb)
-    CircleImageView mThumb;
+    ImageView mThumb;
 //    @Bind(R.id.nickname)
     TextView mNickname;
 //    @Bind(R.id.phonenumber)
     TextView mPhone;
 //    @Bind(R.id.zhijiealliancenum)
-    TextView mDirectAllianceCount;
 //    @Bind(R.id.fivefloartotal)
     TextView mAllFive;
 //    @Bind(R.id.award)
@@ -78,10 +79,9 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
             }
         }
 //        ButterKnife.bind(ctx,layout);
-        mThumb= (CircleImageView) layout.findViewById(R.id.mythumb);
+        mThumb= (ImageView) layout.findViewById(R.id.mythumb);
         mNickname= (TextView) layout.findViewById(R.id.nickname);
         mPhone= (TextView) layout.findViewById(R.id.phonenumber);
-        mDirectAllianceCount= (TextView) layout.findViewById(R.id.zhijiealliancenum);
         mAllFive= (TextView) layout.findViewById(R.id.fivefloartotal);
         mAward= (TextView) layout.findViewById(R.id.award);
         showProgressDialog();
@@ -134,11 +134,10 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, UserInfoBean response) {
                 userInfoBean = response;
-                Paper.book().write("UserInfoBean", response);
-                Picasso.with(ctx).load(response.getThumb()).into(mThumb);
+                Paper.book().write(UserInfo, response);
+                Picasso.with(ctx).load(response.getThumb()).placeholder(R.drawable.default_avatar).into(mThumb);
                 mNickname.setText(response.getNickname());
                 mPhone.setText(response.getPhone());
-                mDirectAllianceCount.setText(response.getDirectalliancecount() + "");
                 mAllFive.setText(response.getAllalliancecount() + "");
                 mAward.setText(response.getAlliancerewards() + "");
                 closeProgressDialog();
@@ -146,7 +145,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, UserInfoBean errorResponse) {
-
+                closeProgressDialog();
             }
 
             @Override

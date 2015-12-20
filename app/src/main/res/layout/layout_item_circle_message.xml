@@ -29,7 +29,6 @@
             android:textColor="@color/black"
             android:textSize="14sp" />
 
-
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
@@ -48,7 +47,7 @@
             android:gravity="center"
             android:horizontalSpacing="5dp"
             android:listSelector="#00000000"
-            android:numColumns="4"
+            android:numColumns="3"
             android:paddingLeft="2dp"
             android:paddingRight="2dp"
             android:stretchMode="columnWidth"
@@ -73,8 +72,9 @@
 
             <ImageView
                 android:id="@+id/iv_like"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginLeft="6dp"
                 android:src="@drawable/icon_like_concel" />
 
             <TextView
@@ -87,8 +87,8 @@
 
             <ImageView
                 android:id="@+id/iv_comment"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/icon_comment" />
 
@@ -102,8 +102,8 @@
 
             <ImageView
                 android:id="@+id/iv_collect"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/icon_comment" />
 
@@ -124,22 +124,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="收藏"
+                    android:text="删除"
                     android:textColor="#717171"
                     android:textSize="14sp" />
             </RelativeLayout>
 
         </LinearLayout>
-
         <TextView
             android:id="@+id/tv_peoplename"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
             android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
             android:text="测试"
             android:textColor="#935b5b"
-            android:textSize="12dp" />
+            android:textSize="12dp"
+            android:background="@drawable/icon_bg_like"/>
 
         <LinearLayout
             android:id="@+id/ll_comment"

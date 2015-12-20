@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.ShowBigImgActivity;
-import com.league.activity.liaobaactivity.TopicContent;
+import com.league.activity.postbar.TopicContent;
 import com.league.bean.LiaoBaMessageBean;
 import com.league.bean.SucessBean;
 import com.league.utils.IContants;

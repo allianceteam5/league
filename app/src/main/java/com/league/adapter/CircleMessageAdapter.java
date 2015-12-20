@@ -11,23 +11,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.ShowBigImgActivity;
-import com.league.activity.liaobaactivity.TopicContent;
 import com.league.bean.CircleMessageBean;
-import com.league.bean.LiaoBaMessageBean;
-import com.league.bean.SucessBean;
 import com.league.utils.IContants;
+import com.league.utils.ToastUtils;
 import com.league.utils.Utils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
 import com.league.widget.NoScrollGridView;
-import com.loopj.android.http.BaseJsonHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,8 +70,9 @@ public class CircleMessageAdapter extends BaseAdapter implements IContants {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        CircleMessageBean circleMessageBean = new CircleMessageBean();
-        Picasso.with(ctx).load(list.get(position).getThumb()).resize(80, 80).centerCrop().into(holder.ivThumb);
+
+        final CircleMessageBean circleMessageBean = list.get(position);
+        Picasso.with(ctx).load(circleMessageBean.getThumb()).placeholder(R.drawable.default_avatar).resize(80, 80).centerCrop().into(holder.ivThumb);
         holder.tvName.setText(circleMessageBean.getNickname());
         holder.tvTime.setText(Utils.generateStringByTime(circleMessageBean.getCreated_at()));
         holder.tvContent.setText(circleMessageBean.getContent());
@@ -85,12 +83,22 @@ public class CircleMessageAdapter extends BaseAdapter implements IContants {
             holder.ivLike.setImageResource(R.drawable.icon_like_concel);
         }
 
+        if (1 == circleMessageBean.getIscollected())
+            holder.ivCollect.setImageResource(R.drawable.icon_collect);
+        else
+            holder.ivCollect.setImageResource(R.drawable.icon_collect_concel);
+
+//        if (1 == circleMessageBean.getIsmy())
+//            holder.tvDelete.setVisibility(View.VISIBLE);
+//        else
+        holder.tvDelete.setVisibility(View.GONE);
+
         final List<String> imgList = circleMessageBean.getPictureList();
         ImgGridAdapter adapter = new ImgGridAdapter(ctx, imgList);
-        if (imgList == null)
-            holder.gridview.setVisibility(View.GONE);
-        else
+        if (imgList != null){
+            holder.gridview.setVisibility(View.VISIBLE);
             holder.gridview.setAdapter(adapter);
+        }
 
         holder.gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -104,65 +112,88 @@ public class CircleMessageAdapter extends BaseAdapter implements IContants {
             }
         });
 
-//        holder.ivLike.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (1 == list.get(position).getIsliked()) {
-//                    ApiUtil.liaobaCancellike(ctx, list.get(position).getId(), new BaseJsonHttpResponseHandler<SucessBean>() {
-//                        @Override
-//                        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-//                            if ("1".equals(response.getFlag())) {
-//                                int num = list.get(position).getLikecount();
-//                                num--;
-//                                list.get(position).setLikecount(num);
-//                                list.get(position).setIsliked(0);
-//                                holder.like.setImageResource(R.drawable.liaoba_dianzan);
-//                                holder.dianzanshu.setText(list.get(position).getLikecount() + "");
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-//
-//                        }
-//
-//                        @Override
-//                        protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-//                            return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
-//                            });
-//                        }
-//                    });
-//                } else {
-//                    ApiUtil.liaobaLike(ctx, list.get(position).getId(), new BaseJsonHttpResponseHandler<SucessBean>() {
-//                        @Override
-//                        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-//                            if ("1".equals(response.getFlag())) {
-//                                int num = list.get(position).getLikecount();
-//                                num++;
-//                                list.get(position).setLikecount(num);
-//                                list.get(position).setIsliked(1);
-//                                holder.like.setImageResource(R.drawable.liaoba_like);
-//                                holder.dianzanshu.setText(list.get(position).getLikecount() + "");
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-//
-//                        }
-//
-//                        @Override
-//                        protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-//                            return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
-//                            });
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        holder.tvDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApiUtil.circleMessageDelete(ctx,circleMessageBean.getId(), new JsonHttpResponseHandler(){
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        int flag = response.optInt("flag");
+                        if (flag == 1){
+                        }else{
+                            ToastUtils.showShortToast(ctx,"网络不太好哦");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        ToastUtils.showShortToast(ctx,"网络不太好哦");
+                    }
+                });
+            }
+        });
+
+        holder.ivLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final int type = 1- circleMessageBean.getIszaned();
+                circleMessageBean.setIszaned(type);
+                ApiUtil.circleMessageZanOrCancel(ctx,circleMessageBean.getId(),type, new JsonHttpResponseHandler(){
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        int flag = response.optInt("flag");
+                        if (flag == 1){
+                            if (type == 1)
+                                holder.ivLike.setImageResource(R.drawable.icon_like);
+                            if (type == 0)
+                                holder.ivLike.setImageResource(R.drawable.icon_like_concel);
+                        }else{
+                            ToastUtils.showShortToast(ctx,"网络不太好哦");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        ToastUtils.showShortToast(ctx,"网络不太好哦");
+                    }
+                });
+            }
+        });
+
+        holder.ivCollect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final int type = 1- circleMessageBean.getIscollected();
+                circleMessageBean.setIscollected(type);
+                ApiUtil.circleMessageCollectOrCancel(ctx, circleMessageBean.getId(), type, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        int flag = response.optInt("flag");
+                        if (flag == 1) {
+                            if (type == 1)
+                                holder.ivCollect.setImageResource(R.drawable.icon_collect);
+                            if (type == 0)
+                                holder.ivCollect.setImageResource(R.drawable.icon_collect_concel);
+                        } else {
+                            ToastUtils.showShortToast(ctx, "网络不太好哦");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        ToastUtils.showShortToast(ctx, "网络不太好哦");
+                    }
+                });
+            }
+        });
+
         return convertView;
     }
 
+    public void setData(List<CircleMessageBean> list){
+        this.list = list;
+        this.notifyDataSetChanged();
+    }
     /**
      * This class contains all butterknife-injected Views & Layouts from layout file 'layout_item_circle_message.xml'
      * for easy to all layout elements.

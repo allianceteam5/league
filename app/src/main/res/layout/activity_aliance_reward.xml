@@ -13,7 +13,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dip"
+        android:layout_height="188dip"
         android:background="@color/red"
         >
         <TextView
@@ -21,29 +21,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="600.00"
-            android:textColor="@color/white"
-            android:textSize="50sp"
+            android:textColor="#fffffd"
+            android:textSize="46sp"
             android:layout_centerInParent="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:text="未提取的联盟奖励"
+            android:textSize="16sp"
+            android:text="未提取的联盟奖励\n（元）"
+            android:gravity="center_horizontal"
             android:layout_above="@id/money"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dip"/>
+            android:layout_marginBottom="10dip"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="12sp"
             android:text="联盟奖励只能提取一次"
             android:layout_below="@id/money"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dip"/>
     </RelativeLayout>
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal">
@@ -104,17 +105,17 @@
                 android:textSize="16sp"
                 />
         </LinearLayout>
-    </LinearLayout>
+    </LinearLayout>-->
     <Button
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="提取"
+        android:layout_height="50dp"
+        android:text="申请提取"
         android:textColor="@color/white"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:background="@drawable/btn_exit"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -126,19 +127,25 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="#3a3a3a"
             android:text="快去邀请好友提升收益吧！"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             />
-        <Button
+        <TextView
+            android:id="@+id/tv_invite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:text="邀请好友"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:layout_alignParentRight="true"
+            android:background="@color/white"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
 </LinearLayout>
