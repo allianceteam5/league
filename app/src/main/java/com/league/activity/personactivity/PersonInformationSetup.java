@@ -123,7 +123,10 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
     }
     private void initData(){
         userInfoBean= Paper.book().read("UserInfoBean");
-        Picasso.with(this).load(userInfoBean.getThumb()).into(mThumbnail);
+        if(userInfoBean.getThumb().length()>0){
+            Picasso.with(this).load(userInfoBean.getThumb()).into(mThumbnail);
+        }
+
         mNickName.setText(userInfoBean.getNickname());
         mNumberID.setText(userInfoBean.getPhone());
         mGender.setText(userInfoBean.getGender() == 0 ? "女" : "男");
