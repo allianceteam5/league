@@ -408,14 +408,12 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
                 timeMill.setText(mill + "");
                 timeMinutes.setText(minutes+"");
             }
-            if(timeMinutes.getText().toString().equals("0")&&timeMill.getText().equals("1")){
-                initData();
-            }
+
         }
 
         @Override
         public void onFinish() {
-
+            initData();
         }
     }
 

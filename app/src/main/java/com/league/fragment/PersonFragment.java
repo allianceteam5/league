@@ -27,7 +27,7 @@ import com.league.utils.IContants;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
@@ -192,17 +192,18 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
     }
     //这个有问题啊 ！！！！！
     private void getUrl(){
-        ApiUtil.getSignupUrl(ctx, Constants.PHONENUM,new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Paper.book().write("signupurl",responseString);
-            }
-
+        ApiUtil.getSignupUrl(ctx, Constants.PHONENUM, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Paper.book().write("signupurl",responseString);
+
             }
 
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                String url=responseString.substring(1,responseString.length()-1);
+                Paper.book().write("signupurl",url);
+            }
         });
+
     }
 }

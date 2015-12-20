@@ -54,7 +54,7 @@ public class MyGenderActivity extends PersonInfoBaseActivity implements View.OnC
     @Override
     protected void initData() {
         userInfoBean= Paper.book().read("UserInfoBean");
-        if(userInfoBean.getGender()==0){
+        if(userInfoBean!=null&&userInfoBean.getGender()==0){
             setGender(true);
         }else{
             setGender(false);

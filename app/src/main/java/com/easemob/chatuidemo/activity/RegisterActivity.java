@@ -13,111 +13,167 @@
  */
 package com.easemob.chatuidemo.activity;
 
-import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.easemob.EMError;
-import com.easemob.chat.EMChatManager;
-import com.easemob.chatuidemo.DemoApplication;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.activity.personinfoactivity.CompletePersonInfo;
+import com.league.bean.SucessBean;
+import com.league.utils.Constants;
+import com.league.utils.ToastUtils;
+import com.league.utils.api.ApiUtil;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
-import com.easemob.exceptions.EaseMobException;
+
+import org.apache.http.Header;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import io.paperdb.Paper;
+
+import static android.view.View.VISIBLE;
 
 /**
  * 注册页
  * 
  */
-public class RegisterActivity extends BaseActivity {
-	private EditText userNameEditText;
-	private EditText passwordEditText;
-	private EditText confirmPwdEditText;
-
+public class RegisterActivity extends BaseActivity implements View.OnClickListener{
+	private ImageView back2, titleright, right1, right2;
+	private TextView title;
+	private Button getCode,register;
+	private TimeCount timeCount;
+	@Bind(R.id.inputphone)
+	TextView mInputPhone;
+	@Bind(R.id.inputcode)
+	TextView mInputCode;
+	@Bind(R.id.inputpwd)
+	TextView mInputPwd;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		userNameEditText = (EditText) findViewById(R.id.username);
-		passwordEditText = (EditText) findViewById(R.id.password);
-		confirmPwdEditText = (EditText) findViewById(R.id.confirm_password);
+		ButterKnife.bind(this);
+		initView();
+
+	}
+	private void initView() {
+
+		back2 = (ImageView) findViewById(R.id.near_back);
+
+		back2.setVisibility(VISIBLE);
+		back2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+				finish();
+			}
+		});
+		titleright = (ImageView) findViewById(R.id.near_title_right);
+		titleright.setVisibility(View.GONE);
+		title = (TextView) findViewById(R.id.near_title);
+		title.setText("手机号注册");
+		right1 = (ImageView) findViewById(R.id.near_right);
+		right1.setVisibility(View.GONE);
+		right2 = (ImageView) findViewById(R.id.near_right_item);
+		right2.setVisibility(View.GONE);
+		getCode=(Button)findViewById(R.id.getcode);
+		getCode.setOnClickListener(this);
+		timeCount=new TimeCount(60000,1000);
+		register= (Button) findViewById(R.id.register);
+		register.setOnClickListener(this);
 	}
 
-	/**
-	 * 注册
-	 * 
-	 * @param view
-	 */
-	public void register(View view) {
-		final String username = userNameEditText.getText().toString().trim();
-		final String pwd = passwordEditText.getText().toString().trim();
-		String confirm_pwd = confirmPwdEditText.getText().toString().trim();
-		if (TextUtils.isEmpty(username)) {
-			Toast.makeText(this, getResources().getString(R.string.User_name_cannot_be_empty), Toast.LENGTH_SHORT).show();
-			userNameEditText.requestFocus();
-			return;
-		} else if (TextUtils.isEmpty(pwd)) {
-			Toast.makeText(this, getResources().getString(R.string.Password_cannot_be_empty), Toast.LENGTH_SHORT).show();
-			passwordEditText.requestFocus();
-			return;
-		} else if (TextUtils.isEmpty(confirm_pwd)) {
-			Toast.makeText(this, getResources().getString(R.string.Confirm_password_cannot_be_empty), Toast.LENGTH_SHORT).show();
-			confirmPwdEditText.requestFocus();
-			return;
-		} else if (!pwd.equals(confirm_pwd)) {
-			Toast.makeText(this, getResources().getString(R.string.Two_input_password), Toast.LENGTH_SHORT).show();
-			return;
-		}
-
-		if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(pwd)) {
-			final ProgressDialog pd = new ProgressDialog(this);
-			pd.setMessage(getResources().getString(R.string.Is_the_registered));
-			pd.show();
-
-			new Thread(new Runnable() {
-				public void run() {
-					try {
-						// 调用sdk注册方法
-						EMChatManager.getInstance().createAccountOnServer(username, pwd);
-						runOnUiThread(new Runnable() {
-							public void run() {
-								if (!RegisterActivity.this.isFinishing())
-									pd.dismiss();
-								// 保存用户名
-								DemoApplication.getInstance().setUserName(username);
-								Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registered_successfully), 0).show();
-								finish();
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()){
+			case R.id.getcode:
+				if(mInputPhone.length()==11){
+					timeCount.start();
+					ApiUtil.sendRGText(this, mInputPhone.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
+						@Override
+						public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+							if(response.getFlag().equals("0")){
+								ToastUtils.showShortToast(RegisterActivity.this, response.getMsg());
 							}
-						});
-					} catch (final EaseMobException e) {
-						runOnUiThread(new Runnable() {
-							public void run() {
-								if (!RegisterActivity.this.isFinishing())
-									pd.dismiss();
-								int errorCode=e.getErrorCode();
-								if(errorCode==EMError.NONETWORK_ERROR){
-									Toast.makeText(getApplicationContext(), getResources().getString(R.string.network_anomalies), Toast.LENGTH_SHORT).show();
-								}else if(errorCode == EMError.USER_ALREADY_EXISTS){
-									Toast.makeText(getApplicationContext(), getResources().getString(R.string.User_already_exists), Toast.LENGTH_SHORT).show();
-								}else if(errorCode == EMError.UNAUTHORIZED){
-									Toast.makeText(getApplicationContext(), getResources().getString(R.string.registration_failed_without_permission), Toast.LENGTH_SHORT).show();
-								}else if(errorCode == EMError.ILLEGAL_USER_NAME){
-								    Toast.makeText(getApplicationContext(), getResources().getString(R.string.illegal_user_name),Toast.LENGTH_SHORT).show();
+						}
+
+						@Override
+						public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+							ToastUtils.showShortToast(RegisterActivity.this, "发送失败");
+						}
+
+						@Override
+						protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+							return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+							});
+						}
+					});
+				}else{
+					ToastUtils.showShortToast(this, "请输入正确手机号");
+				}
+
+				break;
+			case R.id.register:
+				ApiUtil.signup(this, mInputPhone.getText().toString(), mInputCode.getText().toString(),
+						mInputPwd.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
+							@Override
+							public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+								if(response.getFlag().equals("1")){
+									Constants.PHONENUM=mInputPhone.getText().toString();
+									Paper.book().write("userkey",Constants.PHONENUM);
+									Constants.HuanXinID=response.getHuanxinid();
+									Constants.HuanxinPwd=mInputPwd.getText().toString();
+									startActivity(new Intent(RegisterActivity.this, CompletePersonInfo.class));
+									finish();
 								}else{
-									Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registration_failed) + e.getMessage(), Toast.LENGTH_SHORT).show();
+									ToastUtils.showShortToast(RegisterActivity.this, "该账号已经注册过");
+
 								}
 							}
-						});
-					}
-				}
-			}).start();
 
+							@Override
+							public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+
+								ToastUtils.showShortToast(RegisterActivity.this,"网络不好");
+							}
+
+							@Override
+							protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+								return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {});
+							}
+						});
+
+				break;
+		}
+	}
+	class TimeCount extends CountDownTimer {
+
+		public TimeCount(long millisInFuture, long countDownInterval) {
+			super(millisInFuture, countDownInterval);
+		}
+
+		@Override
+		public void onTick(long millisUntilFinished) {
+			getCode.setClickable(false);
+			getCode.setText("还剩 "+millisUntilFinished/1000+"秒");
+		}
+
+		@Override
+		public void onFinish() {
+			getCode.setText("重新验证");
+			getCode.setClickable(true);
 		}
 	}
 
-	public void back(View view) {
-		finish();
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		timeCount.onFinish();
 	}
-
 }

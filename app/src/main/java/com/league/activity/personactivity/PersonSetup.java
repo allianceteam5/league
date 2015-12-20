@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.league.utils.DataCleanManager;
+import com.league.utils.ToastUtils;
 import com.mine.league.R;
 
 public class PersonSetup extends Activity implements View.OnClickListener{
@@ -56,6 +58,10 @@ public class PersonSetup extends Activity implements View.OnClickListener{
             case R.id.idrelated:
                 Intent intent2 =new Intent(getApplication(),IDRelated.class);
                 startActivity(intent2);
+                break;
+            case R.id.clearallcache:
+                DataCleanManager.clearAllCache(getApplicationContext());
+                ToastUtils.showShortToast(this,"清理完成");
                 break;
         }
     }

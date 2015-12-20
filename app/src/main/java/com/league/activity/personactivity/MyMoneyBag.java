@@ -1,24 +1,47 @@
 package com.league.activity.personactivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.activity.BaseActivity;
+import com.league.bean.MoneyBean;
+import com.league.utils.Constants;
+import com.league.utils.ToastUtils;
+import com.league.utils.api.ApiUtil;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
 
-public class MyMoneyBag extends Activity implements View.OnClickListener{
+import org.apache.http.Header;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class MyMoneyBag extends BaseActivity implements View.OnClickListener{
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
+    private MoneyBean moneyBean=new MoneyBean();
+
+    @Bind(R.id.mymoney)
+    TextView myMoney;
+    @Bind(R.id.corns)
+    TextView mCorns;
+    @Bind(R.id.cornsforgrab)
+    TextView mCornsForgrab;
+    @Bind(R.id.cardcount)
+    TextView mCardCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_money_bag);
+        ButterKnife.bind(this);
         initView();
-
+        initData();
     }
     private void initView() {
 
@@ -41,7 +64,32 @@ public class MyMoneyBag extends Activity implements View.OnClickListener{
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
     }
+    private void initData(){
+        showProgressDialog();
+        ApiUtil.getUserAllmoney(this, Constants.PHONENUM, new BaseJsonHttpResponseHandler<MoneyBean>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, MoneyBean response) {
+                moneyBean=response;
+                myMoney.setText(moneyBean.getMoney()+"");
+                mCorns.setText(moneyBean.getCorns()+"");
+                mCornsForgrab.setText(moneyBean.getCornsforgrab()+"");
+                mCardCount.setText(moneyBean.getCardcount());
+                closeProgressDialog();
+            }
 
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, MoneyBean errorResponse) {
+                ToastUtils.showShortToast(MyMoneyBag.this,"获取数据失败");
+                closeProgressDialog();
+            }
+
+            @Override
+            protected MoneyBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<MoneyBean>() {
+                });
+            }
+        });
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){

@@ -547,4 +547,30 @@ public class ApiUtil {
         params.put("phone", phone);
         client.post(context, IClientUrl.getSignUpUrl, params, responseHandler);
     }
+    //获取用户各种钱
+    public static void getUserAllmoney(Context context,String phone,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone", phone);
+        client.post(context,IClientUrl.getUserMoneyBag,params,responseHandler);
+    }
+    //发送验证码
+    public static void sendCpText(Context context,String phone,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone", phone);
+        client.post(context, IClientUrl.sendCpText, params, responseHandler);
+    }
+    //发送注册验证码
+    public static void sendRGText(Context context,String phone,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone", phone);
+        client.post(context, IClientUrl.sendrgtext, params, responseHandler);
+    }
+    //注册
+    public static void signup(Context context,String phone,String code,String pwd,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone", phone);
+        params.put("pwd",pwd);
+        params.put("text",code);
+        client.post(context, IClientUrl.signup, params, responseHandler);
+    }
 }

@@ -25,7 +25,8 @@ public class GrabBean {
      * phone : 1
      * thumb : http://7xkbeq.com1.z0.glb.clouddn.com/Fo-v4V7aCVADWiMXJm9TW-kx37U2
      */
-
+    private String grabid;
+    private String tbk;
     private String id;
     private String userid;
     private String grabcornid;
@@ -241,5 +242,21 @@ public class GrabBean {
 
     public String getThumb() {
         return thumb;
+    }
+
+    public String getTbk() {
+        return tbk;
+    }
+
+    public void setTbk(String tbk) {
+        this.tbk = tbk;
+    }
+
+    public String getGrabid() {
+        return grabid;
+    }
+
+    public void setGrabid(String grabid) {
+        this.grabid = grabid;
     }
 }

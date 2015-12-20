@@ -54,6 +54,8 @@
         android:background="@color/black2" />
 
     <RelativeLayout
+        android:id="@+id/clearallcache"
+        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white">
