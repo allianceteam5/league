@@ -387,7 +387,8 @@
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
         <activity
             android:name="com.league.activity.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -424,7 +425,7 @@
         <activity android:name="com.league.activity.personactivity.SetCode" />
         <activity android:name="com.league.activity.personactivity.PaymentOrder" />
         <activity android:name="com.league.activity.personactivity.MyPersonHomepage" />
-        <activity android:name="com.league.activity.liaobaactivity.TopicContent" />
+        <activity android:name="com.league.activity.postbar.TopicContent" />
         <activity android:name="com.league.activity.treasure.PictureDetails" />
         <activity
             android:name="com.league.activity.near.RecommendationInfoPublishActivity"
@@ -456,6 +457,14 @@
         <activity android:name="com.league.activity.personinfoactivity.NickNameActivity" />
         <activity android:name="com.league.activity.circle.CircleActivity" />
         <activity android:name="com.league.activity.personinfoactivity.InviteFriendActivity" />
+        <activity
+            android:name="com.league.activity.circle.CirclePublishActivity"
+            android:label="@string/title_activity_circle_publish" >
+        </activity>
+        <activity
+            android:name="com.league.activity.postbar.LiaobaCommentActivity"
+            android:label="@string/title_activity_circle_comment" >
+        </activity>
         <activity android:name="com.league.activity.personinfoactivity.CompletePersonInfo"></activity>
     </application>
 

@@ -344,5 +344,7 @@
     <string name="title_activity_concern_list">ConcernListActivity</string>
     <string name="title_activity_message_list">MessageListActivity</string>
     <string name="title_activity_circle">CircleActivity</string>
+    <string name="title_activity_circle_publish">CirclePublishActivity</string>
+    <string name="title_activity_circle_comment">CircleCommentActivity</string>
 
 </resources>

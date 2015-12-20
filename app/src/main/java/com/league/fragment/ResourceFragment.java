@@ -100,7 +100,8 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
         mViewPager.setAdapter(adapter);
         mViewPager.setOnPageChangeListener(this);
         llPoints.getChildAt(previousSelectPosition).setEnabled(true);
-        llPoints.getChildAt(previousSelectPosition).setBackground(getResources().getDrawable(R.drawable.pointsred));
+        if (isAdded())
+            llPoints.getChildAt(previousSelectPosition).setBackground(getResources().getDrawable(R.drawable.pointsred));
     }
 
     private void setOnClickListener() {
@@ -123,7 +124,8 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
 
             // 添加点view对象
             view = new View(ctx);
-            view.setBackgroundDrawable(getResources().getDrawable(
+            if (isAdded())
+                view.setBackgroundDrawable(getResources().getDrawable(
                     R.drawable.pointswhite));
             LayoutParams lp = new LayoutParams(25, 25);
             lp.leftMargin = 10;
@@ -155,10 +157,12 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
         // TODO Auto-generated method stub
         // 切换选中的点,把前一个点置为normal状态
         llPoints.getChildAt(previousSelectPosition).setEnabled(false);
-        llPoints.getChildAt(previousSelectPosition).setBackground(getResources().getDrawable(R.drawable.pointswhite));
+        if (isAdded())
+            llPoints.getChildAt(previousSelectPosition).setBackground(getResources().getDrawable(R.drawable.pointswhite));
         // 把当前选中的position对应的点置为enabled状态
         llPoints.getChildAt(arg0 % imageViewList.size()).setEnabled(true);
-        llPoints.getChildAt(arg0 % imageViewList.size()).setBackground(getResources().getDrawable(R.drawable.pointsred));
+        if (isAdded())
+            llPoints.getChildAt(arg0 % imageViewList.size()).setBackground(getResources().getDrawable(R.drawable.pointsred));
         previousSelectPosition = arg0 % imageViewList.size();
     }
 

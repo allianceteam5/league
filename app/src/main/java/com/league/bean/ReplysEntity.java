@@ -10,13 +10,13 @@ public class ReplysEntity {
     private String fromid;
     private String toid;
     private String isread;
-    private String created_at;
+    private long created_at;
     private String fromnickname;
     private String fromphone;
     private String fromthumb;
-    private Object tonickname;
-    private Object tophone;
-    private Object tothumb;
+    private String tonickname;
+    private String tophone;
+    private String tothumb;
 
     public void setId(String id) {
         this.id = id;
@@ -42,7 +42,7 @@ public class ReplysEntity {
         this.isread = isread;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(long created_at) {
         this.created_at = created_at;
     }
 
@@ -58,15 +58,15 @@ public class ReplysEntity {
         this.fromthumb = fromthumb;
     }
 
-    public void setTonickname(Object tonickname) {
+    public void setTonickname(String tonickname) {
         this.tonickname = tonickname;
     }
 
-    public void setTophone(Object tophone) {
+    public void setTophone(String tophone) {
         this.tophone = tophone;
     }
 
-    public void setTothumb(Object tothumb) {
+    public void setTothumb(String tothumb) {
         this.tothumb = tothumb;
     }
 
@@ -94,7 +94,7 @@ public class ReplysEntity {
         return isread;
     }
 
-    public String getCreated_at() {
+    public long getCreated_at() {
         return created_at;
     }
 
@@ -110,15 +110,15 @@ public class ReplysEntity {
         return fromthumb;
     }
 
-    public Object getTonickname() {
+    public String getTonickname() {
         return tonickname;
     }
 
-    public Object getTophone() {
+    public String getTophone() {
         return tophone;
     }
 
-    public Object getTothumb() {
+    public String getTothumb() {
         return tothumb;
     }
 }

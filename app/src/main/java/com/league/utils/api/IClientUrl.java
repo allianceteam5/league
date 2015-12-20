@@ -49,7 +49,7 @@ public class IClientUrl {
     public static final String LiaoBaTbmessagesMyLikesList = testServerUrl + "tbmessages/mylikes?page=";
     public static final String LiaoBaTbmessagesMyList = testServerUrl + "tbmessages/me?page=";
     public static final String LiaoBaTbmessagesView = testServerUrl + "tbmessages/view";
-
+    public static final String LiaoBaTbmessagesReply = testServerUrl + "tbmessages/reply";
 
     public static final String getGrabCommoditiesPass = testServerUrl + "grabcommodities/formeractivities?page=";
     public static final String getGrabCornsPass = testServerUrl + "grabcorns/formeractivities?page=";
@@ -67,6 +67,18 @@ public class IClientUrl {
     public static final String deleteShipAddress = testServerUrl + "users/deleteaddress";
     public static final String getUserDetail = testServerUrl + "users/view";
     public static final String modifyUserDetail = testServerUrl + "users/modify";
+
+    //圈子
+    public static final String CircleMessageSend = testServerUrl + "messages/send";
+    public static final String CircleMessageDelete = testServerUrl + "/messages/delete";
+    public static final String CircleMessageGet = testServerUrl + "messages/get?page=";
+    public static final String CircleMessageMoreReply = testServerUrl + "messages/ morereplys?page=";
+    public static final String CircleMessageConcelZan = testServerUrl + "messages/cancelzan";
+    public static final String CircleMessageZan = testServerUrl + "messages/zan";
+    public static final String CircleMessageReply = testServerUrl + "messages/reply";
+    public static final String CircleMessageCollect = testServerUrl + "messages/collect";
+    public static final String CircleMessageCollectCancel = testServerUrl + "messages/cancelcollect";
+
     public static final String getSignUpUrl = testServerUrl + "users/getsignupurl";
     public static final String getUserMoneyBag = testServerUrl + "users/allmoney";
     public static final String sendCpText = testServerUrl + "users/sendcptext";

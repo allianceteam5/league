@@ -1,4 +1,5 @@
-package com.league.activity.postbar;
+package com.league.activity.circle;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
-public class PostbarPublishActivity extends BaseActivity implements View.OnClickListener, IContants {
+public class CirclePublishActivity extends BaseActivity implements View.OnClickListener, IContants {
     @Bind(R.id.near_back)
     ImageButton nearBack;
     @Bind(R.id.near_title)
@@ -47,8 +48,6 @@ public class PostbarPublishActivity extends BaseActivity implements View.OnClick
     ImageButton nearRight;
     @Bind(R.id.near_save)
     TextView nearSave;
-    @Bind(R.id.et_title)
-    EditText etTitle;
     @Bind(R.id.et_content)
     EditText etContent;
     @Bind(R.id.gridview)
@@ -58,18 +57,18 @@ public class PostbarPublishActivity extends BaseActivity implements View.OnClick
     private ImgGridWithPickImgAdapter adapter;
     private StringBuilder imgUrls = new StringBuilder();
     private int sucNum = 0;
-    private String title, content;
+    private String content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_postbar_publish);
+        setContentView(R.layout.activity_circle_publish);
         ButterKnife.bind(this);
 
         nearBack.setOnClickListener(this);
         nearBack.setVisibility(View.VISIBLE);
         nearTiRight.setVisibility(View.GONE);
-        nearCentertitle.setText("发表话题");
+        nearCentertitle.setText("创建内容");
         nearRight.setVisibility(View.GONE);
         nearSave.setVisibility(View.VISIBLE);
         nearSave.setText("发表");
@@ -117,7 +116,7 @@ public class PostbarPublishActivity extends BaseActivity implements View.OnClick
                     pickImage();
                 } else {
                     ArrayList<String> imgs = new ArrayList<String>(imgList);
-                    Intent intent = new Intent(PostbarPublishActivity.this, ShowBigImgActivity.class);
+                    Intent intent = new Intent(CirclePublishActivity.this, ShowBigImgActivity.class);
                     imgs.remove(imgList.size() - 1);
                     intent.putStringArrayListExtra(PARAMS_IMG_LIST, imgs);
                     intent.putExtra(PARAMS_INDEX, position);
@@ -128,7 +127,7 @@ public class PostbarPublishActivity extends BaseActivity implements View.OnClick
     }
 
     private void pickImage() {
-        Intent intent = new Intent(PostbarPublishActivity.this, MultiImageSelectorActivity.class);
+        Intent intent = new Intent(CirclePublishActivity.this, MultiImageSelectorActivity.class);
         // 是否显示调用相机拍照
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
         // 最大图片选择数量
@@ -139,12 +138,7 @@ public class PostbarPublishActivity extends BaseActivity implements View.OnClick
     }
 
     private void publish() {
-        title = etTitle.getText().toString();
         content = etContent.getText().toString();
-        if (TextUtils.isEmpty(title)) {
-            ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_title));
-            return;
-        }
         if (TextUtils.isEmpty(content)) {
             ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_content));
             return;
@@ -198,7 +192,7 @@ public class PostbarPublishActivity extends BaseActivity implements View.OnClick
 
             String imgStr = imgUrls.toString();
             imgStr = imgStr.trim();
-            ApiUtil.liaobaTbmessagesCreated(getApplicationContext(), title, content, imgStr, new JsonHttpResponseHandler() {
+            ApiUtil.circleMessagesCreated(getApplicationContext(), content, imgStr, new JsonHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                     closeProgressDialog();

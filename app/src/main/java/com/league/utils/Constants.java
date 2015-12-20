@@ -14,7 +14,7 @@ import java.util.List;
  * Created by pfy on 2015/11/7.
  */
 public class Constants {
-    public static String PHONENUM;
+    public static String PHONENUM = "1";
     public static String HuanXinID;
     public static String HuanxinPwd;
     public static List<Activity> collection=new ArrayList<Activity>();

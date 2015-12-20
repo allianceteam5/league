@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.easemob.chatuidemo.domain.User;
 import com.league.activity.BaseActivity;
 import com.league.activity.personinfoactivity.MyAreaActivity;
 import com.league.activity.personinfoactivity.MyGenderActivity;
@@ -176,7 +177,7 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case SELECT_CAMER:
-                    updateAvatar(imgUri);
+//                    updateAvatar(imgUri);
                     Intent intent = new Intent("com.android.camera.action.CROP");
                     intent.setDataAndType(imgUri, "image/*");
 //                    intent.putExtra("scale", true);

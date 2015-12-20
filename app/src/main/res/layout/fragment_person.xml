@@ -80,7 +80,7 @@
                 android:background="@color/white"
                 android:orientation="horizontal">
 
-                <RelativeLayout
+               <!-- <RelativeLayout
                     android:layout_width="0dip"
                     android:layout_height="100dip"
                     android:layout_weight="1">
@@ -124,7 +124,7 @@
                     android:layout_width="2dip"
                     android:layout_height="match_parent"
                     android:background="@color/black2" />
-
+-->
                 <RelativeLayout
                     android:layout_width="0dip"
                     android:layout_height="100dip"
@@ -159,7 +159,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="五层总数"
+                            android:text="两层总数"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
