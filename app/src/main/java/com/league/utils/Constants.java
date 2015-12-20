@@ -1,8 +1,12 @@
 package com.league.utils;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +14,22 @@ import java.util.List;
  * Created by pfy on 2015/11/7.
  */
 public class Constants {
-    public static String PHONENUM="1";
+    public static String PHONENUM;
+    public static String HuanXinID;
+    public static String HuanxinPwd;
+    public static List<Activity> collection=new ArrayList<Activity>();
+    public static void startActivity(Context context,Class<?> clazz){
+        Intent intent = new Intent(context,clazz);
+        context.startActivity(intent);
+    }
+    public static void finishAllActivities(){
+        for(Activity activity:collection){
+            activity.finish();
+        }
+    }
+    public static void addIntoCollection(Activity activity){
+        collection.add(activity);
+    }
     public static final String RADIOSELECTKIND = "radioSelectKind";
     public static final String RADIOSELECEDTINDEX = "radioSelectedIndex";
     public static final int RADIODEDREE = 1;

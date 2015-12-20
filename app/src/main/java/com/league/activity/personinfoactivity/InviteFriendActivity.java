@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.league.utils.CreateQRImage;
 import com.league.utils.PersonInfoBaseActivity;
@@ -81,19 +80,19 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                         new SocializeListeners.SnsPostListener() {
                             @Override
                             public void onStart() {
-                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
                             }
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode,SocializeEntity entity) {
                                 if (eCode == 200) {
-                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
                                     if (eCode == -101){
                                         eMsg = "没有授权";
                                     }
-                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
-                                            eMsg,Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
+//                                            eMsg,Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -103,19 +102,19 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                         new SocializeListeners.SnsPostListener() {
                             @Override
                             public void onStart() {
-                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
                             }
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode,SocializeEntity entity) {
                                 if (eCode == 200) {
-                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
                                     if (eCode == -101){
                                         eMsg = "没有授权";
                                     }
-                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
-                                            eMsg,Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
+//                                            eMsg,Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -126,20 +125,20 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                         new SocializeListeners.SnsPostListener() {
                             @Override
                             public void onStart() {
-                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
-                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
                                     if (eCode == -101) {
                                         eMsg = "没有授权";
                                     }
-                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
-                                            eMsg, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
+//                                            eMsg, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -150,19 +149,19 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                         new SocializeListeners.SnsPostListener() {
                             @Override
                             public void onStart() {
-                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
                             }
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode,SocializeEntity entity) {
                                 if (eCode == 200) {
-                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
                                     if (eCode == -101){
                                         eMsg = "没有授权";
                                     }
-                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
-                                            eMsg,Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
+//                                            eMsg,Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

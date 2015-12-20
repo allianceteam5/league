@@ -424,9 +424,7 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
 
         @Override
         public void onFinish() {
-            if(timeMinutes.getText().toString().equals("0")&&timeMill.getText().equals("1")){
-                initData();
-            }
+            initData();
         }
     }
     public class MyListener implements PullToRefreshLayout.OnRefreshListener

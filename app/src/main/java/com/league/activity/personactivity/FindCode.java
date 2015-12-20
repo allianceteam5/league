@@ -9,7 +9,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.bean.SucessBean;
+import com.league.utils.Constants;
+import com.league.utils.ToastUtils;
+import com.league.utils.api.ApiUtil;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+
+import org.apache.http.Header;
 
 import static android.view.View.VISIBLE;
 
@@ -58,6 +67,23 @@ public class FindCode extends Activity implements View.OnClickListener{
         switch (v.getId()){
             case R.id.getcode:
                 timeCount.start();
+                ApiUtil.sendCpText(this, Constants.PHONENUM, new BaseJsonHttpResponseHandler<SucessBean>() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                        ToastUtils.showShortToast(FindCode.this,"发送失败");
+                    }
+
+                    @Override
+                    protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                        return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                        });
+                    }
+                });
                 break;
             case R.id.yanzheng:
                 Intent intent=new Intent(getApplication(),SetCode.class);
@@ -83,5 +109,11 @@ public class FindCode extends Activity implements View.OnClickListener{
             getCode.setText("重新验证");
             getCode.setClickable(true);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timeCount.onFinish();
     }
 }

@@ -13,11 +13,6 @@
  */
 package com.easemob.chatuidemo.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -38,10 +33,19 @@ import com.easemob.chat.EMGroupManager;
 import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.DemoApplication;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
-import com.mine.league.R;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.utils.CommonUtils;
+import com.league.activity.personactivity.FindCode;
+import com.league.utils.Constants;
+import com.mine.league.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import io.paperdb.Paper;
 
 /**
  * 登陆页面
@@ -71,7 +75,7 @@ public class LoginActivity extends BaseActivity {
 			return;
 		}
 		setContentView(R.layout.activity_login);
-
+		Constants.addIntoCollection(this);
 		usernameEditText = (EditText) findViewById(R.id.username);
 		passwordEditText = (EditText) findViewById(R.id.password);
 
@@ -144,11 +148,11 @@ public class LoginActivity extends BaseActivity {
 				// 登陆成功，保存用户名密码
 				DemoApplication.getInstance().setUserName(currentUsername);
 				DemoApplication.getInstance().setPassword(currentPassword);
-
+				Paper.book().write("userkey",currentUsername);
 				try {
 					// ** 第一次登录或者之前logout后再登录，加载所有本地群和回话
 					// ** manually load all local groups and
-				    EMGroupManager.getInstance().loadAllGroups();
+					EMGroupManager.getInstance().loadAllGroups();
 					EMChatManager.getInstance().loadAllConversations();
 					// 处理好友和群组
 					initializeContacts();
@@ -158,7 +162,7 @@ public class LoginActivity extends BaseActivity {
 					runOnUiThread(new Runnable() {
 						public void run() {
 							pd.dismiss();
-							DemoHXSDKHelper.getInstance().logout(true,null);
+							DemoHXSDKHelper.getInstance().logout(true, null);
 							Toast.makeText(getApplicationContext(), R.string.login_failure_failed, Toast.LENGTH_LONG).show();
 						}
 					});
@@ -177,7 +181,7 @@ public class LoginActivity extends BaseActivity {
 				Intent intent = new Intent(LoginActivity.this,
 						com.league.activity.MainActivity.class);
 				startActivity(intent);
-				
+
 				finish();
 			}
 
@@ -250,6 +254,9 @@ public class LoginActivity extends BaseActivity {
 	 */
 	public void register(View view) {
 		startActivityForResult(new Intent(this, RegisterActivity.class), 0);
+	}
+	public void findpwd(View view){
+		startActivity(new Intent(this, FindCode.class));
 	}
 
 	@Override

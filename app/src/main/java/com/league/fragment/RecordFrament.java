@@ -1,5 +1,7 @@
 package com.league.fragment;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -41,6 +44,9 @@ public class RecordFrament extends Fragment {
     private int currentPage = 1;
     private PullToRefreshLayout pullToRefreshLayout;
     private GrabRecordAdapter adapter;
+
+    protected Dialog loadingDialog;
+
     public RecordFrament(){}
     public RecordFrament(int type) {
         this.type = type;
@@ -64,10 +70,12 @@ public class RecordFrament extends Fragment {
     }
 
     private void initData(final int currentPage) {
+        showProgressDialog();
         if(type==0){
             ApiUtil.getGrabCoinRecords(getActivity().getApplication(), Constants.PHONENUM, currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabBean>>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<GrabBean> response) {
+                    closeProgressDialog();
                     if (currentPage == 1) {
                         list.clear();
                     }
@@ -87,6 +95,7 @@ public class RecordFrament extends Fragment {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<GrabBean> errorResponse) {
 //                    Toast.makeText(getActivity(), "哎呀网络不好", Toast.LENGTH_SHORT).show();
+                    closeProgressDialog();
                 }
 
                 @Override
@@ -101,6 +110,7 @@ public class RecordFrament extends Fragment {
             ApiUtil.getGrabCommodyRecords(getActivity().getApplication(), Constants.PHONENUM, currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabBean>>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<GrabBean> response) {
+                    closeProgressDialog();
                     if (currentPage == 1) {
                         list.clear();
                     }
@@ -120,6 +130,7 @@ public class RecordFrament extends Fragment {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<GrabBean> errorResponse) {
 //                    Toast.makeText(getActivity(), "哎呀网络不好+1", Toast.LENGTH_SHORT).show();
+                    closeProgressDialog();
                 }
 
                 @Override
@@ -134,6 +145,7 @@ public class RecordFrament extends Fragment {
             ApiUtil.getGrabWinRecords(getActivity().getApplication(), Constants.PHONENUM, currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabBean>>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<GrabBean> response) {
+                    closeProgressDialog();
                     if (currentPage == 1) {
                         list.clear();
                     }
@@ -151,6 +163,7 @@ public class RecordFrament extends Fragment {
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<GrabBean> errorResponse) {
+                    closeProgressDialog();
                 }
 
                 @Override
@@ -195,6 +208,35 @@ public class RecordFrament extends Fragment {
                 }
             }.sendEmptyMessageDelayed(0, 1000);
         }
+
+    }
+    /**
+     * 显示等待对话框
+     */
+    public void showProgressDialog() {
+        loadingDialog = createLoadingDialog(getActivity());
+        loadingDialog.show();
+    }
+
+    /**
+     * 关闭等待对话框
+     */
+    public void closeProgressDialog() {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
+    }
+
+    private Dialog createLoadingDialog(Context context) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.dialog_loading, null);// 得到加载view
+        Dialog loadingDialog = new Dialog(context, R.style.loading_dialog);// 创建自定义样式dialog
+
+        loadingDialog.setCancelable(false);// 不可以用“返回键”取消
+        loadingDialog.setContentView(view, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));// 设置布局
+        return loadingDialog;
 
     }
 }
