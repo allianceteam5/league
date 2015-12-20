@@ -25,7 +25,6 @@ import com.league.bean.UserInfoBean;
 import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.api.ApiUtil;
-import com.league.widget.CircleImageView;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.mine.league.R;
@@ -135,7 +134,10 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, UserInfoBean response) {
                 userInfoBean = response;
                 Paper.book().write(UserInfo, response);
-                Picasso.with(ctx).load(response.getThumb()).placeholder(R.drawable.default_avatar).into(mThumb);
+                if(response.getThumb().length()>0){
+                    Picasso.with(ctx).load(response.getThumb()).placeholder(R.drawable.default_avatar).into(mThumb);
+                }
+
                 mNickname.setText(response.getNickname());
                 mPhone.setText(response.getPhone());
                 mAllFive.setText(response.getAllalliancecount() + "");
