@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.easemob.chatuidemo.Constant;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
@@ -572,5 +571,11 @@ public class ApiUtil {
         params.put("pwd",pwd);
         params.put("text",code);
         client.post(context, IClientUrl.signup, params, responseHandler);
+    }
+    //获取我的银行卡列表
+    public static void getUserBankcardList(Context context,String phone,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        client.post(context,IClientUrl.usertocardslist,params,responseHandler);
     }
 }

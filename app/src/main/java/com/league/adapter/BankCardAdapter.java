@@ -55,9 +55,9 @@ public class BankCardAdapter extends BaseAdapter{
         }else{
             holder=(ViewHolder)convertView.getTag();
         }
-        holder.bankname.setText(list.get(position).getBankName());
-        holder.banknum.setText(list.get(position).getCardID().substring(list.get(position).getCardID().length()-2,list.get(position).getCardID().length()));
-        holder.banktype.setText(list.get(position).getBankType());
+        holder.bankname.setText(list.get(position).getName());
+        holder.banknum.setText(list.get(position).getCardnumber().substring(list.get(position).getCardnumber().length()-2,list.get(position).getCardnumber().length()));
+        holder.banktype.setText(list.get(position).getName());
         return  convertView;
     }
     class ViewHolder{

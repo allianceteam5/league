@@ -11,14 +11,20 @@ import com.league.utils.DataCleanManager;
 import com.league.utils.ToastUtils;
 import com.mine.league.R;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class PersonSetup extends Activity implements View.OnClickListener{
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
+    @Bind(R.id.cachesize)
+    TextView mCachesize;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_setup);
+        ButterKnife.bind(this);
         initView();
 
     }
@@ -42,6 +48,11 @@ public class PersonSetup extends Activity implements View.OnClickListener{
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
+        try {
+            mCachesize.setText(DataCleanManager.getTotalCacheSize(this)+"");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -61,7 +72,12 @@ public class PersonSetup extends Activity implements View.OnClickListener{
                 break;
             case R.id.clearallcache:
                 DataCleanManager.clearAllCache(getApplicationContext());
-                ToastUtils.showShortToast(this,"清理完成");
+                ToastUtils.showShortToast(this, "清理完成");
+                try {
+                    mCachesize.setText(DataCleanManager.getTotalCacheSize(PersonSetup.this));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
