@@ -22,6 +22,7 @@
         android:background="@color/white"
         android:orientation="vertical">
         <EditText
+            android:id="@+id/pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -31,7 +32,8 @@
             android:hint="输入当前密码"
             android:background="@null"
             android:gravity="center_vertical"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="10dp"
+            android:inputType="textPassword"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
@@ -40,6 +42,7 @@
             android:background="@color/black2"
             />
         <EditText
+            android:id="@+id/newpwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -49,7 +52,8 @@
             android:hint="输入新密码"
             android:background="@null"
             android:gravity="center_vertical"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="10dp"
+            android:inputType="textPassword"/>
     </LinearLayout>
 
 </LinearLayout>

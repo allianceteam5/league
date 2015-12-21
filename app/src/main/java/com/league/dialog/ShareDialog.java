@@ -1,5 +1,6 @@
 package com.league.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -8,22 +9,32 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.mine.league.R;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.bean.SocializeEntity;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.controller.listener.SocializeListeners;
+import com.umeng.socialize.sso.SinaSsoHandler;
+import com.umeng.socialize.sso.SmsHandler;
+import com.umeng.socialize.sso.UMQQSsoHandler;
+import com.umeng.socialize.weixin.controller.UMWXHandler;
 
 /**
  * Created by liug on 15/12/3.
  */
 public class ShareDialog extends Dialog implements android.view.View.OnClickListener{
-    private ImageView weixin,qq,friends;
     private Context context;
     View localView;
-
-    public ShareDialog(Context context) {
+    Activity activity;
+    // 首先在您的Activity中添加如下成员变量
+    final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
+    public ShareDialog(Context context,Activity activity) {
         super(context);
         this.context=context;
+        this.activity=activity;
     }
 
     @Override
@@ -45,14 +56,30 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
         setOnclick();
     }
     private void initViews(){
-        weixin= (ImageView) findViewById(R.id.weixin);
-        qq= (ImageView) findViewById(R.id.qq);
-        friends= (ImageView) findViewById(R.id.friends);
+        //参数1为当前Activity，参数2为开发者在QQ互联申请的APP ID，参数3为开发者在QQ互联申请的APP kEY.
+        UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(activity, "100424468",
+                "c7394704798a158208a74ab60104f0ba");
+        qqSsoHandler.addToSocialSDK();
+        //添加微博
+        SinaSsoHandler sinaSsoHandler=new SinaSsoHandler();
+        sinaSsoHandler.addToSocialSDK();
+        // 添加短信
+        SmsHandler smsHandler = new SmsHandler();
+        smsHandler.addToSocialSDK();
+        // wx967daebe835fbeac是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
+        String appID = "wx98e6c27800ad7a60";
+        String appSecret = "a7d7ab547a7f2b333f243bf68ac96728";
+        // 添加微信平台
+        UMWXHandler wxHandler = new UMWXHandler(activity,appID,appSecret);
+        wxHandler.addToSocialSDK();
+        mController.getConfig().setSsoHandler(new SinaSsoHandler());
+        // 设置分享内容
+        mController.setShareContent("我在自己人联盟里抢到红包了，你也快来跟我一起抢啊");
     }
     private void setOnclick(){
-        weixin.setOnClickListener(this);
-        qq.setOnClickListener(this);
-        friends.setOnClickListener(this);
+        localView.findViewById(R.id.qqshare).setOnClickListener(this);
+        localView.findViewById(R.id.wxshare).setOnClickListener(this);
+        localView.findViewById(R.id.wbshare).setOnClickListener(this);
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -62,6 +89,75 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.qqshare:
+                mController.postShare(activity, SHARE_MEDIA.QQ,
+                        new SocializeListeners.SnsPostListener() {
+                            @Override
+                            public void onStart() {
+//                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
+                            }
+                            @Override
+                            public void onComplete(SHARE_MEDIA platform, int eCode,SocializeEntity entity) {
+                                if (eCode == 200) {
+//                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    String eMsg = "";
+                                    if (eCode == -101){
+                                        eMsg = "没有授权";
+                                    }
+//                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
+//                                            eMsg,Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                break;
+            case R.id.wxshare:
+                mController.postShare(activity,SHARE_MEDIA.WEIXIN,
+                        new SocializeListeners.SnsPostListener() {
+                            @Override
+                            public void onStart() {
+//                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
+                            }
+                            @Override
+                            public void onComplete(SHARE_MEDIA platform, int eCode,SocializeEntity entity) {
+                                if (eCode == 200) {
+//                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    String eMsg = "";
+                                    if (eCode == -101){
+                                        eMsg = "没有授权";
+                                    }
+//                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
+//                                            eMsg,Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                break;
+            case R.id.wbshare:
+                // 参数1为Context类型对象， 参数2为要分享到的目标平台， 参数3为分享操作的回调接口
+                mController.postShare(activity, SHARE_MEDIA.SINA,
+                        new SocializeListeners.SnsPostListener() {
+                            @Override
+                            public void onStart() {
+//                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
+                            }
 
+                            @Override
+                            public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
+                                if (eCode == 200) {
+//                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    String eMsg = "";
+                                    if (eCode == -101) {
+                                        eMsg = "没有授权";
+                                    }
+//                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
+//                                            eMsg, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                break;
+        }
     }
 }

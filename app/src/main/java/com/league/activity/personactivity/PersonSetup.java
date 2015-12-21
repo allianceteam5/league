@@ -48,6 +48,12 @@ public class PersonSetup extends Activity implements View.OnClickListener{
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         try {
             mCachesize.setText(DataCleanManager.getTotalCacheSize(this)+"");
         } catch (Exception e) {

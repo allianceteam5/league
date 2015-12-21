@@ -85,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cachesize"
+            android:layout_marginRight="10dp"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:layout_centerVertical="true"

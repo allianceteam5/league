@@ -578,4 +578,18 @@ public class ApiUtil {
         params.put("phone",phone);
         client.post(context,IClientUrl.usertocardslist,params,responseHandler);
     }
+    //修改用户名密码
+    public static void changePwd(Context context,String phone,String pwd,String newpwd,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("pwd",pwd);
+        params.put("newpwd",newpwd);
+        client.post(context,IClientUrl.changepwdbypwd,params,responseHandler);
+    }
+    public static void checkPXText(Context context,String phone,String text,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("text",text);
+        client.post(context,IClientUrl.checkpstext,params,responseHandler);
+    }
 }
