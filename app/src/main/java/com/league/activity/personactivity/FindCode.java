@@ -104,17 +104,20 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
                 break;
             case R.id.yanzheng:
                 if(mInputPhone.getText().length()<11&& TextUtils.isEmpty(mInputCode.getText())){
+                    ToastUtils.showShortToast(FindCode.this, "请输入信息");
+                }else{
+
                     showProgressDialog();
                     ApiUtil.checkPXText(FindCode.this, mInputPhone.getText().toString(), mInputCode.getText().toString(),
                             new BaseJsonHttpResponseHandler<SucessBean>() {
                                 @Override
                                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                     closeProgressDialog();
-                                    if(response.getFlag().equals("1")){
-                                        Intent intent=new Intent(getApplication(),SetCode.class);
+                                    if (response.getFlag().equals("1")) {
+                                        Intent intent = new Intent(getApplication(), SetCode.class);
                                         startActivity(intent);
                                         finish();
-                                    }else{
+                                    } else {
                                         ToastUtils.showShortToast(FindCode.this, "验证失败");
                                     }
                                 }
@@ -131,8 +134,6 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
                                     });
                                 }
                             });
-                }else{
-                    ToastUtils.showShortToast(FindCode.this, "请输入信息");
                 }
 
                 break;

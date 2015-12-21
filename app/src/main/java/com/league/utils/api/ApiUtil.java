@@ -592,4 +592,11 @@ public class ApiUtil {
         params.put("text",text);
         client.post(context,IClientUrl.checkpstext,params,responseHandler);
     }
+    //修改密码
+    public static void changepwd(Context context,String phone,String pwd,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("pwd",pwd);
+        client.post(context,IClientUrl.changepwd,params,responseHandler);
+    }
 }
