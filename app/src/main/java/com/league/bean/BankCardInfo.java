@@ -4,68 +4,78 @@ package com.league.bean;
  * Created by liug on 15/11/12.
  */
 public class BankCardInfo {
-    private String cardID;
+
+    /**
+     * id : 3
+     * userid : 3
+     * cardnumber : 12345678654678654333455
+     * name : 周
+     * idcard : 3333333333333
+     * lphone : 12345678
+     * location : 杭州
+     */
+
+    private int id;
+    private int userid;
+    private String cardnumber;
     private String name;
-    private String userID;
-    private String userNumber;
-    private String kaihudi;
+    private String idcard;
+    private String lphone;
+    private String location;
 
-    private String bankName;
-    private String bankType;
-
-    public String getBankName() {
-        return bankName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
-    public String getBankType() {
-        return bankType;
-    }
-
-    public void setBankType(String bankType) {
-        this.bankType = bankType;
-    }
-
-    public String getCardID() {
-        return cardID;
-    }
-
-    public void setCardID(String cardID) {
-        this.cardID = cardID;
-    }
-
-    public String getName() {
-        return name;
+    public void setCardnumber(String cardnumber) {
+        this.cardnumber = cardnumber;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getUserID() {
-        return userID;
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setLphone(String lphone) {
+        this.lphone = lphone;
     }
 
-    public String getUserNumber() {
-        return userNumber;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public void setUserNumber(String userNumber) {
-        this.userNumber = userNumber;
+    public int getId() {
+        return id;
     }
 
-    public String getKaihudi() {
-        return kaihudi;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setKaihudi(String kaihudi) {
-        this.kaihudi = kaihudi;
+    public String getCardnumber() {
+        return cardnumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public String getLphone() {
+        return lphone;
+    }
+
+    public String getLocation() {
+        return location;
     }
 }

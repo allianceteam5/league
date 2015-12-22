@@ -87,4 +87,8 @@ public class IClientUrl {
     public static final String sendCpText = testServerUrl + "users/sendcptext";
     public static final String sendrgtext = testServerUrl + "users/sendrgtext";
     public static final String signup = testServerUrl + "users/signup";
+    public static final String usertocardslist = testServerUrl + "usertocards/list";
+    public static final String changepwdbypwd = testServerUrl + "users/changepwdbypwd";
+    public static final String checkpstext = testServerUrl + "users/checkcptext";
+    public static final String changepwd = testServerUrl + "users/changepwd";
 }

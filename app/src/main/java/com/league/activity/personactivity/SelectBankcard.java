@@ -1,6 +1,5 @@
 package com.league.activity.personactivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,14 +8,23 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.activity.BaseActivity;
 import com.league.adapter.BankCardAdapter;
 import com.league.bean.BankCardInfo;
+import com.league.utils.Constants;
+import com.league.utils.ToastUtils;
+import com.league.utils.api.ApiUtil;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectBankcard extends Activity implements View.OnClickListener{
+public class SelectBankcard extends BaseActivity implements View.OnClickListener{
 
     private List<BankCardInfo> list=new ArrayList<BankCardInfo>();
     private ImageView back2, titleright, right1, right2;
@@ -53,24 +61,36 @@ public class SelectBankcard extends Activity implements View.OnClickListener{
         listView= (ListView) findViewById(R.id.listview);
     }
     private void initData(){
-        for (int i=0;i<3;i++){
-            BankCardInfo bci=new BankCardInfo();
-            bci.setCardID("123456789");
-            bci.setKaihudi("杭州");
-            bci.setName("刘刚");
-            bci.setUserID("987654321");
-            bci.setUserNumber("17244738345");
-            bci.setBankName("招行银行");
-            list.add(bci);
-        }
-        listView.setAdapter(new BankCardAdapter(list,getApplication()));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        showProgressDialog();
+        ApiUtil.getUserBankcardList(this, Constants.PHONENUM, new BaseJsonHttpResponseHandler<ArrayList<BankCardInfo>>() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                onBackPressed();
-                finish();
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<BankCardInfo> response) {
+                closeProgressDialog();
+                list.clear();
+                list.addAll(response);
+                listView.setAdapter(new BankCardAdapter(list, getApplication()));
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        onBackPressed();
+                        finish();
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<BankCardInfo> errorResponse) {
+                closeProgressDialog();
+                ToastUtils.showShortToast(SelectBankcard.this,"网络不给力");
+            }
+
+            @Override
+            protected ArrayList<BankCardInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<BankCardInfo>>() {
+                });
             }
         });
+
     }
 
     @Override

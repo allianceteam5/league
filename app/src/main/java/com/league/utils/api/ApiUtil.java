@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.easemob.chatuidemo.Constant;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
@@ -593,5 +592,32 @@ public class ApiUtil {
         params.put("pwd",pwd);
         params.put("text",code);
         client.post(context, IClientUrl.signup, params, responseHandler);
+    }
+    //获取我的银行卡列表
+    public static void getUserBankcardList(Context context,String phone,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        client.post(context,IClientUrl.usertocardslist,params,responseHandler);
+    }
+    //修改用户名密码
+    public static void changePwd(Context context,String phone,String pwd,String newpwd,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("pwd",pwd);
+        params.put("newpwd",newpwd);
+        client.post(context,IClientUrl.changepwdbypwd,params,responseHandler);
+    }
+    public static void checkPXText(Context context,String phone,String text,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("text",text);
+        client.post(context,IClientUrl.checkpstext,params,responseHandler);
+    }
+    //修改密码
+    public static void changepwd(Context context,String phone,String pwd,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("pwd",pwd);
+        client.post(context,IClientUrl.changepwd,params,responseHandler);
     }
 }

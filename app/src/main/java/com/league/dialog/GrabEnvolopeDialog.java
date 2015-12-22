@@ -101,7 +101,7 @@ public class GrabEnvolopeDialog extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.share:
-                ShareDialog shareDialog=new ShareDialog(GrabEnvolopeDialog.this);
+                ShareDialog shareDialog=new ShareDialog(GrabEnvolopeDialog.this,GrabEnvolopeDialog.this);
                 shareDialog.show();
                 break;
 
