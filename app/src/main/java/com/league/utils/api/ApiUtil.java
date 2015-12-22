@@ -139,6 +139,27 @@ public class ApiUtil {
         client.post(context, IClientUrl.HobbySearch + currentPage, params, responseHandler);
     }
 
+    public static void othersList(Context context, boolean isMy, String search, int currentPage, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        if (isMy)
+            params.add("phone", testPhone);
+        if (!TextUtils.isEmpty(search)) {
+            params.add("content", search);
+        }
+        printHttp(IClientUrl.OtherList, params);
+        client.post(context, IClientUrl.OtherList + currentPage, params, responseHandler);
+    }
+
+    public static void otherCreated(Context context, String title, String content, String pictures, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("phone", testPhone);
+        params.add("title", title);
+        params.add("content", content);
+        params.add("pictures", pictures);
+        printHttp(IClientUrl.OtherCreated, params);
+        client.post(context, IClientUrl.OtherCreated, params, responseHandler);
+    }
+
     public static void grabcornsSearch(Context context, int type, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.add("type", String.valueOf(type));

@@ -13,7 +13,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.league.activity.BaseActivity;
 import com.league.bean.KindBean;
+import com.league.otto.BusProvider;
+import com.league.otto.RefreshEvent;
 import com.league.utils.Constants;
 import com.league.utils.DateFormatUtils;
 import com.league.utils.ToastUtils;
@@ -31,7 +34,7 @@ import cn.aigestudio.datepicker.cons.DPMode;
 import cn.aigestudio.datepicker.views.DatePicker;
 import io.paperdb.Paper;
 
-public  class JobInfoPublishActivity extends Activity implements View.OnClickListener {
+public  class JobInfoPublishActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView back, title_right, right, jobfull, jobpart;
     private TextView title, save, tvDegree, tvWorkTime,tvProfession;
@@ -185,6 +188,7 @@ public  class JobInfoPublishActivity extends Activity implements View.OnClickLis
                             ToastUtils.showLongToast(getApplicationContext(), getString(R.string.publish_success));
                         else
                             ToastUtils.showLongToast(getApplicationContext(), getString(R.string.publish_fail));
+                        BusProvider.getInstance().post(new RefreshEvent());
                         JobInfoPublishActivity.this.finish();
                     }
 

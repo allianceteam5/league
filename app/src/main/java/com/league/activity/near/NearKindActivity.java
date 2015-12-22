@@ -2,6 +2,8 @@ package com.league.activity.near;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
@@ -30,14 +32,18 @@ import com.league.adapter.RecommendationInfoAdapter;
 import com.league.bean.HobbyInfoBean;
 import com.league.bean.JobInfoBean;
 import com.league.bean.KindBean;
+import com.league.bean.LiaoBaMessageBean;
 import com.league.bean.RecommendationInfoBean;
 import com.league.dialog.NearRightDialog;
+import com.league.otto.RefreshEvent;
 import com.league.utils.Constants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.RefreshLayout;
+import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+import com.squareup.otto.Subscribe;
 
 import net.soulwolf.widget.dialogbuilder.DialogBuilder;
 import net.soulwolf.widget.dialogbuilder.MasterDialog;
@@ -53,6 +59,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import io.paperdb.Paper;
 
 /**
@@ -68,7 +76,6 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     private Button btnSure;
     private LinearLayout ll_more;
     private int Flag;
-    private ListView listview;
     private List<HobbyInfoBean> listMaFrData = new ArrayList<HobbyInfoBean>();
     private JobInfoAdapter jobInfoAdapter;
     private RecommendationInfoAdapter recommendationInfoAdapter;
@@ -78,6 +85,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     private List<JobInfoBean> jobInfoList = new ArrayList<>();
     private List<HobbyInfoBean> hobbyInfoList = new ArrayList<>();
     private List<RecommendationInfoBean> recommendationInfoList = new ArrayList<>();
+    private List<LiaoBaMessageBean> otherInfoList=new ArrayList<>();
     private int currentPage = 1;
     private int sumPage;
     private int kindid = 0;
@@ -86,11 +94,17 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     DialogBuilder builder;
     ListMasterDialog dialog;
 
+    @Bind(R.id.listview)
+    ListView listview;
+    @Bind(R.id.refresh_view)
+    PullToRefreshLayout pullToRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_searchinfo);
+        ButterKnife.bind(this);
 
         Flag = getIntent().getIntExtra("mode", -1);
         if (Flag == -1) {
@@ -106,69 +120,19 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
         near_title = (TextView) findViewById(R.id.near_title);
         near_t_rig = (ImageView) findViewById(R.id.near_title_right);
         near_right = (ImageButton) findViewById(R.id.near_right);
-        listview = (ListView) findViewById(R.id.infosearch_list);
         ll_more = (LinearLayout) findViewById(R.id.near_more);
-        etSearch = (EditText) findViewById(R.id.et_search_search);
-        btnSure = (Button) findViewById(R.id.btn_search_sure);
-        final RefreshLayout myRefreshListView = (RefreshLayout)
-                findViewById(R.id.swipe_layout);
-        myRefreshListView
-                .setColorScheme(R.color.black,
-                        R.color.blue, R.color.greenn,
-                        R.color.red);
 
+        View headerView = getLayoutInflater().inflate(R.layout.info_search,null);
+        listview.addHeaderView(headerView);
+        etSearch = (EditText) headerView.findViewById(R.id.et_search_search);
+        btnSure = (Button) headerView.findViewById(R.id.btn_search_sure);
+        pullToRefreshLayout.setOnRefreshListener(new MyListener());
+
+        near_back.setVisibility(View.VISIBLE);
         near_back.setOnClickListener(this);
         near_right.setOnClickListener(this);
         ll_more.setOnClickListener(this);
         btnSure.setOnClickListener(this);
-
-        // 设置下拉刷新监听器
-        myRefreshListView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                myRefreshListView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        currentPage = 1;
-                        switch (Flag) {
-                            case 1:
-                                jobInfoList.clear();
-                                break;
-                            case 2:
-                                recommendationInfoList.clear();
-                                break;
-                            case 3:
-                                hobbyInfoList.clear();
-                        }
-                        // 更新数据
-                        initData();
-                        // 更新完后调用该方法结束刷新
-                        myRefreshListView.setRefreshing(false);
-                    }
-                }, 1500);
-            }
-        });
-
-        // 加载监听器
-        myRefreshListView.setOnLoadListener(new RefreshLayout.OnLoadListener() {
-            @Override
-            public void onLoad() {
-                myRefreshListView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        currentPage++;
-                        if (currentPage < sumPage) {
-                            initData();
-                        } else {
-                            Toast.makeText(getApplicationContext(), getString(R.string.loading_done), Toast.LENGTH_SHORT).show();
-                        }
-                        // 加载完后调用该方法
-                        myRefreshListView.setLoading(false);
-                    }
-                }, 1500);
-
-            }
-        });
 
         builder = new DialogBuilder(this)
                 .setAnimation(R.anim.da_slide_in_top, R.anim.da_slide_out_top)
@@ -253,6 +217,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 closeProgressDialog();
                 near_title.setText("其他");
                 near_t_rig.setVisibility(View.INVISIBLE);
+                ll_more.setClickable(false);
                 break;
             default:
                 break;
@@ -353,7 +318,29 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 });
                 break;
             case 4:
-                closeProgressDialog();
+                ApiUtil.othersList(getApplicationContext(), false, searchString, currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaMessageBean>>() {
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaMessageBean> response) {
+                       otherInfoList.addAll(response);
+                        updateOtherView();
+                        closeProgressDialog();
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaMessageBean> errorResponse) {
+                        closeProgressDialog();
+                        ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_internet));
+                    }
+
+                    @Override
+                    protected ArrayList<LiaoBaMessageBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                        JSONObject jsonObject = new JSONObject(rawJsonData);
+                        sumPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
+                        return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaMessageBean>>() {
+                        });
+                    }
+                });
                 break;
             default:
                 break;
@@ -414,6 +401,12 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
             });
         } else {
             hobbyInfoAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void updateOtherView(){
+        if (otherInfoList == null){
+
         }
     }
 
@@ -486,6 +479,65 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
         hobbyInfoList.clear();
         firstWindowLoad = false;
         searchString = "";
+        initData();
+    }
+
+    public class MyListener implements PullToRefreshLayout.OnRefreshListener {
+        @Override
+        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
+            // 下拉刷新操作
+            new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    currentPage = 1;
+                    switch (Flag) {
+                        case 1:
+                            jobInfoList.clear();
+                            break;
+                        case 2:
+                            recommendationInfoList.clear();
+                            break;
+                        case 3:
+                            hobbyInfoList.clear();
+                    }
+                    // 更新数据
+                    initData();
+                    // 千万别忘了告诉控件刷新完毕了哦！
+                    pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                }
+            }.sendEmptyMessageDelayed(0, 1000);
+        }
+
+        @Override
+        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
+            // 加载操作
+            new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    currentPage++;
+                    if (currentPage <= sumPage)
+                        initData();
+                    // 千万别忘了告诉控件加载完毕了哦！
+                    pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                }
+            }.sendEmptyMessageDelayed(0, 1000);
+        }
+    }
+
+    @Subscribe
+    public void refreshEvent(RefreshEvent event){
+        currentPage = 1;
+        switch (Flag) {
+            case 1:
+                jobInfoList.clear();
+                break;
+            case 2:
+                recommendationInfoList.clear();
+                break;
+            case 3:
+                hobbyInfoList.clear();
+        }
+        // 更新数据
         initData();
     }
 }
