@@ -2,21 +2,26 @@ package com.league.activity.near;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.adapter.HobbyInfoAdapter;
 import com.league.adapter.JobInfoAdapter;
+import com.league.adapter.OtherMessageAdapter;
 import com.league.adapter.RecommendationInfoAdapter;
 import com.league.bean.HobbyInfoBean;
 import com.league.bean.JobInfoBean;
+import com.league.bean.LiaoBaMessageBean;
+import com.league.bean.OtherMessageBean;
 import com.league.bean.RecommendationInfoBean;
 import com.league.utils.Constants;
 import com.league.utils.IContants;
@@ -44,6 +49,8 @@ public class MyPost extends BaseActivity implements OnClickListener, IContants {
     private RecommendationInfoAdapter recommendationInfoAdapter;
     private List<HobbyInfoBean> hobbyInfoList;
     private HobbyInfoAdapter hobbyInfoAdapter;
+    private List<OtherMessageBean> otherMessageList;
+    private OtherMessageAdapter otherMessageAdapter;
     private int flag;
 
     @Override
@@ -142,6 +149,29 @@ public class MyPost extends BaseActivity implements OnClickListener, IContants {
                 });
                 break;
             case 4:
+                title.setText("我的发帖");
+                ApiUtil.othersList(getApplicationContext(), true, "", 1, new BaseJsonHttpResponseHandler<ArrayList<OtherMessageBean>>() {
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OtherMessageBean> response) {
+                        otherMessageList = response;
+                        updateOtherView();
+                        closeProgressDialog();
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<OtherMessageBean> errorResponse) {
+                        closeProgressDialog();
+                        ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_internet));
+                    }
+
+                    @Override
+                    protected ArrayList<OtherMessageBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                        JSONObject jsonObject = new JSONObject(rawJsonData);
+                        return new ObjectMapper().readValue(jsonObject.optJSONArray("items").toString(), new TypeReference<ArrayList<OtherMessageBean>>() {
+                        });
+                    }
+                });
                 break;
         }
     }
@@ -206,6 +236,15 @@ public class MyPost extends BaseActivity implements OnClickListener, IContants {
             });
         } else {
             hobbyInfoAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void updateOtherView(){
+        if (otherMessageAdapter == null){
+            otherMessageAdapter = new OtherMessageAdapter(getApplicationContext(), otherMessageList);
+            list.setAdapter(otherMessageAdapter);
+        } else {
+            otherMessageAdapter.notifyDataSetChanged();
         }
     }
 }

@@ -58,7 +58,6 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
             ctx = this.getActivity();
             layout = ctx.getLayoutInflater().inflate(
                     R.layout.fragment_resource, null);
-
             setView();
             initView();
             setOnClickListener();
@@ -137,7 +136,7 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
 
     private int[] getImageResIDs() {
         return new int[]{R.drawable.back1, R.drawable.back2, R.drawable.back3,
-                R.drawable.back1, R.drawable.back2};
+                R.drawable.back4};
     }
 
     @Override
