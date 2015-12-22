@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -84,7 +85,8 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
         pullToRefreshLayout.setVisibility(View.GONE);
 
         userInfoBean = Paper.book().read(UserInfo);
-        Picasso.with(this).load(userInfoBean.getThumb()).placeholder(R.drawable.default_avatar).into(ivThumb);
+        if (!TextUtils.isEmpty(userInfoBean.getThumb()))
+            Picasso.with(this).load(userInfoBean.getThumb()).placeholder(R.drawable.default_avatar).into(ivThumb);
         tvName.setText(userInfoBean.getNickname());
         tvFriendcount.setText(userInfoBean.getFriendcount()+"");
         tvLikecount.setText(userInfoBean.getConcerncount()+"");
