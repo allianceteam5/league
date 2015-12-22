@@ -18,6 +18,8 @@ import com.league.activity.ShowBigImgActivity;
 import com.league.adapter.ImgGridWithPickImgAdapter;
 import com.league.bean.KindBean;
 import com.league.interf.OnAllComplete;
+import com.league.otto.BusProvider;
+import com.league.otto.RefreshEvent;
 import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
@@ -233,10 +235,8 @@ public class RecommendationInfoPublishActivity extends BaseActivity implements V
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                    Log.i(LOGTAG, "newDynamic onSuccess  " + responseString);
                     closeProgressDialog();
-//                    sharePopWindow.showPopWindow();
-//                    BusProvider.getBus().post(new NewDynamicEvent());
+                    BusProvider.getInstance().post(new RefreshEvent());
                     if (response.optInt("flag") == 1) {
                         Toast.makeText(getApplicationContext(), "发布成功", Toast.LENGTH_SHORT).show();
                         imgList.clear();

@@ -166,18 +166,4 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
 
     }
 
-    @Override protected void onResume() {
-        super.onResume();
-
-        // Register ourselves so that we can provide the initial value.
-        BusProvider.getInstance().register(this);
-    }
-
-    @Override protected void onPause() {
-        super.onPause();
-
-        // Always unregister when an object no longer should be on the bus.
-        BusProvider.getInstance().unregister(this);
-    }
-
 }

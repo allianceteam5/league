@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.league.activity.BaseActivity;
 import com.league.bean.KindBean;
 import com.league.interf.OnAllComplete;
+import com.league.otto.BusProvider;
+import com.league.otto.RefreshEvent;
 import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
@@ -179,6 +181,7 @@ public class HobbyInfoPublishActivity extends BaseActivity implements View.OnCli
                     closeProgressDialog();
                     if (response.optInt("flag") == 1) {
                         Toast.makeText(getApplicationContext(), "发布成功", Toast.LENGTH_SHORT).show();
+                        BusProvider.getInstance().post(new RefreshEvent());
                         finish();
                     }
                 }
