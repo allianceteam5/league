@@ -41,7 +41,7 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener{
         setContentView(R.layout.activity_my_money_bag);
         ButterKnife.bind(this);
         initView();
-        initData();
+//        initData();
     }
     private void initView() {
 
@@ -114,5 +114,11 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener{
                 startActivity(intent5);
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
 }

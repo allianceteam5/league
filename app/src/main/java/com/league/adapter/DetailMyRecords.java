@@ -67,7 +67,7 @@ public class DetailMyRecords extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 if(list.get(position).getGrabcornid()==null){
-                    ApiUtil.getMoreNumCommodity(ctx, list.get(position).getGrabcommodityid(), new BaseJsonHttpResponseHandler<MoreNumberBean>() {
+                    ApiUtil.getMoreNumCommodity(ctx, list.get(position).getId(), new BaseJsonHttpResponseHandler<MoreNumberBean>() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, MoreNumberBean response) {
                             if(response.getFlag()==1){
@@ -90,7 +90,7 @@ public class DetailMyRecords extends BaseAdapter{
                         }
                     });
                 }else if(list.get(position).getGrabcommodityid()==null){
-                    ApiUtil.getMoreNumCorn(ctx, list.get(position).getGrabcornid(), new BaseJsonHttpResponseHandler<MoreNumberBean>() {
+                    ApiUtil.getMoreNumCorn(ctx, list.get(position).getId(), new BaseJsonHttpResponseHandler<MoreNumberBean>() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, MoreNumberBean response) {
                             if (response.getFlag() == 1) {

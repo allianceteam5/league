@@ -5,13 +5,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
+import com.league.bean.UserInfoBean;
 import com.league.utils.Constants;
+import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -21,8 +24,9 @@ import org.apache.http.Header;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.paperdb.Paper;
 
-public class Certification extends BaseActivity implements View.OnClickListener{
+public class Certification extends BaseActivity implements View.OnClickListener,IContants{
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
@@ -32,6 +36,10 @@ public class Certification extends BaseActivity implements View.OnClickListener{
     EditText mInputID;
     @Bind(R.id.bindid)
     Button mBind;
+    @Bind(R.id.ll_notcertify)
+    LinearLayout llNotCertify;
+    @Bind(R.id.ll_hascertified)
+    LinearLayout llHasCertified;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +69,14 @@ public class Certification extends BaseActivity implements View.OnClickListener{
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
         mBind.setOnClickListener(this);
+        UserInfoBean userInfoBean=Paper.book().read(UserInfo);
+        if(userInfoBean.getStatus()==0){
+            llNotCertify.setVisibility(View.VISIBLE);
+            llHasCertified.setVisibility(View.GONE);
+        }else{
+            llNotCertify.setVisibility(View.GONE);
+            llHasCertified.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
