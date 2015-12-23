@@ -36,7 +36,8 @@ public class UserInfoBean {
      * isdraw : 0
      * status : 0
      */
-
+    private String background;
+    private String invitecode;
     private String phone;
     @JsonProperty("id")
     private String hxId;
@@ -65,6 +66,22 @@ public class UserInfoBean {
     private int concerncount;
     private int status;
     private int isdraw;
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
+
+    public String getInvitecode() {
+        return invitecode;
+    }
+
+    public void setInvitecode(String invitecode) {
+        this.invitecode = invitecode;
+    }
 
     public void setPhone(String phone) {
         this.phone = phone;

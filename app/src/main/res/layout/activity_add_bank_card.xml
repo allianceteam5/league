@@ -35,6 +35,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"/>
         <EditText
+            android:id="@+id/inputbankid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -69,6 +70,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"/>
         <EditText
+            android:id="@+id/inputname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -98,6 +100,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"/>
         <EditText
+            android:id="@+id/inputpersonid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -106,7 +109,6 @@
             android:layout_marginLeft="5dp"
             android:textSize="16sp"
             android:textColor="@color/black"
-            android:inputType="number"
             android:hint="（实名认证的ID）"/>
     </LinearLayout>
     <View
@@ -128,6 +130,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"/>
         <EditText
+            android:id="@+id/inputphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -158,6 +161,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"/>
         <EditText
+            android:id="@+id/openarea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -169,6 +173,7 @@
             />
     </LinearLayout>
     <Button
+        android:id="@+id/next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btnbackground"

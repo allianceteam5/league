@@ -9,8 +9,6 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
-import junit.framework.Test;
-
 /**
  * Created by pfy on 2015/11/6.
  */
@@ -606,6 +604,17 @@ public class ApiUtil {
         RequestParams params=new RequestParams();
         params.put("phone",phone);
         client.post(context,IClientUrl.usertocardslist,params,responseHandler);
+    }
+    //添加银行卡
+    public static void addBankCard(Context context,String phone,String bankid,String name,String id,String userphone,String area,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("name",name);
+        params.put("cardnumber",bankid);
+        params.put("idcard",id);
+        params.put("lphone",userphone);
+        params.put("location",area);
+        client.post(context,IClientUrl.createBankcard,params,responseHandler);
     }
     //修改用户名密码
     public static void changePwd(Context context,String phone,String pwd,String newpwd,TextHttpResponseHandler responseHandler){

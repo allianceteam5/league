@@ -24,7 +24,7 @@ import org.apache.http.Header;
 import java.util.ArrayList;
 import java.util.List;
 
-public class    SelectBankcard extends BaseActivity implements View.OnClickListener{
+public class SelectBankcard extends BaseActivity implements View.OnClickListener{
 
     private List<BankCardInfo> list=new ArrayList<BankCardInfo>();
     private ImageView back2, titleright, right1, right2;
@@ -35,7 +35,6 @@ public class    SelectBankcard extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_bankcard);
         initView();
-        initData();
     }
 
     private void initView() {
@@ -101,5 +100,11 @@ public class    SelectBankcard extends BaseActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
 }
