@@ -3,6 +3,7 @@ package com.league.dialog;
 
 import com.league.activity.near.HobbyInfoPublishActivity;
 import com.league.activity.near.MyPost;
+import com.league.activity.near.OtherInfoPublishActivity;
 import com.league.activity.near.RecommendationInfoPublishActivity;
 import com.league.activity.near.JobInfoPublishActivity;
 import com.league.utils.IContants;
@@ -75,6 +76,7 @@ public class NearRightDialog extends Dialog implements
 					context.startActivity(new Intent(context, HobbyInfoPublishActivity.class));
 					break;
 				case 4:
+					context.startActivity(new Intent(context, OtherInfoPublishActivity.class));
 					break;
 			}
 			dismiss();

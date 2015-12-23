@@ -7,6 +7,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.easemob.chatuidemo.Constant;
 import com.league.bean.HobbyInfoBean;
 import com.league.utils.Constants;
 import com.mine.league.R;
@@ -55,7 +56,10 @@ public class HobbyInfoActivity extends Activity implements View.OnClickListener 
     void initView() {
         Picasso.with(getApplicationContext()).load(hobbyInfo.getPicture()).resize(140, 140).centerCrop().into(img);
         sex.setText(Constants.SEXITEMS.get(hobbyInfo.getSex()));
-        age.setText(Constants.AGEITEMS.get(hobbyInfo.getAge()));
+        if (hobbyInfo.getAge() > 6)
+            age.setText(Constants.AGEITEMS.get(3));
+        else
+            age.setText(Constants.AGEITEMS.get(hobbyInfo.getAge()));
         hobby.setText(hobbyInfo.getHobby());
         message.setText(hobbyInfo.getContent());
     }

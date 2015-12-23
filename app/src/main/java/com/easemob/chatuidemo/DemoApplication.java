@@ -19,6 +19,7 @@ import android.support.multidex.MultiDex;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.easemob.EMCallBack;
+import com.tumblr.remember.Remember;
 
 import io.paperdb.Paper;
 
@@ -34,6 +35,7 @@ public class DemoApplication extends Application {
 	 */
 	public static String currentUserNick = "";
 	public static DemoHXSDKHelper hxSDKHelper = new DemoHXSDKHelper();
+	private static final String StoreName = "allleague";
 
 	@Override
 	public void onCreate() {
@@ -62,6 +64,7 @@ public class DemoApplication extends Application {
         hxSDKHelper.onInit(applicationContext);
 		SDKInitializer.initialize(applicationContext);
 		Paper.init(applicationContext);
+		Remember.init(getApplicationContext(), StoreName);
 	}
 
 	public static DemoApplication getInstance() {

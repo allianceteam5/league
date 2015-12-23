@@ -75,12 +75,13 @@ public class IClientUrl {
     public static final String CircleMessageSend = testServerUrl + "messages/send";
     public static final String CircleMessageDelete = testServerUrl + "/messages/delete";
     public static final String CircleMessageGet = testServerUrl + "messages/get?page=";
-    public static final String CircleMessageMoreReply = testServerUrl + "messages/ morereplys?page=";
+    public static final String CircleMessageMoreReply = testServerUrl + "messages/morereplys?page=";
     public static final String CircleMessageConcelZan = testServerUrl + "messages/cancelzan";
     public static final String CircleMessageZan = testServerUrl + "messages/zan";
     public static final String CircleMessageReply = testServerUrl + "messages/reply";
     public static final String CircleMessageCollect = testServerUrl + "messages/collect";
     public static final String CircleMessageCollectCancel = testServerUrl + "messages/cancelcollect";
+    public static final String CircleMessageCollectList = testServerUrl + "messages/getmycollect?page=";
 
     public static final String getSignUpUrl = testServerUrl + "users/getsignupurl";
     public static final String getUserMoneyBag = testServerUrl + "users/allmoney";

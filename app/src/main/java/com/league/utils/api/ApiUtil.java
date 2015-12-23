@@ -9,6 +9,8 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import junit.framework.Test;
+
 /**
  * Created by pfy on 2015/11/6.
  */
@@ -523,7 +525,7 @@ public class ApiUtil {
     public static void circleMessageMoreReply(Context context, String messageid, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.add("messageid", messageid);
-        printHttp(IClientUrl.CircleMessageMoreReply, params);
+        printHttp(IClientUrl.CircleMessageMoreReply + currentPage, params);
         client.post(context, IClientUrl.CircleMessageMoreReply + currentPage, params, responseHandler);
     }
 
@@ -561,6 +563,12 @@ public class ApiUtil {
             client.post(context, IClientUrl.CircleMessageCollectCancel, params, responseHandler);
     }
 
+    //圈子获取我的收藏
+    public static void circleMessageCollectList(Context context, int currentPage, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.add("phone", testPhone);
+        client.post(context, IClientUrl.CircleMessageCollectList + currentPage, params, responseHandler);
+    }
     //获取邀请好友注册的url
     public static void getSignupUrl(Context context, String phone, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();

@@ -28,11 +28,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.adapter.HobbyInfoAdapter;
 import com.league.adapter.JobInfoAdapter;
+import com.league.adapter.OtherMessageAdapter;
 import com.league.adapter.RecommendationInfoAdapter;
 import com.league.bean.HobbyInfoBean;
 import com.league.bean.JobInfoBean;
 import com.league.bean.KindBean;
 import com.league.bean.LiaoBaMessageBean;
+import com.league.bean.OtherMessageBean;
 import com.league.bean.RecommendationInfoBean;
 import com.league.dialog.NearRightDialog;
 import com.league.otto.RefreshEvent;
@@ -80,12 +82,13 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     private JobInfoAdapter jobInfoAdapter;
     private RecommendationInfoAdapter recommendationInfoAdapter;
     private HobbyInfoAdapter hobbyInfoAdapter;
+    private OtherMessageAdapter otherMessageAdapter;
     private ArrayList<KindBean> kinds;
     private List<String> items;
     private List<JobInfoBean> jobInfoList = new ArrayList<>();
     private List<HobbyInfoBean> hobbyInfoList = new ArrayList<>();
     private List<RecommendationInfoBean> recommendationInfoList = new ArrayList<>();
-    private List<LiaoBaMessageBean> otherInfoList=new ArrayList<>();
+    private List<OtherMessageBean> otherInfoList=new ArrayList<>();
     private int currentPage = 1;
     private int sumPage;
     private int kindid = 0;
@@ -318,26 +321,26 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 });
                 break;
             case 4:
-                ApiUtil.othersList(getApplicationContext(), false, searchString, currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaMessageBean>>() {
+                ApiUtil.othersList(getApplicationContext(), false, searchString, currentPage, new BaseJsonHttpResponseHandler<ArrayList<OtherMessageBean>>() {
 
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaMessageBean> response) {
-                       otherInfoList.addAll(response);
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OtherMessageBean> response) {
+                        otherInfoList.addAll(response);
                         updateOtherView();
                         closeProgressDialog();
                     }
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaMessageBean> errorResponse) {
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<OtherMessageBean> errorResponse) {
                         closeProgressDialog();
                         ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_internet));
                     }
 
                     @Override
-                    protected ArrayList<LiaoBaMessageBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                    protected ArrayList<OtherMessageBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                         JSONObject jsonObject = new JSONObject(rawJsonData);
                         sumPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
-                        return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaMessageBean>>() {
+                        return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<OtherMessageBean>>() {
                         });
                     }
                 });
@@ -405,8 +408,11 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     }
 
     public void updateOtherView(){
-        if (otherInfoList == null){
-
+        if (otherMessageAdapter == null){
+            otherMessageAdapter = new OtherMessageAdapter(getApplicationContext(), otherInfoList);
+            listview.setAdapter(otherMessageAdapter);
+        } else {
+            otherMessageAdapter.notifyDataSetChanged();
         }
     }
 
@@ -429,6 +435,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 jobInfoList.clear();
                 recommendationInfoList.clear();
                 hobbyInfoList.clear();
+                otherInfoList.clear();
                 kindid = 0;
                 initData();
                 break;
@@ -499,6 +506,10 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                             break;
                         case 3:
                             hobbyInfoList.clear();
+                            break;
+                        case 4:
+                            otherInfoList.clear();
+                            break;
                     }
                     // 更新数据
                     initData();
