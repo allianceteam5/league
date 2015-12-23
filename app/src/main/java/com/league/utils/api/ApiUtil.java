@@ -453,7 +453,13 @@ public class ApiUtil {
         params.put("addressid", addressID);
         client.post(context, IClientUrl.deleteShipAddress, params, responseHandler);
     }
-
+    //设置默认收货地址
+    public static void setDefaultAddress(Context context,String phone,String addressid,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("addressid",addressid);
+        client.post(context,IClientUrl.setdefaultaddress,params,responseHandler);
+    }
     //获取用户详情
     public static void getUserDetail(Context context, String phone, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();

@@ -96,4 +96,5 @@ public class IClientUrl {
     public static final String getmorenumberCommodity = testServerUrl + "grabcommodityrecords/viewallnumbers";
     public static final String realauth = testServerUrl + "users/realauth";
     public static final String createBankcard = testServerUrl + "usertocards/create";
+    public static final String setdefaultaddress = testServerUrl + "users/setdefaultaddress";
 }

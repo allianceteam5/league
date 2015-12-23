@@ -40,6 +40,7 @@
         android:layout_height="1dp"
         android:background="@color/black2"/>
     <EditText
+        android:focusable="false"
         android:id="@+id/postid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,5 +95,17 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:text="删除该收货地址"
+        android:visibility="gone"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btnbackground"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/setdefault"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="设为默认收货地址"
         android:visibility="gone"/>
 </LinearLayout>
