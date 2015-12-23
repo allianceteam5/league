@@ -24,7 +24,7 @@ import org.apache.http.Header;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectBankcard extends BaseActivity implements View.OnClickListener{
+public class    SelectBankcard extends BaseActivity implements View.OnClickListener{
 
     private List<BankCardInfo> list=new ArrayList<BankCardInfo>();
     private ImageView back2, titleright, right1, right2;

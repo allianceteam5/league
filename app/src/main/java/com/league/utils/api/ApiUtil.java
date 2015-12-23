@@ -620,4 +620,24 @@ public class ApiUtil {
         params.put("pwd",pwd);
         client.post(context,IClientUrl.changepwd,params,responseHandler);
     }
+    //一元夺宝 自己的购买记录获取更多号码
+    public static void getMoreNumCommodity(Context context,String id,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("grabcommodityrecordid",id);
+        client.post(context,IClientUrl.getmorenumberCommodity,params,responseHandler);
+    }
+    //夺金购买 自己的购买号码获取更多
+    public static void getMoreNumCorn(Context context,String id,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("grabcornrecordid",id);
+        client.post(context,IClientUrl.getmorenumberCorn,params,responseHandler);
+    }
+    //实名认证
+    public static void realAuth(Context context,String phone,String realname,String idcard,TextHttpResponseHandler responseHandler){
+        RequestParams params=new RequestParams();
+        params.put("phone",phone);
+        params.put("realname",realname);
+        params.put("idcard",idcard);
+        client.post(context,IClientUrl.realauth,params,responseHandler);
+    }
 }

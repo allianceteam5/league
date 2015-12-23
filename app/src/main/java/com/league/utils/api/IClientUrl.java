@@ -91,4 +91,7 @@ public class IClientUrl {
     public static final String changepwdbypwd = testServerUrl + "users/changepwdbypwd";
     public static final String checkpstext = testServerUrl + "users/checkcptext";
     public static final String changepwd = testServerUrl + "users/changepwd";
+    public static final String getmorenumberCorn = testServerUrl + "grabcornrecords/viewallnumbers";
+    public static final String getmorenumberCommodity = testServerUrl + "grabcommodityrecords/viewallnumbers";
+    public static final String realauth = testServerUrl + "users/realauth";
 }

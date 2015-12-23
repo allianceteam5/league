@@ -11,6 +11,7 @@
         android:id="@+id/title"
         layout="@layout/near_title" />
     <EditText
+        android:id="@+id/inputname"
         android:layout_width="match_parent"
         android:layout_height="40dip"
         android:padding="5dp"
@@ -24,6 +25,7 @@
         android:layout_height="2dp"
         android:background="@color/black2"/>
     <EditText
+        android:id="@+id/inputid"
         android:textSize="14sp"
         android:padding="5dp"
         android:layout_width="match_parent"
@@ -42,10 +44,11 @@
         android:layout_marginLeft="10dip"
         android:textSize="12sp"/>
     <Button
+        android:id="@+id/bindid"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:textColor="@color/white"
-        android:text="绑定"
+        android:text="绑 定"
         android:textSize="14sp"
         android:layout_marginTop="5dip"
         android:layout_marginLeft="15dip"
