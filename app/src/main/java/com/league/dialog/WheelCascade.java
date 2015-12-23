@@ -45,7 +45,7 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
         this.listener=listener;
     }
     public interface ProvinceListener{
-        void refreshProvince(String string);
+        void refreshProvince(String string,String postid);
     }
     private ProvinceListener listener;
     @Override
@@ -100,7 +100,7 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
             case R.id.btn_confirm:
                 dismiss();
                 String temp=mCurrentProviceName+" " + mCurrentCityName +" "+ mCurrentDistrictName+" ";
-                listener.refreshProvince(temp);
+                listener.refreshProvince(temp,mCurrentZipCode);
                 break;
             default:
                 break;
@@ -110,7 +110,7 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
     public boolean onTouchEvent(MotionEvent event) {
         this.dismiss();
         String temp=mCurrentProviceName+" " + mCurrentCityName +" "+ mCurrentDistrictName+" ";
-        listener.refreshProvince(temp);
+        listener.refreshProvince(temp,mCurrentZipCode);
         return super.onTouchEvent(event);
     }
 
@@ -138,6 +138,7 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
         }
         mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(context, areas));
         mViewDistrict.setCurrentItem(0);
+        mCurrentDistrictName = areas[0];
     }
 
     /**

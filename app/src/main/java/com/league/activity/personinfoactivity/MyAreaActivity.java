@@ -152,6 +152,7 @@ public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnCli
         }
         mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(this, areas));
         mViewDistrict.setCurrentItem(0);
+        mCurrentDistrictName = areas[0];
     }
 
     /**

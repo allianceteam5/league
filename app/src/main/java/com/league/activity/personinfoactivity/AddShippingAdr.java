@@ -37,7 +37,8 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
     EditText mDetail;
     @Bind(R.id.delete)
     Button mDelete;
-
+    @Bind(R.id.setdefault)
+    Button mSetDefault;
     private String withSpaceProvice;
     private String[] pro_city;
     @Override
@@ -49,6 +50,7 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
 
         }else{
             mDelete.setOnClickListener(this);
+            mSetDefault.setOnClickListener(this);
             setData();
         }
     }
@@ -65,7 +67,6 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
         mSave.setOnClickListener(this);
         province= (TextView) findViewById(R.id.province);
         province.setOnClickListener(this);
-
     }
 
     @Override
@@ -80,9 +81,10 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
                 WheelCascade dialog=new WheelCascade(AddShippingAdr.this,new WheelCascade.ProvinceListener(){
 
                     @Override
-                    public void refreshProvince(String string) {
+                    public void refreshProvince(String string,String postid) {
                         withSpaceProvice=new String(string);
                         province.setText(string.replace(" ",""));
+                        mPostId.setText(postid);
                     }
                 });
                 dialog.show();
@@ -176,6 +178,29 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
                         });
                     }
                 });
+                break;
+            case R.id.setdefault:
+                ApiUtil.setDefaultAddress(getApplicationContext(), Constants.PHONENUM, getIntent().getLongExtra("addressID", 0) + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                        if(response.getFlag().equals("1")){
+                            ToastUtils.showShortToast(getApplicationContext(),"设置成功");
+                        }else {
+                            ToastUtils.showShortToast(getApplicationContext(),"设置失败");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                        ToastUtils.showShortToast(getApplicationContext(),"设置失败");
+                    }
+
+                    @Override
+                    protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                        return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                        });
+                    }
+                });
         }
     }
     private void setData(){
@@ -183,11 +208,11 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
         mPhoneNum.setText(getIntent().getStringExtra("aphone"));
         mPostId.setText(getIntent().getStringExtra("postcode"));
         withSpaceProvice=getIntent().getStringExtra("address");
-        pro_city=withSpaceProvice.split(" ",4);
+        pro_city=withSpaceProvice.split(" ", 4);
         mDetail.setText(pro_city[3]);
         province.setText(pro_city[0]+pro_city[1]+pro_city[2]);
         mSave.setText("修改");
         mDelete.setVisibility(View.VISIBLE);
-
+        mSetDefault.setVisibility(View.VISIBLE);
     }
 }

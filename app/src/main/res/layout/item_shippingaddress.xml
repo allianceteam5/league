@@ -4,7 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white">
+    <ImageView
+        android:id="@+id/default_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/addressselected"
+        android:layout_centerVertical="true"/>
     <LinearLayout
+        android:layout_toLeftOf="@id/default_selected"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
@@ -54,12 +63,5 @@
                 android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
-    <ImageView
-        android:id="@+id/default_selected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/addressselected"
-        android:layout_centerVertical="true"/>
+
 </RelativeLayout>
