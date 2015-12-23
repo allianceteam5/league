@@ -61,11 +61,29 @@ public class UserInfoBean {
     private int created_at;
     private int updated_at;
     private String channel;
-    private Object platform;
+    private String platform;
     private int friendcount;
     private int concerncount;
     private int status;
     private int isdraw;
+    private int flag;
+    private String huanxinid;
+
+    public String getHuanxinid() {
+        return huanxinid;
+    }
+
+    public void setHuanxinid(String huanxinid) {
+        this.huanxinid = huanxinid;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
 
     public String getBackground() {
         return background;
@@ -167,7 +185,7 @@ public class UserInfoBean {
         this.channel = channel;
     }
 
-    public void setPlatform(Object platform) {
+    public void setPlatform(String platform) {
         this.platform = platform;
     }
 
@@ -272,7 +290,7 @@ public class UserInfoBean {
         return channel;
     }
 
-    public Object getPlatform() {
+    public String getPlatform() {
         return platform;
     }
 

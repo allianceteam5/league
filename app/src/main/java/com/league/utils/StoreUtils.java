@@ -19,6 +19,7 @@ public class StoreUtils {
     private static final String SkipGuidState = "skip_guid_state";
     private static final String LoginState = "login_state";
     private static final String UserInfo = "user_info";
+    private static final String Phone = "phone";
 
     //初始化
     public static void init(Context context){
@@ -29,6 +30,7 @@ public class StoreUtils {
     public static void destory(){
         Paper.book().destroy();
         Remember.clear();
+        setSkipGuidState(true);
     }
 
     public static Boolean getSkipGuidState(){
@@ -49,11 +51,19 @@ public class StoreUtils {
 
     public static void setUserInfo(UserInfoBean value){
         Paper.book().write(UserInfo, value);
+        setPhone(value.getPhone());
     }
 
     public static UserInfoBean getUserInfo(){
         return Paper.book().read(UserInfo);
     }
 
+    public static void setPhone(String value){
+        Remember.putString(Phone, value);
+    }
+    public static String getPhone(){
+        return Remember.getString(Phone, "1");
+
+    }
 
 }

@@ -9,10 +9,13 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.easemob.chatuidemo.activity.LoginActivity;
 import com.easemob.chatuidemo.domain.User;
 import com.league.activity.BaseActivity;
 import com.league.activity.personinfoactivity.MyAreaActivity;
@@ -22,8 +25,11 @@ import com.league.activity.personinfoactivity.ShippingAddress;
 import com.league.activity.personinfoactivity.SignatureActivity;
 import com.league.bean.UserInfoBean;
 import com.league.interf.OnAllComplete;
+import com.league.utils.ActivityUtils;
+import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.ImgUtils;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.PickImgPopWindow;
@@ -60,6 +66,8 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
     TextView mArea;
     @Bind(R.id.signature)
     TextView mSignature;
+    @Bind(R.id.btn_logout)
+    Button btnLogout;
     private PickImgPopWindow pickImgPopWindow;
     private Bitmap bitmap;
     private Uri imgUri;
@@ -160,6 +168,13 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
                 break;
             case R.id.mynickname:
                 startActivity(new Intent(PersonInformationSetup.this, NickNameActivity.class));
+                break;
+            case R.id.btn_logout:
+                DemoHXSDKHelper.getInstance().logout(true, null);
+                StoreUtils.destory();
+                ActivityUtils.start_Activity(this, LoginActivity.class);
+                Constants.finishAllActivities();
+                finish();
                 break;
         }
     }

@@ -19,17 +19,14 @@ import android.support.multidex.MultiDex;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.easemob.EMCallBack;
-import com.tumblr.remember.Remember;
-
-import io.paperdb.Paper;
+import com.league.utils.StoreUtils;
 
 public class DemoApplication extends Application {
 
 	public static Context applicationContext;
 	private static DemoApplication instance;
 	// login user name
-	public final String PREF_USERNAME = "username";
-	
+
 	/**
 	 * 当前用户nickname,为了苹果推送不是userid而是昵称
 	 */
@@ -63,8 +60,7 @@ public class DemoApplication extends Application {
          */
         hxSDKHelper.onInit(applicationContext);
 		SDKInitializer.initialize(applicationContext);
-		Paper.init(applicationContext);
-		Remember.init(getApplicationContext(), StoreName);
+		StoreUtils.init(getApplicationContext());
 	}
 
 	public static DemoApplication getInstance() {

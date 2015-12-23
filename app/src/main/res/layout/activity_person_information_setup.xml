@@ -389,6 +389,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:layout_marginBottom="50dip"
@@ -398,7 +399,9 @@
                 android:background="@drawable/btn_exit"
                 android:text="安全退出"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:onClick="onClick"
+                />
 
         </LinearLayout>
     </ScrollView>

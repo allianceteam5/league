@@ -14,7 +14,7 @@ import com.loopj.android.http.TextHttpResponseHandler;
  */
 public class ApiUtil {
 
-    private static String testPhone = "1";
+    public static String testPhone = "1";
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     private static void printHttp(String baseUrl, RequestParams params) {
@@ -25,6 +25,7 @@ public class ApiUtil {
         RequestParams params = new RequestParams();
         params.add("phone", phone);
         params.add("pwd", pwd);
+        printHttp(IClientUrl.Login, params);
         client.post(context, IClientUrl.Login, params, responseHandler);
     }
 

@@ -39,10 +39,10 @@ import com.easemob.chatuidemo.utils.CommonUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.personactivity.FindCode;
-import com.league.bean.LiaoBaMessageBean;
 import com.league.bean.UserInfoBean;
 import com.league.utils.Constants;
 import com.league.utils.StoreUtils;
+import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
@@ -67,11 +67,12 @@ public class LoginActivity extends BaseActivity {
 	private EditText usernameEditText;
 	private EditText passwordEditText;
 
-	private boolean progressShow;
-	private boolean autoLogin = false;
-
 	private String currentUsername;
 	private String currentPassword;
+
+	private UserInfoBean userInfoBean;
+
+	private ProgressDialog pd;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +87,7 @@ public class LoginActivity extends BaseActivity {
 
 		if (StoreUtils.getLoginState()){
 			startActivity(new Intent(LoginActivity.this, com.league.activity.MainActivity.class));
+			ApiUtil.testPhone = StoreUtils.getPhone();
 			return ;
 		}
 
@@ -112,6 +114,7 @@ public class LoginActivity extends BaseActivity {
 			}
 		});
 
+		pd = new ProgressDialog(LoginActivity.this);
 //		if (DemoApplication.getInstance().getUserName() != null) {
 //			usernameEditText.setText(DemoApplication.getInstance().getUserName());
 //		}
@@ -139,55 +142,50 @@ public class LoginActivity extends BaseActivity {
 			return;
 		}
 
-		progressShow = true;
-
-		final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
 		pd.setCanceledOnTouchOutside(false);
-		pd.setOnCancelListener(new OnCancelListener() {
-
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				progressShow = false;
-			}
-		});
 		pd.setMessage(getString(R.string.Is_landing));
 		pd.show();
 
-		ApiUtil.login(this, currentUsername, currentPassword, new BaseJsonHttpResponseHandler<ArrayList<UserInfoBean>>() {
+		ApiUtil.login(this, currentUsername, currentPassword, new BaseJsonHttpResponseHandler<UserInfoBean>() {
 
 			@Override
-			public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaMessageBean> response) {
-				if (currentPage == 1) {
-					list.clear();
+			public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, UserInfoBean response) {
+				userInfoBean = response;
+				if (userInfoBean.getFlag() == 0) {
+					pd.dismiss();
+					ToastUtils.showShortToast(LoginActivity.this, "密码错误！");
+					return;
 				}
-				list.addAll(response);
-				adapter.notifyDataSetChanged();
-				pullToRefreshLayout.setVisibility(View.VISIBLE);
+				StoreUtils.setUserInfo(userInfoBean);
+				ApiUtil.testPhone = StoreUtils.getPhone();
+				initHuanXin();
 			}
 
 			@Override
-			public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaMessageBean> errorResponse) {
-				Toast.makeText(getActivity(), "哎呀网络不好", Toast.LENGTH_SHORT).show();
+			public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, UserInfoBean errorResponse) {
+				Toast.makeText(LoginActivity.this, "网络不好", Toast.LENGTH_SHORT).show();
+				pd.dismiss();
 			}
 
 			@Override
-			protected ArrayList<LiaoBaMessageBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-				JSONObject jsonObject = new JSONObject(rawJsonData);
-				totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
-				return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaMessageBean>>() {
+			protected UserInfoBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+				if (new JSONObject(rawJsonData).optInt("flag") == 0)
+					return new UserInfoBean();
+				return new ObjectMapper().readValue(rawJsonData, new TypeReference<UserInfoBean>() {
 				});
 			}
 		});
+
+	}
+
+	private void initHuanXin(){
 		final long start = System.currentTimeMillis();
 
 		// 调用sdk登陆方法登陆聊天服务器
-		EMChatManager.getInstance().login(currentUsername, currentPassword, new EMCallBack() {
+		EMChatManager.getInstance().login(userInfoBean.getHxId(), currentPassword, new EMCallBack() {
 
 			@Override
 			public void onSuccess() {
-				if (!progressShow) {
-					return;
-				}
 				// 登陆成功，保存用户名密码
 				DemoApplication.getInstance().setUserName(currentUsername);
 				DemoApplication.getInstance().setPassword(currentPassword);
@@ -213,7 +211,7 @@ public class LoginActivity extends BaseActivity {
 				}
 				// 更新当前用户的nickname 此方法的作用是在ios离线推送时能够显示用户nick
 				boolean updatenick = EMChatManager.getInstance().updateCurrentUserNick(
-						DemoApplication.currentUserNick.trim());
+						userInfoBean.getNickname());
 				if (!updatenick) {
 					Log.e("LoginActivity", "update current user nick fail");
 				}
@@ -234,9 +232,6 @@ public class LoginActivity extends BaseActivity {
 
 			@Override
 			public void onError(final int code, final String message) {
-				if (!progressShow) {
-					return;
-				}
 				runOnUiThread(new Runnable() {
 					public void run() {
 						pd.dismiss();
@@ -247,7 +242,6 @@ public class LoginActivity extends BaseActivity {
 			}
 		});
 	}
-
 	private void initializeContacts() {
 		Map<String, User> userlist = new HashMap<String, User>();
 		// 添加user"申请与通知"
@@ -302,11 +296,4 @@ public class LoginActivity extends BaseActivity {
 		startActivity(new Intent(this, FindCode.class));
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if (autoLogin) {
-			return;
-		}
-	}
 }
