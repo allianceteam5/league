@@ -36,7 +36,30 @@
     <string name="loading">正在加载...</string>
     <string name="load_succeed">加载成功</string>
     <string name="load_fail">加载失败</string>
-
+    <string name="rule1">1.	登陆就送60元联盟奖励！邀请好友也能拿钱！每一名通过您的分享链接注册的好友，五天内成功抢红包一次，您就能获得5元联盟奖励！\n
+    2.	好友就是奖励！人脉就是钱！\n
+    \t\t-邀请的好友再邀请好友，联盟奖励累积拿！\n
+    \t\t-两层以内的联盟好友增加，统统给你奖励！\n
+    3.	提现门槛低！联盟奖励累计到1000元就能获得提现机会！最多可提现30万！\n
+    4.	联盟奖励提现后就是现金！提现平台支持微信钱包支付宝以及各家银行卡！提现截止半个月内系统还会贴心提醒哦！不让您错过每一分收益！\n
+    5.	审核迅速！提交提现申请后，7天内就到账！\n
+    6.	注册成功后5天内没有实名认证就算自动放弃联盟奖励.\n
+    </string>
+    <string name="rule2">1.	每天一次抢红包机会，最高可抢200元！\n
+    2.	分享有礼！在各大社交平台上邀请好友加入，可多得一次抢红包的机会！
+    </string>
+    <string name="rule3">1.	夺宝怡情，为保公平，每个产品最多投注成本的10%!\n
+    2.	夺得产品可选择领取奖品或兑换成等额金币进行保本夺金。多重选择任君选！\n
+    3.	“附近”功能每个首次发帖就送5个夺宝币！ \n
+    4.	“听.说”发帖集赞最高可获500元夺宝币奖励！每周点赞排名前三就有奖！
+    </string>
+    <string name="rule4">1.	真正的“0”风险收益！抢不到金币，本金全退！\n
+    2.	夺宝成功，奖品+ 本金5个月之后返还到账户余额。\n
+    3.	提前提现，收取10%的手续费。
+    </string>
+    <string name="share_text">1.	拒绝优惠券，我们只要钱！来钱神器，每人30万，联盟奖励等你取！\n
+    2.	比没钱更痛苦的是，有红包你竟然没抢！来钱神器，每人30万等你抢！
+    </string>
     <string name="text_ack_msg">Read</string>
     <string name="text_delivered_msg">Delivered</string>
     <string name="back">Back</string>
@@ -346,5 +369,6 @@
     <string name="title_activity_circle">CircleActivity</string>
     <string name="title_activity_circle_publish">CirclePublishActivity</string>
     <string name="title_activity_circle_comment">CircleCommentActivity</string>
+    <string name="title_activity_rule">RuleActivity</string>
 
 </resources>
