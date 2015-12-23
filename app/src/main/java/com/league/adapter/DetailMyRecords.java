@@ -8,8 +8,16 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.bean.MoreNumberBean;
 import com.league.bean.MyRecordGrabBean;
+import com.league.utils.ToastUtils;
+import com.league.utils.api.ApiUtil;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+
+import org.apache.http.Header;
 
 import java.util.List;
 
@@ -41,8 +49,8 @@ public class DetailMyRecords extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final ViewHolder holder;
         if(convertView==null){
             holder=new ViewHolder();
             convertView= LayoutInflater.from(ctx).inflate(R.layout.item_detail_myrecords,null);
@@ -55,6 +63,58 @@ public class DetailMyRecords extends BaseAdapter{
         }
         holder.count.setText(list.get(position).getCount());
         holder.number.setText(list.get(position).getNumbers());
+        holder.more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(list.get(position).getGrabcornid()==null){
+                    ApiUtil.getMoreNumCommodity(ctx, list.get(position).getGrabcommodityid(), new BaseJsonHttpResponseHandler<MoreNumberBean>() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, MoreNumberBean response) {
+                            if(response.getFlag()==1){
+                                holder.number.setText(response.getNumbers());
+                                holder.more.setVisibility(View.GONE);
+                            }else{
+                                ToastUtils.showShortToast(ctx,"获取失败");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, MoreNumberBean errorResponse) {
+                            ToastUtils.showShortToast(ctx,"获取失败");
+                        }
+
+                        @Override
+                        protected MoreNumberBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                            return new ObjectMapper().readValue(rawJsonData, new TypeReference<MoreNumberBean>() {
+                            });
+                        }
+                    });
+                }else if(list.get(position).getGrabcommodityid()==null){
+                    ApiUtil.getMoreNumCorn(ctx, list.get(position).getGrabcornid(), new BaseJsonHttpResponseHandler<MoreNumberBean>() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, MoreNumberBean response) {
+                            if (response.getFlag() == 1) {
+                                holder.number.setText(response.getNumbers());
+                                holder.more.setVisibility(View.GONE);
+                            } else {
+                                ToastUtils.showShortToast(ctx, "获取失败");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, MoreNumberBean errorResponse) {
+                            ToastUtils.showShortToast(ctx, "获取失败");
+                        }
+
+                        @Override
+                        protected MoreNumberBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                            return new ObjectMapper().readValue(rawJsonData, new TypeReference<MoreNumberBean>() {
+                            });
+                        }
+                    });
+                }
+            }
+        });
         return convertView;
     }
     class ViewHolder{
