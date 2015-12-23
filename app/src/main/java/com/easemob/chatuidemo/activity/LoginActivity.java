@@ -36,9 +36,19 @@ import com.easemob.chatuidemo.DemoHXSDKHelper;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.utils.CommonUtils;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.personactivity.FindCode;
+import com.league.bean.LiaoBaMessageBean;
+import com.league.bean.UserInfoBean;
 import com.league.utils.Constants;
+import com.league.utils.StoreUtils;
+import com.league.utils.api.ApiUtil;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,13 +77,18 @@ public class LoginActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// 如果用户名密码都有，直接进入主页面
-		if (DemoHXSDKHelper.getInstance().isLogined()) {
-			autoLogin = true;
-			startActivity(new Intent(LoginActivity.this, com.league.activity.MainActivity.class));
+//		// 如果用户名密码都有，直接进入主页面
+//		if (DemoHXSDKHelper.getInstance().isLogined()) {
+//			autoLogin = true;
+//			startActivity(new Intent(LoginActivity.this, com.league.activity.MainActivity.class));
+//			return;
+//		}
 
-			return;
+		if (StoreUtils.getLoginState()){
+			startActivity(new Intent(LoginActivity.this, com.league.activity.MainActivity.class));
+			return ;
 		}
+
 		setContentView(R.layout.activity_login);
 		Constants.addIntoCollection(this);
 		usernameEditText = (EditText) findViewById(R.id.username);
@@ -96,9 +111,10 @@ public class LoginActivity extends BaseActivity {
 
 			}
 		});
-		if (DemoApplication.getInstance().getUserName() != null) {
-			usernameEditText.setText(DemoApplication.getInstance().getUserName());
-		}
+
+//		if (DemoApplication.getInstance().getUserName() != null) {
+//			usernameEditText.setText(DemoApplication.getInstance().getUserName());
+//		}
 	}
 
 	/**
@@ -124,6 +140,7 @@ public class LoginActivity extends BaseActivity {
 		}
 
 		progressShow = true;
+
 		final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
 		pd.setCanceledOnTouchOutside(false);
 		pd.setOnCancelListener(new OnCancelListener() {
@@ -136,7 +153,33 @@ public class LoginActivity extends BaseActivity {
 		pd.setMessage(getString(R.string.Is_landing));
 		pd.show();
 
+		ApiUtil.login(this, currentUsername, currentPassword, new BaseJsonHttpResponseHandler<ArrayList<UserInfoBean>>() {
+
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaMessageBean> response) {
+				if (currentPage == 1) {
+					list.clear();
+				}
+				list.addAll(response);
+				adapter.notifyDataSetChanged();
+				pullToRefreshLayout.setVisibility(View.VISIBLE);
+			}
+
+			@Override
+			public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaMessageBean> errorResponse) {
+				Toast.makeText(getActivity(), "哎呀网络不好", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			protected ArrayList<LiaoBaMessageBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+				JSONObject jsonObject = new JSONObject(rawJsonData);
+				totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
+				return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaMessageBean>>() {
+				});
+			}
+		});
 		final long start = System.currentTimeMillis();
+
 		// 调用sdk登陆方法登陆聊天服务器
 		EMChatManager.getInstance().login(currentUsername, currentPassword, new EMCallBack() {
 

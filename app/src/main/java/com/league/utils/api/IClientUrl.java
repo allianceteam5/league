@@ -10,7 +10,7 @@ public class IClientUrl {
     public static final String ApplyJobSearch = testServerUrl + "applyjobs/search?page=";
     public static final String RecomendationList = testServerUrl + "kindsofrecommendation/list";
 
-    public static final String Login = testServerUrl + "";
+    public static final String Login = testServerUrl + "users/login";
     public static final String FriendList = testServerUrl + "friends/list";
 
     public static final String RecomendationSearch = testServerUrl + "recommendations/search?page=";

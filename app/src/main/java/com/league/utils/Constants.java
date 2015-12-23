@@ -24,12 +24,16 @@ public class Constants {
     }
     public static void finishAllActivities(){
         for(Activity activity:collection){
-            activity.finish();
+            if (!activity.isFinishing())
+                activity.finish();
         }
+        collection.clear();
     }
+
     public static void addIntoCollection(Activity activity){
         collection.add(activity);
     }
+
     public static final String RADIOSELECTKIND = "radioSelectKind";
     public static final String RADIOSELECEDTINDEX = "radioSelectedIndex";
     public static final int RADIODEDREE = 1;
