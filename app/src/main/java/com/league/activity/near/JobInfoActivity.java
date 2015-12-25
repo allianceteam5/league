@@ -1,5 +1,6 @@
 package com.league.activity.near;
 
+import com.easemob.chat.EMContactManager;
 import com.league.bean.JobInfoBean;
 import com.league.utils.Constants;
 import com.league.utils.DateFormatUtils;
@@ -8,6 +9,7 @@ import com.squareup.picasso.Picasso;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -78,7 +80,8 @@ public class JobInfoActivity extends Activity implements OnClickListener{
 		right1.setVisibility(View.GONE);
 		right2.setVisibility(View.GONE);
 		addFriend.setOnClickListener(this);
-		Picasso.with(getApplicationContext()).load(jobinfo.getThumb()).into(ivThumb);
+		if (TextUtils.isEmpty(jobinfo.getThumb()))
+			Picasso.with(getApplicationContext()).load(jobinfo.getThumb()).into(ivThumb);
 		tvNickname.setText(jobinfo.getNickname());
 		tvTitle.setText(jobinfo.getTitle());
 		tvJobproperty.setText(jobinfo.getJobPropertyName());
@@ -99,7 +102,9 @@ public class JobInfoActivity extends Activity implements OnClickListener{
 			onBackPressed();
 			break;
 		case R.id.addfriend:
-			Toast.makeText(getApplicationContext(), "add friend", Toast.LENGTH_LONG).show();
+//			EMContactManager.getInstance().addContact(jobinfo.get, reason);
+			Toast.makeText(getApplicationContext(), "已申请", Toast.LENGTH_LONG).show();
+			addFriend.setText("已申请");
 			break;
 
 		}

@@ -20,6 +20,7 @@ public class StoreUtils {
     private static final String LoginState = "login_state";
     private static final String UserInfo = "user_info";
     private static final String Phone = "phone";
+    private static final String HuanXin = "huanxin_id";
 
     //初始化
     public static void init(Context context){
@@ -52,6 +53,7 @@ public class StoreUtils {
     public static void setUserInfo(UserInfoBean value){
         Paper.book().write(UserInfo, value);
         setPhone(value.getPhone());
+        setHuanXinId(value.getHuanxinid());
     }
 
     public static UserInfoBean getUserInfo(){
@@ -64,6 +66,14 @@ public class StoreUtils {
     public static String getPhone(){
         return Remember.getString(Phone, "1");
 
+    }
+
+    public static void setHuanXinId(String value){
+        Remember.putString(HuanXin, value);
+    }
+
+    public static String getHuanXin(){
+        return Remember.getString(HuanXin, "");
     }
 
 }
