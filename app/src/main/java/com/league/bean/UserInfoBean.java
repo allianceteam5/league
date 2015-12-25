@@ -36,6 +36,7 @@ public class UserInfoBean {
      * isdraw : 0
      * status : 0
      */
+    private String paypwd;
     private String background;
     private String invitecode;
     private String phone;
@@ -68,6 +69,14 @@ public class UserInfoBean {
     private int isdraw;
     private int flag;
     private String huanxinid;
+
+    public String getPaypwd() {
+        return paypwd;
+    }
+
+    public void setPaypwd(String paypwd) {
+        this.paypwd = paypwd;
+    }
 
     public String getHuanxinid() {
         return huanxinid;

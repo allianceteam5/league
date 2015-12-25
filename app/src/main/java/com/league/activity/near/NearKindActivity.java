@@ -360,7 +360,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                                         int position, long id) {
                     // TODO Auto-generated method stub
                     Intent intent = new Intent(getApplicationContext(), JobInfoActivity.class);
-                    Paper.book().write(Constants.SingleInfoName, jobInfoList.get(position));
+                    Paper.book().write(Constants.SingleInfoName, jobInfoList.get(position - 1));
                     startActivity(intent);
                 }
             });
@@ -379,7 +379,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                                         int position, long id) {
                     // TODO Auto-generated method stub
                     Intent intent = new Intent(getApplicationContext(), RecommendationInfoActivity.class);
-                    Paper.book().write(Constants.SingleInfoName, recommendationInfoList.get(position));
+                    Paper.book().write(Constants.SingleInfoName, recommendationInfoList.get(position - 1));
                     startActivity(intent);
                 }
             });
@@ -398,7 +398,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                                         int position, long id) {
                     // TODO Auto-generated method stub
                     Intent intent = new Intent(getApplicationContext(), HobbyInfoActivity.class);
-                    Paper.book().write(Constants.SingleInfoName, hobbyInfoList.get(position));
+                    Paper.book().write(Constants.SingleInfoName, hobbyInfoList.get(position - 1));
                     startActivity(intent);
                 }
             });
@@ -547,6 +547,9 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 break;
             case 3:
                 hobbyInfoList.clear();
+            case 4:
+                otherInfoList.clear();
+                break;
         }
         // 更新数据
         initData();

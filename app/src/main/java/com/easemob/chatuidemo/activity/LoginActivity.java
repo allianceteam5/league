@@ -156,7 +156,6 @@ public class LoginActivity extends BaseActivity {
 					ToastUtils.showShortToast(LoginActivity.this, "密码错误！");
 					return;
 				}
-				StoreUtils.setUserInfo(userInfoBean);
 				ApiUtil.testPhone = StoreUtils.getPhone();
 				initHuanXin();
 			}
@@ -222,7 +221,8 @@ public class LoginActivity extends BaseActivity {
 				Intent intent = new Intent(LoginActivity.this,
 						com.league.activity.MainActivity.class);
 				startActivity(intent);
-
+				StoreUtils.setUserInfo(userInfoBean);
+				StoreUtils.setLoginState(true);
 				finish();
 			}
 
