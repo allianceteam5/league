@@ -16,6 +16,8 @@ import com.league.activity.BaseActivity;
 import com.league.activity.ShowBigImgActivity;
 import com.league.adapter.ImgGridWithPickImgAdapter;
 import com.league.interf.OnAllComplete;
+import com.league.otto.BusProvider;
+import com.league.otto.RefreshEvent;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
@@ -141,6 +143,10 @@ public class OtherInfoPublishActivity extends BaseActivity implements View.OnCli
     private void publish() {
         title = etTitle.getText().toString();
         content = etContent.getText().toString();
+        if (imgList.size() == 1){
+            ToastUtils.showShortToast(getApplicationContext(), "请选择图片");
+            return;
+        }
         if (TextUtils.isEmpty(title)) {
             ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_title));
             return;
@@ -212,6 +218,7 @@ public class OtherInfoPublishActivity extends BaseActivity implements View.OnCli
 //                    BusProvider.getBus().post(new NewDynamicEvent());
                     if (response.optInt("flag") == 1) {
                         Toast.makeText(getApplicationContext(), "发布成功", Toast.LENGTH_SHORT).show();
+                        BusProvider.getInstance().post(new RefreshEvent());
                         imgList.clear();
                         finish();
                     }

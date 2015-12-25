@@ -2,6 +2,7 @@ package com.league.activity.near;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -54,7 +55,8 @@ public class HobbyInfoActivity extends Activity implements View.OnClickListener 
     }
 
     void initView() {
-        Picasso.with(getApplicationContext()).load(hobbyInfo.getPicture()).resize(140, 140).centerCrop().into(img);
+        if (!TextUtils.isEmpty(hobbyInfo.getThumb()))
+            Picasso.with(getApplicationContext()).load(hobbyInfo.getPicture()).resize(140, 140).centerCrop().into(img);
         sex.setText(Constants.SEXITEMS.get(hobbyInfo.getSex()));
         if (hobbyInfo.getAge() > 6)
             age.setText(Constants.AGEITEMS.get(3));

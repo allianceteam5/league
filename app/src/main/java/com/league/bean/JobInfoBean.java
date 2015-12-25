@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @date 2015年9月19日
  */
 public class JobInfoBean {
-    private int id;
-    private int userid;
+    private String id;
+    private String userid;
     private String title;
     private String thumb;
     private String nickname;
@@ -74,19 +74,19 @@ public class JobInfoBean {
         this.jobproperty = jobproperty;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getUserid() {
+    public String getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(String userid) {
         this.userid = userid;
     }
 

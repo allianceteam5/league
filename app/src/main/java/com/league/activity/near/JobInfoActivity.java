@@ -1,6 +1,7 @@
 package com.league.activity.near;
 
 import com.easemob.chat.EMContactManager;
+import com.easemob.exceptions.EaseMobException;
 import com.league.bean.JobInfoBean;
 import com.league.utils.Constants;
 import com.league.utils.DateFormatUtils;
@@ -80,7 +81,7 @@ public class JobInfoActivity extends Activity implements OnClickListener{
 		right1.setVisibility(View.GONE);
 		right2.setVisibility(View.GONE);
 		addFriend.setOnClickListener(this);
-		if (TextUtils.isEmpty(jobinfo.getThumb()))
+		if (!TextUtils.isEmpty(jobinfo.getThumb()))
 			Picasso.with(getApplicationContext()).load(jobinfo.getThumb()).into(ivThumb);
 		tvNickname.setText(jobinfo.getNickname());
 		tvTitle.setText(jobinfo.getTitle());
@@ -102,7 +103,15 @@ public class JobInfoActivity extends Activity implements OnClickListener{
 			onBackPressed();
 			break;
 		case R.id.addfriend:
-//			EMContactManager.getInstance().addContact(jobinfo.get, reason);
+			if (addFriend.getText().equals("已申请")){
+				Toast.makeText(getApplicationContext(), "已申请", Toast.LENGTH_LONG).show();
+				return ;
+			}
+			try {
+				EMContactManager.getInstance().addContact(jobinfo.getUserid(), "请添加我为好友吧");
+			} catch (EaseMobException e) {
+				e.printStackTrace();
+			}
 			Toast.makeText(getApplicationContext(), "已申请", Toast.LENGTH_LONG).show();
 			addFriend.setText("已申请");
 			break;

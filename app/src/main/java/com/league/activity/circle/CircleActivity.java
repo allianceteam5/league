@@ -21,6 +21,7 @@ import com.league.bean.CircleMessageBean;
 import com.league.bean.PopularityBean;
 import com.league.bean.UserInfoBean;
 import com.league.otto.BusProvider;
+import com.league.otto.RefreshEvent;
 import com.league.utils.ActivityUtils;
 import com.league.utils.IContants;
 import com.league.utils.Utils;
@@ -30,6 +31,7 @@ import com.league.widget.NoScrollListView;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
@@ -166,6 +168,13 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
             }.sendEmptyMessageDelayed(0, 1000);
         }
 
+    }
+
+    @Subscribe
+    public void refreshEvent(RefreshEvent event){
+        currentPage = 1;
+        // 更新数据
+        initData(currentPage);
     }
 
 }

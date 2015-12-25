@@ -8,6 +8,7 @@ import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,8 @@ public class HobbyInfoAdapter extends BaseAdapter{
 			holder=(ViewHolder) convertView.getTag();
 			
 		}
-		Picasso.with(ctx).load(list.get(position).getPicture()).resize(120,120).centerCrop().into(holder.thumb);
+		if (!TextUtils.isEmpty(list.get(position).getPicture()))
+			Picasso.with(ctx).load(list.get(position).getPicture()).resize(120,120).centerCrop().into(holder.thumb);
 		holder.username.setText(list.get(position).getNickname());
 		if(list.get(position).getSex() == 1){
 			holder.sex.setImageResource(R.drawable.friend_sex_man);

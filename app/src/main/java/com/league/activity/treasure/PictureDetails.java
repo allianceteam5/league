@@ -2,6 +2,7 @@ package com.league.activity.treasure;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,7 +48,8 @@ public class PictureDetails extends Activity implements View.OnClickListener{
             ImageView imageView=new ImageView(this);
             imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            Picasso.with(getApplicationContext()).load(picture).into(imageView);
+            if (!TextUtils.isEmpty(picture))
+                Picasso.with(getApplicationContext()).load(picture).into(imageView);
             viewGroup.addView(imageView);
         }
     }

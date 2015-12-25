@@ -2,6 +2,7 @@ package com.league.activity.treasure;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -236,9 +237,12 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
 
 
     private void updateTenYuan() {
-        Picasso.with(getApplication()).load(listTenYuanGrab.get(0).getPicture()).into(tenImage1);
-        Picasso.with(getApplication()).load(listTenYuanGrab.get(1).getPicture()).into(tenImage2);
-        Picasso.with(getApplication()).load(listTenYuanGrab.get(2).getPicture()).into(tenImage3);
+        if (!TextUtils.isEmpty(listTenYuanGrab.get(0).getPicture()))
+            Picasso.with(getApplication()).load(listTenYuanGrab.get(0).getPicture()).into(tenImage1);
+        if (!TextUtils.isEmpty(listTenYuanGrab.get(1).getPicture()))
+            Picasso.with(getApplication()).load(listTenYuanGrab.get(1).getPicture()).into(tenImage2);
+        if (!TextUtils.isEmpty(listTenYuanGrab.get(2).getPicture()))
+            Picasso.with(getApplication()).load(listTenYuanGrab.get(2).getPicture()).into(tenImage3);
         money1.setText(listTenYuanGrab.get(0).getTitle());
         money2.setText(listTenYuanGrab.get(1).getTitle());
         money3.setText(listTenYuanGrab.get(2).getTitle());

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
@@ -317,7 +318,8 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
             winnerEndTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(detail.getEnd_at()) * 1000));
             winnerName.setText(detail.getNickname());
             winnerCount.setText(detail.getCount());
-            Picasso.with(getApplicationContext()).load(detail.getThumb()).into(winnerThumb);
+            if (!TextUtils.isEmpty(detail.getThumb()))
+                Picasso.with(getApplicationContext()).load(detail.getThumb()).into(winnerThumb);
 
         }
 
@@ -338,7 +340,8 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
         for(int i=0;i<pictures.length;i++) {
             iv = new ImageView(this);
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
-            Picasso.with(getApplication()).load(pictures[i]).into(iv);
+            if (!TextUtils.isEmpty(pictures[i]))
+                Picasso.with(getApplication()).load(pictures[i]).into(iv);
             listImageViews.add(iv);
 
             // 添加点view对象

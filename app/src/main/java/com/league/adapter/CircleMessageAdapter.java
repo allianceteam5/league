@@ -2,6 +2,7 @@ package com.league.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,8 @@ public class CircleMessageAdapter extends BaseAdapter implements IContants {
         }
 
         final CircleMessageBean circleMessageBean = list.get(position);
-        Picasso.with(ctx).load(circleMessageBean.getThumb()).placeholder(R.drawable.default_avatar).resize(80, 80).centerCrop().into(holder.ivThumb);
+        if (!TextUtils.isEmpty(circleMessageBean.getThumb()))
+            Picasso.with(ctx).load(circleMessageBean.getThumb()).placeholder(R.drawable.default_avatar).resize(80, 80).centerCrop().into(holder.ivThumb);
         holder.tvName.setText(circleMessageBean.getNickname());
         holder.tvTime.setText(Utils.generateStringByTime(circleMessageBean.getCreated_at()));
         holder.tvContent.setText(circleMessageBean.getContent());

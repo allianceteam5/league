@@ -2,6 +2,7 @@ package com.league.activity.near;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -96,7 +97,8 @@ public class RecommendationInfoActivity extends BaseActivity implements View.OnC
 
     private void initView() {
         nearUsername.setText(recommendationInfo.getNickname());
-        Picasso.with(getApplicationContext()).load(recommendationInfo.getThumb()).resize(60,60).centerCrop().into(nearUserthumb);
+        if (!TextUtils.isEmpty(recommendationInfo.getThumb()))
+            Picasso.with(getApplicationContext()).load(recommendationInfo.getThumb()).resize(60,60).centerCrop().into(nearUserthumb);
         lasttime.setText(Utils.generateStringByTime(recommendationInfo.getCreated_at()));
         commandType.setText(recommendationInfo.getKind());
         commandLocation.setText(recommendationInfo.getLocation());

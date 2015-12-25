@@ -161,6 +161,10 @@ public class RecommendationInfoPublishActivity extends BaseActivity implements V
         position = etPosition.getText().toString();
         phone = etPhone.getText().toString();
         content = etContent.getText().toString();
+        if (imgList.size() == 1){
+            ToastUtils.showShortToast(getApplicationContext(), "请选择图片");
+            return;
+        }
         if (TextUtils.isEmpty(title)) {
             ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_title));
             return;
@@ -236,9 +240,9 @@ public class RecommendationInfoPublishActivity extends BaseActivity implements V
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     closeProgressDialog();
-                    BusProvider.getInstance().post(new RefreshEvent());
                     if (response.optInt("flag") == 1) {
                         Toast.makeText(getApplicationContext(), "发布成功", Toast.LENGTH_SHORT).show();
+                        BusProvider.getInstance().post(new RefreshEvent());
                         imgList.clear();
                         finish();
                     }
