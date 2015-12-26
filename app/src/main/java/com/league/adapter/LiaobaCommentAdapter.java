@@ -1,6 +1,7 @@
 package com.league.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,8 @@ public class LiaobaCommentAdapter extends BaseAdapter {
         holder.nikename.setText(replysEntity.getFromnickname());
         holder.content.setText(replysEntity.getContent());
         holder.lasttime.setText(Utils.generateStringByTime(replysEntity.getCreated_at()));
-        Picasso.with(ctx).load(replysEntity.getFromthumb()).placeholder(R.drawable.default_avatar).resize(80,80).centerCrop().into(holder.thumb);
+        if (!TextUtils.isEmpty(replysEntity.getFromthumb()))
+            Picasso.with(ctx).load(replysEntity.getFromthumb()).placeholder(R.drawable.default_avatar).resize(80,80).centerCrop().into(holder.thumb);
         return convertView;
     }
 

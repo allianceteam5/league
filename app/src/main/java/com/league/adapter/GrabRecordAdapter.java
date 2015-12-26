@@ -2,6 +2,7 @@ package com.league.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,8 @@ public class GrabRecordAdapter extends BaseAdapter{
         }else{
             holder= (ViewHolder) convertView.getTag();
         }
-        Picasso.with(ctx).load(list.get(position).getPicture()).into(holder.picture);
+        if (!TextUtils.isEmpty(list.get(position).getPicture()))
+            Picasso.with(ctx).load(list.get(position).getPicture()).into(holder.picture);
         holder.version.setText(list.get(position).getVersion());
         holder.title.setText(list.get(position).getTitle());
         holder.total.setText(list.get(position).getNeeded());

@@ -77,7 +77,7 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
             @Override
             public void run() {
                 while (isLoop) {
-                    SystemClock.sleep(5000);
+                    SystemClock.sleep(4000);
                     handler.sendEmptyMessage(0);
                 }
             }

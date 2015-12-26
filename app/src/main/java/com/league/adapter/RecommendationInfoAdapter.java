@@ -8,6 +8,7 @@ import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,8 @@ public class RecommendationInfoAdapter extends BaseAdapter{
 			holder=(ViewHolder) convertView.getTag();			
 		}
 		holder.userNickname.setText(list.get(position).getNickname());
-		Picasso.with(ctx).load(list.get(position).getThumb()).resize(60,60).centerCrop().into(holder.thumb);
+		if (!TextUtils.isEmpty(list.get(position).getThumb()))
+			Picasso.with(ctx).load(list.get(position).getThumb()).resize(60,60).centerCrop().into(holder.thumb);
 		holder.fea_location.setText(list.get(position).getLocation());
 		holder.type.setText(list.get(position).getKind());
 		holder.lasttime.setText(Utils.generateStringByTime(list.get(position).getCreated_at()));

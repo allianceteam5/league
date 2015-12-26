@@ -2,6 +2,7 @@ package com.league.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,7 +85,8 @@ public class LiaoBaAdapter extends BaseAdapter implements IContants {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        Picasso.with(ctx).load(list.get(position).getThumb()).resize(80, 80).centerCrop().into(holder.thumb);
+        if (!TextUtils.isEmpty(list.get(position).getThumb()))
+            Picasso.with(ctx).load(list.get(position).getThumb()).resize(80, 80).centerCrop().into(holder.thumb);
         holder.name.setText(list.get(position).getNickname());
         holder.time.setText(Utils.generateStringByTime(list.get(position).getCreated_at()));
         if (type == 0) {

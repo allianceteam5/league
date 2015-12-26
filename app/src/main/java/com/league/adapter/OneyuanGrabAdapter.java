@@ -1,6 +1,7 @@
 package com.league.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,8 @@ public class OneyuanGrabAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         OneYuanBean oneYuanBean = list.get(position);
-        Picasso.with(ctx).load(list.get(position).getPicture()).into(holder.thumb);
+        if (!TextUtils.isEmpty(list.get(position).getPicture()))
+            Picasso.with(ctx).load(list.get(position).getPicture()).into(holder.thumb);
         holder.mName.setText(oneYuanBean.getTitle());
         holder.totalPeo.setText(oneYuanBean.getNeeded() + "人次");
         holder.leavePeo.setText(oneYuanBean.getRemain());

@@ -2,6 +2,7 @@ package com.league.activity.postbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -168,7 +169,8 @@ public class TopicContent extends BaseActivity implements IContants, View.OnClic
     }
 
     private void updateView() {
-        Picasso.with(getApplication()).load(liaoBaMessageBean.getThumb()).placeholder(R.drawable.default_avatar).resize(100, 100).centerCrop().into(thumb);
+        if (!TextUtils.isEmpty(liaoBaMessageBean.getThumb()))
+            Picasso.with(getApplication()).load(liaoBaMessageBean.getThumb()).placeholder(R.drawable.default_avatar).resize(100, 100).centerCrop().into(thumb);
         tvUsername.setText(liaoBaMessageBean.getNickname());
         tvPushtime.setText(Utils.generateStringByTime(liaoBaMessageBean.getCreated_at()));
         tvTitle.setText(liaoBaMessageBean.getTitle());

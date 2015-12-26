@@ -17,6 +17,8 @@ import com.league.activity.BaseActivity;
 import com.league.activity.ShowBigImgActivity;
 import com.league.adapter.ImgGridWithPickImgAdapter;
 import com.league.interf.OnAllComplete;
+import com.league.otto.BusProvider;
+import com.league.otto.RefreshEvent;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
@@ -143,6 +145,12 @@ public class CirclePublishActivity extends BaseActivity implements View.OnClickL
             ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_content));
             return;
         }
+
+        if (imgList.size() == 1){
+            callApi("");
+            return;
+        }
+
         final UploadManager uploadManager = new UploadManager();
         showProgressDialog();
         final int size = imgList.size() - 1;
@@ -192,25 +200,29 @@ public class CirclePublishActivity extends BaseActivity implements View.OnClickL
 
             String imgStr = imgUrls.toString();
             imgStr = imgStr.trim();
-            ApiUtil.circleMessagesCreated(getApplicationContext(), content, imgStr, new JsonHttpResponseHandler() {
-                @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    closeProgressDialog();
-                    Toast.makeText(getApplicationContext(), "发布失败", Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    closeProgressDialog();
-//                    sharePopWindow.showPopWindow();
-//                    BusProvider.getBus().post(new NewDynamicEvent());
-                    if (response.optInt("flag") == 1) {
-                        Toast.makeText(getApplicationContext(), "发布成功", Toast.LENGTH_SHORT).show();
-                        imgList.clear();
-                        finish();
-                    }
-                }
-            });
+            callApi(imgStr);
         }
     };
+
+    private void callApi(String imgStr){
+        ApiUtil.circleMessagesCreated(getApplicationContext(), content, imgStr, new JsonHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                closeProgressDialog();
+                Toast.makeText(getApplicationContext(), "发布失败", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                closeProgressDialog();
+//                    sharePopWindow.showPopWindow();
+                if (response.optInt("flag") == 1) {
+                    Toast.makeText(getApplicationContext(), "发布成功", Toast.LENGTH_SHORT).show();
+                    BusProvider.getInstance().post(new RefreshEvent());
+                    imgList.clear();
+                    finish();
+                }
+            }
+        });
+    }
 }

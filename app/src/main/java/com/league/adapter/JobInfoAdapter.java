@@ -11,6 +11,7 @@ import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +75,8 @@ public class JobInfoAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         JobInfoBean jobinfo = list.get(position);
-        Picasso.with(ctx).load(jobinfo.getThumb()).into(holder.thumb);
+        if (!TextUtils.isEmpty(jobinfo.getThumb()))
+            Picasso.with(ctx).load(jobinfo.getThumb()).into(holder.thumb);
         holder.fullorpart_timejob.setText(jobinfo.getJobPropertyName());
         holder.userNickname.setText(jobinfo.getNickname());
         holder.current_status.setText(jobinfo.getStatus());

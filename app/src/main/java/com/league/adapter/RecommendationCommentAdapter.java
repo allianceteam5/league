@@ -1,6 +1,7 @@
 package com.league.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,8 @@ public class RecommendationCommentAdapter extends BaseAdapter {
         holder.nikename.setText(commentBean.getNickname());
         holder.content.setText(commentBean.getContent());
         holder.lasttime.setText(Utils.generateStringByTime(commentBean.getCreated_at()));
-        Picasso.with(ctx).load(commentBean.getThumb()).resize(80,80).centerCrop().into(holder.thumb);
+        if (!TextUtils.isEmpty(commentBean.getThumb()))
+            Picasso.with(ctx).load(commentBean.getThumb()).resize(80,80).centerCrop().into(holder.thumb);
         return convertView;
     }
 

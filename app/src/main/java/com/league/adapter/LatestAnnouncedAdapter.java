@@ -2,6 +2,7 @@ package com.league.adapter;
 
 import android.content.Context;
 import android.os.CountDownTimer;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,8 @@ public class LatestAnnouncedAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        Picasso.with(context).load(list.get(position).getPicture()).into(holder.picture);
+        if (!TextUtils.isEmpty(list.get(position).getPicture()))
+            Picasso.with(context).load(list.get(position).getPicture()).into(holder.picture);
         holder.title.setText(list.get(position).getTitle());
         TimeCount count = new TimeCount(Long.valueOf(list.get(position).getEnd_at())*1000-System.currentTimeMillis(), 1000, holder.timeMinu,holder.timeMill);
         count.start();

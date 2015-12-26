@@ -1,6 +1,7 @@
 package com.league.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,8 @@ public class LiaobaConcernListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.headPortrait);
+        if (!TextUtils.isEmpty(list.get(position).getThumb()))
+            Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.headPortrait);
         holder.usrName.setText(list.get(position).getNickname());
         holder.funNum.setText(list.get(position).getConcerncount() + "");
         if (0 == list.get(position).getIsconcerned()) {

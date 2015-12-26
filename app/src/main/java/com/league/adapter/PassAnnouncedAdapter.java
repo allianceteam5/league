@@ -1,6 +1,7 @@
 package com.league.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,8 @@ public class PassAnnouncedAdapter extends BaseAdapter{
         holder.holderId.setText(list.get(position).getWinneruserid());
         holder.holderNum.setText(list.get(position).getWinnernumber());
         holder.takNum.setText(list.get(position).getCount());
-        Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.thumb);
+        if (!TextUtils.isEmpty(list.get(position).getThumb()))
+            Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.thumb);
         return convertView;
     }
     class ViewHolder{

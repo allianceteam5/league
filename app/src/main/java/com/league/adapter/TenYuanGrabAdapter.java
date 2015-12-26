@@ -1,6 +1,7 @@
 package com.league.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,8 @@ public class TenYuanGrabAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        Picasso.with(ctx).load(list.get(position).getPicture()).into(holder.thumb);
+        if (!TextUtils.isEmpty(list.get(position).getThumb()))
+            Picasso.with(ctx).load(list.get(position).getPicture()).into(holder.thumb);
         holder.period.setText("(第" + list.get(position).getVersion() + "期)");
         holder.mName_Monery.setText(list.get(position).getTitle());
         float need=Float.valueOf(list.get(position).getNeeded());
