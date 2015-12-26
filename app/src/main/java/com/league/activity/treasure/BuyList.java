@@ -15,6 +15,7 @@ import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
+import com.league.widget.MyRadioGroup;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
 
@@ -22,20 +23,18 @@ import org.apache.http.Header;
 
 import io.paperdb.Paper;
 
-public class BuyList extends BaseActivity implements View.OnClickListener,IContants{
+public class BuyList extends BaseActivity implements View.OnClickListener,IContants,MyRadioGroup.OnCheckedChangeListener{
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
-    private ImageView balancepay,coinpay,alliancepay,bankcardpay;
-    private ImageView balancepayed,coinpayed,alliancepayed,bankcardpayed;
-    private TextView tvBalance,tvCoin,tvAlliance;
+    private TextView tvBalance,tvCoin,tvGrabCoin;
     private int paytype=-1,type;
     private Button buy;
     private String id,number;
     private int buytype;
     private TextView totalText;
     private UserInfoBean userInfoBean=new UserInfoBean();
-
+    private MyRadioGroup radioGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,24 +69,21 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-        balancepay= (ImageView) findViewById(R.id.select1);
-        balancepayed= (ImageView) findViewById(R.id.selected1);
-        coinpay= (ImageView) findViewById(R.id.select2);
-        coinpayed= (ImageView) findViewById(R.id.selected2);
-        alliancepay= (ImageView) findViewById(R.id.select3);
-        alliancepayed= (ImageView) findViewById(R.id.selected3);
-        bankcardpay= (ImageView) findViewById(R.id.select4);
-        bankcardpayed= (ImageView) findViewById(R.id.selected4);
-        balancepay.setOnClickListener(this);
-        coinpay.setOnClickListener(this);
-        alliancepay.setOnClickListener(this);
-        bankcardpay.setOnClickListener(this);
+
         buy= (Button) findViewById(R.id.makepayment);
         buy.setOnClickListener(this);
         totalText= (TextView) findViewById(R.id.number);
         tvBalance= (TextView) findViewById(R.id.balance);
         tvCoin= (TextView) findViewById(R.id.coin);
-        tvAlliance= (TextView) findViewById(R.id.alliance);
+        tvGrabCoin= (TextView) findViewById(R.id.grabcorn);
+        radioGroup= (MyRadioGroup) findViewById(R.id.paytypegroup);
+        if(type==0){
+            findViewById(R.id.rl_coin).setVisibility(View.GONE);
+            findViewById(R.id.view).setVisibility(View.GONE);
+        }else if(type==1){
+            findViewById(R.id.rl_grabcorn).setVisibility(View.GONE);
+            findViewById(R.id.view).setVisibility(View.GONE);
+        }
     }
 
     private void initData(){
@@ -95,55 +91,12 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
         userInfoBean= Paper.book().read(UserInfo);
         tvBalance.setText(userInfoBean.getMoney()+"");
         tvCoin.setText(userInfoBean.getCorns()+"");
-        tvAlliance.setText(userInfoBean.getAlliancerewards()+"");
+        tvGrabCoin.setText(userInfoBean.getCornsforgrab()+"");
+        radioGroup.setOnCheckedChangeListener(this);
     }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.select1:
-                balancepay.setVisibility(View.GONE);
-                balancepayed.setVisibility(View.VISIBLE);
-                coinpay.setVisibility(View.VISIBLE);
-                coinpayed.setVisibility(View.GONE);
-                alliancepay.setVisibility(View.VISIBLE);
-                alliancepayed.setVisibility(View.GONE);
-                bankcardpay.setVisibility(View.VISIBLE);
-                bankcardpayed.setVisibility(View.GONE);
-                paytype=0;
-                break;
-            case R.id.select2:
-                balancepay.setVisibility(View.VISIBLE);
-                balancepayed.setVisibility(View.GONE);
-                coinpay.setVisibility(View.GONE);
-                coinpayed.setVisibility(View.VISIBLE);
-                alliancepay.setVisibility(View.VISIBLE);
-                alliancepayed.setVisibility(View.GONE);
-                bankcardpay.setVisibility(View.VISIBLE);
-                bankcardpayed.setVisibility(View.GONE);
-                paytype=1;
-                break;
-            case R.id.select3:
-                balancepay.setVisibility(View.VISIBLE);
-                balancepayed.setVisibility(View.GONE);
-                coinpay.setVisibility(View.VISIBLE);
-                coinpayed.setVisibility(View.GONE);
-                alliancepay.setVisibility(View.GONE);
-                alliancepayed.setVisibility(View.VISIBLE);
-                bankcardpay.setVisibility(View.VISIBLE);
-                bankcardpayed.setVisibility(View.GONE);
-                paytype=2;
-                break;
-            case R.id.select4:
-                balancepay.setVisibility(View.VISIBLE);
-                balancepayed.setVisibility(View.GONE);
-                coinpay.setVisibility(View.VISIBLE);
-                coinpayed.setVisibility(View.GONE);
-                alliancepay.setVisibility(View.VISIBLE);
-                alliancepayed.setVisibility(View.GONE);
-                bankcardpay.setVisibility(View.GONE);
-                bankcardpayed.setVisibility(View.VISIBLE);
-                paytype=4;
-                break;
             case R.id.makepayment:
                 if(paytype==-1){
                     ToastUtils.showShortToast(getApplication(),"请选择支付方式");
@@ -253,5 +206,24 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
                 break;
         }
 
+    }
+
+
+    @Override
+    public void onCheckedChanged(MyRadioGroup group, int checkedId) {
+        switch (checkedId){
+            case R.id.rb_balancepay:
+                paytype=0;
+                break;
+            case R.id.rb_cornpay:
+                paytype=1;
+                break;
+            case R.id.rb_grabcornpay:
+                paytype=2;
+                break;
+            case R.id.rb_alipay:
+                paytype=3;
+                break;
+        }
     }
 }
