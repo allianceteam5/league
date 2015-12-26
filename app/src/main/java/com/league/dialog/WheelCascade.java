@@ -139,6 +139,7 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
         mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(context, areas));
         mViewDistrict.setCurrentItem(0);
         mCurrentDistrictName = areas[0];
+        mCurrentZipCode=mZipcodeDatasMap.get(mCurrentDistrictName);
     }
 
     /**

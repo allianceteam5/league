@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
+import com.league.utils.Constants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -114,6 +115,7 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
                                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                     closeProgressDialog();
                                     if (response.getFlag().equals("1")) {
+                                        Constants.PHONENUM=mInputPhone.getText().toString();
                                         Intent intent = new Intent(getApplication(), SetCode.class);
                                         startActivity(intent);
                                         finish();
@@ -125,7 +127,7 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
                                 @Override
                                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
                                     closeProgressDialog();
-                                    ToastUtils.showShortToast(FindCode.this, "发送失败");
+                                    ToastUtils.showShortToast(FindCode.this, "验证失败");
                                 }
 
                                 @Override

@@ -16,11 +16,7 @@ public class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+        BusProvider.getInstance().register(this);
     }
 
     /**
@@ -59,16 +55,8 @@ public class BaseActivity extends Activity {
         super.onBackPressed();
     }
 
-    @Override protected void onResume() {
-        super.onResume();
-
-        // Register ourselves so that we can provide the initial value.
-        BusProvider.getInstance().register(this);
-    }
-
-    @Override protected void onPause() {
-        super.onPause();
-
+    @Override protected void onDestroy() {
+        super.onDestroy();
         // Always unregister when an object no longer should be on the bus.
         BusProvider.getInstance().unregister(this);
     }

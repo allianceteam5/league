@@ -6,27 +6,35 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
+import com.league.bean.UserInfoBean;
 import com.league.utils.Constants;
+import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
 
 import org.apache.http.Header;
-public class BuyList extends BaseActivity implements View.OnClickListener{
+
+import io.paperdb.Paper;
+
+public class BuyList extends BaseActivity implements View.OnClickListener,IContants{
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
     private ImageView balancepay,coinpay,alliancepay,bankcardpay;
     private ImageView balancepayed,coinpayed,alliancepayed,bankcardpayed;
+    private TextView tvBalance,tvCoin,tvAlliance;
     private int paytype=-1,type;
     private Button buy;
     private String id,number;
     private int buytype;
     private TextView totalText;
-
+    private UserInfoBean userInfoBean=new UserInfoBean();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +85,17 @@ public class BuyList extends BaseActivity implements View.OnClickListener{
         buy= (Button) findViewById(R.id.makepayment);
         buy.setOnClickListener(this);
         totalText= (TextView) findViewById(R.id.number);
-
+        tvBalance= (TextView) findViewById(R.id.balance);
+        tvCoin= (TextView) findViewById(R.id.coin);
+        tvAlliance= (TextView) findViewById(R.id.alliance);
     }
 
     private void initData(){
         totalText.setText(number);
+        userInfoBean= Paper.book().read(UserInfo);
+        tvBalance.setText(userInfoBean.getMoney()+"");
+        tvCoin.setText(userInfoBean.getCorns()+"");
+        tvAlliance.setText(userInfoBean.getAlliancerewards()+"");
     }
     @Override
     public void onClick(View v) {
@@ -139,74 +153,99 @@ public class BuyList extends BaseActivity implements View.OnClickListener{
                         ApiUtil.grabcoinBuy(getApplication(), id, Constants.PHONENUM, number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                onBackPressed();
-                                finish();
+                                if(response.getFlag().equals("1")){
+                                    ToastUtils.showShortToast(getApplicationContext(),"支付成功");
+                                    onBackPressed();
+                                    finish();
+                                }else{
+                                    ToastUtils.showShortToast(getApplicationContext(),"支付失败");
+                                }
+
                             }
 
                             @Override
                             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-
+                                ToastUtils.showShortToast(getApplicationContext(),"支付失败");
                             }
 
                             @Override
                             protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
 
-                                return null;
+                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                                });
                             }
                         });
                     }else if(buytype==1&&type==0){
                         ApiUtil.grabcoinBuyAll(getApplication(), id, Constants.PHONENUM, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                onBackPressed();
-                                finish();
+                                if(response.getFlag().equals("1")){
+                                    ToastUtils.showShortToast(getApplicationContext(),"支付成功");
+                                    onBackPressed();
+                                    finish();
+                                }else{
+                                    ToastUtils.showShortToast(getApplicationContext(),"支付失败");
+                                }
                             }
 
                             @Override
                             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-
+                                ToastUtils.showShortToast(getApplicationContext(),"支付失败");
                             }
 
                             @Override
                             protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                                return null;
+                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                                });
                             }
                         });
                     }else if(buytype==0&&type==1){
                         ApiUtil.oneYuanBuy(getApplication(), id, Constants.PHONENUM, number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                onBackPressed();
-                                finish();
+                                if(response.getFlag().equals("1")){
+                                    ToastUtils.showShortToast(getApplicationContext(),"支付成功");
+                                    onBackPressed();
+                                    finish();
+                                }else{
+                                    ToastUtils.showShortToast(getApplicationContext(),"支付失败");
+                                }
                             }
 
                             @Override
                             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-
+                                ToastUtils.showShortToast(getApplicationContext(),"支付失败");
                             }
 
                             @Override
                             protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
 
-                                return null;
+                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                                });
                             }
                         });
                     }else if(buytype==1&&type==1){
                         ApiUtil.oneyuanBuyAll(getApplication(), id, Constants.PHONENUM, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                onBackPressed();
-                                finish();
+                                if(response.getFlag().equals("1")){
+                                    ToastUtils.showShortToast(getApplicationContext(),"支付成功");
+                                    onBackPressed();
+                                    finish();
+                                }else{
+                                    ToastUtils.showShortToast(getApplicationContext(),"支付失败");
+                                }
                             }
 
                             @Override
                             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-
+                                ToastUtils.showShortToast(getApplicationContext(),"支付失败");
                             }
 
                             @Override
                             protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                                return null;
+                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                                });
                             }
                         });
                     }

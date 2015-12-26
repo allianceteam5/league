@@ -14,8 +14,6 @@
 package com.easemob.chatuidemo.activity;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -156,7 +154,6 @@ public class LoginActivity extends BaseActivity {
 					ToastUtils.showShortToast(LoginActivity.this, "密码错误！");
 					return;
 				}
-				StoreUtils.setUserInfo(userInfoBean);
 				ApiUtil.testPhone = StoreUtils.getPhone();
 				initHuanXin();
 			}
@@ -222,7 +219,8 @@ public class LoginActivity extends BaseActivity {
 				Intent intent = new Intent(LoginActivity.this,
 						com.league.activity.MainActivity.class);
 				startActivity(intent);
-
+				StoreUtils.setUserInfo(userInfoBean);
+				StoreUtils.setLoginState(true);
 				finish();
 			}
 
