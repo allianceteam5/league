@@ -62,6 +62,7 @@ import com.easemob.util.EMLog;
 import com.easemob.util.HanziToPinyin;
 import com.easemob.util.NetUtils;
 import com.league.utils.Constants;
+import com.league.utils.StoreUtils;
 import com.mine.league.R;
 import com.umeng.analytics.MobclickAgent;
 
@@ -108,7 +109,6 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Constants.PHONENUM= Paper.book().read("userkey");
 		if (savedInstanceState != null && savedInstanceState.getBoolean(Constant.ACCOUNT_REMOVED, false)) {
 			// 防止被移除后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
 			// 三个fragment里加的判断同理

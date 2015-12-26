@@ -67,7 +67,7 @@ public class SetCode extends BaseActivity implements View.OnClickListener{
                     ToastUtils.showShortToast(SetCode.this,"请输入完整");
                 }else{
                     showProgressDialog();
-                    ApiUtil.changepwd(SetCode.this, Constants.PHONENUM, gridPasswordView.getPassWord().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
+                    ApiUtil.changepwd(SetCode.this, gridPasswordView.getPassWord().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
 

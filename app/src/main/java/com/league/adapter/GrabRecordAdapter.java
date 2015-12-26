@@ -109,7 +109,7 @@ public class GrabRecordAdapter extends BaseAdapter{
             holder.applyfor.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ApiUtil.applyForCorns(ctx, Constants.PHONENUM, list.get(position).getGrabid(), new BaseJsonHttpResponseHandler<SucessBean>() {
+                    ApiUtil.applyForCorns(ctx, list.get(position).getGrabid(), new BaseJsonHttpResponseHandler<SucessBean>() {
 
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {

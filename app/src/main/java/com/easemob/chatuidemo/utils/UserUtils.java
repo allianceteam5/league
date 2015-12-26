@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.easemob.applib.controller.HXSDKHelper;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
 import com.easemob.chatuidemo.UserProfileManager;
+import com.league.utils.StoreUtils;
 import com.mine.league.R;
 import com.easemob.chatuidemo.domain.User;
 import com.squareup.picasso.Picasso;
@@ -38,8 +39,8 @@ public class UserUtils {
      */
     public static void setUserAvatar(Context context, String username, ImageView imageView){
     	User user = getUserInfo(username);
-        if(user != null && user.getAvatar() != null){
-            Picasso.with(context).load(user.getAvatar()).placeholder(R.drawable.default_avatar).into(imageView);
+        if(user != null && !TextUtils.isEmpty(user.getAvatar())){
+            Picasso.with(context).load(user.getAvatar()).placeholder(R.drawable.default_avatar).resize(80, 80).centerCrop().into(imageView);
         }else{
             Picasso.with(context).load(R.drawable.default_avatar).into(imageView);
         }
@@ -50,8 +51,9 @@ public class UserUtils {
      */
 	public static void setCurrentUserAvatar(Context context, ImageView imageView) {
 		User user = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getUserProfileManager().getCurrentUserInfo();
-		if (user != null && user.getAvatar() != null) {
-			Picasso.with(context).load(user.getAvatar()).placeholder(R.drawable.default_avatar).into(imageView);
+//		if (user != null && user.getAvatar() != null) {
+		if (!TextUtils.isEmpty(StoreUtils.getAvatar())) {
+			Picasso.with(context).load(StoreUtils.getAvatar()).placeholder(R.drawable.default_avatar).resize(80,80).centerCrop().into(imageView);
 		} else {
 			Picasso.with(context).load(R.drawable.default_avatar).into(imageView);
 		}
@@ -75,7 +77,9 @@ public class UserUtils {
     public static void setCurrentUserNick(TextView textView){
     	User user = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getUserProfileManager().getCurrentUserInfo();
     	if(textView != null){
-    		textView.setText(user.getNick());
+//    		textView.setText(user.getNick());
+			if (!TextUtils.isEmpty(StoreUtils.getNickname()))
+				textView.setText(StoreUtils.getNickname());
     	}
     }
     

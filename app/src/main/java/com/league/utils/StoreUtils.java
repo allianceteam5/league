@@ -5,6 +5,7 @@ package com.league.utils;
  */
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.league.bean.UserInfoBean;
 import com.tumblr.remember.Remember;
@@ -20,8 +21,10 @@ public class StoreUtils {
     private static final String LoginState = "login_state";
     private static final String UserInfo = "user_info";
     private static final String Phone = "phone";
-    private static final String HuanXin = "huanxin_id";
-
+    private static final String HuanXinId = "huanxin_id";
+    private static final String HuanXinPwd = "huanxin_pwd";
+    private static final String Avatar = "avatar";
+    private static final String Nickname = "nickname";
     //初始化
     public static void init(Context context){
         Paper.init(context);
@@ -53,7 +56,10 @@ public class StoreUtils {
     public static void setUserInfo(UserInfoBean value){
         Paper.book().write(UserInfo, value);
         setPhone(value.getPhone());
-        setHuanXinId(value.getHuanxinid());
+        if (!TextUtils.isEmpty(value.getThumb()))
+            setAvatar(value.getThumb());
+        if (!TextUtils.isEmpty(value.getNickname()))
+            setNickname(value.getNickname());
     }
 
     public static UserInfoBean getUserInfo(){
@@ -69,11 +75,33 @@ public class StoreUtils {
     }
 
     public static void setHuanXinId(String value){
-        Remember.putString(HuanXin, value);
+        Remember.putString(HuanXinId, value);
     }
 
-    public static String getHuanXin(){
-        return Remember.getString(HuanXin, "");
+    public static void setHuanXinPwd(String pwd){
+        Remember.putString(HuanXinPwd, pwd);
     }
 
+    public static String getHuanXinPwd(){
+        return Remember.getString(HuanXinPwd, "");
+    }
+    public static String getHuanXinId(){
+        return Remember.getString(HuanXinId, "");
+    }
+
+    public static void setAvatar(String value){
+        Remember.putString(Avatar, value);
+    }
+
+    public static String getAvatar(){
+        return Remember.getString(Avatar,"");
+    }
+
+    public static void setNickname(String value){
+        Remember.putString(Nickname, value);
+    }
+
+    public static String getNickname(){
+        return Remember.getString(Nickname, "");
+    }
 }

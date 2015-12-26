@@ -115,7 +115,6 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
                                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                     closeProgressDialog();
                                     if (response.getFlag().equals("1")) {
-                                        Constants.PHONENUM=mInputPhone.getText().toString();
                                         Intent intent = new Intent(getApplication(), SetCode.class);
                                         startActivity(intent);
                                         finish();

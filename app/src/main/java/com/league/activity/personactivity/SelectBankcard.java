@@ -61,7 +61,7 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
     }
     private void initData(){
         showProgressDialog();
-        ApiUtil.getUserBankcardList(this, Constants.PHONENUM, new BaseJsonHttpResponseHandler<ArrayList<BankCardInfo>>() {
+        ApiUtil.getUserBankcardList(this,new BaseJsonHttpResponseHandler<ArrayList<BankCardInfo>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<BankCardInfo> response) {
                 closeProgressDialog();

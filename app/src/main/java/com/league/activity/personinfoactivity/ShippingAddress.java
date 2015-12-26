@@ -59,7 +59,7 @@ public class ShippingAddress extends PersonInfoBaseActivity implements View.OnCl
 
     @Override
     protected void initData() {
-        ApiUtil.getShipAddress(getApplicationContext(), Constants.PHONENUM, new BaseJsonHttpResponseHandler<ArrayList<ShippingAddressBean>>() {
+        ApiUtil.getShipAddress(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<ShippingAddressBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<ShippingAddressBean> response) {
                 mAddressData.clear();

@@ -56,7 +56,7 @@ public class NickNameActivity extends PersonInfoBaseActivity implements View.OnC
         switch (v.getId()){
             case R.id.newadd:
                 mOption.setClickable(false);
-                ApiUtil.modifyUserDetailNickname(getApplicationContext(), Constants.PHONENUM, mInputNickname.getText().toString(),
+                ApiUtil.modifyUserDetailNickname(getApplicationContext(), mInputNickname.getText().toString(),
                         new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {

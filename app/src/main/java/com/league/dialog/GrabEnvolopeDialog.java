@@ -48,7 +48,7 @@ public class GrabEnvolopeDialog extends BaseActivity implements View.OnClickList
     }
 
     private void initData() {
-        ApiUtil.getGrabEnvelope(getApplicationContext(), Constants.PHONENUM, new BaseJsonHttpResponseHandler<EnvelopeBean>() {
+        ApiUtil.getGrabEnvelope(getApplicationContext(),new BaseJsonHttpResponseHandler<EnvelopeBean>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, EnvelopeBean response) {
                 closeProgressDialog();

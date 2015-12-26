@@ -74,7 +74,7 @@ public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnCli
         switch (v.getId()){
          case R.id.newadd:
              String temp=mCurrentProviceName + mCurrentCityName + mCurrentDistrictName;
-             ApiUtil.modifyUserDetailArea(getApplicationContext(), Constants.PHONENUM, temp, new BaseJsonHttpResponseHandler<SucessBean>() {
+             ApiUtil.modifyUserDetailArea(getApplicationContext(), temp, new BaseJsonHttpResponseHandler<SucessBean>() {
                  @Override
                  public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                      if(response.getFlag().equals("1")){

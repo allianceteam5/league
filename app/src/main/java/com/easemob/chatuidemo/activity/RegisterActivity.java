@@ -13,6 +13,7 @@
  */
 package com.easemob.chatuidemo.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -22,8 +23,10 @@ import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.activity.personinfoactivity.CompletePersonInfo;
 import com.league.bean.SucessBean;
 import com.league.utils.Constants;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -122,7 +125,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
                 break;
             case R.id.register:
-                String phone = mInputPhone.getText().toString();
+                final String phone = mInputPhone.getText().toString();
                 if (phone.length() != 11) {
                     ToastUtils.showShortToast(this, "请输入正确手机号");
                     return;
@@ -145,11 +148,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                         if (response.getFlag().equals("1")) {
-                            Constants.PHONENUM = mInputPhone.getText().toString();
-                            Paper.book().write("userkey", Constants.PHONENUM);
-                            Constants.HuanXinID = response.getHuanxinid();
-                            Constants.HuanxinPwd = mInputPwd.getText().toString();
-                            HxId = response.getHuanxinid();
+                            StoreUtils.setPhone(phone);
+                            StoreUtils.setHuanXinId(response.getHuanxinid());
+                            ApiUtil.testPhone = phone;
+                            startActivity(new Intent(RegisterActivity.this, CompletePersonInfo.class));
+                            finish();
                         } else {
                             ToastUtils.showShortToast(RegisterActivity.this, "该账号已经注册过");
                         }

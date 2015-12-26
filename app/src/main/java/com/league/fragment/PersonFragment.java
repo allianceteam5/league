@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import com.league.bean.UserInfoBean;
 import com.league.utils.ActivityUtils;
 import com.league.utils.Constants;
 import com.league.utils.IContants;
+import com.league.utils.StoreUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -57,14 +59,6 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
 //    @Bind(R.id.award)
     TextView mAward;
 
-    private static PersonFragment instance;
-    public PersonFragment(){}
-    public static synchronized PersonFragment getInstance(){
-        if(instance==null){
-            instance=new PersonFragment();
-        }
-        return instance;
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -135,13 +129,14 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
         }
     }
     private void initData(){
-        ApiUtil.getUserDetail(ctx, Constants.PHONENUM, new BaseJsonHttpResponseHandler<UserInfoBean>() {
+        ApiUtil.getUserDetail(ctx, StoreUtils.getPhone(), new BaseJsonHttpResponseHandler<UserInfoBean>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, UserInfoBean response) {
                 userInfoBean = response;
                 Paper.book().write(UserInfo, response);
-                if(response.getThumb().length()>0){
-                    Picasso.with(ctx).load(response.getThumb()).placeholder(R.drawable.default_avatar).into(mThumb);
+                StoreUtils.setUserInfo(userInfoBean);
+                if(!TextUtils.isEmpty(response.getThumb())){
+                    Picasso.with(ctx).load(response.getThumb()).resize(120,120).centerCrop().placeholder(R.drawable.default_avatar).into(mThumb);
                 }
 
                 mNickname.setText(response.getNickname());
@@ -168,7 +163,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
     @Override
     public void onResume() {
         super.onResume();
-        initData();
+//        initData();
     }
     private Dialog createLoadingDialog(Context context) {
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -200,7 +195,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
     }
     //这个有问题啊 ！！！！！
     private void getUrl(){
-        ApiUtil.getSignupUrl(ctx, Constants.PHONENUM, new TextHttpResponseHandler() {
+        ApiUtil.getSignupUrl(ctx, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 

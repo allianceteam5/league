@@ -65,7 +65,7 @@ public class MyGenderActivity extends PersonInfoBaseActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.newadd:
-                ApiUtil.modifyUserDetaiSex(getApplicationContext(), Constants.PHONENUM, isFlag, new BaseJsonHttpResponseHandler<SucessBean>() {
+                ApiUtil.modifyUserDetaiSex(getApplicationContext(), isFlag, new BaseJsonHttpResponseHandler<SucessBean>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                         if(response.getFlag().equals("1")){

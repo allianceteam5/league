@@ -60,7 +60,7 @@ public class TenYuanGrabAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        if (!TextUtils.isEmpty(list.get(position).getThumb()))
+        if (!TextUtils.isEmpty(list.get(position).getPicture()))
             Picasso.with(ctx).load(list.get(position).getPicture()).into(holder.thumb);
         holder.period.setText("(第" + list.get(position).getVersion() + "期)");
         holder.mName_Monery.setText(list.get(position).getTitle());

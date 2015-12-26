@@ -60,6 +60,7 @@ import com.league.fragment.PersonFragment;
 import com.league.fragment.ResourceFragment;
 import com.league.utils.ComplexPreferences;
 import com.league.utils.Constants;
+import com.league.utils.StoreUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
@@ -117,7 +118,6 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Constants.PHONENUM= Paper.book().read("userkey");
         if (savedInstanceState != null && savedInstanceState.getBoolean(Constant.ACCOUNT_REMOVED, false)) {
             // 防止被移除后，没点确定按钮然后按了home键，长期在后台又进app导致的crash
             // 三个fragment里加的判断同理
@@ -201,7 +201,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         chatHistoryFragment = new ChatAllHistoryFragment();
         contactListFragment = new ContactlistFragment();
         resourceFragment = new ResourceFragment();
-        personFragment = PersonFragment.getInstance();
+        personFragment = new PersonFragment();
         fragments = new Fragment[]{chatHistoryFragment, contactListFragment, resourceFragment, personFragment};
         getFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, resourceFragment)

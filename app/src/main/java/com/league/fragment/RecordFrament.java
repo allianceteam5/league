@@ -72,7 +72,7 @@ public class RecordFrament extends Fragment {
     private void initData(final int currentPage) {
         showProgressDialog();
         if(type==0){
-            ApiUtil.getGrabCoinRecords(getActivity().getApplication(), Constants.PHONENUM, currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabBean>>() {
+            ApiUtil.getGrabCoinRecords(getActivity().getApplication(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabBean>>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<GrabBean> response) {
                     closeProgressDialog();
@@ -107,7 +107,7 @@ public class RecordFrament extends Fragment {
                 }
             });
         }else if(type==1){
-            ApiUtil.getGrabCommodyRecords(getActivity().getApplication(), Constants.PHONENUM, currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabBean>>() {
+            ApiUtil.getGrabCommodyRecords(getActivity().getApplication(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabBean>>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<GrabBean> response) {
                     closeProgressDialog();
@@ -142,7 +142,7 @@ public class RecordFrament extends Fragment {
                 }
             });
         }else if(type==2){
-            ApiUtil.getGrabWinRecords(getActivity().getApplication(), Constants.PHONENUM, currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabBean>>() {
+            ApiUtil.getGrabWinRecords(getActivity().getApplication(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabBean>>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<GrabBean> response) {
                     closeProgressDialog();

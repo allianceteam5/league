@@ -150,7 +150,7 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
 
                 }else{
                     if(buytype==0&&type==0){
-                        ApiUtil.grabcoinBuy(getApplication(), id, Constants.PHONENUM, number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+                        ApiUtil.grabcoinBuy(getApplication(), id,number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                 if(response.getFlag().equals("1")){
@@ -176,7 +176,7 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
                             }
                         });
                     }else if(buytype==1&&type==0){
-                        ApiUtil.grabcoinBuyAll(getApplication(), id, Constants.PHONENUM, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+                        ApiUtil.grabcoinBuyAll(getApplication(), id, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                 if(response.getFlag().equals("1")){
@@ -200,7 +200,7 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
                             }
                         });
                     }else if(buytype==0&&type==1){
-                        ApiUtil.oneYuanBuy(getApplication(), id, Constants.PHONENUM, number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+                        ApiUtil.oneYuanBuy(getApplication(), id,number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                 if(response.getFlag().equals("1")){
@@ -225,7 +225,7 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
                             }
                         });
                     }else if(buytype==1&&type==1){
-                        ApiUtil.oneyuanBuyAll(getApplication(), id, Constants.PHONENUM, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+                        ApiUtil.oneyuanBuyAll(getApplication(), id, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                 if(response.getFlag().equals("1")){

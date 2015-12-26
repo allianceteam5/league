@@ -1,16 +1,19 @@
 package com.league.activity.personactivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.league.activity.RuleActivity;
 import com.league.activity.personinfoactivity.InviteFriendActivity;
 import com.league.utils.ActivityUtils;
+import com.league.utils.IContants;
 import com.mine.league.R;
 
-public class AlianceReward extends Activity {
+public class AlianceReward extends Activity implements IContants {
 
     private ImageView back2, titleright, right1, right2;
     private TextView title,rules;
@@ -45,6 +48,14 @@ public class AlianceReward extends Activity {
         right2.setVisibility(View.GONE);
         rules= (TextView) findViewById(R.id.near_rule);
         rules.setVisibility(View.VISIBLE);
+        rules.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rule = new Intent(getApplication(), RuleActivity.class);
+                rule.putExtra(RuleType, 1);
+                startActivity(rule);
+            }
+        });
         tvInvite = (TextView) findViewById(R.id.tv_invite);
         tvInvite.setOnClickListener(new View.OnClickListener() {
             @Override

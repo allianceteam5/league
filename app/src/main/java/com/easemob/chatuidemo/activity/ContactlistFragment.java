@@ -302,7 +302,7 @@ public class ContactlistFragment extends Fragment {
 		super.onHiddenChanged(hidden);
 		this.hidden = hidden;
 		if (!hidden) {
-			refresh();
+//			refresh();
 		}
 	}
 
@@ -310,7 +310,7 @@ public class ContactlistFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		if (!hidden) {
-			refresh();
+//			refresh();
 		}
 	}
 

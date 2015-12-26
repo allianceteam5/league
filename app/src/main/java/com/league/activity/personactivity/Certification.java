@@ -84,7 +84,7 @@ public class Certification extends BaseActivity implements View.OnClickListener,
         switch (v.getId()){
             case R.id.bindid:
                 showProgressDialog();
-                ApiUtil.realAuth(Certification.this, Constants.PHONENUM, mInputName.getText().toString(),
+                ApiUtil.realAuth(Certification.this, mInputName.getText().toString(),
                         mInputID.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {

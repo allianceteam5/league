@@ -20,6 +20,7 @@ import android.support.multidex.MultiDex;
 import com.baidu.mapapi.SDKInitializer;
 import com.easemob.EMCallBack;
 import com.league.utils.StoreUtils;
+import com.league.utils.api.ApiUtil;
 
 public class DemoApplication extends Application {
 
@@ -61,6 +62,7 @@ public class DemoApplication extends Application {
         hxSDKHelper.onInit(applicationContext);
 		SDKInitializer.initialize(applicationContext);
 		StoreUtils.init(getApplicationContext());
+		ApiUtil.testPhone = StoreUtils.getPhone();
 	}
 
 	public static DemoApplication getInstance() {

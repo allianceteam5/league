@@ -66,7 +66,7 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener{
     }
     private void initData(){
         showProgressDialog();
-        ApiUtil.getUserAllmoney(this, Constants.PHONENUM, new BaseJsonHttpResponseHandler<MoneyBean>() {
+        ApiUtil.getUserAllmoney(this, new BaseJsonHttpResponseHandler<MoneyBean>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, MoneyBean response) {
                 moneyBean=response;

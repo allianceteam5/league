@@ -184,7 +184,7 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
     }
 
     public void initData(){
-        ApiUtil.grabcornsGetDetail(getApplication(), id, Constants.PHONENUM, new BaseJsonHttpResponseHandler<TenGrabDetailBean>() {
+        ApiUtil.grabcornsGetDetail(getApplication(), id, new BaseJsonHttpResponseHandler<TenGrabDetailBean>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, TenGrabDetailBean response) {
                 detail = response.getTenYuanGrabBean();
@@ -226,7 +226,7 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
             @Override
             public void run() {
                 while (true){
-                    SystemClock.sleep(2000);
+                    SystemClock.sleep(4000);
                     handler.sendEmptyMessage(0);
 
                 }

@@ -25,6 +25,7 @@ import com.easemob.chatuidemo.domain.User;
 import com.league.bean.UserInfoBean;
 import com.league.utils.Constants;
 import com.league.utils.PersonInfoBaseActivity;
+import com.league.utils.StoreUtils;
 import com.league.widget.CircleImageView;
 import com.mine.league.R;
 
@@ -105,7 +106,7 @@ public class CompletePersonInfo extends PersonInfoBaseActivity implements View.O
 
                 final long start = System.currentTimeMillis();
                 // 调用sdk登陆方法登陆聊天服务器
-                EMChatManager.getInstance().login(Constants.HuanXinID, Constants.HuanxinPwd, new EMCallBack() {
+                EMChatManager.getInstance().login(StoreUtils.getHuanXinId(), StoreUtils.getHuanXinPwd(), new EMCallBack() {
 
                     @Override
                     public void onSuccess() {
@@ -113,8 +114,8 @@ public class CompletePersonInfo extends PersonInfoBaseActivity implements View.O
                             return;
                         }
                         // 登陆成功，保存用户名密码
-                        DemoApplication.getInstance().setUserName(Constants.HuanXinID);
-                        DemoApplication.getInstance().setPassword(Constants.HuanxinPwd);
+                        DemoApplication.getInstance().setUserName(StoreUtils.getHuanXinId());
+                        DemoApplication.getInstance().setPassword(StoreUtils.getHuanXinPwd());
 
                         try {
                             // ** 第一次登录或者之前logout后再登录，加载所有本地群和回话

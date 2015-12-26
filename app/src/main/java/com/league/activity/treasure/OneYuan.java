@@ -13,12 +13,14 @@ import android.widget.Toast;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
+import com.league.activity.RuleActivity;
 import com.league.adapter.LatestAnnouncedAdapter;
 import com.league.adapter.OneyuanGrabAdapter;
 import com.league.bean.AnnouncedTheLatestBean;
 import com.league.bean.OneYuanBean;
 import com.league.bean.TenYuanGrabBean;
 import com.league.utils.Constants;
+import com.league.utils.IContants;
 import com.league.utils.api.ApiUtil;
 import com.league.view.MyGridView;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -33,7 +35,7 @@ import java.util.List;
 
 import io.paperdb.Paper;
 
-public class OneYuan extends BaseActivity implements View.OnClickListener {
+public class OneYuan extends BaseActivity implements View.OnClickListener,IContants {
 
     private ImageView back, titleright, right1, right2;
     private TextView title;
@@ -286,8 +288,9 @@ public class OneYuan extends BaseActivity implements View.OnClickListener {
                 startActivity(record);
                 break;
             case R.id.One_question:
-
-                Toast.makeText(this, "que", Toast.LENGTH_LONG).show();
+                Intent rule = new Intent(getApplication(), RuleActivity.class);
+                rule.putExtra(RuleType, 3);
+                startActivity(rule);
                 break;
             case R.id.ten1:
                 Intent intent = new Intent(getApplication(), TenYuanGrabItem.class);

@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
 import com.league.utils.Constants;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -80,7 +81,7 @@ public class AddBankCard extends BaseActivity implements View.OnClickListener{
                     ToastUtils.showShortToast(AddBankCard.this,"请输入完整信息");
                 }else{
                     showProgressDialog();
-                    ApiUtil.addBankCard(AddBankCard.this, Constants.PHONENUM,mInputBankID.getText().toString(),mInputName.getText().toString(),
+                    ApiUtil.addBankCard(AddBankCard.this,mInputBankID.getText().toString(),mInputName.getText().toString(),
                             mInputPersonID.getText().toString(),mInputPhone.getText().toString(),mInputArea.getText().toString(),
                             new BaseJsonHttpResponseHandler<SucessBean>(){
                                 @Override

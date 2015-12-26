@@ -74,7 +74,7 @@ public class ChangeCode extends BaseActivity implements View.OnClickListener{
                     ToastUtils.showShortToast(ChangeCode.this, "输入框不能为空");
                 }else{
                     showProgressDialog();
-                    ApiUtil.changePwd(ChangeCode.this, Constants.PHONENUM, mPwd.getText().toString(),
+                    ApiUtil.changePwd(ChangeCode.this, mPwd.getText().toString(),
                             mNewPwd.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
                                 @Override
                                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {

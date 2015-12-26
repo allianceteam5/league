@@ -92,7 +92,7 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
             case R.id.newadd:
                 showProgressDialog();
                 if(getIntent().getIntExtra("flag",0)==0){
-                    ApiUtil.addShipAddress(getApplicationContext(), Constants.PHONENUM, mPhoneNum.getText().toString(),
+                    ApiUtil.addShipAddress(getApplicationContext(), mPhoneNum.getText().toString(),
                             mConsignee.getText().toString(), mPostId.getText().toString(), withSpaceProvice+mDetail.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
                                 @Override
                                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
@@ -125,7 +125,7 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
                         }
                     }
                     index--;
-                    ApiUtil.modifyShipAddress(getApplicationContext(), Constants.PHONENUM, getIntent().getLongExtra("addressID",-1)+"",
+                    ApiUtil.modifyShipAddress(getApplicationContext(), getIntent().getLongExtra("addressID",-1)+"",
                             mPhoneNum.getText().toString(),
                             mConsignee.getText().toString(), mPostId.getText().toString(), withSpaceProvice.substring(0,index)+" "+mDetail.getText().toString(),
                             new BaseJsonHttpResponseHandler<SucessBean>() {
@@ -156,7 +156,7 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
 
                 break;
             case R.id.delete:
-                ApiUtil.deleteShipAddress(getApplicationContext(), Constants.PHONENUM, getIntent().getLongExtra("addressID", 0) + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+                ApiUtil.deleteShipAddress(getApplicationContext(), getIntent().getLongExtra("addressID", 0) + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                         if (response.getFlag().equals("1")) {
@@ -180,7 +180,7 @@ public class AddShippingAdr extends PersonInfoBaseActivity implements View.OnCli
                 });
                 break;
             case R.id.setdefault:
-                ApiUtil.setDefaultAddress(getApplicationContext(), Constants.PHONENUM, getIntent().getLongExtra("addressID", 0) + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+                ApiUtil.setDefaultAddress(getApplicationContext(), getIntent().getLongExtra("addressID", 0) + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                         if(response.getFlag().equals("1")){

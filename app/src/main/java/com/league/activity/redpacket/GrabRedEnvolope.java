@@ -14,14 +14,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.league.activity.RuleActivity;
 import com.league.dialog.GrabEnvolopeDialog;
+import com.league.utils.IContants;
 import com.mine.league.R;
 
-public class GrabRedEnvolope extends Activity implements OnClickListener {
+public class GrabRedEnvolope extends Activity implements OnClickListener,IContants {
 
 
     private ImageView back, titleright, right1, right2;
-    private TextView title;
+    private TextView title,rules;
     private ListView listview;
     private Button ivGrabMoney;
 
@@ -47,7 +49,16 @@ public class GrabRedEnvolope extends Activity implements OnClickListener {
         ivGrabMoney.setOnClickListener(this);
         listview = (ListView) findViewById(R.id.lv_winner);
         listview.setAdapter(new WinnerAdapter(getApplicationContext()));
-
+        rules= (TextView) findViewById(R.id.near_rule);
+        rules.setVisibility(View.VISIBLE);
+        rules.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rule = new Intent(getApplication(), RuleActivity.class);
+                rule.putExtra(RuleType, 2);
+                startActivity(rule);
+            }
+        });
     }
 
     @Override

@@ -186,7 +186,6 @@ public class LoginActivity extends BaseActivity {
 				// 登陆成功，保存用户名密码
 				DemoApplication.getInstance().setUserName(currentUsername);
 				DemoApplication.getInstance().setPassword(currentPassword);
-				Paper.book().write("userkey",currentUsername);
 				try {
 					// ** 第一次登录或者之前logout后再登录，加载所有本地群和回话
 					// ** manually load all local groups and
@@ -215,12 +214,14 @@ public class LoginActivity extends BaseActivity {
 				if (!LoginActivity.this.isFinishing() && pd.isShowing()) {
 					pd.dismiss();
 				}
+
+				StoreUtils.setUserInfo(userInfoBean);
+				StoreUtils.setLoginState(true);
+				ApiUtil.testPhone = StoreUtils.getPhone();
 				// 进入主页面
 				Intent intent = new Intent(LoginActivity.this,
 						com.league.activity.MainActivity.class);
 				startActivity(intent);
-				StoreUtils.setUserInfo(userInfoBean);
-				StoreUtils.setLoginState(true);
 				finish();
 			}
 

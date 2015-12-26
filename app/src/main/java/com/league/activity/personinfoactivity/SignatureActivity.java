@@ -54,7 +54,7 @@ public class SignatureActivity extends PersonInfoBaseActivity implements View.On
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.newadd:
-                ApiUtil.modifyUserDetailSignature(getApplicationContext(), Constants.PHONENUM, mInputSignature.getText().toString(),
+                ApiUtil.modifyUserDetailSignature(getApplicationContext(),mInputSignature.getText().toString(),
                         new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {

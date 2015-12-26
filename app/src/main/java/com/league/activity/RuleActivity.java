@@ -27,6 +27,7 @@ public class RuleActivity extends BaseActivity implements IContants{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rule);
         ButterKnife.bind(this);
+        ibBack.setVisibility(View.VISIBLE);
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
