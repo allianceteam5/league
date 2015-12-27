@@ -74,7 +74,7 @@
                     android:layout_below="@id/ib_yiyuan"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
-                    android:text="一元夺宝"
+                    android:text="夺金和夺宝"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
             </RelativeLayout>

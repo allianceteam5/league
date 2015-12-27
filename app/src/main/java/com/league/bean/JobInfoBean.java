@@ -25,6 +25,15 @@ public class JobInfoBean {
     private String status;
     @JsonProperty("content")
     private String intro;
+    private String herphone;
+
+    public String getHerphone() {
+        return herphone;
+    }
+
+    public void setHerphone(String herphone) {
+        this.herphone = herphone;
+    }
 
     public String getThumb() {
         return thumb;

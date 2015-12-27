@@ -86,7 +86,9 @@ public class TopicContent extends BaseActivity implements IContants, View.OnClic
     private String tbmessageid;
     private LiaoBaMessageBean liaoBaMessageBean;
     private int currentPage = 1;
-    private int sumPage;
+    private int sumPage = 3;
+    private List<ReplysEntity> replys;
+    LiaobaCommentAdapter liaobaCommentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +121,24 @@ public class TopicContent extends BaseActivity implements IContants, View.OnClic
                         R.color.blue, R.color.greenn,
                         R.color.red);
 
+//        // 设置下拉刷新监听器
+//        refreshLayout.setOnRefreshListener(new RefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                refreshLayout.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        currentPage = 1;
+//                        // 更新数据
+////                        initData();
+//                        // 更新完后调用该方法结束刷新
+//                        refreshLayout.setRefreshing(false);
+//                    }
+//                }, 1500);
+//            }
+//        });
+
+        refreshLayout.setEnabled(false);
         // 加载监听器
         refreshLayout.setOnLoadListener(new RefreshLayout.OnLoadListener() {
             @Override
@@ -126,6 +146,10 @@ public class TopicContent extends BaseActivity implements IContants, View.OnClic
                 refreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        if (liaoBaMessageBean.getReplys() == null || liaoBaMessageBean.getReplys().size() < 20){
+                            refreshLayout.setLoading(false);
+                            return;
+                        }
                         currentPage++;
                         if (currentPage < sumPage) {
                             loadData();
@@ -139,10 +163,31 @@ public class TopicContent extends BaseActivity implements IContants, View.OnClic
 
             }
         });
+
     }
 
     private void loadData() {
+        ApiUtil.liaobaTbmessagesMoreReply(getApplicationContext(), tbmessageid, currentPage, new BaseJsonHttpResponseHandler<ArrayList<ReplysEntity>>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<ReplysEntity> response) {
+                replys.addAll(response);
+                liaobaCommentAdapter.notifyDataSetChanged();
+            }
 
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<ReplysEntity> errorResponse) {
+                ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_internet));
+            }
+
+            @Override
+            protected ArrayList<ReplysEntity> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                Log.d("response", rawJsonData);
+                JSONObject jsonObject = new JSONObject(rawJsonData);
+                sumPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
+                return new ObjectMapper().readValue(jsonObject.optJSONArray("items").toString(), new TypeReference<ArrayList<ReplysEntity>>() {
+                });
+            }
+        });
     }
 
     private void getData() {
@@ -199,8 +244,9 @@ public class TopicContent extends BaseActivity implements IContants, View.OnClic
                 TopicContent.this.startActivity(intent);
             }
         });
-        List<ReplysEntity> replys = liaoBaMessageBean.getReplys();
-        listview.setAdapter(new LiaobaCommentAdapter(TopicContent.this, replys));
+        replys = liaoBaMessageBean.getReplys();
+        liaobaCommentAdapter = new LiaobaCommentAdapter(TopicContent.this, replys);
+        listview.setAdapter(liaobaCommentAdapter);
     }
 
     @Override

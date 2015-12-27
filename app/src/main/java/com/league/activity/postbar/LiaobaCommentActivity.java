@@ -55,6 +55,9 @@ public class LiaobaCommentActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.near_back:
+                finish();
+                break;
             case R.id.near_save:
                 content = etContent.getText().toString();
                 if(TextUtils.isEmpty(content)){

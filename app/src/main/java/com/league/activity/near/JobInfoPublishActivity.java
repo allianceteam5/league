@@ -180,7 +180,7 @@ public  class JobInfoPublishActivity extends BaseActivity implements View.OnClic
                     return;
                 }
 
-                ApiUtil.applyJobCreated(getApplicationContext(),selectedJobIndex, title, selectedDegreeIndex, DateFormatUtils.Date2TimeStamp(worktime), status, 0, content, selectedProfessionId, new JsonHttpResponseHandler() {
+                ApiUtil.applyJobCreated(getApplicationContext(),selectedJobIndex, title, selectedDegreeIndex, DateFormatUtils.Date2TimeStamp(worktime), status, 0, phone, content, selectedProfessionId, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         int flag = response.optInt("flag");

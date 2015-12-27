@@ -39,7 +39,7 @@ public class ApiUtil {
         client.post(context, IClientUrl.ProfessionList, new RequestParams(), responseHandler);
     }
 
-    public static void applyJobCreated(Context context,int jobproperty, String title, int degree, long workat, String status, int hidephone, String content, int professionid, TextHttpResponseHandler responseHandler) {
+    public static void applyJobCreated(Context context,int jobproperty, String title, int degree, long workat, String status, int hidephone,String herphone, String content, int professionid, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.add("phone", testPhone);
         params.add("jobproperty", String.valueOf(jobproperty));
@@ -48,6 +48,7 @@ public class ApiUtil {
         params.add("work_at", String.valueOf(workat));
         params.add("status", status);
         params.add("hidephone", String.valueOf(hidephone));
+        params.add("herphone",herphone);
         params.add("content", content);
         params.add("professionid", String.valueOf(professionid));
         printHttp(IClientUrl.ApplyJobCreated, params);
@@ -342,6 +343,13 @@ public class ApiUtil {
         params.put("phone", testPhone);
         params.put("tbmessageid", tbmessageid);
         client.post(context, IClientUrl.LiaoBaTbmessagesView, params, responseHandler);
+    }
+
+    //聊吧消息更多回复
+    public static void liaobaTbmessagesMoreReply(Context context, String tbmessageid, int currentPage, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("tbmessageid", tbmessageid);
+        client.post(context, IClientUrl.LiaoBaTbmessageMoreReply + currentPage, params, responseHandler);
     }
 
     //获取往期揭晓 一元夺宝的

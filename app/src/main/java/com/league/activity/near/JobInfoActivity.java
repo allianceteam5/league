@@ -91,7 +91,7 @@ public class JobInfoActivity extends Activity implements OnClickListener{
 		tvDegree.setText(Constants.DEGREEITEMS.get(jobinfo.getDegree()));
 		tvWorktime.setText(DateFormatUtils.TimeStamp2Date(jobinfo.getWorktime()));
 		tvStatus.setText(jobinfo.getStatus());
-		tvPhone.setText(jobinfo.getPhone());
+		tvPhone.setText(jobinfo.getHerphone());
 		tvIntro.setText(jobinfo.getIntro());
 	}
 
