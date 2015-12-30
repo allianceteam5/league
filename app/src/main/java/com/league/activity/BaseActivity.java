@@ -48,13 +48,6 @@ public class BaseActivity extends Activity {
         return loadingDialog;
 
     }
-
-    @Override
-    public void onBackPressed() {
-        closeProgressDialog();
-        super.onBackPressed();
-    }
-
     @Override protected void onDestroy() {
         super.onDestroy();
         // Always unregister when an object no longer should be on the bus.

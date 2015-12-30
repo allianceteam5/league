@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.easemob.chatuidemo.DemoHXSDKHelper;
 import com.easemob.chatuidemo.activity.LoginActivity;
-import com.easemob.chatuidemo.domain.User;
 import com.league.activity.BaseActivity;
 import com.league.activity.personinfoactivity.MyAreaActivity;
 import com.league.activity.personinfoactivity.MyGenderActivity;

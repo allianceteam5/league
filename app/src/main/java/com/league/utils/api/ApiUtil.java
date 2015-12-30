@@ -39,7 +39,7 @@ public class ApiUtil {
         client.post(context, IClientUrl.ProfessionList, new RequestParams(), responseHandler);
     }
 
-    public static void applyJobCreated(Context context,int jobproperty, String title, int degree, long workat, String status, int hidephone,String herphone, String content, int professionid, TextHttpResponseHandler responseHandler) {
+    public static void applyJobCreated(Context context, int jobproperty, String title, int degree, long workat, String status, int hidephone, String herphone, String content, int professionid, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.add("phone", testPhone);
         params.add("jobproperty", String.valueOf(jobproperty));
@@ -48,7 +48,7 @@ public class ApiUtil {
         params.add("work_at", String.valueOf(workat));
         params.add("status", status);
         params.add("hidephone", String.valueOf(hidephone));
-        params.add("herphone",herphone);
+        params.add("herphone", herphone);
         params.add("content", content);
         params.add("professionid", String.valueOf(professionid));
         printHttp(IClientUrl.ApplyJobCreated, params);
@@ -141,7 +141,7 @@ public class ApiUtil {
         client.post(context, IClientUrl.HobbySearch + currentPage, params, responseHandler);
     }
 
-    public static void othersList(Context context, boolean isMy, String search, int currentPage, TextHttpResponseHandler responseHandler){
+    public static void othersList(Context context, boolean isMy, String search, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         if (isMy)
             params.add("phone", testPhone);
@@ -306,14 +306,14 @@ public class ApiUtil {
     }
 
     //圈子状态评论
-    public static void liaobaTbmessageComment(Context context, String tbmessageid,String content,String tphone, TextHttpResponseHandler responseHandler){
+    public static void liaobaTbmessageComment(Context context, String tbmessageid, String content, String tphone, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.add("tbmessageid", tbmessageid);
         params.add("fphone", testPhone);
         params.add("content", content);
         params.add("tphone", tphone);
         printHttp(IClientUrl.LiaoBaTbmessagesReply, params);
-        client.post(context, IClientUrl.LiaoBaTbmessagesReply,params,responseHandler);
+        client.post(context, IClientUrl.LiaoBaTbmessagesReply, params, responseHandler);
     }
 
     //聊吧获取我的关注列表
@@ -346,7 +346,7 @@ public class ApiUtil {
     }
 
     //聊吧消息更多回复
-    public static void liaobaTbmessagesMoreReply(Context context, String tbmessageid, int currentPage, TextHttpResponseHandler responseHandler){
+    public static void liaobaTbmessagesMoreReply(Context context, String tbmessageid, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("tbmessageid", tbmessageid);
         client.post(context, IClientUrl.LiaoBaTbmessageMoreReply + currentPage, params, responseHandler);
@@ -461,13 +461,15 @@ public class ApiUtil {
         params.put("addressid", addressID);
         client.post(context, IClientUrl.deleteShipAddress, params, responseHandler);
     }
+
     //设置默认收货地址
-    public static void setDefaultAddress(Context context,String addressid,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",testPhone);
-        params.put("addressid",addressid);
-        client.post(context,IClientUrl.setdefaultaddress,params,responseHandler);
+    public static void setDefaultAddress(Context context, String addressid, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("addressid", addressid);
+        client.post(context, IClientUrl.setdefaultaddress, params, responseHandler);
     }
+
     //获取用户详情
     public static void getUserDetail(Context context, String phone, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
@@ -476,7 +478,7 @@ public class ApiUtil {
     }
 
     //修改用户个性签名
-    public static void modifyUserDetailSignature(Context context,  String sign, TextHttpResponseHandler responseHandler) {
+    public static void modifyUserDetailSignature(Context context, String sign, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("signature", sign);
@@ -484,7 +486,7 @@ public class ApiUtil {
     }
 
     //修改用户地区
-    public static void modifyUserDetailArea(Context context,  String area, TextHttpResponseHandler responseHandler) {
+    public static void modifyUserDetailArea(Context context, String area, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("area", area);
@@ -492,7 +494,7 @@ public class ApiUtil {
     }
 
     //修改用户性别
-    public static void modifyUserDetaiSex(Context context,  int gender, TextHttpResponseHandler responseHandler) {
+    public static void modifyUserDetaiSex(Context context, int gender, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("gender", gender);
@@ -500,7 +502,7 @@ public class ApiUtil {
     }
 
     //修改用户昵称
-    public static void modifyUserDetailNickname(Context context,  String nick, TextHttpResponseHandler responseHandler) {
+    public static void modifyUserDetailNickname(Context context, String nick, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("nickname", nick);
@@ -543,7 +545,7 @@ public class ApiUtil {
     }
 
     //圈子状态评论
-    public static void circleMessageComment(Context context, String messageid,String content,String tphone, TextHttpResponseHandler responseHandler){
+    public static void circleMessageComment(Context context, String messageid, String content, String tphone, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.add("messageid", messageid);
         params.add("fphone", testPhone);
@@ -551,7 +553,7 @@ public class ApiUtil {
         if (!TextUtils.isEmpty(tphone))
             params.add("tphone", tphone);
         printHttp(IClientUrl.CircleMessageReply, params);
-        client.post(context, IClientUrl.CircleMessageReply,params,responseHandler);
+        client.post(context, IClientUrl.CircleMessageReply, params, responseHandler);
     }
 
     //圈子消息点赞 type=0取消点赞 type=1 点赞
@@ -577,99 +579,134 @@ public class ApiUtil {
     }
 
     //圈子获取我的收藏
-    public static void circleMessageCollectList(Context context, int currentPage, TextHttpResponseHandler responseHandler){
+    public static void circleMessageCollectList(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.add("phone", testPhone);
         client.post(context, IClientUrl.CircleMessageCollectList + currentPage, params, responseHandler);
     }
+
     //获取邀请好友注册的url
-    public static void getSignupUrl(Context context,  TextHttpResponseHandler responseHandler) {
+    public static void getSignupUrl(Context context, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         client.post(context, IClientUrl.getSignUpUrl, params, responseHandler);
     }
+
     //获取用户各种钱
-    public static void getUserAllmoney(Context context,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
+    public static void getUserAllmoney(Context context, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
         params.put("phone", testPhone);
-        client.post(context,IClientUrl.getUserMoneyBag,params,responseHandler);
+        client.post(context, IClientUrl.getUserMoneyBag, params, responseHandler);
     }
+
     //发送验证码
-    public static void sendCpText(Context context,String phone,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
+    public static void sendCpText(Context context, String phone, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
         params.put("phone", phone);
         client.post(context, IClientUrl.sendCpText, params, responseHandler);
     }
+
     //发送注册验证码
-    public static void sendRGText(Context context,String phone,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
+    public static void sendRGText(Context context, String phone, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
         params.put("phone", phone);
         client.post(context, IClientUrl.sendrgtext, params, responseHandler);
     }
+
     //注册
-    public static void signup(Context context,String phone,String code,String pwd,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
+    public static void signup(Context context, String phone, String code, String pwd, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
         params.put("phone", phone);
-        params.put("pwd",pwd);
-        params.put("text",code);
+        params.put("pwd", pwd);
+        params.put("text", code);
         client.post(context, IClientUrl.signup, params, responseHandler);
     }
+
     //获取我的银行卡列表
-    public static void getUserBankcardList(Context context,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",testPhone);
-        client.post(context,IClientUrl.usertocardslist,params,responseHandler);
+    public static void getUserBankcardList(Context context, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        client.post(context, IClientUrl.usertocardslist, params, responseHandler);
     }
+
     //添加银行卡
-    public static void addBankCard(Context context,String bankid,String name,String id,String userphone,String area,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",testPhone);
-        params.put("name",name);
-        params.put("cardnumber",bankid);
-        params.put("idcard",id);
-        params.put("lphone",userphone);
-        params.put("location",area);
-        client.post(context,IClientUrl.createBankcard,params,responseHandler);
+    public static void addBankCard(Context context, String bankid, String name, String id, String userphone, String area, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("name", name);
+        params.put("cardnumber", bankid);
+        params.put("idcard", id);
+        params.put("lphone", userphone);
+        params.put("location", area);
+        client.post(context, IClientUrl.createBankcard, params, responseHandler);
     }
+
     //修改用户名密码
-    public static void changePwd(Context context,String pwd,String newpwd,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",testPhone);
-        params.put("pwd",pwd);
-        params.put("newpwd",newpwd);
-        client.post(context,IClientUrl.changepwdbypwd,params,responseHandler);
+    public static void changePwd(Context context, String pwd, String newpwd, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("pwd", pwd);
+        params.put("newpwd", newpwd);
+        client.post(context, IClientUrl.changepwdbypwd, params, responseHandler);
     }
-    public static void checkPXText(Context context,String phone,String text,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",phone);
-        params.put("text",text);
-        client.post(context,IClientUrl.checkpstext,params,responseHandler);
+
+    public static void checkPXText(Context context, String phone, String text, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", phone);
+        params.put("text", text);
+        client.post(context, IClientUrl.checkpstext, params, responseHandler);
     }
+
     //修改密码
-    public static void changepwd(Context context,String pwd,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("phone",testPhone);
-        params.put("pwd",pwd);
-        client.post(context,IClientUrl.changepwd,params,responseHandler);
+    public static void changepwd(Context context, String pwd, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("pwd", pwd);
+        client.post(context, IClientUrl.changepwd, params, responseHandler);
     }
+
     //一元夺宝 自己的购买记录获取更多号码
-    public static void getMoreNumCommodity(Context context,String id,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("grabcommodityrecordid",id);
-        client.post(context,IClientUrl.getmorenumberCommodity,params,responseHandler);
+    public static void getMoreNumCommodity(Context context, String id, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("grabcommodityrecordid", id);
+        client.post(context, IClientUrl.getmorenumberCommodity, params, responseHandler);
     }
+
     //夺金购买 自己的购买号码获取更多
-    public static void getMoreNumCorn(Context context,String id,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
-        params.put("grabcornrecordid",id);
-        client.post(context,IClientUrl.getmorenumberCorn,params,responseHandler);
+    public static void getMoreNumCorn(Context context, String id, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("grabcornrecordid", id);
+        client.post(context, IClientUrl.getmorenumberCorn, params, responseHandler);
     }
+
     //实名认证
-    public static void realAuth(Context context,String realname,String idcard,TextHttpResponseHandler responseHandler){
-        RequestParams params=new RequestParams();
+    public static void realAuth(Context context, String realname, String idcard, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("realname", realname);
+        params.put("idcard", idcard);
+        client.post(context, IClientUrl.realauth, params, responseHandler);
+    }
+
+    //获取红包中奖列表
+    public static void getEnvelopeWinnerList(Context context, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        client.post(context,IClientUrl.envelopesList,params,responseHandler);
+    }
+    //修改 支付密码
+    public static void changePayPwd(Context context,String oldpaypwd,String newpaypwd,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
         params.put("phone",testPhone);
-        params.put("realname",realname);
-        params.put("idcard",idcard);
-        client.post(context,IClientUrl.realauth,params,responseHandler);
+        params.put("oldpaypwd",oldpaypwd);
+        params.put("newpaypwd",newpaypwd);
+        client.post(context,IClientUrl.setpaypwd,params,responseHandler);
+    }
+    //设置 支付密码
+    public static void setPayPwd(Context context,String newpaypwd,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone",testPhone);
+        params.put("newpaypwd",newpaypwd);
+        printHttp(IClientUrl.setpaypwd,params);
+        client.post(context,IClientUrl.setpaypwd,params,responseHandler);
     }
 }

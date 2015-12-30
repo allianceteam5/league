@@ -1,23 +1,35 @@
 package com.league.activity.redpacket;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.RuleActivity;
+import com.league.adapter.EnvelopeWinnerAdapter;
+import com.league.bean.EnvelopWinBean;
 import com.league.dialog.GrabEnvolopeDialog;
 import com.league.utils.IContants;
+import com.league.utils.api.ApiUtil;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+
+import org.apache.http.Header;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GrabRedEnvolope extends Activity implements OnClickListener,IContants {
 
@@ -26,12 +38,53 @@ public class GrabRedEnvolope extends Activity implements OnClickListener,IContan
     private TextView title,rules;
     private ListView listview;
     private Button ivGrabMoney;
-
+    private EnvelopeWinnerAdapter adapter;
+    private List<EnvelopWinBean> data = new ArrayList<>();
+    private Timer autoScroll = new Timer();
+    private int index=0;
+    private final Timer timer = new Timer();
+    private TimerTask autoUpdateTask;
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            // 要做的事情
+            switch (msg.what){
+                case 1:
+                    initData();
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grabredenvolope);
         initView();
+        autoUpdateTask = new TimerTask() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                Message message = new Message();
+                message.what = 1;
+                handler.sendMessage(message);
+            }
+        };
+        timer.schedule(autoUpdateTask, 500, 15000);
+        autoScroll.schedule(new TimerTask(){
+            @Override
+            public void run(){
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        index += 1;
+                        if (index >= listview.getCount()) {
+                            index=listview.getCount();
+                        }
+                        listview.smoothScrollToPosition(index);
+                    }
+                });
+            }
+        }, 0,1000);
     }
 
     private void initView() {
@@ -48,7 +101,8 @@ public class GrabRedEnvolope extends Activity implements OnClickListener,IContan
         ivGrabMoney = (Button) findViewById(R.id.grab);
         ivGrabMoney.setOnClickListener(this);
         listview = (ListView) findViewById(R.id.lv_winner);
-        listview.setAdapter(new WinnerAdapter(getApplicationContext()));
+        adapter=new EnvelopeWinnerAdapter(this,data);
+        listview.setAdapter(adapter);
         rules= (TextView) findViewById(R.id.near_rule);
         rules.setVisibility(View.VISIBLE);
         rules.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +114,27 @@ public class GrabRedEnvolope extends Activity implements OnClickListener,IContan
             }
         });
     }
+    private void initData(){
+        Log.i("我测试一下","我测试一下");
+        ApiUtil.getEnvelopeWinnerList(this, new BaseJsonHttpResponseHandler<List<EnvelopWinBean>>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, List<EnvelopWinBean> response) {
+                data.addAll(response);
+                adapter.notifyDataSetChanged();
+            }
 
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, List<EnvelopWinBean> errorResponse) {
+
+            }
+
+            @Override
+            protected List<EnvelopWinBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<List<EnvelopWinBean>>() {
+                });
+            }
+        });
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -75,39 +149,9 @@ public class GrabRedEnvolope extends Activity implements OnClickListener,IContan
         }
     }
 
-    class WinnerAdapter extends BaseAdapter {
-        private Context context;
-
-        public WinnerAdapter(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public int getCount() {
-            return 5;
-        }
-
-        @Override
-        public Object getItem(int arg0) {
-            return arg0;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-            convertView = LayoutInflater.from(context).inflate(
-                    R.layout.layout_item_redwinner, null);
-            TextView tvWinnername = (TextView) convertView.findViewById(R.id.tv_winnername);
-            TextView tvMoney = (TextView) convertView.findViewById(R.id.tv_money);
-            return convertView;
-        }
-    }
-
-    public String getMoneyString(int money) {
-        return "抢到" + money + "元红包";
+    @Override
+    protected void onStop() {
+        super.onStop();
+        timer.cancel();
     }
 }

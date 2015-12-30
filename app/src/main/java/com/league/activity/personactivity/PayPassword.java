@@ -48,11 +48,12 @@ public class PayPassword extends Activity implements OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.changecode:
-                Intent intent=new Intent(getApplication(),ChangeCode.class);
+                Intent intent=new Intent(getApplication(),ChangePayCodeActivity.class);
                 startActivity(intent);
                 break;
             case R.id.findcode:
                 Intent intent1=new Intent(getApplication(),FindCode.class);
+                intent1.putExtra("type","支付密码");
                 startActivity(intent1);
                 break;
 

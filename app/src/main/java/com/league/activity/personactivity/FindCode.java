@@ -14,7 +14,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
-import com.league.utils.Constants;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -34,14 +34,16 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
     private Button getCode,yanzheng;
     private TimeCount timeCount;
     @Bind(R.id.inputphone)
-    EditText mInputPhone;
+    TextView mInputPhone;
     @Bind(R.id.code)
     EditText mInputCode;
+    private String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_code);
         ButterKnife.bind(this);
+        type=getIntent().getStringExtra("type");
         initView();
 
     }
@@ -70,6 +72,7 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
         timeCount=new TimeCount(60000,1000);
         yanzheng= (Button) findViewById(R.id.yanzheng);
         yanzheng.setOnClickListener(this);
+        mInputPhone.setText(StoreUtils.getPhone());
     }
 
     @Override
@@ -115,8 +118,12 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
                                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                     closeProgressDialog();
                                     if (response.getFlag().equals("1")) {
-                                        Intent intent = new Intent(getApplication(), SetCode.class);
-                                        startActivity(intent);
+
+                                        if(type.equals("账号相关")){
+                                            startActivity(new Intent(getApplication(), SetIDCodeActivity.class));
+                                        }else if(type.equals("支付密码")){
+                                            startActivity(new Intent(getApplication(), SetPayCode.class));
+                                        }
                                         finish();
                                     } else {
                                         ToastUtils.showShortToast(FindCode.this, "验证失败");

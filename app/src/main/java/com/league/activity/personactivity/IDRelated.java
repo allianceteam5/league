@@ -54,6 +54,7 @@ public class IDRelated extends Activity implements View.OnClickListener{
                 break;
             case R.id.findcode:
                 Intent intent1=new Intent(getApplication(),FindCode.class);
+                intent1.putExtra("type","账号相关");
                 startActivity(intent1);
                 break;
 

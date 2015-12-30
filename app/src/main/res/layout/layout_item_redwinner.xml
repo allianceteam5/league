@@ -30,12 +30,22 @@
             android:textColor="@color/red"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
-            android:text="张总" />
+            android:text="" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="抢到" />
         <TextView
             android:id="@+id/tv_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:text="" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="抢到5元红包" />
+            android:text="红包" />
     </LinearLayout>
 </RelativeLayout>

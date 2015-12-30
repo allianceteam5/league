@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jungly.gridpasswordview.GridPasswordView;
 import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
-import com.league.utils.Constants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -22,17 +21,17 @@ import org.apache.http.Header;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SetCode extends BaseActivity implements View.OnClickListener{
+public class ChangePayCodeActivity extends BaseActivity implements View.OnClickListener{
 
     private ImageView back2, titleright, right1, right2;
     private TextView title;
-    private GridPasswordView gridPasswordView;
+    private GridPasswordView gridPasswordView,newGridPasswordView;
     @Bind(R.id.next)
     Button mNext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_code);
+        setContentView(R.layout.activity_change_pay_code);
         ButterKnife.bind(this);
         initView();
     }
@@ -56,6 +55,7 @@ public class SetCode extends BaseActivity implements View.OnClickListener{
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
         gridPasswordView= (GridPasswordView) findViewById(R.id.gpv_passwd);
+        newGridPasswordView = (GridPasswordView) findViewById(R.id.gpv_newpasswd);
         mNext.setOnClickListener(this);
     }
 
@@ -63,27 +63,28 @@ public class SetCode extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.next:
-                if(gridPasswordView.getPassWord().length()<6){
-                    ToastUtils.showShortToast(SetCode.this,"请输入完整");
+                if(gridPasswordView.getPassWord().length()<6||newGridPasswordView.getPassWord().length()<6){
+                    ToastUtils.showShortToast(this, "请输入完整数据");
                 }else{
                     showProgressDialog();
-                    ApiUtil.changepwd(SetCode.this, gridPasswordView.getPassWord().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
+                    ApiUtil.changePayPwd(ChangePayCodeActivity.this,gridPasswordView.getPassWord().toString(),newGridPasswordView.getPassWord().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
 
                             closeProgressDialog();
-                            if(response.getFlag().equals("1")){
+                            if (response.getFlag().equals("1")) {
+                                ToastUtils.showShortToast(ChangePayCodeActivity.this, "更改支付密码成功");
                                 onBackPressed();
                                 finish();
-                            }else {
-                                ToastUtils.showShortToast(SetCode.this,"更改失败");
+                            } else {
+                                ToastUtils.showShortToast(ChangePayCodeActivity.this, "更改支付密码失败");
                             }
                         }
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
                             closeProgressDialog();
-                            ToastUtils.showShortToast(SetCode.this, "更改失败");
+                            ToastUtils.showShortToast(ChangePayCodeActivity.this, "更改支付密码失败");
                         }
 
                         @Override
@@ -93,7 +94,6 @@ public class SetCode extends BaseActivity implements View.OnClickListener{
                         }
                     });
                 }
-
                 break;
         }
     }

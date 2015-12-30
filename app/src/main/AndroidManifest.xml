@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mine.league"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -48,7 +48,7 @@
         android:icon="@drawable/launch"
         android:label="@string/app_name"
         android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.NoTitleBar" >
+        android:theme="@android:style/Theme.NoTitleBar">
 
         <!-- 百度地图所需的service -->
         <service
@@ -106,12 +106,11 @@
         <activity
             android:name="com.easemob.chatuidemo.activity.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide" >
-        </activity>
+            android:theme="@style/horizontal_slide" />
         <activity android:name="com.league.activity.ShowBigImgActivity" />
         <activity
             android:name="com.league.guide.GuideActivity"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -312,8 +311,8 @@
             android:theme="@style/horizontal_slide" />
 
         <!-- 开机自启动服务 -->
-        <receiver android:name="com.easemob.chat.StartServiceReceiver" >
-            <intent-filter android:priority="1000" >
+        <receiver android:name="com.easemob.chat.StartServiceReceiver">
+            <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
 
@@ -325,7 +324,7 @@
         <receiver
             android:name="com.easemob.chat.EMGCMBroadcastReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
@@ -339,7 +338,7 @@
 
         <receiver
             android:name="com.easemob.chatuidemo.receiver.GCMPushBroadCast"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.easemob.sdk.push" />
 
@@ -356,7 +355,7 @@
         <!-- 声明sdk所需的service -->
         <service android:name="com.easemob.chat.EMChatService" />
         <!-- 声明sdk所需的receiver -->
-        <receiver android:name="com.easemob.chat.EMMonitorReceiver" >
+        <receiver android:name="com.easemob.chat.EMMonitorReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
@@ -382,7 +381,7 @@
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -395,8 +394,7 @@
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.league.activity.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -430,7 +428,7 @@
         <activity android:name="com.league.activity.personactivity.SelectBankcard" />
         <activity android:name="com.league.activity.personactivity.MyGoldCoin" />
         <activity android:name="com.league.activity.personactivity.PayPassword" />
-        <activity android:name="com.league.activity.personactivity.SetCode" />
+        <activity android:name="com.league.activity.personactivity.SetPayCode" />
         <activity android:name="com.league.activity.personactivity.PaymentOrder" />
         <activity android:name="com.league.activity.personactivity.MyPersonHomepage" />
         <activity android:name="com.league.activity.postbar.TopicContent" />
@@ -467,17 +465,16 @@
         <activity android:name="com.league.activity.personinfoactivity.InviteFriendActivity" />
         <activity
             android:name="com.league.activity.circle.CirclePublishActivity"
-            android:label="@string/title_activity_circle_publish" >
-        </activity>
+            android:label="@string/title_activity_circle_publish" />
         <activity
             android:name="com.league.activity.postbar.LiaobaCommentActivity"
-            android:label="@string/title_activity_circle_comment" >
-        </activity>
+            android:label="@string/title_activity_circle_comment" />
         <activity android:name="com.league.activity.personinfoactivity.CompletePersonInfo" />
         <activity
             android:name="com.league.activity.RuleActivity"
-            android:label="@string/title_activity_rule" >
-        </activity>
+            android:label="@string/title_activity_rule" />
+        <activity android:name="com.league.activity.personactivity.SetIDCodeActivity" />
+        <activity android:name="com.league.activity.personactivity.ChangePayCodeActivity"></activity>
     </application>
 
 </manifest>

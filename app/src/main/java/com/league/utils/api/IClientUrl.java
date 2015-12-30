@@ -98,4 +98,6 @@ public class IClientUrl {
     public static final String realauth = testServerUrl + "users/realauth";
     public static final String createBankcard = testServerUrl + "usertocards/create";
     public static final String setdefaultaddress = testServerUrl + "users/setdefaultaddress";
+    public static final String envelopesList = testServerUrl +"envelopes/list";
+    public static final String setpaypwd = testServerUrl + "users/setpaypwd";
 }
