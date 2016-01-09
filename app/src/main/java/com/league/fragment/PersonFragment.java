@@ -26,7 +26,6 @@ import com.league.activity.personactivity.PersonSetup;
 import com.league.activity.personinfoactivity.InviteFriendActivity;
 import com.league.bean.UserInfoBean;
 import com.league.utils.ActivityUtils;
-import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.StoreUtils;
 import com.league.utils.api.ApiUtil;

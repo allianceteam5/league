@@ -21,16 +21,17 @@ import com.umeng.socialize.weixin.controller.UMWXHandler;
 
 import io.paperdb.Paper;
 
-public class InviteFriendActivity extends PersonInfoBaseActivity implements View.OnClickListener{
+public class InviteFriendActivity extends PersonInfoBaseActivity implements View.OnClickListener {
     private ImageView mQRCode;
     // 首先在您的Activity中添加如下成员变量
     final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("邀请好友");
-        CreateQRImage mCreateQR=new CreateQRImage(mQRCode);
-        String url=Paper.book().read("signupurl").toString();
+        CreateQRImage mCreateQR = new CreateQRImage(mQRCode);
+        String url = Paper.book().read("signupurl").toString();
         mCreateQR.createQRImage(url);
         com.umeng.socialize.utils.Log.LOG = true;
 
@@ -39,7 +40,7 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                 "c7394704798a158208a74ab60104f0ba");
         qqSsoHandler.addToSocialSDK();
         //添加微博
-        SinaSsoHandler sinaSsoHandler=new SinaSsoHandler();
+        SinaSsoHandler sinaSsoHandler = new SinaSsoHandler();
         sinaSsoHandler.addToSocialSDK();
         // 添加短信
         SmsHandler smsHandler = new SmsHandler();
@@ -48,12 +49,15 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
         String appID = "wx98e6c27800ad7a60";
         String appSecret = "a7d7ab547a7f2b333f243bf68ac96728";
         // 添加微信平台
-        UMWXHandler wxHandler = new UMWXHandler(this,appID,appSecret);
+        UMWXHandler wxHandler = new UMWXHandler(this, appID, appSecret);
         wxHandler.addToSocialSDK();
+        // 支持微信朋友圈
+        UMWXHandler wxCircleHandler = new UMWXHandler(this,appID,appSecret);
+        wxCircleHandler.setToCircle(true);
+        wxCircleHandler.addToSocialSDK();
         mController.getConfig().setSsoHandler(new SinaSsoHandler());
         // 设置分享内容
-        mController.setShareContent("欢迎下载自己人联盟APP "+url);
-
+        mController.setShareContent("欢迎下载自己人联盟APP " + url);
     }
 
     @Override
@@ -63,7 +67,7 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
 
     @Override
     protected void initView() {
-        mQRCode= (ImageView) findViewById(R.id.qrcode);
+        mQRCode = (ImageView) findViewById(R.id.qrcode);
         setOnclickListener();
     }
 
@@ -74,9 +78,27 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.qqshare:
-                mController.postShare(InviteFriendActivity.this,SHARE_MEDIA.QQ,
+        switch (v.getId()) {
+            case R.id.qqzoneshare:
+                mController.postShare(InviteFriendActivity.this,SHARE_MEDIA.QZONE,
+                        new SocializeListeners.SnsPostListener() {
+                            @Override
+                            public void onStart() {
+                            }
+                            @Override
+                            public void onComplete(SHARE_MEDIA platform, int eCode,SocializeEntity entity) {
+                                if (eCode == 200) {
+                                } else {
+                                    String eMsg = "";
+                                    if (eCode == -101){
+                                        eMsg = "没有授权";
+                                    }
+                                }
+                            }
+                        });
+                break;
+            case R.id.wxcircleshare:
+                mController.postShare(InviteFriendActivity.this,SHARE_MEDIA.WEIXIN_CIRCLE,
                         new SocializeListeners.SnsPostListener() {
                             @Override
                             public void onStart() {
@@ -97,20 +119,44 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                             }
                         });
                 break;
-            case R.id.wxshare:
-                mController.postShare(InviteFriendActivity.this,SHARE_MEDIA.WEIXIN,
+            case R.id.qqshare:
+                mController.postShare(InviteFriendActivity.this, SHARE_MEDIA.QQ,
                         new SocializeListeners.SnsPostListener() {
                             @Override
                             public void onStart() {
 //                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
                             }
+
                             @Override
-                            public void onComplete(SHARE_MEDIA platform, int eCode,SocializeEntity entity) {
+                            public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
-                                    if (eCode == -101){
+                                    if (eCode == -101) {
+                                        eMsg = "没有授权";
+                                    }
+//                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
+//                                            eMsg,Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                break;
+            case R.id.wxshare:
+                mController.postShare(InviteFriendActivity.this, SHARE_MEDIA.WEIXIN,
+                        new SocializeListeners.SnsPostListener() {
+                            @Override
+                            public void onStart() {
+//                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
+                                if (eCode == 200) {
+//                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    String eMsg = "";
+                                    if (eCode == -101) {
                                         eMsg = "没有授权";
                                     }
 //                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
@@ -145,19 +191,20 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
 
                 break;
             case R.id.dxshare:
-                mController.postShare(InviteFriendActivity.this,SHARE_MEDIA.SMS,
+                mController.postShare(InviteFriendActivity.this, SHARE_MEDIA.SMS,
                         new SocializeListeners.SnsPostListener() {
                             @Override
                             public void onStart() {
 //                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
                             }
+
                             @Override
-                            public void onComplete(SHARE_MEDIA platform, int eCode,SocializeEntity entity) {
+                            public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
-                                    if (eCode == -101){
+                                    if (eCode == -101) {
                                         eMsg = "没有授权";
                                     }
 //                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +
@@ -168,18 +215,22 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                 break;
         }
     }
-    private void setOnclickListener(){
+
+    private void setOnclickListener() {
+        findViewById(R.id.wxcircleshare).setOnClickListener(this);
         findViewById(R.id.qqshare).setOnClickListener(this);
         findViewById(R.id.wxshare).setOnClickListener(this);
         findViewById(R.id.wbshare).setOnClickListener(this);
         findViewById(R.id.dxshare).setOnClickListener(this);
+        findViewById(R.id.qqzoneshare).setOnClickListener(this);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         /**使用SSO授权必须添加如下代码 */
-        UMSsoHandler ssoHandler = mController.getConfig().getSsoHandler(requestCode) ;
-        if(ssoHandler != null){
+        UMSsoHandler ssoHandler = mController.getConfig().getSsoHandler(requestCode);
+        if (ssoHandler != null) {
             ssoHandler.authorizeCallBack(requestCode, resultCode, data);
         }
     }
