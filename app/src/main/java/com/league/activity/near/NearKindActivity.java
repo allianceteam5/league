@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,7 +31,6 @@ import com.league.adapter.RecommendationInfoAdapter;
 import com.league.bean.HobbyInfoBean;
 import com.league.bean.JobInfoBean;
 import com.league.bean.KindBean;
-import com.league.bean.LiaoBaMessageBean;
 import com.league.bean.OtherMessageBean;
 import com.league.bean.RecommendationInfoBean;
 import com.league.dialog.NearRightDialog;
@@ -41,7 +38,6 @@ import com.league.otto.RefreshEvent;
 import com.league.utils.Constants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
-import com.league.widget.RefreshLayout;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
@@ -154,6 +150,10 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 ApiUtil.professionList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<KindBean>>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<KindBean> response) {
+                        if (response != null && response.size() > 0){
+                            response.add(0,new KindBean(-1,"兼职"));
+                            response.add(0,new KindBean(-2,"全职"));
+                        }
                         kinds = response;
                         Paper.book().write(Constants.ProfessinListName, kinds);
                     }
@@ -246,7 +246,12 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
         }
         switch (Flag) {
             case 1:
-                ApiUtil.applyjobSearch(getApplicationContext(), false, kindid, searchString, currentPage, new BaseJsonHttpResponseHandler<ArrayList<JobInfoBean>>() {
+                int jobproperty = -1;
+                if (kindid == -1)
+                    jobproperty = 1;
+                if (kindid == -2)
+                    jobproperty = 0;
+                ApiUtil.applyjobSearch(getApplicationContext(), false, kindid, searchString, jobproperty, currentPage, new BaseJsonHttpResponseHandler<ArrayList<JobInfoBean>>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<JobInfoBean> response) {
                         jobInfoList.addAll(response);

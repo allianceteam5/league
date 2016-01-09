@@ -63,14 +63,14 @@ public class GrabEnvolopeDialog extends BaseActivity implements View.OnClickList
                             viewLoss.setVisibility(View.GONE);
                             viewGet.setVisibility(View.VISIBLE);
                             num.setText("" + response.getCount());
-                            numbite.setText("元");
+                            numbite.setText("元现金");
                         }
                         if (response.getType() == 2) {
                             result.setText("恭喜您！");
                             viewLoss.setVisibility(View.GONE);
                             viewGet.setVisibility(View.VISIBLE);
                             num.setText("" + response.getCount());
-                            numbite.setText("夺宝币");
+                            numbite.setText("个夺宝币");
                         }
                     }
                 } else if (response.getFlag() == 2) {

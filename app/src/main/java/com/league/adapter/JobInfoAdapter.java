@@ -76,7 +76,10 @@ public class JobInfoAdapter extends BaseAdapter {
         }
         JobInfoBean jobinfo = list.get(position);
         if (!TextUtils.isEmpty(jobinfo.getThumb()))
-            Picasso.with(ctx).load(jobinfo.getThumb()).into(holder.thumb);
+            Picasso.with(ctx).load(jobinfo.getThumb()).resize(120,120).centerCrop().into(holder.thumb);
+        else
+            Picasso.with(ctx).load(R.drawable.example).into(holder.thumb);
+
         holder.fullorpart_timejob.setText(jobinfo.getJobPropertyName());
         holder.userNickname.setText(jobinfo.getNickname());
         holder.current_status.setText(jobinfo.getStatus());

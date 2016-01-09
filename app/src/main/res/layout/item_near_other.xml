@@ -82,8 +82,8 @@
                 android:layout_marginLeft="10dip"
                 android:gravity="center_vertical"
                 android:text="一想到明天就要上班就不开心了"
-                android:textColor="@color/black1"
-                android:textSize="15sp" />
+                android:textColor="@color/text_title"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 

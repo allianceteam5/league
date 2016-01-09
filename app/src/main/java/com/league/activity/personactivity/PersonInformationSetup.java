@@ -168,13 +168,13 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
             case R.id.mynickname:
                 startActivity(new Intent(PersonInformationSetup.this, NickNameActivity.class));
                 break;
-            case R.id.btn_logout:
-                DemoHXSDKHelper.getInstance().logout(true, null);
-                StoreUtils.destory();
-                ActivityUtils.start_Activity(this, LoginActivity.class);
-                Constants.finishAllActivities();
-                finish();
-                break;
+//            case R.id.btn_logout:
+//                DemoHXSDKHelper.getInstance().logout(true, null);
+//                StoreUtils.destory();
+//                ActivityUtils.start_Activity(this, LoginActivity.class);
+//                Constants.finishAllActivities();
+//                finish();
+//                break;
         }
     }
 

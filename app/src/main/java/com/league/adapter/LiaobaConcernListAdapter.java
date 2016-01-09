@@ -70,6 +70,8 @@ public class LiaobaConcernListAdapter extends BaseAdapter {
 
         if (!TextUtils.isEmpty(list.get(position).getThumb()))
             Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.headPortrait);
+        else
+            Picasso.with(ctx).load(R.drawable.example).into(holder.headPortrait);
         holder.usrName.setText(list.get(position).getNickname());
         holder.funNum.setText(list.get(position).getConcerncount() + "");
         if (0 == list.get(position).getIsconcerned()) {

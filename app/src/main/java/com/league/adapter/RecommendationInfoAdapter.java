@@ -73,6 +73,8 @@ public class RecommendationInfoAdapter extends BaseAdapter{
 		holder.userNickname.setText(list.get(position).getNickname());
 		if (!TextUtils.isEmpty(list.get(position).getThumb()))
 			Picasso.with(ctx).load(list.get(position).getThumb()).resize(60,60).centerCrop().into(holder.thumb);
+		else
+			Picasso.with(ctx).load(R.drawable.example).into(holder.thumb);
 		holder.fea_location.setText(list.get(position).getLocation());
 		holder.type.setText(list.get(position).getKind());
 		holder.lasttime.setText(Utils.generateStringByTime(list.get(position).getCreated_at()));

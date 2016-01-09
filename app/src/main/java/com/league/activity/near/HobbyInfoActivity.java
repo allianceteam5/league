@@ -57,6 +57,8 @@ public class HobbyInfoActivity extends Activity implements View.OnClickListener 
     void initView() {
         if (!TextUtils.isEmpty(hobbyInfo.getThumb()))
             Picasso.with(getApplicationContext()).load(hobbyInfo.getPicture()).resize(140, 140).centerCrop().into(img);
+        else
+            Picasso.with(getApplicationContext()).load(R.drawable.example).into(img);
         sex.setText(Constants.SEXITEMS.get(hobbyInfo.getSex()));
         if (hobbyInfo.getAge() > 6)
             age.setText(Constants.AGEITEMS.get(3));

@@ -55,7 +55,7 @@ public class ApiUtil {
         client.post(context, IClientUrl.ApplyJobCreated, params, responseHandler);
     }
 
-    public static void applyjobSearch(Context context, boolean isMy, int professionid, String searchString, int currentPage, TextHttpResponseHandler responseHandler) {
+    public static void applyjobSearch(Context context, boolean isMy, int professionid, String searchString,int jobproperty, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         if (isMy)
             params.add("phone", testPhone);
@@ -65,6 +65,8 @@ public class ApiUtil {
         }
         if (professionid > 0)
             params.add("professionid", String.valueOf(professionid));
+        if (jobproperty >= 0)
+            params.add("jobproperty",String.valueOf(jobproperty));
         printHttp(IClientUrl.ApplyJobSearch, params);
         client.post(context, IClientUrl.ApplyJobSearch + currentPage, params, responseHandler);
     }

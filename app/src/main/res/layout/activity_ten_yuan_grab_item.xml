@@ -109,9 +109,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:text="日期"
+                        android:text="本金退还日期"
                         android:textColor="@color/red"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/date"
@@ -121,9 +121,29 @@
                         android:gravity="center_vertical"
                         android:text="2015-9-1"
                         android:textColor="@color/red"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red"
+                        android:textSize="12sp"
+                        android:text="注："/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dip"
+                        android:gravity="center_vertical"
+                        android:text="也可以在我的记录里提前赎回"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
                 <ProgressBar
                     android:id="@+id/progressbar"
                     style="@android:style/Widget.ProgressBar.Horizontal"
@@ -148,7 +168,7 @@
                         android:gravity="center_vertical"
                         android:text="总需"
                         android:textColor="@color/black1"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/totalpeo"
@@ -159,7 +179,7 @@
                         android:gravity="center_vertical"
                         android:text="60人次"
                         android:textColor="@color/black1"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/leavepeo"
@@ -169,7 +189,7 @@
                         android:gravity="center_vertical"
                         android:text="剩余40"
                         android:textColor="@color/red"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -444,7 +464,7 @@
                     android:padding="4dp"
                     android:text="您没有参与本次夺宝哦~"
                     android:textColor="@color/black1"
-                    android:textSize="14sp" />
+                    android:textSize="13sp" />
 
                 <com.league.widget.ListViewForScrollView
                     android:id="@+id/myrecordlist"
@@ -469,9 +489,7 @@
                 <RelativeLayout
                     android:id="@+id/passannounced"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_height="34dp"
                     android:background="@color/white"
                     android:onClick="onClick">
 
@@ -484,7 +502,7 @@
                         android:gravity="center_vertical"
                         android:text="往期揭晓"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -503,9 +521,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_height="34dp"
                     android:background="@color/white">
 
                     <TextView
@@ -518,7 +534,7 @@
                         android:gravity="center_vertical"
                         android:text="参与记录"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/since"
@@ -602,7 +618,7 @@
                 android:layout_marginTop="2dip"
                 android:layout_weight="1"
                 android:background="@drawable/addfriendback"
-                android:text="购买全部"
+                android:text="整期购买"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>

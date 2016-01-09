@@ -8,15 +8,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp" >
+        android:layout_height="56dp" >
 
         <com.league.widget.CircleImageView
             android:id="@+id/near_feauserthumb"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/head" >
+            android:src="@drawable/example" >
         </com.league.widget.CircleImageView>
 
         <LinearLayout
@@ -32,8 +32,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="用户昵称"
-                android:textSize="18dp"
-                android:textColor="@color/black" />
+                android:textSize="14dp"
+                android:textColor="#434343" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -46,8 +46,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="地区"
-                    android:textSize="16dp"
-                    android:textColor="@color/black" />
+                    android:textSize="14dp"
+                    android:textColor="#979797" />
 
                 <View
                     android:layout_width="1dp"
@@ -56,15 +56,15 @@
                     android:layout_marginBottom="2dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
-                    android:background="@color/black" />
+                    android:background="#979797" />
 
                 <TextView
                     android:id="@+id/near_fea_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="外卖"
-                    android:textSize="16dp"
-                    android:textColor="@color/black" />
+                    android:textSize="14dp"
+                    android:textColor="#979797" />
             </LinearLayout>
         </LinearLayout>
 
@@ -76,7 +76,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:text="2"
-            android:textSize="16dp"
+            android:textSize="14dp"
             android:textColor="@color/red" />
 
         <ImageView
@@ -96,13 +96,13 @@
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/xiaoxi"
             android:text="11分钟前"
-            android:textSize="16dp"
-            android:textColor="@color/black" />
+            android:textSize="12dp"
+            android:textColor="#979797" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:background="@color/black2" />
 
     <LinearLayout
@@ -122,7 +122,7 @@
             android:singleLine="true"
             android:text="这事一个测试。来测试单行和最后结尾是否是省略号结束的，你卡看啊"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
         <TextView
             android:id="@+id/fea_seccontent"
             android:layout_width="match_parent"
@@ -133,8 +133,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="很不错的一家店呀，大家都来侃侃"
-            android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textColor="#6b6869"
+            android:textSize="12sp"
             android:layout_marginBottom="10dp"/>
         <com.league.widget.NoScrollGridView
             android:id="@+id/gridview"

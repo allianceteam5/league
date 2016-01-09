@@ -1,13 +1,23 @@
 package com.league.activity.personactivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.easemob.EMCallBack;
+import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.easemob.chatuidemo.activity.LoginActivity;
+import com.easemob.chatuidemo.activity.MainActivity;
+import com.league.utils.ActivityUtils;
+import com.league.utils.Constants;
 import com.league.utils.DataCleanManager;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.mine.league.R;
 
@@ -20,6 +30,7 @@ public class PersonSetup extends Activity implements View.OnClickListener{
     private TextView title;
     @Bind(R.id.cachesize)
     TextView mCachesize;
+    private Button logoutBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +59,8 @@ public class PersonSetup extends Activity implements View.OnClickListener{
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-
+        logoutBtn = (Button) findViewById(R.id.btn_logout);
+        logoutBtn.setOnClickListener(this);
     }
 
     @Override
@@ -84,6 +96,13 @@ public class PersonSetup extends Activity implements View.OnClickListener{
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                break;
+            case R.id.btn_logout: //退出登陆
+                DemoHXSDKHelper.getInstance().logout(true, null);
+                StoreUtils.destory();
+                ActivityUtils.start_Activity(this, LoginActivity.class);
+                Constants.finishAllActivities();
+                finish();
                 break;
         }
     }

@@ -71,6 +71,8 @@ public class RecommendationCommentAdapter extends BaseAdapter {
         holder.lasttime.setText(Utils.generateStringByTime(commentBean.getCreated_at()));
         if (!TextUtils.isEmpty(commentBean.getThumb()))
             Picasso.with(ctx).load(commentBean.getThumb()).resize(80,80).centerCrop().into(holder.thumb);
+        else
+            Picasso.with(ctx).load(R.drawable.example).into(holder.thumb);
         return convertView;
     }
 

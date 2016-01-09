@@ -70,7 +70,9 @@ public class LiaobaCommentAdapter extends BaseAdapter {
         holder.content.setText(replysEntity.getContent());
         holder.lasttime.setText(Utils.generateStringByTime(replysEntity.getCreated_at()));
         if (!TextUtils.isEmpty(replysEntity.getFromthumb()))
-            Picasso.with(ctx).load(replysEntity.getFromthumb()).placeholder(R.drawable.default_avatar).resize(80,80).centerCrop().into(holder.thumb);
+            Picasso.with(ctx).load(replysEntity.getFromthumb()).placeholder(R.drawable.example).resize(80,80).centerCrop().into(holder.thumb);
+        else
+            Picasso.with(ctx).load(R.drawable.example).into(holder.thumb);
         return convertView;
     }
 

@@ -87,6 +87,8 @@ public class LiaoBaAdapter extends BaseAdapter implements IContants {
         }
         if (!TextUtils.isEmpty(list.get(position).getThumb()))
             Picasso.with(ctx).load(list.get(position).getThumb()).resize(80, 80).centerCrop().into(holder.thumb);
+        else
+            Picasso.with(ctx).load(R.drawable.example).into(holder.thumb);
         holder.name.setText(list.get(position).getNickname());
         holder.time.setText(Utils.generateStringByTime(list.get(position).getCreated_at()));
         if (type == 0) {

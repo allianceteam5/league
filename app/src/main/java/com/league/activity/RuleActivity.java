@@ -57,6 +57,8 @@ public class RuleActivity extends BaseActivity implements IContants{
                 tvRule.setText(getString(R.string.rule5));
                 break;
             case 6:
+                tvTitle.setText("我的钱包常见问题");
+                tvRule.setText(getString(R.string.rule1));
                 break;
             case 7:
                 break;

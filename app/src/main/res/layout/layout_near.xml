@@ -44,7 +44,7 @@
                     android:layout_below="@id/ib_yiyuan"
                     android:layout_centerHorizontal="true"
                     android:text="求职信息"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_title"
                     android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>
@@ -80,7 +80,7 @@
                     android:layout_below="@id/ib_hongbao"
                     android:layout_centerHorizontal="true"
                     android:text="特色推荐"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_title"
                     android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>
@@ -116,7 +116,7 @@
                     android:layout_below="@id/ib_fujin"
                     android:layout_centerHorizontal="true"
                     android:text="爱好交友"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_title"
                     android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>
@@ -234,7 +234,7 @@
                     android:layout_below="@id/ib_hongbao3"
                     android:layout_centerHorizontal="true"
                     android:text="其他"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_title"
                     android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>

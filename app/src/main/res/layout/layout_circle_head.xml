@@ -19,9 +19,8 @@
                 android:id="@+id/iv_thumb"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-
                 android:layout_marginLeft="8dp"
-                android:src="@drawable/default_avatar" />
+                android:src="@drawable/example" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
