@@ -99,6 +99,8 @@ public class RecommendationInfoActivity extends BaseActivity implements View.OnC
         nearUsername.setText(recommendationInfo.getNickname());
         if (!TextUtils.isEmpty(recommendationInfo.getThumb()))
             Picasso.with(getApplicationContext()).load(recommendationInfo.getThumb()).resize(60,60).centerCrop().into(nearUserthumb);
+        else
+            Picasso.with(this).load(R.drawable.example).into(nearUserthumb);
         lasttime.setText(Utils.generateStringByTime(recommendationInfo.getCreated_at()));
         commandType.setText(recommendationInfo.getKind());
         commandLocation.setText(recommendationInfo.getLocation());

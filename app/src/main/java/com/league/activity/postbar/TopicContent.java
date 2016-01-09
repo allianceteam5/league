@@ -216,6 +216,8 @@ public class TopicContent extends BaseActivity implements IContants, View.OnClic
     private void updateView() {
         if (!TextUtils.isEmpty(liaoBaMessageBean.getThumb()))
             Picasso.with(getApplication()).load(liaoBaMessageBean.getThumb()).placeholder(R.drawable.default_avatar).resize(100, 100).centerCrop().into(thumb);
+        else
+            Picasso.with(getApplication()).load(R.drawable.example).into(thumb);
         tvUsername.setText(liaoBaMessageBean.getNickname());
         tvPushtime.setText(Utils.generateStringByTime(liaoBaMessageBean.getCreated_at()));
         tvTitle.setText(liaoBaMessageBean.getTitle());
