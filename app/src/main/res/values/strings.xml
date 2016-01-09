@@ -57,9 +57,13 @@
     2.	夺宝成功，奖品+ 本金5个月之后返还到账户余额。\n
     3.	提前提现，收取10%的手续费。
     </string>
+    <string name="rule5">联盟好友</string>
     <string name="share_text">1.	拒绝优惠券，我们只要钱！来钱神器，每人30万，联盟奖励等你取！\n
     2.	比没钱更痛苦的是，有红包你竟然没抢！来钱神器，每人30万等你抢！
     </string>
+    <string name="invite_rule">邀请好友规则</string>
+    <string name="about_company">\t\t自己人联盟是上海互益网络科技有限公司与浙大技术联盟主导开发，上海浙江商会副会长单位参与的互联网综合性资源共享平台。给用户提供招聘、购物、娱乐等功能。提供商家公告展示页面，并将平台利润给广大会员共享。</string>
+    <string name="copyright">Copyright @2014-2016\n上海互益网络科技有限公司</string>
     <string name="text_ack_msg">Read</string>
     <string name="text_delivered_msg">Delivered</string>
     <string name="back">Back</string>

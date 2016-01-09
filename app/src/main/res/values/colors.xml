@@ -160,4 +160,8 @@
     <drawable name="actionbar_pressed_bg">#111111</drawable>
 
     <color name="moneybag">#252A32</color>
+    <color name="text_title">#363636</color>
+    <color name="text_body">#666666</color>
+    <color name="text_content">#999999</color>
+    <color name="text_hint">#d8d8d8</color>
 </resources>

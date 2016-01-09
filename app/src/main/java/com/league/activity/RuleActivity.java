@@ -53,7 +53,14 @@ public class RuleActivity extends BaseActivity implements IContants{
                 tvRule.setText(getString(R.string.rule4));
                 break;
             case 5:
-                tvTitle.setText("");
+                tvTitle.setText("联盟好友计算规则");
+                tvRule.setText(getString(R.string.rule5));
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
                 break;
         }
     }

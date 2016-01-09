@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.activity.RuleActivity;
 import com.league.activity.circle.CircleActivity;
 import com.league.activity.personactivity.AlianceReward;
 import com.league.activity.personactivity.MyCollection;
@@ -25,7 +26,6 @@ import com.league.activity.personactivity.PersonSetup;
 import com.league.activity.personinfoactivity.InviteFriendActivity;
 import com.league.bean.UserInfoBean;
 import com.league.utils.ActivityUtils;
-import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.StoreUtils;
 import com.league.utils.api.ApiUtil;
@@ -95,6 +95,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
         layout.findViewById(R.id.mymoneybag).setOnClickListener(this);
         layout.findViewById(R.id.invitefriend).setOnClickListener(this);
         layout.findViewById(R.id.mycircle).setOnClickListener(this);
+        layout.findViewById(R.id.rl_allancecount).setOnClickListener(this);
     }
 
     @Override
@@ -125,6 +126,11 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
                 break;
             case R.id.invitefriend:
                 startActivity(new Intent(ctx, InviteFriendActivity.class));
+                break;
+            case R.id.rl_allancecount:
+                Intent intent5 = new Intent(ctx, RuleActivity.class);
+                intent5.putExtra(RuleType,5);
+                startActivity(intent5);
                 break;
         }
     }
