@@ -7,15 +7,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp" >
+        android:layout_height="56dp" >
 
         <com.league.widget.CircleImageView
             android:id="@+id/near_userthumb"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/head" >
+            android:src="@drawable/example" >
         </com.league.widget.CircleImageView>
 
         <LinearLayout
@@ -31,8 +31,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="用户昵称"
-                android:textSize="16dp"
-                android:textColor="@color/black" />
+                android:textSize="14dp"
+                android:layout_marginBottom="2dp"
+                android:textColor="#434343" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -44,21 +45,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="全职"
-                    android:textColor="@color/black" />
+                    android:textSize="14dp"
+                    android:textColor="#b4b4b4" />
 
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
-                    android:background="@color/black2" />
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="#b4b4b4" />
 
                 <TextView
                     android:id="@+id/near_userprofession"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="金融"
-                    android:textColor="@color/black" />
+                    android:textSize="14dp"
+                    android:textColor="#b4b4b4" />
             </LinearLayout>
         </LinearLayout>
 
@@ -70,12 +75,15 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:text="11分钟前"
-            android:textColor="@color/black" />
+            android:textSize="14dp"
+            android:textColor="#979797" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:background="@color/black2" />
 
     <LinearLayout
@@ -95,7 +103,7 @@
             android:singleLine="true"
             android:text="这事一个测试。来测试单行和最后结尾是否是省略号结束的，你卡看啊"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -108,22 +116,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="学历 ："
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textColor="#6a6969"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/near_usereducation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="本科"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textColor="#6a6969"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -131,22 +139,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="参加工作时间 ："
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textColor="#6a6969"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/near_userworktime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2013-7-1"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textColor="#6a6969"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -154,8 +162,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="目前状况 ："
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textColor="#6a6969"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/near_usercurrentstaus"
@@ -165,15 +173,15 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="目前处于离职状态，可立即上岗"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textColor="#6a6969"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -181,8 +189,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="留言 ："
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textColor="#6a6969"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/near_userleavemessage"
@@ -192,8 +200,8 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="本人有两年销售经验，可以很好的胜任这份职业"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textColor="#6a6969"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 

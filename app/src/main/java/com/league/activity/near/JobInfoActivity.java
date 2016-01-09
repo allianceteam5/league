@@ -82,7 +82,9 @@ public class JobInfoActivity extends Activity implements OnClickListener{
 		right2.setVisibility(View.GONE);
 		addFriend.setOnClickListener(this);
 		if (!TextUtils.isEmpty(jobinfo.getThumb()))
-			Picasso.with(getApplicationContext()).load(jobinfo.getThumb()).into(ivThumb);
+			Picasso.with(getApplicationContext()).load(jobinfo.getThumb()).resize(120,120).centerCrop().into(ivThumb);
+		else
+			Picasso.with(getApplicationContext()).load(R.drawable.example).into(ivThumb);
 		tvNickname.setText(jobinfo.getNickname());
 		tvTitle.setText(jobinfo.getTitle());
 		tvJobproperty.setText(jobinfo.getJobPropertyName());

@@ -71,6 +71,8 @@ public class HobbyInfoAdapter extends BaseAdapter{
 		}
 		if (!TextUtils.isEmpty(list.get(position).getPicture()))
 			Picasso.with(ctx).load(list.get(position).getPicture()).resize(120,120).centerCrop().into(holder.thumb);
+		else
+			Picasso.with(ctx).load(R.drawable.example).into(holder.thumb);
 		holder.username.setText(list.get(position).getNickname());
 		if(list.get(position).getSex() == 1){
 			holder.sex.setImageResource(R.drawable.friend_sex_man);

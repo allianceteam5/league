@@ -11,7 +11,7 @@
         android:layout_height="38dp"
         android:layout_centerVertical="true"
         android:layout_margin="10dp"
-        android:src="@drawable/head"></com.league.widget.CircleImageView>
+        android:src="@drawable/example"></com.league.widget.CircleImageView>
 
     <LinearLayout
         android:layout_width="match_parent"

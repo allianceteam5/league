@@ -9,8 +9,10 @@ import android.widget.TextView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
+import com.league.activity.RuleActivity;
 import com.league.bean.MoneyBean;
 import com.league.utils.Constants;
+import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -21,7 +23,7 @@ import org.apache.http.Header;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MyMoneyBag extends BaseActivity implements View.OnClickListener{
+public class MyMoneyBag extends BaseActivity implements View.OnClickListener,IContants{
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
@@ -105,14 +107,18 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener{
                 Intent intent3 =new Intent(getApplication(),SelectBankcard.class);
                 startActivity(intent3);
                 break;
-            case R.id.goldcoin:
-                Intent intent4 = new Intent(getApplication(),MyGoldCoin.class);
-                startActivity(intent4);
-                break;
+//            case R.id.goldcoin:
+//                Intent intent4 = new Intent(getApplication(),MyGoldCoin.class);
+//                startActivity(intent4);
+//                break;
             case R.id.paypassword:
                 Intent intent5=new Intent(getApplication(),PayPassword.class);
                 startActivity(intent5);
                 break;
+            case R.id.rl_question:
+                Intent intent6 = new Intent(getApplication(), RuleActivity.class);
+                intent6.putExtra(RuleType, 6);
+                startActivity(intent6);
         }
     }
 

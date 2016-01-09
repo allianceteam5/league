@@ -78,7 +78,7 @@ public class MyPost extends BaseActivity implements OnClickListener, IContants {
         switch (flag) {
             case 1:
                 title.setText("我的求职");
-                ApiUtil.applyjobSearch(getApplicationContext(), true, 0, "", 1, new BaseJsonHttpResponseHandler<ArrayList<JobInfoBean>>() {
+                ApiUtil.applyjobSearch(getApplicationContext(), true, 0, "", -1,1, new BaseJsonHttpResponseHandler<ArrayList<JobInfoBean>>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<JobInfoBean> response) {
                         jobInfoList = response;

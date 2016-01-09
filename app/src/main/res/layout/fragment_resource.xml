@@ -74,8 +74,8 @@
                     android:layout_below="@id/ib_yiyuan"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
-                    android:text="夺金和夺宝"
-                    android:textColor="@color/black"
+                    android:text="保本夺金"
+                    android:textColor="@color/text_title"
                     android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>
@@ -120,7 +120,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
                     android:text="抢红包"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_title"
                     android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>
@@ -165,7 +165,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
                     android:text="附近"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_title"
                     android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>
@@ -213,7 +213,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
                     android:text="说·吧"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_title"
                     android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>

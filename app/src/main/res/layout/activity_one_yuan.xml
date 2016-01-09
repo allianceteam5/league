@@ -165,8 +165,8 @@
                             android:layout_below="@id/iv_1"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="6dp"
-                            android:text="十夺金"
-                            android:textColor="@color/black"
+                            android:text="保本夺金"
+                            android:textColor="#656565"
                             android:textSize="16sp" />
                     </RelativeLayout>
                 </RelativeLayout>
@@ -203,7 +203,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="6dp"
                             android:text="一元夺宝"
-                            android:textColor="@color/black"
+                            android:textColor="#656565"
                             android:textSize="16sp" />
                     </RelativeLayout>
                 </RelativeLayout>
@@ -239,8 +239,8 @@
                             android:layout_below="@id/iv_3"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="6dp"
-                            android:text="夺宝记录"
-                            android:textColor="@color/black"
+                            android:text="我的记录"
+                            android:textColor="#656565"
                             android:textSize="16sp" />
                     </RelativeLayout>
                 </RelativeLayout>
@@ -276,8 +276,8 @@
                             android:layout_below="@id/iv_4"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="6dp"
-                            android:text="常见问题"
-                            android:textColor="@color/black"
+                            android:text="活动规则"
+                            android:textColor="#656565"
                             android:textSize="16sp" />
                     </RelativeLayout>
                 </RelativeLayout>
@@ -300,8 +300,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dip"
                     android:gravity="center_vertical"
-                    android:text="十夺金"
-                    android:textColor="@color/black"
+                    android:text="保本夺金"
+                    android:textColor="@color/text_title"
                     android:textSize="16sp" />
 
                 <TextView
@@ -558,7 +558,7 @@
                     android:layout_marginLeft="15dip"
                     android:gravity="center_vertical"
                     android:text="最新揭晓"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_title"
                     android:textSize="16sp" />
 
                 <TextView
@@ -607,7 +607,7 @@
                     android:layout_marginLeft="15dip"
                     android:gravity="center_vertical"
                     android:text="一元夺宝"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_title"
                     android:textSize="16sp" />
 
                 <TextView
