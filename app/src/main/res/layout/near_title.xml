@@ -68,6 +68,17 @@
         android:src="@drawable/resource_delete"
         android:visibility="gone" />
     <TextView
+        android:id="@+id/near_report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="举报"
+        android:textColor="@color/white"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:textSize="18sp"
+        android:visibility="gone"/>
+    <TextView
         android:id="@+id/near_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

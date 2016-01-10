@@ -141,9 +141,10 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
                 userInfoBean = response;
                 Paper.book().write(UserInfo, response);
                 StoreUtils.setUserInfo(userInfoBean);
-                if(!TextUtils.isEmpty(response.getThumb())){
+                if(!TextUtils.isEmpty(response.getThumb()))
                     Picasso.with(ctx).load(response.getThumb()).resize(120,120).centerCrop().placeholder(R.drawable.example).into(mThumb);
-                }
+                else
+                    Picasso.with(ctx).load(R.drawable.example).into(mThumb);
 
                 mNickname.setText(response.getNickname());
                 mPhone.setText(response.getPhone());

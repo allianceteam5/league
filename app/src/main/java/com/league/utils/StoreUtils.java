@@ -7,6 +7,7 @@ package com.league.utils;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.league.bean.LocationBean;
 import com.league.bean.UserInfoBean;
 import com.tumblr.remember.Remember;
 
@@ -27,35 +28,38 @@ public class StoreUtils {
     private static final String Nickname = "nickname";
     private static final String RealMoney = "realmoney";
     private static final String BankNum = "banknum";
+    private static final String LocationBean = "locationbean";
+
     //初始化
-    public static void init(Context context){
+    public static void init(Context context) {
         Paper.init(context);
         Remember.init(context, StoreName);
     }
+
     //销毁所有数据
-    public static void destory(){
+    public static void destory() {
         Paper.book().destroy();
         Remember.clear();
         setSkipGuidState(true);
     }
 
-    public static Boolean getSkipGuidState(){
+    public static Boolean getSkipGuidState() {
         return Remember.getBoolean(SkipGuidState, false);
     }
 
-    public static void setSkipGuidState(Boolean value){
+    public static void setSkipGuidState(Boolean value) {
         Remember.putBoolean(SkipGuidState, value);
     }
 
-    public static Boolean getLoginState(){
+    public static Boolean getLoginState() {
         return Remember.getBoolean(LoginState, false);
     }
 
-    public static void setLoginState(Boolean value){
+    public static void setLoginState(Boolean value) {
         Remember.putBoolean(LoginState, value);
     }
 
-    public static void setUserInfo(UserInfoBean value){
+    public static void setUserInfo(UserInfoBean value) {
         Paper.book().write(UserInfo, value);
         setPhone(value.getPhone());
         if (!TextUtils.isEmpty(value.getThumb()))
@@ -64,58 +68,70 @@ public class StoreUtils {
             setNickname(value.getNickname());
     }
 
-    public static UserInfoBean getUserInfo(){
+    public static UserInfoBean getUserInfo() {
         return Paper.book().read(UserInfo);
     }
 
-    public static void setPhone(String value){
+    public static void setPhone(String value) {
         Remember.putString(Phone, value);
     }
-    public static String getPhone(){
+
+    public static String getPhone() {
         return Remember.getString(Phone, "1");
 
     }
 
-    public static void setHuanXinId(String value){
+    public static void setHuanXinId(String value) {
         Remember.putString(HuanXinId, value);
     }
 
-    public static void setHuanXinPwd(String pwd){
+    public static void setHuanXinPwd(String pwd) {
         Remember.putString(HuanXinPwd, pwd);
     }
 
-    public static String getHuanXinPwd(){
+    public static String getHuanXinPwd() {
         return Remember.getString(HuanXinPwd, "");
     }
-    public static String getHuanXinId(){
+
+    public static String getHuanXinId() {
         return Remember.getString(HuanXinId, "");
     }
 
-    public static void setAvatar(String value){
+    public static void setAvatar(String value) {
         Remember.putString(Avatar, value);
     }
 
-    public static String getAvatar(){
-        return Remember.getString(Avatar,"");
+    public static String getAvatar() {
+        return Remember.getString(Avatar, "");
     }
 
-    public static void setNickname(String value){
+    public static void setNickname(String value) {
         Remember.putString(Nickname, value);
     }
 
-    public static String getNickname(){
+    public static String getNickname() {
         return Remember.getString(Nickname, "");
     }
-    public static void setRealMoney(Float value){
+
+    public static void setRealMoney(Float value) {
         Remember.putFloat(RealMoney, value);
     }
-    public static Float getRealMoney(){
-        return Remember.getFloat(RealMoney,0.0f);
+
+    public static Float getRealMoney() {
+        return Remember.getFloat(RealMoney, 0.0f);
     }
-    public static void setBankNum(int value){
-        Remember.putInt(BankNum,value);
+
+    public static void setBankNum(int value) {
+        Remember.putInt(BankNum, value);
     }
-    public static int getBankNum(){
-        return Remember.getInt(BankNum,0);
+
+    public static int getBankNum() {
+        return Remember.getInt(BankNum, 0);
+    }
+    public static void setLocationBean(LocationBean value) {
+        Paper.book().write(LocationBean, value);
+    }
+    public static LocationBean getLocationBean() {
+        return Paper.book().exist(LocationBean) ? (LocationBean) Paper.book().read(LocationBean) : new LocationBean();
     }
 }

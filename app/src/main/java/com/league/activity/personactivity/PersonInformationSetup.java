@@ -269,7 +269,10 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
                 return;
             }
             //头像地址放在picture里
-            Picasso.with(getApplicationContext()).load(picture.toString()).resize(160, 160).centerCrop().into(mThumbnail);
+            if (TextUtils.isEmpty(picture))
+                Picasso.with(getApplicationContext()).load(picture.toString()).resize(160, 160).centerCrop().into(mThumbnail);
+            else
+                Picasso.with(getApplicationContext()).load(R.drawable.example).into(mThumbnail);
 //            加上修改头像的接口
 //            ApiUtil.hobbyCreated(getApplicationContext(), picture.toString(), selectedSexIndex, selectedAgeIndex, selectedHobbyId, message, new JsonHttpResponseHandler() {
 //                @Override

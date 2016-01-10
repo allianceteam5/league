@@ -43,6 +43,7 @@ public class Constants {
     public static final List<String> DEGREEITEMS = Arrays.asList("初中及初中以下", "高中", "大专", "本科", "硕士", "博士");
     public static final List<String> SEXITEMS = Arrays.asList("女","男");
     public static final List<String> AGEITEMS = Arrays.asList("20岁以下","20-25岁","25-30岁","30-35岁","35-40岁","40岁以上");
+    public static final List<String> REPORTITEMS = Arrays.asList("色情低俗","赌博","政治敏感","欺诈骗钱","违法（暴力恐怖、违禁品等）");
     public static final int REQUESTDEGREE = 1;
     public static final int REQUESTPROFESSION = 2;
     public static final String ProfessinListName = "professionListName";

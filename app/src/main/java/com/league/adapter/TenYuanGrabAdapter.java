@@ -62,6 +62,8 @@ public class TenYuanGrabAdapter extends BaseAdapter {
         }
         if (!TextUtils.isEmpty(list.get(position).getPicture()))
             Picasso.with(ctx).load(list.get(position).getPicture()).into(holder.thumb);
+        else
+            Picasso.with(ctx).load(R.drawable.example).into(holder.thumb);
         holder.period.setText("(第" + list.get(position).getVersion() + "期)");
         holder.mName_Monery.setText(list.get(position).getTitle());
         float need=Float.valueOf(list.get(position).getNeeded());

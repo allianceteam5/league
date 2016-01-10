@@ -88,7 +88,9 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
 
         userInfoBean = Paper.book().read(UserInfo);
         if (!TextUtils.isEmpty(userInfoBean.getThumb()))
-            Picasso.with(this).load(userInfoBean.getThumb()).placeholder(R.drawable.default_avatar).into(ivThumb);
+            Picasso.with(this).load(userInfoBean.getThumb()).placeholder(R.drawable.example).resize(120,120).centerCrop().into(ivThumb);
+        else
+            Picasso.with(this).load(R.drawable.example).into(ivThumb);
         tvName.setText(userInfoBean.getNickname());
         tvFriendcount.setText(userInfoBean.getFriendcount()+"");
         tvLikecount.setText(userInfoBean.getConcerncount()+"");

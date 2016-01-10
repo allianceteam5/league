@@ -74,7 +74,9 @@ public class CircleMessageAdapter extends BaseAdapter implements IContants {
 
         final CircleMessageBean circleMessageBean = list.get(position);
         if (!TextUtils.isEmpty(circleMessageBean.getThumb()))
-            Picasso.with(ctx).load(circleMessageBean.getThumb()).placeholder(R.drawable.default_avatar).resize(80, 80).centerCrop().into(holder.ivThumb);
+            Picasso.with(ctx).load(circleMessageBean.getThumb()).placeholder(R.drawable.example).resize(80, 80).centerCrop().into(holder.ivThumb);
+        else
+            Picasso.with(ctx).load(R.drawable.example).into(holder.ivThumb);
         holder.tvName.setText(circleMessageBean.getNickname());
         holder.tvTime.setText(Utils.generateStringByTime(circleMessageBean.getCreated_at()));
         holder.tvContent.setText(circleMessageBean.getContent());
