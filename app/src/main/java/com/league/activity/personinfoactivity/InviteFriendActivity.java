@@ -13,6 +13,7 @@ import com.umeng.socialize.bean.SocializeEntity;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.controller.listener.SocializeListeners;
+import com.umeng.socialize.sso.QZoneSsoHandler;
 import com.umeng.socialize.sso.SinaSsoHandler;
 import com.umeng.socialize.sso.SmsHandler;
 import com.umeng.socialize.sso.UMQQSsoHandler;
@@ -39,6 +40,10 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
         UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(this, "100424468",
                 "c7394704798a158208a74ab60104f0ba");
         qqSsoHandler.addToSocialSDK();
+        //参数1为当前Activity， 参数2为开发者在QQ互联申请的APP ID，参数3为开发者在QQ互联申请的APP kEY.
+        QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(this, "100424468",
+                "c7394704798a158208a74ab60104f0ba");
+        qZoneSsoHandler.addToSocialSDK();
         //添加微博
         SinaSsoHandler sinaSsoHandler = new SinaSsoHandler();
         sinaSsoHandler.addToSocialSDK();
@@ -47,7 +52,7 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
         smsHandler.addToSocialSDK();
         // wx967daebe835fbeac是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
         String appID = "wx98e6c27800ad7a60";
-        String appSecret = "a7d7ab547a7f2b333f243bf68ac96728";
+        String appSecret = "35978744f081736d47fca4042c8cd4f4";
         // 添加微信平台
         UMWXHandler wxHandler = new UMWXHandler(this, appID, appSecret);
         wxHandler.addToSocialSDK();
