@@ -257,7 +257,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/chongzhi"
+                    android:id="@+id/recharge"
                     android:onClick="onClick"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
