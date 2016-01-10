@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
 import com.league.bean.UserInfoBean;
-import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
@@ -78,11 +77,13 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
         tvGrabCoin= (TextView) findViewById(R.id.grabcorn);
         radioGroup= (MyRadioGroup) findViewById(R.id.paytypegroup);
         if(type==0){
-            findViewById(R.id.rl_coin).setVisibility(View.GONE);
-            findViewById(R.id.view).setVisibility(View.GONE);
-        }else if(type==1){
             findViewById(R.id.rl_grabcorn).setVisibility(View.GONE);
             findViewById(R.id.view).setVisibility(View.GONE);
+//            findViewById(R.id.rl_coin).setVisibility(View.GONE);
+//            findViewById(R.id.view).setVisibility(View.GONE);
+        }else if(type==1){
+//            findViewById(R.id.rl_grabcorn).setVisibility(View.GONE);
+//            findViewById(R.id.view).setVisibility(View.GONE);
         }
     }
 
@@ -223,6 +224,9 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
                 break;
             case R.id.rb_alipay:
                 paytype=3;
+                break;
+            case R.id.rb_wxpay:
+                paytype=4;
                 break;
         }
     }

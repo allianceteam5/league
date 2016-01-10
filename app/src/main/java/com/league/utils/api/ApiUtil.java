@@ -642,7 +642,13 @@ public class ApiUtil {
         params.put("location", area);
         client.post(context, IClientUrl.createBankcard, params, responseHandler);
     }
-
+    //删除银行卡
+    public static void deleteBanCard(Context context,String usertocardid,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone",testPhone);
+        params.put("usertocardid",usertocardid);
+        client.post(context,IClientUrl.deleteBankCard,params,responseHandler);
+    }
     //修改用户名密码
     public static void changePwd(Context context, String pwd, String newpwd, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();

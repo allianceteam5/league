@@ -19,10 +19,19 @@ import java.util.List;
 public class BankCardAdapter extends BaseAdapter{
     private List<BankCardInfo> list;
     private Context ctx;
+    private boolean[] select;
+    private boolean[] delete = new boolean[3];
 
-    public BankCardAdapter(List<BankCardInfo> list, Context ctx) {
+    public BankCardAdapter(List<BankCardInfo> list, Context ctx,boolean[] select) {
         this.list = list;
         this.ctx = ctx;
+        this.select = select;
+    }
+    public BankCardAdapter(List<BankCardInfo> list, Context ctx,boolean[] select,boolean[] delete) {
+        this.list = list;
+        this.ctx = ctx;
+        this.select = select;
+        this.delete = delete;
     }
 
     @Override
@@ -51,13 +60,24 @@ public class BankCardAdapter extends BaseAdapter{
             holder.banknum= (TextView) convertView.findViewById(R.id.banknum);
             holder.banktype= (TextView) convertView.findViewById(R.id.banktype);
             holder.icon_select= (ImageView) convertView.findViewById(R.id.icon_selected);
+            holder.icon_delete= (ImageView) convertView.findViewById(R.id.icon_deleted);
             convertView.setTag(holder);
         }else{
             holder=(ViewHolder)convertView.getTag();
         }
         holder.bankname.setText(list.get(position).getName());
-        holder.banknum.setText(list.get(position).getCardnumber().substring(list.get(position).getCardnumber().length()-2,list.get(position).getCardnumber().length()));
+        holder.banknum.setText(list.get(position).getCardnumber().substring(list.get(position).getCardnumber().length() - 2, list.get(position).getCardnumber().length()));
         holder.banktype.setText(list.get(position).getName());
+        if(select[position]){
+            holder.icon_select.setVisibility(View.VISIBLE);
+        }else{
+            holder.icon_select.setVisibility(View.GONE);
+        }
+        if(delete[position]){
+            holder.icon_delete.setVisibility(View.VISIBLE);
+        }else{
+            holder.icon_delete.setVisibility(View.GONE);
+        }
         return  convertView;
     }
     class ViewHolder{
@@ -66,5 +86,6 @@ public class BankCardAdapter extends BaseAdapter{
         TextView banknum;
         TextView banktype;
         ImageView icon_select;
+        ImageView icon_delete;
     }
 }

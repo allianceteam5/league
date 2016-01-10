@@ -12,6 +12,7 @@ import com.league.activity.BaseActivity;
 import com.league.activity.RuleActivity;
 import com.league.bean.MoneyBean;
 import com.league.utils.IContants;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -72,9 +73,11 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener,ICo
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, MoneyBean response) {
                 moneyBean=response;
                 myMoney.setText(moneyBean.getMoney()+"");
-                mCorns.setText(moneyBean.getCorns()+"");
+                StoreUtils.setRealMoney(moneyBean.getMoney());
+                mCorns.setText(moneyBean.getCorns() + "");
                 mCornsForgrab.setText(moneyBean.getCornsforgrab()+"");
                 mCardCount.setText(moneyBean.getCardcount());
+                StoreUtils.setBankNum(Integer.valueOf(moneyBean.getCardcount()));
                 closeProgressDialog();
             }
 

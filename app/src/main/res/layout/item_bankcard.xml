@@ -72,4 +72,13 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="15dp"
         android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/icon_deleted"
+        android:layout_width="24dp"
+        android:layout_height="wrap_content"
+        android:src ="@drawable/icon_delete"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:visibility="visible"/>
 </RelativeLayout>

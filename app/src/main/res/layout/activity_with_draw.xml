@@ -11,144 +11,94 @@
         android:id="@+id/title"
         layout="@layout/near_title" />
 
-    <View
 
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/black2" />
-    <RelativeLayout
-        android:id="@+id/bankiditem"
-        android:onClick="onClick"
+    <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
-        <ImageView
-            android:id="@+id/iconbank"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_bankcard"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"/>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/iconbank"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="招商银行"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                />
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="尾号"
-                    android:textSize="13sp"
-                    android:textColor="@color/black1"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="52"
-                    android:textSize="13sp"
-                    android:textColor="@color/black1"/>
-                <TextView
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="储蓄卡"
-                    android:textSize="13sp"
-                    android:textColor="@color/black1"/>
-                <TextView
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="快捷"
-                    android:textSize="13sp"
-                    android:textColor="@color/black1"/>
-            </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
+        android:listSelector="@color/transparent"
+        android:scrollbars="none">
+
+    </ListView>
+
 
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@color/black2" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
                 android:id="@+id/addbankcard"
-                android:onClick="onClick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:onClick="onClick"
                 android:orientation="horizontal">
+
                 <ImageView
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/addidcard"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginLeft="15dp"
-                    />
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/addidcard" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="添加银行卡"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="10dp"/>
+                    android:text="添加银行卡"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
             </LinearLayout>
+
             <LinearLayout
-                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:background="@color/white"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:paddingTop="10dp"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="10dp"
                         android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
                         android:text="可提现金额:"
-                        android:gravity="center_vertical"
-                        android:paddingBottom="10dp"/>
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
                     <TextView
+                        android:id="@+id/withdrawnum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/red"
-                        android:paddingTop="10dp"
-                        android:paddingLeft="10dp"
-                        android:text="100.23元"
                         android:gravity="center_vertical"
-                        android:paddingBottom="10dp"/>
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:text="0.0元"
+                        android:textColor="@color/red"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <View
@@ -156,48 +106,51 @@
                     android:layout_height="2dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:background="@color/black2"
-                    />
+                    android:background="@color/black2" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:paddingTop="10dp"
-                        android:paddingLeft="10dp"
-                        android:text="金额（元）:"
                         android:gravity="center_vertical"
-                        android:paddingBottom="10dp"/>
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:text="金额（元）:"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:paddingTop="10dp"
-                        android:paddingLeft="10dp"
-                        android:hint="输入提现金额"
                         android:background="@null"
                         android:gravity="center_vertical"
+                        android:hint="输入提现金额"
+                        android:inputType="number"
                         android:paddingBottom="10dp"
-                        android:inputType="number"/>
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btnbackground"
-                android:layout_marginTop="15dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btnbackground"
+                android:gravity="center"
                 android:text="确认提现"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                android:gravity="center"/>
+                android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
 

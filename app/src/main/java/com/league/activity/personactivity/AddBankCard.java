@@ -12,8 +12,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
-import com.league.utils.Constants;
-import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -31,9 +29,9 @@ public class AddBankCard extends BaseActivity implements View.OnClickListener{
     @Bind(R.id.inputbankid)
     EditText mInputBankID;
     @Bind(R.id.inputname)
-    EditText mInputName;
+    TextView mInputName;
     @Bind(R.id.inputpersonid)
-    EditText mInputPersonID;
+    TextView mInputPersonID;
     @Bind(R.id.inputphone)
     EditText mInputPhone;
     @Bind(R.id.openarea)
@@ -76,8 +74,7 @@ public class AddBankCard extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.next:
-                if(TextUtils.isEmpty(mInputBankID.getText())||TextUtils.isEmpty(mInputName.getText())||TextUtils.isEmpty(mInputPersonID.getText())
-                        || TextUtils.isEmpty(mInputPhone.getText())||TextUtils.isEmpty(mInputArea.getText())){
+                if(TextUtils.isEmpty(mInputBankID.getText())|| TextUtils.isEmpty(mInputPhone.getText())||TextUtils.isEmpty(mInputArea.getText())){
                     ToastUtils.showShortToast(AddBankCard.this,"请输入完整信息");
                 }else{
                     showProgressDialog();

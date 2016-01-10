@@ -25,6 +25,8 @@ public class StoreUtils {
     private static final String HuanXinPwd = "huanxin_pwd";
     private static final String Avatar = "avatar";
     private static final String Nickname = "nickname";
+    private static final String RealMoney = "realmoney";
+    private static final String BankNum = "banknum";
     //初始化
     public static void init(Context context){
         Paper.init(context);
@@ -103,5 +105,17 @@ public class StoreUtils {
 
     public static String getNickname(){
         return Remember.getString(Nickname, "");
+    }
+    public static void setRealMoney(Float value){
+        Remember.putFloat(RealMoney, value);
+    }
+    public static Float getRealMoney(){
+        return Remember.getFloat(RealMoney,0.0f);
+    }
+    public static void setBankNum(int value){
+        Remember.putInt(BankNum,value);
+    }
+    public static int getBankNum(){
+        return Remember.getInt(BankNum,0);
     }
 }

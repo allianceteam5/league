@@ -14,7 +14,7 @@ public class MoneyBean {
      */
 
     private String cardcount;
-    private double money;
+    private float money;
     private int corns;
     private int cornsforgrab;
 
@@ -22,7 +22,7 @@ public class MoneyBean {
         this.cardcount = cardcount;
     }
 
-    public void setMoney(double money) {
+    public void setMoney(float money) {
         this.money = money;
     }
 
@@ -38,7 +38,7 @@ public class MoneyBean {
         return cardcount;
     }
 
-    public double getMoney() {
+    public float getMoney() {
         return money;
     }
 

@@ -100,4 +100,5 @@ public class IClientUrl {
     public static final String setdefaultaddress = testServerUrl + "users/setdefaultaddress";
     public static final String envelopesList = testServerUrl +"envelopes/list";
     public static final String setpaypwd = testServerUrl + "users/setpaypwd";
+    public static final String deleteBankCard = testServerUrl + "usertocards/delete";
 }
