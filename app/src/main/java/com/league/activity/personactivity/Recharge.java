@@ -3,9 +3,12 @@ package com.league.activity.personactivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,7 +29,26 @@ public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeLi
     private List<Integer> listData = new ArrayList<Integer>();
     private GridView gridView;
     private PayMoneyAmountAdapter adapter;
+    private EditText etInputNum;
 
+    private TextWatcher watcher = new TextWatcher() {
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // TODO Auto-generated method stub
+            tvNum.setText(s);
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // TODO Auto-generated method stub
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +100,8 @@ public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeLi
         radioGroup.setOnCheckedChangeListener(this);
         gridView = (GridView) findViewById(R.id.gv_recharge);
         tvNum = (TextView) findViewById(R.id.tv_num);
+        etInputNum = (EditText) findViewById(R.id.et_inputnum);
+        etInputNum.addTextChangedListener(watcher);
     }
 
     @Override
