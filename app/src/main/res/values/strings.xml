@@ -376,5 +376,6 @@
     <string name="title_activity_circle_comment">CircleCommentActivity</string>
     <string name="title_activity_rule">RuleActivity</string>
     <string name="title_activity_location">LocationActivity</string>
+    <string name="title_activity_report">ReportActivity</string>
 
 </resources>

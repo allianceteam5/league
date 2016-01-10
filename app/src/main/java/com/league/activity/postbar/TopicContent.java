@@ -17,12 +17,14 @@ import android.widget.Toast;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
+import com.league.activity.ReportActivity;
 import com.league.activity.ShowBigImgActivity;
 import com.league.adapter.ImgGridAdapter;
 import com.league.adapter.LiaobaCommentAdapter;
 import com.league.bean.LiaoBaMessageBean;
 import com.league.bean.RecommendationInfoBean;
 import com.league.bean.ReplysEntity;
+import com.league.utils.ActivityUtils;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.Utils;
@@ -82,6 +84,8 @@ public class TopicContent extends BaseActivity implements IContants, View.OnClic
     ListView listview;
     @Bind(R.id.swipe_layout)
     RefreshLayout refreshLayout;
+    @Bind(R.id.near_report)
+    TextView tvReport;
 
     private String tbmessageid;
     private LiaoBaMessageBean liaoBaMessageBean;
@@ -249,6 +253,8 @@ public class TopicContent extends BaseActivity implements IContants, View.OnClic
         replys = liaoBaMessageBean.getReplys();
         liaobaCommentAdapter = new LiaobaCommentAdapter(TopicContent.this, replys);
         listview.setAdapter(liaobaCommentAdapter);
+        tvReport.setVisibility(View.VISIBLE);
+        tvReport.setOnClickListener(this);
     }
 
     @Override
@@ -258,6 +264,9 @@ public class TopicContent extends BaseActivity implements IContants, View.OnClic
                 Intent intent = new Intent(TopicContent.this, LiaobaCommentActivity.class);
                 intent.putExtra(COMMENT_ID, liaoBaMessageBean.getId());
                 startActivityForResult(intent, ONE);
+                break;
+            case R.id.near_report:
+                ActivityUtils.start_Activity(this, ReportActivity.class);
                 break;
             case R.id.ll_like:
                 int type = 1 - liaoBaMessageBean.getIsliked();

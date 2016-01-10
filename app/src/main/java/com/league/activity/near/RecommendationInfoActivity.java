@@ -15,11 +15,13 @@ import android.widget.TextView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
+import com.league.activity.ReportActivity;
 import com.league.activity.ShowBigImgActivity;
 import com.league.adapter.ImgGridAdapter;
 import com.league.adapter.RecommendationCommentAdapter;
 import com.league.bean.CommentBean;
 import com.league.bean.RecommendationInfoBean;
+import com.league.utils.ActivityUtils;
 import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
@@ -72,6 +74,8 @@ public class RecommendationInfoActivity extends BaseActivity implements View.OnC
     LinearLayout bottom;
     @Bind(R.id.gridview)
     GridView gridview;
+    @Bind(R.id.near_report)
+            TextView tvReport;
     ImgGridAdapter imgGridAdapter;
     RecommendationInfoBean recommendationInfo;
     List<String> imgList;
@@ -128,6 +132,8 @@ public class RecommendationInfoActivity extends BaseActivity implements View.OnC
         recommendationCommentAdapter = new RecommendationCommentAdapter(getApplicationContext(),commentList);
         commentNum.setText(String.valueOf(commentList.size()));
         listview.setAdapter(recommendationCommentAdapter);
+        tvReport.setVisibility(View.VISIBLE);
+        tvReport.setOnClickListener(this);
     }
 
     @Override
@@ -142,7 +148,9 @@ public class RecommendationInfoActivity extends BaseActivity implements View.OnC
                 intent.putExtra(COMMENT_ID, recommendationInfo.getId());
                 startActivityForResult(intent, ONE);
                 break;
-
+            case R.id.near_report:
+                ActivityUtils.start_Activity(this, ReportActivity.class);
+                break;
         }
     }
 

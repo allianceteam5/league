@@ -1,6 +1,7 @@
 package com.league.activity.near;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -128,10 +129,11 @@ public class LocationActivity extends BaseActivity implements OnGetGeoCoderResul
         mBaiduMap.clear();
         mBaiduMap.addOverlay(new MarkerOptions().position(reverseGeoCodeResult.getLocation())
                 .icon(BitmapDescriptorFactory
-                        .fromResource(R.drawable.icon_marka)).title(reverseGeoCodeResult.getAddress()));
+                        .fromResource(R.drawable.icon_marka)));
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(reverseGeoCodeResult
                 .getLocation()));
-        Toast.makeText(LocationActivity.this, reverseGeoCodeResult.getAddress(),
+        if (!TextUtils.isEmpty(reverseGeoCodeResult.getAddress()))
+            Toast.makeText(LocationActivity.this, reverseGeoCodeResult.getAddress(),
                 Toast.LENGTH_LONG).show();
         StoreUtils.setLocationBean(new LocationBean(reverseGeoCodeResult.getLocation().latitude, reverseGeoCodeResult.getLocation().longitude, reverseGeoCodeResult.getAddressDetail().city));
         nearLocation.setText(reverseGeoCodeResult.getAddressDetail().city);
@@ -153,15 +155,23 @@ public class LocationActivity extends BaseActivity implements OnGetGeoCoderResul
                     location.getLongitude());
             mBaiduMap.addOverlay(new MarkerOptions().position(ll)
                     .icon(BitmapDescriptorFactory
-                            .fromResource(R.drawable.icon_marka)).title(location.getAddrStr()));
-            Toast.makeText(LocationActivity.this, location.getAddrStr(),
+                            .fromResource(R.drawable.icon_marka)));
+            if (!TextUtils.isEmpty(location.getAddrStr()))
+                Toast.makeText(LocationActivity.this, location.getAddrStr(),
                     Toast.LENGTH_LONG).show();
-            MyLocationData locData = new MyLocationData.Builder()
-                    .accuracy(location.getRadius())
-                            // 此处设置开发者获取到的方向信息，顺时针0-360
-                    .direction(100).latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
-            mBaiduMap.setMyLocationData(locData);
+//            MyLocationData locData = new MyLocationData.Builder()
+//                    .accuracy(location.getRadius())
+//                            // 此处设置开发者获取到的方向信息，顺时针0-360
+//                    .direction(100).latitude(location.getLatitude())
+//                    .longitude(location.getLongitude()).build();
+//            mBaiduMap.setMyLocationData(locData);
+            if (isFirstLoc) {
+                isFirstLoc = false;
+                LatLng llg = new LatLng(location.getLatitude(),
+                        location.getLongitude());
+                MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(llg);
+                mBaiduMap.animateMapStatus(u);
+            }
             nearLocation.setText(location.getCity());
         }
 

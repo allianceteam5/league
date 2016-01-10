@@ -479,6 +479,10 @@
             android:name="com.league.activity.near.LocationActivity"
             android:label="@string/title_activity_location" >
         </activity>
+        <activity
+            android:name="com.league.activity.ReportActivity"
+            android:label="@string/title_activity_report" >
+        </activity>
     </application>
 
 </manifest>
