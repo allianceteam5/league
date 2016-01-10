@@ -3,6 +3,7 @@ package com.league.activity.near;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -14,6 +15,11 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
+import com.easemob.chatuidemo.activity.BaiduMapActivity;
+import com.league.activity.MainActivity;
+import com.league.bean.LocationBean;
+import com.league.utils.ActivityUtils;
+import com.league.utils.StoreUtils;
 import com.mine.league.R;
 
 /**
@@ -42,6 +48,7 @@ public class NearActivity extends Activity implements OnClickListener {
         imgBack = (ImageButton) findViewById(R.id.imgbtn_back);
         nearTitle = (TextView) findViewById(R.id.oh_title);
         nearLocation = (TextView) findViewById(R.id.location);
+        nearLocation.setOnClickListener(this);
         nearTitle.setText("附近");
         imgBack.setVisibility(View.VISIBLE);
         imgBack.setOnClickListener(new OnClickListener() {
@@ -71,6 +78,7 @@ public class NearActivity extends Activity implements OnClickListener {
             nearLocation.setText(//arg0.getCountry()+" "
 //			+arg0.getProvince().substring(0, arg0.getProvince().length()-1)+" "+
                     arg0.getCity().substring(0, arg0.getCity().length() - 1));
+            StoreUtils.setLocationBean(new LocationBean(arg0.getLatitude(),arg0.getLongitude(),arg0.getCity()));
         }
 
     }
@@ -104,8 +112,19 @@ public class NearActivity extends Activity implements OnClickListener {
                 intent.putExtra("mode", 4);
                 startActivity(intent);
                 break;
+            case R.id.location:
+                ActivityUtils.start_Activity(this, LocationActivity.class);
+                break;
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocationBean locationBean = StoreUtils.getLocationBean();
+        if (!TextUtils.isEmpty(locationBean.getCity()))
+            nearLocation.setText(locationBean.getCity());
     }
 }

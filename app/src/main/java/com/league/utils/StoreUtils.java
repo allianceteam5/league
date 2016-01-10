@@ -7,6 +7,7 @@ package com.league.utils;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.league.bean.LocationBean;
 import com.league.bean.UserInfoBean;
 import com.tumblr.remember.Remember;
 
@@ -25,6 +26,7 @@ public class StoreUtils {
     private static final String HuanXinPwd = "huanxin_pwd";
     private static final String Avatar = "avatar";
     private static final String Nickname = "nickname";
+    private static final String LocationBean = "locationbean";
     //初始化
     public static void init(Context context){
         Paper.init(context);
@@ -103,5 +105,13 @@ public class StoreUtils {
 
     public static String getNickname(){
         return Remember.getString(Nickname, "");
+    }
+
+    public static void setLocationBean(LocationBean value){
+        Paper.book().write(LocationBean, value);
+    }
+
+    public static LocationBean getLocationBean(){
+        return Paper.book().exist(LocationBean) ? (LocationBean)Paper.book().read(LocationBean):new LocationBean();
     }
 }
