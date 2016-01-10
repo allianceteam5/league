@@ -128,9 +128,11 @@ public class StoreUtils {
     public static int getBankNum() {
         return Remember.getInt(BankNum, 0);
     }
+
     public static void setLocationBean(LocationBean value) {
         Paper.book().write(LocationBean, value);
     }
+
     public static LocationBean getLocationBean() {
         return Paper.book().exist(LocationBean) ? (LocationBean) Paper.book().read(LocationBean) : new LocationBean();
     }

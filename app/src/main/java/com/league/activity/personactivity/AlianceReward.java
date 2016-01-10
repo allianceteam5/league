@@ -16,8 +16,9 @@ import com.mine.league.R;
 public class AlianceReward extends Activity implements IContants {
 
     private ImageView back2, titleright, right1, right2;
-    private TextView title,rules;
+    private TextView title, rules;
     private TextView tvInvite;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,7 @@ public class AlianceReward extends Activity implements IContants {
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-        rules= (TextView) findViewById(R.id.near_rule);
+        rules = (TextView) findViewById(R.id.near_rule);
         rules.setVisibility(View.VISIBLE);
         rules.setOnClickListener(new View.OnClickListener() {
             @Override

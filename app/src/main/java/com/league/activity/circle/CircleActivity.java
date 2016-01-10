@@ -1,6 +1,5 @@
 package com.league.activity.circle;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,23 +10,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.easemob.chatuidemo.domain.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.adapter.CircleMessageAdapter;
-import com.league.adapter.LiaobaConcernListAdapter;
 import com.league.bean.CircleMessageBean;
-import com.league.bean.PopularityBean;
 import com.league.bean.UserInfoBean;
-import com.league.otto.BusProvider;
 import com.league.otto.RefreshEvent;
 import com.league.utils.ActivityUtils;
 import com.league.utils.IContants;
-import com.league.utils.Utils;
 import com.league.utils.api.ApiUtil;
-import com.league.widget.CircleImageView;
-import com.league.widget.NoScrollListView;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
@@ -44,7 +36,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.paperdb.Paper;
 
-public class CircleActivity extends BaseActivity implements View.OnClickListener,IContants{
+public class CircleActivity extends BaseActivity implements View.OnClickListener, IContants {
 
     @Bind(R.id.ib_back)
     ImageView ibBack;
@@ -65,6 +57,10 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
     private int currentPage = 1;
     private UserInfoBean userInfoBean;
 
+//    private EditText etInput;
+//    private TextView tvSend;
+//    private PopupWindow popupWindow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,27 +69,27 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
         ibBack.setOnClickListener(this);
         ivPublish.setOnClickListener(this);
 
-        View headerView = getLayoutInflater().inflate(R.layout.layout_circle_head,null);
+        View headerView = getLayoutInflater().inflate(R.layout.layout_circle_head, null);
         ivThumb = (ImageView) headerView.findViewById(R.id.iv_thumb);
-        tvName =(TextView) headerView.findViewById(R.id.tv_name);
-        tvFriendcount= (TextView) headerView.findViewById(R.id.tv_friendcount);
+        tvName = (TextView) headerView.findViewById(R.id.tv_name);
+        tvFriendcount = (TextView) headerView.findViewById(R.id.tv_friendcount);
         tvLikecount = (TextView) headerView.findViewById(R.id.tv_likecount);
         tvSignature = (TextView) headerView.findViewById(R.id.tv_signature);
         listview.addHeaderView(headerView);
         showProgressDialog();
-        adapter = new CircleMessageAdapter(this, list);
+        adapter = new CircleMessageAdapter(this, list, getWindow().getDecorView());
         listview.setAdapter(adapter);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);
 
         userInfoBean = Paper.book().read(UserInfo);
         if (!TextUtils.isEmpty(userInfoBean.getThumb()))
-            Picasso.with(this).load(userInfoBean.getThumb()).placeholder(R.drawable.example).resize(120,120).centerCrop().into(ivThumb);
+            Picasso.with(this).load(userInfoBean.getThumb()).placeholder(R.drawable.example).resize(120, 120).centerCrop().into(ivThumb);
         else
             Picasso.with(this).load(R.drawable.example).into(ivThumb);
         tvName.setText(userInfoBean.getNickname());
-        tvFriendcount.setText(userInfoBean.getFriendcount()+"");
-        tvLikecount.setText(userInfoBean.getConcerncount()+"");
+        tvFriendcount.setText(userInfoBean.getFriendcount() + "");
+        tvLikecount.setText(userInfoBean.getConcerncount() + "");
         tvSignature.setText(userInfoBean.getSignature());
         initData(currentPage);
     }
@@ -129,7 +125,7 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ib_back:
                 finish();
                 break;
@@ -173,10 +169,34 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
     }
 
     @Subscribe
-    public void refreshEvent(RefreshEvent event){
+    public void refreshEvent(RefreshEvent event) {
         currentPage = 1;
         // 更新数据
         initData(currentPage);
     }
+
+//    public void closePopupWindow() {
+//        if (popupWindow != null && popupWindow.isShowing())
+//            popupWindow.dismiss();
+//    }
+//
+//    public PopupWindow createPopupWindow() {
+//        View view = getLayoutInflater().inflate(R.layout.layout_item_popup_comment, null);
+//        tvSend = (TextView) view.findViewById(R.id.tv_send);
+//        etInput = (EditText) view
+//                .findViewById(R.id.et_input);
+//        etInput.setFocusableInTouchMode(true);
+//        etInput.requestFocus();
+//        InputMethodManager inputManager = (InputMethodManager) etInput
+//                .getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//        inputManager.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+//        PopupWindow popupWindow = new PopupWindow(view, WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+//        popupWindow.setFocusable(true);
+//        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+//        popupWindow.setSoftInputMode(PopupWindow.INPUT_METHOD_NEEDED);
+//        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//        popupWindow.setAnimationStyle(R.style.popwindow_anim_style);
+//        return popupWindow;
+//    }
 
 }

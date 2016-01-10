@@ -318,6 +318,7 @@ public class UserInfoBean {
     public int getStatus() {
         return status;
     }
+
     public void setHxId(String hxId) {
         this.hxId = hxId;
     }

@@ -49,25 +49,25 @@ import java.util.List;
 
 import io.paperdb.Paper;
 
-public class OneYuanGrabItem extends BaseActivity implements View.OnClickListener{
+public class OneYuanGrabItem extends BaseActivity implements View.OnClickListener {
 
     private ImageView back2, titleright, right1, right2;
     private TextView title;
     private ListViewForScrollView listView;
-    private Button takeinNow,takeinAll;
+    private Button takeinNow, takeinAll;
 
     private OneYuanBean detail;
     private List<GrabRecordBean> records;
     private List<MyRecordGrabBean> myrecords;
     private String id;
     private ImageView state;
-    private TextView period,name,totalneed,remain,starttime;
+    private TextView period, name, totalneed, remain, starttime;
     private ProgressBar progressbar;
-    private float needed,remained;
-    private LinearLayout linearLayout,llPoints,winnerresult,bottonnormal;
+    private float needed, remained;
+    private LinearLayout linearLayout, llPoints, winnerresult, bottonnormal;
     private RelativeLayout bottongo;
     private RelativeLayout viewTimeCount;
-    private TextView timeMinutes,timeMill;//倒计时textview
+    private TextView timeMinutes, timeMill;//倒计时textview
     private Button countdetail;//计算详情
     private TimeCount count;//计时器
     private TextView lucknum;//幸运号码
@@ -90,7 +90,7 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
     private int currentPage = 1;
     private OneYuanGrabTakRecodAdapter recordAdapter;
     private boolean isLoop = true;
-    private Handler handler=new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -105,11 +105,12 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
 //            }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_yuan_grab_item);
-        id=getIntent().getStringExtra("id");
+        id = getIntent().getStringExtra("id");
         showProgressDialog();
         initView();
         initData();
@@ -138,8 +139,8 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
 
 
     private void initView() {
-        myrecordlist= (ListViewForScrollView) findViewById(R.id.myrecordlist);
-        tv= (TextView) findViewById(R.id.viewtakestate);
+        myrecordlist = (ListViewForScrollView) findViewById(R.id.myrecordlist);
+        tv = (TextView) findViewById(R.id.viewtakestate);
         back2 = (ImageView) findViewById(R.id.near_back);
 
         back2.setVisibility(View.VISIBLE);
@@ -158,61 +159,61 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-        listView= (ListViewForScrollView) findViewById(R.id.record_list);
-        takeinNow=(Button)findViewById(R.id.takeinnow);
+        listView = (ListViewForScrollView) findViewById(R.id.record_list);
+        takeinNow = (Button) findViewById(R.id.takeinnow);
         takeinNow.setOnClickListener(this);
-        takeinAll= (Button) findViewById(R.id.takeall);
+        takeinAll = (Button) findViewById(R.id.takeall);
         takeinAll.setOnClickListener(this);
 
         llPoints = (LinearLayout) findViewById(R.id.ll_points);
-        viewTimeCount= (RelativeLayout) findViewById(R.id.viewtimecount);
-        timeMinutes= (TextView) findViewById(R.id.countminu);
-        timeMill= (TextView) findViewById(R.id.countmill);
-        countdetail= (Button) findViewById(R.id.countdetail);
+        viewTimeCount = (RelativeLayout) findViewById(R.id.viewtimecount);
+        timeMinutes = (TextView) findViewById(R.id.countminu);
+        timeMill = (TextView) findViewById(R.id.countmill);
+        countdetail = (Button) findViewById(R.id.countdetail);
         countdetail.setOnClickListener(this);
-        winnerresult= (LinearLayout) findViewById(R.id.viewwinneresult);
-        lucknum= (TextView) findViewById(R.id.luckynumber);
-        countdetail1= (Button) findViewById(R.id.countdetail1);
+        winnerresult = (LinearLayout) findViewById(R.id.viewwinneresult);
+        lucknum = (TextView) findViewById(R.id.luckynumber);
+        countdetail1 = (Button) findViewById(R.id.countdetail1);
         countdetail1.setOnClickListener(this);
-        winnerThumb= (CircleImageView) findViewById(R.id.thumb);
-        winnerName= (TextView) findViewById(R.id.holdername);
-        winnerId= (TextView) findViewById(R.id.holderid);
-        winnerCount= (TextView) findViewById(R.id.taknum);
-        winnerEndTime= (TextView) findViewById(R.id.endtime);
+        winnerThumb = (CircleImageView) findViewById(R.id.thumb);
+        winnerName = (TextView) findViewById(R.id.holdername);
+        winnerId = (TextView) findViewById(R.id.holderid);
+        winnerCount = (TextView) findViewById(R.id.taknum);
+        winnerEndTime = (TextView) findViewById(R.id.endtime);
 
-        state= (ImageView) findViewById(R.id.state);
-        period= (TextView) findViewById(R.id.period);
-        name= (TextView) findViewById(R.id.name);
-        totalneed= (TextView) findViewById(R.id.totalpeo);
-        remain= (TextView) findViewById(R.id.leavepeo);
-        starttime= (TextView) findViewById(R.id.starttime);
-        progressbar= (ProgressBar) findViewById(R.id.progressbar);
-        linearLayout= (LinearLayout) findViewById(R.id.viewpaper);
-        viewPager=new ViewPager(this);
-        DisplayMetrics dm=new DisplayMetrics();
+        state = (ImageView) findViewById(R.id.state);
+        period = (TextView) findViewById(R.id.period);
+        name = (TextView) findViewById(R.id.name);
+        totalneed = (TextView) findViewById(R.id.totalpeo);
+        remain = (TextView) findViewById(R.id.leavepeo);
+        starttime = (TextView) findViewById(R.id.starttime);
+        progressbar = (ProgressBar) findViewById(R.id.progressbar);
+        linearLayout = (LinearLayout) findViewById(R.id.viewpaper);
+        viewPager = new ViewPager(this);
+        DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         viewPager.setLayoutParams(new LinearLayout.LayoutParams(dm.widthPixels, dm.heightPixels * 2 / 5));
         linearLayout.addView(viewPager);
-        listviews=new ArrayList<ImageView>();
+        listviews = new ArrayList<ImageView>();
 
         pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
 
-        bottonnormal= (LinearLayout) findViewById(R.id.bottomnormal);
-        bottongo= (RelativeLayout) findViewById(R.id.bottom_go);
-        goRightNow= (Button) findViewById(R.id.gorightnow);
+        bottonnormal = (LinearLayout) findViewById(R.id.bottomnormal);
+        bottongo = (RelativeLayout) findViewById(R.id.bottom_go);
+        goRightNow = (Button) findViewById(R.id.gorightnow);
         goRightNow.setOnClickListener(this);
     }
 
-    public void initData(){
-        ApiUtil.grabcommoditiesGetDetail(getApplication(), id,new BaseJsonHttpResponseHandler<OneGrabDetailBean>() {
+    public void initData() {
+        ApiUtil.grabcommoditiesGetDetail(getApplication(), id, new BaseJsonHttpResponseHandler<OneGrabDetailBean>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, OneGrabDetailBean response) {
-                detail=response.getOneYuanBean();
-                records=response.getGrabRecordBean();
-                myrecords=response.getMyRecordGrabBean();
+                detail = response.getOneYuanBean();
+                records = response.getGrabRecordBean();
+                myrecords = response.getMyRecordGrabBean();
                 Paper.book().write(Constants.OneYuanDetail + id, detail);
-                Paper.book().write(Constants.OneYuanDetailRecords+id,records);
+                Paper.book().write(Constants.OneYuanDetailRecords + id, records);
                 updateView(detail, records, myrecords);
                 closeProgressDialog();
             }
@@ -220,23 +221,24 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, OneGrabDetailBean errorResponse) {
                 detail = Paper.book().read(Constants.OneYuanDetail + id);
-                records=Paper.book().read(Constants.OneYuanDetailRecords+id);
+                records = Paper.book().read(Constants.OneYuanDetailRecords + id);
                 if (detail != null) {
-                    updateView(detail,records,myrecords);
+                    updateView(detail, records, myrecords);
                 }
                 closeProgressDialog();
             }
 
             @Override
             protected OneGrabDetailBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                JSONObject jsonObject=new JSONObject(rawJsonData);
-                OneYuanBean oyb=new ObjectMapper().readValue(jsonObject.optString("detail"), new TypeReference<OneYuanBean>() {});
-                List<GrabRecordBean> grb=new ObjectMapper().readValue(jsonObject.optString("records"), new TypeReference<ArrayList<GrabRecordBean>>() {
+                JSONObject jsonObject = new JSONObject(rawJsonData);
+                OneYuanBean oyb = new ObjectMapper().readValue(jsonObject.optString("detail"), new TypeReference<OneYuanBean>() {
                 });
-                Log.i("grb",grb.size()+"");
-                List<MyRecordGrabBean> mrgb=new ObjectMapper().readValue(jsonObject.optString("myrecords"), new TypeReference<ArrayList<MyRecordGrabBean>>() {
+                List<GrabRecordBean> grb = new ObjectMapper().readValue(jsonObject.optString("records"), new TypeReference<ArrayList<GrabRecordBean>>() {
                 });
-                OneGrabDetailBean ogdb=new OneGrabDetailBean();
+                Log.i("grb", grb.size() + "");
+                List<MyRecordGrabBean> mrgb = new ObjectMapper().readValue(jsonObject.optString("myrecords"), new TypeReference<ArrayList<MyRecordGrabBean>>() {
+                });
+                OneGrabDetailBean ogdb = new OneGrabDetailBean();
                 ogdb.setOneYuanBean(oyb);
                 ogdb.setGrabRecordBean(grb);
                 ogdb.setMyRecordGrabBean(mrgb);
@@ -245,24 +247,25 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
         });
 
     }
-    void updateView(OneYuanBean detail,List<GrabRecordBean> records,List<MyRecordGrabBean> myrecords){
 
-        if(detail.getIslotteried().equals("0")){
+    void updateView(OneYuanBean detail, List<GrabRecordBean> records, List<MyRecordGrabBean> myrecords) {
+
+        if (detail.getIslotteried().equals("0")) {
             state.setImageResource(R.drawable.running);
 
             winnerresult.setVisibility(View.GONE);
-            if(detail.getEnd_at().equals("0")){
+            if (detail.getEnd_at().equals("0")) {
                 bottonnormal.setVisibility(View.VISIBLE);
                 bottongo.setVisibility(View.GONE);
                 viewTimeCount.setVisibility(View.GONE);
-            }else{
+            } else {
                 bottongo.setVisibility(View.VISIBLE);
                 bottonnormal.setVisibility(View.GONE);
                 viewTimeCount.setVisibility(View.VISIBLE);
-                count=new TimeCount(Long.valueOf(detail.getEnd_at())*1000-System.currentTimeMillis(),1000);
+                count = new TimeCount(Long.valueOf(detail.getEnd_at()) * 1000 - System.currentTimeMillis(), 1000);
                 count.start();
             }
-        }else{
+        } else {
             state.setImageResource(R.drawable.grabstate_finished);
             bottongo.setVisibility(View.VISIBLE);
             bottonnormal.setVisibility(View.GONE);
@@ -277,21 +280,21 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
                 Picasso.with(getApplicationContext()).load(detail.getThumb()).into(winnerThumb);
 
         }
-        period.setText("第"+detail.getVersion()+"期");
+        period.setText("第" + detail.getVersion() + "期");
         name.setText(detail.getTitle());
         totalneed.setText(detail.getNeeded());
-        remain.setText("剩余"+detail.getRemain());
-        needed=Float.valueOf(detail.getNeeded());
-        remained=Float.valueOf(detail.getRemain());
+        remain.setText("剩余" + detail.getRemain());
+        needed = Float.valueOf(detail.getNeeded());
+        remained = Float.valueOf(detail.getRemain());
         progressbar.setProgress((int) ((needed - remained) / needed * 100));
         starttime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(detail.getCreated_at()) * 1000));
-        pictures=detail.getPictures().split(" ");
+        pictures = detail.getPictures().split(" ");
 
-        ImageView iv=null;
+        ImageView iv = null;
         View view;
         listviews.clear();
         llPoints.removeAllViews();
-        for(int i=0;i<pictures.length;i++) {
+        for (int i = 0; i < pictures.length; i++) {
             iv = new ImageView(this);
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
             if (!TextUtils.isEmpty(pictures[i]))
@@ -309,7 +312,7 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
             llPoints.addView(view);
         }
 
-        mViewPaperAdapter=new ViewPaperAdapter(listviews);
+        mViewPaperAdapter = new ViewPaperAdapter(listviews);
         viewPager.setAdapter(mViewPaperAdapter);
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -334,15 +337,15 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
 
             }
         });
-        recordAdapter=new OneYuanGrabTakRecodAdapter(records,getApplication());
+        recordAdapter = new OneYuanGrabTakRecodAdapter(records, getApplication());
         listView.setAdapter(recordAdapter);
-        if(myrecords.size()==0){
+        if (myrecords.size() == 0) {
             tv.setVisibility(View.VISIBLE);
             myrecordlist.setVisibility(View.GONE);
-        }else{
+        } else {
             tv.setVisibility(View.GONE);
             myrecordlist.setVisibility(View.VISIBLE);
-            myrecordlist.setAdapter(new DetailMyRecords(myrecords,getApplication()));
+            myrecordlist.setAdapter(new DetailMyRecords(myrecords, getApplication()));
         }
 
         llPoints.getChildAt(previousSelectPosition).setEnabled(true);
@@ -351,34 +354,34 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.takeinnow:
                 //弹出对话框
-                TakeInDialog takeInDialog=new TakeInDialog(OneYuanGrabItem.this,id,1);
+                TakeInDialog takeInDialog = new TakeInDialog(OneYuanGrabItem.this, id, 1);
                 takeInDialog.show();
                 break;
             case R.id.passanou://往期揭晓
-                Intent intent=new Intent(OneYuanGrabItem.this,PassAnnounced.class);
-                intent.putExtra("type",1);
-                intent.putExtra("kind",detail.getKind());
+                Intent intent = new Intent(OneYuanGrabItem.this, PassAnnounced.class);
+                intent.putExtra("type", 1);
+                intent.putExtra("kind", detail.getKind());
                 startActivity(intent);
                 break;
             case R.id.takeall:
-                Intent inten=new Intent(OneYuanGrabItem.this,BuyList.class);
-                inten.putExtra("type",1);
-                inten.putExtra("number",detail.getNeeded());
-                inten.putExtra("id",id);
-                inten.putExtra("buytype",1);
+                Intent inten = new Intent(OneYuanGrabItem.this, BuyList.class);
+                inten.putExtra("type", 1);
+                inten.putExtra("number", detail.getNeeded());
+                inten.putExtra("id", id);
+                inten.putExtra("buytype", 1);
                 startActivity(inten);
                 break;
             case R.id.picturesdetail:
-                Intent intentpicture=new Intent (OneYuanGrabItem.this,PictureDetails.class);
-                intentpicture.putExtra("picturesdetail",detail.getDetails());
+                Intent intentpicture = new Intent(OneYuanGrabItem.this, PictureDetails.class);
+                intentpicture.putExtra("picturesdetail", detail.getDetails());
                 startActivity(intentpicture);
                 break;
             case R.id.countdetail1:
             case R.id.countdetail:
-                Intent count=new Intent(OneYuanGrabItem.this,CountDetailActivity.class);
+                Intent count = new Intent(OneYuanGrabItem.this, CountDetailActivity.class);
                 startActivity(count);
                 break;
             case R.id.gorightnow:
@@ -390,7 +393,7 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
                             go.putExtra("id", response.get(0).getId());
                             startActivity(go);
                         } else {
-                            ToastUtils.showShortToast(getApplicationContext(),"没有下一期了");
+                            ToastUtils.showShortToast(getApplicationContext(), "没有下一期了");
                         }
 
                     }
@@ -411,6 +414,7 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
                 break;
         }
     }
+
     class TimeCount extends CountDownTimer {
 
         public TimeCount(long millisInFuture, long countDownInterval) {
@@ -419,13 +423,13 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
 
         @Override
         public void onTick(long millisUntilFinished) {
-            long minutes=millisUntilFinished / 60000;
-            long mill=(millisUntilFinished %60000)/1000;
-            if(timeMinutes.getText().toString().equals(minutes+"")){
-                timeMill.setText(mill+"");
-            }else{
+            long minutes = millisUntilFinished / 60000;
+            long mill = (millisUntilFinished % 60000) / 1000;
+            if (timeMinutes.getText().toString().equals(minutes + "")) {
                 timeMill.setText(mill + "");
-                timeMinutes.setText(minutes+"");
+            } else {
+                timeMill.setText(mill + "");
+                timeMinutes.setText(minutes + "");
             }
         }
 
@@ -434,18 +438,15 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
             initData();
         }
     }
-    public class MyListener implements PullToRefreshLayout.OnRefreshListener
-    {
+
+    public class MyListener implements PullToRefreshLayout.OnRefreshListener {
 
         @Override
-        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
             // 下拉刷新操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     initData();
                     totalPage = 2;
                     currentPage = 1;
@@ -457,16 +458,13 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
         }
 
         @Override
-        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
             // 加载操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage++;
-                    if(currentPage <= totalPage){
+                    if (currentPage <= totalPage) {
                         ApiUtil.getMoreRecordCommodity(getApplicationContext(), id, currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabRecordBean>>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<GrabRecordBean> response) {
@@ -491,7 +489,7 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
                                 });
                             }
                         });
-                    }else{
+                    } else {
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
 
@@ -500,6 +498,7 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
         }
 
     }
+
     @Override
     public void onDestroy() {
         // TODO Auto-generated method stub

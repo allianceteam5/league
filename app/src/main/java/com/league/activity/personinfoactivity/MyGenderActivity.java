@@ -9,7 +9,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.bean.SucessBean;
 import com.league.bean.UserInfoBean;
-import com.league.utils.Constants;
 import com.league.utils.PersonInfoBaseActivity;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
@@ -20,12 +19,13 @@ import org.apache.http.Header;
 
 import io.paperdb.Paper;
 
-public class MyGenderActivity extends PersonInfoBaseActivity implements View.OnClickListener{
+public class MyGenderActivity extends PersonInfoBaseActivity implements View.OnClickListener {
     private Button mOption;
     private UserInfoBean userInfoBean;
-    private ImageView mImgWoman,mImgMan;
-    private View view1,view2;
-    private int isFlag=0;
+    private ImageView mImgWoman, mImgMan;
+    private View view1, view2;
+    private int isFlag = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,42 +39,42 @@ public class MyGenderActivity extends PersonInfoBaseActivity implements View.OnC
 
     @Override
     protected void initView() {
-        mOption= (Button) findViewById(R.id.newadd);
+        mOption = (Button) findViewById(R.id.newadd);
         mOption.setVisibility(View.VISIBLE);
         mOption.setText("提交");
         mOption.setOnClickListener(this);
-        mImgMan= (ImageView) findViewById(R.id.img_man);
-        mImgWoman= (ImageView) findViewById(R.id.img_woman);
-        view1=findViewById(R.id.woman);
-        view2=findViewById(R.id.man);
+        mImgMan = (ImageView) findViewById(R.id.img_man);
+        mImgWoman = (ImageView) findViewById(R.id.img_woman);
+        view1 = findViewById(R.id.woman);
+        view2 = findViewById(R.id.man);
         view1.setOnClickListener(this);
         view2.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
-        userInfoBean= Paper.book().read("UserInfoBean");
-        if(userInfoBean!=null&&userInfoBean.getGender()==0){
+        userInfoBean = Paper.book().read("UserInfoBean");
+        if (userInfoBean != null && userInfoBean.getGender() == 0) {
             setGender(true);
-        }else{
+        } else {
             setGender(false);
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.newadd:
                 ApiUtil.modifyUserDetaiSex(getApplicationContext(), isFlag, new BaseJsonHttpResponseHandler<SucessBean>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                        if(response.getFlag().equals("1")){
+                        if (response.getFlag().equals("1")) {
                             userInfoBean.setGender(isFlag);
-                            Paper.book().write("UserInfoBean",userInfoBean);
+                            Paper.book().write("UserInfoBean", userInfoBean);
                             onBackPressed();
                             finish();
-                        }else{
-                            ToastUtils.showShortToast(getApplicationContext(),"网络不好，再试试");
+                        } else {
+                            ToastUtils.showShortToast(getApplicationContext(), "网络不好，再试试");
                         }
                     }
 
@@ -98,13 +98,14 @@ public class MyGenderActivity extends PersonInfoBaseActivity implements View.OnC
                 break;
         }
     }
-    private void setGender(boolean flag){
-        if(flag){
-            isFlag=0;
+
+    private void setGender(boolean flag) {
+        if (flag) {
+            isFlag = 0;
             mImgWoman.setVisibility(View.VISIBLE);
             mImgMan.setVisibility(View.INVISIBLE);
-        }else{
-            isFlag=1;
+        } else {
+            isFlag = 1;
             mImgWoman.setVisibility(View.INVISIBLE);
             mImgMan.setVisibility(View.VISIBLE);
         }

@@ -146,7 +146,7 @@ public class CirclePublishActivity extends BaseActivity implements View.OnClickL
             return;
         }
 
-        if (imgList.size() == 1){
+        if (imgList.size() == 1) {
             callApi("");
             return;
         }
@@ -204,7 +204,7 @@ public class CirclePublishActivity extends BaseActivity implements View.OnClickL
         }
     };
 
-    private void callApi(String imgStr){
+    private void callApi(String imgStr) {
         ApiUtil.circleMessagesCreated(getApplicationContext(), content, imgStr, new JsonHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {

@@ -10,7 +10,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.bean.EnvelopeBean;
-import com.league.utils.Constants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -48,7 +47,7 @@ public class GrabEnvolopeDialog extends BaseActivity implements View.OnClickList
     }
 
     private void initData() {
-        ApiUtil.getGrabEnvelope(getApplicationContext(),new BaseJsonHttpResponseHandler<EnvelopeBean>() {
+        ApiUtil.getGrabEnvelope(getApplicationContext(), new BaseJsonHttpResponseHandler<EnvelopeBean>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, EnvelopeBean response) {
                 closeProgressDialog();
@@ -101,7 +100,7 @@ public class GrabEnvolopeDialog extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.share:
-                ShareDialog shareDialog=new ShareDialog(GrabEnvolopeDialog.this,GrabEnvolopeDialog.this);
+                ShareDialog shareDialog = new ShareDialog(GrabEnvolopeDialog.this, GrabEnvolopeDialog.this);
                 shareDialog.show();
                 break;
 

@@ -27,7 +27,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class WithDraw extends BaseActivity implements View.OnClickListener{
+public class WithDraw extends BaseActivity implements View.OnClickListener {
 
     private ImageView back2, titleright, right1, right2;
     private TextView title;
@@ -35,9 +35,10 @@ public class WithDraw extends BaseActivity implements View.OnClickListener{
     TextView withDrawNum;
     @Bind(R.id.listview)
     ListView listView;
-    private List<BankCardInfo> list=new ArrayList<BankCardInfo>();
+    private List<BankCardInfo> list = new ArrayList<BankCardInfo>();
     BankCardAdapter adapter;
-    private boolean[] select=new boolean[StoreUtils.getBankNum()];
+    private boolean[] select = new boolean[StoreUtils.getBankNum()];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +70,7 @@ public class WithDraw extends BaseActivity implements View.OnClickListener{
         right2.setVisibility(View.GONE);
 
         withDrawNum.setText(StoreUtils.getRealMoney() + "元");
-        adapter = new BankCardAdapter(list, getApplication(),select);
+        adapter = new BankCardAdapter(list, getApplication(), select);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,12 +89,12 @@ public class WithDraw extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.addbankcard:
-                if(StoreUtils.getBankNum()>2){
-                    ToastUtils.showShortToast(WithDraw.this,"最多只可以添加3张银行卡");
-                }else{
-                    Intent intent=new Intent(getApplication(),AddBankCard.class);
+                if (StoreUtils.getBankNum() > 2) {
+                    ToastUtils.showShortToast(WithDraw.this, "最多只可以添加3张银行卡");
+                } else {
+                    Intent intent = new Intent(getApplication(), AddBankCard.class);
                     startActivity(intent);
                 }
 
@@ -101,7 +102,7 @@ public class WithDraw extends BaseActivity implements View.OnClickListener{
         }
     }
 
-    private void initData(){
+    private void initData() {
         showProgressDialog();
         ApiUtil.getUserBankcardList(this, new BaseJsonHttpResponseHandler<ArrayList<BankCardInfo>>() {
             @Override

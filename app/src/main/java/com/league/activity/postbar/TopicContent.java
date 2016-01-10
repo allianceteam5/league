@@ -22,7 +22,6 @@ import com.league.activity.ShowBigImgActivity;
 import com.league.adapter.ImgGridAdapter;
 import com.league.adapter.LiaobaCommentAdapter;
 import com.league.bean.LiaoBaMessageBean;
-import com.league.bean.RecommendationInfoBean;
 import com.league.bean.ReplysEntity;
 import com.league.utils.ActivityUtils;
 import com.league.utils.IContants;
@@ -150,7 +149,7 @@ public class TopicContent extends BaseActivity implements IContants, View.OnClic
                 refreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (liaoBaMessageBean.getReplys() == null || liaoBaMessageBean.getReplys().size() < 20){
+                        if (liaoBaMessageBean.getReplys() == null || liaoBaMessageBean.getReplys().size() < 20) {
                             refreshLayout.setLoading(false);
                             return;
                         }

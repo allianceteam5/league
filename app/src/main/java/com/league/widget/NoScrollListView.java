@@ -5,31 +5,30 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 /**
- * 
  * @author pfy 重写ListView，解决ListView与ListView的冲突问题
  *         由于ListView中嵌套了ListView，会造成ListView无法完全显示图片，所以要重写ListView
  */
 public class NoScrollListView extends ListView {
 
-	public NoScrollListView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-	}
+    public NoScrollListView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
 
-	public NoScrollListView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    public NoScrollListView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-	public NoScrollListView(Context context) {
-		super(context);
-	}
+    public NoScrollListView(Context context) {
+        super(context);
+    }
 
-	/**
-	 * 设置不滚动
-	 */
-	public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
-				MeasureSpec.AT_MOST);
-		super.onMeasure(widthMeasureSpec, expandSpec);
-	}
+    /**
+     * 设置不滚动
+     */
+    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
+                MeasureSpec.AT_MOST);
+        super.onMeasure(widthMeasureSpec, expandSpec);
+    }
 
 }

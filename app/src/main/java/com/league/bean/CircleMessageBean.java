@@ -39,7 +39,7 @@ public class CircleMessageBean {
     private List<ReplysEntity> replys;
     private List<ZansEntity> zans;
 
-    public List<String> getPictureList(){
+    public List<String> getPictureList() {
         if (TextUtils.isEmpty(pictures))
             return null;
         return Arrays.asList(pictures.trim().split(" "));
@@ -179,6 +179,17 @@ public class CircleMessageBean {
         private String tonickname;
         private String tophone;
         private String tothumb;
+
+        public ReplysEntity() {
+        }
+
+        public ReplysEntity(String fromphone, String fromnickname, String tophone, String tonickname, String content) {
+            this.fromphone = fromphone;
+            this.fromnickname = fromnickname;
+            this.tophone = tophone;
+            this.tonickname = tonickname;
+            this.content = content;
+        }
 
         public void setId(String id) {
             this.id = id;

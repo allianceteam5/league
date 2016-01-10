@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -77,7 +76,7 @@ public class LiaobaConcernListAdapter extends BaseAdapter {
         if (0 == list.get(position).getIsconcerned()) {
             holder.concern.setVisibility(View.GONE);
         }
-        holder.concern.setOnClickListener(new View.OnClickListener(){
+        holder.concern.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ApiUtil.liaobaConcern(ctx, list.get(position).getPhone(), 0, new BaseJsonHttpResponseHandler<SucessBean>() {

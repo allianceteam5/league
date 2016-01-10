@@ -15,6 +15,7 @@ public class PaymentOrder extends Activity {
     private ImageView back2, titleright, right1, right2;
     private TextView title;
     private Button sure;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +44,11 @@ public class PaymentOrder extends Activity {
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-        sure= (Button) findViewById(R.id.sure);
+        sure = (Button) findViewById(R.id.sure);
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplication(),PaymentOrder.class);
+                Intent intent = new Intent(getApplication(), PaymentOrder.class);
                 startActivity(intent);
 
             }

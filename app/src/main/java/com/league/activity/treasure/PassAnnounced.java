@@ -26,30 +26,32 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PassAnnounced extends BaseActivity{
+public class PassAnnounced extends BaseActivity {
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
     private ListView listView;
-    private List<PassAnnouncedBean> list=new ArrayList<PassAnnouncedBean>();
+    private List<PassAnnouncedBean> list = new ArrayList<PassAnnouncedBean>();
     private int totalPage = 1;
     private int currentPage = 1;
     private int type = 0;//0表示10夺金  1表示一元夺宝
     private PullToRefreshLayout pullToRefreshLayout;
     private PassAnnouncedAdapter adapter;
     private String kind;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pass_announced);
-        kind=getIntent().getStringExtra("kind");
-        type=getIntent().getIntExtra("type",-1);
-        if(type==-1){
+        kind = getIntent().getStringExtra("kind");
+        type = getIntent().getIntExtra("type", -1);
+        if (type == -1) {
             return;
         }
         showProgressDialog();
         initView();
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -70,16 +72,17 @@ public class PassAnnounced extends BaseActivity{
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.INVISIBLE);
-        listView= (ListView) findViewById(R.id.pass_list);
-        adapter=new PassAnnouncedAdapter(list,getApplication());
+        listView = (ListView) findViewById(R.id.pass_list);
+        adapter = new PassAnnouncedAdapter(list, getApplication());
         listView.setAdapter(adapter);
         pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);
-        initData(type,currentPage);
+        initData(type, currentPage);
     }
-    private void initData(int type, final int currentPage){
-        if(type==1){
+
+    private void initData(int type, final int currentPage) {
+        if (type == 1) {
             ApiUtil.grabcommoditiesPassAnnounced(getApplication(), kind, currentPage, new BaseJsonHttpResponseHandler<ArrayList<PassAnnouncedBean>>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<PassAnnouncedBean> response) {
@@ -117,7 +120,7 @@ public class PassAnnounced extends BaseActivity{
                     });
                 }
             });
-        }else if(type==0){
+        } else if (type == 0) {
             ApiUtil.grabcornsPassAnnounced(getApplication(), kind, currentPage, new BaseJsonHttpResponseHandler<ArrayList<PassAnnouncedBean>>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<PassAnnouncedBean> response) {
@@ -125,7 +128,7 @@ public class PassAnnounced extends BaseActivity{
                         list.clear();
                     }
                     list.addAll(response);
-                    if(list.get(0).getEnd_at().equals("0")){
+                    if (list.get(0).getEnd_at().equals("0")) {
                         list.remove(0);
                     }
 
@@ -158,20 +161,16 @@ public class PassAnnounced extends BaseActivity{
         }
     }
 
-    public class MyListener implements PullToRefreshLayout.OnRefreshListener
-    {
+    public class MyListener implements PullToRefreshLayout.OnRefreshListener {
 
         @Override
-        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
             // 下拉刷新操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage = 1;
-                    initData(type,currentPage);
+                    initData(type, currentPage);
                     // 千万别忘了告诉控件刷新完毕了哦！
                     pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                 }
@@ -180,17 +179,14 @@ public class PassAnnounced extends BaseActivity{
         }
 
         @Override
-        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
             // 加载操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage++;
-                    if(currentPage <= totalPage)
-                        initData(type,currentPage);
+                    if (currentPage <= totalPage)
+                        initData(type, currentPage);
                     // 千万别忘了告诉控件加载完毕了哦！
                     pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                 }

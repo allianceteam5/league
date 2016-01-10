@@ -13,7 +13,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
 import com.league.bean.UserInfoBean;
-import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
@@ -26,7 +25,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.paperdb.Paper;
 
-public class Certification extends BaseActivity implements View.OnClickListener,IContants{
+public class Certification extends BaseActivity implements View.OnClickListener, IContants {
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
@@ -40,6 +39,7 @@ public class Certification extends BaseActivity implements View.OnClickListener,
     LinearLayout llNotCertify;
     @Bind(R.id.ll_hascertified)
     LinearLayout llHasCertified;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +48,7 @@ public class Certification extends BaseActivity implements View.OnClickListener,
         initView();
 
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -69,11 +70,11 @@ public class Certification extends BaseActivity implements View.OnClickListener,
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
         mBind.setOnClickListener(this);
-        UserInfoBean userInfoBean=Paper.book().read(UserInfo);
-        if(userInfoBean.getStatus()==0){
+        UserInfoBean userInfoBean = Paper.book().read(UserInfo);
+        if (userInfoBean.getStatus() == 0) {
             llNotCertify.setVisibility(View.VISIBLE);
             llHasCertified.setVisibility(View.GONE);
-        }else{
+        } else {
             llNotCertify.setVisibility(View.GONE);
             llHasCertified.setVisibility(View.VISIBLE);
         }
@@ -81,7 +82,7 @@ public class Certification extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.bindid:
                 showProgressDialog();
                 ApiUtil.realAuth(Certification.this, mInputName.getText().toString(),
@@ -90,7 +91,7 @@ public class Certification extends BaseActivity implements View.OnClickListener,
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                 closeProgressDialog();
                                 if (response.getFlag().equals("1")) {
-                                    ToastUtils.showShortToast(Certification.this,"绑定成功");
+                                    ToastUtils.showShortToast(Certification.this, "绑定成功");
                                     onBackPressed();
                                     finish();
                                 } else {

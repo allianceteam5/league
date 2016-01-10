@@ -8,13 +8,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp">
 
         <com.league.widget.CircleImageView
             android:id="@+id/thumb"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:src="@drawable/example" >
@@ -33,16 +33,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="用户昵称"
-                android:textSize="16dp"
-                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:textColor="@color/text_title"
                 android:layout_marginBottom="2dp"/>
             <TextView
                 android:id="@+id/content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="还不错"
-                android:textSize="14dp"
-                android:textColor="@color/black" />
+                android:textSize="12dp"
+                android:textColor="@color/text_title" />
 
         </LinearLayout>
         <TextView
@@ -53,6 +53,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:text="11分钟前"
-            android:textColor="@color/black" />
+            android:textSize="10dp"
+            android:textColor="@color/text_content" />
     </RelativeLayout>
 </LinearLayout>

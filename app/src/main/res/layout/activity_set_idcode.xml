@@ -50,6 +50,7 @@
             android:paddingLeft="10dp"
             android:hint="确认新密码"
             android:background="@null"
+            style="@style/editText"
             android:gravity="center_vertical"
             android:paddingBottom="10dp"
             android:inputType="textPassword"/>

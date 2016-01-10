@@ -14,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.easemob.chatuidemo.DemoHXSDKHelper;
-import com.easemob.chatuidemo.activity.LoginActivity;
 import com.league.activity.BaseActivity;
 import com.league.activity.personinfoactivity.MyAreaActivity;
 import com.league.activity.personinfoactivity.MyGenderActivity;
@@ -24,11 +22,8 @@ import com.league.activity.personinfoactivity.ShippingAddress;
 import com.league.activity.personinfoactivity.SignatureActivity;
 import com.league.bean.UserInfoBean;
 import com.league.interf.OnAllComplete;
-import com.league.utils.ActivityUtils;
-import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.ImgUtils;
-import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.PickImgPopWindow;
@@ -48,7 +43,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.paperdb.Paper;
 
-public class PersonInformationSetup extends BaseActivity implements View.OnClickListener,IContants{
+public class PersonInformationSetup extends BaseActivity implements View.OnClickListener, IContants {
 
     private ImageView back2, titleright, right1, right2;
     private TextView title;
@@ -74,6 +69,7 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
     public final int SELECT_PICTURE = 2; // 从图库中选择图片
     public final int CROP_PHOTO = 3;// 系统的裁剪图片
     private StringBuffer picture = new StringBuffer();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,10 +125,11 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
             }
         });
     }
-    private void initData(){
-        userInfoBean= Paper.book().read("UserInfoBean");
-        if(userInfoBean.getThumb().length()>0){
-            Picasso.with(this).load(userInfoBean.getThumb()).into(mThumbnail);
+
+    private void initData() {
+        userInfoBean = Paper.book().read("UserInfoBean");
+        if (!TextUtils.isEmpty(userInfoBean.getThumb())) {
+            Picasso.with(this).load(userInfoBean.getThumb()).resize(120, 120).centerCrop().into(mThumbnail);
         }
 
         mNickName.setText(userInfoBean.getNickname());
@@ -141,22 +138,23 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
         mArea.setText(userInfoBean.getArea());
         mSignature.setText(userInfoBean.getSignature());
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.changeportrail:
                 pickImgPopWindow.showPopWindow();
                 break;
             case R.id.truenamemake:
-                Intent intent=new Intent(PersonInformationSetup.this,Certification.class);
+                Intent intent = new Intent(PersonInformationSetup.this, Certification.class);
                 startActivity(intent);
                 break;
             case R.id.shippingaddress:
-                Intent address=new Intent(PersonInformationSetup.this, ShippingAddress.class);
+                Intent address = new Intent(PersonInformationSetup.this, ShippingAddress.class);
                 startActivity(address);
                 break;
             case R.id.mysignature:
-                Intent signature=new Intent(PersonInformationSetup.this, SignatureActivity.class);
+                Intent signature = new Intent(PersonInformationSetup.this, SignatureActivity.class);
                 startActivity(signature);
                 break;
             case R.id.myarea:
@@ -219,20 +217,21 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
                     .show();
         }
     }
+
     public void updateAvatar(Uri uri) {
         String imagePath = ImgUtils.getRealFilePath(getApplicationContext(), uri);
-        Log.d("url",imagePath);
+        Log.d("url", imagePath);
         //本地为什么放不进去 实在不行先要上传到七牛 再用七牛的链接地址更新头像
         Picasso.with(this).load("file://" + ImgUtils.getRealFilePath(getApplicationContext(), uri)).resize(160, 160).centerCrop().into(mThumbnail);
         if (!TextUtils.isEmpty(imagePath)) {
-            String zoomedImgePath = ImgUtils.saveBitmapToSDCard(ImgUtils.zoomBitmap(PersonInformationSetup.this,uri, 160, 160));
+            String zoomedImgePath = ImgUtils.saveBitmapToSDCard(ImgUtils.zoomBitmap(PersonInformationSetup.this, uri, 160, 160));
             Picasso.with(this).load("file://" + zoomedImgePath).resize(160, 160).centerCrop().into(mThumbnail);
 //            uploadAvatar(zoomedImgePath);
         } else
             ToastUtils.showShortToast(this, "头像获取失败");
     }
 
-    public void uploadAvatar(final String imagePath){
+    public void uploadAvatar(final String imagePath) {
         final UploadManager uploadManager = new UploadManager();
 //        showProgressDialog();
         ApiUtil.getQiniuToken(getApplicationContext(), new JsonHttpResponseHandler() {
@@ -254,6 +253,7 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
                             }
                         }, null);
             }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 closeProgressDialog();

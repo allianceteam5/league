@@ -64,14 +64,14 @@ public class OneYuanGrab extends BaseActivity implements View.OnClickListener {
         pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);
-        initData(type,currentPage);
+        initData(type, currentPage);
     }
 
-    private void initData(int type, final int currentPage){
-        ApiUtil.grabCommoditiesSearch(getApplication(),type,currentPage, new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
+    private void initData(int type, final int currentPage) {
+        ApiUtil.grabCommoditiesSearch(getApplication(), type, currentPage, new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
-                if(currentPage == 1){
+                if (currentPage == 1) {
                     list.clear();
                 }
                 list.addAll(response);
@@ -94,32 +94,29 @@ public class OneYuanGrab extends BaseActivity implements View.OnClickListener {
             }
         });
     }
+
     private void updateView() {
         oneyuanGrabAdapter.notifyDataSetChanged();
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(OneYuanGrab.this,OneYuanGrabItem.class);
-                intent.putExtra("id",list.get(position).getId());
+                Intent intent = new Intent(OneYuanGrab.this, OneYuanGrabItem.class);
+                intent.putExtra("id", list.get(position).getId());
                 startActivity(intent);
             }
         });
     }
 
-    public class MyListener implements PullToRefreshLayout.OnRefreshListener
-    {
+    public class MyListener implements PullToRefreshLayout.OnRefreshListener {
 
         @Override
-        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
             // 下拉刷新操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage = 1;
-                    initData(type,currentPage);
+                    initData(type, currentPage);
                     // 千万别忘了告诉控件刷新完毕了哦！
                     pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                 }
@@ -128,17 +125,14 @@ public class OneYuanGrab extends BaseActivity implements View.OnClickListener {
         }
 
         @Override
-        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
             // 加载操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage++;
-                    if(currentPage <= totalPage)
-                        initData(type,currentPage);
+                    if (currentPage <= totalPage)
+                        initData(type, currentPage);
                     // 千万别忘了告诉控件加载完毕了哦！
                     pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                 }

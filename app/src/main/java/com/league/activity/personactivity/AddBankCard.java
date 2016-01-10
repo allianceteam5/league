@@ -22,7 +22,7 @@ import org.apache.http.Header;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class AddBankCard extends BaseActivity implements View.OnClickListener{
+public class AddBankCard extends BaseActivity implements View.OnClickListener {
 
     private ImageView back2, titleright, right1, right2;
     private TextView title;
@@ -38,6 +38,7 @@ public class AddBankCard extends BaseActivity implements View.OnClickListener{
     EditText mInputArea;
     @Bind(R.id.next)
     Button mNext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,31 +73,31 @@ public class AddBankCard extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.next:
-                if(TextUtils.isEmpty(mInputBankID.getText())|| TextUtils.isEmpty(mInputPhone.getText())||TextUtils.isEmpty(mInputArea.getText())){
-                    ToastUtils.showShortToast(AddBankCard.this,"请输入完整信息");
-                }else{
+                if (TextUtils.isEmpty(mInputBankID.getText()) || TextUtils.isEmpty(mInputPhone.getText()) || TextUtils.isEmpty(mInputArea.getText())) {
+                    ToastUtils.showShortToast(AddBankCard.this, "请输入完整信息");
+                } else {
                     showProgressDialog();
-                    ApiUtil.addBankCard(AddBankCard.this,mInputBankID.getText().toString(),mInputName.getText().toString(),
-                            mInputPersonID.getText().toString(),mInputPhone.getText().toString(),mInputArea.getText().toString(),
-                            new BaseJsonHttpResponseHandler<SucessBean>(){
+                    ApiUtil.addBankCard(AddBankCard.this, mInputBankID.getText().toString(), mInputName.getText().toString(),
+                            mInputPersonID.getText().toString(), mInputPhone.getText().toString(), mInputArea.getText().toString(),
+                            new BaseJsonHttpResponseHandler<SucessBean>() {
                                 @Override
                                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                     closeProgressDialog();
-                                    if(response.getFlag().equals("1")){
+                                    if (response.getFlag().equals("1")) {
                                         onBackPressed();
                                         finish();
 
-                                    }else{
-                                        ToastUtils.showShortToast(AddBankCard.this,"添加失败了");
+                                    } else {
+                                        ToastUtils.showShortToast(AddBankCard.this, "添加失败了");
                                     }
                                 }
 
                                 @Override
                                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
                                     closeProgressDialog();
-                                    ToastUtils.showShortToast(AddBankCard.this,"添加失败");
+                                    ToastUtils.showShortToast(AddBankCard.this, "添加失败");
                                 }
 
                                 @Override

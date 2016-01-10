@@ -129,7 +129,7 @@ public class LiaoBaAdapter extends BaseAdapter implements IContants {
             public void onClick(View v) {
                 Intent intent = new Intent(ctx, TopicContent.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra(TBMESSAGEID,list.get(position).getId());
+                intent.putExtra(TBMESSAGEID, list.get(position).getId());
                 ctx.startActivity(intent);
             }
         });
@@ -244,7 +244,7 @@ public class LiaoBaAdapter extends BaseAdapter implements IContants {
         ImageView like;
         TextView dianzanshu;
         TextView commentnum;
-        LinearLayout llDianzan,llDetail;
+        LinearLayout llDianzan, llDetail;
         GridView gridview;
     }
 }

@@ -44,15 +44,15 @@ public class EnvelopeWinnerAdapter extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.layout_item_redwinner, null);
-            holder =new ViewHolder();
+            holder = new ViewHolder();
             holder.nickName = (TextView) convertView.findViewById(R.id.tv_winnername);
             holder.money = (TextView) convertView.findViewById(R.id.tv_money);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.nickName.setText(list.get(position).getNickname());
-        holder.money.setText(list.get(position).getCount()+"元");
+        holder.money.setText(list.get(position).getCount() + "元");
         return convertView;
     }
 

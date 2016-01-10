@@ -17,16 +17,18 @@ public abstract class PersonInfoBaseActivity extends Activity {
     private TextView tvTitle;
     private ImageButton ivBack;
     protected Dialog loadingDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View v = LayoutInflater.from(getApplicationContext()).inflate(getLayoutId(),null);
+        View v = LayoutInflater.from(getApplicationContext()).inflate(getLayoutId(), null);
         setContentView(v);
         init();
         initView();
         initData();
     }
-    private void init(){
+
+    private void init() {
         ivBack = (ImageButton) findViewById(R.id.ib_back);
         ivBack.setVisibility(View.VISIBLE);
         ivBack.setOnClickListener(new View.OnClickListener() {
@@ -36,15 +38,19 @@ public abstract class PersonInfoBaseActivity extends Activity {
             }
         });
     }
+
     public void setTitle(String title) {
         tvTitle = (TextView) findViewById(R.id.tv_title);
-        if(!TextUtils.isEmpty(title))
+        if (!TextUtils.isEmpty(title))
             tvTitle.setText(title);
     }
 
     protected abstract int getLayoutId();
+
     protected abstract void initView();
+
     protected abstract void initData();
+
     /**
      * 显示等待对话框
      */
@@ -61,6 +67,7 @@ public abstract class PersonInfoBaseActivity extends Activity {
             loadingDialog.dismiss();
         }
     }
+
     public Dialog createLoadingDialog(Context context) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.dialog_loading, null);// 得到加载view

@@ -16,18 +16,19 @@ import java.util.List;
 /**
  * Created by liug on 15/11/12.
  */
-public class BankCardAdapter extends BaseAdapter{
+public class BankCardAdapter extends BaseAdapter {
     private List<BankCardInfo> list;
     private Context ctx;
     private boolean[] select;
     private boolean[] delete = new boolean[3];
 
-    public BankCardAdapter(List<BankCardInfo> list, Context ctx,boolean[] select) {
+    public BankCardAdapter(List<BankCardInfo> list, Context ctx, boolean[] select) {
         this.list = list;
         this.ctx = ctx;
         this.select = select;
     }
-    public BankCardAdapter(List<BankCardInfo> list, Context ctx,boolean[] select,boolean[] delete) {
+
+    public BankCardAdapter(List<BankCardInfo> list, Context ctx, boolean[] select, boolean[] delete) {
         this.list = list;
         this.ctx = ctx;
         this.select = select;
@@ -52,35 +53,36 @@ public class BankCardAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        if(convertView==null){
-            holder=new ViewHolder();
-            convertView= LayoutInflater.from(ctx).inflate(R.layout.item_bankcard,null);
-            holder.icon_bank= (ImageView) convertView.findViewById(R.id.iconbank);
-            holder.bankname= (TextView) convertView.findViewById(R.id.bankname);
-            holder.banknum= (TextView) convertView.findViewById(R.id.banknum);
-            holder.banktype= (TextView) convertView.findViewById(R.id.banktype);
-            holder.icon_select= (ImageView) convertView.findViewById(R.id.icon_selected);
-            holder.icon_delete= (ImageView) convertView.findViewById(R.id.icon_deleted);
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = LayoutInflater.from(ctx).inflate(R.layout.item_bankcard, null);
+            holder.icon_bank = (ImageView) convertView.findViewById(R.id.iconbank);
+            holder.bankname = (TextView) convertView.findViewById(R.id.bankname);
+            holder.banknum = (TextView) convertView.findViewById(R.id.banknum);
+            holder.banktype = (TextView) convertView.findViewById(R.id.banktype);
+            holder.icon_select = (ImageView) convertView.findViewById(R.id.icon_selected);
+            holder.icon_delete = (ImageView) convertView.findViewById(R.id.icon_deleted);
             convertView.setTag(holder);
-        }else{
-            holder=(ViewHolder)convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
         holder.bankname.setText(list.get(position).getName());
         holder.banknum.setText(list.get(position).getCardnumber().substring(list.get(position).getCardnumber().length() - 2, list.get(position).getCardnumber().length()));
         holder.banktype.setText(list.get(position).getName());
-        if(select[position]){
+        if (select[position]) {
             holder.icon_select.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             holder.icon_select.setVisibility(View.GONE);
         }
-        if(delete[position]){
+        if (delete[position]) {
             holder.icon_delete.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             holder.icon_delete.setVisibility(View.GONE);
         }
-        return  convertView;
+        return convertView;
     }
-    class ViewHolder{
+
+    class ViewHolder {
         ImageView icon_bank;
         TextView bankname;
         TextView banknum;

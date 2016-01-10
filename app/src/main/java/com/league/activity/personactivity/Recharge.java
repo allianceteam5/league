@@ -20,10 +20,10 @@ import com.mine.league.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeListener,AdapterView.OnItemClickListener {
+public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeListener, AdapterView.OnItemClickListener {
 
     private ImageView back2, titleright, right1, right2;
-    private TextView title,tvNum;
+    private TextView title, tvNum;
     private Button sure;
     private MyRadioGroup radioGroup;
     private List<Integer> listData = new ArrayList<Integer>();
@@ -64,7 +64,7 @@ public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeLi
         for (int m : data) {
             listData.add(m);
         }
-        adapter = new PayMoneyAmountAdapter(listData,this,control);
+        adapter = new PayMoneyAmountAdapter(listData, this, control);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);
     }
@@ -117,14 +117,14 @@ public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeLi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        for(int i=0;i<control.length;i++){
-            if(i == position){
+        for (int i = 0; i < control.length; i++) {
+            if (i == position) {
                 control[i] = true;
-            }else{
+            } else {
                 control[i] = false;
             }
         }
-        tvNum.setText(listData.get(position)+"");
+        tvNum.setText(listData.get(position) + "");
         adapter.notifyDataSetChanged();
     }
 }

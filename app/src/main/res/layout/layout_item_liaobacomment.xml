@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="还不错"
+                style="@style/editText"
                 android:textColor="#747474"
                 android:textSize="14dp" />
 

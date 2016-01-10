@@ -16,7 +16,6 @@ import com.kankan.OnWheelChangedListener;
 import com.kankan.WheelView;
 import com.league.bean.SucessBean;
 import com.league.bean.UserInfoBean;
-import com.league.utils.Constants;
 import com.league.utils.PersonInfoBaseActivity;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
@@ -35,12 +34,13 @@ import javax.xml.parsers.SAXParserFactory;
 
 import io.paperdb.Paper;
 
-public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnClickListener,OnWheelChangedListener {
+public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnClickListener, OnWheelChangedListener {
     private Button mOption;
     private WheelView mViewProvince;
     private WheelView mViewCity;
     private WheelView mViewDistrict;
     private UserInfoBean userInfoBean;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +56,7 @@ public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnCli
     @Override
     protected void initView() {
         setUpViews();
-        mOption= (Button) findViewById(R.id.newadd);
+        mOption = (Button) findViewById(R.id.newadd);
         mOption.setVisibility(View.VISIBLE);
         mOption.setText("提交");
         mOption.setOnClickListener(this);
@@ -64,42 +64,44 @@ public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnCli
 
     @Override
     protected void initData() {
-        userInfoBean=Paper.book().read("UserInfoBean");
+        userInfoBean = Paper.book().read("UserInfoBean");
         setUpListener();
         setUpData();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-         case R.id.newadd:
-             String temp=mCurrentProviceName + mCurrentCityName + mCurrentDistrictName;
-             ApiUtil.modifyUserDetailArea(getApplicationContext(), temp, new BaseJsonHttpResponseHandler<SucessBean>() {
-                 @Override
-                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                     if(response.getFlag().equals("1")){
-                         userInfoBean.setArea(mCurrentProviceName + mCurrentCityName + mCurrentDistrictName);
-                         Paper.book().write("UserInfoBean",userInfoBean);
-                         onBackPressed();
-                         finish();
-                     }else{
-                         ToastUtils.showShortToast(getApplicationContext(), "网络不好，再试试");
-                     }
-                 }
+        switch (v.getId()) {
+            case R.id.newadd:
+                String temp = mCurrentProviceName + mCurrentCityName + mCurrentDistrictName;
+                ApiUtil.modifyUserDetailArea(getApplicationContext(), temp, new BaseJsonHttpResponseHandler<SucessBean>() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                        if (response.getFlag().equals("1")) {
+                            userInfoBean.setArea(mCurrentProviceName + mCurrentCityName + mCurrentDistrictName);
+                            Paper.book().write("UserInfoBean", userInfoBean);
+                            onBackPressed();
+                            finish();
+                        } else {
+                            ToastUtils.showShortToast(getApplicationContext(), "网络不好，再试试");
+                        }
+                    }
 
-                 @Override
-                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                     ToastUtils.showShortToast(getApplicationContext(),"网络不好，再试试");
-                 }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                        ToastUtils.showShortToast(getApplicationContext(), "网络不好，再试试");
+                    }
 
-                 @Override
-                 protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                     return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {});
-                 }
-             });
-             break;
+                    @Override
+                    protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                        return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                        });
+                    }
+                });
+                break;
         }
     }
+
     private void setUpViews() {
         mViewProvince = (WheelView) findViewById(R.id.id_province);
         mViewCity = (WheelView) findViewById(R.id.id_city);
@@ -148,7 +150,7 @@ public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnCli
         String[] areas = mDistrictDatasMap.get(mCurrentCityName);
 
         if (areas == null) {
-            areas = new String[] { "" };
+            areas = new String[]{""};
         }
         mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(this, areas));
         mViewDistrict.setCurrentItem(0);
@@ -163,7 +165,7 @@ public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnCli
         mCurrentProviceName = mProvinceDatas[pCurrent];
         String[] cities = mCitisDatasMap.get(mCurrentProviceName);
         if (cities == null) {
-            cities = new String[] { "" };
+            cities = new String[]{""};
         }
         mViewCity.setViewAdapter(new ArrayWheelAdapter<String>(this, cities));
         mViewCity.setCurrentItem(0);
@@ -200,19 +202,18 @@ public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnCli
     /**
      * 当前区的名称
      */
-    protected String mCurrentDistrictName ="";
+    protected String mCurrentDistrictName = "";
 
     /**
      * 当前区的邮政编码
      */
-    protected String mCurrentZipCode ="";
+    protected String mCurrentZipCode = "";
 
     /**
      * 解析省市区的XML数据
      */
 
-    protected void initProvinceDatas()
-    {
+    protected void initProvinceDatas() {
         List<ProvinceModel> provinceList = null;
         AssetManager asset = getAssets();
         try {
@@ -227,10 +228,10 @@ public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnCli
             // 获取解析出来的数据
             provinceList = handler.getDataList();
             //*/ 初始化默认选中的省、市、区
-            if (provinceList!= null && !provinceList.isEmpty()) {
+            if (provinceList != null && !provinceList.isEmpty()) {
                 mCurrentProviceName = provinceList.get(0).getName();
                 List<CityModel> cityList = provinceList.get(0).getCityList();
-                if (cityList!= null && !cityList.isEmpty()) {
+                if (cityList != null && !cityList.isEmpty()) {
                     mCurrentCityName = cityList.get(0).getName();
                     List<DistrictModel> districtList = cityList.get(0).getDistrictList();
                     mCurrentDistrictName = districtList.get(0).getName();
@@ -239,18 +240,18 @@ public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnCli
             }
             //*/
             mProvinceDatas = new String[provinceList.size()];
-            for (int i=0; i< provinceList.size(); i++) {
+            for (int i = 0; i < provinceList.size(); i++) {
                 // 遍历所有省的数据
                 mProvinceDatas[i] = provinceList.get(i).getName();
                 List<CityModel> cityList = provinceList.get(i).getCityList();
                 String[] cityNames = new String[cityList.size()];
-                for (int j=0; j< cityList.size(); j++) {
+                for (int j = 0; j < cityList.size(); j++) {
                     // 遍历省下面的所有市的数据
                     cityNames[j] = cityList.get(j).getName();
                     List<DistrictModel> districtList = cityList.get(j).getDistrictList();
                     String[] distrinctNameArray = new String[districtList.size()];
                     DistrictModel[] distrinctArray = new DistrictModel[districtList.size()];
-                    for (int k=0; k<districtList.size(); k++) {
+                    for (int k = 0; k < districtList.size(); k++) {
                         // 遍历市下面所有区/县的数据
                         DistrictModel districtModel = new DistrictModel(districtList.get(k).getName(), districtList.get(k).getZipcode());
                         // 区/县对于的邮编，保存到mZipcodeDatasMap

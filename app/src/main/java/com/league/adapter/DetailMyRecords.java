@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by liug on 15/11/22.
  */
-public class DetailMyRecords extends BaseAdapter{
+public class DetailMyRecords extends BaseAdapter {
     private List<MyRecordGrabBean> list;
     private Context ctx;
 
@@ -51,36 +51,36 @@ public class DetailMyRecords extends BaseAdapter{
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
-        if(convertView==null){
-            holder=new ViewHolder();
-            convertView= LayoutInflater.from(ctx).inflate(R.layout.item_detail_myrecords,null);
-            holder.count= (TextView) convertView.findViewById(R.id.myrecordscount);
-            holder.number= (TextView) convertView.findViewById(R.id.myrecordsnumber);
-            holder.more= (Button) convertView.findViewById(R.id.getmore);
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = LayoutInflater.from(ctx).inflate(R.layout.item_detail_myrecords, null);
+            holder.count = (TextView) convertView.findViewById(R.id.myrecordscount);
+            holder.number = (TextView) convertView.findViewById(R.id.myrecordsnumber);
+            holder.more = (Button) convertView.findViewById(R.id.getmore);
             convertView.setTag(holder);
-        }else{
-            holder= (ViewHolder) convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
         holder.count.setText(list.get(position).getCount());
         holder.number.setText(list.get(position).getNumbers());
         holder.more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(list.get(position).getGrabcornid()==null){
+                if (list.get(position).getGrabcornid() == null) {
                     ApiUtil.getMoreNumCommodity(ctx, list.get(position).getId(), new BaseJsonHttpResponseHandler<MoreNumberBean>() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, MoreNumberBean response) {
-                            if(response.getFlag()==1){
+                            if (response.getFlag() == 1) {
                                 holder.number.setText(response.getNumbers());
                                 holder.more.setVisibility(View.GONE);
-                            }else{
-                                ToastUtils.showShortToast(ctx,"获取失败");
+                            } else {
+                                ToastUtils.showShortToast(ctx, "获取失败");
                             }
                         }
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, MoreNumberBean errorResponse) {
-                            ToastUtils.showShortToast(ctx,"获取失败");
+                            ToastUtils.showShortToast(ctx, "获取失败");
                         }
 
                         @Override
@@ -89,7 +89,7 @@ public class DetailMyRecords extends BaseAdapter{
                             });
                         }
                     });
-                }else if(list.get(position).getGrabcommodityid()==null){
+                } else if (list.get(position).getGrabcommodityid() == null) {
                     ApiUtil.getMoreNumCorn(ctx, list.get(position).getId(), new BaseJsonHttpResponseHandler<MoreNumberBean>() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, MoreNumberBean response) {
@@ -117,8 +117,9 @@ public class DetailMyRecords extends BaseAdapter{
         });
         return convertView;
     }
-    class ViewHolder{
-        TextView count,number;
+
+    class ViewHolder {
+        TextView count, number;
         Button more;
     }
 }

@@ -8,10 +8,11 @@ import android.widget.TextView;
 
 import com.mine.league.R;
 
-public class MyGoldCoin extends Activity implements View.OnClickListener{
+public class MyGoldCoin extends Activity implements View.OnClickListener {
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +20,7 @@ public class MyGoldCoin extends Activity implements View.OnClickListener{
         initView();
 
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -43,7 +45,7 @@ public class MyGoldCoin extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.goldcoinmakesure:
                 onBackPressed();
                 finish();

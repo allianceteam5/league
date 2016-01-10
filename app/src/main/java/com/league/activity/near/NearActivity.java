@@ -15,8 +15,6 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
-import com.easemob.chatuidemo.activity.BaiduMapActivity;
-import com.league.activity.MainActivity;
 import com.league.bean.LocationBean;
 import com.league.utils.ActivityUtils;
 import com.league.utils.StoreUtils;
@@ -78,7 +76,7 @@ public class NearActivity extends Activity implements OnClickListener {
             nearLocation.setText(//arg0.getCountry()+" "
 //			+arg0.getProvince().substring(0, arg0.getProvince().length()-1)+" "+
                     arg0.getCity().substring(0, arg0.getCity().length() - 1));
-            StoreUtils.setLocationBean(new LocationBean(arg0.getLatitude(),arg0.getLongitude(),arg0.getCity()));
+            StoreUtils.setLocationBean(new LocationBean(arg0.getLatitude(), arg0.getLongitude(), arg0.getCity()));
         }
 
     }

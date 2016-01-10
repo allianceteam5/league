@@ -39,15 +39,19 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
     private WheelView mViewCity;
     private WheelView mViewDistrict;
     private TextView mBtnConfirm;
-    public WheelCascade(Context context,ProvinceListener listener) {
+
+    public WheelCascade(Context context, ProvinceListener listener) {
         super(context);
-        this.context=context;
-        this.listener=listener;
+        this.context = context;
+        this.listener = listener;
     }
-    public interface ProvinceListener{
-        void refreshProvince(String string,String postid);
+
+    public interface ProvinceListener {
+        void refreshProvince(String string, String postid);
     }
+
     private ProvinceListener listener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,12 +71,14 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
         setUpListener();
         setUpData();
     }
+
     private void setUpViews() {
         mViewProvince = (WheelView) findViewById(R.id.id_province);
         mViewCity = (WheelView) findViewById(R.id.id_city);
         mViewDistrict = (WheelView) findViewById(R.id.id_district);
         mBtnConfirm = (TextView) findViewById(R.id.btn_confirm);
     }
+
     private void setUpListener() {
         // 添加change事件
         mViewProvince.addChangingListener(this);
@@ -94,23 +100,25 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
         updateCities();
         updateAreas();
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_confirm:
                 dismiss();
-                String temp=mCurrentProviceName+" " + mCurrentCityName +" "+ mCurrentDistrictName+" ";
-                listener.refreshProvince(temp,mCurrentZipCode);
+                String temp = mCurrentProviceName + " " + mCurrentCityName + " " + mCurrentDistrictName + " ";
+                listener.refreshProvince(temp, mCurrentZipCode);
                 break;
             default:
                 break;
         }
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         this.dismiss();
-        String temp=mCurrentProviceName+" " + mCurrentCityName +" "+ mCurrentDistrictName+" ";
-        listener.refreshProvince(temp,mCurrentZipCode);
+        String temp = mCurrentProviceName + " " + mCurrentCityName + " " + mCurrentDistrictName + " ";
+        listener.refreshProvince(temp, mCurrentZipCode);
         return super.onTouchEvent(event);
     }
 
@@ -125,6 +133,7 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
             mCurrentZipCode = mZipcodeDatasMap.get(mCurrentDistrictName);
         }
     }
+
     /**
      * 根据当前的市，更新区WheelView的信息
      */
@@ -139,7 +148,7 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
         mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(context, areas));
         mViewDistrict.setCurrentItem(0);
         mCurrentDistrictName = areas[0];
-        mCurrentZipCode=mZipcodeDatasMap.get(mCurrentDistrictName);
+        mCurrentZipCode = mZipcodeDatasMap.get(mCurrentDistrictName);
     }
 
     /**
@@ -156,6 +165,7 @@ public class WheelCascade extends Dialog implements View.OnClickListener, OnWhee
         mViewCity.setCurrentItem(0);
         updateAreas();
     }
+
     /**
      * 所有省
      */

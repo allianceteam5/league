@@ -10,10 +10,11 @@ import com.mine.league.R;
 
 import static android.view.View.VISIBLE;
 
-public class FeedBack extends Activity implements View.OnClickListener{
+public class FeedBack extends Activity implements View.OnClickListener {
 
     private ImageView back1, back2, titleright, right1, right2;
-    private TextView title,commit;
+    private TextView title, commit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +22,7 @@ public class FeedBack extends Activity implements View.OnClickListener{
         initView();
 
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -41,15 +43,15 @@ public class FeedBack extends Activity implements View.OnClickListener{
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-        commit= (TextView) findViewById(R.id.near_commit);
+        commit = (TextView) findViewById(R.id.near_commit);
         commit.setVisibility(View.VISIBLE);
         commit.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.near_commit :
+        switch (v.getId()) {
+            case R.id.near_commit:
                 onBackPressed();
                 finish();
                 break;

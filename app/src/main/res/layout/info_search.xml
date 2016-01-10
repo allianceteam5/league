@@ -26,6 +26,7 @@
 		android:drawableLeft="@drawable/sousuoyemian"
 		android:hint="搜索"
 		android:paddingLeft="10dp"
+		style="@style/editText"
 		android:singleLine="true"
 		android:textColorHint="@color/text_hint"
 		android:textSize="14dp" />

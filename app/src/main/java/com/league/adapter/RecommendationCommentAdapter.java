@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.league.bean.CommentBean;
-import com.league.bean.RecommendationInfoBean;
 import com.league.utils.Utils;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
@@ -70,15 +69,16 @@ public class RecommendationCommentAdapter extends BaseAdapter {
         holder.content.setText(commentBean.getContent());
         holder.lasttime.setText(Utils.generateStringByTime(commentBean.getCreated_at()));
         if (!TextUtils.isEmpty(commentBean.getThumb()))
-            Picasso.with(ctx).load(commentBean.getThumb()).resize(80,80).centerCrop().into(holder.thumb);
+            Picasso.with(ctx).load(commentBean.getThumb()).resize(80, 80).centerCrop().into(holder.thumb);
         else
             Picasso.with(ctx).load(R.drawable.example).into(holder.thumb);
         return convertView;
     }
 
-    public void setData(List<CommentBean> list){
+    public void setData(List<CommentBean> list) {
         this.list = list;
     }
+
     /**
      * This class contains all butterknife-injected Views & Layouts from layout file 'layout_item_recommendationcomment.xml'
      * for easy to all layout elements.

@@ -22,8 +22,6 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
-import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
@@ -56,6 +54,7 @@ public class LocationActivity extends BaseActivity implements OnGetGeoCoderResul
      * 当前地点击点
      */
     private LatLng currentPt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,7 +133,7 @@ public class LocationActivity extends BaseActivity implements OnGetGeoCoderResul
                 .getLocation()));
         if (!TextUtils.isEmpty(reverseGeoCodeResult.getAddress()))
             Toast.makeText(LocationActivity.this, reverseGeoCodeResult.getAddress(),
-                Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_LONG).show();
         StoreUtils.setLocationBean(new LocationBean(reverseGeoCodeResult.getLocation().latitude, reverseGeoCodeResult.getLocation().longitude, reverseGeoCodeResult.getAddressDetail().city));
         nearLocation.setText(reverseGeoCodeResult.getAddressDetail().city);
     }
@@ -158,7 +157,7 @@ public class LocationActivity extends BaseActivity implements OnGetGeoCoderResul
                             .fromResource(R.drawable.icon_marka)));
             if (!TextUtils.isEmpty(location.getAddrStr()))
                 Toast.makeText(LocationActivity.this, location.getAddrStr(),
-                    Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_LONG).show();
 //            MyLocationData locData = new MyLocationData.Builder()
 //                    .accuracy(location.getRadius())
 //                            // 此处设置开发者获取到的方向信息，顺时针0-360
@@ -178,6 +177,7 @@ public class LocationActivity extends BaseActivity implements OnGetGeoCoderResul
         public void onReceivePoi(BDLocation poiLocation) {
         }
     }
+
     /**
      * 更新地图状态显示面板
      */

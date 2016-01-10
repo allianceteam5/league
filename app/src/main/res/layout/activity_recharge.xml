@@ -85,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:padding="10dp"
+                style="@style/editText"
                 android:textColor="@color/black" />
         </LinearLayout>
 

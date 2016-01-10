@@ -181,7 +181,7 @@ public class LiaoBaMessageBean {
         return likes;
     }
 
-    public List<String> getPictureList(){
+    public List<String> getPictureList() {
         if (TextUtils.isEmpty(pictures))
             return null;
         return Arrays.asList(pictures.trim().split(" "));

@@ -26,16 +26,17 @@ import com.umeng.socialize.weixin.controller.UMWXHandler;
 /**
  * Created by liug on 15/12/3.
  */
-public class ShareDialog extends Dialog implements android.view.View.OnClickListener{
+public class ShareDialog extends Dialog implements android.view.View.OnClickListener {
     private Context context;
     View localView;
     Activity activity;
     // 首先在您的Activity中添加如下成员变量
     final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
-    public ShareDialog(Context context,Activity activity) {
+
+    public ShareDialog(Context context, Activity activity) {
         super(context);
-        this.context=context;
-        this.activity=activity;
+        this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -56,7 +57,8 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
         initViews();
         setOnclick();
     }
-    private void initViews(){
+
+    private void initViews() {
         //参数1为当前Activity，参数2为开发者在QQ互联申请的APP ID，参数3为开发者在QQ互联申请的APP kEY.
         UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(activity, "100424468",
                 "c7394704798a158208a74ab60104f0ba");
@@ -78,14 +80,15 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
         UMWXHandler wxHandler = new UMWXHandler(activity, appID, appSecret);
         wxHandler.addToSocialSDK();
         // 支持微信朋友圈
-        UMWXHandler wxCircleHandler = new UMWXHandler(activity,appID,appSecret);
+        UMWXHandler wxCircleHandler = new UMWXHandler(activity, appID, appSecret);
         wxCircleHandler.setToCircle(true);
         wxCircleHandler.addToSocialSDK();
         mController.getConfig().setSsoHandler(new SinaSsoHandler());
         // 设置分享内容
         mController.setShareContent("我在自己人联盟里抢到红包了，你也快来跟我一起抢啊");
     }
-    private void setOnclick(){
+
+    private void setOnclick() {
         localView.findViewById(R.id.qqshare).setOnClickListener(this);
         localView.findViewById(R.id.wxshare).setOnClickListener(this);
         localView.findViewById(R.id.wbshare).setOnClickListener(this);
@@ -93,6 +96,7 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
         localView.findViewById(R.id.wxcircleshare).setOnClickListener(this);
         localView.findViewById(R.id.dxshare).setOnClickListener(this);
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         this.dismiss();
@@ -103,17 +107,18 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.qqzoneshare:
-                mController.postShare(activity,SHARE_MEDIA.QZONE,
+                mController.postShare(activity, SHARE_MEDIA.QZONE,
                         new SocializeListeners.SnsPostListener() {
                             @Override
                             public void onStart() {
                             }
+
                             @Override
-                            public void onComplete(SHARE_MEDIA platform, int eCode,SocializeEntity entity) {
+                            public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
                                 } else {
                                     String eMsg = "";
-                                    if (eCode == -101){
+                                    if (eCode == -101) {
                                         eMsg = "没有授权";
                                     }
                                 }
@@ -121,19 +126,20 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
                         });
                 break;
             case R.id.wxcircleshare:
-                mController.postShare(activity,SHARE_MEDIA.WEIXIN_CIRCLE,
+                mController.postShare(activity, SHARE_MEDIA.WEIXIN_CIRCLE,
                         new SocializeListeners.SnsPostListener() {
                             @Override
                             public void onStart() {
 //                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
                             }
+
                             @Override
-                            public void onComplete(SHARE_MEDIA platform, int eCode,SocializeEntity entity) {
+                            public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
-                                    if (eCode == -101){
+                                    if (eCode == -101) {
                                         eMsg = "没有授权";
                                     }
 //                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +

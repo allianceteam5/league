@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dip"
             android:hint="身份证号码"
+            style="@style/editText"
             android:gravity="center_vertical"
             android:inputType="number"
             android:background="@color/white"/>

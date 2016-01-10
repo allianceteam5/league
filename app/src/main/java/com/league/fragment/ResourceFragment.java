@@ -125,7 +125,7 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
             view = new View(ctx);
             if (isAdded())
                 view.setBackgroundDrawable(getResources().getDrawable(
-                    R.drawable.pointswhite));
+                        R.drawable.pointswhite));
             LayoutParams lp = new LayoutParams(25, 25);
             lp.leftMargin = 10;
             view.setLayoutParams(lp);

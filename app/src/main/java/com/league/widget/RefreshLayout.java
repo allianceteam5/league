@@ -99,7 +99,7 @@ public class RefreshLayout extends SwipeRefreshLayout implements AbsListView.OnS
                 // 设置滚动监听器给ListView, 使得滚动的情况下也可以自动加载
                 mListView.setOnScrollListener(this);
                 Log.d(VIEW_LOG_TAG, "### 找到listview");
-                return ;
+                return;
             }
         }
     }
@@ -221,9 +221,9 @@ public class RefreshLayout extends SwipeRefreshLayout implements AbsListView.OnS
         public void onLoad();
     }
 
-    public void setFooterLoadingEnd(){
-        ProgressBar bar = (ProgressBar)mListViewFooter.findViewById(R.id.pull_to_refresh_load_progress);
-        TextView text = (TextView)mListViewFooter.findViewById(R.id.pull_to_refresh_loadmore_text);
+    public void setFooterLoadingEnd() {
+        ProgressBar bar = (ProgressBar) mListViewFooter.findViewById(R.id.pull_to_refresh_load_progress);
+        TextView text = (TextView) mListViewFooter.findViewById(R.id.pull_to_refresh_loadmore_text);
         text.setText(getResources().getString(R.string.loading_done));
     }
 }

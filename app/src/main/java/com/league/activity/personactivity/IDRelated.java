@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.mine.league.R;
 
-public class IDRelated extends Activity implements View.OnClickListener{
+public class IDRelated extends Activity implements View.OnClickListener {
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
@@ -46,15 +46,15 @@ public class IDRelated extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.changecode:
 
-                Intent intent=new Intent(getApplication(),ChangeCode.class);
+                Intent intent = new Intent(getApplication(), ChangeCode.class);
                 startActivity(intent);
                 break;
             case R.id.findcode:
-                Intent intent1=new Intent(getApplication(),FindCode.class);
-                intent1.putExtra("type","账号相关");
+                Intent intent1 = new Intent(getApplication(), FindCode.class);
+                intent1.putExtra("type", "账号相关");
                 startActivity(intent1);
                 break;
 

@@ -13,6 +13,7 @@ import com.mine.league.R;
 
 public class BaseActivity extends Activity {
     protected Dialog loadingDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,9 @@ public class BaseActivity extends Activity {
         return loadingDialog;
 
     }
-    @Override protected void onDestroy() {
+
+    @Override
+    protected void onDestroy() {
         super.onDestroy();
         // Always unregister when an object no longer should be on the bus.
         BusProvider.getInstance().unregister(this);

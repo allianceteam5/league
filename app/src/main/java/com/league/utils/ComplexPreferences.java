@@ -84,7 +84,7 @@ public class ComplexPreferences {
         return preferences.getString(USERID, "");
     }
 
-//    public static void setUser(User user) {
+    //    public static void setUser(User user) {
 //        setObject(USER, user);
 //    }
 //
@@ -99,8 +99,9 @@ public class ComplexPreferences {
 
     public static int getScreenWidth(Context context) {
         getComplexPreferences(context);
-        return preferences.getInt(SCREEN_WIDTH,640);
+        return preferences.getInt(SCREEN_WIDTH, 640);
     }
+
     public static void setObject(String key, Object object) {
         if (object == null) {
             throw new IllegalArgumentException("object is null");

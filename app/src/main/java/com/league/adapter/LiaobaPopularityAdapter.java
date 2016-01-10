@@ -93,9 +93,9 @@ public class LiaobaPopularityAdapter extends BaseAdapter {
             holder.iconLeftRank.setVisibility(View.GONE);
             holder.iconRight.setVisibility(View.GONE);
         }
-        if(!TextUtils.isEmpty(list.get(position).getThumb())){
+        if (!TextUtils.isEmpty(list.get(position).getThumb())) {
             Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.headPortrait);
-        }else
+        } else
             Picasso.with(ctx).load(R.drawable.example).into(holder.headPortrait);
 
         holder.usrName.setText(list.get(position).getNickname());

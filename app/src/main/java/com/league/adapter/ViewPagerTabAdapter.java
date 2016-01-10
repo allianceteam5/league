@@ -7,15 +7,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 /**
  * Created by liug on 15/11/9.
  */
-public class ViewPagerTabAdapter extends FragmentPagerAdapter{
+public class ViewPagerTabAdapter extends FragmentPagerAdapter {
 
     CharSequence Titles[];
     Fragment fragments[];
 
-    public ViewPagerTabAdapter(FragmentManager fm,CharSequence cs[],Fragment fragment[]) {
+    public ViewPagerTabAdapter(FragmentManager fm, CharSequence cs[], Fragment fragment[]) {
         super(fm);
-        Titles=cs;
-        fragments=fragment;
+        Titles = cs;
+        fragments = fragment;
     }
 
     @Override

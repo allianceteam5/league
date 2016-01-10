@@ -25,11 +25,11 @@ import org.apache.http.Header;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectBankcard extends BaseActivity implements View.OnClickListener{
+public class SelectBankcard extends BaseActivity implements View.OnClickListener {
 
-    private List<BankCardInfo> list=new ArrayList<BankCardInfo>();
+    private List<BankCardInfo> list = new ArrayList<BankCardInfo>();
     private ImageView back2, titleright, right1, right2;
-    private TextView title,edit;
+    private TextView title, edit;
     private ListView listView;
     private boolean[] select = new boolean[3];
     private boolean[] delete = new boolean[3];
@@ -66,8 +66,8 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
         edit.setVisibility(View.VISIBLE);
         edit.setText("编辑");
         edit.setOnClickListener(this);
-        listView= (ListView) findViewById(R.id.listview);
-        adapter = new BankCardAdapter(list, getApplication(),select,delete);
+        listView = (ListView) findViewById(R.id.listview);
+        adapter = new BankCardAdapter(list, getApplication(), select, delete);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,7 +82,7 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                        ToastUtils.showShortToast(SelectBankcard.this,"删除失败，请检查网络");
+                        ToastUtils.showShortToast(SelectBankcard.this, "删除失败，请检查网络");
                     }
 
                     @Override
@@ -94,9 +94,10 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
             }
         });
     }
-    private void initData(){
+
+    private void initData() {
         showProgressDialog();
-        ApiUtil.getUserBankcardList(this,new BaseJsonHttpResponseHandler<ArrayList<BankCardInfo>>() {
+        ApiUtil.getUserBankcardList(this, new BaseJsonHttpResponseHandler<ArrayList<BankCardInfo>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<BankCardInfo> response) {
                 closeProgressDialog();
@@ -109,7 +110,7 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<BankCardInfo> errorResponse) {
                 closeProgressDialog();
-                ToastUtils.showShortToast(SelectBankcard.this,"网络不给力");
+                ToastUtils.showShortToast(SelectBankcard.this, "网络不给力");
             }
 
             @Override
@@ -123,18 +124,18 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.addbankcard:
-                if(list.size()>2){
-                    ToastUtils.showShortToast(SelectBankcard.this,"最多只可以添加3张银行卡");
-                }else{
-                    Intent intent=new Intent(getApplication(),AddBankCard.class);
+                if (list.size() > 2) {
+                    ToastUtils.showShortToast(SelectBankcard.this, "最多只可以添加3张银行卡");
+                } else {
+                    Intent intent = new Intent(getApplication(), AddBankCard.class);
                     startActivity(intent);
                 }
 
                 break;
             case R.id.near_commit:
-                for(int i = 0;i<delete.length;i++){
+                for (int i = 0; i < delete.length; i++) {
                     delete[i] = true;
                 }
                 adapter.notifyDataSetChanged();

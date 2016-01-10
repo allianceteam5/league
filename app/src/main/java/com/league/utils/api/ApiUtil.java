@@ -55,7 +55,7 @@ public class ApiUtil {
         client.post(context, IClientUrl.ApplyJobCreated, params, responseHandler);
     }
 
-    public static void applyjobSearch(Context context, boolean isMy, int professionid, String searchString,int jobproperty, int currentPage, TextHttpResponseHandler responseHandler) {
+    public static void applyjobSearch(Context context, boolean isMy, int professionid, String searchString, int jobproperty, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         if (isMy)
             params.add("phone", testPhone);
@@ -66,7 +66,7 @@ public class ApiUtil {
         if (professionid > 0)
             params.add("professionid", String.valueOf(professionid));
         if (jobproperty >= 0)
-            params.add("jobproperty",String.valueOf(jobproperty));
+            params.add("jobproperty", String.valueOf(jobproperty));
         printHttp(IClientUrl.ApplyJobSearch, params);
         client.post(context, IClientUrl.ApplyJobSearch + currentPage, params, responseHandler);
     }
@@ -554,6 +554,8 @@ public class ApiUtil {
         params.add("content", content);
         if (!TextUtils.isEmpty(tphone))
             params.add("tphone", tphone);
+        else
+            params.add("tphone", "");
         printHttp(IClientUrl.CircleMessageReply, params);
         client.post(context, IClientUrl.CircleMessageReply, params, responseHandler);
     }
@@ -642,13 +644,15 @@ public class ApiUtil {
         params.put("location", area);
         client.post(context, IClientUrl.createBankcard, params, responseHandler);
     }
+
     //删除银行卡
-    public static void deleteBanCard(Context context,String usertocardid,TextHttpResponseHandler responseHandler){
+    public static void deleteBanCard(Context context, String usertocardid, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.put("phone",testPhone);
-        params.put("usertocardid",usertocardid);
-        client.post(context,IClientUrl.deleteBankCard,params,responseHandler);
+        params.put("phone", testPhone);
+        params.put("usertocardid", usertocardid);
+        client.post(context, IClientUrl.deleteBankCard, params, responseHandler);
     }
+
     //修改用户名密码
     public static void changePwd(Context context, String pwd, String newpwd, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
@@ -699,22 +703,24 @@ public class ApiUtil {
     //获取红包中奖列表
     public static void getEnvelopeWinnerList(Context context, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        client.post(context,IClientUrl.envelopesList,params,responseHandler);
+        client.post(context, IClientUrl.envelopesList, params, responseHandler);
     }
+
     //修改 支付密码
-    public static void changePayPwd(Context context,String oldpaypwd,String newpaypwd,TextHttpResponseHandler responseHandler){
+    public static void changePayPwd(Context context, String oldpaypwd, String newpaypwd, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.put("phone",testPhone);
-        params.put("oldpaypwd",oldpaypwd);
-        params.put("newpaypwd",newpaypwd);
-        client.post(context,IClientUrl.setpaypwd,params,responseHandler);
+        params.put("phone", testPhone);
+        params.put("oldpaypwd", oldpaypwd);
+        params.put("newpaypwd", newpaypwd);
+        client.post(context, IClientUrl.setpaypwd, params, responseHandler);
     }
+
     //设置 支付密码
-    public static void setPayPwd(Context context,String newpaypwd,TextHttpResponseHandler responseHandler){
+    public static void setPayPwd(Context context, String newpaypwd, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
-        params.put("phone",testPhone);
-        params.put("newpaypwd",newpaypwd);
-        printHttp(IClientUrl.setpaypwd,params);
-        client.post(context,IClientUrl.setpaypwd,params,responseHandler);
+        params.put("phone", testPhone);
+        params.put("newpaypwd", newpaypwd);
+        printHttp(IClientUrl.setpaypwd, params);
+        client.post(context, IClientUrl.setpaypwd, params, responseHandler);
     }
 }

@@ -42,21 +42,21 @@ import io.paperdb.Paper;
  * @author liugang
  * @date 2015年9月15日
  */
-public class PersonFragment extends Fragment implements View.OnClickListener,IContants {
+public class PersonFragment extends Fragment implements View.OnClickListener, IContants {
     protected Dialog loadingDialog;
     private View layout;
     private Activity ctx;
     private UserInfoBean userInfoBean;
-//    @Bind(R.id.mythumb)
+    //    @Bind(R.id.mythumb)
     ImageView mThumb;
-//    @Bind(R.id.nickname)
+    //    @Bind(R.id.nickname)
     TextView mNickname;
-//    @Bind(R.id.phonenumber)
+    //    @Bind(R.id.phonenumber)
     TextView mPhone;
-//    @Bind(R.id.zhijiealliancenum)
+    //    @Bind(R.id.zhijiealliancenum)
 //    @Bind(R.id.fivefloartotal)
     TextView mAllFive;
-//    @Bind(R.id.award)
+    //    @Bind(R.id.award)
     TextView mAward;
 
     @Override
@@ -74,11 +74,11 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
             }
         }
 //        ButterKnife.bind(ctx,layout);
-        mThumb= (ImageView) layout.findViewById(R.id.mythumb);
-        mNickname= (TextView) layout.findViewById(R.id.nickname);
-        mPhone= (TextView) layout.findViewById(R.id.phonenumber);
-        mAllFive= (TextView) layout.findViewById(R.id.fivefloartotal);
-        mAward= (TextView) layout.findViewById(R.id.award);
+        mThumb = (ImageView) layout.findViewById(R.id.mythumb);
+        mNickname = (TextView) layout.findViewById(R.id.nickname);
+        mPhone = (TextView) layout.findViewById(R.id.phonenumber);
+        mAllFive = (TextView) layout.findViewById(R.id.fivefloartotal);
+        mAward = (TextView) layout.findViewById(R.id.award);
         showProgressDialog();
         initData();
         getUrl();
@@ -106,7 +106,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
                 startActivity(intent);
                 break;
             case R.id.myown:
-                Intent intent1=new Intent(ctx, PersonInformationSetup.class);
+                Intent intent1 = new Intent(ctx, PersonInformationSetup.class);
                 startActivity(intent1);
                 break;
             case R.id.aliancereward:
@@ -114,14 +114,14 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
                 startActivity(intent2);
                 break;
             case R.id.mycollection:
-                Intent intent3=new Intent(ctx, MyCollection.class);
+                Intent intent3 = new Intent(ctx, MyCollection.class);
                 startActivity(intent3);
                 break;
             case R.id.mycircle:
                 ActivityUtils.start_Activity(getActivity(), CircleActivity.class);
                 break;
             case R.id.mymoneybag:
-                Intent intent4=new Intent(ctx, MyMoneyBag.class);
+                Intent intent4 = new Intent(ctx, MyMoneyBag.class);
                 startActivity(intent4);
                 break;
             case R.id.invitefriend:
@@ -129,20 +129,21 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
                 break;
             case R.id.rl_allancecount:
                 Intent intent5 = new Intent(ctx, RuleActivity.class);
-                intent5.putExtra(RuleType,5);
+                intent5.putExtra(RuleType, 5);
                 startActivity(intent5);
                 break;
         }
     }
-    private void initData(){
+
+    private void initData() {
         ApiUtil.getUserDetail(ctx, StoreUtils.getPhone(), new BaseJsonHttpResponseHandler<UserInfoBean>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, UserInfoBean response) {
                 userInfoBean = response;
                 Paper.book().write(UserInfo, response);
                 StoreUtils.setUserInfo(userInfoBean);
-                if(!TextUtils.isEmpty(response.getThumb()))
-                    Picasso.with(ctx).load(response.getThumb()).resize(120,120).centerCrop().placeholder(R.drawable.example).into(mThumb);
+                if (!TextUtils.isEmpty(response.getThumb()))
+                    Picasso.with(ctx).load(response.getThumb()).resize(120, 120).centerCrop().placeholder(R.drawable.example).into(mThumb);
                 else
                     Picasso.with(ctx).load(R.drawable.example).into(mThumb);
 
@@ -172,6 +173,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
         super.onResume();
 //        initData();
     }
+
     private Dialog createLoadingDialog(Context context) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.dialog_loading, null);// 得到加载view
@@ -184,6 +186,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
         return loadingDialog;
 
     }
+
     /**
      * 显示等待对话框
      */
@@ -200,8 +203,9 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
             loadingDialog.dismiss();
         }
     }
+
     //这个有问题啊 ！！！！！
-    private void getUrl(){
+    private void getUrl() {
         ApiUtil.getSignupUrl(ctx, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -210,8 +214,8 @@ public class PersonFragment extends Fragment implements View.OnClickListener,ICo
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                String url=responseString.substring(1,responseString.length()-1);
-                Paper.book().write("signupurl",url);
+                String url = responseString.substring(1, responseString.length() - 1);
+                Paper.book().write("signupurl", url);
             }
         });
 

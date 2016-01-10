@@ -27,26 +27,28 @@ import butterknife.ButterKnife;
 
 import static android.view.View.VISIBLE;
 
-public class FindCode extends BaseActivity implements View.OnClickListener{
+public class FindCode extends BaseActivity implements View.OnClickListener {
 
-    private ImageView  back2, titleright, right1, right2;
+    private ImageView back2, titleright, right1, right2;
     private TextView title;
-    private Button getCode,yanzheng;
+    private Button getCode, yanzheng;
     private TimeCount timeCount;
     @Bind(R.id.inputphone)
     TextView mInputPhone;
     @Bind(R.id.code)
     EditText mInputCode;
     private String type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_code);
         ButterKnife.bind(this);
-        type=getIntent().getStringExtra("type");
+        type = getIntent().getStringExtra("type");
         initView();
 
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -67,21 +69,21 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-        getCode=(Button)findViewById(R.id.getcode);
+        getCode = (Button) findViewById(R.id.getcode);
         getCode.setOnClickListener(this);
-        timeCount=new TimeCount(60000,1000);
-        yanzheng= (Button) findViewById(R.id.yanzheng);
+        timeCount = new TimeCount(60000, 1000);
+        yanzheng = (Button) findViewById(R.id.yanzheng);
         yanzheng.setOnClickListener(this);
         mInputPhone.setText(StoreUtils.getPhone());
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.getcode:
-                if(mInputPhone.getText().length()<11){
-                    ToastUtils.showShortToast(FindCode.this,"请输入完整手机号");
-                }else{
+                if (mInputPhone.getText().length() < 11) {
+                    ToastUtils.showShortToast(FindCode.this, "请输入完整手机号");
+                } else {
                     timeCount.start();
                     ApiUtil.sendCpText(this, mInputPhone.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
                         @Override
@@ -107,9 +109,9 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
                 }
                 break;
             case R.id.yanzheng:
-                if(mInputPhone.getText().length()<11&& TextUtils.isEmpty(mInputCode.getText())){
+                if (mInputPhone.getText().length() < 11 && TextUtils.isEmpty(mInputCode.getText())) {
                     ToastUtils.showShortToast(FindCode.this, "请输入信息");
-                }else{
+                } else {
 
                     showProgressDialog();
                     ApiUtil.checkPXText(FindCode.this, mInputPhone.getText().toString(), mInputCode.getText().toString(),
@@ -119,9 +121,9 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
                                     closeProgressDialog();
                                     if (response.getFlag().equals("1")) {
 
-                                        if(type.equals("账号相关")){
+                                        if (type.equals("账号相关")) {
                                             startActivity(new Intent(getApplication(), SetIDCodeActivity.class));
-                                        }else if(type.equals("支付密码")){
+                                        } else if (type.equals("支付密码")) {
                                             startActivity(new Intent(getApplication(), SetPayCode.class));
                                         }
                                         finish();
@@ -147,7 +149,8 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
                 break;
         }
     }
-    class TimeCount extends CountDownTimer{
+
+    class TimeCount extends CountDownTimer {
 
         public TimeCount(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
@@ -156,7 +159,7 @@ public class FindCode extends BaseActivity implements View.OnClickListener{
         @Override
         public void onTick(long millisUntilFinished) {
             getCode.setClickable(false);
-            getCode.setText("还剩 "+millisUntilFinished/1000+"秒");
+            getCode.setText("还剩 " + millisUntilFinished / 1000 + "秒");
         }
 
         @Override

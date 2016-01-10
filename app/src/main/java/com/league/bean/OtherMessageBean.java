@@ -104,7 +104,7 @@ public class OtherMessageBean {
         return nickname;
     }
 
-    public List<String> getPictureList(){
+    public List<String> getPictureList() {
         if (TextUtils.isEmpty(pictures))
             return null;
         return Arrays.asList(pictures.trim().split(" "));

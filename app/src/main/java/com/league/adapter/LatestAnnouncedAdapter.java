@@ -60,7 +60,7 @@ public class LatestAnnouncedAdapter extends BaseAdapter {
         if (!TextUtils.isEmpty(list.get(position).getPicture()))
             Picasso.with(context).load(list.get(position).getPicture()).into(holder.picture);
         holder.title.setText(list.get(position).getTitle());
-        TimeCount count = new TimeCount(Long.valueOf(list.get(position).getEnd_at())*1000-System.currentTimeMillis(), 1000, holder.timeMinu,holder.timeMill);
+        TimeCount count = new TimeCount(Long.valueOf(list.get(position).getEnd_at()) * 1000 - System.currentTimeMillis(), 1000, holder.timeMinu, holder.timeMill);
         count.start();
         return convertView;
     }
@@ -72,24 +72,24 @@ public class LatestAnnouncedAdapter extends BaseAdapter {
 
     class TimeCount extends CountDownTimer {
 
-        private TextView timeMinu,timeMill;
+        private TextView timeMinu, timeMill;
 
-        public TimeCount(long millisInFuture, long countDownInterval, TextView timeMinu,TextView timeMill) {
+        public TimeCount(long millisInFuture, long countDownInterval, TextView timeMinu, TextView timeMill) {
             super(millisInFuture, countDownInterval);
-            this.timeMinu=timeMinu;
-            this.timeMill=timeMill;
+            this.timeMinu = timeMinu;
+            this.timeMill = timeMill;
         }
 
         @Override
         public void onTick(long millisUntilFinished) {
 
-            long minutes=millisUntilFinished / 60000;
-            long mill=(millisUntilFinished %60000)/1000;
-            if(timeMinu.getText().toString().equals(minutes+"")){
-                timeMill.setText(mill+"");
-            }else{
+            long minutes = millisUntilFinished / 60000;
+            long mill = (millisUntilFinished % 60000) / 1000;
+            if (timeMinu.getText().toString().equals(minutes + "")) {
                 timeMill.setText(mill + "");
-                timeMinu.setText(minutes+"");
+            } else {
+                timeMill.setText(mill + "");
+                timeMinu.setText(minutes + "");
             }
         }
 

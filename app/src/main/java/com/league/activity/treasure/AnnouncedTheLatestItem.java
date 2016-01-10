@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.league.widget.ListViewForScrollView;
 import com.mine.league.R;
 
-public class AnnouncedTheLatestItem extends Activity implements View.OnClickListener{
+public class AnnouncedTheLatestItem extends Activity implements View.OnClickListener {
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
@@ -23,6 +23,7 @@ public class AnnouncedTheLatestItem extends Activity implements View.OnClickList
         initView();
 //        initData();
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -43,7 +44,7 @@ public class AnnouncedTheLatestItem extends Activity implements View.OnClickList
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.VISIBLE);
-        listView= (ListViewForScrollView) findViewById(R.id.record_list);
+        listView = (ListViewForScrollView) findViewById(R.id.record_list);
 
     }
 //    public void initData(){

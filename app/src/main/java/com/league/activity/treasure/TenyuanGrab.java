@@ -68,7 +68,7 @@ public class TenyuanGrab extends BaseActivity {
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
         gridView = (GridView) findViewById(R.id.gridview);
-        tenYuanGrabAdapter=new TenYuanGrabAdapter(getApplication(),list);
+        tenYuanGrabAdapter = new TenYuanGrabAdapter(getApplication(), list);
         gridView.setAdapter(tenYuanGrabAdapter);
         pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
@@ -122,20 +122,17 @@ public class TenyuanGrab extends BaseActivity {
             }
         });
     }
-    public class MyListener implements PullToRefreshLayout.OnRefreshListener
-    {
+
+    public class MyListener implements PullToRefreshLayout.OnRefreshListener {
 
         @Override
-        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
             // 下拉刷新操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage = 1;
-                    initData(type,currentPage);
+                    initData(type, currentPage);
                     // 千万别忘了告诉控件刷新完毕了哦！
                     pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                 }
@@ -144,17 +141,14 @@ public class TenyuanGrab extends BaseActivity {
         }
 
         @Override
-        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
             // 加载操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage++;
-                    if(currentPage <= totalPage)
-                        initData(type,currentPage);
+                    if (currentPage <= totalPage)
+                        initData(type, currentPage);
                     // 千万别忘了告诉控件加载完毕了哦！
                     pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                 }

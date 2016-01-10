@@ -31,7 +31,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MessageListActivity extends BaseActivity implements View.OnClickListener,IContants{
+public class MessageListActivity extends BaseActivity implements View.OnClickListener, IContants {
     @Bind(R.id.near_back)
     ImageButton nearBack;
     @Bind(R.id.near_title)
@@ -44,21 +44,22 @@ public class MessageListActivity extends BaseActivity implements View.OnClickLis
     PullToRefreshLayout pullToRefreshLayout;
     @Bind(R.id.liaoba_concern_list)
     ListView listView;
-    private  List<LiaoBaMessageBean> list=new ArrayList<LiaoBaMessageBean>();
+    private List<LiaoBaMessageBean> list = new ArrayList<LiaoBaMessageBean>();
     private LiaoBaAdapter adapter;
     private int totalPage;
     private int currentPage = 1;
     private int mode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_concern_list);
         ButterKnife.bind(this);
-        mode = getIntent().getIntExtra(MODE,0);
+        mode = getIntent().getIntExtra(MODE, 0);
         nearBack.setOnClickListener(this);
         nearTiRight.setVisibility(View.GONE);
         nearRight.setVisibility(View.GONE);
-        switch (mode){
+        switch (mode) {
             case 1:
                 nearCentertitle.setText("我的点赞");
                 break;
@@ -86,7 +87,7 @@ public class MessageListActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initData(final int currentPage) {
-        switch (mode){
+        switch (mode) {
             case 1:
                 ApiUtil.liaobaTbmessagesMyLikesList(getApplicationContext(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaMessageBean>>() {
                     @Override

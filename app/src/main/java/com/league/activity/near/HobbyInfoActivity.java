@@ -8,8 +8,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.easemob.chatuidemo.Constant;
+import com.league.activity.ReportActivity;
 import com.league.bean.HobbyInfoBean;
+import com.league.utils.ActivityUtils;
 import com.league.utils.Constants;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
@@ -38,6 +39,9 @@ public class HobbyInfoActivity extends Activity implements View.OnClickListener 
     TextView hobby;
     @Bind(R.id.message)
     TextView message;
+    @Bind(R.id.near_report)
+    TextView tvReport;
+
     private HobbyInfoBean hobbyInfo;
 
     @Override
@@ -66,6 +70,8 @@ public class HobbyInfoActivity extends Activity implements View.OnClickListener 
             age.setText(Constants.AGEITEMS.get(hobbyInfo.getAge()));
         hobby.setText(hobbyInfo.getHobby());
         message.setText(hobbyInfo.getContent());
+        tvReport.setVisibility(View.VISIBLE);
+        tvReport.setOnClickListener(this);
     }
 
     @Override
@@ -74,6 +80,9 @@ public class HobbyInfoActivity extends Activity implements View.OnClickListener 
             case R.id.near_back:
                 onBackPressed();
                 finish();
+                break;
+            case R.id.near_report:
+                ActivityUtils.start_Activity(this, ReportActivity.class);
                 break;
         }
     }

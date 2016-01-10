@@ -377,5 +377,6 @@
     <string name="title_activity_rule">RuleActivity</string>
     <string name="title_activity_location">LocationActivity</string>
     <string name="title_activity_report">ReportActivity</string>
+    <string name="title_activity_circle_detail">CircleDetailActivity</string>
 
 </resources>

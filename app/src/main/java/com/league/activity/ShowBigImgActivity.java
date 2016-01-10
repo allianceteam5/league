@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.league.utils.ComplexPreferences;
 import com.league.utils.IContants;
 import com.league.widget.CirclePageIndicator;
 import com.mine.league.R;
@@ -24,7 +23,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ShowBigImgActivity extends BaseActivity implements IContants{
+public class ShowBigImgActivity extends BaseActivity implements IContants {
     @Bind(R.id.viewpager)
     ViewPager viewpager;
     @Bind(R.id.indicator)
@@ -44,7 +43,7 @@ public class ShowBigImgActivity extends BaseActivity implements IContants{
 
         index = getIntent().getIntExtra(PARAMS_INDEX, 0);
         viewpager.setOffscreenPageLimit(1);
-        adapter=new SimpleImgAdapter(this, data);
+        adapter = new SimpleImgAdapter(this, data);
         viewpager.setAdapter(adapter);
         indicator.setViewPager(viewpager);
         viewpager.setCurrentItem(index);
@@ -59,7 +58,7 @@ public class ShowBigImgActivity extends BaseActivity implements IContants{
         public SimpleImgAdapter(Context context, List<String> list) {
             this.mContext = context;
             this.list = list;
-            this.inflater= LayoutInflater.from(context);
+            this.inflater = LayoutInflater.from(context);
         }
 
         @Override
@@ -79,16 +78,16 @@ public class ShowBigImgActivity extends BaseActivity implements IContants{
 
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
-            View view=inflater.inflate(R.layout.item_big_img,null);
+            View view = inflater.inflate(R.layout.item_big_img, null);
             ImageView img = (ImageView) view.findViewById(R.id.img);
-            final ProgressBar progressBar= (ProgressBar) view.findViewById(R.id.progressBar);
-            String path=list.get(position);
+            final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+            String path = list.get(position);
 //            if(path.startsWith("http")){
 //                path=AppUtil.qiniuResize(path);
 //            }else {
 //                path="file://"+path;
 //            }
-            if (!path.startsWith("http")){
+            if (!path.startsWith("http")) {
                 path = "file://" + path;
             }
             //Log.i("qiniu", "qiniu resizeAndWater=" + path);
@@ -103,7 +102,7 @@ public class ShowBigImgActivity extends BaseActivity implements IContants{
                     progressBar.setVisibility(View.GONE);
                 }
             });
-            ((ViewPager) container).addView(view,0);
+            ((ViewPager) container).addView(view, 0);
 
             img.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -79,6 +79,7 @@
             android:layout_marginLeft="5dp"
             android:textSize="16sp"
             android:textColor="@color/black"
+            style="@style/editText"
             android:text="（实名认证的姓名）"/>
     </LinearLayout>
     <View

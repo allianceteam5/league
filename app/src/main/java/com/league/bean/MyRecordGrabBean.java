@@ -112,8 +112,8 @@ public class MyRecordGrabBean {
     }
 
     public String getCreated_at() {
-        long l=(long)(Double.valueOf(created_at)*1000);
-        return l+"";
+        long l = (long) (Double.valueOf(created_at) * 1000);
+        return l + "";
     }
 
     public String getPhone() {

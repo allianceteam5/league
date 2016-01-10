@@ -10,9 +10,7 @@ import com.league.activity.postbar.MessageListActivity;
 import com.league.utils.IContants;
 import com.mine.league.R;
 
-import butterknife.internal.ListenerClass;
-
-public class MyPersonHomepage extends Activity implements View.OnClickListener,IContants {
+public class MyPersonHomepage extends Activity implements View.OnClickListener, IContants {
 
 
     @Override
@@ -34,12 +32,12 @@ public class MyPersonHomepage extends Activity implements View.OnClickListener,I
                 break;
             case R.id.mytopic:
                 Intent intent2 = new Intent(getApplication(), MessageListActivity.class);
-                intent2.putExtra(MODE,2);
+                intent2.putExtra(MODE, 2);
                 startActivity(intent2);
                 break;
             case R.id.mylikes:
                 Intent intent1 = new Intent(getApplication(), MessageListActivity.class);
-                intent1.putExtra(MODE,1);
+                intent1.putExtra(MODE, 1);
                 startActivity(intent1);
                 break;
         }
