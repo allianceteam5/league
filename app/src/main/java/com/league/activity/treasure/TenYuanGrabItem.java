@@ -118,6 +118,17 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
     protected void onResume() {
         super.onResume();
         initData();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    SystemClock.sleep(4000);
+                    handler.sendEmptyMessage(0);
+
+                }
+
+            }
+        }).start();
     }
 
     private void initView() {
@@ -188,20 +199,20 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, TenGrabDetailBean response) {
                 detail = response.getTenYuanGrabBean();
-                records=response.getGrabRecordBean();
-                myrecords=response.getMyRecordGrabBean();
+                records = response.getGrabRecordBean();
+                myrecords = response.getMyRecordGrabBean();
                 Paper.book().write(Constants.TenYuanDetail + id, detail);
                 Paper.book().write(Constants.TenyuanGrabRecords + id, records);
-                updateView(detail, records,myrecords);
+                updateView(detail, records, myrecords);
                 closeProgressDialog();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, TenGrabDetailBean errorResponse) {
                 detail = Paper.book().read(Constants.TenYuanDetail + id);
-                records=Paper.book().read(Constants.TenyuanGrabRecords+id);
+                records = Paper.book().read(Constants.TenyuanGrabRecords + id);
                 if (detail != null) {
-                    updateView(detail,records,myrecords);
+                    updateView(detail, records, myrecords);
 
                 }
                 closeProgressDialog();
@@ -209,30 +220,21 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
 
             @Override
             protected TenGrabDetailBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                JSONObject jsonObject=new JSONObject(rawJsonData);
-                TenYuanGrabBean tyb=new ObjectMapper().readValue(jsonObject.optString("detail"), new TypeReference<TenYuanGrabBean>() {});
-                List<GrabRecordBean> grb=new ObjectMapper().readValue(jsonObject.optString("records"), new TypeReference<ArrayList<GrabRecordBean>>() {
+                JSONObject jsonObject = new JSONObject(rawJsonData);
+                TenYuanGrabBean tyb = new ObjectMapper().readValue(jsonObject.optString("detail"), new TypeReference<TenYuanGrabBean>() {
                 });
-                List<MyRecordGrabBean> mrgb=new ObjectMapper().readValue(jsonObject.optString("myrecords"), new TypeReference<ArrayList<MyRecordGrabBean>>() {
+                List<GrabRecordBean> grb = new ObjectMapper().readValue(jsonObject.optString("records"), new TypeReference<ArrayList<GrabRecordBean>>() {
                 });
-                TenGrabDetailBean gdb=new TenGrabDetailBean();
+                List<MyRecordGrabBean> mrgb = new ObjectMapper().readValue(jsonObject.optString("myrecords"), new TypeReference<ArrayList<MyRecordGrabBean>>() {
+                });
+                TenGrabDetailBean gdb = new TenGrabDetailBean();
                 gdb.setTenYuanGrabBean(tyb);
                 gdb.setGrabRecordBean(grb);
                 gdb.setMyRecordGrabBean(mrgb);
                 return gdb;
             }
         });
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true){
-                    SystemClock.sleep(4000);
-                    handler.sendEmptyMessage(0);
 
-                }
-
-            }
-        }).start();
 
     }
 

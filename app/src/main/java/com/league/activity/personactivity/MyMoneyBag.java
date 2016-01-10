@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.activity.RuleActivity;
 import com.league.bean.MoneyBean;
-import com.league.utils.Constants;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
@@ -95,7 +94,7 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener,ICo
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.chongzhi:
+            case R.id.recharge:
                 Intent intent1=new Intent(getApplication(),Recharge.class);
                 startActivity(intent1);
                 break;

@@ -89,18 +89,20 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
     private int totalPage = 2;
     private int currentPage = 1;
     private OneYuanGrabTakRecodAdapter recordAdapter;
-
+    private boolean isLoop = true;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            viewPager.setCurrentItem((viewPager.getCurrentItem() + 1) % listviews.size());
 
-            switch (msg.what){
-                case 0:
-                    if(listviews.size()!=0){
-                        viewPager.setCurrentItem((viewPager.getCurrentItem() + 1)%listviews.size());
-                    }
-                    break;
-            }
+//            switch (msg.what){
+//                case 0:
+//                    if(listviews.size()!=0){
+//                        viewPager.setCurrentItem((viewPager.getCurrentItem()+1)%listviews.size());
+//                    }
+//                    break;
+//            }
         }
     };
     @Override
@@ -121,7 +123,19 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
     protected void onResume() {
         super.onResume();
         initData();
+        // 自动切换页面功能
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                while (isLoop) {
+                    SystemClock.sleep(4000);
+                    handler.sendEmptyMessage(0);
+                }
+            }
+        }).start();
     }
+
 
     private void initView() {
         myrecordlist= (ListViewForScrollView) findViewById(R.id.myrecordlist);
@@ -229,17 +243,7 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
                 return ogdb;
             }
         });
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true){
-                    SystemClock.sleep(4000);
-                    handler.sendEmptyMessage(0);
 
-                }
-
-            }
-        }).start();
     }
     void updateView(OneYuanBean detail,List<GrabRecordBean> records,List<MyRecordGrabBean> myrecords){
 
@@ -495,5 +499,11 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
             }.sendEmptyMessageDelayed(0, 1000);
         }
 
+    }
+    @Override
+    public void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+        isLoop = false;
     }
 }
