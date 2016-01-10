@@ -147,7 +147,11 @@
 
 
                 </LinearLayout>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black2"
+                    android:layout_marginLeft="10dp"/>
                 <LinearLayout
                     android:id="@+id/rl_wxipay"
                     android:layout_width="match_parent"
@@ -188,7 +192,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/btnbackground"
-        android:text="确认支付"
+        android:text="确认充值"
         android:textColor="@color/white"
         android:textSize="16sp" />
 </LinearLayout>

@@ -30,6 +30,7 @@ public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeLi
     private GridView gridView;
     private PayMoneyAmountAdapter adapter;
     private EditText etInputNum;
+    private boolean[] control = new boolean[6];
 
     private TextWatcher watcher = new TextWatcher() {
         @Override
@@ -63,7 +64,7 @@ public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeLi
         for (int m : data) {
             listData.add(m);
         }
-        adapter = new PayMoneyAmountAdapter(listData,this);
+        adapter = new PayMoneyAmountAdapter(listData,this,control);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);
     }
@@ -116,6 +117,14 @@ public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeLi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        for(int i=0;i<control.length;i++){
+            if(i == position){
+                control[i] = true;
+            }else{
+                control[i] = false;
+            }
+        }
         tvNum.setText(listData.get(position)+"");
+        adapter.notifyDataSetChanged();
     }
 }

@@ -19,11 +19,13 @@ import butterknife.ButterKnife;
  */
 public class PayMoneyAmountAdapter extends BaseAdapter {
     private List<Integer> list;
+    private boolean[] control;
     private Context context;
 
-    public PayMoneyAmountAdapter(List<Integer> list, Context context) {
+    public PayMoneyAmountAdapter(List<Integer> list, Context context, boolean[] control) {
         this.list = list;
         this.context = context;
+        this.control = control;
     }
 
     @Override
@@ -48,10 +50,17 @@ public class PayMoneyAmountAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.layout_item_paymoneyamout, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tvAmount.setText(list.get(position)+"");
+        holder.tvAmount.setText(list.get(position) + "");
+        if (control[position]) {
+            holder.tvAmount.setTextColor(context.getResources().getColor(R.color.white));
+            holder.tvAmount.setBackgroundColor(context.getResources().getColor(R.color.red));
+        }else{
+            holder.tvAmount.setTextColor(context.getResources().getColor(R.color.black));
+            holder.tvAmount.setBackgroundColor(context.getResources().getColor(R.color.black2));
+        }
         return convertView;
     }
 
