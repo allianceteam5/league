@@ -11,11 +11,6 @@
         android:id="@+id/title"
         layout="@layout/near_title" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/black2" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,12 +22,14 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/black2">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="选择充值金额(元)"
@@ -44,6 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:gravity="center"
                 android:padding="10dp"
@@ -85,21 +83,27 @@
                 android:id="@+id/et_inputnum"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:background="@color/black2"
                 android:inputType="number"
                 android:padding="10dp"
                 android:textColor="@color/black" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="选择支付方式"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:background="@color/black2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="选择支付方式"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
 
 
         <com.league.widget.MyRadioGroup
@@ -113,15 +117,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
                     android:id="@+id/rl_alipay"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_alipay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/paytypeselect"
+                        android:button="@null" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
@@ -130,26 +145,31 @@
                         android:textColor="@color/black1"
                         android:textSize="16sp" />
 
-                    <RadioButton
-                        android:id="@+id/rb_alipay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/paytypeselect"
-                        android:button="@null" />
-                </RelativeLayout>
 
-                <RelativeLayout
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black2"
+                    android:layout_marginLeft="10dp"/>
+                <LinearLayout
                     android:id="@+id/rl_wxipay"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/rb_wxpay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/paytypeselect"
+                        android:button="@null" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
                         android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
@@ -158,16 +178,8 @@
                         android:textColor="@color/black1"
                         android:textSize="16sp" />
 
-                    <RadioButton
-                        android:id="@+id/rb_wxpay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/paytypeselect"
-                        android:button="@null" />
-                </RelativeLayout>
+
+                </LinearLayout>
             </LinearLayout>
         </com.league.widget.MyRadioGroup>
     </LinearLayout>
@@ -180,7 +192,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/btnbackground"
-        android:text="确认支付"
+        android:text="确认充值"
         android:textColor="@color/white"
         android:textSize="16sp" />
 </LinearLayout>
