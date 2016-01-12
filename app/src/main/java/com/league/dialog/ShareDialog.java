@@ -72,8 +72,8 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
         SmsHandler smsHandler = new SmsHandler();
         smsHandler.addToSocialSDK();
         // wx967daebe835fbeac是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
-        String appID = "wx98e6c27800ad7a60";
-        String appSecret = "35978744f081736d47fca4042c8cd4f4";
+        String appID = "wxa2d6e9ec950af3d1";
+        String appSecret = "77efbe96aa7b2b65d998fed09fa920fd";
         // 添加微信平台
         UMWXHandler wxHandler = new UMWXHandler(activity, appID, appSecret);
         wxHandler.addToSocialSDK();

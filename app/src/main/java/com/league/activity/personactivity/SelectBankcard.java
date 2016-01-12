@@ -145,6 +145,9 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
     @Override
     protected void onResume() {
         super.onResume();
+        for(int i = 0;i<delete.length;i++){
+            delete[i] = false;
+        }
         initData();
     }
 }
