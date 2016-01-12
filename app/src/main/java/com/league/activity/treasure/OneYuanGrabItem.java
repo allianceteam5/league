@@ -339,7 +339,7 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
         });
         recordAdapter = new OneYuanGrabTakRecodAdapter(records, getApplication());
         listView.setAdapter(recordAdapter);
-        if (myrecords.size() == 0) {
+        if (myrecords == null || myrecords.size() == 0) {
             tv.setVisibility(View.VISIBLE);
             myrecordlist.setVisibility(View.GONE);
         } else {

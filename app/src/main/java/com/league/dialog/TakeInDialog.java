@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ public class TakeInDialog extends Dialog implements android.view.View.OnClickLis
 
     private Button submit;
     private ImageView substract, add, cancle;
-    private TextView number;
+    private EditText number;
     Context context;
     View localView;
     private RelativeLayout clearallpan;
@@ -78,7 +79,8 @@ public class TakeInDialog extends Dialog implements android.view.View.OnClickLis
     private void initView() {
         cancle = (ImageView) findViewById(R.id.cancle);
         substract = (ImageView) findViewById(R.id.substract);
-        number = (TextView) findViewById(R.id.number);
+        number = (EditText) findViewById(R.id.number);
+        number.setSelection(number.getText().toString().length());
         add = (ImageView) findViewById(R.id.add);
         submit = (Button) findViewById(R.id.submit);
         clearallpan = (RelativeLayout) findViewById(R.id.clearallpan);
