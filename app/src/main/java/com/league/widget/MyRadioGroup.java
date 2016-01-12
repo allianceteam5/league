@@ -75,7 +75,9 @@ public class MyRadioGroup extends LinearLayout {
         }
     }
 
-    /** 递归查找具有选中属性的子控件 */
+    /**
+     * 递归查找具有选中属性的子控件
+     */
 //    private static CompoundButton findCheckedView(View child) {
 //        if (child instanceof CompoundButton)
 //            return (CompoundButton) child;
@@ -91,15 +93,15 @@ public class MyRadioGroup extends LinearLayout {
 //    }
     private List<CompoundButton> findCheckedView(View child) {
         List<CompoundButton> allCompoundButtonList = null;
-        if (child instanceof CompoundButton){
+        if (child instanceof CompoundButton) {
             allCompoundButtonList = new ArrayList<CompoundButton>();
             allCompoundButtonList.add((CompoundButton) child);
-        }else if (child instanceof ViewGroup) {
+        } else if (child instanceof ViewGroup) {
             ViewGroup group = (ViewGroup) child;
             for (int i = 0, j = group.getChildCount(); i < j; i++) {
                 List<CompoundButton> allChildCompoundButtonList = findCheckedView(group.getChildAt(i));
-                if(allChildCompoundButtonList != null){
-                    if(allCompoundButtonList == null){
+                if (allChildCompoundButtonList != null) {
+                    if (allCompoundButtonList == null) {
                         allCompoundButtonList = new ArrayList<CompoundButton>();
                     }
                     allCompoundButtonList.addAll(allChildCompoundButtonList);
@@ -112,7 +114,7 @@ public class MyRadioGroup extends LinearLayout {
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
         final List<CompoundButton> list = findCheckedView(child);
-        for(CompoundButton view : list){
+        for (CompoundButton view : list) {
             if (view != null) {
                 if (view.isChecked()) {
                     mProtectFromCheckedChange = true;
@@ -133,7 +135,6 @@ public class MyRadioGroup extends LinearLayout {
      * such an operation is equivalent to invoking {@link #clearCheck()}.</p>
      *
      * @param id the unique id of the radio button to select in this group
-     *
      * @see #getCheckedRadioButtonId()
      * @see #clearCheck()
      */
@@ -173,11 +174,9 @@ public class MyRadioGroup extends LinearLayout {
      * Upon empty selection, the returned value is -1.</p>
      *
      * @return the unique id of the selected radio button in this group
-     *
+     * @attr ref android.R.styleable#NestRadioGroup_checkedButton
      * @see #check(int)
      * @see #clearCheck()
-     *
-     * @attr ref android.R.styleable#NestRadioGroup_checkedButton
      */
     public int getCheckedRadioButtonId() {
         return mCheckedId;
@@ -230,11 +229,10 @@ public class MyRadioGroup extends LinearLayout {
      * <p>This set of layout parameters defaults the width and the height of
      * the children to {@link #WRAP_CONTENT} when they are not specified in the
      * XML file. Otherwise, this class ussed the value read from the XML file.</p>
-     *
+     * <p/>
      * <p>See
      * {@link android.R.styleable#LinearLayout_Layout LinearLayout Attributes}
      * for a list of all child view attributes that this class supports.</p>
-     *
      */
     public static class LayoutParams extends LinearLayout.LayoutParams {
         /**
@@ -278,8 +276,8 @@ public class MyRadioGroup extends LinearLayout {
          * height to  {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}
          * when not specified in the XML file.</p>
          *
-         * @param a the styled attributes set
-         * @param widthAttr the width attribute to fetch
+         * @param a          the styled attributes set
+         * @param widthAttr  the width attribute to fetch
          * @param heightAttr the height attribute to fetch
          */
         @Override
@@ -308,7 +306,7 @@ public class MyRadioGroup extends LinearLayout {
          * <p>Called when the checked radio button has changed. When the
          * selection is cleared, checkedId is -1.</p>
          *
-         * @param group the group in which the checked radio button has changed
+         * @param group     the group in which the checked radio button has changed
          * @param checkedId the unique identifier of the newly checked radio button
          */
         public void onCheckedChanged(MyRadioGroup group, int checkedId);
@@ -347,7 +345,7 @@ public class MyRadioGroup extends LinearLayout {
         public void onChildViewAdded(View parent, View child) {
             if (parent == MyRadioGroup.this) {
                 final List<CompoundButton> list = findCheckedView(child);
-                for(CompoundButton view : list){
+                for (CompoundButton view : list) {
                     if (view != null) {
                         int id = view.getId();
                         // generates an id if it's missing
@@ -372,7 +370,7 @@ public class MyRadioGroup extends LinearLayout {
         public void onChildViewRemoved(View parent, View child) {
             if (parent == MyRadioGroup.this) {
                 final List<CompoundButton> list = findCheckedView(child);
-                for(CompoundButton view : list){
+                for (CompoundButton view : list) {
                     if (view != null) {
                         view.setOnCheckedChangeListener(null);
                     }

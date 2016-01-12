@@ -84,7 +84,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     private List<JobInfoBean> jobInfoList = new ArrayList<>();
     private List<HobbyInfoBean> hobbyInfoList = new ArrayList<>();
     private List<RecommendationInfoBean> recommendationInfoList = new ArrayList<>();
-    private List<OtherMessageBean> otherInfoList=new ArrayList<>();
+    private List<OtherMessageBean> otherInfoList = new ArrayList<>();
     private int currentPage = 1;
     private int sumPage;
     private int kindid = 0;
@@ -121,7 +121,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
         near_right = (ImageButton) findViewById(R.id.near_right);
         ll_more = (LinearLayout) findViewById(R.id.near_more);
 
-        View headerView = getLayoutInflater().inflate(R.layout.info_search,null);
+        View headerView = getLayoutInflater().inflate(R.layout.info_search, null);
         listview.addHeaderView(headerView);
         etSearch = (EditText) headerView.findViewById(R.id.et_search_search);
         btnSure = (Button) headerView.findViewById(R.id.btn_search_sure);
@@ -150,9 +150,9 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
                 ApiUtil.professionList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<KindBean>>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<KindBean> response) {
-                        if (response != null && response.size() > 0){
-                            response.add(0,new KindBean(-1,"兼职"));
-                            response.add(0,new KindBean(-2,"全职"));
+                        if (response != null && response.size() > 0) {
+                            response.add(0, new KindBean(-1, "兼职"));
+                            response.add(0, new KindBean(-2, "全职"));
                         }
                         kinds = response;
                         Paper.book().write(Constants.ProfessinListName, kinds);
@@ -412,8 +412,8 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
         }
     }
 
-    public void updateOtherView(){
-        if (otherMessageAdapter == null){
+    public void updateOtherView() {
+        if (otherMessageAdapter == null) {
             otherMessageAdapter = new OtherMessageAdapter(getApplicationContext(), otherInfoList);
             listview.setAdapter(otherMessageAdapter);
         } else {
@@ -541,7 +541,7 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     }
 
     @Subscribe
-    public void refreshEvent(RefreshEvent event){
+    public void refreshEvent(RefreshEvent event) {
         currentPage = 1;
         switch (Flag) {
             case 1:

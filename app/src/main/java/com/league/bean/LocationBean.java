@@ -9,9 +9,10 @@ public class LocationBean {
     private String address;
     private String city;
 
-    public LocationBean(){}
+    public LocationBean() {
+    }
 
-    public LocationBean(double latitude, double longitude, String city){
+    public LocationBean(double latitude, double longitude, String city) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.city = city;

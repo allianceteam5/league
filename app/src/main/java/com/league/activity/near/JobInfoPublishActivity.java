@@ -1,6 +1,5 @@
 package com.league.activity.near;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,10 +33,10 @@ import cn.aigestudio.datepicker.cons.DPMode;
 import cn.aigestudio.datepicker.views.DatePicker;
 import io.paperdb.Paper;
 
-public  class JobInfoPublishActivity extends BaseActivity implements View.OnClickListener {
+public class JobInfoPublishActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView back, title_right, right, jobfull, jobpart;
-    private TextView title, save, tvDegree, tvWorkTime,tvProfession;
+    private TextView title, save, tvDegree, tvWorkTime, tvProfession;
     private RelativeLayout rl_degree, rl_time, rl_profession;
     private EditText etTitle, etStatus, etContent, etPhone;
     private int selectedJobIndex = 0;
@@ -180,7 +179,7 @@ public  class JobInfoPublishActivity extends BaseActivity implements View.OnClic
                     return;
                 }
 
-                ApiUtil.applyJobCreated(getApplicationContext(),selectedJobIndex, title, selectedDegreeIndex, DateFormatUtils.Date2TimeStamp(worktime), status, 0, phone, content, selectedProfessionId, new JsonHttpResponseHandler() {
+                ApiUtil.applyJobCreated(getApplicationContext(), selectedJobIndex, title, selectedDegreeIndex, DateFormatUtils.Date2TimeStamp(worktime), status, 0, phone, content, selectedProfessionId, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         int flag = response.optInt("flag");

@@ -20,5 +20,6 @@
         android:paddingRight="10dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
+        style="@style/editText"
         android:gravity="top"/>
 </LinearLayout>

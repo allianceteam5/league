@@ -23,11 +23,11 @@ import org.apache.http.Header;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MyMoneyBag extends BaseActivity implements View.OnClickListener,IContants{
+public class MyMoneyBag extends BaseActivity implements View.OnClickListener, IContants {
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
-    private MoneyBean moneyBean=new MoneyBean();
+    private MoneyBean moneyBean = new MoneyBean();
 
     @Bind(R.id.mymoney)
     TextView myMoney;
@@ -37,6 +37,7 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener,ICo
     TextView mCornsForgrab;
     @Bind(R.id.cardcount)
     TextView mCardCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,7 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener,ICo
         initView();
 //        initData();
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -66,16 +68,17 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener,ICo
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
     }
-    private void initData(){
+
+    private void initData() {
         showProgressDialog();
         ApiUtil.getUserAllmoney(this, new BaseJsonHttpResponseHandler<MoneyBean>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, MoneyBean response) {
-                moneyBean=response;
-                myMoney.setText(moneyBean.getMoney()+"");
+                moneyBean = response;
+                myMoney.setText(moneyBean.getMoney() + "");
                 StoreUtils.setRealMoney(moneyBean.getMoney());
                 mCorns.setText(moneyBean.getCorns() + "");
-                mCornsForgrab.setText(moneyBean.getCornsforgrab()+"");
+                mCornsForgrab.setText(moneyBean.getCornsforgrab() + "");
                 mCardCount.setText(moneyBean.getCardcount());
                 StoreUtils.setBankNum(Integer.valueOf(moneyBean.getCardcount()));
                 closeProgressDialog();
@@ -83,7 +86,7 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener,ICo
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, MoneyBean errorResponse) {
-                ToastUtils.showShortToast(MyMoneyBag.this,"获取数据失败");
+                ToastUtils.showShortToast(MyMoneyBag.this, "获取数据失败");
                 closeProgressDialog();
             }
 
@@ -94,19 +97,20 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener,ICo
             }
         });
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.recharge:
-                Intent intent1=new Intent(getApplication(),Recharge.class);
+                Intent intent1 = new Intent(getApplication(), Recharge.class);
                 startActivity(intent1);
                 break;
             case R.id.tixian:
-                Intent intent2 =new Intent(getApplication(),WithDraw.class);
+                Intent intent2 = new Intent(getApplication(), WithDraw.class);
                 startActivity(intent2);
                 break;
             case R.id.bankcardnum:
-                Intent intent3 =new Intent(getApplication(),SelectBankcard.class);
+                Intent intent3 = new Intent(getApplication(), SelectBankcard.class);
                 startActivity(intent3);
                 break;
 //            case R.id.goldcoin:
@@ -114,7 +118,7 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener,ICo
 //                startActivity(intent4);
 //                break;
             case R.id.paypassword:
-                Intent intent5=new Intent(getApplication(),PayPassword.class);
+                Intent intent5 = new Intent(getApplication(), PayPassword.class);
                 startActivity(intent5);
                 break;
             case R.id.rl_question:

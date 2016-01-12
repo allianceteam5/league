@@ -1,18 +1,11 @@
 package com.league.activity;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.easemob.chatuidemo.Constant;
 import com.league.adapter.RadioSelectAdapter;
 import com.league.utils.Constants;
 import com.league.utils.ToastUtils;
@@ -21,7 +14,7 @@ import com.mine.league.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportActivity extends BaseActivity implements View.OnClickListener{
+public class ReportActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView back, title_right, right;
     private TextView title, save;
@@ -29,6 +22,7 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
     RadioSelectAdapter radioSelectAdapter;
     List<String> items = new ArrayList<String>();
     int selectedIndex = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,12 +55,12 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
                 finish();
                 break;
             case R.id.near_save:
-                if (radioSelectAdapter.getSelectedIndex() < 0){
-                    ToastUtils.showShortToast(ReportActivity.this,"请选择");
+                if (radioSelectAdapter.getSelectedIndex() < 0) {
+                    ToastUtils.showShortToast(ReportActivity.this, "请选择");
                     return;
                 }
                 finish();
-                ToastUtils.showShortToast(ReportActivity.this,"您的举报已提交成功");
+                ToastUtils.showShortToast(ReportActivity.this, "您的举报已提交成功");
                 break;
         }
     }

@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class LiaobaCommentActivity extends BaseActivity implements View.OnClickListener,IContants{
+public class LiaobaCommentActivity extends BaseActivity implements View.OnClickListener, IContants {
     @Bind(R.id.near_back)
     ImageButton nearBack;
     @Bind(R.id.near_title)
@@ -36,6 +36,7 @@ public class LiaobaCommentActivity extends BaseActivity implements View.OnClickL
     EditText etContent;
     String content;
     String tbmessageid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,18 +55,18 @@ public class LiaobaCommentActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.near_back:
                 finish();
                 break;
             case R.id.near_save:
                 content = etContent.getText().toString();
-                if(TextUtils.isEmpty(content)){
-                    ToastUtils.showShortToast(getApplicationContext(),getString(R.string.warning_comment));
+                if (TextUtils.isEmpty(content)) {
+                    ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_comment));
                     return;
                 }
                 showProgressDialog();
-                ApiUtil.liaobaTbmessageComment(getApplicationContext(), tbmessageid, content,"", new JsonHttpResponseHandler() {
+                ApiUtil.liaobaTbmessageComment(getApplicationContext(), tbmessageid, content, "", new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);

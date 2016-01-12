@@ -78,7 +78,6 @@ public class OtherMessageAdapter extends BaseAdapter implements IContants {
         holder.content.setText(list.get(position).getContent());
 
 
-
         final List<String> imgList = list.get(position).getPictureList();
         ImgGridAdapter adapter = new ImgGridAdapter(ctx, imgList);
         if (imgList == null)

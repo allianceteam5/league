@@ -329,7 +329,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                     user.setAvatar(userBasicInfo.getThumb());
                     user.setPhone(userBasicInfo.getPhone());
                     setUserHearder(userBasicInfo.getHuanxinid(), user);
-                    userlist.put(userBasicInfo.getHuanxinid(),user);
+                    userlist.put(userBasicInfo.getHuanxinid(), user);
                 }
 
 
@@ -430,22 +430,22 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 //        new Thread(){
 //            @Override
 //            public void run() {
-                ApiUtil.friendList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<UserBasicInfo>>() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<UserBasicInfo> response) {
-                    }
+        ApiUtil.friendList(getApplicationContext(), new BaseJsonHttpResponseHandler<ArrayList<UserBasicInfo>>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<UserBasicInfo> response) {
+            }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<UserBasicInfo> errorResponse) {
-                    }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<UserBasicInfo> errorResponse) {
+            }
 
-                    @Override
-                    protected ArrayList<UserBasicInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                        Log.d("response", rawJsonData);
-                        return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<UserBasicInfo>>() {
-                        });
-                    }
+            @Override
+            protected ArrayList<UserBasicInfo> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                Log.d("response", rawJsonData);
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<UserBasicInfo>>() {
                 });
+            }
+        });
 //            }
 //        }.start();
 

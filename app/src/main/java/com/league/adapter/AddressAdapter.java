@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by liug on 15/12/6.
  */
-public class AddressAdapter extends BaseAdapter{
+public class AddressAdapter extends BaseAdapter {
     private List<ShippingAddressBean> list;
     private Context context;
 
@@ -43,33 +43,34 @@ public class AddressAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        if(convertView==null){
-            convertView= LayoutInflater.from(context).inflate(R.layout.item_shippingaddress,null);
-            holder=new ViewHolder();
-            holder.name= (TextView) convertView.findViewById(R.id.addressname);
-            holder.number= (TextView) convertView.findViewById(R.id.addressnumber);
-            holder.deaulttext= (TextView) convertView.findViewById(R.id.defaulttext);
-            holder.detail= (TextView) convertView.findViewById(R.id.addressdetail);
-            holder.selected= (ImageView) convertView.findViewById(R.id.default_selected);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_shippingaddress, null);
+            holder = new ViewHolder();
+            holder.name = (TextView) convertView.findViewById(R.id.addressname);
+            holder.number = (TextView) convertView.findViewById(R.id.addressnumber);
+            holder.deaulttext = (TextView) convertView.findViewById(R.id.defaulttext);
+            holder.detail = (TextView) convertView.findViewById(R.id.addressdetail);
+            holder.selected = (ImageView) convertView.findViewById(R.id.default_selected);
             convertView.setTag(holder);
-        }else{
-            holder= (ViewHolder) convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
         holder.name.setText(list.get(position).getName());
         holder.number.setText(list.get(position).getAphone());
-        if(list.get(position).getIsdefault()==1){
+        if (list.get(position).getIsdefault() == 1) {
             holder.deaulttext.setVisibility(View.VISIBLE);
             holder.selected.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             holder.deaulttext.setVisibility(View.GONE);
             holder.selected.setVisibility(View.INVISIBLE);
         }
-        String temp=new String(list.get(position).getAddress());
+        String temp = new String(list.get(position).getAddress());
         holder.detail.setText(temp.replace(" ", ""));
         return convertView;
     }
-    class ViewHolder{
-        TextView name,number,deaulttext,detail;
+
+    class ViewHolder {
+        TextView name, number, deaulttext, detail;
         ImageView selected;
     }
 }

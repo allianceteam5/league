@@ -45,17 +45,17 @@ public class TenYuanGrabAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder=null;
-        if(convertView==null){
-            holder=new ViewHolder();
-            convertView= LayoutInflater.from(ctx).inflate(R.layout.gridview_tenyuan_item,null);
-            holder.thumb= (ImageView) convertView.findViewById(R.id.ten_image);
+        ViewHolder holder = null;
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = LayoutInflater.from(ctx).inflate(R.layout.gridview_tenyuan_item, null);
+            holder.thumb = (ImageView) convertView.findViewById(R.id.ten_image);
             holder.period = (TextView) convertView.findViewById(R.id.period);
             holder.mName_Monery = (TextView) convertView.findViewById(R.id.name);
-            holder.progress= (TextView) convertView.findViewById(R.id.progress);
+            holder.progress = (TextView) convertView.findViewById(R.id.progress);
             holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progressbar);
             holder.totalPeo = (TextView) convertView.findViewById(R.id.totalpeo);
-            holder.leavePeo=(TextView) convertView.findViewById(R.id.leavepeo);
+            holder.leavePeo = (TextView) convertView.findViewById(R.id.leavepeo);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -66,12 +66,12 @@ public class TenYuanGrabAdapter extends BaseAdapter {
             Picasso.with(ctx).load(R.drawable.example).into(holder.thumb);
         holder.period.setText("(第" + list.get(position).getVersion() + "期)");
         holder.mName_Monery.setText(list.get(position).getTitle());
-        float need=Float.valueOf(list.get(position).getNeeded());
-        float remain=Float.valueOf(list.get(position).getRemain());
-        holder.progress.setText((int)((need-remain)/need*100)+"%");
+        float need = Float.valueOf(list.get(position).getNeeded());
+        float remain = Float.valueOf(list.get(position).getRemain());
+        holder.progress.setText((int) ((need - remain) / need * 100) + "%");
         holder.totalPeo.setText(list.get(position).getNeeded() + "人次");
-        holder.leavePeo.setText(list.get(position).getRemain()+"");
-        holder.progressBar.setProgress((int)((need-remain)/need*100));
+        holder.leavePeo.setText(list.get(position).getRemain() + "");
+        holder.progressBar.setProgress((int) ((need - remain) / need * 100));
         return convertView;
     }
 

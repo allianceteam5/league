@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +34,7 @@ import java.util.List;
 
 import io.paperdb.Paper;
 
-public class OneYuan extends BaseActivity implements View.OnClickListener,IContants {
+public class OneYuan extends BaseActivity implements View.OnClickListener, IContants {
 
     private ImageView back, titleright, right1, right2;
     private TextView title;
@@ -159,13 +158,13 @@ public class OneYuan extends BaseActivity implements View.OnClickListener,IConta
             }
         });
         //新接口获取即将揭晓
-        ApiUtil.getTheLatest(getApplication(),1, new BaseJsonHttpResponseHandler<ArrayList<AnnouncedTheLatestBean>>() {
+        ApiUtil.getTheLatest(getApplication(), 1, new BaseJsonHttpResponseHandler<ArrayList<AnnouncedTheLatestBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<AnnouncedTheLatestBean> response) {
                 announcedList.clear();
-                if(response.size()<3){
+                if (response.size() < 3) {
                     announcedList.addAll(response);
-                }else{
+                } else {
                     for (int i = 0; i < 3; i++) {
                         announcedList.add(response.get(i));
                     }
@@ -174,12 +173,13 @@ public class OneYuan extends BaseActivity implements View.OnClickListener,IConta
                 latestGridView.setAdapter(new LatestAnnouncedAdapter(announcedList, getApplication()));
                 latestGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     Intent intent;
+
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if(announcedList.get(position).getTbk().equals("1")){
+                        if (announcedList.get(position).getTbk().equals("1")) {
                             intent = new Intent(OneYuan.this, OneYuanGrabItem.class);
-                        }else{
-                            intent=new Intent(OneYuan.this,TenYuanGrabItem.class);
+                        } else {
+                            intent = new Intent(OneYuan.this, TenYuanGrabItem.class);
                         }
                         intent.putExtra("id", announcedList.get(position).getId());
                         startActivity(intent);
@@ -250,13 +250,13 @@ public class OneYuan extends BaseActivity implements View.OnClickListener,IConta
         money3.setText(listTenYuanGrab.get(2).getTitle());
         float need1 = Float.valueOf(listTenYuanGrab.get(0).getNeeded());
         float remain1 = Float.valueOf(listTenYuanGrab.get(0).getRemain());
-        txtProgress1.setText((int)((need1 - remain1) / need1 * 100) + "%");
+        txtProgress1.setText((int) ((need1 - remain1) / need1 * 100) + "%");
         float need2 = Float.valueOf(listTenYuanGrab.get(1).getNeeded());
         float remain2 = Float.valueOf(listTenYuanGrab.get(1).getRemain());
-        txtProgress2.setText((int)((need2 - remain2) / need2 * 100) + "%");
+        txtProgress2.setText((int) ((need2 - remain2) / need2 * 100) + "%");
         float need3 = Float.valueOf(listTenYuanGrab.get(2).getNeeded());
         float remain3 = Float.valueOf(listTenYuanGrab.get(2).getRemain());
-        txtProgress3.setText((int)((need3 - remain3) / need3 * 100) + "%");
+        txtProgress3.setText((int) ((need3 - remain3) / need3 * 100) + "%");
         progressbar1.setProgress((int) ((need1 - remain1) / need1 * 100));
         progressbar2.setProgress((int) ((need2 - remain2) / need2 * 100));
         progressbar3.setProgress((int) ((need3 - remain3) / need3 * 100));

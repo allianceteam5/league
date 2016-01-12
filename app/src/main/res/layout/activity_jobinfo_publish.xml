@@ -47,6 +47,7 @@
                 android:maxLength="16"
                 android:paddingLeft="10dp"
                 android:textColor="@color/black"
+                style="@style/editText"
                 android:textColorHint="@color/black"
                 android:singleLine="true" />
 
@@ -243,6 +244,7 @@
                     android:hint="我目前处于离职状态，可立即入职"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
+                    style="@style/editText"
                     android:background="@color/white"
                     android:textSize="16sp" />
             </RelativeLayout>
@@ -271,6 +273,7 @@
                     android:paddingLeft="10dp"
                     android:hint="输入你的联系方式"
                     android:inputType="number"
+                    style="@style/editText"
                     android:background="@color/white"
                     android:maxLength="11"
                     android:textColor="@color/black"
@@ -297,6 +300,7 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:singleLine="false"
+                style="@style/editText"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="16sp"

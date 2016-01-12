@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by liug on 15/11/7.
  */
-public class PassAnnouncedAdapter extends BaseAdapter{
+public class PassAnnouncedAdapter extends BaseAdapter {
     private List<PassAnnouncedBean> list;
     private Context ctx;
 
@@ -46,20 +46,20 @@ public class PassAnnouncedAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        if(convertView==null){
-            holder=new ViewHolder();
-            convertView= LayoutInflater.from(ctx).inflate(R.layout.item_passannounced,null);
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = LayoutInflater.from(ctx).inflate(R.layout.item_passannounced, null);
 
-            holder.period= (TextView) convertView.findViewById(R.id.period);
-            holder.announTime= (TextView) convertView.findViewById(R.id.announcedtime);
-            holder.thumb= (ImageView) convertView.findViewById(R.id.thumb);
-            holder.holderName= (TextView) convertView.findViewById(R.id.holdername);
-            holder.holderId= (TextView) convertView.findViewById(R.id.holderid);
-            holder.holderNum= (TextView) convertView.findViewById(R.id.holdernum);
-            holder.takNum= (TextView) convertView.findViewById(R.id.taknum);
+            holder.period = (TextView) convertView.findViewById(R.id.period);
+            holder.announTime = (TextView) convertView.findViewById(R.id.announcedtime);
+            holder.thumb = (ImageView) convertView.findViewById(R.id.thumb);
+            holder.holderName = (TextView) convertView.findViewById(R.id.holdername);
+            holder.holderId = (TextView) convertView.findViewById(R.id.holderid);
+            holder.holderNum = (TextView) convertView.findViewById(R.id.holdernum);
+            holder.takNum = (TextView) convertView.findViewById(R.id.taknum);
             convertView.setTag(holder);
-        }else{
-            holder= (ViewHolder) convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
         holder.period.setText(list.get(position).getVersion());
         holder.announTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(list.get(position).getEnd_at()) * 1000));
@@ -72,8 +72,9 @@ public class PassAnnouncedAdapter extends BaseAdapter{
             Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.thumb);
         return convertView;
     }
-    class ViewHolder{
-        TextView period,announTime,holderName,holderId,holderNum,takNum;
+
+    class ViewHolder {
+        TextView period, announTime, holderName, holderId, holderNum, takNum;
         ImageView thumb;
     }
 }

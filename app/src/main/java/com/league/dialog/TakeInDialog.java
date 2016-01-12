@@ -24,7 +24,7 @@ import com.mine.league.R;
 public class TakeInDialog extends Dialog implements android.view.View.OnClickListener {
 
     private Button submit;
-    private ImageView substract,add,cancle;
+    private ImageView substract, add, cancle;
     private TextView number;
     Context context;
     View localView;
@@ -32,11 +32,11 @@ public class TakeInDialog extends Dialog implements android.view.View.OnClickLis
     private String coinID;
     private int type;
 
-    public TakeInDialog(Context context,String coinID,int type) {
+    public TakeInDialog(Context context, String coinID, int type) {
         super(context);
         this.context = context;
-        this.coinID=coinID;
-        this.type=type;//type==0表示10夺金type==1表示一元夺宝
+        this.coinID = coinID;
+        this.type = type;//type==0表示10夺金type==1表示一元夺宝
     }
 
     @Override
@@ -76,11 +76,11 @@ public class TakeInDialog extends Dialog implements android.view.View.OnClickLis
     }
 
     private void initView() {
-        cancle= (ImageView) findViewById(R.id.cancle);
-        substract= (ImageView) findViewById(R.id.substract);
-        number= (TextView) findViewById(R.id.number);
-        add= (ImageView) findViewById(R.id.add);
-        submit= (Button) findViewById(R.id.submit);
+        cancle = (ImageView) findViewById(R.id.cancle);
+        substract = (ImageView) findViewById(R.id.substract);
+        number = (TextView) findViewById(R.id.number);
+        add = (ImageView) findViewById(R.id.add);
+        submit = (Button) findViewById(R.id.submit);
         clearallpan = (RelativeLayout) findViewById(R.id.clearallpan);
 
     }
@@ -91,23 +91,23 @@ public class TakeInDialog extends Dialog implements android.view.View.OnClickLis
                 this.dismiss();
                 break;
             case R.id.substract:
-                int num=Integer.valueOf(number.getText().toString());
+                int num = Integer.valueOf(number.getText().toString());
                 num--;
-                if(num<=0){
-                    number.setText(1+"");
-                }else{
-                    number.setText(num+"");
+                if (num <= 0) {
+                    number.setText(1 + "");
+                } else {
+                    number.setText(num + "");
                 }
                 break;
             case R.id.add:
-                number.setText(Integer.valueOf(number.getText().toString())+1+"");
+                number.setText(Integer.valueOf(number.getText().toString()) + 1 + "");
                 break;
             case R.id.submit:
-                Intent inten=new Intent(context,BuyList.class);
-                inten.putExtra("number",number.getText().toString());
-                inten.putExtra("id",coinID);
-                inten.putExtra("buytype",0);
-                inten.putExtra("type",type);
+                Intent inten = new Intent(context, BuyList.class);
+                inten.putExtra("number", number.getText().toString());
+                inten.putExtra("id", coinID);
+                inten.putExtra("buytype", 0);
+                inten.putExtra("type", type);
                 context.startActivity(inten);
                 this.dismiss();
                 break;

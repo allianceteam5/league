@@ -10,17 +10,11 @@
         android:id="@+id/title"
         layout="@layout/near_title" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom"
-        android:layout_below="@+id/title">
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:layout_above="@+id/bottom"
+            android:layout_below="@+id/title"
             android:orientation="vertical">
 
             <LinearLayout
@@ -173,7 +167,6 @@
                 </com.league.widget.NoScrollListView>
             </com.league.widget.RefreshLayout>
         </LinearLayout>
-    </ScrollView>
     <LinearLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"

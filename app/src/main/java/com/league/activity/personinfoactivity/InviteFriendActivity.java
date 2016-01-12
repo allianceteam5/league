@@ -57,7 +57,7 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
         UMWXHandler wxHandler = new UMWXHandler(this, appID, appSecret);
         wxHandler.addToSocialSDK();
         // 支持微信朋友圈
-        UMWXHandler wxCircleHandler = new UMWXHandler(this,appID,appSecret);
+        UMWXHandler wxCircleHandler = new UMWXHandler(this, appID, appSecret);
         wxCircleHandler.setToCircle(true);
         wxCircleHandler.addToSocialSDK();
         mController.getConfig().setSsoHandler(new SinaSsoHandler());
@@ -85,17 +85,18 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.qqzoneshare:
-                mController.postShare(InviteFriendActivity.this,SHARE_MEDIA.QZONE,
+                mController.postShare(InviteFriendActivity.this, SHARE_MEDIA.QZONE,
                         new SocializeListeners.SnsPostListener() {
                             @Override
                             public void onStart() {
                             }
+
                             @Override
-                            public void onComplete(SHARE_MEDIA platform, int eCode,SocializeEntity entity) {
+                            public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
                                 } else {
                                     String eMsg = "";
-                                    if (eCode == -101){
+                                    if (eCode == -101) {
                                         eMsg = "没有授权";
                                     }
                                 }
@@ -103,19 +104,20 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                         });
                 break;
             case R.id.wxcircleshare:
-                mController.postShare(InviteFriendActivity.this,SHARE_MEDIA.WEIXIN_CIRCLE,
+                mController.postShare(InviteFriendActivity.this, SHARE_MEDIA.WEIXIN_CIRCLE,
                         new SocializeListeners.SnsPostListener() {
                             @Override
                             public void onStart() {
 //                                Toast.makeText(InviteFriendActivity.this, "开始分享.", Toast.LENGTH_SHORT).show();
                             }
+
                             @Override
-                            public void onComplete(SHARE_MEDIA platform, int eCode,SocializeEntity entity) {
+                            public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
-                                    if (eCode == -101){
+                                    if (eCode == -101) {
                                         eMsg = "没有授权";
                                     }
 //                                    Toast.makeText(InviteFriendActivity.this, "分享失败[" + eCode + "] " +

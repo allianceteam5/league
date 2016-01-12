@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class CommentActivity extends BaseActivity implements View.OnClickListener,IContants{
+public class CommentActivity extends BaseActivity implements View.OnClickListener, IContants {
     @Bind(R.id.near_back)
     ImageButton nearBack;
     @Bind(R.id.near_title)
@@ -36,6 +36,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     EditText etContent;
     String content;
     int recommendationId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +55,11 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.near_save:
                 content = etContent.getText().toString();
-                if(TextUtils.isEmpty(content)){
-                    ToastUtils.showShortToast(getApplicationContext(),getString(R.string.warning_comment));
+                if (TextUtils.isEmpty(content)) {
+                    ToastUtils.showShortToast(getApplicationContext(), getString(R.string.warning_comment));
                     return;
                 }
                 showProgressDialog();
@@ -67,7 +68,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);
                         closeProgressDialog();
-                        ToastUtils.showShortToast(getApplicationContext(),"评价成功");
+                        ToastUtils.showShortToast(getApplicationContext(), "评价成功");
                         setResult(RESULT_OK);
                         finish();
                     }

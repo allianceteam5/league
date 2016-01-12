@@ -72,6 +72,7 @@
             android:paddingLeft="10dp"
             android:hint="输入验证码"
             android:background="@null"
+            style="@style/editText"
             android:gravity="center_vertical"
             android:paddingBottom="10dp"/>
     </LinearLayout>

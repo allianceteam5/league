@@ -27,13 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LiaoBaLatestFragment extends Fragment{
+public class LiaoBaLatestFragment extends Fragment {
 
     private View layout;
     private ListView listView;
-    private List<LiaoBaMessageBean> list=new ArrayList<LiaoBaMessageBean>();
+    private List<LiaoBaMessageBean> list = new ArrayList<LiaoBaMessageBean>();
     private int totalPage;
-    private int currentPage=1;
+    private int currentPage = 1;
     private PullToRefreshLayout pullToRefreshLayout;
     private LiaoBaAdapter adapter;
 
@@ -41,26 +41,28 @@ public class LiaoBaLatestFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        layout=inflater.inflate(R.layout.fragment_liao_ba_latest,container,false);
+        layout = inflater.inflate(R.layout.fragment_liao_ba_latest, container, false);
         initView();
         initData(currentPage);
         return layout;
     }
-    private void initView(){
-        listView= (ListView) layout.findViewById(R.id.liaoba_latest_list);
-        adapter=new LiaoBaAdapter(list, getActivity().getApplication(),0);
+
+    private void initView() {
+        listView = (ListView) layout.findViewById(R.id.liaoba_latest_list);
+        adapter = new LiaoBaAdapter(list, getActivity().getApplication(), 0);
         listView.setAdapter(adapter);
         pullToRefreshLayout = (PullToRefreshLayout) layout.findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);
 
     }
-    private void initData(final int currentPage){
-        ApiUtil.liaobagetlatest(getActivity().getApplication(), currentPage,new BaseJsonHttpResponseHandler<ArrayList<LiaoBaMessageBean>>() {
+
+    private void initData(final int currentPage) {
+        ApiUtil.liaobagetlatest(getActivity().getApplication(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaMessageBean>>() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaMessageBean> response) {
-                if(currentPage==1){
+                if (currentPage == 1) {
                     list.clear();
                 }
                 list.addAll(response);
@@ -70,30 +72,27 @@ public class LiaoBaLatestFragment extends Fragment{
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<LiaoBaMessageBean> errorResponse) {
-                Toast.makeText(getActivity(),"哎呀网络不好",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "哎呀网络不好", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             protected ArrayList<LiaoBaMessageBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                JSONObject jsonObject=new JSONObject(rawJsonData);
-                totalPage=jsonObject.optJSONObject("_meta").optInt("pageCount");
-                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaMessageBean>>() {});
+                JSONObject jsonObject = new JSONObject(rawJsonData);
+                totalPage = jsonObject.optJSONObject("_meta").optInt("pageCount");
+                return new ObjectMapper().readValue(jsonObject.optString("items"), new TypeReference<ArrayList<LiaoBaMessageBean>>() {
+                });
             }
         });
     }
 
-    public class MyListener implements PullToRefreshLayout.OnRefreshListener
-    {
+    public class MyListener implements PullToRefreshLayout.OnRefreshListener {
 
         @Override
-        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
             // 下拉刷新操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage = 1;
                     initData(currentPage);
                     // 千万别忘了告诉控件刷新完毕了哦！
@@ -104,16 +103,13 @@ public class LiaoBaLatestFragment extends Fragment{
         }
 
         @Override
-        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
             // 加载操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage++;
-                    if(currentPage <= totalPage)
+                    if (currentPage <= totalPage)
                         initData(currentPage);
                     // 千万别忘了告诉控件加载完毕了哦！
                     pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);

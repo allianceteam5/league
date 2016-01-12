@@ -483,6 +483,10 @@
             android:name="com.league.activity.ReportActivity"
             android:label="@string/title_activity_report" >
         </activity>
+        <activity
+            android:name="com.league.activity.circle.CircleDetailActivity"
+            android:label="@string/title_activity_circle_detail" >
+        </activity>
     </application>
 
 </manifest>

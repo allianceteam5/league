@@ -1,6 +1,5 @@
 package com.league.activity.personactivity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,7 +25,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MyCollection extends BaseActivity {
@@ -39,6 +37,7 @@ public class MyCollection extends BaseActivity {
     private CircleMessageAdapter adapter;
     private int totalPage;
     private int currentPage = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +46,7 @@ public class MyCollection extends BaseActivity {
         initView();
 
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -71,7 +71,7 @@ public class MyCollection extends BaseActivity {
         pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
 
         showProgressDialog();
-        adapter = new CircleMessageAdapter(this, list);
+        adapter = new CircleMessageAdapter(this, list, getWindow().getDecorView());
         listview.setAdapter(adapter);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);

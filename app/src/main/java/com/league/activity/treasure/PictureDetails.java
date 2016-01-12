@@ -14,24 +14,26 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by liug on 15/11/22.
  */
-public class PictureDetails extends Activity implements View.OnClickListener{
+public class PictureDetails extends Activity implements View.OnClickListener {
     private ImageView back, titleright, right1, right2;
     private TextView title;
     private String details;
     private String[] pictures;
     private LinearLayout viewGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.picturedetails);
-        details=getIntent().getStringExtra("picturesdetail");
-        if("".equals(details)){
+        details = getIntent().getStringExtra("picturesdetail");
+        if ("".equals(details)) {
             return;
-        }else{
-            pictures=details.trim().split(" ");
+        } else {
+            pictures = details.trim().split(" ");
         }
         initView();
     }
+
     private void initView() {
         back = (ImageView) findViewById(R.id.near_back);
         back.setOnClickListener(this);
@@ -43,9 +45,9 @@ public class PictureDetails extends Activity implements View.OnClickListener{
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-        viewGroup= (LinearLayout) findViewById(R.id.viewgroup);
-        for(String picture :pictures){
-            ImageView imageView=new ImageView(this);
+        viewGroup = (LinearLayout) findViewById(R.id.viewgroup);
+        for (String picture : pictures) {
+            ImageView imageView = new ImageView(this);
             imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             if (!TextUtils.isEmpty(picture))

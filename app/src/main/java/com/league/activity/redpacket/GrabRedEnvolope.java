@@ -31,17 +31,17 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GrabRedEnvolope extends Activity implements OnClickListener,IContants {
+public class GrabRedEnvolope extends Activity implements OnClickListener, IContants {
 
 
     private ImageView back, titleright, right1, right2;
-    private TextView title,rules;
+    private TextView title, rules;
     private ListView listview;
     private Button ivGrabMoney;
     private EnvelopeWinnerAdapter adapter;
     private List<EnvelopWinBean> data = new ArrayList<>();
     private Timer autoScroll = new Timer();
-    private int index=0;
+    private int index = 0;
     private final Timer timer = new Timer();
     private TimerTask autoUpdateTask;
     Handler handler = new Handler() {
@@ -49,13 +49,14 @@ public class GrabRedEnvolope extends Activity implements OnClickListener,IContan
         public void handleMessage(Message msg) {
             // TODO Auto-generated method stub
             // 要做的事情
-            switch (msg.what){
+            switch (msg.what) {
                 case 1:
                     initData();
                     break;
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,20 +72,20 @@ public class GrabRedEnvolope extends Activity implements OnClickListener,IContan
             }
         };
         timer.schedule(autoUpdateTask, 500, 15000);
-        autoScroll.schedule(new TimerTask(){
+        autoScroll.schedule(new TimerTask() {
             @Override
-            public void run(){
+            public void run() {
                 runOnUiThread(new Runnable() {
                     public void run() {
                         index += 1;
                         if (index >= listview.getCount()) {
-                            index=listview.getCount();
+                            index = listview.getCount();
                         }
                         listview.smoothScrollToPosition(index);
                     }
                 });
             }
-        }, 0,1000);
+        }, 0, 1000);
     }
 
     private void initView() {
@@ -101,9 +102,9 @@ public class GrabRedEnvolope extends Activity implements OnClickListener,IContan
         ivGrabMoney = (Button) findViewById(R.id.grab);
         ivGrabMoney.setOnClickListener(this);
         listview = (ListView) findViewById(R.id.lv_winner);
-        adapter=new EnvelopeWinnerAdapter(this,data);
+        adapter = new EnvelopeWinnerAdapter(this, data);
         listview.setAdapter(adapter);
-        rules= (TextView) findViewById(R.id.near_rule);
+        rules = (TextView) findViewById(R.id.near_rule);
         rules.setVisibility(View.VISIBLE);
         rules.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,8 +115,9 @@ public class GrabRedEnvolope extends Activity implements OnClickListener,IContan
             }
         });
     }
-    private void initData(){
-        Log.i("我测试一下","我测试一下");
+
+    private void initData() {
+        Log.i("我测试一下", "我测试一下");
         ApiUtil.getEnvelopeWinnerList(this, new BaseJsonHttpResponseHandler<List<EnvelopWinBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, List<EnvelopWinBean> response) {
@@ -135,6 +137,7 @@ public class GrabRedEnvolope extends Activity implements OnClickListener,IContan
             }
         });
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -143,7 +146,7 @@ public class GrabRedEnvolope extends Activity implements OnClickListener,IContan
                 finish();
                 break;
             case R.id.grab:
-                Intent intent=new Intent(GrabRedEnvolope.this, GrabEnvolopeDialog.class);
+                Intent intent = new Intent(GrabRedEnvolope.this, GrabEnvolopeDialog.class);
                 startActivity(intent);
                 break;
         }

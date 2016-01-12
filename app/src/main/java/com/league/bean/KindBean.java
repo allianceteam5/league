@@ -7,7 +7,7 @@ public class KindBean {
     private int id;
     private String name;
 
-    public KindBean(){
+    public KindBean() {
     }
 
     public KindBean(int id, String name) {

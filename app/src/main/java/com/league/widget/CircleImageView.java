@@ -1,7 +1,5 @@
 package com.league.widget;
 
-import com.mine.league.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -21,6 +19,8 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+
+import com.mine.league.R;
 
 
 public class CircleImageView extends ImageView {

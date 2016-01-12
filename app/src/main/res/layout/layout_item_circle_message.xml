@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:paddingBottom="10dp"
     android:orientation="horizontal">
 
     <com.league.widget.CircleImageView
@@ -67,6 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -130,23 +132,48 @@
             </RelativeLayout>
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/tv_peoplename"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
-            android:gravity="center_vertical"
-            android:text="测试"
-            android:textColor="#935b5b"
-            android:textSize="12dp"
-            android:background="@drawable/icon_bg_like"/>
-
         <LinearLayout
+            android:id="@+id/ll_like"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="6dp"
+            android:background="@color/home_bg">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_like_left" />
+            <TextView
+                android:id="@+id/tv_peoplename"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="测试"
+                android:textColor="#935b5b"
+                android:textSize="12dp"
+                android:background="@color/transparent"
+                android:drawablePadding="4dp"
+                android:paddingLeft="4dp" />
+        </LinearLayout>
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/divider_list"/>
+        <com.league.widget.NoScrollListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black2"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            ></com.league.widget.NoScrollListView>
+        <!--<LinearLayout
             android:id="@+id/ll_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/black2">
 
             <TextView
                 android:id="@+id/tv_comment1"
@@ -184,7 +211,7 @@
                 android:text="哈哈"
                 android:textColor="#272727"
                 android:textSize="12sp" />
-        </LinearLayout>
+        </LinearLayout>-->
     </LinearLayout>
 
 </LinearLayout>

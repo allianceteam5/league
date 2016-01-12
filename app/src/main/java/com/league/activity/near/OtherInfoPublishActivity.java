@@ -143,7 +143,7 @@ public class OtherInfoPublishActivity extends BaseActivity implements View.OnCli
     private void publish() {
         title = etTitle.getText().toString();
         content = etContent.getText().toString();
-        if (imgList.size() == 1){
+        if (imgList.size() == 1) {
             ToastUtils.showShortToast(getApplicationContext(), "请选择图片");
             return;
         }

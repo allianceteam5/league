@@ -1,15 +1,5 @@
 package com.league.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.league.bean.JobInfoBean;
-import com.league.utils.Constants;
-import com.league.utils.DateFormatUtils;
-import com.league.utils.Utils;
-import com.mine.league.R;
-import com.squareup.picasso.Picasso;
-
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -18,6 +8,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.league.bean.JobInfoBean;
+import com.league.utils.Constants;
+import com.league.utils.DateFormatUtils;
+import com.league.utils.Utils;
+import com.mine.league.R;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author liugang
@@ -76,7 +76,7 @@ public class JobInfoAdapter extends BaseAdapter {
         }
         JobInfoBean jobinfo = list.get(position);
         if (!TextUtils.isEmpty(jobinfo.getThumb()))
-            Picasso.with(ctx).load(jobinfo.getThumb()).resize(120,120).centerCrop().into(holder.thumb);
+            Picasso.with(ctx).load(jobinfo.getThumb()).resize(120, 120).centerCrop().into(holder.thumb);
         else
             Picasso.with(ctx).load(R.drawable.example).into(holder.thumb);
 
@@ -92,7 +92,7 @@ public class JobInfoAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void setData(ArrayList<JobInfoBean> list){
+    public void setData(ArrayList<JobInfoBean> list) {
         this.list = list;
     }
 

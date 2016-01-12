@@ -211,4 +211,16 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
+    <style name="editText">
+        <item name="android:textColor">@color/text_title</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+        <item name="android:textCursorDrawable">@drawable/color_cursor</item>
+    </style>
+
+    <!--  这个是加入的代码 -->
+    <style name="popwindow_anim_style">
+    <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+    <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
+    </style>
 </resources>

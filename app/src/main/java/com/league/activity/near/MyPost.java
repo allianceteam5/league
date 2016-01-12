@@ -2,14 +2,12 @@ package com.league.activity.near;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
-import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +18,6 @@ import com.league.adapter.OtherMessageAdapter;
 import com.league.adapter.RecommendationInfoAdapter;
 import com.league.bean.HobbyInfoBean;
 import com.league.bean.JobInfoBean;
-import com.league.bean.LiaoBaMessageBean;
 import com.league.bean.OtherMessageBean;
 import com.league.bean.RecommendationInfoBean;
 import com.league.utils.Constants;
@@ -78,7 +75,7 @@ public class MyPost extends BaseActivity implements OnClickListener, IContants {
         switch (flag) {
             case 1:
                 title.setText("我的求职");
-                ApiUtil.applyjobSearch(getApplicationContext(), true, 0, "", -1,1, new BaseJsonHttpResponseHandler<ArrayList<JobInfoBean>>() {
+                ApiUtil.applyjobSearch(getApplicationContext(), true, 0, "", -1, 1, new BaseJsonHttpResponseHandler<ArrayList<JobInfoBean>>() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<JobInfoBean> response) {
                         jobInfoList = response;
@@ -239,8 +236,8 @@ public class MyPost extends BaseActivity implements OnClickListener, IContants {
         }
     }
 
-    public void updateOtherView(){
-        if (otherMessageAdapter == null){
+    public void updateOtherView() {
+        if (otherMessageAdapter == null) {
             otherMessageAdapter = new OtherMessageAdapter(getApplicationContext(), otherMessageList);
             list.setAdapter(otherMessageAdapter);
         } else {

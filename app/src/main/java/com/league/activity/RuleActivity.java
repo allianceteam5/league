@@ -1,9 +1,6 @@
 package com.league.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -14,7 +11,7 @@ import com.mine.league.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class RuleActivity extends BaseActivity implements IContants{
+public class RuleActivity extends BaseActivity implements IContants {
     @Bind(R.id.ib_back)
     ImageButton ibBack;
     @Bind(R.id.tv_title)
@@ -22,6 +19,7 @@ public class RuleActivity extends BaseActivity implements IContants{
     @Bind(R.id.tv_rule)
     TextView tvRule;
     int ruleTyle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +33,7 @@ public class RuleActivity extends BaseActivity implements IContants{
             }
         });
         ruleTyle = getIntent().getIntExtra(RuleType, 0);
-        switch (ruleTyle){
+        switch (ruleTyle) {
             case 1:
                 tvTitle.setText("联盟奖励规则");
                 tvRule.setText(getString(R.string.rule1));

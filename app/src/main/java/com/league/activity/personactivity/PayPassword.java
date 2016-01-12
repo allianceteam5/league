@@ -10,10 +10,11 @@ import android.widget.TextView;
 
 import com.mine.league.R;
 
-public class PayPassword extends Activity implements OnClickListener{
+public class PayPassword extends Activity implements OnClickListener {
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,14 +47,14 @@ public class PayPassword extends Activity implements OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.changecode:
-                Intent intent=new Intent(getApplication(),ChangePayCodeActivity.class);
+                Intent intent = new Intent(getApplication(), ChangePayCodeActivity.class);
                 startActivity(intent);
                 break;
             case R.id.findcode:
-                Intent intent1=new Intent(getApplication(),FindCode.class);
-                intent1.putExtra("type","支付密码");
+                Intent intent1 = new Intent(getApplication(), FindCode.class);
+                intent1.putExtra("type", "支付密码");
                 startActivity(intent1);
                 break;
 

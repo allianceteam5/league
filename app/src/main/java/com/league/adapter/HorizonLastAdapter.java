@@ -15,13 +15,13 @@ import java.util.List;
 /**
  * Created by liug on 15/11/1.
  */
-public class HorizonLastAdapter extends BaseAdapter{
+public class HorizonLastAdapter extends BaseAdapter {
     private Context ctx;
     private List<AnnouncedTheLatestBean> list;
 
-    public HorizonLastAdapter(Context ctx,List<AnnouncedTheLatestBean> list) {
-        this.ctx=ctx;
-        this.list=list;
+    public HorizonLastAdapter(Context ctx, List<AnnouncedTheLatestBean> list) {
+        this.ctx = ctx;
+        this.list = list;
     }
 
     @Override
@@ -42,17 +42,18 @@ public class HorizonLastAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        if(convertView==null){
-            holder=new ViewHolder();
-            convertView= LayoutInflater.from(ctx).inflate(R.layout.horizontal_last_item,null);
-            holder.imageView=(ImageView)convertView.findViewById(R.id.lastnew_image);
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = LayoutInflater.from(ctx).inflate(R.layout.horizontal_last_item, null);
+            holder.imageView = (ImageView) convertView.findViewById(R.id.lastnew_image);
             convertView.setTag(holder);
-        }else{
-            holder=(ViewHolder)convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
         return convertView;
     }
-    class ViewHolder{
+
+    class ViewHolder {
         ImageView imageView;
 
     }

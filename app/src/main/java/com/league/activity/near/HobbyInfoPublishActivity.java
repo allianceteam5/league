@@ -203,7 +203,7 @@ public class HobbyInfoPublishActivity extends BaseActivity implements View.OnCli
                 mSelectPath = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
                 if (mSelectPath.size() == 1) {
                     Picasso.with(getApplicationContext()).load(new File(mSelectPath.get(0))).resize(140, 140).centerCrop().into(ivPhone);
-                }else
+                } else
                     Picasso.with(this).load(R.drawable.example).into(ivPhone);
             }
         }

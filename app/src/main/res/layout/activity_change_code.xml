@@ -30,6 +30,7 @@
             android:layout_marginTop="10dp"
             android:paddingLeft="10dp"
             android:hint="输入当前密码"
+            style="@style/editText"
             android:background="@null"
             android:gravity="center_vertical"
             android:paddingBottom="10dp"

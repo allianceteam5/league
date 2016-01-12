@@ -1,19 +1,15 @@
 package com.league.activity.personactivity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.easemob.EMCallBack;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
 import com.easemob.chatuidemo.activity.LoginActivity;
-import com.easemob.chatuidemo.activity.MainActivity;
 import com.league.utils.ActivityUtils;
 import com.league.utils.Constants;
 import com.league.utils.DataCleanManager;
@@ -24,13 +20,14 @@ import com.mine.league.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PersonSetup extends Activity implements View.OnClickListener{
+public class PersonSetup extends Activity implements View.OnClickListener {
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
     @Bind(R.id.cachesize)
     TextView mCachesize;
     private Button logoutBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +36,7 @@ public class PersonSetup extends Activity implements View.OnClickListener{
         initView();
 
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -67,7 +65,7 @@ public class PersonSetup extends Activity implements View.OnClickListener{
     protected void onResume() {
         super.onResume();
         try {
-            mCachesize.setText(DataCleanManager.getTotalCacheSize(this)+"");
+            mCachesize.setText(DataCleanManager.getTotalCacheSize(this) + "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,17 +73,17 @@ public class PersonSetup extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.aboutus:
-                Intent intent=new Intent(getApplication(),AboutUs.class);
+                Intent intent = new Intent(getApplication(), AboutUs.class);
                 startActivity(intent);
                 break;
             case R.id.feedback:
-                Intent intent1=new Intent(getApplication(),FeedBack.class);
+                Intent intent1 = new Intent(getApplication(), FeedBack.class);
                 startActivity(intent1);
                 break;
             case R.id.idrelated:
-                Intent intent2 =new Intent(getApplication(),IDRelated.class);
+                Intent intent2 = new Intent(getApplication(), IDRelated.class);
                 startActivity(intent2);
                 break;
             case R.id.clearallcache:

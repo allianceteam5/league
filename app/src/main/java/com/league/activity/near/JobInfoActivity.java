@@ -1,15 +1,5 @@
 package com.league.activity.near;
 
-import com.easemob.chat.EMContactManager;
-import com.easemob.exceptions.EaseMobException;
-import com.league.activity.ReportActivity;
-import com.league.bean.JobInfoBean;
-import com.league.utils.ActivityUtils;
-import com.league.utils.Constants;
-import com.league.utils.DateFormatUtils;
-import com.mine.league.R;
-import com.squareup.picasso.Picasso;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,6 +9,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.easemob.chat.EMContactManager;
+import com.easemob.exceptions.EaseMobException;
+import com.league.activity.ReportActivity;
+import com.league.bean.JobInfoBean;
+import com.league.utils.ActivityUtils;
+import com.league.utils.Constants;
+import com.league.utils.DateFormatUtils;
+import com.mine.league.R;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

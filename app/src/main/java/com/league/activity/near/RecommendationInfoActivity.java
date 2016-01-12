@@ -42,7 +42,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.paperdb.Paper;
 
-public class RecommendationInfoActivity extends BaseActivity implements View.OnClickListener,IContants {
+public class RecommendationInfoActivity extends BaseActivity implements View.OnClickListener, IContants {
 
     @Bind(R.id.near_back)
     ImageButton nearBack;
@@ -75,13 +75,14 @@ public class RecommendationInfoActivity extends BaseActivity implements View.OnC
     @Bind(R.id.gridview)
     GridView gridview;
     @Bind(R.id.near_report)
-            TextView tvReport;
+    TextView tvReport;
     ImgGridAdapter imgGridAdapter;
     RecommendationInfoBean recommendationInfo;
     List<String> imgList;
     List<CommentBean> commentList;
     RecommendationCommentAdapter recommendationCommentAdapter;
     int recommendationId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +95,7 @@ public class RecommendationInfoActivity extends BaseActivity implements View.OnC
         nearRight.setVisibility(View.GONE);
         bottom.setOnClickListener(this);
 
-        recommendationInfo = Paper.book().read(Constants.SingleInfoName,new RecommendationInfoBean());
+        recommendationInfo = Paper.book().read(Constants.SingleInfoName, new RecommendationInfoBean());
         recommendationId = recommendationInfo.getId();
         initView();
     }
@@ -102,7 +103,7 @@ public class RecommendationInfoActivity extends BaseActivity implements View.OnC
     private void initView() {
         nearUsername.setText(recommendationInfo.getNickname());
         if (!TextUtils.isEmpty(recommendationInfo.getThumb()))
-            Picasso.with(getApplicationContext()).load(recommendationInfo.getThumb()).resize(60,60).centerCrop().into(nearUserthumb);
+            Picasso.with(getApplicationContext()).load(recommendationInfo.getThumb()).resize(60, 60).centerCrop().into(nearUserthumb);
         else
             Picasso.with(this).load(R.drawable.example).into(nearUserthumb);
         lasttime.setText(Utils.generateStringByTime(recommendationInfo.getCreated_at()));
@@ -118,18 +119,18 @@ public class RecommendationInfoActivity extends BaseActivity implements View.OnC
         else
             gridview.setAdapter(imgGridAdapter);
 
-		gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					Intent intent = new Intent(getApplicationContext(), ShowBigImgActivity.class);
-					intent.putStringArrayListExtra(PARAMS_IMG_LIST, new ArrayList<String>(imgList));
-					intent.putExtra(PARAMS_INDEX, position);
-					startActivity(intent);
-			}
-		});
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), ShowBigImgActivity.class);
+                intent.putStringArrayListExtra(PARAMS_IMG_LIST, new ArrayList<String>(imgList));
+                intent.putExtra(PARAMS_INDEX, position);
+                startActivity(intent);
+            }
+        });
 
         commentList = recommendationInfo.getComments();
-        recommendationCommentAdapter = new RecommendationCommentAdapter(getApplicationContext(),commentList);
+        recommendationCommentAdapter = new RecommendationCommentAdapter(getApplicationContext(), commentList);
         commentNum.setText(String.valueOf(commentList.size()));
         listview.setAdapter(recommendationCommentAdapter);
         tvReport.setVisibility(View.VISIBLE);

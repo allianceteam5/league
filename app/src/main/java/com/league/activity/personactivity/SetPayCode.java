@@ -21,13 +21,14 @@ import org.apache.http.Header;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SetPayCode extends BaseActivity implements View.OnClickListener{
+public class SetPayCode extends BaseActivity implements View.OnClickListener {
 
     private ImageView back2, titleright, right1, right2;
     private TextView title;
-    private GridPasswordView gridPasswordView,newGridPasswordView;
+    private GridPasswordView gridPasswordView, newGridPasswordView;
     @Bind(R.id.next)
     Button mNext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,20 +55,20 @@ public class SetPayCode extends BaseActivity implements View.OnClickListener{
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-        gridPasswordView= (GridPasswordView) findViewById(R.id.gpv_passwd);
+        gridPasswordView = (GridPasswordView) findViewById(R.id.gpv_passwd);
         newGridPasswordView = (GridPasswordView) findViewById(R.id.gpv_newpasswd);
         mNext.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.next:
-                if(gridPasswordView.getPassWord().length()<6||newGridPasswordView.getPassWord().length()<6){
+                if (gridPasswordView.getPassWord().length() < 6 || newGridPasswordView.getPassWord().length() < 6) {
                     ToastUtils.showShortToast(this, "请输入完整数据");
-                }else if(!gridPasswordView.getPassWord().toString().equals(newGridPasswordView.getPassWord().toString())){
+                } else if (!gridPasswordView.getPassWord().toString().equals(newGridPasswordView.getPassWord().toString())) {
                     ToastUtils.showShortToast(this, "两次输入的密码不一致");
-                }else{
+                } else {
                     showProgressDialog();
                     ApiUtil.setPayPwd(SetPayCode.this, gridPasswordView.getPassWord().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
                         @Override

@@ -20,8 +20,8 @@ public class PickImgPopWindow implements View.OnClickListener {
 
     public PickImgPopWindow(Context context, View archor, PopClickListener popClickListener) {
         createPopWindow(context);
-        this.popClickListener=popClickListener;
-        this.archor=archor;
+        this.popClickListener = popClickListener;
+        this.archor = archor;
     }
 
     private void createPopWindow(Context context) {
@@ -57,12 +57,12 @@ public class PickImgPopWindow implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.take_photo:
-                if (popClickListener!=null){
+                if (popClickListener != null) {
                     popClickListener.onClick(0);
                 }
                 break;
             case R.id.get_from_album:
-                if (popClickListener!=null){
+                if (popClickListener != null) {
                     popClickListener.onClick(1);
                 }
                 break;
@@ -72,7 +72,7 @@ public class PickImgPopWindow implements View.OnClickListener {
         }
     }
 
-    public interface PopClickListener{
+    public interface PopClickListener {
         void onClick(int index);
     }
 }

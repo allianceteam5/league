@@ -57,7 +57,7 @@ public class PayMoneyAmountAdapter extends BaseAdapter {
         if (control[position]) {
             holder.tvAmount.setTextColor(context.getResources().getColor(R.color.white));
             holder.tvAmount.setBackgroundColor(context.getResources().getColor(R.color.red));
-        }else{
+        } else {
             holder.tvAmount.setTextColor(context.getResources().getColor(R.color.black));
             holder.tvAmount.setBackgroundColor(context.getResources().getColor(R.color.black2));
         }

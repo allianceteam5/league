@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.league.bean.CommentBean;
 import com.league.bean.ReplysEntity;
 import com.league.utils.Utils;
 import com.mine.league.R;
@@ -70,15 +69,16 @@ public class LiaobaCommentAdapter extends BaseAdapter {
         holder.content.setText(replysEntity.getContent());
         holder.lasttime.setText(Utils.generateStringByTime(replysEntity.getCreated_at()));
         if (!TextUtils.isEmpty(replysEntity.getFromthumb()))
-            Picasso.with(ctx).load(replysEntity.getFromthumb()).placeholder(R.drawable.example).resize(80,80).centerCrop().into(holder.thumb);
+            Picasso.with(ctx).load(replysEntity.getFromthumb()).placeholder(R.drawable.example).resize(80, 80).centerCrop().into(holder.thumb);
         else
             Picasso.with(ctx).load(R.drawable.example).into(holder.thumb);
         return convertView;
     }
 
-    public void setData(List<ReplysEntity> list){
+    public void setData(List<ReplysEntity> list) {
         this.list = list;
     }
+
     /**
      * This class contains all butterknife-injected Views & Layouts from layout file 'layout_item_recommendationcomment.xml'
      * for easy to all layout elements.

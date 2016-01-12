@@ -28,32 +28,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LiaoBaHotFragment extends Fragment{
+public class LiaoBaHotFragment extends Fragment {
     private View layout;
     private ListView listView;
 
-    private List<LiaoBaMessageBean> list=new ArrayList<LiaoBaMessageBean>();
+    private List<LiaoBaMessageBean> list = new ArrayList<LiaoBaMessageBean>();
     private int totalPage;
-    private int currentPage=1;
+    private int currentPage = 1;
     private PullToRefreshLayout pullToRefreshLayout;
     private LiaoBaAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        layout=inflater.inflate(R.layout.fragment_liao_ba_hot,container,false);
+        layout = inflater.inflate(R.layout.fragment_liao_ba_hot, container, false);
         initView();
         initData(currentPage);
         return layout;
     }
-    private void initView(){
-        listView= (ListView) layout.findViewById(R.id.liaoba_hot_list);
-        adapter=new LiaoBaAdapter(list, getActivity().getApplication(),1);
+
+    private void initView() {
+        listView = (ListView) layout.findViewById(R.id.liaoba_hot_list);
+        adapter = new LiaoBaAdapter(list, getActivity().getApplication(), 1);
         listView.setAdapter(adapter);
         pullToRefreshLayout = (PullToRefreshLayout) layout.findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);
     }
-    private void initData(final int currentPage){
+
+    private void initData(final int currentPage) {
         ApiUtil.liaobagetlatest(getActivity().getApplication(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaMessageBean>>() {
 
             @Override
@@ -82,18 +85,14 @@ public class LiaoBaHotFragment extends Fragment{
         });
     }
 
-    public class MyListener implements PullToRefreshLayout.OnRefreshListener
-    {
+    public class MyListener implements PullToRefreshLayout.OnRefreshListener {
 
         @Override
-        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
             // 下拉刷新操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage = 1;
                     initData(currentPage);
                     // 千万别忘了告诉控件刷新完毕了哦！
@@ -104,16 +103,13 @@ public class LiaoBaHotFragment extends Fragment{
         }
 
         @Override
-        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
             // 加载操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage++;
-                    if(currentPage <= totalPage)
+                    if (currentPage <= totalPage)
                         initData(currentPage);
                     // 千万别忘了告诉控件加载完毕了哦！
                     pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);

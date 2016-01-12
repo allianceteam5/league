@@ -178,17 +178,17 @@ public class RecommendationInfoBean {
         return nickname;
     }
 
-    public List<String> getPictureLimitFour(){
+    public List<String> getPictureLimitFour() {
         if (TextUtils.isEmpty(pictures))
             return null;
         List<String> pictureList = Arrays.asList(pictures.trim().split(" "));
         if (pictureList.size() > 4)
-            return pictureList.subList(0,4);
+            return pictureList.subList(0, 4);
         return pictureList;
 
     }
 
-    public List<String> getPictureList(){
+    public List<String> getPictureList() {
         if (TextUtils.isEmpty(pictures))
             return null;
         return Arrays.asList(pictures.trim().split(" "));

@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by liug on 15/11/7.
  */
-public class OneYuanGrabTakRecodAdapter extends BaseAdapter{
+public class OneYuanGrabTakRecodAdapter extends BaseAdapter {
 
     private List<GrabRecordBean> list;
     private Context ctx;
@@ -47,16 +47,16 @@ public class OneYuanGrabTakRecodAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        if(convertView==null){
-            convertView= LayoutInflater.from(ctx).inflate(R.layout.item_taking_record,null);
-            holder=new ViewHolder();
-            holder.thumb= (ImageView) convertView.findViewById(R.id.thumb);
-            holder.name= (TextView) convertView.findViewById(R.id.name);
-            holder.takTime= (TextView) convertView.findViewById(R.id.taktime);
-            holder.takNum= (TextView) convertView.findViewById(R.id.taknum);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(ctx).inflate(R.layout.item_taking_record, null);
+            holder = new ViewHolder();
+            holder.thumb = (ImageView) convertView.findViewById(R.id.thumb);
+            holder.name = (TextView) convertView.findViewById(R.id.name);
+            holder.takTime = (TextView) convertView.findViewById(R.id.taktime);
+            holder.takNum = (TextView) convertView.findViewById(R.id.taknum);
             convertView.setTag(holder);
-        }else{
-            holder= (ViewHolder) convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
         holder.name.setText(list.get(position).getNickname());
         holder.takTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(list.get(position).getCreated_at())));
@@ -65,7 +65,8 @@ public class OneYuanGrabTakRecodAdapter extends BaseAdapter{
             Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.thumb);
         return convertView;
     }
-    class ViewHolder{
+
+    class ViewHolder {
         ImageView thumb;
         TextView name;
         TextView takTime;

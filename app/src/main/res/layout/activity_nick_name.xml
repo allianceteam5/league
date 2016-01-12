@@ -20,10 +20,8 @@
         android:hint="昵称"
         android:maxLength="16"
         android:singleLine="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
+        android:padding="10dp"
+        style="@style/editText"
         android:gravity="top"
         />
 </LinearLayout>

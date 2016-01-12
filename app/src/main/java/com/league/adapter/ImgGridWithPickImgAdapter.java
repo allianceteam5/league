@@ -54,7 +54,7 @@ public class ImgGridWithPickImgAdapter extends BaseAdapter {
         }
         if (position == data.size() - 1) {
             Picasso.with(mContext).load(R.drawable.upload_default)./*resize(screenW / 4, screenW / 4).centerCrop().*/into(((ImageView) convertView));
-            if(data.size()==10){
+            if (data.size() == 10) {
                 convertView.setVisibility(View.GONE);
             }
         } else {

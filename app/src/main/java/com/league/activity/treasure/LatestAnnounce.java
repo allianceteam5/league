@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LatestAnnounce extends BaseActivity implements View.OnClickListener{
+public class LatestAnnounce extends BaseActivity implements View.OnClickListener {
 
     private ImageView back, titleright, right1, right2;
     private TextView title;
@@ -36,6 +36,7 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
     private int totalPage = 1;
     private int currentPage = 1;
     private PullToRefreshLayout pullToRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,14 +57,15 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
         gridView = (GridView) findViewById(R.id.gridview_latest);
-        adapter = new LatestAnnouncedAdapter(list,getApplication());
+        adapter = new LatestAnnouncedAdapter(list, getApplication());
         gridView.setAdapter(adapter);
         pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);
         initData(currentPage);
     }
-    private void initData(final int currentPage){
+
+    private void initData(final int currentPage) {
         //新接口获取即将揭晓
         ApiUtil.getTheLatest(getApplicationContext(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<AnnouncedTheLatestBean>>() {
             @Override
@@ -117,35 +119,32 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
 //            }
 //        });
     }
+
     private void updateView() {
         adapter.notifyDataSetChanged();
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent;
-                if(list.get(position).getTbk().equals("1")){
-                    intent=new Intent(LatestAnnounce.this,OneYuanGrabItem.class);
-                }else{
-                    intent=new Intent(LatestAnnounce.this,TenYuanGrabItem.class);
+                if (list.get(position).getTbk().equals("1")) {
+                    intent = new Intent(LatestAnnounce.this, OneYuanGrabItem.class);
+                } else {
+                    intent = new Intent(LatestAnnounce.this, TenYuanGrabItem.class);
                 }
-                intent.putExtra("id",list.get(position).getId());
+                intent.putExtra("id", list.get(position).getId());
                 startActivity(intent);
             }
         });
     }
 
-    public class MyListener implements PullToRefreshLayout.OnRefreshListener
-    {
+    public class MyListener implements PullToRefreshLayout.OnRefreshListener {
 
         @Override
-        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
             // 下拉刷新操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage = 1;
                     initData(currentPage);
                     // 千万别忘了告诉控件刷新完毕了哦！
@@ -156,16 +155,13 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
         }
 
         @Override
-        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout)
-        {
+        public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
             // 加载操作
-            new Handler()
-            {
+            new Handler() {
                 @Override
-                public void handleMessage(Message msg)
-                {
+                public void handleMessage(Message msg) {
                     currentPage++;
-                    if(currentPage <= totalPage)
+                    if (currentPage <= totalPage)
                         initData(currentPage);
                     // 千万别忘了告诉控件加载完毕了哦！
                     pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
@@ -174,6 +170,7 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
         }
 
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

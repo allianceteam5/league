@@ -1,13 +1,9 @@
 package com.league.activity.near;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -82,10 +78,11 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
         lvItems.setAdapter(radioSelectAdapter);
     }
 
-    private void initItems(List<KindBean> kinds){
+    private void initItems(List<KindBean> kinds) {
         for (int i = 0; i < kinds.size(); i++)
             items.add(kinds.get(i).getName());
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

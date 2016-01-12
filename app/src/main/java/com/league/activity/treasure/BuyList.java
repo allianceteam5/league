@@ -22,32 +22,34 @@ import org.apache.http.Header;
 
 import io.paperdb.Paper;
 
-public class BuyList extends BaseActivity implements View.OnClickListener,IContants,MyRadioGroup.OnCheckedChangeListener{
+public class BuyList extends BaseActivity implements View.OnClickListener, IContants, MyRadioGroup.OnCheckedChangeListener {
 
     private ImageView back1, back2, titleright, right1, right2;
     private TextView title;
-    private TextView tvBalance,tvCoin,tvGrabCoin;
-    private int paytype=-1,type;
+    private TextView tvBalance, tvCoin, tvGrabCoin;
+    private int paytype = -1, type;
     private Button buy;
-    private String id,number;
+    private String id, number;
     private int buytype;
     private TextView totalText;
-    private UserInfoBean userInfoBean=new UserInfoBean();
+    private UserInfoBean userInfoBean = new UserInfoBean();
     private MyRadioGroup radioGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_list);
-        id=getIntent().getStringExtra("id");
-        number=getIntent().getStringExtra("number");
-        buytype=getIntent().getIntExtra("buytype", -1);//0表示正常购买 1表示购买全部
-        type=getIntent().getIntExtra("type",-1);//type=0 10夺金   =1一元夺宝
-        if(buytype==-1||type==-1)
-            return ;
+        id = getIntent().getStringExtra("id");
+        number = getIntent().getStringExtra("number");
+        buytype = getIntent().getIntExtra("buytype", -1);//0表示正常购买 1表示购买全部
+        type = getIntent().getIntExtra("type", -1);//type=0 10夺金   =1一元夺宝
+        if (buytype == -1 || type == -1)
+            return;
         initView();
         initData();
 
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -69,57 +71,58 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
 
-        buy= (Button) findViewById(R.id.makepayment);
+        buy = (Button) findViewById(R.id.makepayment);
         buy.setOnClickListener(this);
-        totalText= (TextView) findViewById(R.id.number);
-        tvBalance= (TextView) findViewById(R.id.balance);
-        tvCoin= (TextView) findViewById(R.id.coin);
-        tvGrabCoin= (TextView) findViewById(R.id.grabcorn);
-        radioGroup= (MyRadioGroup) findViewById(R.id.paytypegroup);
-        if(type==0){
+        totalText = (TextView) findViewById(R.id.number);
+        tvBalance = (TextView) findViewById(R.id.balance);
+        tvCoin = (TextView) findViewById(R.id.coin);
+        tvGrabCoin = (TextView) findViewById(R.id.grabcorn);
+        radioGroup = (MyRadioGroup) findViewById(R.id.paytypegroup);
+        if (type == 0) {
             findViewById(R.id.rl_grabcorn).setVisibility(View.GONE);
             findViewById(R.id.view).setVisibility(View.GONE);
 //            findViewById(R.id.rl_coin).setVisibility(View.GONE);
 //            findViewById(R.id.view).setVisibility(View.GONE);
-        }else if(type==1){
+        } else if (type == 1) {
 //            findViewById(R.id.rl_grabcorn).setVisibility(View.GONE);
 //            findViewById(R.id.view).setVisibility(View.GONE);
         }
     }
 
-    private void initData(){
+    private void initData() {
         totalText.setText(number);
-        userInfoBean= Paper.book().read(UserInfo);
-        tvBalance.setText(userInfoBean.getMoney()+"");
-        tvCoin.setText(userInfoBean.getCorns()+"");
-        tvGrabCoin.setText(userInfoBean.getCornsforgrab()+"");
+        userInfoBean = Paper.book().read(UserInfo);
+        tvBalance.setText(userInfoBean.getMoney() + "");
+        tvCoin.setText(userInfoBean.getCorns() + "");
+        tvGrabCoin.setText(userInfoBean.getCornsforgrab() + "");
         radioGroup.setOnCheckedChangeListener(this);
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.makepayment:
-                if(paytype==-1){
-                    ToastUtils.showShortToast(getApplication(),"请选择支付方式");
+                if (paytype == -1) {
+                    ToastUtils.showShortToast(getApplication(), "请选择支付方式");
 
-                }else{
-                    if(buytype==0&&type==0){
-                        ApiUtil.grabcoinBuy(getApplication(), id,number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+                } else {
+                    if (buytype == 0 && type == 0) {
+                        ApiUtil.grabcoinBuy(getApplication(), id, number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                if(response.getFlag().equals("1")){
-                                    ToastUtils.showShortToast(getApplicationContext(),"支付成功");
+                                if (response.getFlag().equals("1")) {
+                                    ToastUtils.showShortToast(getApplicationContext(), "支付成功");
                                     onBackPressed();
                                     finish();
-                                }else{
-                                    ToastUtils.showShortToast(getApplicationContext(),"支付失败");
+                                } else {
+                                    ToastUtils.showShortToast(getApplicationContext(), "支付失败");
                                 }
 
                             }
 
                             @Override
                             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                                ToastUtils.showShortToast(getApplicationContext(),"支付失败");
+                                ToastUtils.showShortToast(getApplicationContext(), "支付失败");
                             }
 
                             @Override
@@ -129,22 +132,22 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
                                 });
                             }
                         });
-                    }else if(buytype==1&&type==0){
+                    } else if (buytype == 1 && type == 0) {
                         ApiUtil.grabcoinBuyAll(getApplication(), id, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                if(response.getFlag().equals("1")){
-                                    ToastUtils.showShortToast(getApplicationContext(),"支付成功");
+                                if (response.getFlag().equals("1")) {
+                                    ToastUtils.showShortToast(getApplicationContext(), "支付成功");
                                     onBackPressed();
                                     finish();
-                                }else{
-                                    ToastUtils.showShortToast(getApplicationContext(),"支付失败");
+                                } else {
+                                    ToastUtils.showShortToast(getApplicationContext(), "支付失败");
                                 }
                             }
 
                             @Override
                             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                                ToastUtils.showShortToast(getApplicationContext(),"支付失败");
+                                ToastUtils.showShortToast(getApplicationContext(), "支付失败");
                             }
 
                             @Override
@@ -153,22 +156,22 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
                                 });
                             }
                         });
-                    }else if(buytype==0&&type==1){
-                        ApiUtil.oneYuanBuy(getApplication(), id,number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+                    } else if (buytype == 0 && type == 1) {
+                        ApiUtil.oneYuanBuy(getApplication(), id, number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                if(response.getFlag().equals("1")){
-                                    ToastUtils.showShortToast(getApplicationContext(),"支付成功");
+                                if (response.getFlag().equals("1")) {
+                                    ToastUtils.showShortToast(getApplicationContext(), "支付成功");
                                     onBackPressed();
                                     finish();
-                                }else{
-                                    ToastUtils.showShortToast(getApplicationContext(),"支付失败");
+                                } else {
+                                    ToastUtils.showShortToast(getApplicationContext(), "支付失败");
                                 }
                             }
 
                             @Override
                             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                                ToastUtils.showShortToast(getApplicationContext(),"支付失败");
+                                ToastUtils.showShortToast(getApplicationContext(), "支付失败");
                             }
 
                             @Override
@@ -178,22 +181,22 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
                                 });
                             }
                         });
-                    }else if(buytype==1&&type==1){
+                    } else if (buytype == 1 && type == 1) {
                         ApiUtil.oneyuanBuyAll(getApplication(), id, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                if(response.getFlag().equals("1")){
-                                    ToastUtils.showShortToast(getApplicationContext(),"支付成功");
+                                if (response.getFlag().equals("1")) {
+                                    ToastUtils.showShortToast(getApplicationContext(), "支付成功");
                                     onBackPressed();
                                     finish();
-                                }else{
-                                    ToastUtils.showShortToast(getApplicationContext(),"支付失败");
+                                } else {
+                                    ToastUtils.showShortToast(getApplicationContext(), "支付失败");
                                 }
                             }
 
                             @Override
                             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                                ToastUtils.showShortToast(getApplicationContext(),"支付失败");
+                                ToastUtils.showShortToast(getApplicationContext(), "支付失败");
                             }
 
                             @Override
@@ -212,21 +215,21 @@ public class BuyList extends BaseActivity implements View.OnClickListener,IConta
 
     @Override
     public void onCheckedChanged(MyRadioGroup group, int checkedId) {
-        switch (checkedId){
+        switch (checkedId) {
             case R.id.rb_balancepay:
-                paytype=0;
+                paytype = 0;
                 break;
             case R.id.rb_cornpay:
-                paytype=1;
+                paytype = 1;
                 break;
             case R.id.rb_grabcornpay:
-                paytype=2;
+                paytype = 2;
                 break;
             case R.id.rb_alipay:
-                paytype=3;
+                paytype = 3;
                 break;
             case R.id.rb_wxpay:
-                paytype=4;
+                paytype = 4;
                 break;
         }
     }

@@ -11,7 +11,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
-import com.league.utils.Constants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -24,14 +23,15 @@ import butterknife.ButterKnife;
 
 import static android.view.View.VISIBLE;
 
-public class ChangeCode extends BaseActivity implements View.OnClickListener{
+public class ChangeCode extends BaseActivity implements View.OnClickListener {
 
     private ImageView back1, back2, titleright, right1, right2;
-    private TextView title,commit;
+    private TextView title, commit;
     @Bind(R.id.pwd)
     EditText mPwd;
     @Bind(R.id.newpwd)
     EditText mNewPwd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,7 @@ public class ChangeCode extends BaseActivity implements View.OnClickListener{
         initView();
 
     }
+
     private void initView() {
 
         back2 = (ImageView) findViewById(R.id.near_back);
@@ -60,7 +61,7 @@ public class ChangeCode extends BaseActivity implements View.OnClickListener{
         right1.setVisibility(View.GONE);
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
-        commit= (TextView) findViewById(R.id.near_commit);
+        commit = (TextView) findViewById(R.id.near_commit);
         commit.setText("修改");
         commit.setVisibility(View.VISIBLE);
         commit.setOnClickListener(this);
@@ -68,11 +69,11 @@ public class ChangeCode extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.near_commit:
-                if(TextUtils.isEmpty(mPwd.getText())||TextUtils.isEmpty(mNewPwd.getText())){
+                if (TextUtils.isEmpty(mPwd.getText()) || TextUtils.isEmpty(mNewPwd.getText())) {
                     ToastUtils.showShortToast(ChangeCode.this, "输入框不能为空");
-                }else{
+                } else {
                     showProgressDialog();
                     ApiUtil.changePwd(ChangeCode.this, mPwd.getText().toString(),
                             mNewPwd.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {

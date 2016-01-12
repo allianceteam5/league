@@ -9,7 +9,6 @@ import android.widget.ImageView;
 
 import com.league.utils.ComplexPreferences;
 import com.league.widget.SquaredImageView;
-import com.mine.league.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

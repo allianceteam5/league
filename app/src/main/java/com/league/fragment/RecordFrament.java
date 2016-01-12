@@ -20,7 +20,6 @@ import com.league.activity.treasure.OneYuanGrabItem;
 import com.league.activity.treasure.TenYuanGrabItem;
 import com.league.adapter.GrabRecordAdapter;
 import com.league.bean.GrabBean;
-import com.league.utils.Constants;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -47,7 +46,9 @@ public class RecordFrament extends Fragment {
 
     protected Dialog loadingDialog;
 
-    public RecordFrament(){}
+    public RecordFrament() {
+    }
+
     public RecordFrament(int type) {
         this.type = type;
     }
@@ -71,7 +72,7 @@ public class RecordFrament extends Fragment {
 
     private void initData(final int currentPage) {
         showProgressDialog();
-        if(type==0){
+        if (type == 0) {
             ApiUtil.getGrabCoinRecords(getActivity().getApplication(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabBean>>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<GrabBean> response) {
@@ -106,7 +107,7 @@ public class RecordFrament extends Fragment {
                     });
                 }
             });
-        }else if(type==1){
+        } else if (type == 1) {
             ApiUtil.getGrabCommodyRecords(getActivity().getApplication(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabBean>>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<GrabBean> response) {
@@ -119,8 +120,8 @@ public class RecordFrament extends Fragment {
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent=new Intent(getActivity().getApplication(),OneYuanGrabItem.class);
-                            intent.putExtra("id",list.get(position).getGrabcommodityid());
+                            Intent intent = new Intent(getActivity().getApplication(), OneYuanGrabItem.class);
+                            intent.putExtra("id", list.get(position).getGrabcommodityid());
                             startActivity(intent);
                         }
                     });
@@ -141,7 +142,7 @@ public class RecordFrament extends Fragment {
                     });
                 }
             });
-        }else if(type==2){
+        } else if (type == 2) {
             ApiUtil.getGrabWinRecords(getActivity().getApplication(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<GrabBean>>() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<GrabBean> response) {
@@ -210,6 +211,7 @@ public class RecordFrament extends Fragment {
         }
 
     }
+
     /**
      * 显示等待对话框
      */
