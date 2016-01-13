@@ -32,7 +32,7 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
     private TextView title, edit;
     private ListView listView;
     private boolean[] select = new boolean[3];
-    private boolean[] delete = new boolean[3];
+    private List<Boolean> delete = new ArrayList<>();
     BankCardAdapter adapter;
 
     @Override
@@ -72,25 +72,28 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                ApiUtil.deleteBanCard(SelectBankcard.this, list.get(position).getIdcard(), new BaseJsonHttpResponseHandler<SucessBean>() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                        list.remove(position);
-                        StoreUtils.setBankNum(list.size());
-                        adapter.notifyDataSetChanged();
-                    }
+                if (delete.get(position)) {
+                    ApiUtil.deleteBanCard(SelectBankcard.this, list.get(position).getIdcard(), new BaseJsonHttpResponseHandler<SucessBean>() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                            list.remove(position);
+                            StoreUtils.setBankNum(list.size());
+                            adapter.notifyDataSetChanged();
+                        }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                        ToastUtils.showShortToast(SelectBankcard.this, "删除失败，请检查网络");
-                    }
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                            ToastUtils.showShortToast(SelectBankcard.this, "删除失败，请检查网络");
+                        }
 
-                    @Override
-                    protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                        return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
-                        });
-                    }
-                });
+                        @Override
+                        protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                            return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                            });
+                        }
+                    });
+                }
+
             }
         });
     }
@@ -104,6 +107,9 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
                 list.clear();
                 list.addAll(response);
                 StoreUtils.setBankNum(list.size());
+                for (int i = 0; i < list.size(); i++) {
+                    delete.add(new Boolean(false));
+                }
                 adapter.notifyDataSetChanged();
             }
 
@@ -135,8 +141,8 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
 
                 break;
             case R.id.near_commit:
-                for (int i = 0; i < delete.length; i++) {
-                    delete[i] = true;
+                for (int i = 0; i < delete.size(); i++) {
+                    delete.set(i, true);
                 }
                 adapter.notifyDataSetChanged();
                 break;
@@ -146,8 +152,8 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
     @Override
     protected void onResume() {
         super.onResume();
-        for(int i = 0;i<delete.length;i++){
-            delete[i] = false;
+        for (int i = 0; i < delete.size(); i++) {
+            delete.set(i, false);
         }
         initData();
     }

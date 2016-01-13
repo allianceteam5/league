@@ -41,6 +41,7 @@
             android:inputType="number"
             android:background="@color/white"/>
         <TextView
+            android:id="@+id/tv_text"
             android:layout_width="match_parent"
             android:layout_height="40dip"
             android:textColor="@color/black1"

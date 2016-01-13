@@ -64,6 +64,7 @@ public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeLi
         for (int m : data) {
             listData.add(m);
         }
+        control[0] = true;
         adapter = new PayMoneyAmountAdapter(listData, this, control);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.activity.RuleActivity;
 import com.league.bean.MoneyBean;
+import com.league.bean.UserRealInfoBean;
 import com.league.utils.IContants;
 import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
@@ -93,6 +94,23 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener, IC
             @Override
             protected MoneyBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
                 return new ObjectMapper().readValue(rawJsonData, new TypeReference<MoneyBean>() {
+                });
+            }
+        });
+        ApiUtil.getCertificationInfo(this, new BaseJsonHttpResponseHandler<UserRealInfoBean>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, UserRealInfoBean response) {
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, UserRealInfoBean errorResponse) {
+
+            }
+
+            @Override
+            protected UserRealInfoBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<UserRealInfoBean>() {
                 });
             }
         });

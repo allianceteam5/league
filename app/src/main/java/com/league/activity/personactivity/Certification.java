@@ -39,6 +39,8 @@ public class Certification extends BaseActivity implements View.OnClickListener,
     LinearLayout llNotCertify;
     @Bind(R.id.ll_hascertified)
     LinearLayout llHasCertified;
+    @Bind(R.id.tv_text)
+    TextView tvText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +77,8 @@ public class Certification extends BaseActivity implements View.OnClickListener,
             llNotCertify.setVisibility(View.VISIBLE);
             llHasCertified.setVisibility(View.GONE);
         } else {
-            llNotCertify.setVisibility(View.GONE);
+            tvText.setVisibility(View.GONE);
+            mBind.setVisibility(View.GONE);
             llHasCertified.setVisibility(View.VISIBLE);
         }
     }

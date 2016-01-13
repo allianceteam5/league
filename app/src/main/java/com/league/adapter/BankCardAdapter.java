@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.league.bean.BankCardInfo;
 import com.mine.league.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class BankCardAdapter extends BaseAdapter {
     private List<BankCardInfo> list;
     private Context ctx;
     private boolean[] select;
-    private boolean[] delete = new boolean[3];
+    private List<Boolean> delete = new ArrayList<>();
 
     public BankCardAdapter(List<BankCardInfo> list, Context ctx, boolean[] select) {
         this.list = list;
@@ -28,7 +29,7 @@ public class BankCardAdapter extends BaseAdapter {
         this.select = select;
     }
 
-    public BankCardAdapter(List<BankCardInfo> list, Context ctx, boolean[] select, boolean[] delete) {
+    public BankCardAdapter(List<BankCardInfo> list, Context ctx, boolean[] select, List<Boolean> delete) {
         this.list = list;
         this.ctx = ctx;
         this.select = select;
@@ -74,11 +75,12 @@ public class BankCardAdapter extends BaseAdapter {
         } else {
             holder.icon_select.setVisibility(View.GONE);
         }
-        if (delete[position]) {
+        if (delete.get(position)) {
             holder.icon_delete.setVisibility(View.VISIBLE);
         } else {
             holder.icon_delete.setVisibility(View.GONE);
         }
+
         return convertView;
     }
 

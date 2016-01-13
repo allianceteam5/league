@@ -723,4 +723,11 @@ public class ApiUtil {
         printHttp(IClientUrl.setpaypwd, params);
         client.post(context, IClientUrl.setpaypwd, params, responseHandler);
     }
+    //获取实名信息
+    public static void getCertificationInfo(Context context,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        printHttp(IClientUrl.realinfo, params);
+        client.post(context,IClientUrl.realinfo,params,responseHandler);
+    }
 }
