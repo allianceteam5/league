@@ -487,6 +487,21 @@
             android:name="com.league.activity.circle.CircleDetailActivity"
             android:label="@string/title_activity_circle_detail" >
         </activity>
+
+        <activity
+            android:name="cn.beecloud.BCWechatPaymentActivity"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity-alias
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:targetActivity="cn.beecloud.BCWechatPaymentActivity" />
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
     </application>
 
 </manifest>
