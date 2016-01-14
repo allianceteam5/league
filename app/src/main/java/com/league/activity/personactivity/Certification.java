@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
 import com.league.bean.UserInfoBean;
+import com.league.bean.UserRealInfoBean;
 import com.league.utils.IContants;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
@@ -80,6 +81,28 @@ public class Certification extends BaseActivity implements View.OnClickListener,
             tvText.setVisibility(View.GONE);
             mBind.setVisibility(View.GONE);
             llHasCertified.setVisibility(View.VISIBLE);
+            showProgressDialog();
+            ApiUtil.getCertificationInfo(this, new BaseJsonHttpResponseHandler<UserRealInfoBean>() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, UserRealInfoBean response) {
+                    closeProgressDialog();
+                    mInputName.setText(response.getRealname());
+                    mInputID.setText(response.getIdcard());
+                    mInputID.setEnabled(false);
+                    mInputName.setEnabled(false);
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, UserRealInfoBean errorResponse) {
+                    closeProgressDialog();
+                }
+
+                @Override
+                protected UserRealInfoBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                    return new ObjectMapper().readValue(rawJsonData, new TypeReference<UserRealInfoBean>() {
+                    });
+                }
+            });
         }
     }
 

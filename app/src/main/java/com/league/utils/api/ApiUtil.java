@@ -650,6 +650,7 @@ public class ApiUtil {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("usertocardid", usertocardid);
+        printHttp(IClientUrl.deleteBankCard,params);
         client.post(context, IClientUrl.deleteBankCard, params, responseHandler);
     }
 

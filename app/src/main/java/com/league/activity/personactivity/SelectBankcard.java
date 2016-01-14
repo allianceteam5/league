@@ -73,12 +73,16 @@ public class SelectBankcard extends BaseActivity implements View.OnClickListener
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 if (delete.get(position)) {
-                    ApiUtil.deleteBanCard(SelectBankcard.this, list.get(position).getIdcard(), new BaseJsonHttpResponseHandler<SucessBean>() {
+                    ApiUtil.deleteBanCard(SelectBankcard.this, list.get(position).getId()+"", new BaseJsonHttpResponseHandler<SucessBean>() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                            list.remove(position);
-                            StoreUtils.setBankNum(list.size());
-                            adapter.notifyDataSetChanged();
+                            if(response.getFlag().equals("1")){
+                                list.remove(position);
+                                StoreUtils.setBankNum(list.size());
+                                adapter.notifyDataSetChanged();
+                            }else{
+                                ToastUtils.showShortToast(SelectBankcard.this,"删除失败，请稍后再试");
+                            }
                         }
 
                         @Override
