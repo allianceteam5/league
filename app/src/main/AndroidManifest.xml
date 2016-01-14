@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mine.league"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -48,7 +48,7 @@
         android:icon="@drawable/launch"
         android:label="@string/app_name"
         android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.NoTitleBar" >
+        android:theme="@android:style/Theme.NoTitleBar">
 
         <!-- 百度地图所需的service -->
         <service
@@ -90,15 +90,33 @@
             android:name="com.league.activity.near.OtherInfoPublishActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.league.activity.near.HobbyInfoActivity" />
-        <activity android:name="com.league.activity.near.MyPost" />
-        <activity android:name="com.league.activity.near.HobbyInfoPublishActivity" />
-        <activity android:name="com.league.activity.near.RadioSelectActivity" />
-        <activity android:name="com.league.activity.redpacket.GrabRedEnvolope" />
-        <activity android:name="com.league.activity.treasure.OneYuan" />
-        <activity android:name="com.league.activity.treasure.TenyuanGrab" />
-        <activity android:name="com.league.activity.treasure.OneYuanGrab" />
-        <activity android:name="com.league.activity.treasure.TenYuanGrabItem" />
+        <activity
+            android:name="com.league.activity.near.HobbyInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.near.MyPost"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.near.HobbyInfoPublishActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.near.RadioSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.redpacket.GrabRedEnvolope"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.treasure.OneYuan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.treasure.TenyuanGrab"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.treasure.OneYuanGrab"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.treasure.TenYuanGrabItem"
+            android:screenOrientation="portrait" />
         <activity
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
             android:configChanges="orientation|screenSize" />
@@ -110,7 +128,7 @@
         <activity android:name="com.league.activity.ShowBigImgActivity" />
         <activity
             android:name="com.league.guide.GuideActivity"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -311,8 +329,8 @@
             android:theme="@style/horizontal_slide" />
 
         <!-- 开机自启动服务 -->
-        <receiver android:name="com.easemob.chat.StartServiceReceiver" >
-            <intent-filter android:priority="1000" >
+        <receiver android:name="com.easemob.chat.StartServiceReceiver">
+            <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
 
@@ -324,7 +342,7 @@
         <receiver
             android:name="com.easemob.chat.EMGCMBroadcastReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
@@ -338,7 +356,7 @@
 
         <receiver
             android:name="com.easemob.chatuidemo.receiver.GCMPushBroadCast"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.easemob.sdk.push" />
 
@@ -355,7 +373,7 @@
         <!-- 声明sdk所需的service -->
         <service android:name="com.easemob.chat.EMChatService" />
         <!-- 声明sdk所需的receiver -->
-        <receiver android:name="com.easemob.chat.EMMonitorReceiver" >
+        <receiver android:name="com.easemob.chat.EMMonitorReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
@@ -381,7 +399,7 @@
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -406,102 +424,192 @@
             android:name="UMENG_APPKEY"
             android:value="5662fb25e0f55a863d00609f" />
 
-        <activity android:name="com.league.activity.treasure.AnnouncedTheLatestItem" />
-        <activity android:name="com.league.activity.treasure.OneYuanGrabItem" />
-        <activity android:name="com.league.activity.treasure.PassAnnounced" />
-        <activity android:name="com.league.activity.treasure.BuyList" />
-        <activity android:name="com.league.activity.personactivity.PersonSetup" />
-        <activity android:name="com.league.activity.personactivity.PersonInformationSetup" />
-        <activity android:name="com.league.activity.personactivity.AlianceReward" />
-        <activity android:name="com.league.activity.personactivity.Certification" />
-        <activity android:name="com.league.activity.personactivity.MyCollection" />
-        <activity android:name="com.league.activity.postbar.LiaoBaActivity" />
-        <activity android:name="com.league.activity.personactivity.MyMoneyBag" />
-        <activity android:name="com.league.activity.personactivity.AboutUs" />
-        <activity android:name="com.league.activity.personactivity.FeedBack" />
-        <activity android:name="com.league.activity.personactivity.IDRelated" />
-        <activity android:name="com.league.activity.personactivity.ChangeCode" />
-        <activity android:name="com.league.activity.personactivity.FindCode" />
-        <activity android:name="com.league.activity.personactivity.Recharge" />
-        <activity android:name="com.league.activity.personactivity.WithDraw" />
-        <activity android:name="com.league.activity.personactivity.AddBankCard" />
-        <activity android:name="com.league.activity.personactivity.SelectBankcard" />
-        <activity android:name="com.league.activity.personactivity.MyGoldCoin" />
-        <activity android:name="com.league.activity.personactivity.PayPassword" />
-        <activity android:name="com.league.activity.personactivity.SetPayCode" />
-        <activity android:name="com.league.activity.personactivity.PaymentOrder" />
-        <activity android:name="com.league.activity.personactivity.MyPersonHomepage" />
-        <activity android:name="com.league.activity.postbar.TopicContent" />
-        <activity android:name="com.league.activity.treasure.PictureDetails" />
+        <activity
+            android:name="com.league.activity.treasure.AnnouncedTheLatestItem"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.treasure.OneYuanGrabItem"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.treasure.PassAnnounced"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.treasure.BuyList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.PersonSetup"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.PersonInformationSetup"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.AlianceReward"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.Certification"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.MyCollection"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.postbar.LiaoBaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.MyMoneyBag"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.AboutUs"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.FeedBack"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.IDRelated"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.ChangeCode"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.FindCode"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.Recharge"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.WithDraw"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.AddBankCard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.SelectBankcard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.MyGoldCoin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.PayPassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.SetPayCode"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.PaymentOrder"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.MyPersonHomepage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.postbar.TopicContent"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.treasure.PictureDetails"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.league.activity.near.RecommendationInfoPublishActivity"
-            android:label="@string/title_activity_recommendation_pushlish" />
+            android:label="@string/title_activity_recommendation_pushlish"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.league.activity.near.CommentActivity"
-            android:label="@string/title_activity_comment" />
+            android:label="@string/title_activity_comment"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.league.activity.postbar.PostbarPublishActivity"
-            android:label="@string/title_activity_postbar_publish" />
+            android:label="@string/title_activity_postbar_publish"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.league.activity.postbar.ConcernListActivity"
-            android:label="@string/title_activity_concern_list" />
+            android:label="@string/title_activity_concern_list"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.league.activity.postbar.MessageListActivity"
-            android:label="@string/title_activity_message_list" />
-        <activity android:name="com.league.activity.treasure.GrabRecord" />
-        <activity android:name="com.league.activity.treasure.LatestAnnounce" />
+            android:label="@string/title_activity_message_list"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.treasure.GrabRecord"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.treasure.LatestAnnounce"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.league.dialog.GrabEnvolopeDialog"
             android:screenOrientation="portrait"
             android:theme="@style/grabenvolopedialog" />
-        <activity android:name="com.league.activity.treasure.CountDetailActivity" />
-        <activity android:name="com.league.activity.personinfoactivity.ShippingAddress" />
-        <activity android:name="com.league.activity.personinfoactivity.AddShippingAdr" />
-        <activity android:name="com.league.activity.personinfoactivity.SignatureActivity" />
-        <activity android:name="com.league.activity.personinfoactivity.MyAreaActivity" />
-        <activity android:name="com.league.activity.personinfoactivity.MyGenderActivity" />
-        <activity android:name="com.league.activity.personinfoactivity.NickNameActivity" />
-        <activity android:name="com.league.activity.circle.CircleActivity" />
-        <activity android:name="com.league.activity.personinfoactivity.InviteFriendActivity" />
+        <activity
+            android:name="com.league.activity.treasure.CountDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personinfoactivity.ShippingAddress"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personinfoactivity.AddShippingAdr"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personinfoactivity.SignatureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personinfoactivity.MyAreaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personinfoactivity.MyGenderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personinfoactivity.NickNameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.circle.CircleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personinfoactivity.InviteFriendActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.league.activity.circle.CirclePublishActivity"
-            android:label="@string/title_activity_circle_publish" />
+            android:label="@string/title_activity_circle_publish"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.league.activity.postbar.LiaobaCommentActivity"
-            android:label="@string/title_activity_circle_comment" />
+            android:label="@string/title_activity_circle_comment"
+            android:screenOrientation="portrait" />
         <activity android:name="com.league.activity.personinfoactivity.CompletePersonInfo" />
         <activity
             android:name="com.league.activity.RuleActivity"
-            android:label="@string/title_activity_rule" />
-        <activity android:name="com.league.activity.personactivity.SetIDCodeActivity" />
-        <activity android:name="com.league.activity.personactivity.ChangePayCodeActivity" />
+            android:label="@string/title_activity_rule"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.SetIDCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.league.activity.personactivity.ChangePayCodeActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.league.activity.near.LocationActivity"
-            android:label="@string/title_activity_location" >
-        </activity>
+            android:label="@string/title_activity_location"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.league.activity.ReportActivity"
-            android:label="@string/title_activity_report" >
-        </activity>
+            android:label="@string/title_activity_report"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.league.activity.circle.CircleDetailActivity"
-            android:label="@string/title_activity_circle_detail" >
-        </activity>
-
+            android:label="@string/title_activity_circle_detail"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="cn.beecloud.BCWechatPaymentActivity"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <activity-alias
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:targetActivity="cn.beecloud.BCWechatPaymentActivity" />
+
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name="com.league.activity.personactivity.TradingRecordActivity"></activity>
     </application>
 
 </manifest>

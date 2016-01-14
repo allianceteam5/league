@@ -67,6 +67,7 @@ public class BankCardAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
         holder.bankname.setText(list.get(position).getName());
         holder.banknum.setText(list.get(position).getCardnumber().substring(list.get(position).getCardnumber().length() - 2, list.get(position).getCardnumber().length()));
         holder.banktype.setText(list.get(position).getName());
@@ -75,7 +76,7 @@ public class BankCardAdapter extends BaseAdapter {
         } else {
             holder.icon_select.setVisibility(View.GONE);
         }
-        if (delete.get(position)) {
+        if (delete.size()>0&&delete.get(position)) {
             holder.icon_delete.setVisibility(View.VISIBLE);
         } else {
             holder.icon_delete.setVisibility(View.GONE);

@@ -37,7 +37,7 @@ public class WithDraw extends BaseActivity implements View.OnClickListener {
     ListView listView;
     private List<BankCardInfo> list = new ArrayList<BankCardInfo>();
     BankCardAdapter adapter;
-    private boolean[] select = new boolean[StoreUtils.getBankNum()];
+    private boolean[] select = new boolean[3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,12 @@ public class WithDraw extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_with_draw);
         ButterKnife.bind(this);
         initView();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initData();
     }
 

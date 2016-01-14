@@ -12,6 +12,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.bean.SucessBean;
+import com.league.bean.UserRealInfoBean;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -45,7 +47,30 @@ public class AddBankCard extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_add_bank_card);
         ButterKnife.bind(this);
         initView();
+        initData();
+    }
 
+    private void initData() {
+        showProgressDialog();
+        ApiUtil.getCertificationInfo(this, new BaseJsonHttpResponseHandler<UserRealInfoBean>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, UserRealInfoBean response) {
+                closeProgressDialog();
+                mInputName.setText(response.getRealname());
+                mInputPersonID.setText(response.getIdcard());
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, UserRealInfoBean errorResponse) {
+                closeProgressDialog();
+            }
+
+            @Override
+            protected UserRealInfoBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<UserRealInfoBean>() {
+                });
+            }
+        });
     }
 
     private void initView() {
@@ -86,6 +111,8 @@ public class AddBankCard extends BaseActivity implements View.OnClickListener {
                                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                     closeProgressDialog();
                                     if (response.getFlag().equals("1")) {
+                                        int temp = StoreUtils.getBankNum();
+                                        StoreUtils.setBankNum(temp+1);
                                         onBackPressed();
                                         finish();
 

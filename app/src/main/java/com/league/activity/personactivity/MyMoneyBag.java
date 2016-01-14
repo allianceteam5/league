@@ -39,6 +39,7 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener, IC
     @Bind(R.id.cardcount)
     TextView mCardCount;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,6 +144,10 @@ public class MyMoneyBag extends BaseActivity implements View.OnClickListener, IC
                 Intent intent6 = new Intent(getApplication(), RuleActivity.class);
                 intent6.putExtra(RuleType, 6);
                 startActivity(intent6);
+                break;
+            case R.id.ll_tradingrecord:
+                startActivity(new Intent(MyMoneyBag.this,TradingRecordActivity.class));
+                break;
         }
     }
 

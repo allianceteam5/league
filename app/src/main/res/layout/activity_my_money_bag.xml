@@ -350,6 +350,8 @@
                     android:background="@color/black2" />
 
                 <LinearLayout
+                    android:id="@+id/ll_tradingrecord"
+                    android:onClick="onClick"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
