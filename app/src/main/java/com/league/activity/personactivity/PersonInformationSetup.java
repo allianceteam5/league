@@ -22,8 +22,10 @@ import com.league.activity.personinfoactivity.ShippingAddress;
 import com.league.activity.personinfoactivity.SignatureActivity;
 import com.league.bean.UserInfoBean;
 import com.league.interf.OnAllComplete;
+import com.league.otto.RefreshEvent;
 import com.league.utils.IContants;
 import com.league.utils.ImgUtils;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.PickImgPopWindow;
@@ -32,6 +34,7 @@ import com.mine.league.R;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
+import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
@@ -121,13 +124,16 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
                         startActivityForResult(picIntent, SELECT_PICTURE);
                         pickImgPopWindow.dismissPopWindow();
                         break;
+                    case 2:
+                        pickImgPopWindow.dismissPopWindow();
+                        break;
                 }
             }
         });
     }
 
     private void initData() {
-        userInfoBean = Paper.book().read("UserInfoBean");
+        userInfoBean = StoreUtils.getUserInfo();
         if (!TextUtils.isEmpty(userInfoBean.getThumb())) {
             Picasso.with(this).load(userInfoBean.getThumb()).resize(120, 120).centerCrop().into(mThumbnail);
         }
@@ -137,6 +143,11 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
         mGender.setText(userInfoBean.getGender() == 0 ? "女" : "男");
         mArea.setText(userInfoBean.getArea());
         mSignature.setText(userInfoBean.getSignature());
+    }
+
+    @Subscribe
+    public void refreshUserInfoEvent(RefreshEvent event){
+        initData();
     }
 
     @Override
@@ -176,32 +187,31 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initData();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        initData();
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
-        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case SELECT_CAMER:
 //                    updateAvatar(imgUri);
                     Intent intent = new Intent("com.android.camera.action.CROP");
                     intent.setDataAndType(imgUri, "image/*");
-//                    intent.putExtra("scale", true);
-                    //开启裁剪功能
-                    intent.putExtra("crop", "true");
-                    //设定宽高的比例
-                    intent.putExtra("aspectX", 1);
-                    intent.putExtra("aspectY", 1);
-                    //设定裁剪图片宽高
-                    intent.putExtra("outputX", 160);
-                    intent.putExtra("outputY", 160);
-                    intent.putExtra("return-data", true);
+                    intent.putExtra("scale", true);
+//                    //开启裁剪功能
+//                    intent.putExtra("crop", "true");
+//                    //设定宽高的比例
+//                    intent.putExtra("aspectX", 1);
+//                    intent.putExtra("aspectY", 1);
+//                    //设定裁剪图片宽高
+//                    intent.putExtra("outputX", 160);
+//                    intent.putExtra("outputY", 160);
+//                    intent.putExtra("return-data", true);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
                     startActivityForResult(intent, CROP_PHOTO);
                     break;
@@ -222,18 +232,18 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
         String imagePath = ImgUtils.getRealFilePath(getApplicationContext(), uri);
         Log.d("url", imagePath);
         //本地为什么放不进去 实在不行先要上传到七牛 再用七牛的链接地址更新头像
-        Picasso.with(this).load("file://" + ImgUtils.getRealFilePath(getApplicationContext(), uri)).resize(160, 160).centerCrop().into(mThumbnail);
+//        Picasso.with(this).load("file://" + ImgUtils.getRealFilePath(getApplicationContext(), uri)).resize(160, 160).centerCrop().into(mThumbnail);
         if (!TextUtils.isEmpty(imagePath)) {
             String zoomedImgePath = ImgUtils.saveBitmapToSDCard(ImgUtils.zoomBitmap(PersonInformationSetup.this, uri, 160, 160));
-            Picasso.with(this).load("file://" + zoomedImgePath).resize(160, 160).centerCrop().into(mThumbnail);
-//            uploadAvatar(zoomedImgePath);
+//            Picasso.with(this).load("file://" + zoomedImgePath).resize(160, 160).centerCrop().into(mThumbnail);
+            uploadAvatar(zoomedImgePath);
         } else
             ToastUtils.showShortToast(this, "头像获取失败");
     }
 
     public void uploadAvatar(final String imagePath) {
         final UploadManager uploadManager = new UploadManager();
-//        showProgressDialog();
+        showProgressDialog();
         ApiUtil.getQiniuToken(getApplicationContext(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -269,27 +279,22 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
                 return;
             }
             //头像地址放在picture里
-            if (TextUtils.isEmpty(picture))
+            if (!TextUtils.isEmpty(picture))
                 Picasso.with(getApplicationContext()).load(picture.toString()).resize(160, 160).centerCrop().into(mThumbnail);
             else
                 Picasso.with(getApplicationContext()).load(R.drawable.example).into(mThumbnail);
 //            加上修改头像的接口
-//            ApiUtil.hobbyCreated(getApplicationContext(), picture.toString(), selectedSexIndex, selectedAgeIndex, selectedHobbyId, message, new JsonHttpResponseHandler() {
-//                @Override
-//                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                    closeProgressDialog();
-//                    if (response.optInt("flag") == 1) {
-//                        Toast.makeText(getApplicationContext(), "发布成功", Toast.LENGTH_SHORT).show();
-//                        finish();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//                    closeProgressDialog();
-//                    Toast.makeText(getApplicationContext(), "发布失败", Toast.LENGTH_SHORT).show();
-//                }
-//            });
+            ApiUtil.modifyUserThumb(getApplicationContext(), picture.toString(), new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    closeProgressDialog();
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    closeProgressDialog();
+                }
+            });
         }
     };
 }

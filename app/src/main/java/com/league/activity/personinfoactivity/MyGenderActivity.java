@@ -9,7 +9,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.bean.SucessBean;
 import com.league.bean.UserInfoBean;
+import com.league.otto.BusProvider;
+import com.league.otto.RefreshEvent;
 import com.league.utils.PersonInfoBaseActivity;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -53,7 +56,7 @@ public class MyGenderActivity extends PersonInfoBaseActivity implements View.OnC
 
     @Override
     protected void initData() {
-        userInfoBean = Paper.book().read("UserInfoBean");
+        userInfoBean = StoreUtils.getUserInfo();
         if (userInfoBean != null && userInfoBean.getGender() == 0) {
             setGender(true);
         } else {
@@ -70,8 +73,8 @@ public class MyGenderActivity extends PersonInfoBaseActivity implements View.OnC
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                         if (response.getFlag().equals("1")) {
                             userInfoBean.setGender(isFlag);
-                            Paper.book().write("UserInfoBean", userInfoBean);
-                            onBackPressed();
+                            StoreUtils.setUserInfo(userInfoBean);
+                            BusProvider.getInstance().post(new RefreshEvent());
                             finish();
                         } else {
                             ToastUtils.showShortToast(getApplicationContext(), "网络不好，再试试");

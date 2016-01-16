@@ -74,7 +74,6 @@ public class NearKindActivity extends BaseActivity implements OnClickListener, O
     private Button btnSure;
     private LinearLayout ll_more;
     private int Flag;
-    private List<HobbyInfoBean> listMaFrData = new ArrayList<HobbyInfoBean>();
     private JobInfoAdapter jobInfoAdapter;
     private RecommendationInfoAdapter recommendationInfoAdapter;
     private HobbyInfoAdapter hobbyInfoAdapter;

@@ -9,7 +9,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.bean.SucessBean;
 import com.league.bean.UserInfoBean;
+import com.league.otto.BusProvider;
+import com.league.otto.RefreshEvent;
 import com.league.utils.PersonInfoBaseActivity;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -46,7 +49,7 @@ public class SignatureActivity extends PersonInfoBaseActivity implements View.On
 
     @Override
     protected void initData() {
-        userInfoBean = Paper.book().read("UserInfoBean");
+        userInfoBean = StoreUtils.getUserInfo();
         mInputSignature.setText(userInfoBean.getSignature());
         mInputSignature.setSelection(mInputSignature.getText().toString().length());
     }
@@ -61,7 +64,8 @@ public class SignatureActivity extends PersonInfoBaseActivity implements View.On
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                 if (response.getFlag().equals("1")) {
                                     userInfoBean.setSignature("" + mInputSignature.getText().toString());
-                                    Paper.book().write("UserInfoBean", userInfoBean);
+                                    StoreUtils.setUserInfo(userInfoBean);
+                                    BusProvider.getInstance().post(new RefreshEvent());
                                     onBackPressed();
                                     finish();
                                 } else {

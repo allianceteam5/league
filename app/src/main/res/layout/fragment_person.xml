@@ -14,66 +14,108 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dip"
-                android:background="@color/red">
-
+                android:layout_height="215dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/mybackground"
+                    android:scaleType="center"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    >
+                </RelativeLayout>
                 <LinearLayout
                     android:id="@+id/myown"
-                    android:onClick="onClick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="46dp"
                     android:orientation="vertical">
-
                     <com.league.widget.CircleImageView
-                        android:id="@+id/mythumb"
-                        android:layout_width="80dip"
-                        android:layout_height="80dip"
+                        android:id="@+id/iv_thumb"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/example" />
-
-                    <TextView
-                        android:id="@+id/nickname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text=""
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@drawable/example"
+                        />
                     <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_nickname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="@color/white"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dip"
                         android:orientation="horizontal">
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="账号："
+                            android:text="好友"
                             android:textColor="@color/white"
-                            android:textSize="16sp" />
-
+                            android:textSize="12sp"
+                            />
                         <TextView
-                            android:id="@+id/phonenumber"
+                            android:id="@+id/tv_friendcount"
+                            android:layout_marginLeft="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
                             android:textColor="@color/white"
-                            android:textSize="16sp" />
+                            android:textSize="12sp"
+                            android:layout_marginRight="10dp"
+                            />
+                        <View
+                            android:layout_width="1px"
+                            android:layout_height="match_parent"
+                            android:background="@color/black2"/>
+                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="粉丝"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            />
+                        <TextView
+                            android:id="@+id/tv_fanscount"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_signature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            />
                     </LinearLayout>
                 </LinearLayout>
-            </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dip"
-                android:background="@color/black2" />
-
+            </FrameLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

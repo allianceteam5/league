@@ -59,6 +59,8 @@ public class PersonFragment extends Fragment implements View.OnClickListener, IC
     //    @Bind(R.id.award)
     TextView mAward;
 
+    TextView tvFriendCount,tvFansCount,tvSignature;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,11 +76,14 @@ public class PersonFragment extends Fragment implements View.OnClickListener, IC
             }
         }
 //        ButterKnife.bind(ctx,layout);
-        mThumb = (ImageView) layout.findViewById(R.id.mythumb);
-        mNickname = (TextView) layout.findViewById(R.id.nickname);
-        mPhone = (TextView) layout.findViewById(R.id.phonenumber);
+        mThumb = (ImageView) layout.findViewById(R.id.iv_thumb);
+        mNickname = (TextView) layout.findViewById(R.id.tv_nickname);
+//        mPhone = (TextView) layout.findViewById(R.id.phonenumber);
         mAllFive = (TextView) layout.findViewById(R.id.fivefloartotal);
         mAward = (TextView) layout.findViewById(R.id.award);
+        tvFansCount = (TextView) layout.findViewById(R.id.tv_fanscount);
+        tvFriendCount = (TextView) layout.findViewById(R.id.tv_friendcount);
+        tvSignature = (TextView) layout.findViewById(R.id.tv_signature);
         showProgressDialog();
         initData();
         getUrl();
@@ -118,7 +123,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener, IC
                 startActivity(intent3);
                 break;
             case R.id.mycircle:
-                ActivityUtils.start_Activity(getActivity(), CircleActivity.class);
+                ActivityUtils.start_Activity(ctx, CircleActivity.class);
                 break;
             case R.id.mymoneybag:
                 Intent intent4 = new Intent(ctx, MyMoneyBag.class);
@@ -139,23 +144,15 @@ public class PersonFragment extends Fragment implements View.OnClickListener, IC
         ApiUtil.getUserDetail(ctx, StoreUtils.getPhone(), new BaseJsonHttpResponseHandler<UserInfoBean>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, UserInfoBean response) {
-                userInfoBean = response;
-                Paper.book().write(UserInfo, response);
-                StoreUtils.setUserInfo(userInfoBean);
-                if (!TextUtils.isEmpty(response.getThumb()))
-                    Picasso.with(ctx).load(response.getThumb()).resize(120, 120).centerCrop().placeholder(R.drawable.example).into(mThumb);
-                else
-                    Picasso.with(ctx).load(R.drawable.example).into(mThumb);
-
-                mNickname.setText(response.getNickname());
-                mPhone.setText(response.getPhone());
-                mAllFive.setText(response.getAllalliancecount() + "");
-                mAward.setText(response.getAlliancerewards() + "");
+                StoreUtils.setUserInfo(response);
+                updateView();
                 closeProgressDialog();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, UserInfoBean errorResponse) {
+                if (Paper.book().exist(StoreUtils.UserInfo))
+                    updateView();
                 closeProgressDialog();
             }
 
@@ -171,7 +168,23 @@ public class PersonFragment extends Fragment implements View.OnClickListener, IC
     @Override
     public void onResume() {
         super.onResume();
-//        initData();
+        initData();
+    }
+
+    private void updateView(){
+        userInfoBean = StoreUtils.getUserInfo();
+
+        if (!TextUtils.isEmpty(userInfoBean.getThumb()))
+            Picasso.with(ctx).load(userInfoBean.getThumb()).resize(120, 120).centerCrop().placeholder(R.drawable.example).into(mThumb);
+        else
+            Picasso.with(ctx).load(R.drawable.example).into(mThumb);
+
+        mNickname.setText(userInfoBean.getNickname());
+        mAllFive.setText(userInfoBean.getAllalliancecount() + "");
+        mAward.setText(userInfoBean.getAlliancerewards() + "");
+        tvFriendCount.setText(userInfoBean.getFriendcount() + "");
+        tvFansCount.setText(userInfoBean.getConcerncount() + "");
+        tvSignature.setText(userInfoBean.getSignature());
     }
 
     private Dialog createLoadingDialog(Context context) {

@@ -16,7 +16,10 @@ import com.kankan.OnWheelChangedListener;
 import com.kankan.WheelView;
 import com.league.bean.SucessBean;
 import com.league.bean.UserInfoBean;
+import com.league.otto.BusProvider;
+import com.league.otto.RefreshEvent;
 import com.league.utils.PersonInfoBaseActivity;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -64,7 +67,7 @@ public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnCli
 
     @Override
     protected void initData() {
-        userInfoBean = Paper.book().read("UserInfoBean");
+        userInfoBean = StoreUtils.getUserInfo();
         setUpListener();
         setUpData();
     }
@@ -79,7 +82,8 @@ public class MyAreaActivity extends PersonInfoBaseActivity implements View.OnCli
                     public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                         if (response.getFlag().equals("1")) {
                             userInfoBean.setArea(mCurrentProviceName + mCurrentCityName + mCurrentDistrictName);
-                            Paper.book().write("UserInfoBean", userInfoBean);
+                            StoreUtils.setUserInfo(userInfoBean);
+                            BusProvider.getInstance().post(new RefreshEvent());
                             onBackPressed();
                             finish();
                         } else {

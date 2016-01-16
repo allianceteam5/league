@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.league.activity.personactivity.MyPersonHomepage;
 import com.league.adapter.ViewPagerTabAdapter;
 import com.league.fragment.LiaoBaConcernFragment;
 import com.league.fragment.LiaoBaHotFragment;

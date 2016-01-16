@@ -1,6 +1,7 @@
 package com.league.activity.personactivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import com.league.bean.SucessBean;
 import com.league.bean.UserInfoBean;
 import com.league.bean.UserRealInfoBean;
 import com.league.utils.IContants;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -73,7 +75,7 @@ public class Certification extends BaseActivity implements View.OnClickListener,
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
         mBind.setOnClickListener(this);
-        UserInfoBean userInfoBean = Paper.book().read(UserInfo);
+        UserInfoBean userInfoBean = StoreUtils.getUserInfo();
         if (userInfoBean.getStatus() == 0) {
             llNotCertify.setVisibility(View.VISIBLE);
             llHasCertified.setVisibility(View.GONE);
@@ -110,6 +112,10 @@ public class Certification extends BaseActivity implements View.OnClickListener,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bindid:
+                if (!TextUtils.isEmpty(mInputID.getText().toString()) && !TextUtils.isEmpty(mInputID.getText().toString())){
+                    ToastUtils.showShortToast(this, getString(R.string.warning_message));
+                    return;
+                }
                 showProgressDialog();
                 ApiUtil.realAuth(Certification.this, mInputName.getText().toString(),
                         mInputID.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
@@ -118,6 +124,10 @@ public class Certification extends BaseActivity implements View.OnClickListener,
                                 closeProgressDialog();
                                 if (response.getFlag().equals("1")) {
                                     ToastUtils.showShortToast(Certification.this, "绑定成功");
+                                    //设置已实名认证
+                                    UserInfoBean bean = StoreUtils.getUserInfo();
+                                    bean.setStatus(1);
+                                    StoreUtils.setUserInfo(bean);
                                     onBackPressed();
                                     finish();
                                 } else {

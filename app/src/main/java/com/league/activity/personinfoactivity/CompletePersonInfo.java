@@ -183,7 +183,7 @@ public class CompletePersonInfo extends PersonInfoBaseActivity implements View.O
     }
 
     private void reloadData() {
-        userInfoBean = Paper.book().read("UserInfoBean");
+        userInfoBean = StoreUtils.getUserInfo();
         if (userInfoBean == null) {
             userInfoBean = new UserInfoBean();
         }
@@ -252,7 +252,7 @@ public class CompletePersonInfo extends PersonInfoBaseActivity implements View.O
         public void afterTextChanged(Editable s) {
             // TODO Auto-generated method stub
             userInfoBean.setNickname(mNickname.getText().toString());
-            Paper.book().write("UserInfoBean", userInfoBean);
+            StoreUtils.setUserInfo(userInfoBean);
         }
     };
 }

@@ -16,6 +16,7 @@ import com.league.bean.UserInfoBean;
 import com.league.utils.BeeCloud;
 import com.league.utils.BillUtils;
 import com.league.utils.IContants;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.MyRadioGroup;
@@ -114,7 +115,7 @@ public class BuyList extends BaseActivity implements View.OnClickListener, ICont
 
     private void initData() {
         totalText.setText(number);
-        userInfoBean = Paper.book().read(UserInfo);
+        userInfoBean = StoreUtils.getUserInfo();
         tvBalance.setText(userInfoBean.getMoney() + "");
         tvCoin.setText(userInfoBean.getCorns() + "");
         tvGrabCoin.setText(userInfoBean.getCornsforgrab() + "");

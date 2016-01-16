@@ -102,4 +102,5 @@ public class IClientUrl {
     public static final String setpaypwd = testServerUrl + "users/setpaypwd";
     public static final String deleteBankCard = testServerUrl + "usertocards/delete";
     public static final String realinfo = testServerUrl + "users/realinfo";
+    public static final String usersSearch = testServerUrl + "users/search";
 }

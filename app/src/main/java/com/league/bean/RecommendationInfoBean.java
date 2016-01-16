@@ -41,6 +41,7 @@ public class RecommendationInfoBean {
     private long created_at;
     private double longitude;
     private double latitude;
+    private int distance;
     private String phone;
     private String thumb;
     private String nickname;
@@ -48,6 +49,14 @@ public class RecommendationInfoBean {
     private ArrayList<CommentBean> comments = new ArrayList<>();
 
     public RecommendationInfoBean() {
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
     }
 
     public ArrayList<CommentBean> getComments() {

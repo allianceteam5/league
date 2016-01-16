@@ -9,9 +9,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.league.otto.BusProvider;
+import com.league.utils.IContants;
 import com.mine.league.R;
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends Activity implements IContants{
     protected Dialog loadingDialog;
 
     @Override

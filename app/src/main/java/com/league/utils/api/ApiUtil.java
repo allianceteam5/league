@@ -4,6 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.league.bean.LocationBean;
+import com.league.utils.StoreUtils;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
@@ -19,6 +21,14 @@ public class ApiUtil {
 
     private static void printHttp(String baseUrl, RequestParams params) {
         Log.d("http", "http请求: " + baseUrl + "?" + params);
+    }
+
+    public static RequestParams getLocationCommonParams(){
+        RequestParams params = new RequestParams();
+        LocationBean locationBean = StoreUtils.getLocationBean();
+        params.add("longitude",String.valueOf(locationBean.getLongitude()));
+        params.add("latitude", String.valueOf(locationBean.getLatitude()));
+        return params;
     }
 
     public static void login(Context context, String phone, String pwd, TextHttpResponseHandler responseHandler) {
@@ -40,7 +50,7 @@ public class ApiUtil {
     }
 
     public static void applyJobCreated(Context context, int jobproperty, String title, int degree, long workat, String status, int hidephone, String herphone, String content, int professionid, TextHttpResponseHandler responseHandler) {
-        RequestParams params = new RequestParams();
+        RequestParams params = getLocationCommonParams();
         params.add("phone", testPhone);
         params.add("jobproperty", String.valueOf(jobproperty));
         params.add("title", title);
@@ -56,7 +66,7 @@ public class ApiUtil {
     }
 
     public static void applyjobSearch(Context context, boolean isMy, int professionid, String searchString, int jobproperty, int currentPage, TextHttpResponseHandler responseHandler) {
-        RequestParams params = new RequestParams();
+        RequestParams params = getLocationCommonParams();
         if (isMy)
             params.add("phone", testPhone);
         if (!TextUtils.isEmpty(searchString)) {
@@ -76,7 +86,7 @@ public class ApiUtil {
     }
 
     public static void recommendationsSearch(Context context, boolean isMy, int kindid, String title, int recommendationId, int currentPage, TextHttpResponseHandler responseHandler) {
-        RequestParams params = new RequestParams();
+        RequestParams params = getLocationCommonParams();
         if (isMy)
             params.add("phone", testPhone);
         if (!TextUtils.isEmpty(title)) {
@@ -92,7 +102,7 @@ public class ApiUtil {
     }
 
     public static void recommendationCreated(Context context, String title, int kindid, String location, String phone, String reason, String pictures, TextHttpResponseHandler responseHandler) {
-        RequestParams params = new RequestParams();
+        RequestParams params = getLocationCommonParams();
         params.add("phone", testPhone);
         params.add("kindid", String.valueOf(kindid));
         params.add("title", title);
@@ -117,7 +127,7 @@ public class ApiUtil {
     }
 
     public static void hobbyCreated(Context context, String picture, int sex, int age, int hobbyid, String content, TextHttpResponseHandler responseHandler) {
-        RequestParams params = new RequestParams();
+        RequestParams params = getLocationCommonParams();
         params.add("phone", testPhone);
         params.add("picture", picture);
         params.add("sex", String.valueOf(sex));
@@ -129,7 +139,7 @@ public class ApiUtil {
     }
 
     public static void hobbySearch(Context context, boolean isMy, int hobbyid, String searchString, int currentPage, TextHttpResponseHandler responseHandler) {
-        RequestParams params = new RequestParams();
+        RequestParams params = getLocationCommonParams();
         if (isMy)
             params.add("phone", testPhone);
         if (!TextUtils.isEmpty(searchString)) {
@@ -144,7 +154,7 @@ public class ApiUtil {
     }
 
     public static void othersList(Context context, boolean isMy, String search, int currentPage, TextHttpResponseHandler responseHandler) {
-        RequestParams params = new RequestParams();
+        RequestParams params = getLocationCommonParams();
         if (isMy)
             params.add("phone", testPhone);
         if (!TextUtils.isEmpty(search)) {
@@ -155,7 +165,7 @@ public class ApiUtil {
     }
 
     public static void otherCreated(Context context, String title, String content, String pictures, TextHttpResponseHandler responseHandler) {
-        RequestParams params = new RequestParams();
+        RequestParams params = getLocationCommonParams();
         params.add("phone", testPhone);
         params.add("title", title);
         params.add("content", content);
@@ -476,6 +486,7 @@ public class ApiUtil {
     public static void getUserDetail(Context context, String phone, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", phone);
+        printHttp(IClientUrl.getUserDetail, params);
         client.post(context, IClientUrl.getUserDetail, params, responseHandler);
     }
 
@@ -511,6 +522,13 @@ public class ApiUtil {
         client.post(context, IClientUrl.modifyUserDetail, params, responseHandler);
     }
 
+    //修改用户头像
+    public static void modifyUserThumb(Context context, String thumbUrl, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("thumb", thumbUrl);
+        client.post(context, IClientUrl.modifyUserDetail, params, responseHandler);
+    }
     //圈子创建内容
     public static void circleMessagesCreated(Context context, String content, String pictures, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
@@ -650,7 +668,7 @@ public class ApiUtil {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("usertocardid", usertocardid);
-        printHttp(IClientUrl.deleteBankCard,params);
+        printHttp(IClientUrl.deleteBankCard, params);
         client.post(context, IClientUrl.deleteBankCard, params, responseHandler);
     }
 
@@ -730,6 +748,14 @@ public class ApiUtil {
         params.put("phone", testPhone);
         printHttp(IClientUrl.realinfo, params);
         client.post(context,IClientUrl.realinfo,params,responseHandler);
+    }
+
+    //查找用户
+    public static void searchUsers(Context context, String searchString, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("search", searchString);
+        client.post(context, IClientUrl.usersSearch, params, responseHandler);
     }
 }
 

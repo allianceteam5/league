@@ -13,6 +13,6 @@ public interface IContants {
     public static final String MYPOST_FLAG = "mypost_flag";
     public static final String MODE = "mode";
     public static final String TBMESSAGEID = "tbmessageid";
-    public static final String UserInfo = "UserInfoBean";
     public static final String RuleType = "rule_type";
+    public static final String PHONE = "phone";
 }

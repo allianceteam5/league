@@ -4,16 +4,21 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.league.activity.ReportActivity;
+import com.league.activity.UserHomePageActivity;
 import com.league.bean.HobbyInfoBean;
 import com.league.utils.ActivityUtils;
 import com.league.utils.Constants;
+import com.league.utils.IContants;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
+
+import org.apache.http.message.BasicNameValuePair;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,6 +46,8 @@ public class HobbyInfoActivity extends Activity implements View.OnClickListener 
     TextView message;
     @Bind(R.id.near_report)
     TextView tvReport;
+    @Bind(R.id.addfriend)
+    Button addFriend;
 
     private HobbyInfoBean hobbyInfo;
 
@@ -55,6 +62,7 @@ public class HobbyInfoActivity extends Activity implements View.OnClickListener 
         nearCentertitle.setText("交友详情");
         nearRight.setVisibility(View.GONE);
         hobbyInfo = Paper.book().read(Constants.SingleInfoName, new HobbyInfoBean());
+        addFriend.setOnClickListener(this);
         initView();
     }
 
@@ -83,6 +91,9 @@ public class HobbyInfoActivity extends Activity implements View.OnClickListener 
                 break;
             case R.id.near_report:
                 ActivityUtils.start_Activity(this, ReportActivity.class);
+                break;
+            case R.id.addfriend:
+                ActivityUtils.start_Activity(HobbyInfoActivity.this, UserHomePageActivity.class, new BasicNameValuePair(IContants.PHONE, hobbyInfo.getPhone()));
                 break;
         }
     }

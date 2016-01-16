@@ -9,7 +9,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.bean.SucessBean;
 import com.league.bean.UserInfoBean;
+import com.league.otto.BusProvider;
+import com.league.otto.RefreshEvent;
 import com.league.utils.PersonInfoBaseActivity;
+import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -47,7 +50,7 @@ public class NickNameActivity extends PersonInfoBaseActivity implements View.OnC
 
     @Override
     protected void initData() {
-        userInfoBean = Paper.book().read("UserInfoBean");
+        userInfoBean = StoreUtils.getUserInfo();
         mInputNickname.setText(userInfoBean.getNickname());
         mInputNickname.setSelection(mInputNickname.getText().toString().length());
     }
@@ -63,7 +66,8 @@ public class NickNameActivity extends PersonInfoBaseActivity implements View.OnC
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                 if (response.getFlag().equals("1")) {
                                     userInfoBean.setNickname("" + mInputNickname.getText().toString());
-                                    Paper.book().write("UserInfoBean", userInfoBean);
+                                    StoreUtils.setUserInfo(userInfoBean);
+                                    BusProvider.getInstance().post(new RefreshEvent());
                                     onBackPressed();
                                     finish();
                                 } else {

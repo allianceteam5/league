@@ -2,11 +2,15 @@ package com.league.activity.personinfoactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.league.bean.UserInfoBean;
 import com.league.utils.CreateQRImage;
 import com.league.utils.PersonInfoBaseActivity;
+import com.league.utils.StoreUtils;
 import com.mine.league.R;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.bean.SocializeEntity;
@@ -20,10 +24,13 @@ import com.umeng.socialize.sso.UMQQSsoHandler;
 import com.umeng.socialize.sso.UMSsoHandler;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
 
+import org.w3c.dom.Text;
+
 import io.paperdb.Paper;
 
 public class InviteFriendActivity extends PersonInfoBaseActivity implements View.OnClickListener {
     private ImageView mQRCode;
+    private TextView tvInviteCode;
     // 首先在您的Activity中添加如下成员变量
     final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
 
@@ -73,6 +80,10 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
     @Override
     protected void initView() {
         mQRCode = (ImageView) findViewById(R.id.qrcode);
+        tvInviteCode = (TextView) findViewById(R.id.tv_invitecode);
+        UserInfoBean userInfoBean = StoreUtils.getUserInfo();
+        if (!TextUtils.isEmpty(userInfoBean.getInvitecode()))
+            tvInviteCode.setText(userInfoBean.getInvitecode());
         setOnclickListener();
     }
 

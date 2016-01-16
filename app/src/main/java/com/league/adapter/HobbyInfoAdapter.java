@@ -64,6 +64,7 @@ public class HobbyInfoAdapter extends BaseAdapter {
             holder.intest = (TextView) convertView.findViewById(R.id.near_friend_intes);
             holder.leavemessage = (TextView) convertView.findViewById(R.id.near_friend_leave);
             holder.lasttime = (TextView) convertView.findViewById(R.id.lasttime);
+            holder.distance = (TextView) convertView.findViewById(R.id.tv_distance);
             convertView.setTag(holder);
 
         } else {
@@ -83,7 +84,11 @@ public class HobbyInfoAdapter extends BaseAdapter {
         holder.leavemessage.setText(list.get(position).getContent());
         holder.lasttime.setText(Utils.generateStringByTime(list.get(position).getCreated_at()));
 
-
+        HobbyInfoBean hobbyInfoBean = list.get(position);
+        if (hobbyInfoBean.getDistance() < 1000)
+            holder.distance.setText("1公里内");
+        else
+            holder.distance.setText(String.valueOf(hobbyInfoBean.getDistance()/1000) + "公里");
         return convertView;
     }
 
@@ -94,5 +99,6 @@ public class HobbyInfoAdapter extends BaseAdapter {
         TextView intest;
         TextView leavemessage;
         TextView lasttime;
+        TextView distance;
     }
 }

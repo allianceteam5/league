@@ -18,10 +18,11 @@
         <EditText
             android:id="@+id/inputname"
             android:layout_width="match_parent"
-            android:layout_height="40dip"
+            android:layout_height="42dip"
             android:padding="5dp"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:hint="姓名"
+            style="@style/editText"
             android:gravity="center_vertical"
             android:background="@color/white"/>
 
@@ -31,10 +32,10 @@
             android:background="@color/black2"/>
         <EditText
             android:id="@+id/inputid"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:padding="5dp"
             android:layout_width="match_parent"
-            android:layout_height="40dip"
+            android:layout_height="42dip"
             android:hint="身份证号码"
             style="@style/editText"
             android:gravity="center_vertical"

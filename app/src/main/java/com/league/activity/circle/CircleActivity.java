@@ -19,6 +19,7 @@ import com.league.bean.UserInfoBean;
 import com.league.otto.RefreshEvent;
 import com.league.utils.ActivityUtils;
 import com.league.utils.IContants;
+import com.league.utils.StoreUtils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -82,7 +83,7 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);
 
-        userInfoBean = Paper.book().read(UserInfo);
+        userInfoBean = StoreUtils.getUserInfo();
         if (!TextUtils.isEmpty(userInfoBean.getThumb()))
             Picasso.with(this).load(userInfoBean.getThumb()).placeholder(R.drawable.example).resize(120, 120).centerCrop().into(ivThumb);
         else

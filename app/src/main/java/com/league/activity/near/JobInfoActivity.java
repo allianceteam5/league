@@ -13,12 +13,17 @@ import android.widget.Toast;
 import com.easemob.chat.EMContactManager;
 import com.easemob.exceptions.EaseMobException;
 import com.league.activity.ReportActivity;
+import com.league.activity.UserHomePageActivity;
 import com.league.bean.JobInfoBean;
 import com.league.utils.ActivityUtils;
 import com.league.utils.Constants;
 import com.league.utils.DateFormatUtils;
+import com.league.utils.IContants;
+import com.league.utils.api.IClientUrl;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
+
+import org.apache.http.message.BasicNameValuePair;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -110,17 +115,7 @@ public class JobInfoActivity extends Activity implements OnClickListener {
                 onBackPressed();
                 break;
             case R.id.addfriend:
-                if (addFriend.getText().equals("已申请")) {
-                    Toast.makeText(getApplicationContext(), "已申请", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                try {
-                    EMContactManager.getInstance().addContact(jobinfo.getUserid(), "请添加我为好友吧");
-                } catch (EaseMobException e) {
-                    e.printStackTrace();
-                }
-                Toast.makeText(getApplicationContext(), "已申请", Toast.LENGTH_LONG).show();
-                addFriend.setText("已申请");
+                ActivityUtils.start_Activity(JobInfoActivity.this, UserHomePageActivity.class, new BasicNameValuePair(IContants.PHONE, jobinfo.getPhone()));
                 break;
             case R.id.near_report:
                 ActivityUtils.start_Activity(this, ReportActivity.class);

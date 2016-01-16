@@ -17,9 +17,8 @@
         style="@style/editText"
         android:gravity="left"
         android:background="@color/white"
-        android:maxLength="11"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/text_title"
+        android:textColorHint="@color/text_hint"
         android:textSize="16sp" />
 
 </LinearLayout>

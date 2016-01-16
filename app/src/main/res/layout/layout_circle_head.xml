@@ -47,7 +47,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="好友人脉"
+                        android:text="好友"
                         android:textColor="@color/white"
                         android:textSize="12dp" />
 
@@ -65,12 +65,14 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="6dp"
                         android:layout_marginRight="6dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
                         android:background="@color/white" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="说吧粉丝"
+                        android:text="粉丝"
                         android:textColor="@color/white"
                         android:textSize="12dp" />
 

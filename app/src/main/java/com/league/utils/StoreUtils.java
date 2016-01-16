@@ -20,7 +20,7 @@ public class StoreUtils {
     public static final String StoreName = "allpeopleleague";
     private static final String SkipGuidState = "skip_guid_state";
     private static final String LoginState = "login_state";
-    private static final String UserInfo = "user_info";
+    public static final String UserInfo = "user_info";
     private static final String Phone = "phone";
     private static final String HuanXinId = "huanxin_id";
     private static final String HuanXinPwd = "huanxin_pwd";

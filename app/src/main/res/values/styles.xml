@@ -216,6 +216,7 @@
         <item name="android:textColor">@color/text_title</item>
         <item name="android:textColorHint">@color/text_hint</item>
         <item name="android:textCursorDrawable">@drawable/color_cursor</item>
+        <item name="android:background">@color/white</item>
     </style>
 
     <!--  这个是加入的代码 -->
