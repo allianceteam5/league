@@ -775,5 +775,19 @@ public class ApiUtil {
         params.put("search", searchString);
         client.post(context, IClientUrl.usersSearch, params, responseHandler);
     }
+    //获取交易记录
+    public static void getTradingRecord(Context context,int currentPage,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        client.post(context, IClientUrl.tradingRecord+currentPage, params, responseHandler);
+    }
+    //充值
+    public static void rechargeMoney(Context context,String count,String type,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("count",count);
+        params.put("type",type);
+        client.post(context,IClientUrl.recharge,params,responseHandler);
+    }
 }
 
