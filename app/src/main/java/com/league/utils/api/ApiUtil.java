@@ -809,5 +809,13 @@ public class ApiUtil {
         params.put("type",type);
         client.post(context,IClientUrl.recharge,params,responseHandler);
     }
+    //提现
+    public static void withdraw(Context context,String count, String cardid,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("count",count);
+        params.put("cardid",cardid);
+        client.post(context,IClientUrl.withdraw,params,responseHandler);
+    }
 }
 

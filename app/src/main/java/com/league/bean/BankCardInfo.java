@@ -22,6 +22,24 @@ public class BankCardInfo {
     private String idcard;
     private String lphone;
     private String location;
+    private String bankname;
+    private String bankcode;
+
+    public String getBankcode() {
+        return bankcode;
+    }
+
+    public void setBankcode(String bankcode) {
+        this.bankcode = bankcode;
+    }
+
+    public String getBankname() {
+        return bankname;
+    }
+
+    public void setBankname(String bankname) {
+        this.bankname = bankname;
+    }
 
     public void setId(int id) {
         this.id = id;
