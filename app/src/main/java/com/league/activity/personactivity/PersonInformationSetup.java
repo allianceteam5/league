@@ -63,14 +63,8 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
     TextView mArea;
     @Bind(R.id.signature)
     TextView mSignature;
-    @Bind(R.id.btn_logout)
-    Button btnLogout;
     private PickImgPopWindow pickImgPopWindow;
-    private Bitmap bitmap;
     private Uri imgUri;
-    public final int SELECT_CAMER = 1; // 用相机拍摄照片
-    public final int SELECT_PICTURE = 2; // 从图库中选择图片
-    public final int CROP_PHOTO = 3;// 系统的裁剪图片
     private StringBuffer picture = new StringBuffer();
 
     @Override
@@ -113,16 +107,17 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
                         imgUri = Uri.fromFile(tempFile);
                         Intent camerInetent = new Intent(
                                 MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(camerInetent, SELECT_CAMER);
+                        camerInetent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
                         pickImgPopWindow.dismissPopWindow();
+                        startActivityForResult(camerInetent, SELECT_CAMER);
                         break;
                     case 1:
                         Intent picIntent = new Intent(
                                 Intent.ACTION_GET_CONTENT);
                         picIntent.addCategory(Intent.CATEGORY_OPENABLE);
                         picIntent.setType("image/*");
-                        startActivityForResult(picIntent, SELECT_PICTURE);
                         pickImgPopWindow.dismissPopWindow();
+                        startActivityForResult(picIntent, SELECT_PICTURE);
                         break;
                     case 2:
                         pickImgPopWindow.dismissPopWindow();
@@ -230,7 +225,7 @@ public class PersonInformationSetup extends BaseActivity implements View.OnClick
 
     public void updateAvatar(Uri uri) {
         String imagePath = ImgUtils.getRealFilePath(getApplicationContext(), uri);
-        Log.d("url", imagePath);
+//        Log.d("url", imagePath);
         //本地为什么放不进去 实在不行先要上传到七牛 再用七牛的链接地址更新头像
 //        Picasso.with(this).load("file://" + ImgUtils.getRealFilePath(getApplicationContext(), uri)).resize(160, 160).centerCrop().into(mThumbnail);
         if (!TextUtils.isEmpty(imagePath)) {

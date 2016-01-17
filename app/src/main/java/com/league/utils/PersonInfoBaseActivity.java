@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.mine.league.R;
 
-public abstract class PersonInfoBaseActivity extends Activity {
+public abstract class PersonInfoBaseActivity extends Activity implements IContants{
     private TextView tvTitle;
     private ImageButton ivBack;
     protected Dialog loadingDialog;

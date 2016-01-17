@@ -15,4 +15,7 @@ public interface IContants {
     public static final String TBMESSAGEID = "tbmessageid";
     public static final String RuleType = "rule_type";
     public static final String PHONE = "phone";
+    public final int SELECT_CAMER = 1; // 用相机拍摄照片
+    public final int SELECT_PICTURE = 2; // 从图库中选择图片
+    public final int CROP_PHOTO = 3;// 系统的裁剪图片
 }

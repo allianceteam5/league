@@ -57,7 +57,7 @@ public class LiaoBaHotFragment extends Fragment {
     }
 
     private void initData(final int currentPage) {
-        ApiUtil.liaobagetlatest(getActivity().getApplication(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaMessageBean>>() {
+        ApiUtil.liaobaGetHot(getActivity().getApplication(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<LiaoBaMessageBean>>() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<LiaoBaMessageBean> response) {

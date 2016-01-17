@@ -529,6 +529,24 @@ public class ApiUtil {
         params.put("thumb", thumbUrl);
         client.post(context, IClientUrl.modifyUserDetail, params, responseHandler);
     }
+
+    public static void modifyUserRegister(Context context, String nickname, int gender, String area, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("area", area);
+        params.put("gender", gender);
+        params.put("nickname", nickname);
+        client.post(context, IClientUrl.modifyUserDetail, params, responseHandler);
+    }
+
+    //修改用户背景
+    public static void modifyUserBackground(Context context, String backgroundUrl, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("background", backgroundUrl);
+        client.post(context, IClientUrl.modifyUserDetail, params, responseHandler);
+    }
+
     //圈子创建内容
     public static void circleMessagesCreated(Context context, String content, String pictures, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
