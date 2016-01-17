@@ -10,13 +10,26 @@
     <include
         android:id="@+id/title"
         layout="@layout/near_title" />
-    <ListView
-        android:id="@+id/lv_trading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:dividerHeight="2dp"
-        android:divider="@color/black2">
 
-    </ListView>
+    <com.league.widget.pulltorefreshandload.PullToRefreshLayout
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/refresh_head" />
+        <!-- 支持所有实现Pullable接口的View -->
+
+        <com.league.widget.pulltorefreshandload.PullableListView
+            android:id="@+id/lv_trading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/black2"
+            android:dividerHeight="2dp"
+            android:scrollbars="none"></com.league.widget.pulltorefreshandload.PullableListView>
+
+        <include layout="@layout/load_more" />
+
+    </com.league.widget.pulltorefreshandload.PullToRefreshLayout>
+
+
 </LinearLayout>

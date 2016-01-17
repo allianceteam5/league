@@ -1,7 +1,5 @@
 package com.league.activity.personactivity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,14 +11,23 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.activity.BaseActivity;
 import com.league.adapter.PayMoneyAmountAdapter;
+import com.league.bean.SucessBean;
+import com.league.utils.ToastUtils;
+import com.league.utils.api.ApiUtil;
 import com.league.widget.MyRadioGroup;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeListener, AdapterView.OnItemClickListener {
+public class Recharge extends BaseActivity implements MyRadioGroup.OnCheckedChangeListener, AdapterView.OnItemClickListener {
 
     private ImageView back2, titleright, right1, right2;
     private TextView title, tvNum;
@@ -30,6 +37,7 @@ public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeLi
     private GridView gridView;
     private PayMoneyAmountAdapter adapter;
     private EditText etInputNum;
+    private String type = "";
     private boolean[] control = new boolean[6];
 
     private TextWatcher watcher = new TextWatcher() {
@@ -93,8 +101,37 @@ public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeLi
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), PaymentOrder.class);
-                startActivity(intent);
+                if(type.equals("")){
+                    ToastUtils.showShortToast(Recharge.this,"请选择支付方式");
+                }else{
+                    showProgressDialog();
+                    ApiUtil.rechargeMoney(Recharge.this, tvNum.getText().toString(), type, new BaseJsonHttpResponseHandler<SucessBean>() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                            closeProgressDialog();
+                            if(response.getFlag().equals("1")){
+
+                            }else{
+                                ToastUtils.showShortToast(Recharge.this,"充值失败");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                            closeProgressDialog();
+                            ToastUtils.showShortToast(Recharge.this, "网络不好，请检查网络再试一次");
+                        }
+
+                        @Override
+                        protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                            return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                            });
+                        }
+                    });
+                }
+
+//                Intent intent = new Intent(getApplication(), PaymentOrder.class);
+//                startActivity(intent);
 
             }
         });
@@ -110,8 +147,10 @@ public class Recharge extends Activity implements MyRadioGroup.OnCheckedChangeLi
     public void onCheckedChanged(MyRadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.rb_wxpay:
+                type = "2";
                 break;
             case R.id.rb_alipay:
+                type = "1";
                 break;
         }
     }

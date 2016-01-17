@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.league.bean.TradingDetailBean;
+import com.league.utils.Utils;
 import com.mine.league.R;
 
 import java.util.List;
@@ -49,15 +50,41 @@ public class TradingRecordAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_tradingrecord, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tvPaytime.setText(list.get(position).getPayTime());
-        holder.tvPaydate.setText(list.get(position).getPayDate());
-        holder.tvPaymoney.setText(list.get(position).getPayMoney());
-        holder.tvPaycontent.setText(list.get(position).getPayContent());
+        int type = Integer.valueOf(list.get(position).getType());
+        String tradeType="";
+        String sign="+";
+        switch (type) {
+            case 1:
+                tradeType = "支付宝充值";
+                sign = "+";
+                break;
+            case 2:
+                tradeType = "微信充值";
+                sign = "+";
+                break;
+            case -1:
+                tradeType = "提现";
+                sign = "+";
+                break;
+            case -2:
+                tradeType = "购买一元夺宝";
+                sign = "-";
+                break;
+            case -3:
+                tradeType = "购买保本夺金";
+                sign = "-";
+                break;
+        }
+        holder.tvTradetype.setText(tradeType);
+        holder.tvPaydate.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(list.get(position).getCreated_at())));
+        holder.tvPaymoney.setText(sign+list.get(position).getCount());
+        holder.tvPaycontent.setText(list.get(position).getDescription());
         return convertView;
     }
+
 
     /**
      * This class contains all butterknife-injected Views & Layouts from layout file 'item_tradingrecord.xml'
@@ -66,8 +93,8 @@ public class TradingRecordAdapter extends BaseAdapter {
      * @author ButterKnifeZelezny, plugin for Android Studio by Avast Developers (http://github.com/avast)
      */
     static class ViewHolder {
-        @Bind(R.id.tv_paytime)
-        TextView tvPaytime;
+        @Bind(R.id.tv_tradetype)
+        TextView tvTradetype;
         @Bind(R.id.tv_paydate)
         TextView tvPaydate;
         @Bind(R.id.tv_paymoney)
