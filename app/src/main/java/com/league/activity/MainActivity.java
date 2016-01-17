@@ -60,6 +60,7 @@ import com.league.fragment.PersonFragment;
 import com.league.fragment.ResourceFragment;
 import com.league.utils.ComplexPreferences;
 import com.league.utils.Constants;
+import com.league.utils.StoreUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
@@ -133,7 +134,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         Constants.addIntoCollection(this);
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        ComplexPreferences.getComplexPreferences(getApplicationContext()).setScreenWidth(metrics.widthPixels);
+        StoreUtils.setWidthScreen(metrics.widthPixels);
 //        metaSpUtil.setScreenHeight(this, metrics.heightPixels);
 
         init();
@@ -699,30 +700,37 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 
         @Override
         public void onConnected() {
-            boolean groupSynced = HXSDKHelper.getInstance().isGroupsSyncedWithServer();
-            boolean contactSynced = HXSDKHelper.getInstance().isContactsSyncedWithServer();
+//            boolean groupSynced = HXSDKHelper.getInstance().isGroupsSyncedWithServer();
+//            boolean contactSynced = HXSDKHelper.getInstance().isContactsSyncedWithServer();
 
-            // in case group and contact were already synced, we supposed to notify sdk we are ready to receive the events
-            if (groupSynced && contactSynced) {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        HXSDKHelper.getInstance().notifyForRecevingEvents();
-                    }
-                }.start();
-            } else {
-                if (!groupSynced) {
-                    asyncFetchGroupsFromServer();
+            new Thread() {
+                @Override
+                public void run() {
+                    HXSDKHelper.getInstance().notifyForRecevingEvents();
                 }
+            }.start();
 
-                if (!contactSynced) {
-                    asyncFetchContactsFromServer();
-                }
-
-                if (!HXSDKHelper.getInstance().isBlackListSyncedWithServer()) {
-                    asyncFetchBlackListFromServer();
-                }
-            }
+//            // in case group and contact were already synced, we supposed to notify sdk we are ready to receive the events
+//            if (groupSynced && contactSynced) {
+//                new Thread() {
+//                    @Override
+//                    public void run() {
+//                        HXSDKHelper.getInstance().notifyForRecevingEvents();
+//                    }
+//                }.start();
+//            } else {
+//                if (!groupSynced) {
+//                    asyncFetchGroupsFromServer();
+//                }
+//
+//                if (!contactSynced) {
+//                    asyncFetchContactsFromServer();
+//                }
+//
+//                if (!HXSDKHelper.getInstance().isBlackListSyncedWithServer()) {
+//                    asyncFetchBlackListFromServer();
+//                }
+//            }
 
             runOnUiThread(new Runnable() {
 

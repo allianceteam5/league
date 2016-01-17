@@ -80,13 +80,15 @@ public class CompletePersonInfo extends PersonInfoBaseActivity implements View.O
     private Uri imgUri;
     private StringBuffer picture = new StringBuffer();
 
+    private UserInfoBean userInfoBean;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setTitle("完善个人信息");
         login.setOnClickListener(this);
-
+        userInfoBean = StoreUtils.getUserInfo();
         pickImgPopWindow = new PickImgPopWindow(this, login, new PickImgPopWindow.PopClickListener() {
             @Override
             public void onClick(int index) {
@@ -246,21 +248,23 @@ public class CompletePersonInfo extends PersonInfoBaseActivity implements View.O
         }
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        reloadData();
-//    }
-//
-//    private void reloadData() {
-//        userInfoBean = StoreUtils.getUserInfo();
-//        if (userInfoBean == null) {
-//            userInfoBean = new UserInfoBean();
-//        }
-//        mNickname.setText(userInfoBean.getNickname());
-//        mGender.setText(userInfoBean.getGender() == 0 ? "女" : "男");
-//        mArea.setText(userInfoBean.getArea());
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadData();
+    }
+
+    private void reloadData() {
+        userInfoBean = StoreUtils.getUserInfo();
+        if (userInfoBean == null) {
+            userInfoBean = new UserInfoBean();
+        }
+        if (!TextUtils.isEmpty(userInfoBean.getNickname()))
+            mNickname.setText(userInfoBean.getNickname());
+        mGender.setText(userInfoBean.getGender() == 0 ? "女" : "男");
+        if (!TextUtils.isEmpty(userInfoBean.getArea()))
+            mArea.setText(userInfoBean.getArea());
+    }
 
     private void initializeContacts() {
         Map<String, User> userlist = new HashMap<String, User>();

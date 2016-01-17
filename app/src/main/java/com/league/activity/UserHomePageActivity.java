@@ -124,7 +124,8 @@ public class UserHomePageActivity extends BaseActivity {
     }
 
     private void updateView() {
-        Picasso.with(this).load(userInfoBean.getThumb()).resize(160, 160).centerCrop().into(ivThumb);
+        if (!TextUtils.isEmpty(userInfoBean.getThumb()))
+            Picasso.with(this).load(userInfoBean.getThumb()).resize(160, 160).centerCrop().into(ivThumb);
         tvNickname.setText(userInfoBean.getNickname());
         tvFriendcount.setText(userInfoBean.getFriendcount() + "");
         tvFanscount.setText(userInfoBean.getConcerncount() + "");

@@ -32,20 +32,27 @@ import android.widget.Toast;
 
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
+import com.league.bean.SearchUserBean;
+import com.league.utils.api.ApiUtil;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.mine.league.R;
 import com.easemob.chatuidemo.db.InviteMessgeDao;
 import com.easemob.chatuidemo.domain.InviteMessage;
 import com.easemob.chatuidemo.domain.InviteMessage.InviteMesageStatus;
+import com.squareup.picasso.Picasso;
 
 public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 
 	private Context context;
 	private InviteMessgeDao messgeDao;
+	private List<SearchUserBean> list;
 
-	public NewFriendsMsgAdapter(Context context, int textViewResourceId, List<InviteMessage> objects) {
+
+	public NewFriendsMsgAdapter(Context context, int textViewResourceId, List<InviteMessage> objects, List<SearchUserBean> list) {
 		super(context, textViewResourceId, objects);
 		this.context = context;
 		messgeDao = new InviteMessgeDao(context);
+		this.list = list;
 	}
 
 	@Override
@@ -74,6 +81,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 		String str5 = context.getResources().getString(R.string.Has_agreed_to);
 		String str6 = context.getResources().getString(R.string.Has_refused_to);
 		final InviteMessage msg = getItem(position);
+		final SearchUserBean searchUserBean = list.get(position);
 		if (msg != null) {
 			if(msg.getGroupId() != null){ // 显示群聊提示
 				holder.groupContainer.setVisibility(View.VISIBLE);
@@ -81,9 +89,12 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 			} else{
 				holder.groupContainer.setVisibility(View.GONE);
 			}
-			
+
+			if (!TextUtils.isEmpty(searchUserBean.getThumb()))
+				Picasso.with(context).load(searchUserBean.getThumb()).into(holder.avator);
 			holder.reason.setText(msg.getReason());
-			holder.name.setText(msg.getFrom());
+//			holder.name.setText(msg.getFrom());
+			holder.name.setText(searchUserBean.getNickname());
 			// holder.time.setText(DateUtils.getTimestampString(new
 			// Date(msg.getTime())));
 			if (msg.getStatus() == InviteMesageStatus.BEAGREED) {
@@ -110,7 +121,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 					@Override
 					public void onClick(View v) {
 						// 同意别人发的好友请求
-						acceptInvitation(holder.status, msg);
+						acceptInvitation(holder.status, msg, searchUserBean.getPhone());
 					}
 				});
 			} else if (msg.getStatus() == InviteMesageStatus.AGREED) {
@@ -133,9 +144,8 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 	 * 同意好友请求或者群申请
 	 * 
 	 * @param button
-	 * @param username
 	 */
-	private void acceptInvitation(final Button button, final InviteMessage msg) {
+	private void acceptInvitation(final Button button, final InviteMessage msg, final String friendphone) {
 		final ProgressDialog pd = new ProgressDialog(context);
 		String str1 = context.getResources().getString(R.string.Are_agree_with);
 		final String str2 = context.getResources().getString(R.string.Has_agreed_to);
@@ -148,8 +158,11 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 			public void run() {
 				// 调用sdk的同意方法
 				try {
-					if(msg.getGroupId() == null) //同意好友请求
+					if(msg.getGroupId() == null) {//同意好友请求
 						EMChatManager.getInstance().acceptInvitation(msg.getFrom());
+						ApiUtil.approveFriend(context, friendphone, new JsonHttpResponseHandler(){
+						});
+					}
 					else //同意加群申请
 					    EMGroupManager.getInstance().acceptApplication(msg.getFrom(), msg.getGroupId());
 					((Activity) context).runOnUiThread(new Runnable() {
@@ -174,7 +187,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 						@Override
 						public void run() {
 							pd.dismiss();
-							Toast.makeText(context, str3 + e.getMessage(), 1).show();
+							Toast.makeText(context, str3 + e.getMessage(), Toast.LENGTH_SHORT).show();
 						}
 					});
 

@@ -1,5 +1,7 @@
 package com.league.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by pfy on 2016/1/16.
  */
@@ -15,6 +17,7 @@ public class SearchUserBean {
      * friendcount : 2
      */
 
+    @JsonIgnore
     private String id;
     private String huanxinid;
     private String phone;
@@ -22,6 +25,7 @@ public class SearchUserBean {
     private int concerncount;
     private String thumb;
     private int friendcount;
+    @JsonIgnore
     private int isfriend;
 
     public int getIsfriend() {
