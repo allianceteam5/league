@@ -2,8 +2,11 @@ package com.league.activity.personactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.adapter.BankCardAdapter;
 import com.league.bean.BankCardInfo;
+import com.league.bean.SucessBean;
 import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
@@ -35,9 +39,14 @@ public class WithDraw extends BaseActivity implements View.OnClickListener {
     TextView withDrawNum;
     @Bind(R.id.listview)
     ListView listView;
+    @Bind(R.id.btn_confirm)
+    Button confirm;
+    @Bind(R.id.et_withdrawnum)
+    EditText etWithdrawNum;
     private List<BankCardInfo> list = new ArrayList<BankCardInfo>();
     BankCardAdapter adapter;
     private boolean[] select = new boolean[3];
+    private String cardID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +84,8 @@ public class WithDraw extends BaseActivity implements View.OnClickListener {
         right2 = (ImageView) findViewById(R.id.near_right_item);
         right2.setVisibility(View.GONE);
 
+        confirm.setOnClickListener(this);
+
         withDrawNum.setText(StoreUtils.getRealMoney() + "元");
         adapter = new BankCardAdapter(list, getApplication(), select);
         listView.setAdapter(adapter);
@@ -84,6 +95,7 @@ public class WithDraw extends BaseActivity implements View.OnClickListener {
                 for (int i = 0; i < list.size(); i++) {
                     if (i == position) {
                         select[i] = true;
+                        cardID = list.get(position).getId()+"";
                     } else {
                         select[i] = false;
                     }
@@ -102,6 +114,47 @@ public class WithDraw extends BaseActivity implements View.OnClickListener {
                 } else {
                     Intent intent = new Intent(getApplication(), AddBankCard.class);
                     startActivity(intent);
+                }
+                break;
+            case R.id.btn_confirm:
+                if(TextUtils.isEmpty(etWithdrawNum.getText().toString())){
+                    ToastUtils.showShortToast(WithDraw.this, "请输入金额");
+                }else {
+                    float now = StoreUtils.getRealMoney();
+                    float out = Float.valueOf(etWithdrawNum.getText().toString());
+                    if(out>now){
+                        ToastUtils.showShortToast(WithDraw.this, "没那么多钱让您提现啊");
+                    }else{
+                        if(TextUtils.isEmpty(cardID)){
+                            ToastUtils.showShortToast(WithDraw.this, "请选择银行卡");
+                        }else{
+                            showProgressDialog();
+                            ApiUtil.withdraw(WithDraw.this, etWithdrawNum.getText().toString(), cardID, new BaseJsonHttpResponseHandler<SucessBean>() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                                    closeProgressDialog();
+                                    if(response.getFlag().equals("0")){
+                                        ToastUtils.showShortToast(WithDraw.this, "提现请求失败");
+                                    }else{
+                                        ToastUtils.showShortToast(WithDraw.this, "提现请求发送成功");
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                                    closeProgressDialog();
+                                    ToastUtils.showShortToast(WithDraw.this, "网络请求失败");
+                                }
+
+                                @Override
+                                protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                                    return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                                    });
+                                }
+                            });
+                        }
+//
+                    }
                 }
 
                 break;

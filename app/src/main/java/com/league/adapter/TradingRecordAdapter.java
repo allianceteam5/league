@@ -54,8 +54,8 @@ public class TradingRecordAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         int type = Integer.valueOf(list.get(position).getType());
-        String tradeType="";
-        String sign="+";
+        String tradeType = "";
+        String sign = "+";
         switch (type) {
             case 1:
                 tradeType = "支付宝充值";
@@ -79,8 +79,8 @@ public class TradingRecordAdapter extends BaseAdapter {
                 break;
         }
         holder.tvTradetype.setText(tradeType);
-        holder.tvPaydate.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(list.get(position).getCreated_at())));
-        holder.tvPaymoney.setText(sign+list.get(position).getCount());
+        holder.tvPaydate.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(list.get(position).getCreated_at()) * 1000));
+        holder.tvPaymoney.setText(sign + list.get(position).getCount());
         holder.tvPaycontent.setText(list.get(position).getDescription());
         return convertView;
     }

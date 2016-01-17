@@ -609,7 +609,8 @@
             android:exported="false"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name="com.league.activity.personactivity.TradingRecordActivity" />
+        <activity android:name="com.league.activity.personactivity.TradingRecordActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.league.activity.UserHomePageActivity"
             android:label="@string/title_activity_user_home_page" >

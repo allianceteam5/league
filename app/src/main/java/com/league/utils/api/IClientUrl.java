@@ -103,6 +103,7 @@ public class IClientUrl {
     public static final String deleteBankCard = testServerUrl + "usertocards/delete";
     public static final String realinfo = testServerUrl + "users/realinfo";
     public static final String usersSearch = testServerUrl + "users/search";
-    public static final String tradingRecord = testServerUrl + "users/traderecords";
+    public static final String tradingRecord = testServerUrl + "users/traderecords?page=";
     public static final String recharge = testServerUrl + "users/moneyin";
+    public static final String withdraw = testServerUrl + "users/moneyout";
 }
