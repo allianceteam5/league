@@ -11,6 +11,9 @@ import com.league.bean.LocationBean;
 import com.league.bean.UserInfoBean;
 import com.tumblr.remember.Remember;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 import io.paperdb.Paper;
 
 /**
@@ -30,6 +33,8 @@ public class StoreUtils {
     private static final String BankNum = "banknum";
     private static final String LocationBean = "locationbean";
     private static final String WidthScreen = "width_screen";
+    private static final String TodayGrabNum = "sharenum";
+    private static final String date = "date";
 
     //初始化
     public static void init(Context context) {
@@ -140,10 +145,77 @@ public class StoreUtils {
     }
 
     public static void setWidthScreen(int value){
-        Remember.putInt(WidthScreen,value);
+        Remember.putInt(WidthScreen, value);
     }
 
     public static int getWidthScreen(){
         return Remember.getInt(WidthScreen,100);
+    }
+    public static void setLastDate(String temp){
+        Remember.putString(date, temp);
+    }
+    public static String getLastDate(){
+        return Remember.getString(date, "");
+    }
+    public static int getGrabNum(){
+        int result;
+        DateFormat df = DateFormat.getDateInstance();
+        String current = df.format(new Date());
+        String last = getLastDate();
+        if(current.equals(last)){
+            int tem = getTotalNum(current);
+            result = tem;
+            tem--;
+            if(tem<=0){
+                setTotalNum(current,0);
+            }else{
+                setTotalNum(current,tem);
+            }
+        }else{
+            int tem = getTotalNum(current);
+            result = tem;
+            tem--;
+            setTotalNum(current,tem);
+            setLastDate(current);
+        }
+        if(result>0){
+            int grabnum = getTodayGrabNum(current);
+            if(grabnum<=0){
+                result = 0;
+            }
+            grabnum--;
+            setTodayGrabNum(current,grabnum);
+
+        }
+        return result;
+    }
+    public static int getTotalNum(String key){
+        return Remember.getInt(key, 1);
+    }
+    public static void setTotalNum(String key,int num){
+        Remember.putInt(key,num);
+    }
+    public static void setGrabNum(){
+        DateFormat df = DateFormat.getDateInstance();
+        String current = df.format(new Date());
+        int tem = getTotalNum(current);
+        tem++;
+        if(tem>3){
+            setTotalNum(current,3);
+        }else{
+            setTotalNum(current,tem);
+        }
+    }
+//    public static int getTotalShareNum(String key){
+//        return Remember.getInt(key+"sharenum",0);
+//    }
+//    public static void setTotalShareNum(String key,int num){
+//        Remember.putInt(key+"sharenum",num);
+//    }
+    public static int getTodayGrabNum(String key){
+        return Remember.getInt(key+TodayGrabNum,3);
+    }
+    public static void setTodayGrabNum(String key,int num){
+        Remember.putInt(key+TodayGrabNum,num);
     }
 }

@@ -13,6 +13,15 @@ public class SucessBean {
     private String flag;
     private String msg;
     private String huanxinid;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getHuanxinid() {
         return huanxinid;

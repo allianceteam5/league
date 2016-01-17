@@ -24,8 +24,6 @@ import com.umeng.socialize.sso.UMQQSsoHandler;
 import com.umeng.socialize.sso.UMSsoHandler;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
 
-import org.w3c.dom.Text;
-
 import io.paperdb.Paper;
 
 public class InviteFriendActivity extends PersonInfoBaseActivity implements View.OnClickListener {
@@ -105,6 +103,7 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
+                                    StoreUtils.setGrabNum();
                                 } else {
                                     String eMsg = "";
                                     if (eCode == -101) {
@@ -125,6 +124,7 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
+                                    StoreUtils.setGrabNum();
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
@@ -148,6 +148,7 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
+                                    StoreUtils.setGrabNum();
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
@@ -171,6 +172,7 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
+                                    StoreUtils.setGrabNum();
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
@@ -195,6 +197,7 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
+                                    StoreUtils.setGrabNum();
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
@@ -219,6 +222,7 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
+                                    StoreUtils.setGrabNum();
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
