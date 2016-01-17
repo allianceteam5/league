@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.league.utils.ComplexPreferences;
+import com.league.utils.StoreUtils;
 import com.league.widget.SquaredImageView;
 import com.squareup.picasso.Picasso;
 
@@ -26,7 +27,7 @@ public class ImgGridAdapter extends BaseAdapter {
     public ImgGridAdapter(Context context, List<String> data) {
         this.mContext = context;
         this.data = data;
-        screenW = ComplexPreferences.getScreenWidth(context);
+        screenW = StoreUtils.getWidthScreen();
     }
 
     @Override

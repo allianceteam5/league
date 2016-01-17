@@ -29,6 +29,7 @@ public class StoreUtils {
     private static final String RealMoney = "realmoney";
     private static final String BankNum = "banknum";
     private static final String LocationBean = "locationbean";
+    private static final String WidthScreen = "width_screen";
 
     //初始化
     public static void init(Context context) {
@@ -61,7 +62,8 @@ public class StoreUtils {
 
     public static void setUserInfo(UserInfoBean value) {
         Paper.book().write(UserInfo, value);
-        setPhone(value.getPhone());
+        if (!TextUtils.isEmpty(value.getPhone()))
+            setPhone(value.getPhone());
         if (!TextUtils.isEmpty(value.getThumb()))
             setAvatar(value.getThumb());
         if (!TextUtils.isEmpty(value.getNickname()))
@@ -69,7 +71,7 @@ public class StoreUtils {
     }
 
     public static UserInfoBean getUserInfo() {
-        return Paper.book().read(UserInfo);
+        return Paper.book().exist(UserInfo) ? (UserInfoBean)Paper.book().read(UserInfo) : new UserInfoBean();
     }
 
     public static void setPhone(String value) {
@@ -135,5 +137,13 @@ public class StoreUtils {
 
     public static LocationBean getLocationBean() {
         return Paper.book().exist(LocationBean) ? (LocationBean) Paper.book().read(LocationBean) : new LocationBean();
+    }
+
+    public static void setWidthScreen(int value){
+        Remember.putInt(WidthScreen,value);
+    }
+
+    public static int getWidthScreen(){
+        return Remember.getInt(WidthScreen,100);
     }
 }

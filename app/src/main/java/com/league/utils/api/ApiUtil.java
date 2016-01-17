@@ -11,6 +11,9 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by pfy on 2015/11/6.
  */
@@ -774,6 +777,22 @@ public class ApiUtil {
         params.put("phone", testPhone);
         params.put("search", searchString);
         client.post(context, IClientUrl.usersSearch, params, responseHandler);
+    }
+
+    //根据环信id查找用户信息
+    public static void friendGetInfoByArray(Context context, List<String> list, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("huanxinids",list);
+        printHttp(IClientUrl.FriendGetInfoByArray, params);
+        client.post(context, IClientUrl.FriendGetInfoByArray, params,responseHandler);
+    }
+
+    //同意好友申请
+    public static void approveFriend(Context context, String friendphone, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("myphone", testPhone);
+        params.put("friendphone", friendphone);
+        client.post(context,IClientUrl.FriendApprove, params, responseHandler);
     }
 }
 

@@ -163,7 +163,9 @@ public class BuyList extends BaseActivity implements View.OnClickListener, ICont
                     //对于JRE6的用户请参考demo中使用if else判断
                     switch (bcPayResult.getResult()) {
                         case BCPayResult.RESULT_SUCCESS:
-                            ToastUtils.showShortToast(BuyList.this, "支付成功");
+//                            ToastUtils.showShortToast(BuyList.this, "支付成功");
+                            paytype = 3;
+                            oneyuanBuy();
                             break;
                         case BCPayResult.RESULT_CANCEL:
                             Toast.makeText(BuyList.this, "用户取消支付", Toast.LENGTH_LONG).show();
@@ -235,107 +237,15 @@ public class BuyList extends BaseActivity implements View.OnClickListener, ICont
                 }
                 if (paytype == -1) {
                     ToastUtils.showShortToast(getApplication(), "请选择支付方式");
-
                 } else {
                     if (buytype == 0 && type == 0) {
-                        ApiUtil.grabcoinBuy(getApplication(), id, number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                if (response.getFlag().equals("1")) {
-                                    ToastUtils.showShortToast(getApplicationContext(), "支付成功");
-                                    onBackPressed();
-                                    finish();
-                                } else {
-                                    ToastUtils.showShortToast(getApplicationContext(), "支付失败");
-                                }
-
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                                ToastUtils.showShortToast(getApplicationContext(), "支付失败");
-                            }
-
-                            @Override
-                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-
-                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
-                                });
-                            }
-                        });
+                        grabcoinBuy();
                     } else if (buytype == 1 && type == 0) {
-                        ApiUtil.grabcoinBuyAll(getApplication(), id, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                if (response.getFlag().equals("1")) {
-                                    ToastUtils.showShortToast(getApplicationContext(), "支付成功");
-                                    onBackPressed();
-                                    finish();
-                                } else {
-                                    ToastUtils.showShortToast(getApplicationContext(), "支付失败");
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                                ToastUtils.showShortToast(getApplicationContext(), "支付失败");
-                            }
-
-                            @Override
-                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
-                                });
-                            }
-                        });
+                        grabcoinBuyAll();
                     } else if (buytype == 0 && type == 1) {
-                        ApiUtil.oneYuanBuy(getApplication(), id, number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                if (response.getFlag().equals("1")) {
-                                    ToastUtils.showShortToast(getApplicationContext(), "支付成功");
-                                    onBackPressed();
-                                    finish();
-                                } else {
-                                    ToastUtils.showShortToast(getApplicationContext(), "支付失败");
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                                ToastUtils.showShortToast(getApplicationContext(), "支付失败");
-                            }
-
-                            @Override
-                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-
-                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
-                                });
-                            }
-                        });
+                        oneyuanBuy();
                     } else if (buytype == 1 && type == 1) {
-                        ApiUtil.oneyuanBuyAll(getApplication(), id, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                if (response.getFlag().equals("1")) {
-                                    ToastUtils.showShortToast(getApplicationContext(), "支付成功");
-                                    onBackPressed();
-                                    finish();
-                                } else {
-                                    ToastUtils.showShortToast(getApplicationContext(), "支付失败");
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                                ToastUtils.showShortToast(getApplicationContext(), "支付失败");
-                            }
-
-                            @Override
-                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
-                                });
-                            }
-                        });
+                        oneyuanBuyAll();
                     }
                 }
                 break;
@@ -343,6 +253,113 @@ public class BuyList extends BaseActivity implements View.OnClickListener, ICont
 
     }
 
+
+    private void grabcoinBuy(){
+        ApiUtil.grabcoinBuy(getApplication(), id, number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                if (response.getFlag().equals("1")) {
+                    ToastUtils.showShortToast(getApplicationContext(), "支付成功");
+                    onBackPressed();
+                    finish();
+                } else {
+                    ToastUtils.showShortToast(getApplicationContext(), "支付失败");
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                ToastUtils.showShortToast(getApplicationContext(), "支付失败");
+            }
+
+            @Override
+            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                });
+            }
+        });
+    }
+
+    private void grabcoinBuyAll(){
+        ApiUtil.grabcoinBuyAll(getApplication(), id, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                if (response.getFlag().equals("1")) {
+                    ToastUtils.showShortToast(getApplicationContext(), "支付成功");
+                    onBackPressed();
+                    finish();
+                } else {
+                    ToastUtils.showShortToast(getApplicationContext(), "支付失败");
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                ToastUtils.showShortToast(getApplicationContext(), "支付失败");
+            }
+
+            @Override
+            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                });
+            }
+        });
+    }
+
+    private void oneyuanBuy(){
+        ApiUtil.oneYuanBuy(getApplication(), id, number, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                if (response.getFlag().equals("1")) {
+                    ToastUtils.showShortToast(getApplicationContext(), "支付成功");
+                    onBackPressed();
+                    finish();
+                } else {
+                    ToastUtils.showShortToast(getApplicationContext(), "支付失败");
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                ToastUtils.showShortToast(getApplicationContext(), "支付失败");
+            }
+
+            @Override
+            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                });
+            }
+        });
+    }
+
+    private void oneyuanBuyAll(){
+        ApiUtil.oneyuanBuyAll(getApplication(), id, paytype + "", new BaseJsonHttpResponseHandler<SucessBean>() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                if (response.getFlag().equals("1")) {
+                    ToastUtils.showShortToast(getApplicationContext(), "支付成功");
+                    onBackPressed();
+                    finish();
+                } else {
+                    ToastUtils.showShortToast(getApplicationContext(), "支付失败");
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                ToastUtils.showShortToast(getApplicationContext(), "支付失败");
+            }
+
+            @Override
+            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                });
+            }
+        });
+    }
 
     @Override
     public void onCheckedChanged(MyRadioGroup group, int checkedId) {
