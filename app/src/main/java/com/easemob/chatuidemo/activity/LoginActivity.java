@@ -83,7 +83,9 @@ public class LoginActivity extends BaseActivity {
 
 		if (StoreUtils.getLoginState()){
 			startActivity(new Intent(LoginActivity.this, com.league.activity.MainActivity.class));
+
 			ApiUtil.testPhone = StoreUtils.getPhone();
+			finish();
 			return ;
 		}
 

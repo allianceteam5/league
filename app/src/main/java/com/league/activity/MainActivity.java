@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -58,7 +57,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.bean.UserBasicInfo;
 import com.league.fragment.PersonFragment;
 import com.league.fragment.ResourceFragment;
-import com.league.utils.ComplexPreferences;
 import com.league.utils.Constants;
 import com.league.utils.StoreUtils;
 import com.league.utils.api.ApiUtil;
@@ -131,6 +129,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
             return;
         }
         setContentView(R.layout.activity_main);
+        Constants.finishAllActivities();
         Constants.addIntoCollection(this);
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -1011,14 +1010,16 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            moveTaskToBack(false);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            moveTaskToBack(false);
+//            onBackPressed();
+//            Constants.finishAllActivities();
+//            return true;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
 
     private android.app.AlertDialog.Builder conflictBuilder;
     private android.app.AlertDialog.Builder accountRemovedBuilder;
