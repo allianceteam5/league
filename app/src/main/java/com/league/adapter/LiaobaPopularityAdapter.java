@@ -71,6 +71,9 @@ public class LiaobaPopularityAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        holder.iconLeftRank.setVisibility(View.VISIBLE);
+        holder.iconRight.setVisibility(View.VISIBLE);
+        holder.tvLeftRank.setVisibility(View.GONE);
         if (position == 0) {
             holder.iconLeftRank.setImageResource(R.drawable.icon_popularity_1);
             holder.iconRight.setImageResource(R.drawable.icon_popularity_1_copy);
@@ -92,6 +95,7 @@ public class LiaobaPopularityAdapter extends BaseAdapter {
         if (position > 9) {
             holder.iconLeftRank.setVisibility(View.GONE);
             holder.iconRight.setVisibility(View.GONE);
+            holder.tvLeftRank.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(list.get(position).getThumb())) {
             Picasso.with(ctx).load(list.get(position).getThumb()).into(holder.headPortrait);
