@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.provider.MediaStore;
 
@@ -49,9 +50,13 @@ public class ImgUtils {
     public static Bitmap zoomBitmap(Context context, Uri uri, int width, int height) {
         Bitmap bitmap = null;
         try {
-            bitmap = BitmapFactory
-                    .decodeStream(context.getContentResolver().openInputStream(
-                            uri));
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            Rect rect = new Rect();
+            rect.set(0,0,width,height);
+            BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri),rect,options);
+            options.inJustDecodeBounds = false;
+            bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri),rect,options);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

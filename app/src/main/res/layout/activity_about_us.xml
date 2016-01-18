@@ -36,7 +36,6 @@
         android:layout_marginTop="30dp"
         android:background="@color/text_content" />
     <RelativeLayout
-        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="46dp">
 
@@ -83,7 +82,6 @@
 
     <RelativeLayout
         android:id="@+id/feedback"
-        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="46dp">
 

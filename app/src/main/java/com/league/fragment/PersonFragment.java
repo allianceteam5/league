@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -237,7 +236,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener, IC
             Picasso.with(ctx).load(R.drawable.example).into(mThumb);
 
         if (!TextUtils.isEmpty(userInfoBean.getBackground()))
-            Picasso.with(ctx).load(userInfoBean.getBackground()).fit().placeholder(R.drawable.mybackground).into(ivBackground);
+            Picasso.with(ctx).load(userInfoBean.getBackground()).placeholder(R.drawable.mybackground).into(ivBackground);
         else
             Picasso.with(ctx).load(R.drawable.mybackground).into(ivBackground);
 

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -20,6 +19,8 @@ import com.league.adapter.EnvelopeWinnerAdapter;
 import com.league.bean.EnvelopWinBean;
 import com.league.dialog.GrabEnvolopeDialog;
 import com.league.utils.IContants;
+import com.league.utils.StoreUtils;
+import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
@@ -117,7 +118,6 @@ public class GrabRedEnvolope extends Activity implements OnClickListener, IConta
     }
 
     private void initData() {
-        Log.i("我测试一下", "我测试一下");
         ApiUtil.getEnvelopeWinnerList(this, new BaseJsonHttpResponseHandler<List<EnvelopWinBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, List<EnvelopWinBean> response) {
@@ -146,8 +146,13 @@ public class GrabRedEnvolope extends Activity implements OnClickListener, IConta
                 finish();
                 break;
             case R.id.grab:
-                Intent intent = new Intent(GrabRedEnvolope.this, GrabEnvolopeDialog.class);
-                startActivity(intent);
+                if(StoreUtils.getGrabNum()>0){
+                    Intent intent = new Intent(GrabRedEnvolope.this, GrabEnvolopeDialog.class);
+                    startActivity(intent);
+                }else{
+                    ToastUtils.showShortToast(GrabRedEnvolope.this,"今天抢红包次数用完了");
+                }
+
                 break;
         }
     }
