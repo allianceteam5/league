@@ -117,7 +117,7 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
-                                    StoreUtils.setGrabNum();
+                                    StoreUtils.setGrabNum(2);
                                 } else {
                                     String eMsg = "";
                                     if (eCode == -101) {
@@ -138,7 +138,7 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
-                                    StoreUtils.setGrabNum();
+                                    StoreUtils.setGrabNum(0);
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
@@ -162,7 +162,7 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
-                                    StoreUtils.setGrabNum();
+                                    StoreUtils.setGrabNum(3);
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
@@ -186,7 +186,7 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
-                                    StoreUtils.setGrabNum();
+                                    StoreUtils.setGrabNum(1);
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
@@ -211,7 +211,7 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
-                                    StoreUtils.setGrabNum();
+                                    StoreUtils.setGrabNum(4);
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";
@@ -236,7 +236,7 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
                             @Override
                             public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
                                 if (eCode == 200) {
-                                    StoreUtils.setGrabNum();
+                                    StoreUtils.setGrabNum(5);
 //                                    Toast.makeText(InviteFriendActivity.this, "分享成功.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     String eMsg = "";

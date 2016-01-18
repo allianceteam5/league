@@ -76,7 +76,7 @@ public class StoreUtils {
     }
 
     public static UserInfoBean getUserInfo() {
-        return Paper.book().exist(UserInfo) ? (UserInfoBean)Paper.book().read(UserInfo) : new UserInfoBean();
+        return Paper.book().exist(UserInfo) ? (UserInfoBean) Paper.book().read(UserInfo) : new UserInfoBean();
     }
 
     public static void setPhone(String value) {
@@ -144,78 +144,135 @@ public class StoreUtils {
         return Paper.book().exist(LocationBean) ? (LocationBean) Paper.book().read(LocationBean) : new LocationBean();
     }
 
-    public static void setWidthScreen(int value){
+    public static void setWidthScreen(int value) {
         Remember.putInt(WidthScreen, value);
     }
 
-    public static int getWidthScreen(){
-        return Remember.getInt(WidthScreen,100);
+    public static int getWidthScreen() {
+        return Remember.getInt(WidthScreen, 100);
     }
-    public static void setLastDate(String temp){
+
+    public static void setLastDate(String temp) {
         Remember.putString(date, temp);
     }
-    public static String getLastDate(){
+
+    public static String getLastDate() {
         return Remember.getString(date, "");
     }
-    public static int getGrabNum(){
+
+    public static int getGrabNum() {
         int result;
         DateFormat df = DateFormat.getDateInstance();
         String current = df.format(new Date());
         String last = getLastDate();
-        if(current.equals(last)){
+        if (current.equals(last)) {
             int tem = getTotalNum(current);
             result = tem;
             tem--;
-            if(tem<=0){
-                setTotalNum(current,0);
-            }else{
-                setTotalNum(current,tem);
+            if (tem <= 0) {
+                setTotalNum(current, 0);
+            } else {
+                setTotalNum(current, tem);
             }
-        }else{
+        } else {
             int tem = getTotalNum(current);
             result = tem;
             tem--;
-            setTotalNum(current,tem);
+            setTotalNum(current, tem);
             setLastDate(current);
         }
-        if(result>0){
+        if (result > 0) {
             int grabnum = getTodayGrabNum(current);
-            if(grabnum<=0){
+            if (grabnum <= 0) {
                 result = 0;
             }
             grabnum--;
-            setTodayGrabNum(current,grabnum);
+            setTodayGrabNum(current, grabnum);
 
         }
         return result;
     }
-    public static int getTotalNum(String key){
+
+    public static int getTotalNum(String key) {
         return Remember.getInt(key, 1);
     }
-    public static void setTotalNum(String key,int num){
-        Remember.putInt(key,num);
+
+    public static void setTotalNum(String key, int num) {
+        Remember.putInt(key, num);
     }
-    public static void setGrabNum(){
+
+    public static void setGrabNum(int type) {
         DateFormat df = DateFormat.getDateInstance();
         String current = df.format(new Date());
         int tem = getTotalNum(current);
-        tem++;
-        if(tem>3){
-            setTotalNum(current,3);
-        }else{
-            setTotalNum(current,tem);
+        switch (type) {
+            case 0:
+                boolean wxcircle = getsharetype(current+"wxcircle");
+                if(wxcircle == false){
+                    tem++;
+                    setsharetype(current+"wxcircle",true);
+                }
+                break;
+            case 1:
+                boolean wx = getsharetype(current+"wx");
+                if(wx == false){
+                    tem++;
+                    setsharetype(current+"wx",true);
+                }
+                break;
+            case 2:
+                boolean qqzone = getsharetype(current+"qqzone");
+                if(qqzone == false){
+                    tem++;
+                    setsharetype(current+"qqzone",true);
+                }
+                break;
+            case 3:
+                boolean qq = getsharetype(current+"qq");
+                if(qq == false){
+                    tem++;
+                    setsharetype(current+"qq",true);
+                }
+                break;
+            case 4:
+                boolean sina = getsharetype(current+"sina");
+                if(sina == false){
+                    tem++;
+                    setsharetype(current+"sina",true);
+                }
+                break;
+            case 5:
+                boolean message = getsharetype(current+"message");
+                if(message == false){
+                    tem++;
+                    setsharetype(current+"message",true);
+                }
+                break;
+        }
+        if (tem > 3) {
+            setTotalNum(current, 3);
+        } else {
+            setTotalNum(current, tem);
         }
     }
-//    public static int getTotalShareNum(String key){
+
+    //    public static int getTotalShareNum(String key){
 //        return Remember.getInt(key+"sharenum",0);
 //    }
 //    public static void setTotalShareNum(String key,int num){
 //        Remember.putInt(key+"sharenum",num);
 //    }
-    public static int getTodayGrabNum(String key){
-        return Remember.getInt(key+TodayGrabNum,3);
+    public static int getTodayGrabNum(String key) {
+        return Remember.getInt(key + TodayGrabNum, 3);
     }
-    public static void setTodayGrabNum(String key,int num){
-        Remember.putInt(key+TodayGrabNum,num);
+
+    public static void setTodayGrabNum(String key, int num) {
+        Remember.putInt(key + TodayGrabNum, num);
+    }
+    public static void setsharetype(String key,boolean value){
+        Remember.putBoolean(key, value);
+    }
+    public static boolean getsharetype(String key){
+        return Remember.getBoolean(key,false);
     }
 }
