@@ -21,6 +21,9 @@ import android.widget.TextView;
 
 import com.league.activity.ShowBigImgActivity;
 import com.league.bean.CircleMessageBean;
+import com.league.otto.BusProvider;
+import com.league.otto.CircleMessageEvent;
+import com.league.otto.DeleteIndexEvent;
 import com.league.utils.IContants;
 import com.league.utils.StoreUtils;
 import com.league.utils.ToastUtils;
@@ -30,6 +33,7 @@ import com.league.widget.CircleImageView;
 import com.league.widget.NoScrollGridView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.mine.league.R;
+import com.squareup.otto.Bus;
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
@@ -107,16 +111,18 @@ public class CircleMessageAdapter extends BaseAdapter implements IContants {
         else
             holder.ivCollect.setImageResource(R.drawable.icon_collect_concel);
 
-//        if (1 == circleMessageBean.getIsmy())
-//            holder.tvDelete.setVisibility(View.VISIBLE);
-//        else
-        holder.tvDelete.setVisibility(View.GONE);
+        if (1 == circleMessageBean.getIsmy())
+            holder.tvDelete.setVisibility(View.VISIBLE);
+        else
+            holder.tvDelete.setVisibility(View.GONE);
 
         final List<String> imgList = circleMessageBean.getPictureList();
         ImgGridAdapter adapter = new ImgGridAdapter(ctx, imgList);
         if (imgList != null) {
             holder.gridview.setVisibility(View.VISIBLE);
             holder.gridview.setAdapter(adapter);
+        }else {
+            holder.gridview.setVisibility(View.GONE);
         }
 
         holder.gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -159,6 +165,8 @@ public class CircleMessageAdapter extends BaseAdapter implements IContants {
         holder.listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (replysEntityList.get(position).getFromphone().equals(StoreUtils.getPhone()))
+                    return;
                 showPopupWindow(circleMessageBean.getId(), replysEntityList.get(position).getFromphone(), replysEntityList.get(position).getFromnickname(), index);
             }
         });
@@ -178,6 +186,8 @@ public class CircleMessageAdapter extends BaseAdapter implements IContants {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         int flag = response.optInt("flag");
                         if (flag == 1) {
+                            ToastUtils.showShortToast(ctx, "删除成功");
+                            BusProvider.getInstance().post(new DeleteIndexEvent(position));
                         } else {
                             ToastUtils.showShortToast(ctx, "网络不太好哦");
                         }
@@ -250,6 +260,7 @@ public class CircleMessageAdapter extends BaseAdapter implements IContants {
                                 holder.ivCollect.setImageResource(R.drawable.icon_collect);
                             if (type == 0)
                                 holder.ivCollect.setImageResource(R.drawable.icon_collect_concel);
+                            BusProvider.getInstance().post(new CircleMessageEvent());
                         } else {
                             ToastUtils.showShortToast(ctx, "网络不太好哦");
                         }

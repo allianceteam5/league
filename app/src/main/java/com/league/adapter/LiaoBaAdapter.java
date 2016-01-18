@@ -118,11 +118,13 @@ public class LiaoBaAdapter extends BaseAdapter implements IContants {
         }
 
         final List<String> imgList = list.get(position).getPictureList();
-        ImgGridAdapter adapter = new ImgGridAdapter(ctx, imgList);
         if (imgList == null)
             holder.gridview.setVisibility(View.GONE);
-        else
+        else{
+            ImgGridAdapter adapter = new ImgGridAdapter(ctx, imgList);
+            holder.gridview.setVisibility(View.VISIBLE);
             holder.gridview.setAdapter(adapter);
+        }
 
         holder.llDetail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +133,13 @@ public class LiaoBaAdapter extends BaseAdapter implements IContants {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(TBMESSAGEID, list.get(position).getId());
                 ctx.startActivity(intent);
+            }
+        });
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.llDetail.performClick();
             }
         });
 

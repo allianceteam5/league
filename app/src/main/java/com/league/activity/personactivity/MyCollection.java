@@ -14,10 +14,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.BaseActivity;
 import com.league.adapter.CircleMessageAdapter;
 import com.league.bean.CircleMessageBean;
+import com.league.otto.CircleMessageEvent;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mine.league.R;
+import com.squareup.otto.Subscribe;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -137,6 +139,10 @@ public class MyCollection extends BaseActivity {
                 }
             }.sendEmptyMessageDelayed(0, 1000);
         }
+    }
 
+    @Subscribe
+    public void refreshView(CircleMessageEvent event){
+        initData(1);
     }
 }
