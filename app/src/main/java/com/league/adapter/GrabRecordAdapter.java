@@ -15,6 +15,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.bean.GrabBean;
 import com.league.bean.SucessBean;
+import com.league.utils.ToastUtils;
 import com.league.utils.Utils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -108,27 +109,57 @@ public class GrabRecordAdapter extends BaseAdapter {
             holder.applyfor.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ApiUtil.applyForCorns(ctx, list.get(position).getGrabid(), new BaseJsonHttpResponseHandler<SucessBean>() {
+                    if(list.get(position).getTbk().equals("0")){
+                        ApiUtil.applyForCorns(ctx, list.get(position).getGrabid(), new BaseJsonHttpResponseHandler<SucessBean>() {
 
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                            if (response.getFlag().equals("1")) {
-                                holder.onebutton.setVisibility(View.GONE);
-                                holder.twobutton.setVisibility(View.VISIBLE);
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                                if (response.getFlag().equals("1")) {
+                                    holder.onebutton.setVisibility(View.GONE);
+                                    holder.twobutton.setVisibility(View.VISIBLE);
+                                }else{
+                                    ToastUtils.showShortToast(ctx,"提取申请失败");
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
 
-                        }
+                            }
 
-                        @Override
-                        protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                            return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
-                            });
-                        }
-                    });
+                            @Override
+                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                                });
+                            }
+                        });
+                    }
+                    if(list.get(position).getTbk().equals("1")){
+                        ApiUtil.applyForCommodity(ctx, list.get(position).getGrabid(), new BaseJsonHttpResponseHandler<SucessBean>() {
+
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                                if (response.getFlag().equals("1")) {
+                                    holder.onebutton.setVisibility(View.GONE);
+                                    holder.twobutton.setVisibility(View.VISIBLE);
+                                } else {
+                                    ToastUtils.showShortToast(ctx, "提取申请失败");
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+
+                            }
+
+                            @Override
+                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                                });
+                            }
+                        });
+                    }
+
                 }
             });
         } else if (list.get(position).getFlag() != null && !list.get(position).getIsgot().equals("0")) {

@@ -11,7 +11,6 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -424,12 +423,20 @@ public class ApiUtil {
         client.post(context, IClientUrl.getMoreRecordCommodity + currentPage, params, responseHandler);
     }
 
-    //申请提取
+    //夺金申请提取
     public static void applyForCorns(Context context, String grabcornid, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("grabcornid", grabcornid);
         client.post(context, IClientUrl.applyForCorns, params, responseHandler);
+    }
+    //夺宝申请提取
+    public static void applyForCommodity(Context context, String grabcommodityid, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("grabcommodityid", grabcommodityid);
+        printHttp(IClientUrl.applyForCommodity, params);
+        client.post(context, IClientUrl.applyForCommodity, params, responseHandler);
     }
 
     //获取收货地址

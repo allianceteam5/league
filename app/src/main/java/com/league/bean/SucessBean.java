@@ -15,6 +15,7 @@ public class SucessBean {
     private String huanxinid;
     private String name;
 
+
     public String getName() {
         return name;
     }

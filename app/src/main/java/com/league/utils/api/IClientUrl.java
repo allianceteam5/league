@@ -66,6 +66,7 @@ public class IClientUrl {
     public static final String getMoreRecordCorn = testServerUrl + "grabcorns/morerecords?page=";
     public static final String getMoreRecordCommodity = testServerUrl + "grabcommodities/morerecords?page=";
     public static final String applyForCorns = testServerUrl + "grabcorns/getcorns";
+    public static final String applyForCommodity = testServerUrl + "grabcommodities/getcommodity";
     public static final String getShippingAddress = testServerUrl + "users/listaddresses";
     public static final String getTheLatest = testServerUrl + "grab/list?page=";
     public static final String addShippingAddress = testServerUrl + "users/createaddress";

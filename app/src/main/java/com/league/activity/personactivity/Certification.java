@@ -26,7 +26,6 @@ import org.apache.http.Header;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import io.paperdb.Paper;
 
 public class Certification extends BaseActivity implements View.OnClickListener, IContants {
 
@@ -112,41 +111,42 @@ public class Certification extends BaseActivity implements View.OnClickListener,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bindid:
-                if (!TextUtils.isEmpty(mInputID.getText().toString()) && !TextUtils.isEmpty(mInputID.getText().toString())){
-                    ToastUtils.showShortToast(this, getString(R.string.warning_message));
-                    return;
-                }
-                showProgressDialog();
-                ApiUtil.realAuth(Certification.this, mInputName.getText().toString(),
-                        mInputID.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                closeProgressDialog();
-                                if (response.getFlag().equals("1")) {
-                                    ToastUtils.showShortToast(Certification.this, "绑定成功");
-                                    //设置已实名认证
-                                    UserInfoBean bean = StoreUtils.getUserInfo();
-                                    bean.setStatus(1);
-                                    StoreUtils.setUserInfo(bean);
-                                    onBackPressed();
-                                    finish();
-                                } else {
+                if (TextUtils.isEmpty(mInputID.getText().toString()) || TextUtils.isEmpty(mInputID.getText().toString())){
+                    ToastUtils.showShortToast(this, "请输入详细信息");
+                }else{
+                    showProgressDialog();
+                    ApiUtil.realAuth(Certification.this, mInputName.getText().toString(),
+                            mInputID.getText().toString(), new BaseJsonHttpResponseHandler<SucessBean>() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                                    closeProgressDialog();
+                                    if (response.getFlag().equals("1")) {
+                                        ToastUtils.showShortToast(Certification.this, "绑定成功");
+                                        //设置已实名认证
+                                        UserInfoBean bean = StoreUtils.getUserInfo();
+                                        bean.setStatus(1);
+                                        StoreUtils.setUserInfo(bean);
+                                        onBackPressed();
+                                        finish();
+                                    } else {
+                                        ToastUtils.showShortToast(Certification.this, "绑定失败");
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                                    closeProgressDialog();
                                     ToastUtils.showShortToast(Certification.this, "绑定失败");
                                 }
-                            }
 
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-                                closeProgressDialog();
-                                ToastUtils.showShortToast(Certification.this, "绑定失败");
-                            }
+                                @Override
+                                protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                                    return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                                    });
+                                }
+                            });
+                }
 
-                            @Override
-                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
-                                });
-                            }
-                        });
                 break;
         }
     }
