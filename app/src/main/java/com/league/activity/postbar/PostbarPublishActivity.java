@@ -152,6 +152,10 @@ public class PostbarPublishActivity extends BaseActivity implements View.OnClick
         final UploadManager uploadManager = new UploadManager();
         showProgressDialog();
         final int size = imgList.size() - 1;
+        if (size == 0){
+            callApi("");
+            return;
+        }
         for (int i = 0; i < size; i++) {
             final int index = i;
             ApiUtil.getQiniuToken(getApplicationContext(), new JsonHttpResponseHandler() {
@@ -198,25 +202,27 @@ public class PostbarPublishActivity extends BaseActivity implements View.OnClick
 
             String imgStr = imgUrls.toString();
             imgStr = imgStr.trim();
-            ApiUtil.liaobaTbmessagesCreated(getApplicationContext(), title, content, imgStr, new JsonHttpResponseHandler() {
-                @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    closeProgressDialog();
-                    Toast.makeText(getApplicationContext(), "发布失败", Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    closeProgressDialog();
-//                    sharePopWindow.showPopWindow();
-//                    BusProvider.getBus().post(new NewDynamicEvent());
-                    if (response.optInt("flag") == 1) {
-                        Toast.makeText(getApplicationContext(), "发布成功", Toast.LENGTH_SHORT).show();
-                        imgList.clear();
-                        finish();
-                    }
-                }
-            });
+            callApi(imgStr);
         }
     };
+
+    public void callApi(String imgUrl){
+        ApiUtil.liaobaTbmessagesCreated(getApplicationContext(), title, content, imgUrl, new JsonHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                closeProgressDialog();
+                Toast.makeText(getApplicationContext(), "发布失败", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                closeProgressDialog();
+                if (response.optInt("flag") == 1) {
+                    Toast.makeText(getApplicationContext(), "发布成功", Toast.LENGTH_SHORT).show();
+                    imgList.clear();
+                    finish();
+                }
+            }
+        });
+    }
 }

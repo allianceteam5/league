@@ -87,8 +87,9 @@ public class UserHomePageActivity extends BaseActivity {
             public void onClick(View v) {
                 String reason = etReason.getText().toString();
                 if (TextUtils.isEmpty(reason)) {
-                    ToastUtils.showShortToast(UserHomePageActivity.this, "请输入申请理由");
-                    return;
+//                    ToastUtils.showShortToast(UserHomePageActivity.this, "请输入申请理由");
+//                    return;
+                    reason = "请加我好友吧"; //默认的理由
                 }
                 if (userInfoBean == null){
                     ToastUtils.showShortToast(UserHomePageActivity.this, getString(R.string.warning_internet));

@@ -16,6 +16,7 @@ import com.league.activity.BaseActivity;
 import com.league.adapter.CircleMessageAdapter;
 import com.league.bean.CircleMessageBean;
 import com.league.bean.UserInfoBean;
+import com.league.otto.DeleteIndexEvent;
 import com.league.otto.RefreshEvent;
 import com.league.utils.ActivityUtils;
 import com.league.utils.IContants;
@@ -176,28 +177,10 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
         initData(currentPage);
     }
 
-//    public void closePopupWindow() {
-//        if (popupWindow != null && popupWindow.isShowing())
-//            popupWindow.dismiss();
-//    }
-//
-//    public PopupWindow createPopupWindow() {
-//        View view = getLayoutInflater().inflate(R.layout.layout_item_popup_comment, null);
-//        tvSend = (TextView) view.findViewById(R.id.tv_send);
-//        etInput = (EditText) view
-//                .findViewById(R.id.et_input);
-//        etInput.setFocusableInTouchMode(true);
-//        etInput.requestFocus();
-//        InputMethodManager inputManager = (InputMethodManager) etInput
-//                .getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//        inputManager.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
-//        PopupWindow popupWindow = new PopupWindow(view, WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
-//        popupWindow.setFocusable(true);
-//        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-//        popupWindow.setSoftInputMode(PopupWindow.INPUT_METHOD_NEEDED);
-//        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-//        popupWindow.setAnimationStyle(R.style.popwindow_anim_style);
-//        return popupWindow;
-//    }
+    @Subscribe
+    public void deleteIndex(DeleteIndexEvent event){
+        list.remove(event.getIndex());
+        adapter.notifyDataSetChanged();
+    }
 
 }
