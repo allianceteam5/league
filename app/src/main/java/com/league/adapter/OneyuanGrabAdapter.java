@@ -67,8 +67,8 @@ public class OneyuanGrabAdapter extends BaseAdapter {
         holder.leavePeo.setText(oneYuanBean.getRemain());
         float need = Float.valueOf(oneYuanBean.getNeeded());
         float remain = Float.valueOf(oneYuanBean.getRemain());
-        holder.progress.setText((int) ((need - remain) / need) * 100 + "%");
-        holder.progressBar.setProgress((int) ((need - remain) / need) * 100);
+        holder.progress.setText((int) (((need - remain) / need) * 100) + "%");
+        holder.progressBar.setProgress((int)( ((need - remain) / need) * 100));
 
         return convertView;
     }
