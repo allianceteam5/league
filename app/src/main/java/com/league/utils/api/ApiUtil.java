@@ -830,8 +830,24 @@ public class ApiUtil {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("grabcornid",grabcornid);
-        printHttp(IClientUrl.redeem,params);
+        printHttp(IClientUrl.redeem, params);
         client.post(context,IClientUrl.redeem,params,responseHandler);
+    }
+    //获取10夺金的计算详情
+    public static void getTenGrabCountDetail(Context context,String grabcornid,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("grabcornid",grabcornid);
+        printHttp(IClientUrl.grabcornslast50, params);
+        client.post(context,IClientUrl.grabcornslast50,params,responseHandler);
+    }
+    //获取一元夺宝的计算详情
+    public static void getOneYuanGrabCountDetail(Context context,String grabcommodityid,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("grabcommodityid",grabcommodityid);
+        printHttp(IClientUrl.grabcommoditieslast50, params);
+        client.post(context,IClientUrl.grabcommoditieslast50,params,responseHandler);
     }
 }
 

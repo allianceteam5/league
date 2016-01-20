@@ -115,6 +115,7 @@ public class GrabRecordAdapter extends BaseAdapter {
                             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
                                 if (response.getFlag().equals("1")) {
                                     ToastUtils.showShortToast(ctx,"发送申请赎回成功");
+
                                 }else{
                                     ToastUtils.showShortToast(ctx,"发送申请赎回失败");
                                 }

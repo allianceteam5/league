@@ -39,7 +39,7 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
     private int currentPage = 1;
     private PullToRefreshLayout pullToRefreshLayout;
 
-    private final Timer timer = new Timer();
+    private Timer timer;
     private TimerTask autoUpdateTask;
     Handler handler = new Handler() {
         @Override
@@ -64,6 +64,7 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
     @Override
     protected void onResume() {
         super.onResume();
+        timer = new Timer();
         autoUpdateTask = new TimerTask() {
             @Override
             public void run() {

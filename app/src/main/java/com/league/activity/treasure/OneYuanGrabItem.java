@@ -383,6 +383,8 @@ public class OneYuanGrabItem extends BaseActivity implements View.OnClickListene
             case R.id.countdetail1:
             case R.id.countdetail:
                 Intent count = new Intent(OneYuanGrabItem.this, CountDetailActivity.class);
+                count.putExtra("type","1");
+                count.putExtra("id",detail.getId());
                 startActivity(count);
                 break;
             case R.id.gorightnow:

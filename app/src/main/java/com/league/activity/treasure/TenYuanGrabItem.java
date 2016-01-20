@@ -163,9 +163,11 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
         timeMinutes = (TextView) findViewById(R.id.countminu);
         timeMill = (TextView) findViewById(R.id.countmill);
         countdetail = (Button) findViewById(R.id.countdetail);
+        countdetail.setOnClickListener(this);
         winnerresult = (LinearLayout) findViewById(R.id.viewwinneresult);
         lucknum = (TextView) findViewById(R.id.luckynumber);
         countdetail1 = (Button) findViewById(R.id.countdetail1);
+        countdetail1.setOnClickListener(this);
         winnerThumb = (CircleImageView) findViewById(R.id.thumb);
         winnerName = (TextView) findViewById(R.id.holdername);
         winnerId = (TextView) findViewById(R.id.holderid);
@@ -248,6 +250,13 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
                 TakeInDialog takeInDialog = new TakeInDialog(TenYuanGrabItem.this, id, 0);
                 takeInDialog.show();
 
+                break;
+            case R.id.countdetail1:
+            case R.id.countdetail:
+                Intent count = new Intent(TenYuanGrabItem.this, CountDetailActivity.class);
+                count.putExtra("type","0");
+                count.putExtra("id",detail.getId());
+                startActivity(count);
                 break;
             case R.id.passannounced:
                 Intent intent = new Intent(TenYuanGrabItem.this, PassAnnounced.class);
