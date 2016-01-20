@@ -799,7 +799,7 @@ public class ApiUtil {
         RequestParams params = new RequestParams();
         params.put("myphone", testPhone);
         params.put("friendphone", friendphone);
-        client.post(context, IClientUrl.FriendApprove, params, responseHandler);
+        new SyncHttpClient().post(context, IClientUrl.FriendApprove, params, responseHandler);
     }
 
     //获取交易记录
