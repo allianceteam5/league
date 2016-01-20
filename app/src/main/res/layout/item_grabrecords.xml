@@ -252,5 +252,25 @@
                 android:textColor="@color/white"
                 android:textSize="14sp" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_redeem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/redeem"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/applyfor"
+                android:gravity="center"
+                android:text="申请赎回"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
