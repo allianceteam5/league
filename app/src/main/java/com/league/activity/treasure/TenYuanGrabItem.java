@@ -34,6 +34,7 @@ import com.league.utils.ToastUtils;
 import com.league.utils.Utils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
+import com.league.widget.LinearLayoutForListView;
 import com.league.widget.ListViewForScrollView;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -81,7 +82,7 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
     private ViewPaperAdapter mViewPaperAdapter;
     private String[] pictures;
     private TextView tv;//夺宝记录
-    private ListViewForScrollView myrecordlist;
+    private LinearLayoutForListView myrecordlist;
     private Button goRightNow;
     private PullToRefreshLayout pullToRefreshLayout;
     private int totalPage = 2;
@@ -133,7 +134,7 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
     }
 
     private void initView() {
-        myrecordlist = (ListViewForScrollView) findViewById(R.id.myrecordlist);
+        myrecordlist = (LinearLayoutForListView) findViewById(R.id.myrecordlist);
         tv = (TextView) findViewById(R.id.viewtakestate);
         back = (ImageView) findViewById(R.id.near_back);
         back = (ImageView) findViewById(R.id.near_back);
