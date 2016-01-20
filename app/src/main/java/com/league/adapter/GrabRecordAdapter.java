@@ -74,6 +74,8 @@ public class GrabRecordAdapter extends BaseAdapter {
             holder.twobutton = convertView.findViewById(R.id.twobutton);
             holder.onebutton = convertView.findViewById(R.id.onebutton);
             holder.applyfor = (Button) convertView.findViewById(R.id.applyfortake);
+            holder.llRedeem = convertView.findViewById(R.id.ll_redeem);
+            holder.redeem = (Button) convertView.findViewById(R.id.redeem);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -87,8 +89,51 @@ public class GrabRecordAdapter extends BaseAdapter {
         if (list.get(position).getEnd_at().equals("0")) {
             holder.endtime.setText("还未揭晓");
             holder.endtime.setTextColor(Color.RED);
+            if(list.get(position).getGrabcornid()!=null){
+                holder.llRedeem.setVisibility(View.GONE);
+            }
         } else {
             holder.endtime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(list.get(position).getEnd_at()) * 1000));
+            if(list.get(position).getGrabcornid()!=null){
+                holder.llRedeem.setVisibility(View.VISIBLE);
+                if(list.get(position).getIsgotback().equals("0")){
+                    holder.redeem.setText("申请赎回");
+                    holder.redeem.setBackground(ctx.getResources().getDrawable(R.drawable.applyfor));
+                    holder.redeem.setTextColor(ctx.getResources().getColor(R.color.white));
+                    holder.redeem.setEnabled(true);
+                }else{
+                    holder.redeem.setText("已赎回");
+                    holder.redeem.setBackground(ctx.getResources().getDrawable(R.drawable.checkstate));
+                    holder.redeem.setTextColor(ctx.getResources().getColor(R.color.black1));
+                    holder.redeem.setEnabled(false);
+                }
+                holder.redeem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ApiUtil.redeem(ctx, list.get(position).getGrabcornid(), new BaseJsonHttpResponseHandler<SucessBean>() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                                if (response.getFlag().equals("1")) {
+                                    ToastUtils.showShortToast(ctx,"发送申请赎回成功");
+                                }else{
+                                    ToastUtils.showShortToast(ctx,"发送申请赎回失败");
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+                                ToastUtils.showShortToast(ctx,"发送申请赎回失败，网络问题");
+                            }
+
+                            @Override
+                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                                });
+                            }
+                        });
+                    }
+                });
+            }
         }
 
         if (list.get(position).getWinnercount() == null) {
@@ -98,6 +143,7 @@ public class GrabRecordAdapter extends BaseAdapter {
             holder.winnername.setText(list.get(position).getNickname());
             holder.winnernumber.setText(list.get(position).getWinnernumber());
             holder.winnercount.setText(list.get(position).getWinnercount());
+
         }
         if (list.get(position).getFlag() != null && list.get(position).getIsgot().equals("0")) {
             holder.linearlayout.setVisibility(View.VISIBLE);
@@ -210,7 +256,7 @@ public class GrabRecordAdapter extends BaseAdapter {
     class ViewHolder {
         ImageView picture;
         TextView version, title, total, thiscount, endtime, winnername, winnercount, winnernumber;
-        View linearlayout, twobutton, onebutton;
-        Button applyfor;
+        View linearlayout, twobutton, onebutton,llRedeem;
+        Button applyfor,redeem;
     }
 }
