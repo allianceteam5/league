@@ -74,6 +74,8 @@ public class CompletePersonInfo extends PersonInfoBaseActivity implements View.O
     TextView mArea;
     @Bind(R.id.login)
     Button login;
+    @Bind(R.id.et_invite_code)
+    EditText etInviteCode;
 
     private boolean progressShow;
     private PickImgPopWindow pickImgPopWindow;
