@@ -25,6 +25,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LatestAnnounce extends BaseActivity implements View.OnClickListener {
 
@@ -37,12 +39,42 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
     private int currentPage = 1;
     private PullToRefreshLayout pullToRefreshLayout;
 
+    private final Timer timer = new Timer();
+    private TimerTask autoUpdateTask;
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            // 要做的事情
+            switch (msg.what) {
+                case 1:
+                    initData(1);
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_latest_announce);
-        showProgressDialog();
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        autoUpdateTask = new TimerTask() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                Message message = new Message();
+                message.what = 1;
+                handler.sendMessage(message);
+            }
+        };
+        timer.schedule(autoUpdateTask, 10000, 10000);
+        initData(currentPage);
     }
 
     private void initView() {
@@ -62,10 +94,11 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
         pullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
         pullToRefreshLayout.setOnRefreshListener(new MyListener());
         pullToRefreshLayout.setVisibility(View.GONE);
-        initData(currentPage);
+
     }
 
     private void initData(final int currentPage) {
+        showProgressDialog();
         //新接口获取即将揭晓
         ApiUtil.getTheLatest(getApplicationContext(), currentPage, new BaseJsonHttpResponseHandler<ArrayList<AnnouncedTheLatestBean>>() {
             @Override
@@ -180,5 +213,11 @@ public class LatestAnnounce extends BaseActivity implements View.OnClickListener
                 break;
 
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancel();
     }
 }

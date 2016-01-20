@@ -431,10 +431,11 @@ public class ApiUtil {
         client.post(context, IClientUrl.applyForCorns, params, responseHandler);
     }
     //夺宝申请提取
-    public static void applyForCommodity(Context context, String grabcommodityid, TextHttpResponseHandler responseHandler) {
+    public static void applyForCommodity(Context context, String grabcommodityid,String addressid, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("grabcommodityid", grabcommodityid);
+        params.put("addressid",addressid);
         printHttp(IClientUrl.applyForCommodity, params);
         client.post(context, IClientUrl.applyForCommodity, params, responseHandler);
     }

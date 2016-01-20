@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.bean.GrabBean;
+import com.league.bean.ShippingAddressBean;
 import com.league.bean.SucessBean;
 import com.league.utils.ToastUtils;
 import com.league.utils.Utils;
@@ -24,6 +25,7 @@ import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -135,29 +137,59 @@ public class GrabRecordAdapter extends BaseAdapter {
                         });
                     }
                     if(list.get(position).getTbk().equals("1")){
-                        ApiUtil.applyForCommodity(ctx, list.get(position).getGrabid(), new BaseJsonHttpResponseHandler<SucessBean>() {
-
+                        ApiUtil.getShipAddress(ctx, new BaseJsonHttpResponseHandler<ArrayList<ShippingAddressBean>>() {
                             @Override
-                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
-                                if (response.getFlag().equals("1")) {
-                                    holder.onebutton.setVisibility(View.GONE);
-                                    holder.twobutton.setVisibility(View.VISIBLE);
+                            public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<ShippingAddressBean> response) {
+                                if (response == null || response.size() == 0) {
+                                    ToastUtils.showShortToast(ctx, "请去个人中心添加收货地址");
                                 } else {
-                                    ToastUtils.showShortToast(ctx, "提取申请失败");
+                                    int i;
+                                    for (i = 0; i < response.size(); i++) {
+                                        if (response.get(i).getIsdefault() == 1) {
+                                            ApiUtil.applyForCommodity(ctx, list.get(position).getGrabid(),response.get(i).getId()+"" , new BaseJsonHttpResponseHandler<SucessBean>() {
+
+                                                @Override
+                                                public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
+                                                    if (response.getFlag().equals("1")) {
+                                                        holder.onebutton.setVisibility(View.GONE);
+                                                        holder.twobutton.setVisibility(View.VISIBLE);
+                                                    } else {
+                                                        ToastUtils.showShortToast(ctx, "提取申请失败");
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
+
+                                                }
+
+                                                @Override
+                                                protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                                                    return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                                                    });
+                                                }
+                                            });
+                                            break;
+                                        }
+                                    }
+                                    if(i==response.size()){
+                                        ToastUtils.showShortToast(ctx, "请去个人中心设置默认收货地址");
+                                    }
                                 }
                             }
 
                             @Override
-                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, SucessBean errorResponse) {
-
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<ShippingAddressBean> errorResponse) {
+                                ToastUtils.showShortToast(ctx, "网络出错了");
                             }
 
                             @Override
-                            protected SucessBean parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<SucessBean>() {
+                            protected ArrayList<ShippingAddressBean> parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+                                return new ObjectMapper().readValue(rawJsonData, new TypeReference<ArrayList<ShippingAddressBean>>() {
                                 });
                             }
                         });
+
                     }
 
                 }
