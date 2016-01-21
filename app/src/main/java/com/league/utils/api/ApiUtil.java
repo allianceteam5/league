@@ -681,7 +681,7 @@ public class ApiUtil {
     }
 
     //添加银行卡
-    public static void addBankCard(Context context, String bankid, String name, String id, String userphone, String area, TextHttpResponseHandler responseHandler) {
+    public static void addBankCard(Context context, String bankid, String name, String id, String userphone, String area, String bankname,TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("name", name);
@@ -689,6 +689,9 @@ public class ApiUtil {
         params.put("idcard", id);
         params.put("lphone", userphone);
         params.put("location", area);
+        params.put("bankname",bankname);
+        params.put("bankcode","1");
+        printHttp(IClientUrl.createBankcard, params);
         client.post(context, IClientUrl.createBankcard, params, responseHandler);
     }
 
@@ -848,6 +851,15 @@ public class ApiUtil {
         params.put("grabcommodityid",grabcommodityid);
         printHttp(IClientUrl.grabcommoditieslast50, params);
         client.post(context,IClientUrl.grabcommoditieslast50,params,responseHandler);
+    }
+    //联盟奖励提取
+    public static void rewardOut(Context context,String cardid,String num,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("cardid",cardid);
+        params.put("count",num);
+        printHttp(IClientUrl.rewardout, params);
+        client.post(context,IClientUrl.rewardout,params,responseHandler);
     }
 }
 

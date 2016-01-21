@@ -1,6 +1,7 @@
 package com.league.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,10 @@ public class CountDetailAdapter extends BaseAdapter {
         holder.tvName.setText(list.get(position).getNickname());
         holder.tvNum.setText("购买了" + list.get(position).getCount() + "次");
 //        holder.tvTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(list.get(position).getCreated_at()) * 1000));
-        Picasso.with(context).load(list.get(position).getThumb()).into(holder.avatar);
+        if(!TextUtils.isEmpty(list.get(position).getThumb())){
+            Picasso.with(context).load(list.get(position).getThumb()).into(holder.avatar);
+        }
+
         return convertView;
     }
 

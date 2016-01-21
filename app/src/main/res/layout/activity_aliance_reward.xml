@@ -20,7 +20,7 @@
             android:id="@+id/money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="600.00"
+            android:text=""
             android:textColor="#fffffd"
             android:textSize="46sp"
             android:layout_centerInParent="true"/>
@@ -107,6 +107,7 @@
         </LinearLayout>
     </LinearLayout>-->
     <Button
+        android:id="@+id/applyfortake"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="申请提取"
