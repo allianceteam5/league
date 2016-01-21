@@ -394,7 +394,7 @@
                     android:textColor="@color/black1"
                     android:textSize="14sp" />
 
-                <com.league.widget.ListViewForScrollView
+                <com.league.widget.LinearLayoutForListView
                     android:id="@+id/myrecordlist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -402,12 +402,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
-                    android:scrollbars="none"
-                    android:divider="@null"
                     android:visibility="gone"
+                    android:orientation="vertical"
                     >
 
-                </com.league.widget.ListViewForScrollView>
+                </com.league.widget.LinearLayoutForListView>
 
                 <View
                     android:layout_width="match_parent"

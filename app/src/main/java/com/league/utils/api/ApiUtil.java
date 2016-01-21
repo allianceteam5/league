@@ -431,10 +431,11 @@ public class ApiUtil {
         client.post(context, IClientUrl.applyForCorns, params, responseHandler);
     }
     //夺宝申请提取
-    public static void applyForCommodity(Context context, String grabcommodityid, TextHttpResponseHandler responseHandler) {
+    public static void applyForCommodity(Context context, String grabcommodityid,String addressid, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("grabcommodityid", grabcommodityid);
+        params.put("addressid",addressid);
         printHttp(IClientUrl.applyForCommodity, params);
         client.post(context, IClientUrl.applyForCommodity, params, responseHandler);
     }
@@ -806,7 +807,7 @@ public class ApiUtil {
     public static void getTradingRecord(Context context,int currentPage,TextHttpResponseHandler responseHandler){
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
-        client.post(context, IClientUrl.tradingRecord+currentPage, params, responseHandler);
+        client.post(context, IClientUrl.tradingRecord + currentPage, params, responseHandler);
     }
     //充值
     public static void rechargeMoney(Context context,String count,String type,TextHttpResponseHandler responseHandler){
@@ -823,6 +824,30 @@ public class ApiUtil {
         params.put("count",count);
         params.put("cardid",cardid);
         client.post(context,IClientUrl.withdraw,params,responseHandler);
+    }
+    //10夺金赎回
+    public static void redeem(Context context,String grabcornid,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("grabcornid",grabcornid);
+        printHttp(IClientUrl.redeem, params);
+        client.post(context,IClientUrl.redeem,params,responseHandler);
+    }
+    //获取10夺金的计算详情
+    public static void getTenGrabCountDetail(Context context,String grabcornid,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("grabcornid",grabcornid);
+        printHttp(IClientUrl.grabcornslast50, params);
+        client.post(context,IClientUrl.grabcornslast50,params,responseHandler);
+    }
+    //获取一元夺宝的计算详情
+    public static void getOneYuanGrabCountDetail(Context context,String grabcommodityid,TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("grabcommodityid",grabcommodityid);
+        printHttp(IClientUrl.grabcommoditieslast50, params);
+        client.post(context,IClientUrl.grabcommoditieslast50,params,responseHandler);
     }
 }
 

@@ -109,4 +109,7 @@ public class IClientUrl {
     public static final String tradingRecord = testServerUrl + "users/traderecords?page=";
     public static final String recharge = testServerUrl + "users/moneyin";
     public static final String withdraw = testServerUrl + "users/moneyout";
+    public static final String redeem = testServerUrl + "grabcorns/getback";
+    public static final String grabcornslast50 =testServerUrl + "grabcorns/last50";
+    public static final String grabcommoditieslast50 = testServerUrl +"grabcommodities/last50";
 }

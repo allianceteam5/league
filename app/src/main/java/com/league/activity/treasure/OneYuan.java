@@ -2,6 +2,8 @@ package com.league.activity.treasure;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,6 +33,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import io.paperdb.Paper;
 
@@ -49,23 +53,48 @@ public class OneYuan extends BaseActivity implements View.OnClickListener, ICont
 
     private List<OneYuanBean> list = new ArrayList<OneYuanBean>();
 
+    private  Timer timer;
+    private TimerTask autoUpdateTask;
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            // 要做的事情
+            switch (msg.what) {
+                case 1:
+                    initData();
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_yuan);
-        showProgressDialog();
         initView();
-        initData();
-        title.setFocusable(true);
-        title.setFocusableInTouchMode(true);
-        title.requestFocus();
-        title.requestFocusFromTouch();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        timer = new Timer();
+        autoUpdateTask = new TimerTask() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                Message message = new Message();
+                message.what = 1;
+                handler.sendMessage(message);
+            }
+        };
+        timer.schedule(autoUpdateTask, 10000, 10000);
         initData();
+        title.setFocusable(true);
+        title.setFocusableInTouchMode(true);
+        title.requestFocus();
+        title.requestFocusFromTouch();
     }
 
     private void initView() {
@@ -94,15 +123,14 @@ public class OneYuan extends BaseActivity implements View.OnClickListener, ICont
         progressbar1.setProgress(50);
         progressbar2 = (ProgressBar) findViewById(R.id.progressbar2);
         progressbar3 = (ProgressBar) findViewById(R.id.progressbar3);
-
-
     }
 
     void initData() {
+        showProgressDialog();
         ApiUtil.grabCommoditiesSearch(getApplication(), 0, 1, new BaseJsonHttpResponseHandler<ArrayList<OneYuanBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<OneYuanBean> response) {
-
+                list.clear();
                 if (response.size() > 6) {
                     for (int i = 0; i < 6; i++) {
                         list.add(response.get(i));
@@ -142,6 +170,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener, ICont
                 listTenYuanGrab.addAll(response);
                 Paper.book().write(Constants.TenYuanThree, listTenYuanGrab);
                 updateTenYuan();
+                closeProgressDialog();
             }
 
             @Override
@@ -149,6 +178,7 @@ public class OneYuan extends BaseActivity implements View.OnClickListener, ICont
                 listTenYuanGrab = Paper.book().read(Constants.TenYuanThree);
                 if (listTenYuanGrab != null && listTenYuanGrab.size() == 3)
                     updateTenYuan();
+                closeProgressDialog();
             }
 
             @Override
@@ -185,11 +215,12 @@ public class OneYuan extends BaseActivity implements View.OnClickListener, ICont
                         startActivity(intent);
                     }
                 });
+                closeProgressDialog();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, ArrayList<AnnouncedTheLatestBean> errorResponse) {
-
+                closeProgressDialog();
             }
 
             @Override
@@ -311,5 +342,9 @@ public class OneYuan extends BaseActivity implements View.OnClickListener, ICont
         }
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancel();
+    }
 }

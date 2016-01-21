@@ -34,6 +34,7 @@ import com.league.utils.ToastUtils;
 import com.league.utils.Utils;
 import com.league.utils.api.ApiUtil;
 import com.league.widget.CircleImageView;
+import com.league.widget.LinearLayoutForListView;
 import com.league.widget.ListViewForScrollView;
 import com.league.widget.pulltorefreshandload.PullToRefreshLayout;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -81,7 +82,7 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
     private ViewPaperAdapter mViewPaperAdapter;
     private String[] pictures;
     private TextView tv;//夺宝记录
-    private ListViewForScrollView myrecordlist;
+    private LinearLayoutForListView myrecordlist;
     private Button goRightNow;
     private PullToRefreshLayout pullToRefreshLayout;
     private int totalPage = 2;
@@ -133,7 +134,7 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
     }
 
     private void initView() {
-        myrecordlist = (ListViewForScrollView) findViewById(R.id.myrecordlist);
+        myrecordlist = (LinearLayoutForListView) findViewById(R.id.myrecordlist);
         tv = (TextView) findViewById(R.id.viewtakestate);
         back = (ImageView) findViewById(R.id.near_back);
         back = (ImageView) findViewById(R.id.near_back);
@@ -162,9 +163,11 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
         timeMinutes = (TextView) findViewById(R.id.countminu);
         timeMill = (TextView) findViewById(R.id.countmill);
         countdetail = (Button) findViewById(R.id.countdetail);
+        countdetail.setOnClickListener(this);
         winnerresult = (LinearLayout) findViewById(R.id.viewwinneresult);
         lucknum = (TextView) findViewById(R.id.luckynumber);
         countdetail1 = (Button) findViewById(R.id.countdetail1);
+        countdetail1.setOnClickListener(this);
         winnerThumb = (CircleImageView) findViewById(R.id.thumb);
         winnerName = (TextView) findViewById(R.id.holdername);
         winnerId = (TextView) findViewById(R.id.holderid);
@@ -247,6 +250,13 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
                 TakeInDialog takeInDialog = new TakeInDialog(TenYuanGrabItem.this, id, 0);
                 takeInDialog.show();
 
+                break;
+            case R.id.countdetail1:
+            case R.id.countdetail:
+                Intent count = new Intent(TenYuanGrabItem.this, CountDetailActivity.class);
+                count.putExtra("type","0");
+                count.putExtra("id",detail.getId());
+                startActivity(count);
                 break;
             case R.id.passannounced:
                 Intent intent = new Intent(TenYuanGrabItem.this, PassAnnounced.class);

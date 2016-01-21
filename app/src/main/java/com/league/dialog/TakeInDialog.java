@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.league.activity.treasure.BuyList;
+import com.league.utils.ToastUtils;
 import com.mine.league.R;
 
 /**
@@ -94,6 +95,10 @@ public class TakeInDialog extends Dialog implements android.view.View.OnClickLis
                 break;
             case R.id.substract:
                 int num = Integer.valueOf(number.getText().toString());
+                if (type == 0 && num < 11){
+                    ToastUtils.showShortToast(context, "最少购买10元");
+                    return;
+                }
                 num--;
                 if (num <= 0) {
                     number.setText(1 + "");
@@ -105,6 +110,10 @@ public class TakeInDialog extends Dialog implements android.view.View.OnClickLis
                 number.setText(Integer.valueOf(number.getText().toString()) + 1 + "");
                 break;
             case R.id.submit:
+                if (type == 0 && Integer.valueOf(number.getText().toString()) < 10){
+                    ToastUtils.showShortToast(context, "最少购买10元");
+                    return;
+                }
                 Intent inten = new Intent(context, BuyList.class);
                 inten.putExtra("number", number.getText().toString());
                 inten.putExtra("id", coinID);
@@ -114,5 +123,6 @@ public class TakeInDialog extends Dialog implements android.view.View.OnClickLis
                 this.dismiss();
                 break;
         }
+        number.setSelection(number.getText().toString().length());
     }
 }
