@@ -2,6 +2,7 @@ package com.league.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,13 @@ public class CountDetailAdapter extends BaseAdapter {
         }
         holder.tvName.setText(list.get(position).getNickname());
         String t = list.get(position).getCreated_at();
-        holder.tvTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(t.substring(0,t.indexOf("."))) * 1000)+t.substring(t.indexOf("."),t.indexOf(".")+3));
+        Log.i("tag", t);
+        if(t.contains(".")){
+            holder.tvTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(t.substring(0,t.indexOf("."))) * 1000)+t.substring(t.indexOf("."),t.indexOf(".")+3));
+        }else{
+            holder.tvTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(t)));
+        }
+
         if(!TextUtils.isEmpty(list.get(position).getThumb())){
             Picasso.with(context).load(list.get(position).getThumb()).into(holder.avatar);
         }
