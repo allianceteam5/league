@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="10dp">
+    android:padding="5dp">
 
     <com.league.widget.CircleImageView
         android:id="@+id/avatar"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true" />
 
@@ -16,39 +16,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="30dp"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
         android:layout_toRightOf="@id/avatar"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:gravity="center"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:ellipsize="end"
             android:gravity="center"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="10sp" />
     </LinearLayout>
 </RelativeLayout>

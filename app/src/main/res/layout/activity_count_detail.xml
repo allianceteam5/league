@@ -10,14 +10,35 @@
     <include
         android:id="@+id/title"
         layout="@layout/near_title" />
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/red"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="计算公式"
+            android:textColor="@color/white"
+            android:textSize="10sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[数值除以商品所需人数]取余数 + 10000001"
+            android:textColor="@color/white"
+            android:textSize="10sp"/>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lv_countlist"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:divider="@color/transparent"
+        >
 
     </ListView>
 </LinearLayout>

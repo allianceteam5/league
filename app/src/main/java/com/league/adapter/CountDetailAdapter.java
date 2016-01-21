@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.league.bean.CountDetailBean;
+import com.league.utils.Utils;
 import com.league.widget.CircleImageView;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
@@ -56,8 +57,8 @@ public class CountDetailAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.tvName.setText(list.get(position).getNickname());
-        holder.tvNum.setText("购买了" + list.get(position).getCount() + "次");
-//        holder.tvTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(list.get(position).getCreated_at()) * 1000));
+        String t = list.get(position).getCreated_at();
+        holder.tvTime.setText(Utils.TimeStamp2SystemNotificationDate(Long.valueOf(t.substring(0,t.indexOf("."))) * 1000)+t.substring(t.indexOf("."),t.indexOf(".")+3));
         if(!TextUtils.isEmpty(list.get(position).getThumb())){
             Picasso.with(context).load(list.get(position).getThumb()).into(holder.avatar);
         }
@@ -76,8 +77,7 @@ public class CountDetailAdapter extends BaseAdapter {
         CircleImageView avatar;
         @Bind(R.id.tv_name)
         TextView tvName;
-        @Bind(R.id.tv_num)
-        TextView tvNum;
+
         @Bind(R.id.tv_time)
         TextView tvTime;
 
