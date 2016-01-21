@@ -87,6 +87,11 @@ public class Utils {
                 timestamp * 1000));
     }
 
+    public static String TimeStamp2RefundDate(long timestamp) {
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date(
+                timestamp * 1000 + 6 * MONTH));
+    }
+
     public static String TimeStamp2SystemNotificationDate(long timestamp) {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(
                 timestamp));

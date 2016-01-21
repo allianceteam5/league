@@ -338,7 +338,10 @@ public class TenYuanGrabItem extends BaseActivity implements View.OnClickListene
 
         period.setText("保本夺金第" + detail.getVersion() + "期");
         name.setText(detail.getTitle());
-        date.setText(Utils.TimeStamp2Date(Integer.valueOf(detail.getDate())));
+        if (detail.getEnd_at().equals("0"))
+            date.setText(Utils.TimeStamp2RefundDate(System.currentTimeMillis()/1000));
+        else
+            date.setText(Utils.TimeStamp2RefundDate(Integer.valueOf(detail.getEnd_at())));
         totalneed.setText(detail.getNeeded());
         remain.setText("剩余" + detail.getRemain());
         needed = Float.valueOf(detail.getNeeded());
