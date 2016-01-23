@@ -40,6 +40,8 @@ public class AddBankCard extends BaseActivity implements View.OnClickListener {
     EditText mInputArea;
     @Bind(R.id.next)
     Button mNext;
+    @Bind(R.id.bankname)
+    EditText mBankname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,12 +102,12 @@ public class AddBankCard extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
-                if (TextUtils.isEmpty(mInputBankID.getText()) || TextUtils.isEmpty(mInputPhone.getText()) || TextUtils.isEmpty(mInputArea.getText())) {
+                if (TextUtils.isEmpty(mInputBankID.getText()) || TextUtils.isEmpty(mInputPhone.getText()) || TextUtils.isEmpty(mInputArea.getText())|| TextUtils.isEmpty(mBankname.getText())) {
                     ToastUtils.showShortToast(AddBankCard.this, "请输入完整信息");
                 } else {
                     showProgressDialog();
                     ApiUtil.addBankCard(AddBankCard.this, mInputBankID.getText().toString(), mInputName.getText().toString(),
-                            mInputPersonID.getText().toString(), mInputPhone.getText().toString(), mInputArea.getText().toString(),
+                            mInputPersonID.getText().toString(), mInputPhone.getText().toString(), mInputArea.getText().toString(),mBankname.getText().toString(),
                             new BaseJsonHttpResponseHandler<SucessBean>() {
                                 @Override
                                 public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, SucessBean response) {
