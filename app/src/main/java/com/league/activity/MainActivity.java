@@ -596,22 +596,57 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 
         @Override
         public void onContactAdded(List<String> usernameList) {
-            // 保存增加的联系人
-            Map<String, User> localUsers = ((DemoHXSDKHelper) HXSDKHelper.getInstance()).getContactList();
-            Map<String, User> toAddUsers = new HashMap<String, User>();
-            for (String username : usernameList) {
-                User user = setUserHead(username);
-                // 添加好友时可能会回调added方法两次
-                if (!localUsers.containsKey(username)) {
-                    userDao.saveContact(user);
-                }
-                toAddUsers.put(username, user);
-            }
-            localUsers.putAll(toAddUsers);
-            // 刷新ui
-            if (currentTabIndex == 1)
-                contactListFragment.refresh();
+            // 保存增加的联系`人
+//            final Map<String, User> localUsers = ((DemoHXSDKHelper) HXSDKHelper.getInstance()).getContactList();
+            final Map<String, User> localUsers = ((DemoHXSDKHelper) HXSDKHelper.getInstance()).getContactList();
+            final Map<String, User> toAddUsers = new HashMap<String, User>();
+//            for (String username : usernameList) {
+//                User user = setUserHead(username);
+//                // 添加好友时可能会回调added方法两次
+//                if (!localUsers.containsKey(username)) {
+//                    userDao.saveContact(user);
+//                }
+//                toAddUsers.put(username, user);
+//            }
+//            localUsers.putAll(toAddUsers);
+//            // 刷新ui
+//            if (currentTabIndex == 1)
+//                contactListFragment.refresh();
 
+            //修改avatar
+            getAvatar(new AvatarFetchListener() {
+                @Override
+                public void success(List<UserBasicInfo> users) {
+                    List<User> serverUsers = new ArrayList<User>();
+                    for (UserBasicInfo userBasicInfo : users) {
+                        User user = new User();
+                        user.setNick(userBasicInfo.getNickname());
+                        user.setUsername(userBasicInfo.getHuanxinid());
+                        user.setAvatar(userBasicInfo.getThumb());
+                        user.setPhone(userBasicInfo.getPhone());
+                        setUserHearder(userBasicInfo.getHuanxinid(), user);
+//                        toAddUsers.put(userBasicInfo.getHuanxinid(), user);
+                        serverUsers.add(user);
+                    }
+
+                    for (User user : serverUsers) {
+                        // 添加好友时可能会回调added方法两次
+                        if (!localUsers.containsKey(user.getUsername())) {
+                            userDao.saveContact(user);
+                        }
+                        toAddUsers.put(user.getUsername(), user);
+                    }
+                    localUsers.putAll(toAddUsers);
+                    // 刷新ui
+                    if (currentTabIndex == 1)
+                        contactListFragment.refresh();
+                }
+
+                @Override
+                public void error() {
+
+                }
+            });
         }
 
         @Override
@@ -699,8 +734,8 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 
         @Override
         public void onConnected() {
-//            boolean groupSynced = HXSDKHelper.getInstance().isGroupsSyncedWithServer();
-//            boolean contactSynced = HXSDKHelper.getInstance().isContactsSyncedWithServer();
+            boolean groupSynced = HXSDKHelper.getInstance().isGroupsSyncedWithServer();
+            boolean contactSynced = HXSDKHelper.getInstance().isContactsSyncedWithServer();
 
             new Thread() {
                 @Override
@@ -709,27 +744,27 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                 }
             }.start();
 
-//            // in case group and contact were already synced, we supposed to notify sdk we are ready to receive the events
-//            if (groupSynced && contactSynced) {
-//                new Thread() {
-//                    @Override
-//                    public void run() {
-//                        HXSDKHelper.getInstance().notifyForRecevingEvents();
-//                    }
-//                }.start();
-//            } else {
-//                if (!groupSynced) {
-//                    asyncFetchGroupsFromServer();
-//                }
-//
-//                if (!contactSynced) {
-//                    asyncFetchContactsFromServer();
-//                }
-//
-//                if (!HXSDKHelper.getInstance().isBlackListSyncedWithServer()) {
-//                    asyncFetchBlackListFromServer();
-//                }
-//            }
+            // in case group and contact were already synced, we supposed to notify sdk we are ready to receive the events
+            if (groupSynced && contactSynced) {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        HXSDKHelper.getInstance().notifyForRecevingEvents();
+                    }
+                }.start();
+            } else {
+                if (!groupSynced) {
+                    asyncFetchGroupsFromServer();
+                }
+
+                if (!contactSynced) {
+                    asyncFetchContactsFromServer();
+                }
+
+                if (!HXSDKHelper.getInstance().isBlackListSyncedWithServer()) {
+                    asyncFetchBlackListFromServer();
+                }
+            }
 
             runOnUiThread(new Runnable() {
 
