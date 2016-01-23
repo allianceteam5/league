@@ -14,9 +14,12 @@
 package com.easemob.chatuidemo.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -53,15 +56,21 @@ public class NewFriendsMsgActivity extends BaseActivity {
 		InviteMessgeDao dao = new InviteMessgeDao(this);
 		final List<InviteMessage> msgs = dao.getMessagesList();
 		//设置adapter
-		List<String> hxIdList = new ArrayList<>();
+		final List<String> hxIdList = new ArrayList<>();
 		if (msgs != null)
 			for (int i = 0 ; i < msgs.size() ;i++)
-				hxIdList.add(msgs.get(i).getFrom());
+				if (TextUtils.isEmpty(msgs.get(i).getGroupId()))
+					hxIdList.add(msgs.get(i).getFrom());
 		if (hxIdList.size() > 0)
 			ApiUtil.friendGetInfoByArray(this,hxIdList , new BaseJsonHttpResponseHandler<ArrayList<SearchUserBean>>() {
 				@Override
 				public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<SearchUserBean> response) {
-					NewFriendsMsgAdapter adapter = new NewFriendsMsgAdapter(NewFriendsMsgActivity.this, 1, msgs, response);
+					List<InviteMessage> newMsgs = new ArrayList<InviteMessage>();
+					for (int i = 0; i< msgs.size();i++)
+						for (int j = 0; j < response.size(); j++)
+							if (msgs.get(i).getFrom().equals(response.get(j).getHuanxinid()))
+								newMsgs.add(msgs.get(i));
+					NewFriendsMsgAdapter adapter = new NewFriendsMsgAdapter(NewFriendsMsgActivity.this, 1,newMsgs, response);
 					listView.setAdapter(adapter);
 					((DemoHXSDKHelper)HXSDKHelper.getInstance()).getContactList().get(Constant.NEW_FRIENDS_USERNAME).setUnreadMsgCount(0);
 				}

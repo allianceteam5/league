@@ -155,6 +155,7 @@ public class LoginActivity extends BaseActivity {
 					return;
 				}
 				ApiUtil.testPhone = StoreUtils.getPhone();
+				StoreUtils.setHuanXinId(userInfoBean.getHuanxinid());
 				initHuanXin();
 			}
 

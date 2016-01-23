@@ -382,6 +382,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener, IC
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     closeProgressDialog();
+                    picture = new StringBuffer();
                 }
 
                 @Override

@@ -150,6 +150,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         if (response.getFlag().equals("1")) {
                             StoreUtils.setPhone(phone);
                             StoreUtils.setHuanXinId(response.getHuanxinid());
+                            StoreUtils.setHuanXinPwd(pwd);
                             ApiUtil.testPhone = phone;
                             startActivity(new Intent(RegisterActivity.this, CompletePersonInfo.class));
                             finish();

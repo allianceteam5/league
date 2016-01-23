@@ -113,4 +113,6 @@ public class IClientUrl {
     public static final String grabcornslast50 =testServerUrl + "grabcorns/last50";
     public static final String grabcommoditieslast50 = testServerUrl +"grabcommodities/last50";
     public static final String rewardout = testServerUrl + "users/rewardout";
+
+    public static final String SetInviteCode = testServerUrl + "users/setcode";
 }

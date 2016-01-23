@@ -39,7 +39,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 	private ImageView headPhotoUpdate;
 	private ImageView iconRightArrow;
 	private TextView tvNickName;
-	private TextView tvUsername;
+//	private TextView tvUsername;
 	private ProgressDialog dialog;
 	private RelativeLayout rlNickName;
 	
@@ -56,7 +56,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 	private void initView() {
 		headAvatar = (ImageView) findViewById(R.id.user_head_avatar);
 		headPhotoUpdate = (ImageView) findViewById(R.id.user_head_headphoto_update);
-		tvUsername = (TextView) findViewById(R.id.user_username);
+//		tvUsername = (TextView) findViewById(R.id.user_username);
 		tvNickName = (TextView) findViewById(R.id.user_nickname);
 		rlNickName = (RelativeLayout) findViewById(R.id.rl_nickname);
 		iconRightArrow = (ImageView) findViewById(R.id.ic_right_arrow);
@@ -76,15 +76,15 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 			iconRightArrow.setVisibility(View.INVISIBLE);
 		}
 		if (username == null) {
-			tvUsername.setText(EMChatManager.getInstance().getCurrentUser());
+//			tvUsername.setText(EMChatManager.getInstance().getCurrentUser());
 			UserUtils.setCurrentUserNick(tvNickName);
 			UserUtils.setCurrentUserAvatar(this, headAvatar);
 		} else if (username.equals(EMChatManager.getInstance().getCurrentUser())) {
-			tvUsername.setText(EMChatManager.getInstance().getCurrentUser());
+//			tvUsername.setText(EMChatManager.getInstance().getCurrentUser());
 			UserUtils.setCurrentUserNick(tvNickName);
 			UserUtils.setCurrentUserAvatar(this, headAvatar);
 		} else {
-			tvUsername.setText(username);
+//			tvUsername.setText(username);
 			UserUtils.setUserNick(username, tvNickName);
 			UserUtils.setUserAvatar(this, username, headAvatar);
 			asyncFetchUserInfo(username);
