@@ -1063,41 +1063,6 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     private BroadcastReceiver internalDebugReceiver;
 
     /**
-     * 显示帐号在别处登录dialog
-     */
-    private void showConflictDialog() {
-        isConflictDialogShow = true;
-        DemoHXSDKHelper.getInstance().logout(false, null);
-        String st = getResources().getString(R.string.Logoff_notification);
-        if (!MainActivity.this.isFinishing()) {
-            // clear up global variables
-            try {
-                if (conflictBuilder == null)
-                    conflictBuilder = new android.app.AlertDialog.Builder(MainActivity.this);
-                conflictBuilder.setTitle(st);
-                conflictBuilder.setMessage(R.string.connect_conflict);
-                conflictBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        conflictBuilder = null;
-                        finish();
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    }
-                });
-                conflictBuilder.setCancelable(false);
-                conflictBuilder.create().show();
-                isConflict = true;
-            } catch (Exception e) {
-                EMLog.e(TAG, "---------color conflictBuilder error" + e.getMessage());
-            }
-
-        }
-
-    }
-
-    /**
      * 帐号被移除的dialog
      */
     private void showAccountRemovedDialog() {
@@ -1176,5 +1141,41 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         };
         IntentFilter filter = new IntentFilter(getPackageName() + ".em_internal_debug");
         registerReceiver(internalDebugReceiver, filter);
+    }
+
+    /**
+     * 显示帐号在别处登录dialog
+     */
+    private void showConflictDialog() {
+        isConflictDialogShow = true;
+        DemoHXSDKHelper.getInstance().logout(false, null);
+        String st = getResources().getString(R.string.Logoff_notification);
+        if (!MainActivity.this.isFinishing()) {
+            // clear up global variables
+            try {
+                if (conflictBuilder == null)
+                    conflictBuilder = new android.app.AlertDialog.Builder(MainActivity.this);
+                conflictBuilder.setTitle(st);
+                conflictBuilder.setMessage(R.string.connect_conflict);
+                conflictBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        conflictBuilder = null;
+                        StoreUtils.destory();
+                        Constants.finishAllActivities();
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    }
+                });
+                conflictBuilder.setCancelable(false);
+                conflictBuilder.create().show();
+                isConflict = true;
+            } catch (Exception e) {
+                EMLog.e(TAG, "---------color conflictBuilder error" + e.getMessage());
+            }
+
+        }
+
     }
 }
