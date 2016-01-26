@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:paddingRight="10dp"
-            android:text="朋友圈"
+            android:text="我的动态"
             android:textColor="@color/white"
             android:textSize="20sp" />
 

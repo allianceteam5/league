@@ -587,6 +587,14 @@ public class ApiUtil {
         client.post(context, IClientUrl.CircleMessageGet + currentPage, params, responseHandler);
     }
 
+    //获取我发表的动态
+    public static void circleMessageGetMy(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("phone", testPhone);
+        printHttp(IClientUrl.CircleMessageGetMy, params);
+        client.post(context, IClientUrl.CircleMessageGetMy + currentPage, params, responseHandler);
+    }
+
     //圈子获取更多评论
     public static void circleMessageMoreReply(Context context, String messageid, int currentPage, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();

@@ -79,6 +79,7 @@ public class IClientUrl {
     public static final String CircleMessageSend = testServerUrl + "messages/send";
     public static final String CircleMessageDelete = testServerUrl + "messages/delete";
     public static final String CircleMessageGet = testServerUrl + "messages/get?page=";
+    public static final String CircleMessageGetMy = testServerUrl + "messages/getmy?page=";
     public static final String CircleMessageMoreReply = testServerUrl + "messages/morereplys?page=";
     public static final String CircleMessageConcelZan = testServerUrl + "messages/cancelzan";
     public static final String CircleMessageZan = testServerUrl + "messages/zan";

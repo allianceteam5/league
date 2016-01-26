@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.league.activity.RuleActivity;
-import com.league.activity.circle.CircleActivity;
+import com.league.activity.circle.MyCircleActivity;
 import com.league.activity.personactivity.AlianceReward;
 import com.league.activity.personactivity.MyCollection;
 import com.league.activity.personactivity.MyMoneyBag;
@@ -179,7 +179,7 @@ public class PersonFragment extends Fragment implements View.OnClickListener, IC
                 startActivity(intent3);
                 break;
             case R.id.mycircle:
-                ActivityUtils.start_Activity(ctx, CircleActivity.class);
+                ActivityUtils.start_Activity(ctx, MyCircleActivity.class);
                 break;
             case R.id.mymoneybag:
                 Intent intent4 = new Intent(ctx, MyMoneyBag.class);
