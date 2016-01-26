@@ -150,13 +150,13 @@ public class PersonFragment extends Fragment implements View.OnClickListener, IC
         layout.findViewById(R.id.invitefriend).setOnClickListener(this);
         layout.findViewById(R.id.mycircle).setOnClickListener(this);
         layout.findViewById(R.id.rl_allancecount).setOnClickListener(this);
-        ivBackground.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                pickImgPopWindow.showPopWindow();
-                return false;
-            }
-        });
+//        ivBackground.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                pickImgPopWindow.showPopWindow();
+//                return false;
+//            }
+//        });
     }
 
     @Override
@@ -235,10 +235,10 @@ public class PersonFragment extends Fragment implements View.OnClickListener, IC
         else
             Picasso.with(ctx).load(R.drawable.example).into(mThumb);
 
-        if (!TextUtils.isEmpty(userInfoBean.getBackground()))
-            Picasso.with(ctx).load(userInfoBean.getBackground()).placeholder(R.drawable.mybackground).into(ivBackground);
-        else
-            Picasso.with(ctx).load(R.drawable.mybackground).into(ivBackground);
+//        if (!TextUtils.isEmpty(userInfoBean.getBackground()))
+//            Picasso.with(ctx).load(userInfoBean.getBackground()).placeholder(R.drawable.mybackground).into(ivBackground);
+//        else
+//            Picasso.with(ctx).load(R.drawable.mybackground).into(ivBackground);
 
         mNickname.setText(userInfoBean.getNickname());
         mAllFive.setText(userInfoBean.getAllalliancecount() + "");

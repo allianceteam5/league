@@ -214,6 +214,7 @@ public class ContactlistFragment extends Fragment {
 					User user = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getContactList().get(Constant.NEW_FRIENDS_USERNAME);
 					user.setUnreadMsgCount(0);
 					startActivity(new Intent(getActivity(), NewFriendsMsgActivity.class));
+					adapter.notifyDataSetChanged();
 				} else if (Constant.GROUP_USERNAME.equals(username)) {
 					// 进入群聊列表页面
 					startActivity(new Intent(getActivity(), GroupsActivity.class));
