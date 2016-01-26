@@ -69,6 +69,8 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
                 tvTitle.setText("选择推荐");
                 kinds = Paper.book().read(Constants.RecommendationListName, new ArrayList<KindBean>());
                 initItems(kinds);
+                items.remove("兼职");
+                items.remove("全职");
                 break;
             default:
                 break;

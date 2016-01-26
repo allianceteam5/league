@@ -259,13 +259,19 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 				getResources().getDrawable(R.drawable.record_animate_14) };
 
 		// 表情list
-		reslist = getExpressionRes(35);
+		reslist = getExpressionRes(90);
 		// 初始化表情viewpager
 		List<View> views = new ArrayList<View>();
 		View gv1 = getGridChildView(1);
 		View gv2 = getGridChildView(2);
+		View gv3 = getGridChildView(3);
+		View gv4 = getGridChildView(4);
+		View gv5 = getGridChildView(5);
 		views.add(gv1);
 		views.add(gv2);
+		views.add(gv3);
+		views.add(gv4);
+		views.add(gv5);
 		expressionViewpager.setAdapter(new ExpressionPagerAdapter(views));
 		edittext_layout.requestFocus();
 		voiceRecorder = new VoiceRecorder(micImageHandler);
@@ -1395,12 +1401,16 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		View view = View.inflate(this, R.layout.expression_gridview, null);
 		ExpandGridView gv = (ExpandGridView) view.findViewById(R.id.gridview);
 		List<String> list = new ArrayList<String>();
-		if (i == 1) {
-			List<String> list1 = reslist.subList(0, 20);
-			list.addAll(list1);
-		} else if (i == 2) {
-			list.addAll(reslist.subList(20, reslist.size()));
-		}
+//		if (i == 1) {
+//			List<String> list1 = reslist.subList(0, 20);
+//			list.addAll(list1);
+//		} else if (i == 2) {
+//			list.addAll(reslist.subList(20, reslist.size()));
+//		}
+		if (i == 5)
+			list.addAll(reslist.subList(20 * (i - 1), reslist.size()));
+		if (i < 5)
+			list.addAll(reslist.subList(20 * (i - 1), 20 * i));
 		list.add("delete_expression");
 		final ExpressionAdapter expressionAdapter = new ExpressionAdapter(this, 1, list);
 		gv.setAdapter(expressionAdapter);
@@ -1427,7 +1437,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 								if (selectionStart > 0) {
 									String body = mEditTextContent.getText().toString();
 									String tempStr = body.substring(0, selectionStart);
-									int i = tempStr.lastIndexOf("[");// 获取最后一个表情的位置
+									int i = tempStr.lastIndexOf("/");// 获取最后一个表情的位置
 									if (i != -1) {
 										CharSequence cs = tempStr.substring(i, selectionStart);
 										if (SmileUtils.containsKey(cs.toString()))
@@ -1454,7 +1464,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	public List<String> getExpressionRes(int getSum) {
 		List<String> reslist = new ArrayList<String>();
 		for (int x = 1; x <= getSum; x++) {
-			String filename = "ee_" + x;
+			String filename = "chat_" + x;
 
 			reslist.add(filename);
 
