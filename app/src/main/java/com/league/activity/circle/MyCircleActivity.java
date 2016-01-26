@@ -36,9 +36,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import io.paperdb.Paper;
 
-public class CircleActivity extends BaseActivity implements View.OnClickListener, IContants {
+public class MyCircleActivity extends BaseActivity implements View.OnClickListener, IContants {
 
     @Bind(R.id.ib_back)
     ImageView ibBack;
@@ -53,14 +52,11 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
     ListView listview;
     @Bind(R.id.refresh_view)
     PullToRefreshLayout pullToRefreshLayout;
-    @Bind(R.id.tv_title)
-    TextView tvTitle;
     private List<CircleMessageBean> list = new ArrayList<CircleMessageBean>();
     private CircleMessageAdapter adapter;
     private int totalPage;
     private int currentPage = 1;
     private UserInfoBean userInfoBean;
-
 
 //    private EditText etInput;
 //    private TextView tvSend;
@@ -80,7 +76,6 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
         tvFriendcount = (TextView) headerView.findViewById(R.id.tv_friendcount);
         tvLikecount = (TextView) headerView.findViewById(R.id.tv_likecount);
         tvSignature = (TextView) headerView.findViewById(R.id.tv_signature);
-        tvTitle.setText("我的相册");
         listview.addHeaderView(headerView);
         showProgressDialog();
         adapter = new CircleMessageAdapter(this, list, getWindow().getDecorView());
@@ -101,7 +96,7 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initData(final int currentPage) {
-        ApiUtil.circleMessageGet(this, currentPage, new BaseJsonHttpResponseHandler<ArrayList<CircleMessageBean>>() {
+        ApiUtil.circleMessageGetMy(this, currentPage, new BaseJsonHttpResponseHandler<ArrayList<CircleMessageBean>>() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<CircleMessageBean> response) {
                 if (currentPage == 1) {

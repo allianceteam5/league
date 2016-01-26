@@ -35,6 +35,8 @@ import com.mine.league.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.nereo.multi_image_selector.bean.Image;
+
 /**
  * 简单的好友Adapter实现
  *
@@ -65,6 +67,7 @@ public class ContactAdapter extends ArrayAdapter<User> implements SectionIndexer
         TextView unreadMsgView;
         TextView nameTextview;
         TextView tvHeader;
+        ImageView ivArrow;
     }
 
     @Override
@@ -77,6 +80,7 @@ public class ContactAdapter extends ArrayAdapter<User> implements SectionIndexer
             holder.unreadMsgView = (TextView) convertView.findViewById(R.id.unread_msg_number);
             holder.nameTextview = (TextView) convertView.findViewById(R.id.name);
             holder.tvHeader = (TextView) convertView.findViewById(R.id.header);
+            holder.ivArrow = (ImageView) convertView.findViewById(R.id.iv_arrow);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -99,6 +103,7 @@ public class ContactAdapter extends ArrayAdapter<User> implements SectionIndexer
             holder.tvHeader.setVisibility(View.GONE);
         }
 
+        holder.ivArrow.setVisibility(View.VISIBLE);
         if (username.equals(Constant.NEW_FRIENDS_USERNAME)) {
             holder.nameTextview.setText(user.getNick());
             holder.avatar.setImageResource(R.drawable.new_friends_icon);
@@ -131,6 +136,7 @@ public class ContactAdapter extends ArrayAdapter<User> implements SectionIndexer
             UserUtils.setUserAvatar(getContext(), username, holder.avatar);
             if (holder.unreadMsgView != null)
                 holder.unreadMsgView.setVisibility(View.INVISIBLE);
+            holder.ivArrow.setVisibility(View.GONE);
         }
 
         return convertView;
