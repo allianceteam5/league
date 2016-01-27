@@ -612,11 +612,16 @@
             android:exported="false"
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name="com.league.activity.personactivity.TradingRecordActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.league.activity.personactivity.TradingRecordActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.league.activity.UserHomePageActivity"
             android:label="@string/title_activity_user_home_page" >
+        </activity>
+        <activity
+            android:name="com.league.activity.ContactActivity"
+            android:label="@string/title_activity_contact" >
         </activity>
     </application>
 

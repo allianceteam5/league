@@ -51,6 +51,8 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
                 tvTitle.setText("选择行业");
                 kinds = Paper.book().read(Constants.ProfessinListName, new ArrayList<KindBean>());
                 initItems(kinds);
+                items.remove("兼职");
+                items.remove("全职");
                 break;
             case Constants.RADIOSEX:
                 tvTitle.setText("选择性别");
@@ -69,8 +71,6 @@ public class RadioSelectActivity extends Activity implements View.OnClickListene
                 tvTitle.setText("选择推荐");
                 kinds = Paper.book().read(Constants.RecommendationListName, new ArrayList<KindBean>());
                 initItems(kinds);
-                items.remove("兼职");
-                items.remove("全职");
                 break;
             default:
                 break;

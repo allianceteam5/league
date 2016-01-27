@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.easemob.applib.controller.HXSDKHelper;
@@ -29,7 +30,9 @@ import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.activity.ContactActivity;
 import com.league.bean.SearchUserBean;
+import com.league.utils.ActivityUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -46,6 +49,7 @@ import org.apache.http.Header;
  */
 public class NewFriendsMsgActivity extends BaseActivity {
 	private ListView listView;
+	private RelativeLayout rlContact;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,15 @@ public class NewFriendsMsgActivity extends BaseActivity {
 		setContentView(R.layout.activity_new_friends_msg);
 
 		listView = (ListView) findViewById(R.id.list);
+		rlContact = (RelativeLayout) findViewById(R.id.rl_contact);
+
+		rlContact.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ActivityUtils.start_Activity(NewFriendsMsgActivity.this, ContactActivity.class);
+			}
+		});
+
 		InviteMessgeDao dao = new InviteMessgeDao(this);
 		final List<InviteMessage> msgs = dao.getMessagesList();
 		//设置adapter
