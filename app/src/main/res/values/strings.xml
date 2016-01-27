@@ -379,5 +379,6 @@
     <string name="title_activity_report">ReportActivity</string>
     <string name="title_activity_circle_detail">CircleDetailActivity</string>
     <string name="title_activity_user_home_page">UserHomePageActivity</string>
+    <string name="title_activity_contact">ContactActivity</string>
 
 </resources>

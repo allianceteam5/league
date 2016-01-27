@@ -14,11 +14,15 @@
 package com.easemob.chatuidemo.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.easemob.applib.controller.HXSDKHelper;
@@ -26,7 +30,9 @@ import com.easemob.chatuidemo.Constant;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.league.activity.ContactActivity;
 import com.league.bean.SearchUserBean;
+import com.league.utils.ActivityUtils;
 import com.league.utils.ToastUtils;
 import com.league.utils.api.ApiUtil;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -43,6 +49,7 @@ import org.apache.http.Header;
  */
 public class NewFriendsMsgActivity extends BaseActivity {
 	private ListView listView;
+	private RelativeLayout rlContact;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,18 +57,33 @@ public class NewFriendsMsgActivity extends BaseActivity {
 		setContentView(R.layout.activity_new_friends_msg);
 
 		listView = (ListView) findViewById(R.id.list);
+		rlContact = (RelativeLayout) findViewById(R.id.rl_contact);
+
+		rlContact.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ActivityUtils.start_Activity(NewFriendsMsgActivity.this, ContactActivity.class);
+			}
+		});
+
 		InviteMessgeDao dao = new InviteMessgeDao(this);
 		final List<InviteMessage> msgs = dao.getMessagesList();
 		//设置adapter
-		List<String> hxIdList = new ArrayList<>();
+		final List<String> hxIdList = new ArrayList<>();
 		if (msgs != null)
 			for (int i = 0 ; i < msgs.size() ;i++)
-				hxIdList.add(msgs.get(i).getFrom());
+				if (TextUtils.isEmpty(msgs.get(i).getGroupId()))
+					hxIdList.add(msgs.get(i).getFrom());
 		if (hxIdList.size() > 0)
 			ApiUtil.friendGetInfoByArray(this,hxIdList , new BaseJsonHttpResponseHandler<ArrayList<SearchUserBean>>() {
 				@Override
 				public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, ArrayList<SearchUserBean> response) {
-					NewFriendsMsgAdapter adapter = new NewFriendsMsgAdapter(NewFriendsMsgActivity.this, 1, msgs, response);
+					List<InviteMessage> newMsgs = new ArrayList<InviteMessage>();
+					for (int i = 0; i< msgs.size();i++)
+						for (int j = 0; j < response.size(); j++)
+							if (msgs.get(i).getFrom().equals(response.get(j).getHuanxinid()))
+								newMsgs.add(msgs.get(i));
+					NewFriendsMsgAdapter adapter = new NewFriendsMsgAdapter(NewFriendsMsgActivity.this, 1,newMsgs, response);
 					listView.setAdapter(adapter);
 					((DemoHXSDKHelper)HXSDKHelper.getInstance()).getContactList().get(Constant.NEW_FRIENDS_USERNAME).setUnreadMsgCount(0);
 				}

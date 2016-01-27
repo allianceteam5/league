@@ -47,10 +47,10 @@ public class MyPersonHomepage extends Activity implements View.OnClickListener, 
         else
             Picasso.with(this).load(R.drawable.example).into(ivThumb);
 
-        if (!TextUtils.isEmpty(userInfoBean.getBackground()))
-            Picasso.with(this).load(userInfoBean.getBackground()).placeholder(R.drawable.mybackground).into(ivBackground);
-        else
-            Picasso.with(this).load(R.drawable.mybackground).into(ivBackground);
+//        if (!TextUtils.isEmpty(userInfoBean.getBackground()))
+//            Picasso.with(this).load(userInfoBean.getBackground()).placeholder(R.drawable.mybackground).into(ivBackground);
+//        else
+//            Picasso.with(this).load(R.drawable.mybackground).into(ivBackground);
         tvNickname.setText(userInfoBean.getNickname());
         tvFriendcount.setText(userInfoBean.getFriendcount() + "");
         tvFanscount.setText(userInfoBean.getConcerncount() + "");

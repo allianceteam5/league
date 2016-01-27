@@ -53,11 +53,14 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
     ListView listview;
     @Bind(R.id.refresh_view)
     PullToRefreshLayout pullToRefreshLayout;
+    @Bind(R.id.tv_title)
+    TextView tvTitle;
     private List<CircleMessageBean> list = new ArrayList<CircleMessageBean>();
     private CircleMessageAdapter adapter;
     private int totalPage;
     private int currentPage = 1;
     private UserInfoBean userInfoBean;
+
 
 //    private EditText etInput;
 //    private TextView tvSend;
@@ -77,6 +80,7 @@ public class CircleActivity extends BaseActivity implements View.OnClickListener
         tvFriendcount = (TextView) headerView.findViewById(R.id.tv_friendcount);
         tvLikecount = (TextView) headerView.findViewById(R.id.tv_likecount);
         tvSignature = (TextView) headerView.findViewById(R.id.tv_signature);
+        tvTitle.setText("我的相册");
         listview.addHeaderView(headerView);
         showProgressDialog();
         adapter = new CircleMessageAdapter(this, list, getWindow().getDecorView());

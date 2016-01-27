@@ -34,17 +34,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="46dp"
+                    android:layout_marginTop="32dp"
                     android:orientation="vertical">
                     <com.league.widget.CircleImageView
                         android:id="@+id/iv_thumb"
                         android:layout_gravity="center_horizontal"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
+                        android:layout_width="88dp"
+                        android:layout_height="88dp"
                         android:src="@drawable/example"
                         />
                     <LinearLayout
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="8dp"
                         android:layout_gravity="center_horizontal"
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -101,7 +101,7 @@
                             />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="8dp"
                         android:layout_gravity="center_horizontal"
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"

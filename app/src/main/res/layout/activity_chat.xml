@@ -424,6 +424,7 @@
                             android:text="@string/attach_voice_call"
                             android:textColor="#727171" />
                     </LinearLayout>
+
                      <LinearLayout
                         android:id="@+id/container_video_call"
                         android:layout_width="0dp"

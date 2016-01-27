@@ -227,6 +227,7 @@ public class ApiUtil {
 
 
     public static void getQiniuToken(Context context, TextHttpResponseHandler responseHandler) {
+        printHttp(IClientUrl.GetQiniuToken, new RequestParams());
         client.get(context, IClientUrl.GetQiniuToken, responseHandler);
     }
 
@@ -555,6 +556,7 @@ public class ApiUtil {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("background", backgroundUrl);
+        printHttp(IClientUrl.modifyUserDetail, params);
         client.post(context, IClientUrl.modifyUserDetail, params, responseHandler);
     }
 
@@ -583,6 +585,14 @@ public class ApiUtil {
         params.add("phone", testPhone);
         printHttp(IClientUrl.CircleMessageGet, params);
         client.post(context, IClientUrl.CircleMessageGet + currentPage, params, responseHandler);
+    }
+
+    //获取我发表的动态
+    public static void circleMessageGetMy(Context context, int currentPage, TextHttpResponseHandler responseHandler) {
+        RequestParams params = new RequestParams();
+        params.add("phone", testPhone);
+        printHttp(IClientUrl.CircleMessageGetMy, params);
+        client.post(context, IClientUrl.CircleMessageGetMy + currentPage, params, responseHandler);
     }
 
     //圈子获取更多评论
@@ -825,7 +835,7 @@ public class ApiUtil {
         RequestParams params = new RequestParams();
         params.put("phone", testPhone);
         params.put("count",count);
-        params.put("cardid",cardid);
+        params.put("cardid", cardid);
         client.post(context,IClientUrl.withdraw,params,responseHandler);
     }
     //10夺金赎回
@@ -834,7 +844,7 @@ public class ApiUtil {
         params.put("phone", testPhone);
         params.put("grabcornid",grabcornid);
         printHttp(IClientUrl.redeem, params);
-        client.post(context,IClientUrl.redeem,params,responseHandler);
+        client.post(context, IClientUrl.redeem, params, responseHandler);
     }
     //获取10夺金的计算详情
     public static void getTenGrabCountDetail(Context context,String grabcornid,TextHttpResponseHandler responseHandler){
@@ -860,6 +870,14 @@ public class ApiUtil {
         params.put("count",num);
         printHttp(IClientUrl.rewardout, params);
         client.post(context,IClientUrl.rewardout,params,responseHandler);
+    }
+    //设置邀请码
+    public static void setInviteCode(Context context, String code, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("code", code);
+        printHttp(IClientUrl.SetInviteCode, params);
+        client.post(context, IClientUrl.SetInviteCode, params, responseHandler);
     }
 }
 

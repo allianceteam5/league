@@ -60,8 +60,8 @@ public class AddContactActivity extends BaseActivity{
 		editText = (EditText) findViewById(R.id.edit_note);
 		String strAdd = getResources().getString(R.string.add_friend);
 		mTextView.setText(strAdd);
-		String strUserName = getResources().getString(R.string.user_name);
-		editText.setHint(strUserName);
+//		String strUserName = getResources().getString(R.string.user_name);
+//		editText.setHint(strUserName);
 		searchBtn = (Button) findViewById(R.id.search);
 		inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		listview = (ListView) findViewById(R.id.listview);

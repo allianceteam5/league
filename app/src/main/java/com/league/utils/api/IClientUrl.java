@@ -4,7 +4,8 @@ package com.league.utils.api;
  * Created by pfy on 2015/11/6.
  */
 public class IClientUrl {
-    public static final String testServerUrl = "http://183.129.190.82:50001/v1/";
+//    public static final String testServerUrl = "http://183.129.190.82:50001/v1/";
+    public static final String testServerUrl = "http://120.27.196.128:80/v1/";
     public static final String ProfessionList = testServerUrl + "professions/list";
     public static final String ApplyJobCreated = testServerUrl + "applyjobs/create";
     public static final String ApplyJobSearch = testServerUrl + "applyjobs/search?page=";
@@ -79,6 +80,7 @@ public class IClientUrl {
     public static final String CircleMessageSend = testServerUrl + "messages/send";
     public static final String CircleMessageDelete = testServerUrl + "messages/delete";
     public static final String CircleMessageGet = testServerUrl + "messages/get?page=";
+    public static final String CircleMessageGetMy = testServerUrl + "messages/getmy?page=";
     public static final String CircleMessageMoreReply = testServerUrl + "messages/morereplys?page=";
     public static final String CircleMessageConcelZan = testServerUrl + "messages/cancelzan";
     public static final String CircleMessageZan = testServerUrl + "messages/zan";
@@ -113,4 +115,6 @@ public class IClientUrl {
     public static final String grabcornslast50 =testServerUrl + "grabcorns/last50";
     public static final String grabcommoditieslast50 = testServerUrl +"grabcommodities/last50";
     public static final String rewardout = testServerUrl + "users/rewardout";
+
+    public static final String SetInviteCode = testServerUrl + "users/setcode";
 }
