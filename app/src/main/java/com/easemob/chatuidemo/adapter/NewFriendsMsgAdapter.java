@@ -159,7 +159,7 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 				// 调用sdk的同意方法
 				try {
 					if(msg.getGroupId() == null) {//同意好友请求
-						EMChatManager.getInstance().acceptInvitation(msg.getFrom());
+//						EMChatManager.getInstance().acceptInvitation(msg.getFrom());
 						ApiUtil.approveFriend(context, friendphone, new JsonHttpResponseHandler(){
 						});
 					}

@@ -1,1 +1,1 @@
-include ':app', ':sdk', ':multi-image-selector'
+include ':sdk', ':app', ':multi-image-selector'
