@@ -10,10 +10,14 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.easemob.chat.EMContactManager;
+import com.easemob.exceptions.EaseMobException;
 import com.league.activity.UserHomePageActivity;
 import com.league.bean.ContactBean;
+import com.league.bean.RegisterUserBean;
 import com.league.bean.SearchUserBean;
 import com.league.utils.IContants;
+import com.league.utils.ToastUtils;
 import com.league.widget.CircleImageView;
 import com.mine.league.R;
 import com.squareup.picasso.Picasso;
@@ -27,10 +31,10 @@ import butterknife.ButterKnife;
  * Created by liug on 15/12/6.
  */
 public class ContactsAdapter extends BaseAdapter {
-    private List<ContactBean> list;
+    private List<RegisterUserBean> list;
     private Context context;
 
-    public ContactsAdapter(Context context, List<ContactBean> list) {
+    public ContactsAdapter(Context context, List<RegisterUserBean> list) {
         this.list = list;
         this.context = context;
     }
@@ -52,7 +56,7 @@ public class ContactsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        final ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.layout_item_contact, null);
             holder = new ViewHolder(convertView);
@@ -61,13 +65,34 @@ public class ContactsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        final ContactBean contactBean = list.get(position);
-        holder.tvName.setText(contactBean.getNickname());
-        holder.tvNickname.setText(contactBean.getPhone());
-//        if (!TextUtils.isEmpty(searchUserBean.getThumb()))
-//            Picasso.with(context).load(searchUserBean.getThumb()).resize(100,100).centerCrop().into(holder.ivThumb);
-//        else
-//            Picasso.with(context).load(R.drawable.example).into(holder.ivThumb);
+        final RegisterUserBean registerUserBean = list.get(position);
+        holder.tvNickname.setText(registerUserBean.getNickname());
+//        holder.tvNickname.setText(contactBean.getPhone());
+        if (!TextUtils.isEmpty(registerUserBean.getThumb()))
+            Picasso.with(context).load(registerUserBean.getThumb()).resize(100,100).centerCrop().into(holder.ivThumb);
+        else
+            Picasso.with(context).load(R.drawable.example).into(holder.ivThumb);
+
+        if (registerUserBean.getIsfriend() == 1){
+            holder.btnAddfriend.setText("已添加");
+            holder.btnAddfriend.setEnabled(false);
+        }else {
+            holder.btnAddfriend.setText("添加");
+            holder.btnAddfriend.setEnabled(true);
+        }
+
+        holder.btnAddfriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    EMContactManager.getInstance().addContact(registerUserBean.getId(), "请加我好友吧");
+                    holder.btnAddfriend.setEnabled(false);
+                    ToastUtils.showShortToast(context, "已发出请求");
+                } catch (EaseMobException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 //        convertView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -79,7 +104,7 @@ public class ContactsAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void setData(List<ContactBean> list){
+    public void setData(List<RegisterUserBean> list){
         this.list = list;
         notifyDataSetChanged();
     }

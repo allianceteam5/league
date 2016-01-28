@@ -808,6 +808,16 @@ public class ApiUtil {
         client.post(context, IClientUrl.FriendGetInfoByArray, params,responseHandler);
     }
 
+    //根据用户电话号码查找用户信息
+    public static void friendGetInfoByPhone(Context context, List<String> list, TextHttpResponseHandler responseHandler){
+        RequestParams params = new RequestParams();
+        params.put("phone", testPhone);
+        params.put("phones",list);
+        printHttp(IClientUrl.FriendGetInfoByPhone, params);
+        client.post(context, IClientUrl.FriendGetInfoByPhone, params,responseHandler);
+    }
+
+
     //同意好友申请
     public static void approveFriend(Context context, String friendphone, TextHttpResponseHandler responseHandler) {
         RequestParams params = new RequestParams();

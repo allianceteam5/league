@@ -14,6 +14,7 @@ public class IClientUrl {
     public static final String Login = testServerUrl + "users/login";
     public static final String FriendList = testServerUrl + "friends/list";
     public static final String FriendGetInfoByArray = testServerUrl + "friends/getinfobyarray";
+    public static final String FriendGetInfoByPhone = testServerUrl + "friends/getinfobyphonearray";
     public static final String FriendApprove = testServerUrl + "friends/approve";
 
     public static final String RecomendationSearch = testServerUrl + "recommendations/search?page=";

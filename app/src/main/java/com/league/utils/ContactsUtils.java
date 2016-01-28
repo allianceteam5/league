@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.league.bean.ContactBean;
@@ -40,6 +41,30 @@ public class ContactsUtils {
 						.getColumnIndex(Phone.DISPLAY_NAME)));
 				Log.i("phone", contactBean.getPhone() + contactBean.getNickname());
 				localList.add(contactBean);
+			}
+		}
+		cur.close();
+		return localList;
+
+	}
+
+	// ----------------得到本地联系人号码-------------------------------------
+	public static List<String> getLocalContactsPhone(Context context) {
+		List<String> localList = new ArrayList<>();
+		ContentResolver cr = context.getContentResolver();
+		String str[] = { Phone.CONTACT_ID, Phone.DISPLAY_NAME, Phone.NUMBER,
+				Phone.PHOTO_ID };
+		Cursor cur = cr.query(
+				Phone.CONTENT_URI, str, null,
+				null, null);
+
+		if (cur != null) {
+			while (cur.moveToNext()) {
+				String phone = cur.getString(cur
+						.getColumnIndex(Phone.NUMBER));
+				phone = phone.replace(" ","");
+				if (!TextUtils.isEmpty(phone) && phone.length() == 11)
+					localList.add(phone);// 得到手机号码
 			}
 		}
 		cur.close();
