@@ -87,6 +87,7 @@ public class ShareDialog extends Dialog implements android.view.View.OnClickList
         mController.getConfig().setSsoHandler(new SinaSsoHandler());
         // 设置分享内容
         mController.setShareContent("我在自己人联盟里抢到红包了，你也快来跟我一起抢啊");
+        mController.getConfig().closeToast();
     }
 
     private void setOnclick() {

@@ -68,6 +68,7 @@ public class InviteFriendActivity extends PersonInfoBaseActivity implements View
         mController.getConfig().setSsoHandler(new SinaSsoHandler());
         // 设置分享内容
         mController.setShareContent("欢迎下载自己人联盟APP " + url);
+        mController.getConfig().closeToast();
     }
 
     @Override
