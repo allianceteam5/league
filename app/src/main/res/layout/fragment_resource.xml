@@ -61,7 +61,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
                     android:background="#ffffff"
                     android:focusable="false"
                     android:scaleType="centerInside"
@@ -73,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ib_yiyuan"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="10dp"
                     android:text="保本夺金"
                     android:textColor="@color/text_title"
                     android:textSize="18sp" />
@@ -106,7 +105,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
                     android:background="#ffffff"
                     android:focusable="false"
                     android:scaleType="centerInside"
@@ -118,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ib_hongbao"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="10dp"
                     android:text="抢红包"
                     android:textColor="@color/text_title"
                     android:textSize="18sp" />
@@ -151,7 +149,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="28dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
                     android:background="#ffffff"
                     android:focusable="false"
                     android:scaleType="centerInside"
@@ -159,14 +156,15 @@
 
                 <TextView
                     android:id="@+id/tv_recom"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ib_fujin"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="3dp"
-                    android:text="附近"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="正在抓紧施工中~~"
                     android:textColor="@color/text_title"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
@@ -187,7 +185,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            android:padding="3dp">
+            android:padding="3dp"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="100dp"

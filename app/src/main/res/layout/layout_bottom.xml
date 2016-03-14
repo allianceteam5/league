@@ -21,7 +21,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="onTabClicked"
-            android:padding="3dp" >
+            android:padding="3dp"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="60dp"

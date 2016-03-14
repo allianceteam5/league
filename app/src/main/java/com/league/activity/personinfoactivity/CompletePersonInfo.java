@@ -313,7 +313,7 @@ public class CompletePersonInfo extends PersonInfoBaseActivity implements View.O
         groupUser.setUsername(Constant.GROUP_USERNAME);
         groupUser.setNick(strGroup);
         groupUser.setHeader("");
-        userlist.put(Constant.GROUP_USERNAME, groupUser);
+//        userlist.put(Constant.GROUP_USERNAME, groupUser);
 
         // 添加"Robot"
         User robotUser = new User();

@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Fragment;
@@ -229,7 +230,9 @@ public class ContactlistFragment extends Fragment {
 					startActivity(new Intent(getActivity(), CircleActivity.class));
 				} else {
 					// demo中直接进入聊天页面，实际一般是进入用户详情页
-					startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", adapter.getItem(position).getUsername()));
+//					startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("userId", adapter.getItem(position).getUsername()));
+					Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + adapter.getItem(position).getPhone()));
+					startActivity(intent);
 				}
 			}
 		});

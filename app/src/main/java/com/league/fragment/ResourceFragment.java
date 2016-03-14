@@ -23,6 +23,7 @@ import com.league.activity.postbar.LiaoBaActivity;
 import com.league.activity.redpacket.GrabRedEnvolope;
 import com.league.activity.treasure.OneYuan;
 import com.league.adapter.ViewPaperAdapter;
+import com.league.utils.ToastUtils;
 import com.mine.league.R;
 
 import java.util.ArrayList;
@@ -185,8 +186,8 @@ public class ResourceFragment extends Fragment implements OnPageChangeListener, 
                 startActivity(intent2);
                 break;
             case R.id.resource_fujin:
-                Intent intent = new Intent(ctx, NearActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ctx, NearActivity.class);
+//                startActivity(intent);
                 break;
             case R.id.resource_liaoba:
                 Intent intent4 = new Intent(ctx, LiaoBaActivity.class);

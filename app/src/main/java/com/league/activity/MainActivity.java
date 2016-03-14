@@ -292,7 +292,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         groupUser.setUsername(Constant.GROUP_USERNAME);
         groupUser.setNick(strGroup);
         groupUser.setHeader("");
-        userlist.put(Constant.GROUP_USERNAME, groupUser);
+//        userlist.put(Constant.GROUP_USERNAME, groupUser);
 
         // 添加"聊天室"
         User chatRoomItem = new User();
